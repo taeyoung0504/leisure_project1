@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+
+<html layout:decorate="~{jjj/header}">
+<div layout:fragment="content" class="container my-3">
+
+
+	<head>
+<meta charset="UTF-8">
+<title>상품등록</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/pyr_add_product.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
+	</head>
+
+	<div id="allProductContainer">
+
+		<div id="Product-registration">
+
+			<h1>상품 등록</h1>
+
+			<form id="productForm" method="post" enctype="multipart/form-data">
+
+				<!-- 해당 acc의 pk같이 전송용 -->
+				<input type="number" name="acc_id" th:value="${id}"
+					style="display: none;">
+
+
+				<div id="roomAndAmount">
+					<label>방 등록 <input type="text" placeholder="등록할 방 이름"
+						minlength="1" maxlength="20" required name="product_type" />
+					</label> <label>금액 <input type="text" name="product_amount">
+					</label>
+				</div>
+
+				<label id="pr-detail"> 상세설명 <input type="text"
+					placeholder="상세정보" minlength="1" maxlength="200" required
+					name="product_detail" />
+				</label>
+
+
+				<div id="countArea">
+					<label>방 갯수 <input type="number" min="1" max="50" step="1"
+						name="product_count" value="1">
+					</label> <label>최대 수용인원 <input type="number" min="1" max="20"
+						step="1" name="product_pernum" value="1">
+					</label>
+				</div>
+
+				<div id="timeArea">
+					<label>체크인 <input type="time" value="15:00:00"
+						name="product_checkin">
+					</label> <label>체크아웃 <input type="time" value="11:00:00"
+						name="product_checkout">
+					</label>
+				</div>
+
+				<div id="fileArea">
+					<label id="roomPhotos"> 객실 사진 <input type="file"
+						multiple="multiple" name="product_photo" id="addPhoto">
+					</label>
+				</div>
+
+
+				<div id="addResetBtn">
+					<button type="button" id="addProductButton">등록하기</button>
+					<button type="reset" id="addProductReset">초기화</button>
+				</div>
+			</form>
+		</div>
+
+
+		<div class="addProductListAll">
+
+
+			<div id="prListEdit">
+				<p class="list_title">상품리스트</p>
+
+
+
+				<button id="prListEditBtn"
+					onclick="location.href='/user/mypage/my_productList'">완료</button>
+
+
+			</div>
+
+			<div id="productListContainer">
+
+				<div id="productContainer" th:each="product : ${productList}"
+					class="box">
+
+
+					<div class="boxCintainer">
+
+						<div class="itemexer">
+
+							<div th:if="${not #lists.isEmpty(product.productImgs)}"
+								class="slideshow-container">
+								<!-- 해당 배열의 이미지를 보여줌 -->
+								<div th:each="img : ${product.productImgs}" class="imgContainer">
+									<div class="slide">
+
+										<!-- 해당 이미지의 경로를 가져온다.   -->
+										<img th:src="${img.img_url}" alt="Product Image" width="100%"
+											height="100%" class="showImgs"><span
+											th:text="${img.img_id}" style="display: none;" class="img_id"></span>
+									</div>
+									<div class="prev">&lt;</div>
+									<div class="next">&gt;</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="imgLists">
+							<ul class="image-list">
+								<li th:each="img : ${product.productImgs}">
+									<div class="img_list_position">
+										<img th:src="${img.img_url}" alt="Product Image"
+											class="list_img"> <span th:text="${img.img_id}"
+											style="display: none;"></span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="imageUploadContainer">
+								<button class="addImagesButton">이미지 추가</button>
+								<input type="file" name="images[]" multiple
+									class="imageUploadInput">
+							</div>
+
+						</div>
+					</div>
+
+
+
+					<div class="Product_contents">
+
+						<p style="display: none;">
+							객실 번호 <span th:text="${product.product_id}" class="product_id"></span>
+						</p>
+
+						<div class="prName">
+							<p>객실 이름</p>
+							<span th:text="${product.product_type}" class="product_type"></span>
+						</div>
+
+						<div class="pdDetail">
+							<p>상세 설명</p>
+							<span th:text="${product.product_detail}" class="product_detail"></span>
+
+						</div>
+
+						<div class=pdAmount>
+							<p>금액</p>
+							<span th:text="${product.product_amount}" class="product_amount"></span>
+
+						</div>
+
+						<div class="pdCountArea">
+
+							<p>
+								객실수 <span th:text="${product.product_count}"
+									class="product_count"></span>
+							</p>
+							<p>
+								최대인원 <span th:text="${product.product_pernum}"
+									class="product_pernum"></span>
+							</p>
+						</div>
+
+						<div class="pdTimeArea">
+
+							<p>
+								체크인 <span th:text="${product.checkin}" class="checkin"></span>
+							</p>
+							<p>
+								체크아웃 <span th:text="${product.checkout}" class="checkout"></span>
+
+							</p>
+
+						</div>
+						<!-- 	<button class="addEditImg">이미지 추가</button> -->
+
+						<div class="btnArea">
+							<button class="editProduct" onclick="modifyRoom(this)">객실수정</button>
+							<button class="deleteProduct">객실삭제</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- 이 부분 추후 수정해야한다. -->
+			<div th:if="${#lists.isEmpty(productList)}" id="noProduct">
+				<h3>현재 등록된 상품이 없습니다.</h3>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="/js/pyr_add_product.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
+	
+</div>
+
+</html>

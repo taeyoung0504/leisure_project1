@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{jjj/header}">
+<div id="my_infomation_modify" layout:fragment="content"
+	class="container my-3">
+	<head>
+
+
+
+<link rel="stylesheet" href="/css/pyr_my_productlist.css">
+<title>내 상품 목록</title>
+	</head>
+
+
+	<body id="userinfo_modify">
+
+		<!-- 사이드 바 -->
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+						정보</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
+						내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+				</li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_productList}" class="active"> 내 상품
+						목록</a></li>
+			</ul>
+		</nav>
+
+
+		<!-- role이 파트너가 아닌 경우  -->
+		<div th:if="${noPartner}">
+			<script th:inline="javascript">
+				alert('파트너가 아닙니다. 파트너 신청을 해주세요.');
+				window.location.href = '/'; // 메인 페이지 이동
+			</script>
+		</div>
+
+
+		<!-- 파트너이고 acc에 등록한 숙소 정보가 있는 경우  -->
+		<div th:unless="${isEmpty}">
+
+			<div id="Container">
+				<div id="mainContent" class="main_content"
+					th:each="accommodation : ${paging.content}">
+					<div class="top">
+						<div class="left">
+							<img
+								th:src="${accommodation.acc_img ?: '/img/acc_img/no_photo.png'}"
+								alt="Main Image" width="100%" height="100%" class="main_img">
+						</div>
+						<div class="right">
+							<div class="info">
+								<div class="name_fild">
+									<span th:text="${accommodation.acc_sectors}"></span>
+									<p th:text="${accommodation.acc_name}"></p>
+								</div>
+								<div class="score_cnt">
+									<span th:text="${accommodation.acc_rating}"></span> 추천해요
+								</div>
+								<p th:text="${accommodation.acc_address}" class="address"></p>
+							</div>
+							<div class="partner_comment">
+								<strong>사장님 한마디</strong>
+								<div>
+									<p
+										th:if="${accommodation.acc_explain == null || accommodation.acc_explain == ''}">숙소에
+										대한 설명을 등록해 주세요</p>
+									<p th:text="${accommodation.acc_explain}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="pdMainEditArea">
+						<a th:href="@{|/product/registerRoom/${accommodation.id}|}">
+							<button id="pdShowAddRoonBtn" type="button"
+								style="margin-bottom: 20px;">객실등록 / 조회</button>
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- 페이징 처리 -->
+			<div id="accPaging">
+				<div th:if="${!paging.isEmpty()}">
+					<ul class="pagination">
+						<li class="page_previous"
+							th:classappend="${!paging.hasPrevious()} ? 'disabled'"><a
+							class="page_link" th:href="@{|?page=${paging.number-1}|}"><span>이전</span></a>
+						</li>
+						<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+							th:if="${page >= paging.number-2 and page <= paging.number+2}"
+							th:classappend="${page == paging.number} ? 'active'"
+							class="page_item"><a th:text="${page}" class="page_link"
+							th:href="@{|?page=${page}|}"></a></li>
+						<li class="page_next"
+							th:classappend="${!paging.hasNext()} ? 'disabled'"><a
+							class="page_link" th:href="@{|?page=${paging.number+1}|}"><span>다음</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- 만약 해당 데이터가 비어있으면 바로 등록하기로 이동  -->
+		<div th:if="${isEmpty}">
+
+			<div id=noAccfild>
+
+				<div id="noAcc">
+					<h2>현재 등록된 객실이 없습니다</h2>
+				</div>
+
+			</div>
+		</div>
+
+
+		<script src="/js/pyr_add_product.js"></script>
+
+	</body>
+</html>

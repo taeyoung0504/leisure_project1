@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <title>객실 상세 페이지</title>
+  <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <style>
+ 	h1 {
+ 		text-align : center;
+ 		margin-right: 50px;
+ 	}
+ 
+ .form-container {
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    height: 100vh;
+  }
+ 
+ 
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  form label, form input {
+    margin-bottom: 10px;
+  }
+</style>
+
+</head>
+<body>
+  
+
+  <!-- <script src="https://code.jquery.com/jquery-3.7.0.js" 
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> -->
+
+  
+  <h1> 예약하기 </h1>
+
+  <div class="form-container" th:inline="text">
+  <!-- Form element -->
+  <form th:action="@{/book/toss/{roomId}(roomId=${rooms.id})}" th:object="${room}" method="post">
+  
+<!--     <label for="checkIn">checkIn:</label>
+    <input type="date" id="checkIn" name="checkIn" required>
+
+    <label for="checkOut">checkOut:</label>
+    <input type="date" id="checkOut" name="checkOut" required> -->
+    
+    <label for="checkIn">checkIn:</label>
+    <input type="text" id="datepicker1" name="checkIn" required>
+
+    <label for="checkOut">checkOut:</label>
+    <input type="text" id="datepicker2" name="checkOut" required>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div>
+  
+    <p>Model Output:</p>
+    <p th:text="${rooms.id}"></p>
+    <p th:text="${rooms.roomTitle}"></p>
+    <!-- Add more model properties here -->
+  </div>
+</div>
+<script>
+        $("#datepicker1,#datepicker2").datepicker({
+            dateFormat: 'yy-mm-dd', // 날짜 포맷 (예: 2023-07-08)
+            showOtherMonths: true,  //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+            showMonthAfterYear: true, // 월- 년 순서가아닌 년도 - 월 순서
+            // buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",  //버튼 이미지 경로
+            // buttonImageOnly: true,  //버튼 이미지만 깔끔하게 보이게함
+            prevText: '이전 달', // 이전 달 버튼 텍스트
+            nextText: '다음 달', // 다음 달 버튼 텍스트
+            closeText: '닫기', // 닫기 버튼 텍스트
+            currentText: '오늘', // 오늘 버튼 텍스트
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], // 월 이름
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], // 요일 이름 (짧은 버전)
+            minDate: 0,  //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+            maxDate: "+2M",  //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) -> 달별로 유동적으로 +한달까지만 (30일 31일수도 있으니) 표시되게 하기.
+        });
+
+        $('#datepicker1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   
+        $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+       /*  $('#datepicker2').datepicker({
+        	  onSelect: function(dateText, inst) {
+        	    // 이벤트 핸들러 내용 작성
+        	    console.log("datepicker2의 날짜가 선택되었습니다.");
+        	    // 추가로 원하는 작업을 수행할 수 있습니다.
+        	  }
+        	}); */
+        	
+        	
+    </script>
+</body>
+</html>

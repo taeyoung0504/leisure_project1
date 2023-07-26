@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<html layout:decorate="~{jjj/header}">
+
+</html>
+
+<body id="userinfo_modify2">
+	<div id="mypage_partner_reg">
+
+		<table id="mypage_partner_reg_table">
+			<tr>
+				<th class="partner_table-th1">업체명<span id="essential_mark"
+					style="font-weight: bold; color: orangered;"> *</span></th>
+				<td colspan="3" class="partner_table-th2"
+					style="text-align: center;"><input type="text"
+					id="company_name" maxlength="20"></td>
+
+
+			</tr>
+
+			<tr>
+				<th class="partner_table-th1">업체주소<span id="essential_mark"
+					style="font-weight: bold; color: orangered;"> *</span></th>
+				<td colspan="3" class="partner_table-th2"
+					style="text-align: center;"><input type="text"
+					id="company_address" maxlength="50"></td>
+
+			</tr>
+			<tr>
+				<th class="partner_table-th1">인감 증명서<br> 첨부<span
+					id="essential_mark" style="font-weight: bold; color: orangered;">
+						*</span></th>
+				<td colspan="3" class="partner_table-th2"
+					style="text-align: center;"><input type="file"
+					multiple="multiple" id="partner_input-file" style="display: none;">
+					<label for="partner_input-file" id="ch_file"
+					style="display: block; cursor: pointer; color: rgb(128, 128, 128); text-align: center; line-height: 3;">
+						파일 선택을 선택하세요( 이미지 또는 pdf 파일 첨부) </label></td>
+			</tr>
+			<tr>
+				<th class="partner_table-th1">담당자명<span id="essential_mark"
+					style="font-weight: bold; color: orangered;"> *</span></th>
+				<td class="partner_table-th2" style="text-align: center;"><input
+					type="text" id="partner_name"></td>
+				<td class="partner_table-th3"><b>담당자 연락처</b><span
+					id="essential_mark" style="font-weight: bold; color: orangered;">
+						*</span></td>
+				<td class="partner_table-th2" style="text-align: center;"><input
+					type="text" style="font-size: 16px;" id="partner_tel"
+					maxlength="13" placeholder="  - '하이픈' 포함"></td>
+
+			</tr>
+			<tr>
+				<th class="partner_table-th1">업종<span id="essential_mark"
+					style="font-weight: bold; color: orangered;"> *</span></th>
+				<td class="partner_table-th2" style="text-align: center;"><select
+					id="partner_sectors" readonly style="font-size: 16px;">
+						<option value="" disabled selected hidden>선택하세요</option>
+						<option value="모텔">모텔</option>
+						<option value="호텔">호텔</option>
+						<option value="리조트">리조트</option>
+						<option value="펜션">펜션</option>
+						<option value="게스트하우스">게스트하우스</option>
+				</select></td>
+				<td class="partner_table-th3"><b>지역</b></td>
+				<td class="partner_table-th2" style="text-align: center;"><select
+					id="partner_region" readonly style="font-size: 16px;">
+						<option value="" disabled selected hidden>선택하세요</option>
+						<option value="북구">북구</option>
+						<option value="서구">서구</option>
+						<option value="중구">중구</option>
+						<option value="남구">남구</option>
+						<option value="동구">동구</option>
+						<option value="수성구">수성구</option>
+						<option value="달서구">달서구</option>
+						<option value="달성군">달성군</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td style="border: 1px solid white;"><span
+					style="color: orangered;"><b>*</b></span> 값은 필수입니다.</td>
+			</tr>
+			<tr id="sss">
+				<td style="border: 1px solid white;"></td>
+				<td style="border: 1px solid white;"></td>
+				<td style="border: 1px solid white;">
+				</th>
+				<td
+					style="border: 1px solid white; text-align: right; vertical-align: middle;">
+					<input type="button" id="reg_partner_final" value="파트너 신청하기">
+				</td>
+			</tr>
+			<tr></tr>
+
+		</table>
+
+
+
+		<!-- 사이드 바 -->
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+						정보</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
+					내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+				<li class="mypage_sidebar">
+				<a 	th:href="@{/user/mypage/partner_reg}" class="active">파트너 신청</a>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+				</li>
+				<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_productList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+			</ul>
+		</nav>
+
+
+	</div>
+</body>
+<style>
+td, th {
+	border: 1px solid rgb(106, 106, 106);
+	padding: 8px;
+}
+</style>
+
+</html>
