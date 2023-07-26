@@ -1,0 +1,120 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>결제 버튼</title>
+  <style>
+  
+  	h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    /* text-align: center; */
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 버튼 디자인 */
+  
+  #kaobtn {
+   background: #fee500;
+   color: #000;
+   border-radius: 12px;
+   padding: 10px 20px;
+   font-family: "Arial", sans-serif;
+   font-size: 14px;
+   font-weight: bold;
+   border: none;
+   cursor: pointer;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ }
+
+ #kaobtn:hover {
+   background: #ffd900;
+ }
+
+ #kaobtn:active {
+   background: #ffce00;
+ }
+  </style>
+</head>
+<body>
+ <h1> kakaoPay_API 이용하기 </h1>
+ 
+    <button id="kaobtn" style="background: #fee500; color:#000; border-radius: 12px; padidng: 10px 20px;">카카오페이</button>
+    
+     <button id="kaobtn2" style="background: #fee500; color:#000; 
+    border-radius: 12px; padidng: 10px 20px;">결제취소</button>
+   
+
+	jQueryCDN
+	<script src="https://code.jquery.com/jquery-3.7.0.js"
+		integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+		crossorigin="anonymous">
+	</script>
+	
+	jQuery_ajax
+	
+	<script th:inline="javascript">
+	/* $(function() {
+		$("#kaobtn").click(function (){ 
+			$.ajax({
+				type: 'post',
+				url: "/ready",
+				data: {
+					item_name: "아이폰 14 pro",
+					quantity: "1",
+					total_amount: "5000",
+					vat_amount: "0",
+					tax_free_amount: "0"
+				},
+				success: function(res) {
+					location.href = res.next_redirect_pc_url;
+				}
+			});
+		});
+	});  */
+	$(function() {
+		$("#kaobtn").click(function (){ 
+			$.ajax({
+				type: 'post',
+				url: "/ready",
+				//contentType: "application/json",
+				data: {
+					item_name: "아이폰",
+					quantity: "1",
+					total_amount: "5000",
+					vat_amount: "0",
+					tax_free_amount: "0"
+				},
+				 
+				success: function(res) {
+					location.href = res.next_redirect_pc_url;
+				}
+			});
+		});
+	});  
+	
+	/*
+	$(function() {
+		$("#kaobtn2").click(function (){ 
+			$.ajax({
+				type: 'post',
+				url: "/refund",
+				data: {
+					cancel_amount: "100",
+					cancel_tax_free_amount: "0",
+					cancel_vat_amount: "0",
+				},
+				success: function() {
+					location.href = "https://localhost8080/refund";
+				}
+			});
+		});
+	});
+	*/
+	
+	</script>
+</body>
+</html>
+ -->

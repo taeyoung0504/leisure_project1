@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+<html layout:decorate="~{khk/adminNavbar}">
+<div layout:fragment="adminNav" class="container my-3">
+	<h1>리뷰 신고 리스트</h1>
+	<div class="container">
+		<div>
+			<div class="input-group">
+				<input type="text" id="search_kw" class="form-control"
+					placeholder="작성자 ID 검색" th:value="${kw}">
+				<button class="btn btn-outline-secondary" type="button"
+					id="btn_search">검색</button>
+			</div>
+
+			<div id="searchResults">
+				<table>
+					<thead>
+						<tr>
+							<th>신고 번호</th>
+							<th>신고 종류</th>
+							<th>신고 상세 내용</th>
+							<th>리뷰 글 번호</th>
+							<th>리뷰 글 내용</th>
+							<th>블라인드</th>
+							<th>작성자 ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="declaration : ${paging}"
+							th:data-user-id="${declaration.id}">
+							<td th:text="${declaration.id}"></td>
+
+
+							<td th:text="${declaration.declaration}"></td>
+							<td th:text="${declaration.declarationDetail}"></td>
+							<td th:text="${declaration.review.id}"></td>
+							<td th:text="${declaration.review.content}"></td>
+							<!-- 							<td th:text="${declaration.review.author}"></td> -->
+							<td>
+								<form id="unblindForm"
+									th:action="@{/admin/unblind-review/{reviewId}(reviewId=${declaration.review.id})}"
+									method="post">
+									<input type="hidden" name="reviewId"
+										th:value="${declaration.review.id}" />
+									<button type="button"
+										th:if="${declaration.review.contentBlinded}"
+										onclick="unblindReview(this)">블라인드 해제</button>
+								</form>
+								<form id="blindForm"
+									th:if="${!declaration.review.contentBlinded}"
+									th:action="@{/admin/blind-review/{reviewId}(reviewId=${declaration.review.id})}"
+									method="post">
+									<input type="hidden" name="reviewId"
+										th:value="${declaration.review.id}" />
+									<button type="button" onclick="blindReview(this)">블라인드
+										하기</button>
+								</form>
+
+
+							</td>
+
+							<td th:text="${declaration.review.author}"></td>
+							<!-- 							<td> -->
+							<!-- 								<form th:action="@{/admin/toggle-account}" method="post"> -->
+							<!-- 									<input type="hidden" name="username" -->
+							<!-- 										th:value="${declaration.review.author.username}" /> -->
+							<!-- 									<button type="submit" -->
+							<!-- 										th:text="${declaration.review.author.enabled ? '해제' : '정지'}"></button> -->
+							<!-- 								</form> -->
+							<!-- 							</td> -->
+					</tbody>
+				</table>
+
+
+
+				<!-- 페이징처리 시작 -->
+				<div th:if="${!paging.isEmpty()}">
+					<ul class="pagination justify-content-center">
+						<!-- 이전 페이지 버튼 -->
+						<li class="page-item" th:unless="${paging.first}"><a
+							class="page-link" href="javascript:void(0)"
+							th:data-page="${paging.number-1}"> <span>이전</span>
+						</a></li>
+						<!-- 페이지 번호 -->
+						<li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+							th:classappend="${page == paging.number} ? 'active' : ''"
+							class="page-item"><a th:text="${page + 1}" class="page-link"
+							th:href="@{|?page=${page}|}"></a></li>
+						<!-- 다음 페이지 버튼 -->
+						<li class="page-item" th:unless="${paging.last}"><a
+							class="page-link" href="javascript:void(0)"
+							th:data-page="${paging.number+1}"> <span>다음</span>
+						</a></li>
+					</ul>
+					<!-- 					페이징처리 끝 -->
+					<form th:action="@{/admin/decalarationList}" method="get"
+						id="searchForm">
+						<input type="hidden" id="kw" name="kw" th:value="${kw}"> <input
+							type="hidden" id="page" name="page" th:value="${paging.number}">
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		const page_elements = document.getElementsByClassName("page-link");
+		Array.from(page_elements).forEach(function(element) {
+			element.addEventListener('click', function() {
+				document.getElementById('page').value = this.dataset.page;
+				document.getElementById('searchForm').submit();
+			});
+		});
+		const btn_search = document.getElementById("btn_search");
+		btn_search.addEventListener('click', function() {
+			document.getElementById('kw').value = document
+					.getElementById('search_kw').value;
+			document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+			document.getElementById('searchForm').submit();
+		});
+		
+		
+		//블라인드 버튼 비동기 처리
+		  function unblindReview(button) {
+        var reviewId = button.parentNode.querySelector('input[name="reviewId"]').value;
+        var formData = new FormData();
+        formData.append('reviewId', reviewId);
+
+        fetch('/admin/unblind-review/' + reviewId, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            if (response.ok) {
+                // 성공적으로 처리되었을 때 버튼의 텍스트를 변경합니다.
+                button.textContent = '블라인드 하기';
+                window.location.href = window.location.href;
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+    }
+
+    function blindReview(button) {
+        var reviewId = button.parentNode.querySelector('input[name="reviewId"]').value;
+        var formData = new FormData();
+        formData.append('reviewId', reviewId);
+
+        fetch('/admin/blind-review/' + reviewId, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            if (response.ok) {
+                // 성공적으로 처리되었을 때 버튼의 텍스트를 변경합니다.
+                button.textContent = '블라인드 해제';
+                window.location.href = window.location.href;
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+    }
+		
+		
+		// 		function toggleAccount(event, button, author) {
+		// 			event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
+		// 			event.stopPropagation(); // 이벤트 전파 중지
+
+		// 			var username = button.getAttribute("data-username"); // 사용자명 가져오기
+		// 			var currentStatus = button.getAttribute("data-current-status"); // 현재 상태 가져오기
+
+		// 			// 서버로 Ajax 요청 보내기
+		// 			var xhr = new XMLHttpRequest();
+		// 			xhr.open("POST", "/toggle-account", true); // 토글 요청 URL 설정
+
+		// 			xhr.setRequestHeader("Content-Type", "application/json");
+		// 			xhr.onload = function() {
+		// 				if (xhr.status === 200) {
+		// 					var response = JSON.parse(xhr.responseText);
+		// 					var newStatus = response.newStatus;
+
+		// 					// 버튼의 상태 업데이트
+		// 					button.setAttribute("data-current-status", newStatus);
+		// 					button.textContent = (newStatus === "0") ? "토글" : "토글 해제";
+
+		// 					// 계정 상태 업데이트
+		// 					var accountStatusSpan = button.parentNode.previousElementSibling.firstElementChild;
+		// 					if (newStatus === "0") {
+		// 						accountStatusSpan.classList
+		// 								.remove("account-status-disabled");
+		// 					} else {
+		// 						accountStatusSpan.classList
+		// 								.add("account-status-disabled");
+		// 					}
+		// 				}
+		// 			};
+
+		// 			// 요청 데이터 설정
+		// 			var requestData = JSON.stringify({
+		// 				username : username,
+		// 				currentStatus : currentStatus,
+		// 				author : author
+		// 			});
+
+		// 			xhr.send(requestData);
+		// 		}
+		
+		
+		
+	</script>
+
+
+</div>
+</body>
+</html>
