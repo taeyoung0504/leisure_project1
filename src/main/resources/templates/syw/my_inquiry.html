@@ -15,6 +15,10 @@
 			border-bottom: 1px solid #ccc;
 			margin-top: 20px;
 			cursor: pointer;
+<<<<<<< HEAD
+			padding-bottom: 20px;
+=======
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 		}
 
 
@@ -44,13 +48,21 @@
 			margin-left: 50px;
 			padding-bottom: 30px;
 		}
+<<<<<<< HEAD
+		
+		
+=======
 
 
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 
 		.inquiry-content {
 			margin-left: 10px;
 			margin-top: 10px;
+<<<<<<< HEAD
+=======
 			margin-bottom: 10px;
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 			overflow: auto;
 		}
 
@@ -78,11 +90,23 @@
 		}
 
 		.edit-button {
+<<<<<<< HEAD
+			background-color: lightblue;
+			color: white;
+			border-radius: 5px;
+=======
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 			padding: 1px 5px;
 			cursor: pointer;
 		}
 
 		.delete-button {
+<<<<<<< HEAD
+			background-color: #e40000d3;
+			color: white;
+			border-radius: 5px;
+=======
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 			padding: 1px 5px;
 			cursor: pointer;
 		}
@@ -109,6 +133,8 @@
 		.inquiryMessage {
 			padding: 20px;
 		}
+<<<<<<< HEAD
+=======
 
 		.center-content3 {
 			display: flex;
@@ -154,10 +180,28 @@
 		margin-right: 20px;
 	}
 
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function () {
+<<<<<<< HEAD
+			$(".inquiry-item").click(function () {
+				var content = $(this).find(".inquiry-content, .answer-content, .button-container");
+				var image = $(this).find(".toggle-image");
+
+				content.slideToggle(function () {
+
+					if (content.is(":visible")) {
+						image.attr("src", "/img/key/up.png");
+					} else {
+						image.attr("src", "/img/key/down.png");
+					}
+				});
+			});
+		});
+		$(document).ready(function () {
+=======
 	$(".inquiry-item").click(function (event) {
 		if (!$(event.target).hasClass("content-toggle")) {
 			var content = $(this).find(".inquiry-content, .answer-content");
@@ -181,6 +225,7 @@
 				$(this).closest(".inquiry-item").find(".button-container").toggle();
 			});
 
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 			$(".delete-button").click(function (event) {
 				event.preventDefault();
 				var confirmation = confirm('정말 삭제하시겠습니까?');
@@ -226,6 +271,10 @@
 					</h4>
 				</div>
 				<div class="inquiry-content">
+<<<<<<< HEAD
+					<h4 style="margin-left: 5px;">문의</h4>
+					<pre class="inquiryMessage" th:utext="${inquiry.message}" style="background-color: #f2f2f2;"></pre>
+=======
 					<div
 						style="display: flex; justify-content: space-between; align-items: center; position: relative;">
 						<h4 style="margin-left: 5px;">문의</h4>
@@ -237,6 +286,7 @@
 					</div>
 					<p class="inquiryMessage" th:utext="${inquiry.message}"
 						style="background-color: #f2f2f2; white-space: pre-line;"></p>
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 				</div>
 				<div th:each="answer : ${inquiry.inquiryAnswer}" class="answer-content">
 					<h4>
@@ -244,10 +294,19 @@
 							style="font-size: 13px; color: rgb(193, 193, 193);">작성일 <span
 								th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></span></span>
 					</h4>
+<<<<<<< HEAD
+					<pre th:utext="${@commonUtil.markdown(answer.message)}" style="background-color: #f2f2f2; padding: 20px;"></pre>
+				</div>
+				<div th:if="${inquiry.inquiryAnswer.size() == 0}" class="button-container">
+					<a th:href="@{/inquiry/modify/{id}(id=${inquiry.id})}" class="edit-button" style="margin-top: 10px;">수정</a> <a
+						th:href="@{/inquiry/delete/{id}(id=${inquiry.id})}" class="delete-button">삭제</a>
+				</div>
+=======
 					<p th:text="${answer.message}"
 						style="background-color: #f2f2f2; padding: 20px; white-space: pre-line;"></p>
 				</div>
 
+>>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 			</div>
 		</div>
 		<div th:if="${inquiries.size() < 1}" class="center-content3">
