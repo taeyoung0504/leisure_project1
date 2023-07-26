@@ -25,7 +25,7 @@ public class BookingVO extends BaseEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bookNum; // 예약 번호
 	
-	@Column(name = "book_status", nullable = false)
+	//@Column(name = "book_status", nullable = false)
 	private String bookStatus; // 예약 상태
 	
 	private String bookerID; // 예약자 아이디(회원, 비회원 구분)

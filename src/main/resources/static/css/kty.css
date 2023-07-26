@@ -1,3 +1,32 @@
+
+
+
+@font-face {
+	font-family: 'TheJamsil5Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'The-Jamsil-OTF-2-Light';
+	src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'The-Jamsil-OTF-3-Regular';
+	src: url('/font/The-Jamsil-OTF-3-Regular.woff') format('woff');
+	font-style: normal;
+}
+
+
+input[type="button" i] {
+	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+}
+
 /* 회원가입 css */
 #username-error {
 	font-size: 12px
@@ -34,14 +63,15 @@
 	justify-content: center;
 	flex-direction: column;
 	height: 100vh;
+	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 	/* 변경: 전체 뷰포트 높이로 설정 */
 }
 
 .join_title {
-	font-family: 'Rubik Puddles', cursive;
-	margin-left: 30px;
-	margin-top: 70px;
-	font-size: 50px;
+	font-family: "TheJamsil5Bold", Arial, sans-serif;
+/* 	margin-left: 30px; */
+/* 	margin-top: 70px; */
+	font-size: 30px;
 }
 
 .join_title:hover {
@@ -182,10 +212,10 @@
 }
 
 .login_title {
-	font-family: 'Rubik Puddles', cursive;
+	font-family: "TheJamsil5Bold", Arial, sans-serif;
 	margin-left: 30px;
 	margin-top: -70px;
-	font-size: 50px;
+	font-size: 30px;
 }
 
 .login_title:hover {

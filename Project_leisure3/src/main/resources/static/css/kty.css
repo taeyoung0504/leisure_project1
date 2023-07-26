@@ -1,0 +1,1072 @@
+/* 회원가입 css */
+#username-error {
+	font-size: 12px
+}
+
+#password1-error {
+	font-size: 12px
+}
+
+#password2-error {
+	font-size: 12px
+}
+
+#email-error {
+	font-size: 12px
+}
+
+#inputCode_error {
+	font-size: 1px;
+}
+
+#join_timer {
+	position: absolute;
+	display: none;
+	color: red;
+	margin-left: 450px;
+	margin-top: 650px;
+}
+
+/*================================*/
+.container_my-3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	/* 변경: 전체 뷰포트 높이로 설정 */
+}
+
+.join_title {
+	font-family: 'Rubik Puddles', cursive;
+	margin-left: 30px;
+	margin-top: 70px;
+	font-size: 50px;
+}
+
+.join_title:hover {
+	cursor: pointer;
+}
+
+.mb-join {
+	border-bottom: 2px solid #adadad;
+	padding: 5px 10px;
+	flex: 1;
+}
+
+.join_username, .join_password1, .join_password2 {
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 13px;
+	height: 25px;
+	background: none;
+}
+
+.join_email, #inputCode {
+	border: none;
+}
+
+.addr1, .addr3 {
+	border: none;
+	width: 180px;
+	/* text-decoration: underline; */
+}
+
+.addr2 {
+	border: none;
+	width: 300px;
+	/* text-decoration: underline; */
+}
+
+.checkEmailNumber {
+	background-color: rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: none;
+	display: inline-block;
+	border-radius: 15px;
+	font-weight: 600;
+	margin-left: 110px;
+}
+
+.find_addr1 {
+	background-color: rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: none;
+	display: inline-block;
+	border-radius: 15px;
+	font-weight: 600;
+	margin-left: 100px;
+}
+
+.find_addr1:hover {
+	cursor: pointer;
+}
+
+.checkEmailNumber:hover {
+	cursor: pointer;
+}
+
+.join_check {
+	background-color: rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: none;
+	display: inline-block;
+	border-radius: 15px;
+	font-weight: 600;
+	margin-left: 110px;
+}
+
+.join_check:hover {
+	cursor: pointer;
+}
+
+#join_up {
+	background: rgb(255, 128, 128);
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 1.6em;
+	bottom: -20px;
+	width: 100%;
+	right: -5px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+#join_up:hover {
+	background: hsl(166, 81%, 84%);
+	color: hsl(166, 74%, 39%);
+}
+
+#join_up:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	transition: 400ms ease all;
+}
+
+#join_up:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+#join_up:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+/* 로그인 css */
+.container_my-3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	/* 변경: 전체 뷰포트 높이로 설정 */
+}
+
+.login_title {
+	font-family: 'Rubik Puddles', cursive;
+	margin-left: 30px;
+	margin-top: -70px;
+	font-size: 50px;
+}
+
+.login_title:hover {
+	cursor: pointer;
+}
+
+.mb-login {
+	border-bottom: 2px solid #adadad;
+	padding: 10px 10px;
+	flex: 1;
+}
+
+#username, #password {
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
+}
+
+#login_submit {
+	background-color: rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: none;
+	display: inline-block;
+	border-radius: 15px;
+	font-weight: 600;
+	margin-left: 50px;
+	width: 200px;
+}
+
+#login_submit:hover {
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#kakao_login_btn, #google_login_btn, #naver_login_btn {
+	width: 350px;
+	border: 1px solid rgb(192, 192, 192);
+	 border-radius: 8px;
+}
+
+#kakao_login_btn, #google_login_btn, #naver_login_btn:hover {
+	cursor: pointer;
+}
+
+.danger {
+	font-size: 13px;
+	text-align: center;
+	color: rgb(255, 128, 64);
+}
+
+/* 마이페이지 css */
+#body-pd {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+/* 패널 스타일링 */
+.panel.panel-info {
+	position: absolute;
+	margin-top: 50px;
+	width: 400px;
+	border-radius: 10px;
+	height: 250px;
+	box-shadow: 0 2px 4px rgb(192, 192, 192);
+	display: block;
+}
+
+.panel-heading {
+	background-color: #337ab7;
+	color: white;
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.panel-title {
+	margin: 0;
+	font-size: 20px;
+}
+
+.panel-body {
+	padding: 20px;
+}
+
+/* 테이블 스타일링 */
+.table-user-information {
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 20px;
+}
+
+.table-user-information td:first-child {
+	width: 30%;
+	font-weight: bold;
+}
+
+/* 버튼 스타일링 */
+.btn-primary {
+	margin-top: 10px;
+}
+
+/* 아이콘 스타일링 */
+.ion-icon {
+	font-size: 18px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+/* 마이페이지  css */
+#my_infomation_modify {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 800px;
+	top: 180px;
+	margin: 0;
+}
+
+.userinfo_table {
+	position: relative;
+	font-size: 18px;
+}
+
+.userinfo_td_gap {
+	white-space: nowrap;
+	position: relative;
+	padding-bottom: 40px;
+	/* 아래쪽 간격 크기 조절 */
+	padding-left: 100px;
+	/* 좌측 간격 크기 조절 */
+}
+
+.btns-wrap__edit-btn {
+	position: absolute;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	top: -20px;
+	width: 200px;
+	height: 50px;
+}
+
+.btns-wrap__edit-btn:hover {
+	cursor: pointer;
+}
+
+.mypage_sidebar {
+	list-style-type: none;
+	padding-bottom: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#mypage_sidebar_nav {
+	white-space: nowrap;
+	position: absolute;
+	top: 50px;
+	/* 원하는 여백 크기로 조정 */
+	left: -300px;
+	font-size: 20px;
+	color: rgb(69, 69, 69);
+}
+
+#profile_lion {
+	height: 150px;
+	margin-left: 100px;
+	margin-bottom: 10px;
+}
+
+li.mypage_sidebar a.active {
+	color: rgb(255, 64, 64);
+	font-weight: bold;
+}
+
+#modify_password_input {
+	display: none;
+}
+
+#modify_address_input {
+	display: none;
+}
+
+.modify_password {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+#modify_password_input_button {
+	position: relative;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 100px;
+	height: 30px;
+	background-color: rgb(208, 255, 208);
+	color: rgb(64, 128, 128);
+	font-weight: bold;
+}
+
+#modify__input_button:hover {
+	cursor: pointer;
+}
+
+.modify_password2 {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.modify_password3 {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+#modifypassword {
+	position: relative;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: rgb(255, 159, 159);
+	color: rgb(255, 255, 255);
+	width: 200px;
+	height: 50px;
+	font-weight: bold;
+}
+
+#modifypassword:hover {
+	cursor: pointer;
+}
+
+#noused_account {
+	color: rgb(113, 126, 132);
+}
+
+.modify_addr1 {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.modify_addr2 {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.modify_addr3 {
+	height: 30px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+#modifyaddr {
+	position: relative;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: rgb(255, 159, 159);
+	color: rgb(255, 255, 255);
+	width: 200px;
+	height: 50px;
+	font-weight: bold;
+}
+
+#modify_addr_button {
+	cursor: pointer;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 100px;
+	height: 30px;
+}
+
+#modifyaddr {
+	cursor: pointer;
+}
+
+#user_del_input {
+	display: none;
+}
+
+#userdel_confirm_button {
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 100px;
+	height: 30px;
+}
+
+#userdel_confirm_button:hover {
+	cursor: pointer;
+}
+
+#user_del_button:hover {
+	cursor: pointer;
+}
+
+#userdel_check_password {
+	height: 50px;
+	width: 185px;
+	border: none;
+	border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+/* 파트너 신청 페이지 css */
+#mypage_partner_reg {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top:50px;
+	left: 800px;
+	top: 180px;
+	margin: 0;
+}
+
+#mypage_partner_reg_table {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	border-collapse: collapse;
+	bottom: -20px;
+	width: 80vh;
+}
+
+.partner_table-th1 {
+	border-right: 1px solid white;
+	border-left: 1px solid white;
+	background-color: rgb(235, 237, 237);
+	width: 100vh;
+	height: 5vh;
+}
+
+.partner_table-th2 {
+	border-right: 1px solid white;
+	width: 100vh;
+}
+
+.partner_table-th3 {
+	border-right: 1px solid white;
+	border-left: 1px solid white;
+	background-color: rgb(235, 237, 237);
+	width: 90vh;
+	text-align: center;
+}
+
+#company_name, #company_address {
+	width: 95%;
+	height: 45px;
+	border: 1px solid rgb(207, 207, 207);
+}
+
+#partner_name, #partner_sectors {
+	width: 80%;
+	height: 45px;
+	border: 1px solid rgb(207, 207, 207);
+}
+
+#partner_tel, #partner_region {
+	width: 90%;
+	height: 45px;
+	border: 1px solid rgb(207, 207, 207);
+}
+
+#mypage_partner_reg_table {
+	border-collapse: collapse;
+}
+
+#reg_partner_final {
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 160px;
+	height: 50px;
+}
+
+#reg_partner_final:hover {
+	cursor: pointer;
+}
+
+#partner_input-file {
+	width: 90%;
+	height: 45px;
+	border: 1px solid rgb(207, 207, 207);
+}
+
+#ch_file {
+	width: 96%;
+	display: inline-block;
+	margin-left: 10px;
+	/* 오른쪽으로 10px 이동 */
+	height: 45px;
+	border: 1px solid rgb(207, 207, 207);
+}
+
+/* 비밀번호 찾기 css */
+.container_my-find {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 30vh;
+	/* 변경: 전체 뷰포트 높이로 설정 */
+	margin-top: 230px;
+	/* 예시로 20px의 여백을 추가 */
+}
+
+.mb-findpwd {
+	border-bottom: 2px solid #adadad;
+	margin: 13px;
+	flex: 1;
+}
+
+#find_username, #find_email {
+	width: 100%;
+	border: none;
+	outline: none;
+	margin-top:10px;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
+}
+
+.title_find_pw {
+	margin-left: 30px;
+	margin-top: -70px;
+	font-size: 25px;
+	text-align: center;
+}
+
+#send_temppwd {
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 150px;
+	height: 50px;
+	margin-top: 15px;
+}
+
+#send_temppwd:hover {
+	cursor: pointer;
+}
+
+/* 아이디 찾기 css */
+#find_id_email {
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 300px;
+	height: 50px;
+}
+
+#check_email {
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 150px;
+	height: 40px;
+	margin-top: 15px;
+}
+
+#check_email:hover {
+	cursor: pointer;
+}
+
+/* search food css  */
+.left-area {
+
+	margin-top: 10px;
+	margin-left:-600px;
+	width: 400px;
+	height: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	/*border:1px solid black;*/
+}
+
+.search_food {
+	width: 80%;
+	height: 90%;
+	margin-top: 10%;
+	/*display: flex;
+            justify-content: center;
+            align-items: center;*/
+	padding: 40px;
+}
+
+#search_food_title {
+	font-size: 18px;
+}
+#filter_food_title{
+font-size: 18px;
+}
+
+
+@media ( max-width : 768px) {
+	/* 작은 화면 크기에서의 스타일 변경 */
+	.left-area {
+		position: static;
+		width: 100%;
+		height: auto;
+		border: none;
+		display: block;
+	}
+	.search_food {
+		margin-top: 0;
+	}
+}
+
+#search_food {
+	width: 70%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 13px;
+	height: 25px;
+	background: none;
+	margin-top: 15px;
+	border: 1px solid grey;
+	border-radius: 7px;
+}
+
+#btn_search_food {
+	background-color:rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: 1px solid white;
+	border-radius: 10px;
+	border: 1px solid grey;
+	height: 25px;
+	width: 80px;
+	margin-top: 20px;
+}
+
+#btn_search_food:hover {
+	cursor: pointer;
+}
+
+.filter_search_food {
+	padding-top: 20px;
+	border-top: 1px solid rgb(216, 216, 216);
+	margin-top: 30px;
+	font-size: 18px;
+}
+
+#food_type {
+	font-size: 14px;
+	color: rgb(0, 0, 0);
+}
+
+
+
+#price_type {
+	font-size: 14px;
+}
+
+.price_check_type {
+	font-size: 14px;
+	color: rgb(87, 87, 87)
+}
+
+#parking_type {
+	font-size: 14px;
+}
+
+.parking_check_type {
+	color: rgb(87, 87, 87)
+}
+
+#region_type {
+	margin-bottom:10px;
+	font-size: 14px;
+}
+
+#dong_type {
+	font-size: 14px;
+}
+
+.right-area {
+	position: fixed;
+	width: 55.3%;
+	height: 80%;
+	right: 72px;
+	top: 150px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
+	
+	/*border:1px solid black;*/
+}
+
+.food-entry {
+	display: flex;
+	border: 1px solid grey;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin: 10px 10px 10px 10px;
+	border-radius: 20px;
+}
+
+.food-entry>p:first-child {
+	width: 60%;
+	padding: 10px;
+}
+
+.food-entry>p:last-child {
+	width: 40%;
+	padding: 10px;
+}
+
+
+.result_opening {
+	font-size: 14px;
+	color: #f05650;
+	font-weight: light;
+}
+
+#searchBtn {
+	background-color:rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	height: 40px;
+	/* 버튼 디자인 */
+	border: none;
+	display: inline-block;
+	border-radius: 15px;
+	font-weight: 600;
+	margin-left: 35px;
+	width: 200px;
+	margin-top:20px;
+}
+
+#searchBtn:hover {
+	cursor: pointer;
+}
+
+#food_menu_title {
+	font-size: 18px;
+	color: black;
+}
+
+
+.food_check_type {
+	margin-top:10px;
+	font-size: 14px;
+	color: rgb(87, 87, 87)
+}
+  #no_search_data {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 60vh;
+    }
+
+	#my_regi_result {
+		position: absolute;
+		left: -10px;
+		top: 80px;
+		width: 800px;
+		border-collapse: collapse;
+
+	}
+
+	#result_th {
+		height: 50px;
+		background-color: rgb(235, 237, 237);
+	    
+		
+	}
+#result_td{
+	height: 69px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+#modify_reg_result{
+	
+	width:100px;
+}
+
+	#my_regi_result th:first-child,
+	#my_regi_result td:first-child {
+		border-left: none;
+	}
+	
+.center-content2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: -250px;
+	margin-left: 250px;
+	/* You can add more styling as needed */
+	height: 100vh;
+	/* This will center the content vertically within the viewport */
+}
+
+
+.btn_red {
+	display: inline-block;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	background-color: #ff0000; /* Red color for the button */
+	color: #fff; /* Text color for the button */
+	text-decoration: none; /* Remove underline for the link */
+	font-size: 16px;
+	font-weight: bold;
+	margin-top:30px;
+
+}
+
+.btn_red:hover {
+	background-color: #cc0000;
+}
+
+
+
+	#my_regi_result th:last-child,
+	#my_regi_result td:last-child {
+		border-right: none;
+	}
+
+	#my_reg_info {
+		margin-top:20px;
+		font-size: 25px;
+		font-weight: bold;
+	}
+
+.parking_check_type{
+	margin-top:20px;
+	font-size: 14px;
+	color: rgb(0, 0, 0);
+}
+
+.chk_par {
+	margin-top:15px;
+}
+.marker-link {
+  display: inline-block;
+  width: 25px; /* 마커 이미지의 가로 크기 */
+  height: 32px; /* 마커 이미지의 세로 크기 */
+  background-image: url('/img/marker.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.my_position{
+	position: absolute;
+	left:-460px;
+	bottom:480px;
+	/*border:1px solid grey;*/
+	padding-left:10px;
+	padding-top:10px;
+	width:300px;
+	height:100px;
+	font-size:30px;
+	font-weight: bold;
+}
+
+#modify_partner{
+	position: absolute;
+	top:680px;
+	right:-100px;
+		border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	width: 130px;
+	height: 40px;
+}
+
+#modify_partner:hover{
+	cursor: pointer;
+}
+
+
+
+/* 숙소검색*/
+.room-entry {
+	  display: flex;
+    border: 1px solid grey;
+    padding: 5px 20px 20px 50px;
+    width: auto;
+    margin-bottom: 10px;
+	margin-left:100px;
+	margin-top:10px;
+    border-radius: 20px;
+    height: 250px;
+    position: relative;
+  
+/*   background-repeat: no-repeat;
+  background-size: contain;
+  
+  */
+}
+  .room-entry::after {
+     content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40%;
+    transform: translateX(-50%);
+   
+    height: 100%;
+  }
+.room_info_k{
+	margin-top:20px;
+	
+}
+
+.pagination{
+	position:relative;
+	bottom:0px;
+	margin-left:-110px;
+	}
+  .room-entry > div {
+    flex: 1;
+  }
+.centered-title {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+.room-photo{
+	right:50%;
+	 flex: 1;
+	 border-radius:10px;
+	 margin-left:10px;
+	 margin-top:10px;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.room-entry:hover{
+	cursor: pointer;
+}
+
+
+
+
+.room_info{
+	margin-top:30px;
+	margin-bottom:1px;
+	 position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+} 
+
+
+
+ 

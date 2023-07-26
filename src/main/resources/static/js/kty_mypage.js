@@ -159,7 +159,9 @@ $(document).ready(function() {
 				dataType: 'json',
 				success: function(data) {
 					if (data === 1) {
-						$oldPwdError.text('비밀번호가 일치합니다.').show();
+						$oldPwdError.text('비밀번호가 일치합니다').show();
+
+
 						enableNewPwdInputs();
 					} else {
 						$oldPwdError.text('비밀번호가 일치하지 않습니다').show();
@@ -351,6 +353,7 @@ $(document).ready(function() {
 					html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다. </b>',
 					icon: 'success'
 				}).then(function() {
+
 					window.location.href = 'http://192.168.10.67:80/user/mypage/my_partner_reg';
 				});
 			}
