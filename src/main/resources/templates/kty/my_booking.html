@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<style>
+#container {
+	display: flex;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+}
+
+#left {
+	background-color: gray;
+	display: inline-block;
+	width: 300px;
+	height: 200px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+#right {
+	width: 447px;
+	margin-left: 14px;
+	text-align: center;
+}
+
+#right b {
+	font-size: 20px;
+}
+
+.cancelBtn {
+	width: 50%;
+	height: 36px;
+	border: none;
+	font-size: 15px;
+	line-height: 36px;
+	color: #fff;
+	background-color: #e61c51;
+	text-align: center;
+	cursor: pointer;
+	margin-left:-5px;
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 18px;
+	font-weight: bold;
+}
+
+
+#cancelBtn2 {
+	width: 50%;
+	height: 36px;
+	border: none;
+	font-size: 15px;
+	line-height: 36px;
+	color: #fff;
+	background-color: orange;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 18px;
+	font-weight: bold;
+}
+
+/* 스타일링을 추가할 클래스들에 적절한 스타일을 정의 - 타임리프 조건에 따라 적용 */
+.gray-filter {
+	filter: grayscale(100%);
+}
+
+.gray-text {
+	color: gray;
+}
+
+.gray-button {
+	background-color: gray;
+	color: white;
+	width: 50%;
+	height: 36px;
+	border: none;
+	font-size: 15px;
+	line-height: 36px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 18px;
+	font-weight: bold;
+	pointer-events: none; /* 버튼 클릭 비활성화 */
+}
+
+#p-right {
+	margin: 0;
+}
+
+.center-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: -250px;
+	margin-left: 300px;
+	/* You can add more styling as needed */
+	height: 100vh;
+	/* This will center the content vertically within the viewport */
+}
+
+
+.btn_red {
+	display: inline-block;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	background-color: #ff0000; /* Red color for the button */
+	color: #fff; /* Text color for the button */
+	text-decoration: none; /* Remove underline for the link */
+	font-size: 16px;
+	font-weight: bold;
+
+}
+
+.btn_red:hover {
+	background-color: #cc0000;
+} 
+ #cancelBtn2.disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
+    /* Add any additional styles you want for the disabled state */
+  }
+  
+  
+  .gray-button {
+  /* Add your grayscale styles here */
+  filter: grayscale(100%);
+  /* Add any other styles for the grayed-out appearance */
+}
+
+
+</style>
+</head>
+
+<body id="userinfo_modify">
+<html layout:decorate="~{jjj/header}">
+<div id="my_infomation_modify" layout:fragment="content"
+	class="container my-3">
+
+
+
+
+
+
+	<!-- 사이드 바 -->
+	<nav id="mypage_sidebar_nav">
+		<ul>
+			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+					정보</a></li>
+			<!-- <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}" class="active">예약
+						내역</a></li> -->
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_booking}" class="active">예약 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_productList}"
+				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+		</ul>
+	</nav>
+	<div id="wrap">
+		<div id="container" th:each="book : ${bookList}">
+			<div id="left">
+				<!-- <img th:src="${book.productImg}" 
+								alt="Product Image" width="100%"
+								height="100%" class="">    -->
+				<!-- 이미지 태그에 회색 필터 클래스를 적용 -->
+				<img th:src="${book.productImg}"
+					th:class="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' 
+            or book.bookStatus == '이용완료' ? 'gray-filter' : ''}"
+					alt="Product Image" width="100%" height="100%" />
+			</div>
+			<span id="tid" hidden th:text="${book.tid}"></span><Br>
+			<div th:if="${bookList.size() >0}" id="right">
+				<p id="p-right"
+					th:class="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-text' : ''}">
+					<b th:text="${book.AccomTitle}"></b><br> <span
+						th:text="${book.roomTitle}"></span><Br> <span
+						th:text="${book.checkIn}"></span> ~ <span
+						th:text="${book.checkOut}"></span>
+				<hr>
+				<span id="amount" class="in_price" th:inline="text">
+					[[${book.totalPrice}]] </span><br> <span
+					th:text="${book.paymentDate}"></span> <span
+					th:text="${book.payType}"></span><br>
+					<span th:text="${book.accomID}" style="display:none;"></span>
+				<!-- <button id="cancelBtn">예약취소</button> -->
+				<button id="cancelBtn" class="cancelBtn"
+					th:class="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
+					th:text="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button>
+				<button id="cancelBtn2" class="reviewBtn"
+        th:text="'리뷰작성'"
+        th:attr="data-accomid=${book.accomID}"
+        onclick="disableButton(this)">리뷰작성</button>
+				</p>
+				
+			
+
+			</div>
+		</div> <!--  영역끝 -->
+
+		
+		<div class="center-content" th:if="${bookList.size()<1}">
+			<h1>예약 내역이 없습니다.</h1>
+			<span id="intro_acc" style="color:grey;">다양한 숙소들을 지금 만나보세요</span>
+			 <a th:href="@{/tour/daegu_room}"	class="btn_red">다양한 숙소 보러가기</a>
+		</div>			
+		
+	</div>
+
+
+
+	<!-- 이게 아니라 버튼에서 바로 매핑된 컨트롤러로 이동해야함. fetch를 거치는게 아니라 button에 매핑된 url로 바로 이동해야함. -->
+	<script>
+	
+	 // 모든 id가 "cancelBtn"인 요소들을 선택하여 NodeList로 반환
+    const cancelBtns = document.querySelectorAll("#cancelBtn");
+
+    // NodeList에 대해 반복문을 사용하여 각 요소에 이벤트 리스너 추가
+    cancelBtns.forEach(cancelBtn => {
+        cancelBtn.addEventListener("click", () => {
+            const amount = cancelBtn.parentElement.querySelector(".in_price").textContent;
+            const tid = cancelBtn.parentElement.parentElement.querySelector("#tid").textContent;
+            const cleanedAmount = amount.replace(/,/g, '');
+            console.log(amount);
+            alert(cleanedAmount);
+
+            fetch(`/refundd`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    tid: tid,
+                    cancel_amount: cleanedAmount,
+                    cancel_tax_free_amount: "200",
+                    cancel_vat_amount: "200"
+                })
+            })
+            .then(response => response.json())
+            .then(cres => {
+                location.replace('/user/mypage/my_booking');
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    });
+    
+    /* 리뷰 id 출력
+    $(document).ready(function() {
+        // Add click event listener to the "리뷰작성" button
+        $('.reviewBtn').click(function() {
+            // Get the value of accomID from the data-accomid attribute
+            var accomID = $(this).attr('data-accomid');
+            // Log the value to the console
+            console.log(accomID);
+            // You can now use the accomID variable for further processing or display
+        });
+    });
+	
+    */
+    
+    
+    // 리뷰 새창
+  $(document).ready(function() {
+ 
+	  function disableButton(button) {
+		    if (!button.disabled) {
+		      button.disabled = true;
+		      $(button).removeClass('reviewBtn'); // Remove 'reviewBtn' class
+		      $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
+		      var accomID = $(button).attr('data-accomid');
+		      localStorage.setItem('disabled_review_button_' + accomID, 'true'); // Store the disabled state in local storage
+
+		      // Update the button text to "작성 완료"
+		      $(button).text('작성 완료');
+		    }
+		  }
+
+		  // Function to check and update the button state
+		  function checkAndUpdateButtonState() {
+		    $('.reviewBtn').each(function() {
+		      var accomID = $(this).attr('data-accomid');
+		      var isDisabled = localStorage.getItem('disabled_review_button_' + accomID);
+		      if (isDisabled === 'true') {
+		        $(this).prop('disabled', true);
+		        $(this).addClass('gray-button'); // Add the 'graysssss-button' class to change appearance
+		        $(this).text('작성 완료'); // Update the button text to "작성 완료"
+		      }
+		    });
+		  }
+
+		  // Check and update the button state when the page loads
+		  checkAndUpdateButtonState();
+	  
+  $('.reviewBtn').click(function() {
+    var accomID = $(this).attr('data-accomid');
+    console.log(accomID);
+
+
+    var newWindow = window.open('', '_blank', 'width=500,height=400');
+    newWindow.document.write(`
+      <html>
+      <head>
+        <style>
+         body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            #review_title {
+                margin-top: -120px;
+                margin-left: 60px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            #room_start_k {
+                margin-left: 50px;
+            }
+            #myform fieldset {
+                display: inline-block;
+                direction: rtl;
+                border: 0;
+            }
+            #myform fieldset legend {
+                text-align: right;
+            }
+            #myform input[type=radio] {
+                display: none;
+            }
+            #myform label {
+                font-size: 3em;
+                color: transparent;
+                text-shadow: 0 0 0 #f0f0f0;
+            }
+            #myform label:hover {
+                text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+                cursor: pointer;
+            }
+            #myform label:hover ~ label {
+                text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+                cursor: pointer;
+            }
+            #myform input[type=radio]:checked ~ label {
+                text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+                cursor: pointer;
+            }
+            #reviewContents {
+                width: 400px;
+                height: 150px;
+                padding: 10px;
+                box-sizing: border-box;
+                border: solid 1.5px #d3d3d3;
+                border-radius: 5px;
+                font-size: 16px;
+                resize: none;
+            }
+            #review_confirm {
+                border: none;
+                margin-top: 10px;
+                margin-left: 330px;
+                width: 70px;
+                height: 40px;
+                background-color: black;
+                color: white;
+            }
+            #review_confirm:hover {
+                cursor: pointer;
+            }
+
+        </style>
+      </head>
+      <body>
+        <div class="review_mb-3" name="myform" id="myform">
+          <br>
+          <span id="review_title">별점과 이용경험을 남겨주세요.</span><br>
+          <form onsubmit="return validateForm()" 
+                action="/create/review/${accomID}" 
+                method="post">
+            <fieldset id="room_start_k">
+              <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+              <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+              <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+              <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+              <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+            </fieldset>
+            <div>
+              <textarea class="col-auto form-control" 
+                        name="reviewContents" 
+                        id="reviewContents" 
+                        placeholder="좋은 수강평을 남겨주시면 요기어때에 큰 힘이 됩니다!"></textarea>
+            </div>
+            <div id="error_message"></div>
+            <input sec:authorize="isAuthenticated()" 
+                   type="submit" 
+                   value="리뷰작성" 
+                   id="review_confirm">
+          </form>
+        </div>
+      </body>
+      </html>
+    `);
+    disableButton(this);
+  });
+});
+    
+    
+    
+    
+    
+    
+	</script>
+
+	</body>
+
+</html>
