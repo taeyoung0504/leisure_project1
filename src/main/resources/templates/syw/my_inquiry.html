@@ -15,7 +15,6 @@
 			border-bottom: 1px solid #ccc;
 			margin-top: 20px;
 			cursor: pointer;
-			padding-bottom: 20px;
 		}
 
 
@@ -45,12 +44,13 @@
 			margin-left: 50px;
 			padding-bottom: 30px;
 		}
-		
-		
+
+
 
 		.inquiry-content {
 			margin-left: 10px;
 			margin-top: 10px;
+			margin-bottom: 10px;
 			overflow: auto;
 		}
 
@@ -78,17 +78,11 @@
 		}
 
 		.edit-button {
-			background-color: lightblue;
-			color: white;
-			border-radius: 5px;
 			padding: 1px 5px;
 			cursor: pointer;
 		}
 
 		.delete-button {
-			background-color: #e40000d3;
-			color: white;
-			border-radius: 5px;
 			padding: 1px 5px;
 			cursor: pointer;
 		}
@@ -115,25 +109,78 @@
 		.inquiryMessage {
 			padding: 20px;
 		}
+
+		.center-content3 {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin-top: -250px;
+			margin-left: 300px;
+			height: 100vh;
+		}
+
+
+		.btn_red {
+			display: inline-block;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			background-color: #ff0000;
+			color: #fff;
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+
+		}
+
+		.btn_red:hover {
+			background-color: #cc0000;
+		}
+
+		.btn-toggle {
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 1.5rem;
+		}
+
+		.button-container {
+		display: none;
+		background-color: white;
+		border: 1px solid #ccc;
+		padding: 3px;
+		margin-bottom: 17px;
+		margin-right: 20px;
+	}
+
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$(".inquiry-item").click(function () {
-				var content = $(this).find(".inquiry-content, .answer-content, .button-container");
-				var image = $(this).find(".toggle-image");
+	$(".inquiry-item").click(function (event) {
+		if (!$(event.target).hasClass("content-toggle")) {
+			var content = $(this).find(".inquiry-content, .answer-content");
+			var image = $(this).find(".toggle-image");
 
-				content.slideToggle(function () {
+			content.slideToggle(function () {
 
-					if (content.is(":visible")) {
-						image.attr("src", "/img/key/up.png");
-					} else {
-						image.attr("src", "/img/key/down.png");
-					}
-				});
+				if (content.is(":visible")) {
+					image.attr("src", "/img/key/up.png");
+				} else {
+					image.attr("src", "/img/key/down.png");
+				}
 			});
-		});
-		$(document).ready(function () {
+		}
+	});
+	
+	
+
+	$(".content-toggle").click(function (event) {
+				event.stopPropagation();
+				$(this).closest(".inquiry-item").find(".button-container").toggle();
+			});
+
 			$(".delete-button").click(function (event) {
 				event.preventDefault();
 				var confirmation = confirm('정말 삭제하시겠습니까?');
@@ -179,8 +226,17 @@
 					</h4>
 				</div>
 				<div class="inquiry-content">
-					<h4 style="margin-left: 5px;">문의</h4>
-					<pre class="inquiryMessage" th:utext="${inquiry.message}" style="background-color: #f2f2f2;"></pre>
+					<div
+						style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+						<h4 style="margin-left: 5px;">문의</h4>
+						<div class="button-container">
+							<a th:href="@{/inquiry/modify/{id}(id=${inquiry.id})}" class="edit-button">수정</a>
+							<a th:href="@{/inquiry/delete/{id}(id=${inquiry.id})}" class="delete-button">삭제</a>
+						</div>
+						<button class="btn-toggle content-toggle" th:if="${inquiry.inquiryAnswer.size() == 0}">&#x205D;</button>
+					</div>
+					<p class="inquiryMessage" th:utext="${inquiry.message}"
+						style="background-color: #f2f2f2; white-space: pre-line;"></p>
 				</div>
 				<div th:each="answer : ${inquiry.inquiryAnswer}" class="answer-content">
 					<h4>
@@ -188,12 +244,10 @@
 							style="font-size: 13px; color: rgb(193, 193, 193);">작성일 <span
 								th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></span></span>
 					</h4>
-					<pre th:utext="${@commonUtil.markdown(answer.message)}" style="background-color: #f2f2f2; padding: 20px;"></pre>
+					<p th:text="${answer.message}"
+						style="background-color: #f2f2f2; padding: 20px; white-space: pre-line;"></p>
 				</div>
-				<div th:if="${inquiry.inquiryAnswer.size() == 0}" class="button-container">
-					<a th:href="@{/inquiry/modify/{id}(id=${inquiry.id})}" class="edit-button" style="margin-top: 10px;">수정</a> <a
-						th:href="@{/inquiry/delete/{id}(id=${inquiry.id})}" class="delete-button">삭제</a>
-				</div>
+
 			</div>
 		</div>
 		<div th:if="${inquiries.size() < 1}" class="center-content3">

@@ -98,7 +98,7 @@
 				</p>
 
 				<div class="inquiry-container" style="padding: 20px;">
-                <pre th:text="${inquiry.get().message}"></pre>
+                <p th:text="${inquiry.get().message}" style="white-space: pre-line;"></p>
                 <p th:text="${#temporals.format(inquiry.get().createDate, 'yyyy-MM-dd HH:mm')}"></p>
             </div>
 			</div>
@@ -111,7 +111,7 @@
 					</tr>
 					<tr th:each="answer : ${inquiry.get().inquiryAnswer}">
 						<div class="answer-container" style="padding: 20px;">
-                            <pre th:text="${answer.message}"></pre>
+                            <p th:text="${answer.message}" style="white-space: pre-line;"></p>
                             <p th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></p>
                         </div>
 					</tr>

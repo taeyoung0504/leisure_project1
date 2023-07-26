@@ -295,7 +295,7 @@
 			<div th:each="notice : ${page}" class="notice-item">
 				<h3 id="title" th:text="${notice.title}"></h3>
 				<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
-				<pre class="notice-content" th:text="${notice.content}"></pre>
+				<p class="notice-content" th:text="${notice.content}" style="white-space: pre-line;"></p>
 				<a class="edit-button" th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a>
 				<a class="delete-button" th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a>
 			</div>
