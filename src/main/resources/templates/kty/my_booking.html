@@ -200,10 +200,11 @@
 				<button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
 					th:text="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button>
-				<button id="cancelBtn2" class="reviewBtn"
-        th:text="'리뷰작성'"
-        th:attr="data-accomid=${book.accomID}"
-        onclick="disableButton(this)">리뷰작성</button>
+				 <button id="cancelBtn2" class="reviewBtn"
+                    th:if="${book.bookStatus == '이용완료'}" 
+                    th:text="'리뷰작성'"
+                    th:attr="data-accomid=${book.accomID}"
+                    onclick="disableButton(this)">리뷰작성</button>
 				</p>
 				
 			
