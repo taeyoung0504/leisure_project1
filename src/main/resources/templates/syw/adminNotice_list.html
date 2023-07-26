@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+	<meta charset="utf-8">
+	<style>
+		.hide {
+			display: none;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #fff;
+			color: #333;
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		h3 {
+			font-size: 1.17em;
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+			margin-inline-start: 10px;
+			margin-inline-end: 0px;
+			font-weight: bold;
+		}
+
+		.container {
+			margin: 10px auto;
+			width: 90%;
+			height: 100%;
+			padding-left: 80px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			color: #333;
+		}
+
+
+		form {
+			display: inline-block;
+		}
+
+		input[type="submit"] {
+			background-color: rgb(255, 128, 128);
+			color: white;
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: rgb(255, 128, 128);
+		}
+
+		.input-group {
+			right: 100px;
+			position: absolute;
+		}
+
+		#btn_search {
+			background-color: rgb(255, 128, 128);
+			color: #fff;
+			border-style: none;
+		}
+
+		span.role-USER {
+			color: black;
+		}
+
+		span.role-PARTNER {
+			color: blue;
+		}
+
+		span.role-ADMIN {
+			color: red;
+		}
+
+		.account-status-disabled {
+			color: red;
+		}
+
+		.page-item.active .page-link {
+			background-color: gray;
+			/* 선택된 페이지 번호의 배경색 */
+			color: #fff;
+			/* 선택된 페이지 번호의 글자색 */
+		}
+
+		#myModal {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 30%;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 50%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-content {
+			background-color: #fefefe;
+			margin: 10px auto;
+			padding: 0px;
+			border: 1px solid #888;
+			width: 95%;
+			height: 90%;
+			position: relative;
+		}
+
+		.close-modal {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			cursor: pointer;
+			color: #333;
+		}
+
+		.close-modal:hover,
+		.close-modal:focus {
+			color: #000;
+		}
+
+		.modal-header {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.modal-body {
+			text-align: center;
+		}
+
+		.pagination {
+			display: flex;
+			justify-content: center;
+			list-style: none;
+			padding: 0;
+			margin-top: 20px;
+		}
+
+		.page-item {
+			margin: 0 5px;
+		}
+
+		.page-link {
+			display: inline-block;
+			padding: 5px 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			text-decoration: none;
+			color: #333;
+			background-color: #f2f2f2;
+		}
+
+		.page-link:hover {
+			background-color: #e0e0e0;
+		}
+
+		/* 모달 창 폼 css */
+		#editForm {
+			margin-top: 20px;
+			text-align: center;
+		}
+
+		#editForm div {
+			margin-bottom: 10px;
+		}
+
+		#editForm label {
+			display: inline-block;
+			width: 120px;
+		}
+
+		#editNickname,
+		#editZipcode,
+		#editAddress1,
+		#editAddress2 {
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			width: 200px;
+		}
+
+		#editForm button[type="submit"] {
+			margin: 10px auto;
+			display: block;
+			padding: 5px 10px;
+			background-color: rgb(255, 128, 128);
+			color: white;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+
+		.content-container {
+			margin: 0 auto;
+			max-width: 800px;
+		}
+
+		.notice-item {
+			border-bottom: 1px solid #ccc;
+			margin-top: 20px;
+			padding: 8px;
+			cursor: pointer;
+		}
+
+		.notice-item:hover {
+			background-color: #f2f2f2;
+		}
+
+		.notice-content {
+			display: none;
+		}
+
+		.pagination ul {
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+			padding: 0;
+		}
+
+		.pagination ul li {
+			margin-right: 10px;
+		}
+
+		.pagination ul li:last-child {
+			margin-right: 0;
+		}
+
+		.edit-button {
+			display: none;
+		}
+
+		.delete-button {
+			display: none;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		#title {
+			margin-left: -0.01px;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".notice-item").click(function () {
+				$(this).find(".notice-content, .edit-button, .delete-button").toggle();
+			});
+		});
+	</script>
+	</style>
+
+
+
+</head>
+
+<body>
+	<html layout:decorate="~{khk/adminNavbar}">
+	<div layout:fragment="adminNav" class="container my-3">
+		<div class="content-container">
+			<h2>공지사항</h2>
+
+			<div th:each="notice : ${page}" class="notice-item">
+				<h3 id="title" th:text="${notice.title}"></h3>
+				<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
+				<pre class="notice-content" th:text="${notice.content}"></pre>
+				<a class="edit-button" th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a>
+				<a class="delete-button" th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a>
+			</div>
+
+			<div class="pagination">
+				<ul>
+					<li class="page-item" th:if="${page.number > 0}">
+						<a class="page-link" href="#"
+							th:href="@{/admin/adminNoticeList(page=${page.number - 1})}">이전</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+						th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+						<a class="page-link" href="#" th:href="@{/admin/adminNoticeList(page=${i})}"
+							th:text="${i + 1}"></a>
+					</li>
+					<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+						<a class="page-link" href="#"
+							th:href="@{/admin/adminNoticeList(page=${page.number + 1})}">다음</a>
+					</li>
+				</ul>
+			</div>
+			<a href="/admin/createNotice">공지사항 등록</a>
+		</div>
+</body>
+
+</html>

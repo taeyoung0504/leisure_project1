@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>숙박업소 홈페이지</title>
+	<style>
+		.content-container {
+			width: 900px;
+			margin-left: -200px;
+			margin-top: 25px;
+		}
+
+		.notice-item {
+			border-bottom: 1px solid #ccc;
+			margin-top: 20px;
+			padding: 8px 0px;
+			cursor: pointer;
+		}
+
+		.notice-content {
+			display: none;
+		}
+
+		.pagination ul {
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+			padding: 0;
+		}
+
+		.pagination ul li {
+			margin-right: 10px;
+		}
+
+		.pagination ul li:last-child {
+			margin-right: 0;
+		}
+
+		#mypage_sidebar_nav {
+			margin-left: -100px;
+		}
+		.date {
+			color: rgb(193, 193, 193);
+		}
+		.notice_header{
+			color: #e40000d3;
+			margin-top: 40px;
+		}
+		.mypage_sidebar a {
+			color: black;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".notice-item").click(function () {
+				$(this).find(".notice-content").slideToggle();
+			});
+
+			const currentPageURL = window.location.pathname;
+
+			const navLinks = document.querySelectorAll('.mypage_sidebar a');
+
+			for (const link of navLinks) {
+				if (currentPageURL.includes('/noticeList')) {
+					$('.mypage_sidebar a[href="/noticeList"]').css({
+						'color': '#e40000d3',
+						'font-weight': 'bold'
+					});
+				}
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<html layout:decorate="~{jjj/header}">
+	<div id="my_infomation_modify" layout:fragment="content" class="container my-3">
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/more/noticeList}" style="color: #e40000d3; font-weight: bold;">공지사항</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/more/inquiry}">1:1 문의</a></li>
+			</ul>
+		</nav>
+		<div class="content-container">
+			<h2 class="notice_header">공지사항</h2>
+
+			<div th:each="notice : ${page}" class="notice-item">
+				<h3 th:text="${notice.title}"></h3>
+				<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
+				<pre class="notice-content" th:text="${notice.content}" style="background-color: rgb(243, 243, 243); padding: 20px;"></pre>
+			</div>
+
+			<div class="pagination">
+				<ul>
+					<li class="page-item" th:if="${page.number > 0}">
+						<a class="page-link" href="#" th:href="@{/noticeList(page=${page.number - 1})}">이전</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+						th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+						<a class="page-link" href="#" th:href="@{/noticeList(page=${i})}" th:text="${i + 1}"></a>
+					</li>
+					<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+						<a class="page-link" href="#" th:href="@{/noticeList(page=${page.number + 1})}">다음</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

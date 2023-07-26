@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px 0;
+}
+
+h3 {
+	font-size: 1.17em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 10px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}
+
+.container {
+	margin: 10px auto;
+	width: 90%;
+	height: 100%;
+	margin-left: 110px
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+th {
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+form {
+	display: inline-block;
+}
+
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+button{
+border-radius: 5px;
+border-style: none;
+}
+
+
+.approve_btn {
+	background-color: rgb(100, 177, 255);
+}
+
+.approve_btn:hover {
+	background: #01939A;
+}
+
+.reject_btn {
+/* 	background-color: pink; */
+	border-style: none;
+}
+
+.approveCancel_btn {
+	background-color: rgb(192, 192, 192);
+	/* border-style: none;  */
+}
+
+span.role-USER {
+	color: black;
+}
+
+span.role-PARTNER {
+	color: blue;
+}
+
+span.role-ADMIN {
+	color: red;
+}
+
+.account-status-disabled {
+	color: red;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.page-item {
+	margin: 0 5px;
+}
+
+.page-link {
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	text-decoration: none;
+	color: #333;
+	background-color: #f2f2f2;
+}
+
+.page-link:hover {
+	background-color: #e0e0e0;
+}
+</style>
+<script>
+
+	function openPopup(imageUrl) {
+		window.open(imageUrl, "_blank", "width=800,height=800");
+	}
+	
+	function approvePartner(id, page) {
+	    // 승인 요청
+	    fetch('/admin/approve/' + id, {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({ status: 1 })
+	    })
+	    .then(response => {
+	        if (response.ok) {
+	            // 승인 성공 시 처리할 로직
+	            console.log('승인 성공');
+	            const successMessage = document.createElement('p');
+	            successMessage.textContent = "파트너 승인 완료";
+	            document.body.appendChild(successMessage);
+
+	            // 버튼 상태 변경
+	            toggleButtonState(id, true);
+	        } else {
+	            // 승인 실패 시 처리할 로직
+	            console.log('승인 실패');
+	        }
+	    })
+	    .catch(error => {
+	        // 에러 처리 로직
+	        console.log(error);
+	    });
+	}
+
+	function rejectPartner(id, page) {
+	    // 승인 취소 요청
+	    fetch('/admin/approve/' + id, {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({ status: 0 })
+	    })
+	    .then(response => {
+	        if (response.ok) {
+	            // 승인 취소 성공 시 처리할 로직
+	            console.log('승인 취소 성공');
+	            const successMessage = document.createElement('p');
+	            successMessage.textContent = "파트너 승인이 취소되었습니다";
+	            document.body.appendChild(successMessage);
+
+	            // 버튼 상태 변경
+	            toggleButtonState(id, false);
+	        } else {
+	            // 승인 취소 실패 시 처리할 로직
+	            console.log('승인 취소 실패');
+	        }
+	    })
+	    .catch(error => {
+	        // 에러 처리 로직
+	        console.log(error);
+	    });
+	}
+
+	function toggleButtonState(id, isApproved) {
+	    const approveForm = document.querySelector(`form[data-partner-id="${id}"][name="approveForm"]`);
+	    const rejectForm = document.querySelector(`form[data-partner-id="${id}"][name="rejectForm"]`);
+	    const approveButton = approveForm.querySelector('button[type="submit"]');
+	    const rejectButton = rejectForm.querySelector('button[type="submit"]');
+
+	    if (isApproved) {
+	        // 승인된 상태에서 승인 취소 버튼 표시
+	        approveButton.style.display = 'none';
+	        rejectButton.style.display = 'inline-block';
+	    } else {
+	        // 승인되지 않은 상태에서 승인 버튼 표시
+	        approveButton.style.display = 'inline-block';
+	        rejectButton.style.display = 'none';
+	    }
+	}
+
+</script>
+
+
+</head>
+<body>
+<html layout:decorate="~{khk/adminNavbar}">
+<div layout:fragment="adminNav" class="container my-3">
+	<h1>파트너 신청 리스트</h1>
+	<div class="container">
+		<div>
+			<div class="input-group">
+				<input type="text" id="search_kw" class="form-control"
+					placeholder="reg_username으로 찾기" th:value="${kw}">
+				<button class="btn btn-outline-secondary" type="button"
+					id="btn_search">검색</button>
+			</div>
+
+			<div id="searchResults">
+				<table>
+					<thead>
+						<tr>
+							<th>회원 번호</th>
+							<th>신청자 아이디</th>
+							<th>업체명</th>
+							<th>담당자명</th>
+							<th>담당자 번호</th>
+							<th>첨부 파일</th>
+							<th>승인 여부</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="partnerList">
+						<tr th:each="partner : ${paging}" th:data-user-id="${partner.id}">
+							<td th:text="${partner.id}"></td>
+							<td th:text="${partner.reg_username}"></td>
+							<td th:text="${partner.company_name}"></td>
+							<td th:text="${partner.partner_name}"></td>
+							<td th:text="${partner.partner_tel}"></td>
+							<td><a href="#"
+								th:href="@{'/img/partner_regi_img/' + ${partner.filename}}"
+								onclick="openPopup(this.href); return false;"
+								th:text="${partner.filename}"></a></td>
+
+							<td><span th:if="${partner.result_partner_reg == 0}"
+								class="role-USER">심사 중</span> <span
+								th:if="${partner.result_partner_reg == 1}" class="role-PARTNER">승인
+									완료</span> <span th:if="${partner.result_partner_reg == 2}"
+								class="role-ADMIN">반려</span></td>
+							<td>
+								<form
+									th:if="${partner.result_partner_reg == 0 || partner.result_partner_reg == 2}"
+									th:action="@{'/admin/approve/' + ${partner.id}}" method="post"
+									th:data-partner-id="${partner.id}"
+									th:onsubmit="event.preventDefault(); approvePartner(${partner.id}, 1);">
+									<input type="hidden" name="status" value="1" />
+									<button type="submit" class="approve_btn">승인</button>
+								</form>
+								<form
+									th:if="${partner.result_partner_reg == 0 || partner.result_partner_reg == 2}"
+									th:action="@{'/admin/approve/' + ${partner.id}}" method="post"
+									th:data-partner-id="${partner.id}"
+									th:onsubmit="event.preventDefault(); approvePartner(${partner.id}, 2);">
+									<input type="hidden" name="status" value="2" />
+									<button type="submit" class="reject_btn">반려</button>
+								</form>
+								<form th:if="${partner.result_partner_reg == 1}"
+									th:action="@{'/admin/approve/' + ${partner.id}}" method="post"
+									th:data-partner-id="${partner.id}" name="rejectForm"
+									th:onsubmit="event.preventDefault(); rejectPartner(${partner.id}, 0);">
+									<input type="hidden" name="status" value="0" />
+									<button type="submit" class="approveCancel_btn">  승인 취소  </button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- 페이징처리 시작 -->
+		<div th:if="${!paging.isEmpty()}">
+			<ul class="pagination justify-content-center">
+				<!-- 이전 페이지 버튼 -->
+				<li class="page-item" th:unless="${paging.first}"><a
+					class="page-link" href="javascript:void(0)"
+					th:data-page="${paging.number-1}"> <span>이전</span>
+				</a></li>
+				<!-- 페이지 번호 -->
+				<li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+					th:classappend="${page == paging.number} ? 'active' : ''"
+					class="page-item"><a th:text="${page + 1}" class="page-link"
+					th:href="@{|?page=${page}|}"></a></li>
+				<!-- 다음 페이지 버튼 -->
+				<li class="page-item" th:unless="${paging.last}"><a
+					class="page-link" href="javascript:void(0)"
+					th:data-page="${paging.number+1}"> <span>다음</span>
+				</a></li>
+			</ul>
+			<!-- 페이징처리 끝 -->
+			<form th:action="@{/admin/partnerListPage}" method="get"
+				id="searchForm">
+				<input type="hidden" id="kw" name="kw" th:value="${kw}"> <input
+					type="hidden" id="page" name="page" th:value="${paging.number}">
+			</form>
+		</div>
+
+		<script type="text/javascript">
+
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+	element.addEventListener('click', function() {
+		document.getElementById('page').value = this.dataset.page;
+		document.getElementById('searchForm').submit();
+	});
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+	document.getElementById('kw').value = document
+			.getElementById('search_kw').value;
+	document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+	document.getElementById('searchForm').submit();
+});
+
+</script>
+		</body>
+</html>
