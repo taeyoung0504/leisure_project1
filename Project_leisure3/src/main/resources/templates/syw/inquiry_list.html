@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+	<meta charset="utf-8">
+	<style>
+		.container {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		.content-container {
+			margin: 0 auto;
+			max-width: 80%;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 15px 8px;
+			border-bottom: 1px solid #ccc;
+			text-align: left;
+		}
+
+		.pagination ul {
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+			padding: 0;
+		}
+
+		.pagination ul li {
+			margin-right: 10px;
+		}
+
+		.pagination ul li:last-child {
+			margin-right: 0;
+		}
+
+		.pagination {
+			display: flex;
+			justify-content: center;
+			list-style: none;
+			padding: 0;
+			margin-top: 20px;
+		}
+
+		.page-item {
+			margin: 0 5px;
+		}
+
+		.page-link {
+			display: inline-block;
+			padding: 5px 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			text-decoration: none;
+			color: #333;
+			background-color: #f2f2f2;
+		}
+
+		.page-link:hover {
+			background-color: #e0e0e0;
+		}
+
+		.page-item.active .page-link {
+			background-color: gray;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<html layout:decorate="~{khk/adminNavbar}">
+	<div layout:fragment="adminNav" class="container my-3">
+		<div class="content-container">
+			<h2>회원 문의 내역</h2>
+			<!-- 각 문의를 테이블로 표시 -->
+			<table>
+				<thead>
+					<tr>
+						<th>유형</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>답변 여부</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="inquiry : ${page}">
+						<td th:text="${inquiry.type}"></td>
+						<td>
+							<a th:href="@{/admin/inquiryAnswer/{id}(id=${inquiry.id})}" style="text-decoration: none; font-weight: bold; cursor: pointer;">
+								<span th:text="${inquiry.title}"></span>
+							</a>
+						</td>
+						<td th:text="${inquiry.username}"></td>
+						<td th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+						<td>
+							<span th:if="${#lists.size(inquiry.inquiryAnswer) > 0}" style="color: #e40000d3;">답변 완료</span>
+							<span th:unless="${#lists.size(inquiry.inquiryAnswer) > 0}">답변 대기</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div class="pagination">
+			<ul>
+				<li class="page-item" th:if="${page.number > 0}">
+					<a class="page-link" th:href="@{/admin/inquiryList(page=${page.number - 1})}">이전</a>
+				</li>
+				<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+					th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+					<a class="page-link" th:href="@{/admin/inquiryList(page=${i})}" th:text="${i + 1}"></a>
+				</li>
+				<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+					<a class="page-link" th:href="@{/admin/inquiryList(page=${page.number + 1})}">다음</a>
+				</li>
+			</ul>
+		</div>
+
+</body>
+
+</html>

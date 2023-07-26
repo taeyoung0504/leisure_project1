@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>경상도숙박장사</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link rel="stylesheet" href="/css/kty.css">
+	<script th:src="@{/js/kty_join.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- sweetalert2 CDN-->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 검색 api-->
+	<script th:src="@{/js/kty_mypage.js}"></script>
+</head>
+
+<div class="container_my-3">
+	<div class="my-3 border-bottom">
+		<div>
+			<h4 class="join_title">경상도숙박장사</h4>
+		</div>
+	</div>
+	<form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+		<div th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" class="alert alert-danger"
+			role="alert" th:text="${err}"></div>
+		<div class="mb-join">
+			<label for="username" class="form-label">사용자ID</label>
+			<input type="text" th:field="*{username}" id="join_username" class="join_username"
+				placeholder="6-12 길이의 문자열 입력">
+		</div>
+		<div id="username-error"></div>
+		<br>
+		<div class="mb-join">
+			<label for="password1" class="form-label">비밀번호</label>
+			<input type="password" th:field="*{password1}" id="join_password1" class="join_password1"
+				placeholder="영문자와 숫자,특수기호 포함한 6-12자리 사이">
+		</div>
+		<div id="password1-error"></div><br>
+		<div class="mb-join">
+			<label for="password2" class="form-label">비밀번호 확인</label>
+			<input type="password" th:field="*{password2}" class="join_password2" placeholder="다시 비밀번호를 입력하세요">
+		</div>
+		<!-- 주소 검색 부분  시작 -->
+		<div class="mb-join">
+			<br>
+			<label for="addr1" class="form-label">우편번호</label><br>
+			<input type="text" class="addr1" name="addr1" id="addr1" placeholder="우편번호를 입력하세요">
+			<input class="find_addr1" name="find_addr1" id="find_addr1" type="button" onclick="execPostCode();"
+				value="우편번호 찾기">
+			<br><br>
+			<input class="addr2" name="addr2" id="addr2" placeholder="도로명 주소를 입력해주세요" readonly="readonly"><br><br>
+			<input type="text" name="addr3" class="addr3" id="addr3" placeholder="상세주소">
+			<br>
+		</div>
+
+		<!-- 주소 검색 부분 끝  -->
+		<div id="password2-error"></div><br>
+		<div class="mb-join">
+			<label for="email" class="form-label">이메일</label><br>
+			<input type="email" th:field="*{email}" class="join_email" placeholder="이메일을 입력해주세요">
+			<input class="checkEmailNumber" name="checkEmailNumber" id="checkEmailNumber" type="button" value="인증번호 발송">
+			<div id="email-error"></div>
+		</div><br>
+		<div class="mb-join">
+			<label for="code" class="form-label">인증번호</label><br>
+			<input type="text" class="form-control" name="inputCode" id="inputCode" maxlength="6"
+				placeholder="인증번호를 입력해주세요">
+			<input class="join_check" name="check_code" id="check_code" type="button" value="인증번호 확인">
+
+		</div>
+
+
+		<button type="submit" id="join_up" class="btn btn-primary">JOIN</button>
+	</form>
+	<span id="join_timer">03:00</span><br>
+</div>
+
+
+
+
+
+
+
+</html>

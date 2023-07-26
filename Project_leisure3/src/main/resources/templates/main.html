@@ -1,0 +1,209 @@
+<!-- 메인 페이지 (제작 중) -->
+<!--   <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a> -->
+<!--   <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a> -->
+
+
+<!-- <th:block sec:authorize="hasRole('ADMIN')"> -->
+<!--             <a class="nav-link" th:href="@{/admin/adminMain}">관리자페이지</a> -->
+<!--          </th:block> -->
+
+
+<!--    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/mypage/me}">마이페이지로</a> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>경상도숙박장사</title>
+</head>
+<body>
+<html layout:decorate="~{jjj/header}">
+<div layout:fragment="content" class="container my-3">
+
+
+<!-- 슬라이드 -->
+    <div class="jj_slide">
+        <div class="jj_slide_container">
+            <div class="jj_slide-box">
+                <img src="./img/main_jjj/ma-1.jpg">
+            </div>
+            <div class="jj_slide-box">
+                <img src="./img/main_jjj/ma-2.jpg">
+            </div>
+            <div class="jj_slide-box">
+                <img src="./img/main_jjj/ma-3.jpg">
+            </div>
+        </div>
+        <div class="jj_btns">
+            <button class="jj_dot_btn jj_dot_btn_slide-1"></button>
+            <button class="jj_dot_btn jj_dot_btn_slide-2"></button>
+            <button class="jj_dot_btn jj_dot_btn_slide-3"></button>
+        </div>
+    </div>
+
+    <!-- 숙소 카테고리 아이콘 -->
+    <div class="jj_icon">
+        <a th:href="@{/tour/daegu_room3?kw5=호텔}">
+            <span class="fa-solid fa-hotel fa-3x"></span>
+            <p>호텔</p>
+        </a>
+        <a th:href="@{/tour/daegu_room3?kw5=모텔}">
+            <span class="fa-solid fa-bed fa-3x"></span>
+            <p>모텔</p>
+        </a>
+        <a th:href="@{/tour/daegu_room3?kw5=리조트}">
+            <span class="fa-solid fa-water-ladder fa-3x"></span>
+            <p>리조트</p>
+        </a>
+        <a th:href="@{/tour/daegu_room3?kw5=펜션}">
+            <span class="fa-solid fa-tree-city fa-3x"></span>
+            <p>펜션</p>
+        </a>
+        <a th:href="@{/tour/daegu_room3?kw5=게스트하우스}">
+            <span class="fa-solid fa-house fa-3x"></span>
+            <p>게스트하우스</p>
+        </a>
+    </div>
+
+    <!-- 추천 숙소 -->
+   <h2 class="main">추천 숙소</h2>
+    <div class="jj_wrapper">
+        <i id="left" class="fa-solid fa-angle-left"></i>
+        <div class="jj_carousel">
+            <img src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-4.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-5.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-6.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지">
+        </div>
+        <i id="right" class="fa-solid fa-angle-right"></i>
+    </div>
+
+        <!-- 추천 여행 코스 -->
+        <div class="jj_course">
+            <h2 class="main">Visit DAEGU</h2>
+            <div class="jj_course_container">
+                <ul class="jj_course_m">
+                    <li>
+                        <h4 class="main">대구 여행 추천 코스</h4>
+                        <a th:href="@{/tour/daegu_travel}" target="_self">
+                            <img src=" ./img/main_jjj/cr-1.jpg" alt="추천여행코스">
+                        </a>
+                    </li>
+
+                    <li>
+                        <h4 class="main">대구 맛집 소개</h4>
+                        <a th:href="@{/tour/daegu_food}" target="_self">
+                            <img src=" ./img/main_jjj/cr-2.jpg" alt="맛집소개"></a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <!-- 파트너 관련 -->
+        <div class="jj_partner">
+            <h2 class="main">For Partners</h2>
+            <div class="jj_partner_container">
+                <ul class="jj_partner_m">
+                    <li>
+                        <a th:href="@{/user/mypage/partner_reg}" target="_self">
+                            <img src=" ./img/main_jjj/cn-1.jpg" alt="파트너 신청하기">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/user/mypage/my_productList}" target="_self">
+                            <img src=" ./img/main_jjj/cn-2.jpg" alt="숙소 등록하기"></a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- 추천 휴양지 -->
+        <!-- <div class="jj_spot">
+            <h2>추천 휴양지(필요시 사용)</h2>
+            <div class="jj_spot_container">
+                <div class="jj_spot_slide">
+                    <li>
+                        <div class="jj_spot_img_1">
+                            <a href="#">
+                                <img src="./img/sp-1.jpg">
+                                <h4 class="jj_spot_text_1">제주도</h4>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="./img/sp-2.jpg">
+                            <h4 class="jj_spot_text_2">부산</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="./img/sp-3.jpg">
+                            <h4 class="jj_spot_text_3">강원도</h4 </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="./img/sp-4.jpg">
+                            <h4 class="jj_spot_text_4">울릉도</h4 </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="./img/sp-5.jpg">
+                            <h4 class="jj_spot_text_5">서울</h4 </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+ -->
+
+
+        <!-- 푸터 -->
+        <footer>
+            <div class="jj_align">
+                <ul class="jj_link">
+                    <li>회사소개<span>|</span></li>
+                    <li>이용약관<span>|</span></li>
+                    <li>개인정보처리방침<span>|</span></li>
+                    <li>소비자 분쟁해결 기준<span>|</span></li>
+                    <li>사업자 정보확인<span>|</span></li>
+                    <li>액티비티 호스트센터<span>|</span></li>
+                    <li>경상도숙박장사<span>|</span></li>
+                    <li>콘텐츠산업진흥법에 의한 표시<span>|</span></li>
+                    <li>마케팅센터<span>|</span></li>
+                </ul>
+                <p>
+                    <b>고객 센터 0000-0000</b>
+                    <span>9:00 - 18:00(평일)</span>
+                </p>
+                <address>
+                    <span>경상도숙박장사</span>
+                    주소 : 대구시 서대구로7길 2
+                    <br>
+                    통신판매번호 : 0000 | 관광사업자 등록번호 : 0000 | 전화번호 : 0000-0000 | 호스팅 : 00000
+                    <span class="jj_order">
+                        경상도숙박장사는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
+                    </span>
+                    <br>
+                    Copyright GC COMPANY Corp. All rights reserved.
+                </address>
+
+
+            </div>
+
+        </footer>
+        <!-- defer : 페이지가 모두 로드된 후에 해당 외부 스크립트가 실행  -->
+      
+
+</body>
+
+</html>

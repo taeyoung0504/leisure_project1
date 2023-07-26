@@ -66,11 +66,10 @@ input[type="submit"]:hover {
 	background-color: #45a049;
 }
 
-button{
-border-radius: 5px;
-border-style: none;
+button {
+	border-radius: 5px;
+	border-style: none;
 }
-
 
 .approve_btn {
 	background-color: rgb(100, 177, 255);
@@ -81,7 +80,7 @@ border-style: none;
 }
 
 .reject_btn {
-/* 	background-color: pink; */
+	/* 	background-color: pink; */
 	border-style: none;
 }
 
@@ -217,7 +216,6 @@ span.role-ADMIN {
 
 </script>
 
-
 </head>
 <body>
 <html layout:decorate="~{khk/adminNavbar}">
@@ -285,7 +283,8 @@ span.role-ADMIN {
 									th:data-partner-id="${partner.id}" name="rejectForm"
 									th:onsubmit="event.preventDefault(); rejectPartner(${partner.id}, 0);">
 									<input type="hidden" name="status" value="0" />
-									<button type="submit" class="approveCancel_btn">  승인 취소  </button>
+									<button type="submit" class="approveCancel_btn">승인 취소
+									</button>
 								</form>
 							</td>
 						</tr>
@@ -336,6 +335,7 @@ btn_search.addEventListener('click', function() {
 	document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
 	document.getElementById('searchForm').submit();
 });
+
 
 </script>
 		</body>
