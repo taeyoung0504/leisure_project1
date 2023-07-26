@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/css/kty3.css">
+</head>
+<body id="userinfo_modify" onload="showPosition()" >
+<html layout:decorate="~{jjj/header}">
+<div id="test" layout:fragment="content" class="container my-3">
+	<div id="kty_left-side_test">
+		<div class="search_deagu_home">
+			<input type="text" id="search_kw" class="form-control2"
+				th:value="${kw}" placeholder="  키워드를 입력하세요">
+			<button type="button" id="btn_search_home">찾기</button>
+			<p style="margin-top:-20px;"></p>
+			<span id="check_regin_title">구역 선택</span> 
+			<select	id="region_dropdown_daegu">
+
+				<option id="kw2Option1" value="" th:selected="${kw2 == ''}">대구,
+					구역 선택</option>
+				<option id="kw2Option1" value="중구" th:selected="${kw2 == '중구'}">대구,
+					중구</option>
+				<option id="kw2Option2" value="북구" th:selected="${kw2 == '북구'}">대구
+					,북구</option>
+				<option id="kw2Option3" value="서구" th:selected="${kw2 == '서구'}">대구,
+					서구</option>
+				<option id="kw2Option4" value="남구" th:selected="${kw2 == '남구'}">대구,
+					남구</option>
+				<option id="kw2Option5" value="동구" th:selected="${kw2 == '동구'}">대구,
+					동구</option>
+				<option id="kw2Option6" value="달서구" th:selected="${kw2 == '달서구'}">대구,
+					달서구</option>
+				<option id="kw2Option7" value="수성구" th:selected="${kw2 == '수성구'}">대구,
+					수성구</option>
+				<option id="kw2Option8" value="달성군" th:selected="${kw2 == '달성군'}">대구,
+					달성군</option>
+
+			
+			
+			
+			</select> 
+			
+			<div style="display:none;">
+			<span id="checkintitle">체크인 날짜</span>
+			<span id="checkouttitle">체크아웃 날짜</span>
+			</div>
+		<!-- 	<div id="checkin_title">시작</div> <div id="checout_title">종료</div> -->
+			
+			 
+		<div  style="display:none;">
+		<input id="checkin_dropdown_daegu2" type="date" th:value="${kw3}">
+		<input id="checkout_dropdown_daegu3" type="date" th:value="${kw4}">
+		</div>
+
+			<br>
+				
+			<div class="room_money_title" style="margin-bottom: 10px;">
+			가격범위(원)
+			<div id="room_range_maxmin">
+  			  <label for="min-price"></label>
+    			<input type="number" id="kw8Option7" class="min" name="min-price" min="0" step="1000" value="${kw8}" 
+    			placeholder="최소 가격 설정">
+    			 <span id="range"> ~ </span>
+    			<input type="number" id="kw9Option8" class="max" name="max-price" min="0" step="1000" value="${kw9}"
+    			placeholder="최대 가격 설정">
+			</div>
+			</div> <!--  가격범위 div 끝 -->
+			
+		<div class="room_type_title" style="margin-bottom: 10px;">
+    숙소 타입
+    <div id="room_clo" style="margin-top: 10px;">
+        <input type="checkbox" id="kw5Option1" name="RoomType" value="모텔" th:checked="${kw5 != null and kw5.contains('모텔')}">
+        <label for="kw5Option1">모텔</label>
+        <span class="spacing"></span>
+        <input type="checkbox" id="kw5Option2" name="RoomType" value="호텔" th:checked="${kw5 != null and kw5.contains('호텔')}">
+        <label for="kw5Option2">호텔</label>
+        <span class="spacing"></span>
+        <input type="checkbox" id="kw5Option3" name="RoomType" value="리조트" th:checked="${kw5 != null and kw5.contains('리조트')}">
+        <label for="kw5Option3">리조트</label>
+        <span class="spacing"></span>
+        <input type="checkbox" id="kw5Option4" name="RoomType" value="펜션" th:checked="${kw5 != null and kw5.contains('펜션')}">
+        <label for="kw5Option4">펜션</label>
+        <span class="spacing"></span>
+        <input type="checkbox" id="kw5Option5" name="RoomType" value="게스트하우스" th:checked="${kw5 != null and kw5.contains('게스트하우스')}">
+        <label for="kw5Option5">게스트하우스</label>
+    </div>
+</div>
+			<!--  숙소타입 div 끝 -->
+			<div class="avable_people">
+				투숙 인원<br>
+				<div id="pepole_ava">
+				<select id="people_dropdown">
+				<option id="kw7Option1" value='' th:selected="${kw7 == ''}">투숙 인원을 선택하세요.</option>
+				<option id="kw7Option1"  value='1' th:selected="${kw7 == 1}">1명</option>
+				<option id="kw7Option2"  value='2' th:selected="${kw7 == 2}">2명</option>
+				<option id="kw7Option3"  value='3' th:selected="${kw7 == 3}">3명</option>
+				<option id="kw7Option3"  value='4' th:selected="${kw7 == 4}">4명</option>
+				<option id="kw7Option3"  value='5' th:selected="${kw7 == 5}">5명</option>
+				<option id="kw7Option3" value='6' th:selected="${kw7 == 6}">6명</option>
+				<option id="kw7Option3"  value='7' th:selected="${kw7 == 7}">7명</option>
+				<option id="kw7Option3"  value='8' th:selected="${kw7 == 8}">8명</option>
+				<option id="kw7Option3"  value='9' th:selected="${kw7 == 9}">9명</option>
+				<option id="kw7Option3"  value='10' th:selected="${kw7 == 10}">10명</option>
+				</select>
+				</div>
+				<br>
+		</div>
+		<!-- avable_people div 끝 -->
+		<div class="reviews_score">
+			리뷰 평점<br>
+			<div id="star_score">
+				 <input type="checkbox" id="kw6Option1" name="scoreType" value="1"
+					th:checked="${kw6 == '1'}"> <label for="kw6Option1">
+					★  </label><br>
+				<div id="spacing2"></div>
+				<input type="checkbox" id="kw6Option1" name="scoreType" value="2"
+					th:checked="${kw6 == '2'}"> <label for="kw6Option1">
+					★ ★ </label><br>
+				<div id="spacing2"></div>
+				<input type="checkbox" id="kw6Option1" name="scoreType" value="3"
+					th:checked="${kw6 == '3'}"> <label for="kw6Option1">
+					★ ★ ★ </label><br>
+				<div id="spacing2"></div>
+				<input type="checkbox" id="kw6Option1" name="scoreType" value="4"
+					th:checked="${kw6 == '4'}"> <label for="kw6Option1">
+					★ ★ ★ ★ </label><br>
+				<div id="spacing2"></div>
+				<input type="checkbox" id="kw6Option1" name="scoreType" value="5"
+					th:checked="${kw6 == '5'}"> <label for="kw6Option1">
+					★ ★ ★ ★ ★ </label><br>
+				<div id="spacing2"></div>
+
+			</div>
+		</div>
+		<!--  평점 div 끝 -->
+		
+		<button id="btnbtn">상세검색</button>
+	</div>
+
+</div>
+
+<div id="kty_right-side_test">
+<div th:each="accommodations : ${paging}" class="room-entry">
+  <div class="room_info_k">
+    <a th:href="@{|/tour/product/detail/${accommodations.id}|}">
+ <span th:text="${accommodations.acc_name}" style="font-size: 25px;font-weight: bold; margin-bottom: 10px; "></span>&nbsp&nbsp&nbsp <span th:text="${accommodations.acc_sectors}" style="font-size: 15px; color:grey;"></span><br>
+    <span th:switch="${accommodations.acc_rating}" style="color: orange;  margin-bottom: 10px;">
+      <span th:case="1">★ ✩ ✩ ✩ ✩</span>
+    <span th:case="2">★ ★ ✩ ✩ ✩</span>
+    <span th:case="3">★ ★ ★ ✩ ✩</span>
+    <span th:case="4">★ ★ ★ ★ ✩</span>
+    <span th:case="5">★ ★ ★ ★ ★</span>
+ 	<span th:case="0">✩ ✩ ✩ ✩ ✩</span>
+</span>&nbsp
+</span>
+<span th:text="${accommodations.acc_rating != 0 ? accommodations.acc_rating:''}" style="font-size: 13px; margin-top:10px; margin-bottom:10px;"></span>
+<span style="font-size:12px;font-weight:bold;"  th:if="${#lists.size(accommodations.reviews) > 0}" th:text="'(' + ${#lists.size(accommodations.reviews)} + ')'" ></span>  
+
+
+<br><br>
+<span th:text="${accommodations.acc_address}" style="font-size: 15px;"></span><br><br>
+ <span style="font-size: 15px; ">투숙 인원 (최대) : </span>&nbsp<span th:text="${accommodations.acc_max_people}" style="font-size: 15px;"></span><span style="font-size: 15px;"> 명 </span><span style="color:red; font-size:12px; font-weight: bold;"></span><br><br>
+<span class="feefee" style="display: flex; justify-content: flex-end;">
+  <span style="font-size: 20px; font-weight: bold;">평균금액 : </span>&nbsp&nbsp
+  <span class="productAmount" th:text="${accommodations.acc_averPrice}" style="font-size: 20px; font-weight: bold;"></span>
+&nbsp  <span style="font-size: 20px; font-weight: bold;"> 원</span>&nbsp&nbsp
+</span>
+  </a>
+</div>
+  <div class="room-photo" th:style="'background-image: url(' + ${accommodations.acc_img} + ');'"></div>
+  
+  
+  
+</div>
+<div>
+ <p id="no_search_data" th:if="${paging.isEmpty()}">
+        <img src="/img/no_search.PNG">
+    </p>
+</div>
+
+
+
+<!--  지역+평점 -->
+<div th:if="${kw2 != null && kw5 == null && kw6 != null && kw7 == null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link10" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room10(page=${paging.number-1},kw2=${kw2},kw6=${kw6})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link10 active' : 'page-link10'"
+							th:href="@{/tour/daegu_room10(page=${page},kw2=${kw2},kw6=${kw6})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link10"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room10(page=${paging.number+1},kw2=${kw2},kw6=${kw6})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>		
+
+<!--  지역+평점+투숙 -->
+<div th:if="${kw2 != null && kw5 == null && kw6 != null && kw7 != null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link11" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room11(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw7=${kw7})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link11 active' : 'page-link11'"
+							th:href="@{/tour/daegu_room11(page=${page},kw2=${kw2},kw6=${kw6},kw7=${kw7})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link11"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room11(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw7=${kw7})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>
+
+<!--  지역+투숙 -->
+<div th:if="${kw2 != null && kw5 == null && kw6 == null && kw7 != null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link12" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room12(page=${paging.number-1},kw2=${kw2},kw7=${kw7})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link12 active' : 'page-link12'"
+							th:href="@{/tour/daegu_room12(page=${page},kw2=${kw2},kw7=${kw7})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link12"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room12(page=${paging.number+1},kw2=${kw2},kw7=${kw7})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>
+
+<!--  숙소타입 + 평점 -->
+<div th:if="${kw2 == null && kw5 != null && kw6 != null && kw7 == null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link13" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room13(page=${paging.number-1},kw5=${kw5},kw6=${kw6})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link13 active' : 'page-link13'"
+							th:href="@{/tour/daegu_room13(page=${page},kw5=${kw5},kw6=${kw6})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link13"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room13(page=${paging.number+1},kw5=${kw5},kw6=${kw6})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>
+
+		<!--  숙소타입 + 평점 + 투숙인원 -->
+<div th:if="${kw2 == null && kw5 != null && kw6 != null && kw7 != null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link14" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room14(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw7=${kw7})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link14 active' : 'page-link14'"
+							th:href="@{/tour/daegu_room14(page=${page},kw5=${kw5},kw6=${kw6},kw7=${kw7})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link14"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room14(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw7=${kw7})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>
+		
+	
+<!--  평점 + 투숙인원 --> 
+<div th:if="${kw2 == null && kw5 == null && kw6 != null && kw7 != null}"
+		style="display: flex; justify-content: center;">
+			<ul class="pagination" style="flex-direction: row; list-style-type: none;">
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link15" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_room15(page=${paging.number-1},kw6=${kw6},kw7=${kw7})}">
+						<span>이전</span>
+				</a> <th:block
+						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
+						<a th:if="${page >= 0 and page < paging.totalPages}"
+							th:classappend="${page == paging.number} ? 'page-link15 active' : 'page-link15'"
+							th:href="@{/tour/daegu_room15(page=${page},kw6=${kw6},kw7=${kw7})}"
+							th:data-page="${page}"> <span th:text="${page}"
+							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+						</a>
+					</th:block> <a class="page-link15"
+					th:if="${paging.number < paging.totalPages - 1}"
+					th:href="@{/tour/daegu_room15(page=${paging.number+1},kw6=${kw6},kw7=${kw7})}">
+						<span>다음</span>
+				</a></li>
+			</ul>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+
+ <script th:src="@{/js/kty_filter2.js}"></script>
+</html>

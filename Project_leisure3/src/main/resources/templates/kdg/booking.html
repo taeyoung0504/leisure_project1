@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>결제 버튼</title>
+ <style>
+ 	h1 {
+ 		text-align : center;
+ 		margin-right: 50px;
+ 	}
+ 
+ .form-container {
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    height: 100vh;
+  }
+ 
+ 
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  form label, form input {
+    margin-bottom: 10px;
+  }
+</style>
+
+</head>
+<body>
+  
+
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+  
+  <h1> 예약정보 </h1>
+
+  <div class="form-container" th:inline="text">
+  
+  <div>
+  
+    <p>Model Output:</p>
+    <p th:text="${bookingvo.roomTitle}"></p>
+    <p th:text="${bookingvo.checkIn}"></p>
+    <p th:text="${bookingvo.checkOut}"></p>
+    <!-- Add more model properties here -->
+  </div>
+  
+  <form th:action="@{/book/create/{roomID}(roomID=${bookingvo.roomID})}" method="post">
+
+  <label for="bookHeadCount">Number of People:</label>
+  <input type="number" id="bookHeadCount" name="bookHeadCount" required>
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+  <button type="submit">Submit</button>
+</form>
+  </div>
+
+</body>
+</html>
