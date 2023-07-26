@@ -96,7 +96,7 @@ public class ProductController {
 		if (result == 1) {
 			return ResponseEntity.ok().body(acc_id.toString()); // Long을 String으로 변환
 		}
-		return null; // 수정해야한다
+		return null; 
 	}
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
