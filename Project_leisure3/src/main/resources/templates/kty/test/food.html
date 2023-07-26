@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Example</title>
+</head>
+<body>
+    <h1>Tasty Food</h1>
+    <ul id="foodList"></ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        fetchData();
+
+        function fetchData() {
+            var myurl = 'https://www.daegufood.go.kr/kor/api/tasty.html?mode=json&addr=%EC%88%98%EC%84%B1%EA%B5%AC';
+            $.ajax({
+                url: myurl,
+            }).done(function(response) {
+                console.log(response);
+                saveData(response);
+            });
+        }
+
+        function saveData(response) {
+            var data = response.data;
+            var foodList = document.getElementById("foodList");
+
+            for (var i = 0; i < data.length; i++) {
+                var food = {
+                    shopId: data[i].OPENDATA_ID,
+                    shopAddr: data[i].GNG_CS,
+                    shopCategory: data[i].FD_CS,
+                    shopName: data[i].BZ_NM,
+                    shopTel: data[i].TLNO,
+                    shopOpening: data[i].MBZ_HR,
+                    shopParking: data[i].PKPL,
+                    shopMenu: data[i].MNU,
+                    shopInfo: data[i].SMPL_DESC
+                };
+
+                $.ajax({
+                    url: '/tour/saveFood',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(food),
+                    success: function(response) {
+                        console.log(response);
+                        var foodItem = document.createElement("li");
+                        foodItem.innerHTML = response.message;
+                        foodList.appendChild(foodItem);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

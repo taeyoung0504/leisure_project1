@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+<html layout:decorate="~{jjj/header}">
+<div layout:fragment="content" class="container my-3">
+
+
+	<head>
+<meta charset="UTF-8">
+<title>addProduct</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+#Container {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	width: 800px;
+}
+
+#mainContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 55px;
+}
+
+.top {
+	display: flex;
+	justify-content: space-around;
+	box-sizing: border-box;
+	width: 800px;
+	border: 1px solid rgb(149, 148, 153);
+	border-radius: 8px;
+}
+
+.left {
+	width: 40%;
+	height: 300px;
+}
+
+.left img {
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.right {
+	width: 60%;
+}
+
+.right .info {
+	padding: 18px 20px 5px;
+}
+
+.right h2 {
+	display: inline-block;
+}
+
+.right .info .score_cnt {
+	margin: 9px 0 6px 0;
+}
+
+.right .info .address {
+	margin: 6px 0 8px 0;
+	padding-top: 6px;
+	font-size: 18px;
+}
+
+.right .partner_comment strong {
+	display: block;
+	margin-bottom: 15px;
+	font-size: 16px;
+}
+
+.right .partner_comment {
+	padding: 15px 26px 20px;
+	background: rgb(250, 250, 250);
+}
+
+#pdMainEditArea {
+	text-align: right;
+}
+
+#pdMainEditBtn {
+	width: 120px;
+	height: 40px;
+	margin-top: 10px;
+	margin-left: 650px;
+	background-color: #263343;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+}
+
+#pdMainEditBtn:hover {
+	background-color: rgb(155, 155, 155);
+}
+
+/*productContent CSS  */
+.productContent {
+	margin-top: 25px;
+	padding-top: 10px;
+	border-top: 2px solid rgb(175, 173, 180);
+}
+
+.productContent h2 {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+/* 여기서 가져온거 */
+
+/* ============= 상품 리스트 ============= */
+.box {
+	width: 800px;
+	height: 400px;
+	margin-bottom: 20px;
+	border: 1px rgb(149, 148, 153) solid;
+	box-sizing: border-box;
+	display: flex;
+	border-radius: 8px;
+}
+
+#prListEdit {
+	width: 790px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#prListEdit #prListEditBtn {
+	width: 280px;
+	height: 40px;
+	margin-top: 10px;
+	background-color: #263343;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+}
+
+#prListEdit #prListEditBtn:hover {
+	background-color: rgb(155, 155, 155);
+}
+
+/* 상품리스트 h2 */
+#prListEdit h2 {
+	font-size: 30px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	margin-bottom: 20px;
+}
+
+/* ==== 글자 왼쪽 여백 조정 및 해당 영역의 글자 크기 조정==== */
+.Product_contents .prName .product_type, .Product_contents .prName .edit_type,
+	.Product_contents .pdDetail .product_detail, .Product_contents .pdDetail .edit_detail,
+	.Product_contents .pdAmount .product_amount, .Product_contents .pdAmount .edit_amount,
+	.Product_contents .pdCountArea .product_count, .Product_contents .pdCountArea .edit_count,
+	.Product_contents .pdCountArea .product_pernum, .Product_contents .pdCountArea .edit_pernum,
+	.Product_contents .pdTimeArea .checkin, .Product_contents .pdTimeArea .edit_checkin,
+	.Product_contents .pdTimeArea .checkout, .Product_contents .pdTimeArea .edit_checkout
+	{
+	padding: 2px 0 0 7px;
+	font-size: 13px;
+}
+
+/* ============== 이미지 부분 시작 ================== */
+.boxCintainer {
+	flex-direction: column;
+	width: 50%;
+	height: 100%;
+	box-sizing: border-box;
+	border-top-left-radius: 8px;
+	border-right: 1px rgb(149, 148, 153) solid;
+}
+
+.itemexer {
+	height: 50%;
+	box-sizing: border-box;
+}
+
+.imgLists {
+	height: 50%;
+	box-sizing: border-box;
+}
+
+.slideshow-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	margin-right: 10px;
+	margin: 0 auto;
+	overflow: hidden;
+	border-top-left-radius: 8px;
+}
+
+/* 배열에 저장된 이미지 슬라이드 위해서 바로 보여지는 이미지 숨김 */
+.showImgs img {
+	display: none;
+}
+
+.list_img {
+	width: 50px;
+	height: 50px;
+}
+
+.slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	transition: opacity 0.4s ease-in-out;
+	border: 2px rgb(46, 75, 1) solid;
+}
+
+.prev, .next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+}
+
+.prev {
+	left: 10px;
+}
+
+.next {
+	right: 10px;
+}
+
+/* display: flex하기 위한 영역 */
+.imgLists .image-list {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	/* justify-content: space-around; */
+	/* justify-content: flex-start; */
+}
+
+.imgLists {
+	border-bottom-left-radius: 8px;
+	position: relative;
+}
+
+.image-list {
+	padding: 0;
+	margin: 5px;
+	border-bottom-left-radius: 8px;
+	display: inline-block;
+	position: relative;
+}
+
+/* 해당 이미지 리스트에 있는 이미지 영역 */
+.imgLists .image-list li {
+	list-style-type: none;
+	position: relative;
+	width: 95px;
+	height: 85px;
+	padding: 0;
+	margin: 5px 15px;
+	justify-content: flex-start;
+}
+
+.list_img {
+	width: 95px;
+	height: 80px;
+	margin-left: 5px;
+	border-radius: 4px;
+}
+
+/* 이미지가 담겨져 있는 크기를 조정 */
+.img_list_position {
+	width: 100px;
+	height: 90px;
+	padding: 0 10px 10px 0;
+	border-radius: 4px;
+}
+
+.imgLists_deleteButton_position {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.imgLists_deleteButton {
+	font-size: 20px;
+	color: #080808;
+	background-color: rgb(206, 206, 206);
+	border: none;
+	cursor: pointer;
+	outline: none;
+	padding: 4px;
+	margin-top: 3px
+}
+
+/* 상품리스트 이미지 추가 관련  */
+.imageUploadContainer {
+	position: absolute;
+	transition: background-color 0.3s ease;
+	bottom: 0;
+	right: 0;
+}
+
+.addImagesButton {
+	border: none;
+	outline: none;
+	font-size: 13px;
+	padding: 10px 10px;
+	border-radius: 4px;
+	background-color: rgb(235, 235, 235);
+	color: #fff;
+	width: 95px;
+	height: 85px;
+	margin: 20px 27px 15px 15px;
+}
+
+/* .addImagesButton:hover {
+	background-color: #8f928f;
+} */
+
+/* 이미지 추가에서 파일 선택 숨김 */
+.imageUploadInput {
+	display: none;
+}
+
+/* =========== 이미지 옆 내용 ============ */
+
+/* 내용들이 담겨야 하는부분 */
+.Product_contents {
+	/* border: 1px rgb(163, 165, 168) solid; */
+	width: 50%;
+	padding: 10px;
+	/* 안에 내용 정렬 */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.Product_contents p {
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	/* margin-bottom: 20px; */
+	margin-bottom: 5px;
+}
+
+.Product_contents span {
+	font-weight: bold;
+	border: #c9c9c9 1px solid;
+	border-radius: 6px;
+	height: 120%;
+	display: inline-block;
+	width: 120px;
+	margin-left: 8px;
+}
+
+.Product_contents p input {
+	font-weight: bold;
+	border: #cfba9d 1px solid;
+	border-radius: 6px;
+	height: 120%;
+	display: inline-block;
+	width: 120px;
+	margin-left: 8px;
+}
+
+/* 객실 이름 */
+.prName {
+	display: flex;
+	/* margin-bottom: 8px; */
+}
+
+.Product_contents .product_type {
+	width: 300px;
+	height: 25px;
+}
+
+.Product_contents .edit_type {
+	width: 300px;
+	height: 25px;
+	font-weight: bold;
+	border: #cfba9d 1px solid;
+	border-radius: 6px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+/* 상세 설명 */
+.pdDetail {
+	display: flex;
+	margin-top: 20px;
+}
+
+.pdDetail p {
+	height: 20px;
+}
+
+.Product_contents .product_detail {
+	width: 300px;
+	height: 60px;
+}
+
+.Product_contents .edit_detail {
+	width: 300px;
+	height: 60px;
+	font-weight: bold;
+	border: #cfba9d 1px solid;
+	border-radius: 6px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+/* 금액 */
+.pdAmount {
+	display: flex;
+	/* margin-bottom: 8px */
+	margin-top: 20px;
+}
+
+.pdAmount p {
+	height: 20px;
+	padding-left: 3px;
+}
+
+.Product_contents .product_amount {
+	width: 300px;
+	height: 25px;
+	margin-left: 35px;
+}
+
+.Product_contents .edit_amount {
+	width: 300px;
+	height: 25px;
+	margin-left: 35px;
+	font-weight: bold;
+	border: #cfba9d 1px solid;
+	border-radius: 6px;
+	display: inline-block;
+}
+
+/* 객실 수 , 최대 인원 수  */
+.pdCountArea {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+
+/* 상품리트스 시간 */
+.pdTimeArea {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+
+/* 버튼 div */
+.btnArea {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 9px;
+}
+
+.Product_contents button {
+	padding: 10px 20px;
+	margin-top: 10px;
+	background-color: #d49466;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	width: 45%;
+}
+
+.Product_contents button:not(:last-child) {
+	margin-right: 10px;
+}
+
+.Product_contents button[type="reset"] {
+	background-color: #ccc;
+}
+
+.Product_contents button:hover {
+	background-color: #f0a441;
+}
+</style>
+
+	</head>
+
+	<body>
+
+		<div id="Container">
+			<div id="mainContent" class="main_content">
+				<div class="top">
+					<div class="left">
+
+						<!-- 이미지 표시 -->
+						<img th:src="${regPartner.ProductMain.Main_product_img_url}"
+							alt="Main Image" width="100%" height="100%" class="main_img">
+
+					</div>
+
+					<div class="right">
+						<div class="info">
+							<span>5성급</span>
+							<h2 th:text="${regPartner.company_name}"></h2>
+
+
+
+							<div class="score_cnt">
+								<span>9.2</span> 추천해요
+							</div>
+
+							<p th:text="${regPartner.company_address}" class="address"></p>
+						</div>
+						<div class="partner_comment">
+							<strong>사장님 한마디</strong>
+							<div>
+								<p th:text="${regPartner.ProductMain.product_main_detail}"></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div id="pdMainEditArea">
+					<button id="pdMainEditBtn" type="button"
+						onclick="location.href='/product/productMainReg'">수정하기</button>
+				</div>
+
+			</div>
+
+
+			<div class="productContent">
+
+				<div id="prListEdit">
+					<h2>상품리스트</h2>
+					<button id="prListEditBtn" type="button"
+						onclick="location.href='/product/addproduct'">등록 / 수정 /
+						삭제</button>
+				</div>
+
+				<div id="productListContainer">
+
+					<div id="productContainer" th:each="product : ${productList}"
+						class="box">
+
+						<div class="boxCintainer">
+
+							<div class="itemexer">
+
+								<div th:if="${not #lists.isEmpty(product.productImgs)}"
+									class="slideshow-container">
+									<!-- 해당 배열의 이미지를 보여줌 -->
+									<div th:each="img : ${product.productImgs}"
+										class="imgContainer">
+										<div class="slide">
+											<!-- 해당 이미지의 경로를 가져온다.   -->
+
+
+											<img th:src="${img.img_url}" alt="Product Image" width="100%"
+												height="100%" class="showImgs"><span
+												th:text="${img.img_id}" style="display: none;"
+												class="img_id"></span>
+										</div>
+										<div class="prev">&lt;</div>
+										<div class="next">&gt;</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="imgLists">
+								<ul class="image-list">
+									<li th:each="img : ${product.productImgs}">
+										<div class="img_list_position">
+											<img th:src="${img.img_url}" alt="Product Image"
+												class="list_img"> <span th:text="${img.img_id}"
+												style="display: none;"></span>
+
+
+
+
+										</div>
+									</li>
+								</ul>
+
+								<div class="imageUploadContainer">
+									<button class="addImagesButton">이미지 추가</button>
+									<input type="file" name="images[]" multiple
+										class="imageUploadInput">
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<div class="Product_contents">
+
+							<p style="display: none;">
+								객실 번호 <span th:text="${product.product_id}" class="product_id"></span>
+							</p>
+
+							<div class="prName">
+								<p>객실 이름</p>
+								<span th:text="${product.product_type}" class="product_type"></span>
+							</div>
+
+							<div class="pdDetail">
+								<p>상세 설명</p>
+								<span th:text="${product.product_detail}" class="product_detail"></span>
+							</div>
+
+							<div class=pdAmount>
+								<p>금액</p>
+								<span th:text="${product.product_amount}" class="product_amount"></span>
+							</div>
+
+							<div class="pdCountArea">
+
+								<p>
+									객실수 <span th:text="${product.product_count}"
+										class="product_count"></span>
+								</p>
+								<p>
+									최대인원 <span th:text="${product.product_pernum}"
+										class="product_pernum"></span>
+
+								</p>
+							</div>
+
+							<div class="pdTimeArea">
+
+								<p>
+									체크인 <span th:text="${product.checkin}" class="checkin"></span>
+								</p>
+								<p>
+									체크아웃 <span th:text="${product.checkout}" class="checkout"></span>
+
+								</p>
+
+							</div>
+							<!-- 	<button class="addEditImg">이미지 추가</button> -->
+
+
+						</div>
+					</div>
+				</div>
+
+				<!-- 이 부분 추후 수정해야한다. -->
+				<div th:if="${#lists.isEmpty(productList)}" id="noProduct">현재
+					등록된 상품이 없습니다.</div>
+			</div>
+		</div>
+
+
+
+
+		<script>
+			//===== 이미지 슬라이드 ==========
+
+			$(document).ready(
+					function() {
+
+						const productContainers = $('.slideshow-container');
+
+						productContainers.each(function() {
+							const slideshowContainer = $(this);
+							const images = [];
+
+							$(this).find('.imgContainer').each(
+									function() {
+										const img = $(this).find('img');
+										const imgUrl = img.attr('src');
+										var roomId = parseInt($(this).closest(
+												'.box').find('.product_id')
+												.text());
+
+										images.push({
+											imgUrl : imgUrl,
+											roomId : roomId
+										});
+									});
+
+							startSlideshow(slideshowContainer, images);
+						});
+					});
+
+			function startSlideshow(slideshowContainer, images) {
+				let currentSlideIndex = 0;
+				const slide = slideshowContainer.find('.slide');
+				const prevButton = slideshowContainer.find('.prev');
+				const nextButton = slideshowContainer.find('.next');
+
+				// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
+				function updateSlide() {
+					const imgUrl = images[currentSlideIndex].imgUrl;
+					slide.css('background-image', `url(${imgUrl})`);
+				}
+
+				// 첫 번째 이미지로 초기화
+				updateSlide();
+
+				// 이전 이미지로 이동하는 함수
+				function goToPrevSlide() {
+					currentSlideIndex--;
+					if (currentSlideIndex < 0) {
+						currentSlideIndex = images.length - 1;
+					}
+					updateSlide();
+				}
+
+				// 다음 이미지로 이동하는 함수
+				function goToNextSlide() {
+					currentSlideIndex++;
+					if (currentSlideIndex >= images.length) {
+						currentSlideIndex = 0;
+					}
+					updateSlide();
+				}
+
+				// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
+				function updateSlide() {
+					const imgUrl = images[currentSlideIndex].imgUrl;
+					slide.find('img').attr('src', imgUrl);
+					console.log(imgUrl);
+				}
+
+				prevButton.on('click', goToPrevSlide);
+				nextButton.on('click', goToNextSlide);
+
+			}
+
+			//숫자에 쉼표를 넣어서 단위 확인
+
+			$('.product_amount').each(
+					function() {
+						var amountText = $(this).text();
+						console.log(typeof amountText); //String 
+						var amountNumber = parseFloat(amountText.replace(
+								/[^0-9.]/g, '')); //숫자로 변환
+						var formattedNumber = amountNumber.toLocaleString(); //통화 기호
+						$(this).text(formattedNumber); //변경
+					});
+			
+			
+		</script>
+
+	</body>
+</html>
