@@ -147,13 +147,32 @@ function clearError(fieldName) {
 $(document).ready(function() {
 	// 초기화 버튼 클릭 이벤트 핸들러
 	$('#addProductReset').click(function() {
-		clearError('product_type');
-		clearError('product_amount');
-		clearError('product_detail');
-		clearError('product_count');
-		clearError('product_pernum');
+
+		swalWithBootstrapButtons.fire({
+			title: '변경 사항이 적용되지 않습니다',
+			text: '초기화 하시겠습니까?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			reverseButtons: true
+
+		}).then((result) => {
+			if (result.isConfirmed) {
+				clearError('product_type');
+				clearError('product_amount');
+				clearError('product_detail');
+				clearError('product_count');
+				clearError('product_pernum');
+				$('#productForm').trigger('reset');
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				//아무런 작업을 하지 않는다
+			}
+		});
+
 	});
 });
+
 
 
 //=============== 유효성 검사 끝 =================

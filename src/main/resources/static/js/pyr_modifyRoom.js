@@ -243,7 +243,7 @@ $(document).on('click', '.editOkProduct', function() {
 				}, 1500); // 1.5초 후에 이전 페이지로 이동 
 	*/
 
-			Swal.fire('수정성공','수정완료되었습니다','success').then(() => {
+			Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
 				// 알림창이 닫힌 후에 1.5초 후에 이동
 				setTimeout(function() {
 					window.history.back();
@@ -564,33 +564,52 @@ const swalWithBootstrapButtons = Swal.mixin({
 // 초기화 버튼 클릭 이벤트 처리 ===========================================
 
 $(document).on('click', '.resetProduct', function() {
-	// 초기화 버튼 클릭 시 처리할 로직 작성
-	// 해당 컨테이너 찾기
-	var productContainer = $(this).closest('#productContainer');
-	var productId = parseInt(productContainer.find('.Product_contents .product_id').text());
+
+
+	swalWithBootstrapButtons.fire({
+		title: '변경 사항이 적용되지 않습니다',
+		text: '초기화 하시겠습니까?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+		reverseButtons: true
+
+	}).then((result) => {
+		if (result.isConfirmed) {
+
+
+			// 초기화 버튼 클릭 시 처리할 로직 작성
+			// 해당 컨테이너 찾기
+			var productContainer = $(this).closest('#productContainer');
+			var productId = parseInt(productContainer.find('.Product_contents .product_id').text());
 
 
 
-	//해당 영역만을 초기화 시킴
-	productContainer.find('.edit_count').val(originalValues['count']);
-	productContainer.find('.edit_type').val(originalValues['type']);
-	productContainer.find('.edit_pernum').val(originalValues['pernum']);
-	productContainer.find('.edit_amount').val(originalValues['amount']);
-	productContainer.find('.edit_checkin').val(originalValues['checkin']);
-	productContainer.find('.edit_checkout').val(originalValues['checkout']);
-	productContainer.find('.edit_detail').val(originalValues['detail']);
+			//해당 영역만을 초기화 시킴
+			productContainer.find('.edit_count').val(originalValues['count']);
+			productContainer.find('.edit_type').val(originalValues['type']);
+			productContainer.find('.edit_pernum').val(originalValues['pernum']);
+			productContainer.find('.edit_amount').val(originalValues['amount']);
+			productContainer.find('.edit_checkin').val(originalValues['checkin']);
+			productContainer.find('.edit_checkout').val(originalValues['checkout']);
+			productContainer.find('.edit_detail').val(originalValues['detail']);
 
 
-	resetImages(productContainer);
+			resetImages(productContainer);
+
+			//오류 메세지가 있다면 제거
+			clearEditInputError('edit_type');
+			clearEditInputError('edit_detail');
+			clearEditInputError('edit_amount');
+			clearEditInputError('edit_count');
+			clearEditInputError('edit_pernum');
 
 
-	//오류 메세지가 있다면 제거
-	clearEditInputError('edit_type');
-	clearEditInputError('edit_detail');
-	clearEditInputError('edit_amount');
-	clearEditInputError('edit_count');
-	clearEditInputError('edit_pernum');
-
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+			//아무런 작업을 하지 않는다
+		}
+	});
 
 });
 

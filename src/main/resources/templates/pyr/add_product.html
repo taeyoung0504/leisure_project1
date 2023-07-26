@@ -21,8 +21,7 @@
 
 			<h1>상품 등록</h1>
 
-			<form id="productForm" method="post" enctype="multipart/form-data">
-
+			<form id="productForm">
 				<!-- 해당 acc의 pk같이 전송용 -->
 				<input type="number" name="acc_id" th:value="${id}"
 					style="display: none;">
@@ -66,7 +65,7 @@
 
 				<div id="addResetBtn">
 					<button type="button" id="addProductButton">등록하기</button>
-					<button type="reset" id="addProductReset">초기화</button>
+					<button type="button" id="addProductReset">초기화</button>
 				</div>
 			</form>
 		</div>
@@ -82,8 +81,6 @@
 
 				<button id="prListEditBtn"
 					onclick="location.href='/user/mypage/my_productList'">완료</button>
-
-
 			</div>
 
 			<div id="productListContainer">
@@ -190,7 +187,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 			<!-- 이 부분 추후 수정해야한다. -->
@@ -204,7 +200,7 @@
 	<script src="/js/pyr_add_product.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
-	
+
 </div>
 
 </html>

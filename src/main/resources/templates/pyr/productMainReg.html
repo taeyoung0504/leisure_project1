@@ -12,16 +12,14 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
 <title>상품등록</title>
-
 	</head>
-
 	<body>
 
 		<div id="addMainPdregistration">
 			<h1>숙박업소 등록</h1>
 
-			<form id="productForm" method="post" enctype="multipart/form-data"
-				action="/product/productMainInfo">
+			<form id="productForm">
+
 				<div id="namdAddrSecFlex">
 					<div id="nameAndAddr">
 
@@ -64,7 +62,7 @@
 						</div>
 						<div id="fileArea">
 							<label id="roomPhotos">
-								<h3>객실 사진</h3> <input type="file" name="acc_img"
+								<h3>업소 사진</h3> <input type="file" name="acc_img"
 								id="addMainPhoto">
 							</label>
 						</div>
@@ -73,7 +71,7 @@
 					<label id="mainPrCom">
 						<hr>
 						<h3>사장님 한마디</h3> <textarea type="text"
-							placeholder="숙소에 대한 간략한 설명을 등록해 주세요" minlength="10"
+							placeholder="업소에 대한 간략한 설명을 작성해 주세요" minlength="10"
 							maxlength="80" required name="acc_explain"
 							th:text="${accommodation?.acc_explain ?: ''}" id="acc_explain"></textarea>
 					</label>
@@ -96,15 +94,17 @@
 					<button type="button" id="CancelButton" onclick="cancelChanges()">취소</button>
 				</div>
 			</form>
+
+
 		</div>
 		<!-- <script>
 			var simplemde = new SimpleMDE({
 				element : document.getElementById("acc_info"),
 			});
 		</script> -->
+		<script src="/js/pyr_productMainReg.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
-		<script src="/js/pyr_productMainReg.js"></script>
 
 	</body>
 </html>
