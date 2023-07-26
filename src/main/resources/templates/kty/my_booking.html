@@ -7,7 +7,7 @@
 	display: flex;
 	padding: 15px;
 	background: #fff;
-	border: 1px solid rgba(0, 0, 0, 0.08);
+	border: 1px solid grey;
 	border-radius: 4px;
 	box-sizing: border-box;
 	margin-bottom: 15px;
@@ -209,6 +209,7 @@
 					th:text="${book.paymentDate}"></span> <span
 					th:text="${book.payType}"></span><br>
 					<span th:text="${book.accomID}" style="display:none;"></span>
+					<span th:text="${book.roomID}" style="display:none;"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
 				<!-- <button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
@@ -220,7 +221,7 @@
 			 <button id="cancelBtn2" class="reviewBtn"
                     th:if="${book.bookStatus == '이용완료'}" 
                     th:text="'리뷰작성'"
-                    th:attr="data-accomid=${book.accomID}"
+                    th:attr="data-accomid=${book.accomID},data-roomid=${book.roomID},data-in=${book.checkin}"
                     onclick="disableButton(this)">리뷰작성</button>
 				</p>
 				
@@ -299,36 +300,37 @@ cancelBtns.forEach(cancelBtn => {
     
     
     // 리뷰 새창
-  $(document).ready(function() {
- 
-	  function disableButton(button) {
-		    if (!button.disabled) {
-		      button.disabled = true;
-		      $(button).removeClass('reviewBtn'); // Remove 'reviewBtn' class
-		      $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
-		      var accomID = $(button).attr('data-accomid');
-		      localStorage.setItem('disabled_review_button_' + accomID, 'true'); // Store the disabled state in local storage
+ $(document).ready(function() {
+    function disableButton(button) {
+        if (!button.disabled) {
+            button.disabled = true;
+            $(button).removeClass('reviewBtn'); // Remove 'reviewBtn' class
+            $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
+            var roomID = $(button).attr('data-roomid');
+            var checkIn = $(button).attr('data-in')
+            localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
 
-		      // Update the button text to "작성 완료"
-		      $(button).text('작성 완료');
-		    }
-		  }
+            // Update the button text to "작성 완료"
+            $(button).text('작성 완료');
+        }
+    }
 
-		  // Function to check and update the button state
-		  function checkAndUpdateButtonState() {
-		    $('.reviewBtn').each(function() {
-		      var accomID = $(this).attr('data-accomid');
-		      var isDisabled = localStorage.getItem('disabled_review_button_' + accomID);
-		      if (isDisabled === 'true') {
-		        $(this).prop('disabled', true);
-		        $(this).addClass('gray-button'); // Add the 'graysssss-button' class to change appearance
-		        $(this).text('작성 완료'); // Update the button text to "작성 완료"
-		      }
-		    });
-		  }
+    // Function to check and update the button state
+    function checkAndUpdateButtonState() {
+        $('.reviewBtn').each(function() {
+            var roomID = $(this).attr('data-roomid');
+            var checkIn = $(this).attr('data-in');
+            var isDisabled = localStorage.getItem('disabled_review_button_'+checkIn+'-'+roomID);
+            if (isDisabled === 'true') {
+                $(this).prop('disabled', true);
+                $(this).addClass('gray-button'); // Add the 'gray-button' class to change appearance
+                $(this).text('작성 완료'); // Update the button text to "작성 완료"
+            }
+        });
+    }
 
-		  // Check and update the button state when the page loads
-		  checkAndUpdateButtonState();
+    // Check and update the button state when the page loads
+    checkAndUpdateButtonState();
 	  
   $('.reviewBtn').click(function() {
     var accomID = $(this).attr('data-accomid');
