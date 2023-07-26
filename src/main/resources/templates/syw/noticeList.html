@@ -88,11 +88,7 @@
 			<div th:each="notice : ${page}" class="notice-item">
 				<h3 th:text="${notice.title}"></h3>
 				<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
-<<<<<<< HEAD
-				<pre class="notice-content" th:text="${notice.content}" style="background-color: rgb(243, 243, 243); padding: 20px;"></pre>
-=======
 				<p class="notice-content" th:text="${notice.content}" style="background-color: rgb(243, 243, 243); padding: 20px; white-space: pre-line;"></p>
->>>>>>> fcb65018d4ff7952c27607c6b4db6d25cbfff0e0
 			</div>
 
 			<div class="pagination">
