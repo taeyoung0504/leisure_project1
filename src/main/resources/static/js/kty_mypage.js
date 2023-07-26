@@ -159,11 +159,9 @@ $(document).ready(function() {
 				dataType: 'json',
 				success: function(data) {
 					if (data === 1) {
-<<<<<<< HEAD
 						$oldPwdError.text('비밀번호가 일치합니다').show();
-=======
-						$oldPwdError.text('비밀번호가 일치합니다.').show();
->>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
+
+
 						enableNewPwdInputs();
 					} else {
 						$oldPwdError.text('비밀번호가 일치하지 않습니다').show();
@@ -355,11 +353,8 @@ $(document).ready(function() {
 					html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다. </b>',
 					icon: 'success'
 				}).then(function() {
-<<<<<<< HEAD
-					window.location.href = 'http://localhost:8080/user/mypage/my_partner_reg';
-=======
+
 					window.location.href = 'http://192.168.10.67:80/user/mypage/my_partner_reg';
->>>>>>> 1c87b93d6556601830f760dbe686bcfbeb2a2783
 				});
 			}
 		});
