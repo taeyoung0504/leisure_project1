@@ -17,6 +17,30 @@
 	overflow: auto;
 }
 
+.search_deagu_home {
+	width: 300px !important;
+    display: grid!important;
+    height: fit-content !important;
+}
+
+
+
+/* 반응형 미디어 쿼리: 화면 너비가 1000px 이하일 때 */
+@media (max-width: 1000px) {
+	body{
+	margin: 0;}
+	/* 왼쪽 콘텐츠 영역을 100%로 확장 */
+	#kty_left-side_test {
+		width: 100%;
+		margin: auto;
+		left: 0;
+	}
+	/* 오른쪽 콘텐츠를 숨기기 */
+	#kty_right-side_test {
+		display: none;
+	}
+}
+
 #region_dropdown_daegu {
 	position: relative;
 	width: 400px;

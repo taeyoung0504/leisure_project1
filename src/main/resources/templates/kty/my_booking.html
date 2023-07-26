@@ -135,7 +135,20 @@
   /* Add any other styles for the grayed-out appearance */
 }
 
-
+#cancelBtn.cancelBtn3 {
+    background-color: blue;
+    width: 50%;
+	height: 36px;
+	border: none;
+	font-size: 15px;
+	line-height: 36px;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 18px;
+	font-weight: bold;
+}
 </style>
 </head>
 
@@ -197,10 +210,14 @@
 					th:text="${book.payType}"></span><br>
 					<span th:text="${book.accomID}" style="display:none;"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
-				<button id="cancelBtn" class="cancelBtn"
+				<!-- <button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
-					th:text="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button>
-				 <button id="cancelBtn2" class="reviewBtn"
+					th:text="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button> -->
+					<button id="cancelBtn" class="cancelBtn"
+    th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn')}"
+    th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
+					
+			 <button id="cancelBtn2" class="reviewBtn"
                     th:if="${book.bookStatus == '이용완료'}" 
                     th:text="'리뷰작성'"
                     th:attr="data-accomid=${book.accomID}"
