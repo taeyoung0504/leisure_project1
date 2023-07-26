@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f8f8f8;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 0;
+	text-align: center;
+}
+
+.navbar a {
+	margin: 0 10px;
+	text-decoration: none;
+	color: #fff;
+	transition: color 0.3s;
+}
+
+.navbar a:hover {
+	color: #ffc107;
+}
+
+.navbar a.active {
+	font-weight: bold;
+}
+
+.navbar span {
+	color: #fff;
+	margin: 0 5px;
+}

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경상도숙박장사</title>
+    <style>
+
+/* 여기어때 예약 페이지 참고 */
+        
+/* 전체 가운데 정렬 */
+div#content {
+
+	display: flex;
+	justify-content: center;
+	
+	/* align-items: center; */
+	
+	height: 100vh;
+	/* background-color: rgba(241, 243, 244, 1.00); */
+	
+	
+	
+}
+
+div.reserve {
+	
+}
+
+/* 예약자 정보 왼쪽 정렬 */
+div.left {
+
+	float: left;
+	width: 564px;
+	margin: 40px 88px 0 0;
+	
+}
+
+/* 예약 객실 정보 오른쪽 정렬 */
+div.right {
+
+	float: right;
+	width: 310px;
+	margin: 40px 31px 0 0;
+	
+	background: rgb(250,250,250); 
+	
+	box-sizing: border-box;
+	
+	/* display: block; */
+}
+
+/* 예약객실정보 strong태그 설정 */
+.reserve .info p strong, .reserve .info div strong {
+
+    display: block !important;
+    position: relative;
+    margin-bottom: 6px;
+    font-size: 18px !important;
+    line-height: 1;
+    color: rgba(0,0,0,0.38);
+    
+    }
+    
+    /* 예약객실정보 p태그 설정 */
+    .reserve .info .name {
+    
+    height: auto;
+    margin: 0 0 29px 0;
+    padding: 0;
+    border-bottom: none;
+    line-height: 32px;
+    text-align: left;
+    
+}
+
+.reserve .info p {
+
+    position: relative;
+    margin-bottom: 29px;
+    padding-left: 0;
+    font-size: 20px;
+    line-height: 32px;
+    color: rgba(0,0,0,0.87);
+    text-align: left;
+    box-sizing: border-box;
+    
+}
+
+.reserve .info {
+
+    margin: 39px 24px 0 24px;
+    padding: 0 0 31px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: none;
+    
+}
+
+.total_price_pc {
+
+    display: block;
+    padding: 39px 24px 33px!important;
+    background: none!important;
+    
+}
+
+.total_price_pc p strong {
+
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.total_price_pc p span {
+
+    display: block;
+    padding: 19px 0 23px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #e61c51;
+}
+
+ul, ol, li {
+
+    list-style: none;
+    
+}
+
+ul {
+
+	padding: 0px;
+	
+}
+
+
+.total_price_pc ul li{
+
+    margin-bottom: 2px;
+    padding-left: 16px;
+    background: url(//image.goodchoice.kr/images/web_v3/ico_bul.png) 0 0 no-repeat;
+    background-size: 14px auto;
+    font-size: 16px;
+    line-height: 26px;
+    color: rgba(0,0,0,.72);
+    text-align: left;
+}
+
+.total_price_pc ul li span{
+
+    color: #e61c51;
+}
+
+.reserve .right .btn_pay {
+
+    display: block;
+    border-radius: 0 0 4px 4px;
+}
+
+.btn_pay {
+
+    /* display: block; */
+    
+    width: 100%;
+    height: 56px;
+    border: none;
+    font-size: 15px;
+    line-height: 56px;
+    color: #fff;
+    text-align: center;
+}
+
+.gra_left_right_red {
+
+ /*    background: rgb(255, 0, 85);
+    background: -moz-linear-gradient( left, rgba(255, 0, 85, 1) 1%, rgba(230, 34, 67, 1) 100% );
+    background: -webkit-linear-gradient( left, rgba(255, 0, 85, 1) 1%, rgba(230, 34, 67, 1) 100% ); */
+    
+    background: linear-gradient( to right, rgba(255, 0, 85, 1) 1%, rgba(230, 34, 67, 1) 100% );
+    
+    cursor: pointer;
+}
+
+/* 왼쪽 div 예약자 정보 섹션 */
+
+.reserve h3 {
+    display: block;
+    margin: 54px 0 42px 0;
+}
+
+.info_chkin strong {
+    display: block;
+    padding: 0 0 12px 0;
+    font-size: 18px;
+    /* font-weight: normal; */
+    color: rgba(0,0,0,0.56);
+}
+
+.inp_wrap {
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 8px 14px 8px 16px;
+    height: 48px;
+    border-radius: 4px;
+   /*  display: inline; */
+}
+
+.inp_wrap input {
+    border: none;
+    background: none;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.56);
+    line-height: 1;
+}
+
+.alert_txt {
+    height: 46px;
+    padding-top: 5px;
+    font-size: 14px;
+    color: rgb(230,28,81);
+    visibility: hidden;
+}
+
+.info_chkin {
+    padding: 0 0 10px 0 !important;
+}
+
+.info_chkin strong {
+    display: block;
+    padding: 0 0 12px 0;
+    font-size: 18px;
+    /* font-weight: normal; */
+    color: rgba(0,0,0,0.56);
+}
+
+.guest-phone {
+    margin-bottom: 36px;
+}
+
+
+.phone_confirm {
+    position: relative;
+}
+.phone_confirm {
+    margin-top: 16px;
+}
+
+.safety_txt {
+    padding-bottom: 14px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.56);
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box .input.validation-required-input {
+    margin-right: 12px;
+    
+    width: calc(100% - 110px);
+}
+
+.input-box .input {
+    box-sizing: border-box;
+    padding: 8px 14px 8px 16px;
+    width: 100%;
+    height: 48px;
+    border: none;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(0,0,0,.56);
+}
+
+/* 인증번호 전송 버튼 */
+
+.phone-auth-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 48px;
+    padding: 13px 0 10px;
+    border: none;
+    border-radius: 4px;
+    background: #ccc;
+    font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 휴대폰 번호 유효성 검사 */
+
+.error-message{
+    margin: 8px 0;
+}
+
+.alert_txt {
+    height: 46px;
+    padding-top: 5px;
+    font-size: 14px;
+    color: rgb(230,28,81);
+}
+
+/* 결제수단 선택 */
+.pay_select {
+    padding: 0 0 0 0 !important;
+    border-bottom: none !important;
+}
+
+.pay_select h3 {
+    display: block;
+    margin-bottom: 19px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0px !important;
+}
+
+/* 결제 수단 select */
+
+#pay_select select{
+    width: 288px;
+    
+}
+
+.select_type_1 {
+    height: 48px;
+    padding: 0 12px;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 4px;
+    background: #fafafa url(https://image.goodchoice.kr/images/web_v3/ico_arr_down.png) right 10px top 50% no-repeat;
+    background-size: 25px auto;
+    font-size: 18px;
+    color: rgba(0,0,0,.56);
+    cursor: pointer;
+}
+
+.select_type_1 option {
+    color: rgba(0, 0, 0, 0.56);
+}
+
+input:focus, select:focus, option:focus, textarea:focus, button:focus{
+	outline: none;
+}
+
+
+select {
+
+   -webkit-appearance:none; /* for chrome */
+
+   -moz-appearance:none; /*for firefox*/
+
+   appearance:none;
+
+}
+
+select::-ms-expand{
+
+   display:none;/*for IE10,11*/
+
+} 
+
+/* 딱히 없어도 상관 없는 듯 */
+ option {
+    font-weight: normal;
+    display: block;
+    white-space-collapse: collapse;
+    text-wrap: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+
+/* 약관동의 */
+.reserve .agree {
+    padding: 23px 0;
+    font-size: 16px;
+    border: none;
+}
+
+.reserve .agree .all_check {
+    font-weight: 700;
+}
+
+.reserve .agree p {
+    position: relative;
+    padding-top: 11px;
+    padding-bottom: 10px;
+    line-height: 1.2;
+    padding-left: 37px;
+}
+
+label {
+    cursor: pointer;
+}
+
+.reserve .agree input {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -12px;
+}
+
+input[type="checkbox"].inp_chk_02 {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: url(https://image.goodchoice.kr/images/web_v3/ico_chk.png) 0 0 no-repeat;
+    background-size: 24px auto;
+    cursor: pointer;
+    
+}
+
+.reserve .agree span {
+    display: inline-block;
+    color: rgba(0,0,0,.56);
+    cursor: pointer;
+}
+
+.agree p i {
+    font-style: normal;
+    text-decoration: underline;
+}
+
+.reserve .agree span b {
+    font-weight: 400;
+    color: #e61c51;
+}
+
+.btn_pay {
+    display: block;
+    width: 100%;
+    height: 56px;
+    border: none;
+    font-size: 15px;
+    line-height: 56px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+    <html layout:decorate="~{jjj/header}">
+    <div layout:fragment="content" class="container my-3">
+
+
+        <div id="content">
+            <div class="reserve">
+                <div class="right">
+                    <section class="info">
+                        <p class="name">
+                            <strong>숙소이름</strong>
+                            "양평 스마일카라반펜션"
+                        </p>
+                        <p>
+                            <strong>객실타입</strong>
+                            "블루룸"
+                        </p>
+                        <p>
+                            <strong>체크인</strong>
+                            "07.11 화 15:00"
+                        </p>
+                        <p>
+                            <strong>체크아웃</strong>
+                            "07.11 금 11:00"
+                        </p>
+                    </section>
+                    <section class="total_price_pc">
+                        <p>
+                            <strong>
+                                <b>총 결제 금액</b>
+                                "(VAT포함)"
+                            </strong>
+                            <span class="in_price">207,000원</span>
+                        </p>
+                        <ul>
+                            <li>해당 객실가는 세금, 봉사료가 포함된 금액입니다</li>
+                            <li>
+                                " 결제완료 후 "
+                                <span>예약자 이름</span>
+                                "으로 바로 "
+                                <span>체크인</span>
+                                " 하시면 됩니다 "
+                            </li>
+                        </ul>
+                    </section>
+                    <button type="button" class="btn_pay gra_left_right_red"> 결제하기 </button>
+                </div>
+
+
+                <div class="left">
+                    <div>
+                        <section class="info_chkin">
+                            <h3 style="margin-top:0;"> 예약자 정보 </h3>
+                            <strong>예약자 이름</strong>
+                            <p class="inp_wrap remove">
+                                <input type="text" name="username" placeholder="체크인시 필요한 정보입니다." maxlength="20">
+                            </p>
+                            <p class="alert_txt">한글, 영문, 숫자만 입력 가능. (문자 사이 공백은 1칸만 입력 가능)</p>
+                            <div>
+                                <strong class="phone">휴대폰 번호</strong>
+                                <span class="safety_txt">개인 정보 보호를 위해 안심번호로 숙소에 전송됩니다.</span>
+                                <div class="phone_confirm guest-phone">
+	                                <div class="input-box">
+	                                    <input type="tel" name="userPhone" placeholder="체크인시 필요한 정보입니다." maxlength="13"
+	                                        value class="input validation-required-input">
+	                                   <!--  <div class="canel-icn-touch">
+	                                        <svg></svg>
+	                                        <path></path>
+	                                    </div> -->
+	                                </div>
+	                                <button type="button" class="btn_send btn_confirm phone-auth-btn"> 인증번호 전송 </button>
+	                            </div>
+	                            <p data-show="tel" class="alert_txt error-message" style="visibility: hidden;"></p>
+	                            <div id="verificationCode" style="display: none; height: 48px">
+	                                <strong class="mt_09">인증 번호</strong>
+	                                <section>
+	                                    <div class="input-box">
+	                                        <input id="digit" type="tel" name="userPhone" minlength="4" maxlength="4" value
+	                                            class="input validation-required-input">
+	                                    </div>
+	                                    <button class="btn_ok btn_confirm phone-auth-btn"> 확인 </button>
+	                                </section>
+	                            </div>
+                           </div>
+                        </section>
+                    </div>
+                    <section id="pay_select">
+                        <h3>결제수단 선택</h3>
+                        <select id="payment-select" class="select_type_1">
+                            <option data-minprice="0" selected="selected" value="KAKAO"> 카카오페이 </option>
+                            <option data-minprice="0" value="NAVER"> 네이버페이 </option>
+                            <option data-minprice="0" value="KG"> KG이니시스 </option>
+                        </select>
+                    </section>
+                    <section class="agree">
+                        <p class="all_check">
+                            <label for="">
+                                <input type="checkbox" name="checkAll" class="inp_chk_02">
+                                <span>전체 동의</span>
+                            </label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="checkOne" class="inp_chk_02">
+                            <span onclick="pop_agree_01();">
+                                <i>숙소이용규칙 및 취소/환불규정 동의</i>
+                                <b> (필수)</b>
+                            </span>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="checkOne" class="inp_chk_02">
+                            <span onclick="pop_agree_02();">
+                                <i>개인정보 수집 및 이용 동의</i>
+                                <b> (필수)</b>
+                            </span>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="checkOne" class="inp_chk_02">
+                            <span onclick="pop_agree_03();">
+                                <i>개인정보 제 3자 제공 동의</i>
+                                <b> (필수)</b>
+                            </span>
+                        </p>
+                        <p class="guest_chk_area">
+                            <input type="checkbox" name="checkOne" class="inp_chk_02">
+                            <span onclick="pop_agree_03();">
+                                <i>만 14세 이상 확인</i>
+                                <b> (필수)</b>
+                            </span>
+                        </p>
+                    </section>
+                    <!-- <button type="button" class="btn_pay left_right_red"> 결제하기 </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 숙박 일수가 몇박인지 알려주는 방법 : model로 넘어온 총 결제 금액 / 객실의 기본 금액 해서 보여주기 -->
+    
+</body>
+
+</html>

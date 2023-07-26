@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link rel="stylesheet" href="/css/kty.css">
+	<script th:src="@{/js/kty_join.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- sweetalert2 CDN-->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 검색 api-->
+	<script th:src="@{/js/kty_mypage.js}"></script>
+	<title>요기어때</title>
+</head>
+
+<body class=jj_main>
+	<nav class="jj_navbar">
+		<div class="jj_navbar_logo">
+			<i class="fa-solid fa-tent"></i>
+			<a href="/">요기어때</a> <!-- 클릭했을 때 홈화면으로 돌아감-->
+		</div>
+
+
+		<!-- 검색창 -->
+		<div class="jj_search">
+			<input class="jj_search_input" type="type" placeholder="검색어 입력">
+
+			<button class="jj_search_btn">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+		</div>
+		<ul class="jj_navbar_menu">
+			<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+			<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+			<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/mypage/me}">마이페이지</a>
+			<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+			<a href="">예약내역</a>
+			<a href="">더보기</a>
+		</ul>
+
+		<!-- 햄버거 메뉴 아이콘 추가 -->
+		<a href="#" class="jj_navbar_toogleBtn">
+			<i class="fa-solid fa-bars"></i>
+		</a>
+	</nav>
+	<th:block layout:fragment="content"></th:block>
+	<script src="/js/main_jjj.js"></script>
+
+</body>
+
+</html>
