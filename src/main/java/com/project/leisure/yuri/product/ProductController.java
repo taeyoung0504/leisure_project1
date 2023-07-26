@@ -77,9 +77,10 @@ public class ProductController {
 		return "pyr/productMainReg";
 	}
 
+
 	// productMainReg 해당 유저 등록된 숙소 수정하기에서 수정된 값을 받아서 update
 	@PostMapping("/productMainInfo") // required = false => 해당 파라미터가 필수가 아님
-	public String productMainInfo(Principal principal, @RequestParam("acc_name") String acc_name,
+	public ResponseEntity<String> productMainInfo(Principal principal, @RequestParam("acc_name") String acc_name,
 			@RequestParam("acc_address") String acc_address, @RequestParam("acc_sectors") String acc_sectors,
 			@RequestParam("acc_explain") String acc_explain,
 			@RequestParam(value = "acc_img", required = false) MultipartFile acc_img,
@@ -93,8 +94,7 @@ public class ProductController {
 				acc_address, acc_max_people, acc_id, acc_info);
 
 		if (result == 1) {
-			// return "pyr/my_productlist";
-			return "redirect:/product/registerRoom/" + acc_id; // 리다이렉트 경로 수정
+			return ResponseEntity.ok().body(acc_id.toString()); // Long을 String으로 변환
 		}
 		return null; // 수정해야한다
 	}
