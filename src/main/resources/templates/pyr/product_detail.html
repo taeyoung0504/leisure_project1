@@ -195,6 +195,7 @@
 									<div sec:authorize="isAuthenticated()">
 										<button type="button" class="declaration"
 											data-target="modal_declaration"
+											 th:attr="data-accomid=${review.id}"
 											th:data-review-id="${review.id}">신고</button>
 									</div>
 

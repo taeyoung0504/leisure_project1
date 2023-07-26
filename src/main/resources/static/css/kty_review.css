@@ -76,6 +76,8 @@ li {
             font-weight: bold;
             width: 50px;
             height: 25px;
+            position: absolute;
+      
         }
 
         #declaration:hover {
