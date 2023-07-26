@@ -91,8 +91,8 @@
                                  height="100%" class=""></div> -->
 						<!-- 나중에 이부분 스와이퍼 슬라이드로 여러개 사진 다보이게 해야함. -->
 						<img th:src="${product.productImgs[0].img_url}"
-    th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
-    alt="Product Image" width="100%" height="100%" class="">
+    					th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
+    						alt="Product Image" width="100%" height="100%" class="">
 					</div>
 					<div class="room_info" th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
 						<strong class="title" th:text="${product.product_type}"></strong>

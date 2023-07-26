@@ -343,7 +343,7 @@ $(document).ready(function() {
 					html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다.</b>',
 					icon: 'success'
 				}).then(function() {
-					window.location.href = 'http://localhost:8080/user/mypage/my_partner_reg';
+					window.location.href = 'http://192.168.10.67:8080/user/mypage/my_partner_reg';
 				});
 			},
 			error: function(xhr, status, error) {
