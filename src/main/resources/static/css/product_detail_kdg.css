@@ -113,12 +113,7 @@
 	border-radius: 4px 4px 4px 4px;
 	background-color: #fff;
 }
-.dec_repoter_info{
-display:none;
-}
-#current_detail_user{
-	display:none;
-}
+
 #date-choose {
 	height: 50px;
 	line-height: 1px;
