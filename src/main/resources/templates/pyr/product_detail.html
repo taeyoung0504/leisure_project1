@@ -83,24 +83,26 @@
 					<button id="date-choose" onclick="totalPrice()">선택완료</button>
 				</section>
 				<div class="room" th:each="product : ${acc.products}">
-				<span id="accomid" th:text="${acc.id}" hidden ></span>
-				
+					<span id="accomid" th:text="${acc.id}" hidden></span>
+
 					<div class="pic_view">
 						<!--    <div th:each="img : ${product.productImgs}" class="imgContainer">
                 <img th:src="${img.img_url[0]}" alt="Product Image" width="100%"
                                  height="100%" class=""></div> -->
 						<!-- 나중에 이부분 스와이퍼 슬라이드로 여러개 사진 다보이게 해야함. -->
 						<img th:src="${product.productImgs[0].img_url}"
-    					th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
-    						alt="Product Image" width="100%" height="100%" class="">
+							th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
+							alt="Product Image" width="100%" height="100%" class="">
 					</div>
-					<div class="room_info" th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
+					<div class="room_info"
+						th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
 						<strong class="title" th:text="${product.product_type}"></strong>
 						<div class="hotel">
 							<div class="price">
 								<strong style="font-size: 20px; margin-right: 15px;">
 									1박 가격 </strong> <strong style="font-size: 20px; margin-right: 15px;">-</strong>
-								<strong id="totalAmount" th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
+								<strong id="totalAmount"
+									th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
 									style="color: rgba(0, 0, 0, 1); font-size: 20px;"
 									th:text="${product.product_amount}"></strong><strong
 									style="font-size: 20px; margin-left: 5px;">원 </strong>
@@ -111,7 +113,7 @@
 							<span id="hidden" hidden th:text="${product.product_id}"
 								th:value="${product.product_id}"></span>
 							<button type="button" id="button"
-							th:classappend="${product.product_count <= 0 ? 'gray-button' : 'btn_reserve'}"
+								th:classappend="${product.product_count <= 0 ? 'gray-button' : 'btn_reserve'}"
 								th:id="${product.product_id}" onclick="handleClick(this)">
 								<strong>총</strong> <span name=""
 									th:value="${product.product_id}" id="reservePrice"
@@ -182,84 +184,81 @@
 						</form>
 						
 						-->
-						<div class="sss">
-							<h2 id="title_revieww">리뷰 내역</h2>
-							<ul id="review_list">
-								<li class="ssss1" th:each="review : ${acc.reviews}"
-									style="border-bottom: 1px solid grey; width: 680px; padding-top: 10px;">
-									<p style="margin-bottom: 22px;">
-										<span
-											th:text="${review.author.contains('name') ? 'Social_네이버회원' : (review.author.length() > 16 ? 'Social_구글회원' : 
-                                 (review.author.length()>9 && review.author.length() < 13 ? 'Social_카카오회원' : review.author))}"
-											style="font-weight: bold; font-size: 18px;"></span>
+					<div class="sss">
+						<div th:text="${#authentication.name}" id="current_detail_user"></div>
+						<h2 id="title_revieww">리뷰 내역</h2>
+						<ul id="review_list">
+							<li class="ssss1" th:each="review : ${acc.reviews}"
+								style="border-bottom: 1px solid grey; width: 680px; padding-top: 10px;">
+								<p style="margin-bottom: 22px;">
+									<span
+										th:text="${review.author.contains('name') ? 'Social_네이버회원' : (review.author.length() > 16 ? 'Social_구글회원' : 
+                     (review.author.length()>9 && review.author.length() < 13 ? 'Social_카카오회원' : review.author))}"
+										style="font-weight: bold; font-size: 18px;"></span>
+
+
+
 									<div sec:authorize="isAuthenticated()">
-										<button type="button" class="declaration"
-											data-target="modal_declaration"
-											 th:attr="data-accomid=${review.id}"
-											th:data-review-id="${review.id}">신고</button>
-									</div>
-
-									</p>
-									<p class="start_score">
-										<span th:if="${review.rating == 1}" style="color: orange;">★
-											✩ ✩ ✩ ✩</span> <span th:if="${review.rating == 2}"
-											style="color: orange;">★ ★ ✩ ✩ ✩</span> <span
-											th:if="${review.rating == 3}" style="color: orange;">★
-											★ ★ ✩ ✩</span> <span th:if="${review.rating == 4}"
-											style="color: orange;">★ ★ ★ ★ ✩</span> <span
-											th:if="${review.rating == 5}" style="color: orange;">★
-											★ ★ ★ ★</span><span style="margin-left: 10px;"
-											th:text="${review.rating}"> </span>
-									</p> <!-- 신고 누www적시 블라인드 처리된 내용 표시 -->
-									<p style="margin-bottom: 20px; color: rgb(80, 80, 80);">
-										<span th:text="${review.contentForDisplay}"></span>
-									</p>
-
-									<p>
-										<span class="time_real"
-											th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"
-											style="color: grey;"></span>
-									</p> <br>
-								</li>
-							</ul>
-
-						</div>
-
-
-						<!--  모달 (신고) -->
-
-						<div id="myModa" class="modal_declaration">
-							<div class="modal-content_declaration">
-								<span class="close">&times;</span>
-								<h3 style="text-align: center;">회원 신고</h3>
-								<div style="font-weight: bold;">신고 사유</div>
+                <!-- 여기서 JavaScript 함수를 호출하여 버튼을 숨기도록 설정 -->
+                <button type="button" class="declaration"
+										data-target="modal_declaration"
+										th:id="'declaration_button_' + ${review.id}"
+										th:attr="data-accomid=${review.id}"
+										th:data-review-id="${review.id}"
+										th:data-should-hide="${#lists.contains(review.declarations.![repoter], #authentication.name)}">신고</button>
+            </div>
+            <div th:each="dec : ${review.declarations}" class="dec_repoter_info">
+                <div th:text="${dec.repoter}"></div>
+            </div>
+            </p>
+            <p class="start_score">
+                <!-- Rating stars -->
+            </p>
+            <!-- 신고 누락적시 블라인드 처리된 내용 표시 -->
+            <p style="margin-bottom: 20px; color: rgb(80, 80, 80);">
+                <span th:text="${review.contentForDisplay}"></span>
+            </p>
+            <p>
+                <span class="time_real"
+										th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"
+										style="color: grey;"></span>
+            </p>
+            <br>
+        </li>
+    </ul>
+</div>
+					<!--  모달 (신고) --><div id="myModa" class="modal_declaration">
+						<div class="modal-content_declaration">
+							<span class="close">&times;</span>
+							<h3 style="text-align: center;">회원 신고</h3>
+							<div style="font-weight: bold;">신고 사유</div>
+							<br>
+							<form id="declarationForm" data-review-id="${review.id}">
+								<select id="reason_dec" name="reason">
+									<option value="">선택하세요</option>
+									<option value="욕설">욕설</option>
+									<option value="도배">도배</option>
+									<option value="광고">광고</option>
+									<option value="욕설 및 비방">욕설 및 비방</option>
+									<option value="허위·과장">허위·과장</option>
+									<option value="기타">기타</option>
+								</select><br> <br>
+								<div style="font-weight: bold;">상세 내용</div>
 								<br>
-								<form id="declarationForm" data-review-id="${review.id}">
-									<select id="reason_dec" name="reason">
-										<option value="">선택하세요</option>
-										<option value="욕설">욕설</option>
-										<option value="도배">도배</option>
-										<option value="광고">광고</option>
-										<option value="욕설 및 비방">욕설 및 비방</option>
-										<option value="허위·과장">허위·과장</option>
-										<option value="기타">기타</option>
-									</select><br> <br>
-									<div style="font-weight: bold;">상세 내용</div>
-									<br>
-									<textarea id="decl_detail" style="height: 280px; width: 380px;"
-										placeholder="상세 사유를 작성하세요"></textarea>
-									<br> <input type="submit" value="제출" id="declr_btn">
-								</form>
-							</div>
+								<textarea id="decl_detail" style="height: 280px; width: 380px;"
+									placeholder="상세 사유를 작성하세요"></textarea>
+								<br> <input type="submit" value="제출" id="declr_btn">
+							</form>
 						</div>
+					</div>
 
 
-						<!-- datepicker 적용 -->
-						<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-						<script
-							src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-						<!-- <scirpt src="../static/js/kdg_datepicker.js"></scirpt> -->
-						<script th:inline="javascript">
+					<!-- datepicker 적용 -->
+					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+					<script
+						src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+					<!-- <scirpt src="../static/js/kdg_datepicker.js"></scirpt> -->
+					<script th:inline="javascript">
                   $(document).ready(function() {
                        $("#datepicker1").datepicker({
                          multidate: 2,

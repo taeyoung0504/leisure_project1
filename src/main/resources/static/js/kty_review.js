@@ -79,86 +79,75 @@ $(document).ready(function() {
 	});
 
 	/* 신고 모달 */
-$(".declaration").click(function() {
-    var modal = $("#myModa");
-    var reviewId = $(this).data("review-id");
-    console.log(reviewId);
-    modal.attr("data-review-id", reviewId);
+	$(".declaration").click(function() {
+		var modal = $("#myModa");
+		var reviewId = $(this).data("review-id");
+		console.log(reviewId);
+		modal.attr("data-review-id", reviewId);
 
-    // Save the reviewId to local storage
-    localStorage.setItem("reviewId", reviewId);
+		// 입력값 초기화
+		$("#reason_dec").val("");
+		$("#decl_detail").val("");
 
-    // Input fields reset
-    $("#reason_dec").val("");
-    $("#decl_detail").val("");
+		modal.css("display", "block");
+	});
 
-    modal.css("display", "block");
-});
+	$(document).click(function(event) {
+		var modal = $("#myModa");
+		if (event.target === modal[0] || $(event.target).hasClass("close")) {
+			modal.css("display", "none");
+		}
+	});
 
-$(document).click(function(event) {
-    var modal = $("#myModa");
-    if (event.target === modal[0] || $(event.target).hasClass("close")) {
-        modal.css("display", "none");
-    }
-});
+	$("#declarationForm").submit(function(event) {
+		event.preventDefault();
 
-$("#declarationForm").submit(function(event) {
-    event.preventDefault();
+		var reviewId = $("#myModa").attr("data-review-id");
+		//console.log(reviewId);
+		var reason = $("#reason_dec").val();
+		var declarationDetail = $("#decl_detail").val();
 
-    var reviewId = localStorage.getItem("reviewId");
-    var reason = $("#reason_dec").val();
-    var declarationDetail = $("#decl_detail").val();
+		if (!reason) {
+			Swal.fire({
+				icon: 'error',
+				text: '신고사유는 필수 입력사항 입니다!!'
+			});
+			return;
+		}
 
-    if (!reason) {
-        Swal.fire({
-            icon: 'error',
-            text: '신고사유는 필수 입력사항 입니다!!'
-        });
-        return;
-    }
+		$.ajax({
+			type: "POST",
+			url: "/user/decl",
+			data: {
+				reviewId: reviewId,
+				reason: reason,
+				decl_detail: declarationDetail
+			},
+			success: function(data) {
+				alert('Success');
+			},
+			error: function(xhr, status, error) {
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					text: '신고가 접수 되었습니다.',
+					showConfirmButton: false,
+					timer: 1500
+				});
 
-    $.ajax({
-        type: "POST",
-        url: "/user/decl",
-        data: {
-            reviewId: reviewId,
-            reason: reason,
-            decl_detail: declarationDetail
-        },
-        success: function(data) {
-            alert('Success');
-        },
-        error: function(xhr, status, error) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                text: '신고가 접수 되었습니다.',
-                showConfirmButton: false,
-                timer: 1500
-            });
+				var modal = $("#myModa");
+				modal.css("display", "none");
 
-            var modal = $("#myModa");
-            modal.css("display", "none");
-
-            // Hide the specific "신고" button for the review
-            var targetButton = $(`button[data-review-id="${reviewId}"]`);
-            targetButton.hide();
-              localStorage.setItem('reportedReviewId_' + reviewId, 'true');
-        }
-    });
-});
+				// 특정 리뷰에 대한 "신고" 버튼을 숨깁니다.
+				var targetButton = $(`button[data-review-id="${reviewId}"]`);
+				targetButton.hide();
+			}
+		});
 
 
-$(document).ready(function() {
-    // Loop through all the review buttons and check if they were reported
-    $(".declaration").each(function() {
-        var reviewId = $(this).data("review-id");
-        var isReported = localStorage.getItem('reportedReviewId_' + reviewId);
-        if (isReported === 'true') {
-            $(this).hide(); // Hide the button if it was reported
-        }
-    });
-});
+
+	});
+
 
 });
 
@@ -196,3 +185,12 @@ function validateForm() {
 
 
 
+             document.addEventListener("DOMContentLoaded", function () {
+        const declarationButtons = document.querySelectorAll('.declaration');
+        declarationButtons.forEach(function (button) {
+            const shouldHide = button.dataset.shouldHide === "true";
+            if (shouldHide) {
+                button.style.display = 'none';
+            }
+        });
+    });
