@@ -1,72 +1,123 @@
+.userinfo_modify {
+	/* 	margin: 30%; */
+	
+}
+
+#test {
+	display: block;
+	margin: 0 auto;
+	width: 1000px;
+	margin-top: 30px;
+}
 
 #kty_left-side_test {
 	float: left;
-	width: 20%;
-	margin-left:80px;
+	width: 200px;
+	margin-left: 80px;
 	height: 870px;
-	display: flex;
-	justify-content: center;
+	/* 	display: flex; */
+	/* 	justify-content: center; */
 }
 
 #kty_right-side_test {
-	float: left;
+	float: right;
 	width: 62%;
 	height: 820px;
-	margin-top:20px;
-	margin-left:100px;
-	overflow: auto;
+	margin-left: 100px;
+	overflow: visible;
 }
 
 .search_deagu_home {
-	width: 300px !important;
-    display: grid!important;
-    height: fit-content !important;
+	width: 300PX !important;
+	display: grid !important;
+	height: fit-content !important;
+	position: fixed !important;
 }
 
-
+label {
+	display: inline;
+}
 
 /* 반응형 미디어 쿼리: 화면 너비가 1000px 이하일 때 */
-@media (max-width: 1000px) {
-	body{
-	margin: 0;}
-	/* 왼쪽 콘텐츠 영역을 100%로 확장 */
-	#kty_left-side_test {
+@media ( max-width : 1000px) {
+	/* #test의 크기를 100%로 확장하여 가로 폭에 맞게 조절 */
+	#test {
 		width: 100%;
-		margin: auto;
-		left: 0;
 	}
-	/* 오른쪽 콘텐츠를 숨기기 */
+
+	/* #kty_left-side_test와 #kty_right-side_test를 아래로 배치하여 세로 정렬 */
+	.search_deagu_home, #kty_left-side_test, #kty_right-side_test {
+		float: none;
+		width: 100%;
+		margin: 0 20% !important;
+		position: relative;
+	}
 	#kty_right-side_test {
-		display: none;
+		position: relative;
 	}
+	.search_deagu_home {
+		width: 300PX !important;
+		display: grid !important;
+		height: fit-content !important;
+		position: absolute !important;
+		/* 	margin: 0 20%; */
+	}
+	.room-entry {
+		display: flex;
+		border: 1px solid grey;
+		padding: 5px 20px 20px 50px;
+		width: 300px;
+		border-radius: 20px;
+		height: 250px;
+		position: relative;
+	}
+}
+
+.search_kw {
+	margin-top: 20px;
+	width: 100%;
+	display: table;
+}
+
+.checkin_HK {
+	display: none;
+}
+
+.region_hk {
+	margin: 10px 0 !important;
+	height: 50px;
+}
+
+.title_hk {
+/* 	margin-bottom: 20px !important; */
+/* 	margin-top: 30px !important; */
 }
 
 #region_dropdown_daegu {
-	position: relative;
-	width: 400px;
-	margin-top: 100px;
+	/* 	position: relative; */
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
 	padding-left: 10px;
-	margin-left: 20px;
 	background-color: rgb(240, 240, 240);
 	font-weight: bold;
-	margin-bottom: 30px;
+/* 	margin-bottom: 30px; */
+	width: 100%;
+	margin-top: 10px;
 }
 
 #checkin_dropdown_daegu2 {
-	width: 190px;
+	/* 	width: 100px; */
 	margin-top: 10px;
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
-	margin-left: 18px;
+	/* 	margin-left: 18px; */
 	padding-left: 10px;
 	background-color: rgb(240, 240, 240);
 	font-weight: bold;
 }
 
 #checkout_dropdown_daegu3 {
-	width: 180px;
+	/* 	width: 180px; */
 	margin-top: 10px;
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
@@ -76,12 +127,21 @@
 }
 
 .form-control2 {
-	position: relative;
-	left: 22px;
-	top: 60px;
-	width: 300px;
+	/* 	position: relative; */
+	/* 	left: 22px; */
+	top: 100px;
+	width: 230px;
 	height: 30px;
 	border-radius: 10px;
+}
+
+#btn_search_home {
+	background-color: rgb(255, 128, 128);
+	color: rgb(244, 245, 244);
+	border-radius: 10px;
+	border: 1px solid white;
+	height: 35px;
+	width: 60px;
 }
 
 #checkin_title {
@@ -92,59 +152,49 @@
 
 #checout_title {
 	position: absolute;
-	left: 310px;
+	/* 	left: 310px; */
 	bottom: 640px;
-}
-
-#btn_search_home {
-	position:relative;
-	
-	left: 33px;
-	top:61px;
-	background-color:rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	border-radius: 10px;
-	border: 1px solid white;
-	height: 35px;
-	width: 80px;
 }
 
 #btn_search_home:hover {
 	cursor: pointer;
 }
 
-.search_deagu_home{
+.search_deagu_home {
 	width: 80%;
+}
+
+#check_regin_title {
+	/* 	position: relative;
+	top: 88px;
+		left: 23px; */
 	
 }
-#check_regin_title {
-position: relative;
-top:88px;
-left:23px;
-}
+
 .centered-title {
-  text-align: center;
-  display: block;
-  margin: 0 auto;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
 }
+
 .room_type_title {
 	padding-bottom: 10px;
 	position: relative;
-	right: -20px;
-	top: 10px;
+	margin-top: 15px;
 }
+
+
 
 #roomtype_dropdown_daegu {
 	position: relative;
-	width: 400px;
 	margin-top: 20px;
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
 	padding-left: 10px;
-	margin-left: 20px;
 	background-color: rgb(240, 240, 240);
 	font-weight: bold;
 	margin-bottom: 30px;
+	margin-top: 10px;
 }
 
 #kw3Option1 {
@@ -152,39 +202,39 @@ left:23px;
 }
 
 .spacing {
-	margin-left: 1px;
+	/* 	margin-left: 1px; */
+	
 }
 
 #room_clo {
 	border: 1px solid rgb(221, 221, 221);
-	height: 40px;
-	width: 388px;
+	height: auto;
 	border: 1px solid rgb(221, 221, 221);
-	padding-left: 10px;
+	padding: 10px 50px;
 	background-color: rgb(240, 240, 240);
-	margin-bottom: 10px;
-	padding-top: 10px;
+	margin: 10px 0;
 }
 
 .reviews_score {
 	padding: 1px;
 	position: relative;
-	right: -20px;
+	/* 	right: -20px; */
 	top: -5px;
 }
 
 .avable_people {
 	padding: 1px;
 	position: relative;
-	right: -20px;
-	top: -5px;
+	/* 	right: -20px; */
+	margin-top: 10px
 }
 
 #star_score {
 	border: 1px solid rgb(221, 221, 221);
-	width: 392px;
+	/* 	width: 392px; */
 	margin-top: 10px;
 	background-color: rgb(240, 240, 240);
+	padding-left: 10px;
 }
 
 #spacing2 {
@@ -195,48 +245,46 @@ left:23px;
 	color: orange;
 }
 
-
-#people_dropdown{
+#people_dropdown {
 	position: relative;
-	width: 400px;
-	margin-top: 10px;
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
-	padding-left: 10px;
-	margin-left: -5px;
 	background-color: rgb(240, 240, 240);
 	font-weight: bold;
-	margin-bottom: -10px;
-}
-.room_money_title{
-margin-top:-10px; 
-position: relative;
-left:18px;
-
+	width: 100%;
+	margin: 10px 0;
+	padding-left: 10px;
 }
 
+.room_money_title {
+	position: relative;
+	margin-top: 15px;
+}
 
-.min{
-	margin-top:10px;
+#room_range_maxmin {
+	width: 300px;
+	position: relative;
+	margin-top: 10px;
+}
+
+.min {
 	border: 1px solid rgb(221, 221, 221);
 	padding-left: 10px;
-	margin-left: 0px;
-	width:170px;
+	width: 125px;
 	background-color: rgb(240, 240, 240);
 	height: 30px;
-	margin-right: 10px;
+	/* 	margin-right: 10px; */
 }
 
-.max{
-	margin-top:10px;
+.max {
 	border: 1px solid rgb(221, 221, 221);
 	padding-left: 10px;
-	margin-left: 10px;
-	width:160px;
+	width: 125px;
 	background-color: rgb(240, 240, 240);
 	height: 30px;
-	
-	
+	right: 0;
+	position: relative;
+	float: right;
 }
 
 #searchBtn2 {
@@ -248,16 +296,17 @@ left:18px;
 	display: inline-block;
 	border-radius: 15px;
 	font-weight: 600;
-	margin-left: 35px;
-	width: 360px;
-	margin-top:20px;
-}
-#searchBtn2:hover{
-	cursor:pointer;
+	/* 	margin-left: 35px; */
+	/* 	width: 360px; */
+	margin-top: 20px;
 }
 
-#btnbtn{
-	background-color:rgb(255, 128, 128);
+#searchBtn2:hover {
+	cursor: pointer;
+}
+
+#btnbtn {
+	background-color: rgb(255, 128, 128);
 	color: rgb(244, 245, 244);
 	height: 50px;
 	/* 버튼 디자인 */
@@ -265,52 +314,62 @@ left:18px;
 	display: inline-block;
 	border-radius: 15px;
 	font-weight: 600;
-	margin-left: 40px;
-	width: 350px;
-	margin-top:20px;
+	/* 	margin-left: 40px; */
+	/* 	width: 350px; */
+	margin-top: 30px;
 }
 
-#btnbtn:hover{
-cursor: pointer;
+#btnbtn:hover {
+	cursor: pointer;
+}
+
+#checkintitle {
+	/* 	margin-left: 25px; */
 	
 }
 
-
-#checkintitle{
+#checkouttitle {
+	/* 	margin-left: 120px; */
 	
-	margin-left:25px;
 }
-#checkouttitle{
-	margin-left:120px;
-	}
-	
 
-	
-	.acc_img {
-		border-bottom: 1px solid grey;
-		height:50%;
+.acc_img {
+	border-bottom: 1px solid grey;
+	height: 50%;
 	background-repeat: no-repeat;
 	background-size: cover; /* 전체를 보이면서 요소에 꽉 차게 설정 */
 }
 
-.acc_content{
-margin-top:20px;	
-margin-left:50px;
-margin-right:30px;
-margin-bottom:20px;
-	
+.acc_content {
+	margin-top: 20px;
+	/* 	margin-left: 50px; */
+	/* 	margin-right: 30px; */
+	margin-bottom: 20px;
 }
 
-.room-entry2{
-	border:1px solid grey; 
-	margin-left:300px; 
-	margin-top:50px; 
-	height: 600px; 
-	width:450px;
-	border:1px solid grey;
-	border-radius: 5px;
-	
+.room-entry {
+	display: flex;
+    border-bottom: 1px solid #d7d7d7;
+    padding: 20px;
+    width: 600px;
+    /* border-radius: 20px; */
+    height: 250px;
+    position: relative;
+    margin: 15px 20px;
 }
-.right-align{
+
+.room-entry2 {
+	border: 1px solid grey;
+	/* 	margin-left: 300px; */
+	margin-top: 50px;
+	height: 600px;
+	/* 	width: 450px; */
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+.right-align {
 	text-align: right;
 }
+
+
