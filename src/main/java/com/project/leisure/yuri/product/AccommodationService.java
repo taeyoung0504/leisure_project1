@@ -41,7 +41,6 @@ public class AccommodationService {
 
 	}
 
-	
 	// 해당 숙소 삭제
 	public void deleteAcc(long acc_id) {
 		Optional<Accommodation> optionalAccommodation = accommodationRepository.findById(acc_id);

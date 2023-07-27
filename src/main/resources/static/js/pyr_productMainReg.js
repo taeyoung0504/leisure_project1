@@ -51,6 +51,12 @@ $(document).ready(
 
 
 
+		//값 변경됨을 감지하기 위함
+		var originaAccName = $("#acc_name").val(); //숙소 이름
+		var originaAccAddress = $("#acc_address").val(); //숙소 주소
+		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
+
+
 
 		//이미지 변경 여부를 표시(변경 후 => true)
 		imageInput.addEventListener('change', function(event) {
@@ -77,6 +83,31 @@ $(document).ready(
 			var accMaxPeople = $('#acc_max_people').val(); //최대인원
 			var acc_explain = $('#acc_explain').val(); //사장님 한마디
 			var acc_info = $('#acc_info').val(); //숙소 정보
+
+			var accName = $('#acc_name').val();
+			var accAddress = $('#acc_address').val();
+			var accPartnerSec = $('#partner_sectors').val();
+
+
+
+			if (accName !== originaAccName) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				return;
+			}
+
+			if (accAddress !== originaAccAddress) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				return;
+			}
+
+
+			if (accPartnerSec !== originaAccSectors) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				return;
+			}
+
+
+
 
 			if (accMaxPeople.trim() === '') {
 				//최대인원이 공백인 경우
