@@ -59,7 +59,12 @@
 }
 
 */
-
+.dec_repoter_info{
+display:none;
+}
+#current_detail_user{
+	display:none;
+}
 
 li {
 	list-style-type: none;
