@@ -185,3 +185,12 @@ function validateForm() {
 
 
 
+             document.addEventListener("DOMContentLoaded", function () {
+        const declarationButtons = document.querySelectorAll('.declaration');
+        declarationButtons.forEach(function (button) {
+            const shouldHide = button.dataset.shouldHide === "true";
+            if (shouldHide) {
+                button.style.display = 'none';
+            }
+        });
+    });

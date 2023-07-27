@@ -1,15 +1,4 @@
-/*//취소 버튼을 이전 페이지 이동
-document
-	.getElementById("CancelButton")
-	.addEventListener(
-		"click",
-		function() {
-			var confirmed = confirm("변경 사항이 적용되지 않습니다. 이전 페이지로 돌아가시겠습니까?");
-			if (confirmed) {
-				window.history.back();
-			}
-		});
-		*/
+
 
 //취소 버튼을 이전 페이지 이동
 document
@@ -54,6 +43,8 @@ const swalWithBootstrapButtons = Swal.mixin({
 $(document).ready(
 	function() {
 		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
+		var isAccExplainChanged = false; //사장님 한마디 여부를 저장
+
 
 		//이미지
 		const imageInput = document
@@ -61,6 +52,9 @@ $(document).ready(
 		const mainImgView = document
 			.getElementById('mainImgView');
 
+
+		//사장님 한마디 
+		const acc_explain = document.getElementById('acc_explain');
 
 		imageInput.addEventListener('change', function(event) {
 			const file = event.target.files[0];
@@ -73,6 +67,18 @@ $(document).ready(
 			if (file) {
 				reader.readAsDataURL(file);
 				isImageChanged = true; // 이미지가 변경되었음을 표시
+			}
+		});
+
+		acc_explain.addEventListener('input', function(event) {
+			const content = event.target.value;
+
+			if (content) {
+				//사장님 한마디 입력값 변경되면 true	
+				isAccExplainChanged = true;
+			} else {
+				//사장님 한마디 입력값 변경 안되면 false
+				isAccExplainChanged = false;
 			}
 		});
 
@@ -90,7 +96,7 @@ $(document).ready(
 			var accAddress = $('#acc_address').val();
 			var accMaxPeople = $('#acc_max_people').val();
 			var accPartnerSec = $('#partner_sectors').val();
-
+			var acc_explain = $('#acc_explain').val();
 
 			if (accName.trim() === '') {
 				//alert('숙소 이름을 입력해주세요.');
@@ -104,24 +110,38 @@ $(document).ready(
 			}
 
 			if (accMaxPeople.trim() === '') {
-				alert('최대인원을 입력해 주세요');
+				//alert('최대인원을 입력해 주세요');
+				Swal.fire('최대인원을 입력해 주세요')
 				return;
 			}
 
 			if (accMaxPeople <= 0) {
-				alert('최대 인원은 0 보다 커야 합니다.');
+				//alert('최대 인원은 0 보다 커야 합니다.');
+				Swal.fire('최대 인원은 0 보다 커야 합니다')
 				return;
 			}
 
 			if (accPartnerSec === null) {
-				alert('업종을 선택해 주세요.');
+				alert('업종을 선택해 주세요');
 				return;
 			}
 
 
 			if (!isImageChanged) {
 				// 이미지 파일이 변경되지 않은 경우 formData에서 이미지 파일 필드를 삭제
-				alert('이미지를 선택해 주세요.');
+				//alert('이미지를 선택해 주세요.');
+				Swal.fire('이미지를 선택해 주세요')
+				return;
+			}
+
+			if (!isAccExplainChanged) {
+				//사장님 한마디에 아무런 입력값이 없는 경우
+				Swal.fire('업소에 대한 설명을 작성해 주세요')
+				return;
+			}
+
+			if (acc_explain.length < 10) {
+				Swal.fire('글자 수는 최소 10자입니다')
 				return;
 			}
 
@@ -142,7 +162,6 @@ $(document).ready(
 					}).then(() => {
 						window.location.href = '/user/mypage/my_productList';
 					});
-
 
 
 				},

@@ -1,17 +1,3 @@
-/*//취소 버튼을 이전 페이지 이동
-document
-	.getElementById("CancelButton")
-	.addEventListener(
-		"click",
-		function() {
-			var confirmed = confirm("변경 사항이 적용되지 않습니다. 이전 페이지로 돌아가시겠습니까?");
-			if (confirmed) {
-				window.history.back();
-			}
-		});
-		
-		*/
-
 
 //취소 버튼을 이전 페이지 이동
 document
@@ -19,7 +5,6 @@ document
 	.addEventListener(
 		"click",
 		function() {
-
 			swalWithBootstrapButtons.fire({
 				title: '변경 사항이 적용되지 않습니다',
 				text: '이전 페이지로 돌아가시겠습니까?',
@@ -56,23 +41,18 @@ const swalWithBootstrapButtons = Swal.mixin({
 $(document).ready(
 	function() {
 		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
-		var isContentChanged = false; //텍스트 변경 여부를 저장하는 변수
 
-		console.log(isImageChanged);
-		console.log(isContentChanged);
 
 		//이미지
 		const imageInput = document
 			.getElementById('addMainPhoto');
 		const mainImgView = document
 			.getElementById('mainImgView');
-		const partnerComment = document
-			.getElementById('partnerComment');
 
-		console.log(imageInput);
-		console.log(mainImgView);
-		console.log(partnerComment);
 
+
+
+		//이미지 변경 여부를 표시(변경 후 => true)
 		imageInput.addEventListener('change', function(event) {
 			const file = event.target.files[0];
 			const reader = new FileReader();
@@ -84,39 +64,53 @@ $(document).ready(
 			if (file) {
 				reader.readAsDataURL(file);
 				isImageChanged = true; // 이미지가 변경되었음을 표시
-				console.log(isImageChanged);
 			}
 		});
 
-		//텍스트 이벤트 감지
-		partnerComment.addEventListener('input', function() {
 
 
-			isContentChanged = true;
-			console.log(isContentChanged);
-		})
-
-
-
+		//등록하기 버튼을 누름
 		$('#addButton').click(function(event) {
 			event.preventDefault(); // 폼의 기본 동작인 서버로의 전송 방지
 
-			if (isImageChanged || isContentChanged) {
-				// 이미지 또는 텍스트 내용이 변경된 경우에만 서버로 전송
+			//유효성 검사
+			var accMaxPeople = $('#acc_max_people').val(); //최대인원
+			var acc_explain = $('#acc_explain').val(); //사장님 한마디
+			var acc_info = $('#acc_info').val(); //숙소 정보
+
+			if (accMaxPeople.trim() === '') {
+				//최대인원이 공백인 경우
+				Swal.fire('최대인원을 입력해 주세요')
+				return;
+			}
+
+			if (accMaxPeople <= 0) {
+				//alert('최대 인원은 0 보다 커야 합니다.');
+				Swal.fire('최대 인원은 0 보다 커야 합니다')
+				return;
+			}
+
+
+			if (acc_explain.length < 10) {
+				//최소 글자수
+				Swal.fire('글자 수는 최소 10자입니다')
+				return;
+			}
+
+			if (acc_info.trim() === '') {
+				//숙소 정보가 공백인 경우
+				Swal.fire('숙소 정보를 입력해 주세요')
+				return;
+			}
+
+			if (isImageChanged) {
+				// 이미지가 변경되었다면
 				var form = $('#productForm')[0];
 				var formData = new FormData(form);
 
 				if (!isImageChanged) {
 					// 이미지 파일이 변경되지 않은 경우 formData에서 이미지 파일 필드를 삭제
 					formData.delete('partnerMainImg');
-				}
-
-				var comment = $('#acc_explain').val();
-				var commentLength = comment.length;
-
-				if (commentLength < 10) {
-					alert("글자수는 최소 10자입니다.");
-					return;
 				}
 
 				$.ajax({
@@ -128,9 +122,9 @@ $(document).ready(
 					contentType: false,
 					success: function(response) {
 
-						window.location.href = '/product/registerRoom/' + response;
-						alert("변경되었습니다."); // 변경 성공 알림 메시지
-
+						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
+							window.location.href = '/product/registerRoom/' + response;
+						});
 
 					},
 					error: function(xhr, status, error) {
@@ -138,12 +132,36 @@ $(document).ready(
 						console.log(xhr);
 						console.log(status);
 						console.log(error);
-						console.log(product);
 					}
 				});
 			} else {
-				// 글과 이미지가 변경되지 않은 경우 처리 로직 작성
-				alert('변경된 사항이 없습니다.');
+
+				// 이미지가 변경되었다면
+				var form = $('#productForm')[0];
+				var formData = new FormData(form);
+
+				$.ajax({
+					url: '/product/productMainInfo',
+					type: 'POST',
+					data: formData,
+					enctype: 'multipart/form-data',
+					processData: false,
+					contentType: false,
+					success: function(response) {
+
+						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
+							window.location.href = '/product/registerRoom/' + response;
+						});
+
+					},
+					error: function(xhr, status, error) {
+						console.log('AJAX 요청 실패');
+						console.log(xhr);
+						console.log(status);
+						console.log(error);
+					}
+				});
+
 			}
 		});
 	});
