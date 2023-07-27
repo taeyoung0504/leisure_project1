@@ -17,7 +17,7 @@ class UserListTest {
 	
 	@Test
 	void testCreateUsers() {
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 1; i <= 5; i++) {
             String username = String.format("user%03d", i);
             String email = String.format("test%d@example.com", i);
             String password = "password";

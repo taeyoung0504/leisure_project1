@@ -351,6 +351,7 @@ a {
 .userinfo_table {
 	position: relative;
 	font-size: 18px;
+	margin-left: -150px;
 }
 
 .userinfo_td_gap {
@@ -381,7 +382,7 @@ a {
 	list-style-type: none;
 	padding-bottom: 40px;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	flex-direction: column;
 }
@@ -391,7 +392,7 @@ a {
 	position: absolute;
 	top: 50px;
 	/* 원하는 여백 크기로 조정 */
-	left: -300px;
+	left: -400px;
 	font-size: 20px;
 	color: rgb(69, 69, 69);
 }
@@ -1096,6 +1097,11 @@ font-size: 18px;
   background-size: cover;
   background-position: center;
 } 
+
+.mypage_sidebar_nav_menu{
+	padding: 0px;
+	text-align: left;
+}
 
 
 

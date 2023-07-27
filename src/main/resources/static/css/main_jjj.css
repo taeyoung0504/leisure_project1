@@ -9,8 +9,7 @@
 @font-face {
 	font-family: 'TheJamsil5Bold';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2')
-		format('woff2');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -67,6 +66,7 @@
 		-webkit-transition-timing-function: ease;
 		height: 80px;
 	}
+
 	.jj_navbar {
 		background-color: var(--background-color);
 		transition-duration: 0.2s;
@@ -76,6 +76,15 @@
 		-webkit-transition-timing-function: ease;
 		height: 80px;
 	}
+
+	.weather-temp {
+		color: var(--main-color);
+	}
+
+	#header.activee .weather-temp {
+		color: var(--background-color);
+	}
+
 	nav .jj_menubar ul li a .active:hover {
 		color: pink;
 	}
@@ -84,7 +93,7 @@
 .jj_navbar_logo {
 	font-size: 22px;
 	/* 	color: var(--main-color); */
-	padding-left: 200px;
+	padding-left: 380px;
 }
 
 .jj_navbar_logo i {
@@ -105,7 +114,7 @@ body:not(.jj_navbar) {
 }
 
 nav .jj_menubar {
-	padding-right: 200px;
+	padding-right: 360px;
 }
 
 nav .jj_menubar ul {
@@ -266,8 +275,8 @@ nav .jj_menubar .jj_search .search_input {
 }
 
 .jj_slide_container {
-	width: 1200px;
-	height: 600px;
+	width: 1100px;
+	height: 500px;
 	display: flex;
 	margin: auto;
 	transition: transform 300ms ease-in;
@@ -810,6 +819,7 @@ footer address .order {
 
 /* ============== 반응형================== */
 @media screen and (max-width: 1000px) {
+
 	/* h2 원래있었음 */
 	.main {
 		width: 100%;
@@ -825,6 +835,7 @@ footer address .order {
 		padding-left: 20px;
 		font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 	}
+
 	/* ========네비 */
 	#header {
 		position: sticky;
@@ -837,6 +848,7 @@ footer address .order {
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
+
 	.activee {
 		position: sticky;
 		top: 0;
@@ -872,9 +884,11 @@ footer address .order {
 	.jj_search.active .jj_search_input {
 		width: 150px;
 	}
+
 	.jj_search.active .jj_search_btn {
 		transform: translateX(150px);
 	}
+
 	.jj_navbar {
 		background-color: var(--background-color);
 		transition-duration: 0.2s;
@@ -911,6 +925,7 @@ footer address .order {
 		transition: 0.3s;
 		text-align: center;
 	}
+
 	nav .jj_menubar {
 		padding-right: 0px;
 	}
@@ -922,22 +937,26 @@ footer address .order {
 		transition: 0.3s;
 		background-color: #fff;
 	}
+
 	.jj_navbar_menu li {
 		width: 400px;
 		height: 30px;
 		text-align: center;
 		top: 10%;
 	}
+
 	.jj_navbar_menu li:hover {
 		width: 100%;
 		border-radius: 4px;
 	}
+
 	.jj_navbar_menu li:last-child {
 		background-color: transparent;
 		width: 100%;
 		box-shadow: none;
 		border-radius: 0;
 	}
+
 	.jj_navbar_menu li a {
 		display: block;
 		margin: auto;
@@ -945,6 +964,7 @@ footer address .order {
 		padding: 5px;
 		text-align: center;
 	}
+
 	.jj_navbar_toogleBtn {
 		/* 화면이 작아졌을 때만 햄버거 버튼 나오게함 */
 		display: block;
@@ -975,6 +995,7 @@ footer address .order {
 		height: 250px;
 		padding-top: 0px;
 	}
+
 	.jj_slide_container {
 		width: 100%;
 		height: 100%;
@@ -983,10 +1004,12 @@ footer address .order {
 		transition: transform 300ms ease-in;
 		overflow: hidden;
 	}
+
 	.jj_slide-box {
 		overflow: hidden;
 		transition: all 1s ease-in-out;
 	}
+
 	.jj_slide-box img {
 		width: 100%;
 		height: 100%;
@@ -994,6 +1017,7 @@ footer address .order {
 		object-fit: cover;
 		text-align: center;
 	}
+
 	.jj_btns {
 		text-align: center;
 		padding: 10px;
@@ -1008,6 +1032,7 @@ footer address .order {
 		padding-top: 20px;
 		text-align: center;
 	}
+
 	.jj_icon a {
 		display: inline-block;
 		justify-content: space-around;
@@ -1027,24 +1052,29 @@ footer address .order {
 		font-size: 12px;
 		padding-left: 20px;
 	}
+
 	.jj_course {
 		padding-top: 30px;
 	}
-	.jj_course_container ul li:first-child, .jj_course_container ul li:last-child
-		{
+
+	.jj_course_container ul li:first-child,
+	.jj_course_container ul li:last-child {
 		width: 100%;
 		float: none;
 	}
+
 	.jj_course_container ul li {
 		width: 100%;
 		height: auto;
 		margin-bottom: 20px;
 		margin-left: 0px;
 	}
+
 	.jj_course_container ul li a {
 		width: 100%;
 		position: static;
 	}
+
 	.jj_course_m {
 		width: 100%;
 		height: auto;
@@ -1052,45 +1082,54 @@ footer address .order {
 	}
 
 	/* 파트너 관련 */
-	.jj_partner_container ul li:first-child, .jj_partner_container ul li:last-child
-		{
+	.jj_partner_container ul li:first-child,
+	.jj_partner_container ul li:last-child {
 		width: 100%;
 		float: none;
 	}
+
 	.jj_partner_container ul li {
 		height: auto;
 	}
+
 	.jj_partner_container ul li a {
 		width: 100%;
 		height: auto;
 		position: static;
 	}
+
 	.jj_partner_m {
 		width: 100%;
 		height: auto;
 		padding: 0px;
 	}
+
 	footer .jj_align {
 		width: 100%;
 		padding: 0 15px;
 	}
+
 	footer .jj_link {
 		display: block;
 	}
+
 	footer .jj_link li {
 		float: none;
 		display: block;
 		margin-bottom: 5px;
 		line-height: normal;
 	}
+
 	footer .jj_link li span {
 		display: inline-block;
 		position: relative;
 		top: 0;
 	}
+
 	footer p {
 		padding: 20px 0;
 	}
+
 	.jj_carousel img {
 		width: calc(100%/ 2);
 	}
