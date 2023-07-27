@@ -86,3 +86,94 @@ li {
 #declr_btn:hover{
 	cursor: pointer;
 }
+.boss_coments{
+	font-size: 13px; 
+	color: grey;
+}
+.hotelcomment{
+	font-size: 13px;
+}
+.mapbody{
+	margin-top: -12px;
+	
+}
+.intro_load{
+	font-weight: bold; 
+	font-size: 20px; 
+	margin-bottom: 10px;
+}
+#map {
+	width: 100%; 
+	height: 500px;
+	margin-top:20px;
+}
+.ssss1{
+	border-bottom: 1px solid grey; 
+	width: 680px; 
+	padding-top: 10px;
+	margin-bottom:20px;
+	
+}
+.contain_author{
+	font-weight: bold; 
+	font-size: 18px;
+	margin-bottom:20px;
+}
+.start_score{
+	color:black;
+}
+
+.start_repeat{
+	color: orange;
+}
+.score_number{
+	color:black;
+	margin-left:10px;
+}
+
+.blind1{
+	margin-bottom: 20px; 
+	color: rgb(80, 80, 80);
+}
+
+.time_real{
+	color: grey;
+}
+.user_dec{
+	text-align: center;
+}
+.reason_decl{
+	font-weight: bold;
+}
+.decl_detail_con{
+	font-weight: bold;
+}
+.acc_rating_tang{
+	font-size: 13px;
+	
+}
+.oneday_room{
+	font-size: 200px;
+	margin-right:15px;
+	
+}
+#totalAmount{
+	color: rgba(0, 0, 0, 1); 
+	font-size: 20px;
+}
+#totalAmount_won{
+	font-size:20px;
+	margin-left:5px;
+}
+.pre_pre{
+	font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+	font-size:15px;
+}
+.oneday_room2{
+	font-size: 20px;
+	 margin-right: 15px;
+}
+#decl_detail{
+	height: 280px; 
+	width: 380px;
+}

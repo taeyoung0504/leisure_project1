@@ -1,0 +1,23 @@
+#go_reg_partner{
+	color: grey;
+}
+td, th {
+	border: 1px solid rgb(106, 106, 106);
+	padding: 8px;
+}
+
+.addProductBtn {
+	margin-top: 2px;
+	padding: 4px;
+	background-color: #938e8e;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	padding: 4px;
+}
+
+.addProductBtn:hover {
+	background-color: #c3c0c0;
+}

@@ -50,10 +50,10 @@
                                  acc.acc_rating eq 3 ? '★ ★ ★ ✩ ✩' :
                                  acc.acc_rating eq 4 ? '★ ★ ★ ★ ✩ ' :
                                  acc.acc_rating eq 5 ? '★ ★ ★ ★ ★' :
-                                 '✩ ✩ ✩ ✩ ✩'}"></span>&nbsp
+                                 '✩ ✩ ✩ ✩ ✩'}"></span>
 			<span id="acc_score"
 				th:text="${acc.acc_rating eq 0 ? '': acc.acc_rating}"></span> <span
-				style="font-size: 13px;" th:if="${#lists.size(acc.reviews) > 0}"
+				class="acc_rating_tang" th:if="${#lists.size(acc.reviews) > 0}"
 				th:text="'(' + ${#lists.size(acc.reviews)} + ')'"></span>
 
 			<p class="hoteladdress" th:text="${acc.acc_address}"></p>
@@ -61,9 +61,8 @@
 				class="room_detail_fee2" th:text="${acc.acc_averPrice}"></span><span>
 				원</span>
 			<div class="coment_author">
-				<p style="font-size: 12px; color: grey;">사장님 한마디</p>
-				<p class="hotelcomment" style="font-size: 13px;"
-					th:text="${acc.acc_explain}"></p>
+				<p class="boss_coments">사장님 한마디</p>
+				<p class="hotelcomment" th:text="${acc.acc_explain}"></p>
 			</div>
 		</div>
 	</div>
@@ -98,13 +97,11 @@
 						<strong class="title" th:text="${product.product_type}"></strong>
 						<div class="hotel">
 							<div class="price">
-								<strong style="font-size: 20px; margin-right: 15px;">
-									1박 가격 </strong> <strong style="font-size: 20px; margin-right: 15px;">-</strong>
+								<strong class="oneday_room">
+									1박 가격 </strong> <strong class="oneday_room2">-</strong>
 								<strong id="totalAmount"
 									th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
-									style="color: rgba(0, 0, 0, 1); font-size: 20px;"
-									th:text="${product.product_amount}"></strong><strong
-									style="font-size: 20px; margin-left: 5px;">원 </strong>
+									th:text="${product.product_amount}"></strong><strong id="totalAmount_won">원 </strong>
 							</div>
 							<!-- <button type="button" onclick="pop_room_detail()">" 객실
                         이용 안내"</button> -->
@@ -127,8 +124,7 @@
 
 			<div id="view2">
 				<!-- 불러오기 성공 이제 수정들어가야 함 -->
-				<pre
-					style="font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; font-size: 14px;">
+				<pre class="pre_pre">
               <p th:utext="${@commonUtil.markdown(acc?.acc_info) ?: ''}"></p>
             </pre>
 
@@ -136,13 +132,9 @@
 				<div class="map" id="kakao_maps">
 
 					<body>
-						<p style="margin-top: -12px"></p>
-						<span
-							style="font-weight: bold; font-size: 15px; margin-bottom: 10px;">찾아오시는
-							길</span>
-						<p></p>
-						<div id="map" style="width: 100%; height: 500px;"></div>
-
+						<p class="mapbody"></p>
+						<span class="intro_load">찾아오시는 길</span>
+						<div id="map" ></div>
 						<script th:src="@{/js/kty_map.js}"></script>
 					</body>
 
@@ -154,51 +146,19 @@
 			</div>
 			<div id="view3">
 				<body>
-					<!--  
-					<div class="review_mb-3" name="myform" id="myform">
-						<br> <span id=review_title>별점과 이용경험을 남겨주세요.</span><br>
-						<form onsubmit="return validateForm()"
-							th:action="@{|/create/review/${acc.id}|}" method="post">
-							<fieldset id="room_start_k">
-								<input type="radio" name="reviewStar" value="5" id="rate1"><label
-									for="rate1">★</label> <input type="radio" name="reviewStar"
-									value="4" id="rate2"><label for="rate2">★</label> <input
-									type="radio" name="reviewStar" value="3" id="rate3"><label
-									for="rate3">★</label> <input type="radio" name="reviewStar"
-									value="2" id="rate4"><label for="rate4">★</label> <input
-									type="radio" name="reviewStar" value="1" id="rate5"><label
-									for="rate5">★</label>
-							</fieldset>
-							<div>
-								<textarea class="col-auto form-control" name="reviewContents"
-									id="reviewContents" placeholder="좋은 수강평을 남겨주시면 요기어때에 큰 힘이 됩니다!"></textarea>
-							</div>
-							<div id="error_message"></div>
-							
-							<input sec:authorize="isAuthenticated()" type="submit"
-								value="리뷰작성" id="review_confirm">
-								
-				
-    
-						</form>
-						
-						-->
+
 					<div class="sss">
 						<div th:text="${#authentication.name}" id="current_detail_user"></div>
 						<h2 id="title_revieww">리뷰 내역</h2>
 						<ul id="review_list">
-							<li class="ssss1" th:each="review : ${acc.reviews}"
-								style="border-bottom: 1px solid grey; width: 680px; padding-top: 10px;">
-								<p style="margin-bottom: 22px;">
+							<li class="ssss1" th:each="review : ${acc.reviews}">
+								<p class="rating-white">
 									<span
 										th:text="${review.author.contains('name') ? 'Social_네이버회원' : (review.author.length() > 16 ? 'Social_구글회원' : 
                      (review.author.length()>9 && review.author.length() < 13 ? 'Social_카카오회원' : review.author))}"
-										style="font-weight: bold; font-size: 18px;"></span>
-
-
-
+										class="contain_author"></span>
 									<div sec:authorize="isAuthenticated()">
-                <!-- 여기서 JavaScript 함수를 호출하여 버튼을 숨기도록 설정 -->
+
                 <button type="button" class="declaration"
 										data-target="modal_declaration"
 										th:id="'declaration_button_' + ${review.id}"
@@ -211,26 +171,32 @@
             </div>
             </p>
             <p class="start_score">
-                <!-- Rating stars -->
+                <span th:if="${review.rating == 1}" class="start_repeat">★
+                                 ✩ ✩ ✩ ✩</span> <span th:if="${review.rating == 2}" class="start_repeat">★ ★ ✩ ✩ ✩</span> <span
+                                 th:if="${review.rating == 3}" class="start_repeat">★ ★ ★ ✩ ✩</span> 
+                                 <span th:if="${review.rating == 4}" class="start_repeat">★ ★ ★ ★ ✩</span> 
+                                 <span th:if="${review.rating == 5}"  class="start_repeat">
+                                 ★ ★ ★ ★ ★</span>
+                                 <span class="score_number" th:text="${review.rating}"> </span>
             </p>
             <!-- 신고 누락적시 블라인드 처리된 내용 표시 -->
-            <p style="margin-bottom: 20px; color: rgb(80, 80, 80);">
+            <p class="blind1">
                 <span th:text="${review.contentForDisplay}"></span>
             </p>
             <p>
                 <span class="time_real"
-										th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"
-										style="color: grey;"></span>
+										th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"></span>
             </p>
             <br>
         </li>
     </ul>
 </div>
-					<!--  모달 (신고) --><div id="myModa" class="modal_declaration">
+					<!--  모달 (신고) -->
+					<div id="myModa" class="modal_declaration">
 						<div class="modal-content_declaration">
 							<span class="close">&times;</span>
-							<h3 style="text-align: center;">회원 신고</h3>
-							<div style="font-weight: bold;">신고 사유</div>
+							<h3 class="user_dec">회원 신고</h3>
+							<div class="reason_decl">신고 사유</div>
 							<br>
 							<form id="declarationForm" data-review-id="${review.id}">
 								<select id="reason_dec" name="reason">
@@ -242,9 +208,9 @@
 									<option value="허위·과장">허위·과장</option>
 									<option value="기타">기타</option>
 								</select><br> <br>
-								<div style="font-weight: bold;">상세 내용</div>
+								<div class="decl_detail_con">상세 내용</div>
 								<br>
-								<textarea id="decl_detail" style="height: 280px; width: 380px;"
+								<textarea id="decl_detail"
 									placeholder="상세 사유를 작성하세요"></textarea>
 								<br> <input type="submit" value="제출" id="declr_btn">
 							</form>

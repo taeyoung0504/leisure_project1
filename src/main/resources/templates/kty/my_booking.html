@@ -150,6 +150,16 @@
 	margin-top: 18px;
 	font-weight: bold;
 }
+#book_accID{
+display:none;
+}
+#book_roomID{
+display:none;
+}
+
+#intro_acc{
+color:grey;
+}
 </style>
 </head>
 
@@ -209,8 +219,8 @@
 					[[${book.totalPrice}]] </span><br> <span
 					th:text="${book.paymentDate}"></span> <span
 					th:text="${book.payType}"></span><br>
-					<span th:text="${book.accomID}" style="display:none;"></span>
-					<span th:text="${book.roomID}" style="display:none;"></span>
+					<span th:text="${book.accomID}" id="book_accID" ></span>
+					<span th:text="${book.roomID}" id="book_roomID"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
 				<!-- <button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
@@ -234,7 +244,7 @@
 		
 		<div class="center-content" th:if="${bookList.size()<1}">
 			<h1>예약 내역이 없습니다.</h1>
-			<span id="intro_acc" style="color:grey;">다양한 숙소들을 지금 만나보세요</span>
+			<span id="intro_acc">다양한 숙소들을 지금 만나보세요</span>
 			 <a th:href="@{/tour/daegu_room}"	class="btn_red">다양한 숙소 보러가기</a>
 		</div>			
 		

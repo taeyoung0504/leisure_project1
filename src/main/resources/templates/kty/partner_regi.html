@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="/css/reg_partner_kty.css">
 </head>
 <html layout:decorate="~{jjj/header}">
 
@@ -12,52 +13,40 @@
 
 		<table id="mypage_partner_reg_table">
 			<tr>
-				<th class="partner_table-th1">업체명<span id="essential_mark"
-					style="font-weight: bold; color: orangered;"> *</span></th>
-				<td colspan="3" class="partner_table-th2"
-					style="text-align: center;"><input type="text"
+				<th class="partner_table-th1">업체명<span class="essential_mark"> *</span></th>
+				<td colspan="3" class="partner_table-th2"><input type="text"
 					id="company_name" maxlength="20"></td>
 
 
 			</tr>
 
 			<tr>
-				<th class="partner_table-th1">업체주소<span id="essential_mark"
-					style="font-weight: bold; color: orangered;"> *</span></th>
-				<td colspan="3" class="partner_table-th2"
-					style="text-align: center;"><input type="text"
+				<th class="partner_table-th1">업체주소<span class="essential_mark"> *</span></th>
+				<td colspan="3" class="partner_table-th2"><input type="text"
 					id="company_address" maxlength="50"></td>
 
 			</tr>
 			<tr>
-				<th class="partner_table-th1">인감 증명서<br> 첨부<span
-					id="essential_mark" style="font-weight: bold; color: orangered;">
-						*</span></th>
-				<td colspan="3" class="partner_table-th2"
-					style="text-align: center;"><input type="file"
-					multiple="multiple" id="partner_input-file" style="display: none;">
-					<label for="partner_input-file" id="ch_file"
-					style="display: block; cursor: pointer; color: rgb(128, 128, 128); text-align: center; line-height: 3;">
+				<th class="partner_table-th1">인감 증명서<br> 첨부<span class="essential_mark">*</span></th>
+				<td colspan="3" class="partner_table-th2"><input type="file"
+					multiple="multiple" id="partner_input-file">
+					<label for="partner_input-file" id="ch_file">
 						파일 선택을 선택하세요( 이미지 또는 pdf 파일 첨부) </label></td>
 			</tr>
 			<tr>
-				<th class="partner_table-th1">담당자명<span id="essential_mark"
-					style="font-weight: bold; color: orangered;"> *</span></th>
-				<td class="partner_table-th2" style="text-align: center;"><input
+				<th class="partner_table-th1">담당자명<span class="essential_mark"> *</span></th>
+				<td class="partner_table-th2"><input
 					type="text" id="partner_name"></td>
 				<td class="partner_table-th3"><b>담당자 연락처</b><span
-					id="essential_mark" style="font-weight: bold; color: orangered;">
-						*</span></td>
-				<td class="partner_table-th2" style="text-align: center;"><input
-					type="text" style="font-size: 16px;" id="partner_tel"
+					class="essential_mark">*</span></td>
+				<td class="partner_table-th2">
+				<input type="text" id="partner_tel"
 					maxlength="13" placeholder="  - '하이픈' 포함"></td>
 
 			</tr>
 			<tr>
-				<th class="partner_table-th1">업종<span id="essential_mark"
-					style="font-weight: bold; color: orangered;"> *</span></th>
-				<td class="partner_table-th2" style="text-align: center;"><select
-					id="partner_sectors" readonly style="font-size: 16px;">
+				<th class="partner_table-th1">업종<span class="essential_mark"> *</span></th>
+				<td class="partner_table-th2"><select id="partner_sectors" readonly>
 						<option value="" disabled selected hidden>선택하세요</option>
 						<option value="모텔">모텔</option>
 						<option value="호텔">호텔</option>
@@ -66,8 +55,8 @@
 						<option value="게스트하우스">게스트하우스</option>
 				</select></td>
 				<td class="partner_table-th3"><b>지역</b></td>
-				<td class="partner_table-th2" style="text-align: center;"><select
-					id="partner_region" readonly style="font-size: 16px;">
+				<td class="partner_table-th2"><select
+					id="partner_region" readonly>
 						<option value="" disabled selected hidden>선택하세요</option>
 						<option value="북구">북구</option>
 						<option value="서구">서구</option>
@@ -80,16 +69,14 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid white;"><span
-					style="color: orangered;"><b>*</b></span> 값은 필수입니다.</td>
+				<td id="cau_kty"><span class="essential_mark"><b>*</b></span> 값은 필수입니다.</td>
 			</tr>
 			<tr id="sss">
-				<td style="border: 1px solid white;"></td>
-				<td style="border: 1px solid white;"></td>
-				<td style="border: 1px solid white;">
+				<td class="tang" ></td>
+				<td class="tang"></td>
+				<td class="tang">
 				</th>
-				<td
-					style="border: 1px solid white; text-align: right; vertical-align: middle;">
+				<td class="tang2">
 					<input type="button" id="reg_partner_final" value="파트너 신청하기">
 				</td>
 			</tr>
@@ -120,11 +107,6 @@
 
 	</div>
 </body>
-<style>
-td, th {
-	border: 1px solid rgb(106, 106, 106);
-	padding: 8px;
-}
-</style>
+
 
 </html>
