@@ -354,12 +354,30 @@ a {
 }
 
 .userinfo_td_gap {
+
 	white-space: nowrap;
 	position: relative;
 	padding-bottom: 40px;
 	/* 아래쪽 간격 크기 조절 */
 	padding-left: 100px;
 	/* 좌측 간격 크기 조절 */
+}
+
+#unique_social_provider{
+	font-size: 15px; 
+	color: rgb(95, 95, 95);
+}
+.userinfo_td_gap2{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.nav-link{
+	color: rgb(0, 0, 0);
+	text-decoration: underline;
+}
+
+#unique_userinfo_td_gap{
+	font-size: 15px; 
+	color: rgb(95, 95, 95);
 }
 
 .btns-wrap__edit-btn {
@@ -372,7 +390,14 @@ a {
 	width: 200px;
 	height: 50px;
 }
-
+#confirm_newPwd{
+	font-size: 12px;
+	margin: 5px 0;
+}
+#confirm_oldPwd{
+	font-size: 12px; 
+	margin: 5px 0;
+}
 .btns-wrap__edit-btn:hover {
 	cursor: pointer;
 }
@@ -537,6 +562,11 @@ li.mypage_sidebar a.active {
 
 #user_del_button:hover {
 	cursor: pointer;
+	
+}
+#user_del_button{
+	color: rgb(0, 0, 0); 
+	text-decoration: underline;
 }
 
 #userdel_check_password {
@@ -545,7 +575,14 @@ li.mypage_sidebar a.active {
 	border: none;
 	border-bottom: 1px solid rgb(128, 128, 128);
 }
-
+#final_password_check{
+	font-size: 13px; 
+	font-weight: bold;
+}
+#final_check_pwd{
+	font-size: 15px;
+	
+}
 /* 파트너 신청 페이지 css */
 #mypage_partner_reg {
 	position: absolute;
