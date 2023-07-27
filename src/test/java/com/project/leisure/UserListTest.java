@@ -15,7 +15,7 @@ class UserListTest {
 	private AccommodationService accommodationService;
 
 	
-	@Test
+	@Test//////
 	void testCreateUsers() {
 		for (int i = 1; i <= 5; i++) {
             String username = String.format("user%03d", i);
