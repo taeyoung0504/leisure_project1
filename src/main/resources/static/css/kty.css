@@ -366,7 +366,8 @@ a {
 .userinfo_td_gap2{
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.nav-link{
+
+h5 .nav-link{
 	color: rgb(0, 0, 0);
 	text-decoration: underline;
 }
