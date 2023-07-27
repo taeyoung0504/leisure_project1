@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="/css/result_partner_kty.css">
 </head>
 <html layout:decorate="~{jjj/header}">
 
@@ -65,7 +66,7 @@
 			</tbody>
 			<div th:if="${regList.size() < 1}" class="center-content2">
 				<h1>파트너 신청 내역이 없습니다.</h1>
-				<span id="go_reg_partner" style="color: grey;">지금 파트너 등록을
+				<span id="go_reg_partner">지금 파트너 등록을
 					해보세요</span></span> <a th:href="@{/user/mypage/partner_reg}" class="btn_red">파트너
 					등록하기</a>
 			</div>
@@ -117,28 +118,7 @@
 
 
 </body>
-<style>
-td, th {
-	border: 1px solid rgb(106, 106, 106);
-	padding: 8px;
-}
 
-.addProductBtn {
-	margin-top: 2px;
-	padding: 4px;
-	background-color: #938e8e;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	padding: 4px;
-}
-
-.addProductBtn:hover {
-	background-color: #c3c0c0;
-}
-</style>
 
 
 </html>
