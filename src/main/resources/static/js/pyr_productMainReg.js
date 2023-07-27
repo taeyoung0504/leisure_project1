@@ -89,7 +89,7 @@ $(document).ready(
 			var accPartnerSec = $('#partner_sectors').val();
 
 
-
+			//기존 이름 변경 검사
 			if (accName !== originaAccName) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
 				return;
