@@ -148,7 +148,31 @@ li {
 .decl_detail_con{
 	font-weight: bold;
 }
-
+.acc_rating_tang{
+	font-size: 13px;
+	
+}
+.oneday_room{
+	font-size: 200px;
+	margin-right:15px;
+	
+}
+#totalAmount{
+	color: rgba(0, 0, 0, 1); 
+	font-size: 20px;
+}
+#totalAmount_won{
+	font-size:20px;
+	margin-left:5px;
+}
+.pre_pre{
+	font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+	font-size:15px;
+}
+.oneday_room2{
+	font-size: 20px;
+	 margin-right: 15px;
+}
 #decl_detail{
 	height: 280px; 
 	width: 380px;

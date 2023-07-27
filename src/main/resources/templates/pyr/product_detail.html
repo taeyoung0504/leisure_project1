@@ -53,7 +53,7 @@
                                  '✩ ✩ ✩ ✩ ✩'}"></span>
 			<span id="acc_score"
 				th:text="${acc.acc_rating eq 0 ? '': acc.acc_rating}"></span> <span
-				style="font-size: 13px;" th:if="${#lists.size(acc.reviews) > 0}"
+				class="acc_rating_tang" th:if="${#lists.size(acc.reviews) > 0}"
 				th:text="'(' + ${#lists.size(acc.reviews)} + ')'"></span>
 
 			<p class="hoteladdress" th:text="${acc.acc_address}"></p>
@@ -97,13 +97,11 @@
 						<strong class="title" th:text="${product.product_type}"></strong>
 						<div class="hotel">
 							<div class="price">
-								<strong style="font-size: 20px; margin-right: 15px;">
-									1박 가격 </strong> <strong style="font-size: 20px; margin-right: 15px;">-</strong>
+								<strong class="oneday_room">
+									1박 가격 </strong> <strong class="oneday_room2">-</strong>
 								<strong id="totalAmount"
 									th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
-									style="color: rgba(0, 0, 0, 1); font-size: 20px;"
-									th:text="${product.product_amount}"></strong><strong
-									style="font-size: 20px; margin-left: 5px;">원 </strong>
+									th:text="${product.product_amount}"></strong><strong id="totalAmount_won">원 </strong>
 							</div>
 							<!-- <button type="button" onclick="pop_room_detail()">" 객실
                         이용 안내"</button> -->
@@ -126,8 +124,7 @@
 
 			<div id="view2">
 				<!-- 불러오기 성공 이제 수정들어가야 함 -->
-				<pre
-					style="font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; font-size: 14px;">
+				<pre class="pre_pre">
               <p th:utext="${@commonUtil.markdown(acc?.acc_info) ?: ''}"></p>
             </pre>
 
@@ -213,7 +210,7 @@
 								</select><br> <br>
 								<div class="decl_detail_con">상세 내용</div>
 								<br>
-								<textarea id="decl_detail" style="height: 280px; width: 380px;"
+								<textarea id="decl_detail"
 									placeholder="상세 사유를 작성하세요"></textarea>
 								<br> <input type="submit" value="제출" id="declr_btn">
 							</form>
