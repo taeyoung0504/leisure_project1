@@ -1080,6 +1080,7 @@ li.mypage_sidebar a.active {
 .pagination {
 	position: relative !important;
     bottom: 10px;
+    text-align: center;
 }
 
 .room-entry>div {
