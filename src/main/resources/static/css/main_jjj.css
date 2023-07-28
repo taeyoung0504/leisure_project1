@@ -27,11 +27,7 @@
 	font-style: normal;
 }
 
-.jj_main {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+
 
 .jj_navbar a {
 	text-decoration: none;
@@ -40,24 +36,41 @@
 
 #header {
 	/* 네비 상단 고정  */
-	position: sticky;
-	top: 0;
-	z-index: 10;
-	display: flex;
+	position: fixed !important;
+	width: -webkit-fill-available;
+	top: 0 !important;
+	z-index: 10 !important;
+	display: flex !important;
 	/* 한 줄로 나란히 하기 */
-	justify-content: space-between;
+	justify-content: space-between !important;
 	/* 같은 중심축으로 해서 중간에 스페이스 넣기*/
-	align-items: center;
+	align-items: center !important;
 	/* 수직적으로 중간으로 배치 */
 	/*     background-color: var(--background-color); */
-	padding: 0px 12px;
+	padding: 0px 12px !important;
 	font-family: "TheJamsil5Bold", Arial, sans-serif;
 	font-weight: 700;
-	font-style: normal;
+	font-style: normal !important;
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
+.weather-temp {
+	color: var(--main-color);
+}
+
+#header.activee .weather-temp {
+	color: var(--background-color);
+}
+
 @media screen and (min-width: 1000px) {
+	
+	.jj_main {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	margin-top: 100px;
+}
+	
 	#header.activee {
 		background-color: var(--main-color);
 		transition-duration: 0.2s;
@@ -79,6 +92,8 @@
 	nav .jj_menubar ul li a .active:hover {
 		color: pink;
 	}
+
+
 }
 
 .jj_navbar_logo {
@@ -827,8 +842,8 @@ footer address .order {
 	}
 	/* ========네비 */
 	#header {
-		position: sticky;
-		top: 0;
+		position: sticky !important;
+		top: 0 !important;
 		flex-direction: column;
 		/* align-items: center; */
 		align-items: center;
@@ -836,11 +851,12 @@ footer address .order {
 		/* 수평 왼쪽으로*/
 		padding-top: 20px;
 		padding-bottom: 20px;
+		height: 40px;
 	}
 	.activee {
-		position: sticky;
-		top: 0;
-		flex-direction: column;
+		position: sticky !important;
+		top: 0 !important;
+		flex-direction: column !important;
 		/* align-items: center; */
 		align-items: center;
 		padding: 8px 24px;
@@ -866,6 +882,7 @@ footer address .order {
 		text-align: center;
 		margin: 0 auto;
 		display: block;
+		/* 		margin-top: 10px; */
 	}
 
 	/* 검색창 */
@@ -882,6 +899,7 @@ footer address .order {
 		color: var(--main-color);
 		-webkit-transition-duration: 0.2s;
 		-webkit-transition-timing-function: ease;
+		margin-top: 20px;
 	}
 
 	/* 창이 1000보다 작아지면 메뉴와 아이템을 밑으로 내림 */
@@ -902,7 +920,7 @@ footer address .order {
 		flex-direction: column;
 		align-items: center;
 		/* 메뉴만 센터로*/
-		width: 100%;
+		width: 100vw;
 		/* 센터로 안감, 메뉴 너비를 최대한으로 바꿔줘야함 */
 		height: 100vh;
 		top: 10px;

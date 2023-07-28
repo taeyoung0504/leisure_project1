@@ -232,6 +232,7 @@
                          endDate: '+2m +15d',
                          container: '#datepicker-container',
                          showOn: "button",
+                         minDate: 0
                          /* buttonImage: "URL_OF_YOUR_ICON_IMAGE",
                          buttonImageOnly: true */
                        });
@@ -453,13 +454,13 @@
                                   } else {
                                     hasNullValue = true;
                                   }
-                                  if (data.roomID) {
-                                    queryParams.append('roomID', data.roomID);
+                                  if (data.tempRoomId) {
+                                    queryParams.append('tempRoomId', data.tempRoomId);
                                   } else {
                                     hasNullValue = true;
                                   }
-                                  if (data.accomID) {
-                                    queryParams.append('accomID', data.accomID);
+                                  if (data.tempAccomId) {
+                                    queryParams.append('tempAccomId', data.tempAccomId);
                                   } else {
                                     hasNullValue = true;
                                   }
