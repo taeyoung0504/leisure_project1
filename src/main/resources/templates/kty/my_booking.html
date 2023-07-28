@@ -219,8 +219,8 @@ color:grey;
 					[[${book.totalPrice}]] </span><br> <span
 					th:text="${book.paymentDate}"></span> <span
 					th:text="${book.payType}"></span><br>
-					<span th:text="${book.accomID}" id="book_accID" ></span>
-					<span th:text="${book.roomID}" id="book_roomID"></span>
+					<span th:text="${book.tempAccomId}" id="book_accID" ></span>
+					<span th:text="${book.tempRoomId}" id="book_roomID"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
 				<!-- <button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
@@ -232,7 +232,7 @@ color:grey;
 			 <button id="cancelBtn2" class="reviewBtn"
                     th:if="${book.bookStatus == '이용완료'}" 
                     th:text="'리뷰작성'"
-                    th:attr="data-accomid=${book.accomID},data-roomid=${book.roomID},data-in=${book.checkin}"
+                    th:attr="data-accomid=${book.tempAccomId},data-roomid=${book.tempRoomId},data-in=${book.checkin}"
                     onclick="disableButton(this)">리뷰작성</button>
 				</p>
 				
