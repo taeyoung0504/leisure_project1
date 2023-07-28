@@ -92,17 +92,20 @@ $(document).ready(
 			//기존 이름 변경 검사
 			if (accName !== originaAccName) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();	
 				return;
 			}
 
 			if (accAddress !== originaAccAddress) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();	
 				return;
 			}
 
 
 			if (accPartnerSec !== originaAccSectors) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();	
 				return;
 			}
 
