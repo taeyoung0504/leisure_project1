@@ -2111,11 +2111,11 @@ public class AccommodationService {
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //도겸이가 추가한 메서드
-	public Accommodation getAccomList(Long accomid, List<BookingVO> filteredRooms) {
+	public Accommodation getAccomList(Long tempAccomId, List<BookingVO> filteredRooms) {
 		Accommodation acc = new Accommodation();
 		Product pro = new Product();
 		// int count = 0;
-		Long id = accomid;
+		Long id = tempAccomId;
 		Optional<Accommodation> accom = this.accommodationRepository.findById(id); // optional은 findById()만 가능한듯.
 		if (accom.isPresent()) {
 			// for(Accommodation accom: accomList) { // 숙소리스트에서 숙소 뽑아옴
@@ -2123,7 +2123,7 @@ public class AccommodationService {
 				int productCount = product.getProduct_count(); // 객실의 종류는 여러개고 각 객실마다 객실 수가 다르다. A객실의 카운트를 가져온다.
 				// 만일 객실아이디가 여러개면 이 자리에 product.getProduct_id로 foreach문 돌린다. -> 여러개다.
 				for (BookingVO reservedRoom : filteredRooms) { //
-					if (product.getProduct_id() == reservedRoom.getRoomID()) {
+					if (product.getProduct_id() == reservedRoom.getTempRoomId()) {
 						productCount -= 1; // int형이면 0이 담기겠지 null이 아니라?
 					}
 				}
@@ -2138,4 +2138,12 @@ public class AccommodationService {
 		}
 	}
 
+	
+	
+	
+	
+	public List<Accommodation>  my_acc_list() {
+		 return this.accommodationRepository.findAll();
+		
+	}
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +22,8 @@ import com.project.leisure.dogyeom.kakao.KakaoPayController;
 import com.project.leisure.dogyeom.kakao.KakaoReadyResponseVO;
 import com.project.leisure.dogyeom.totalPrice.TotalPrice;
 import com.project.leisure.dogyeom.totalPrice.TotalPriceRepository;
+import com.project.leisure.yuri.product.Accommodation;
+import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.Product;
 import com.project.leisure.yuri.product.ProductImg;
 import com.project.leisure.yuri.product.ProductService;
@@ -45,17 +46,20 @@ public class BookController {
 	private ProductService productService;
 
 	private BookingVO bookingVO;
+	
+	private AccommodationService accommodationService;
 
 	private final TotalPriceRepository totalPriceRepository;
 
 	@Autowired
 	public BookController(BookService bookService, RoomService roomService, KakaoPayController kakaoPayController,
-			ProductService productService, TotalPriceRepository totalPriceRepository) {
+			ProductService productService, TotalPriceRepository totalPriceRepository, AccommodationService accommodationService) {
 		this.bookService = bookService;
 		this.roomService = roomService;
 		this.kakaoPayController = kakaoPayController;
 		this.productService = productService;
 		this.totalPriceRepository = totalPriceRepository;
+		this.accommodationService = accommodationService;
 	}
 
 	@GetMapping("/toss/{id}")
@@ -69,12 +73,12 @@ public class BookController {
 
 		TotalPrice total = new TotalPrice();
 
-		int convertedId = Integer.parseInt(id);
-		Long convertedId2 = (long) convertedId;
 
 		LocalDate date1 = LocalDate.parse(checkin);
 		LocalDate date2 = LocalDate.parse(checkOut);
 
+		int convertedId = Integer.parseInt(id);
+		Long convertedId2 = (long) convertedId;
 		product = productService.getProduct(convertedId2);
 
 		String totalPrice1 = null;
@@ -98,8 +102,8 @@ public class BookController {
 		bookingvo.setCheckOut(date2);
 		bookingvo.setBookHeadCount(4);
 		bookingvo.setTotalPrice(totalPrice1);
-		bookingvo.setRoomID(convertedId2);
-		bookingvo.setAccomID(product.getAccommodation().getId());
+		bookingvo.setTempRoomId(product.getProduct_id());
+		bookingvo.setTempAccomId(product.getAccommodation().getId());
 
 		// 추가
 		List<ProductImg> images = product.getProductImgs();
@@ -150,6 +154,16 @@ System.out.println("First Image URL: " + firstImageUrl);
 		String tel = bvo.getBookerTel();
 
 		String payType = bvo.getPayType();
+		
+		
+		Long convertedId2 = (long) id;
+		Product product = new Product();
+		product = productService.getProduct(convertedId2);
+		
+		
+		Long convertedId3 = product.getAccommodation().getId();
+		Accommodation accommodation = new Accommodation();
+		accommodation = accommodationService.getAccommodation(convertedId3);
 
 		String name = String.valueOf(id);
 		HttpServletRequest request = params;
@@ -159,6 +173,8 @@ System.out.println("First Image URL: " + firstImageUrl);
 		bookingVO.setBookerName(realName);
 		bookingVO.setBookerTel(tel);
 		bookingVO.setPayType(payType);
+		bookingVO.setProduct(product);
+		bookingVO.setAccommodation(accommodation);
 //		bookingVO.setBookerName(params.getParameter(username));
 //		String userID = (String) session.getAttribute("submarine");
 

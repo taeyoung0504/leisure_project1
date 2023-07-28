@@ -28,7 +28,7 @@ public class Accommodation {
 	private String username; // 사용자명
 
 	private String acc_name; // 숙소 이름
-
+			
 	private String acc_explain; // 숙소 설명
 
 	@Column(columnDefinition = "LONGTEXT")

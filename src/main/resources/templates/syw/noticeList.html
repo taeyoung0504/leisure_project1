@@ -19,6 +19,7 @@
 
 		.notice-content {
 			display: none;
+			border-radius: 7px;
 		}
 
 		.pagination ul {
@@ -39,13 +40,16 @@
 		#mypage_sidebar_nav {
 			margin-left: -100px;
 		}
+
 		.date {
 			color: rgb(193, 193, 193);
 		}
-		.notice_header{
+
+		.notice_header {
 			color: #e40000d3;
 			margin-top: 40px;
 		}
+
 		.mypage_sidebar a {
 			color: black;
 		}
@@ -78,17 +82,19 @@
 	<div id="my_infomation_modify" layout:fragment="content" class="container my-3">
 		<nav id="mypage_sidebar_nav">
 			<ul>
-				<li class="mypage_sidebar"><a th:href="@{/more/noticeList}" style="color: #e40000d3; font-weight: bold;">공지사항</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/more/noticeList}"
+						style="color: #e40000d3; font-weight: bold;">공지사항</a></li>
 				<li class="mypage_sidebar"><a th:href="@{/more/inquiry}">1:1 문의</a></li>
 			</ul>
 		</nav>
-		<div class="content-container">
+		<div class="content-container" th:if="${page.getContent().size() > 0}">
 			<h2 class="notice_header">공지사항</h2>
 
 			<div th:each="notice : ${page}" class="notice-item">
 				<h3 th:text="${notice.title}"></h3>
 				<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
-				<p class="notice-content" th:text="${notice.content}" style="background-color: rgb(243, 243, 243); padding: 20px; white-space: pre-line;"></p>
+				<p class="notice-content" th:text="${notice.content}"
+					style="background-color: rgb(243, 243, 243); padding: 20px; white-space: pre-line;"></p>
 			</div>
 
 			<div class="pagination">
@@ -106,6 +112,9 @@
 				</ul>
 			</div>
 		</div>
+		<div th:if="${page.getContent().size() < 1}" class="center-content3">
+         <h1>등록된 공지사항이 없습니다.</h1>
+      </div>
 	</div>
 </body>
 

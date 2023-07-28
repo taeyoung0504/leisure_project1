@@ -34,7 +34,6 @@
 		.content-container {
 			margin: 0 auto;
 			max-width: 800px;
-			padding-top: 60px;
 		}
 
 		.inquiry_list {
@@ -56,8 +55,9 @@
 
 		.answer_form textarea {
 			width: 790px;
-			height: 200px;
+			height: 300px;
 			padding: 5px;
+			border-radius: 5px;
 		}
 
 		.answer_form input[type="submit"] {
@@ -69,14 +69,16 @@
 			border-radius: 3px;
 			cursor: pointer;
 		}
-        
-        .inquiry-container {
-            background-color: rgb(233, 233, 233);
-        }
-        
-        .answer-container {
-            background-color: rgb(233, 233, 233);
-        }
+
+		.inquiry-container {
+			background-color: rgb(233, 233, 233);
+			border-radius: 7px;
+		}
+
+		.answer-container {
+			background-color: rgb(233, 233, 233);
+			border-radius: 7px;
+		}
 	</style>
 
 
@@ -94,13 +96,14 @@
 
 				<p>
 					<span th:text="${inquiry.get().title}" style="font-size: 20px;"></span>
-					<span style="margin-left: 50px;font-size: 15px;">작성자 : </span><span th:text="${inquiry.get().username}" style="font-size: 15px;"></span>
+					<span style="margin-left: 50px;font-size: 15px;">작성자 : </span><span
+						th:text="${inquiry.get().username}" style="font-size: 15px;"></span>
 				</p>
 
 				<div class="inquiry-container" style="padding: 20px;">
-                <p th:text="${inquiry.get().message}" style="white-space: pre-line;"></p>
-                <p th:text="${#temporals.format(inquiry.get().createDate, 'yyyy-MM-dd HH:mm')}"></p>
-            </div>
+					<p th:text="${inquiry.get().message}" style="white-space: pre-line;"></p>
+					<p th:text="${#temporals.format(inquiry.get().createDate, 'yyyy-MM-dd HH:mm')}"></p>
+				</div>
 			</div>
 
 			<div class="previous_answers">
@@ -111,9 +114,9 @@
 					</tr>
 					<tr th:each="answer : ${inquiry.get().inquiryAnswer}">
 						<div class="answer-container" style="padding: 20px;">
-                            <p th:text="${answer.message}" style="white-space: pre-line;"></p>
-                            <p th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></p>
-                        </div>
+							<p th:text="${answer.message}" style="white-space: pre-line;"></p>
+							<p th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></p>
+						</div>
 					</tr>
 				</table>
 			</div>

@@ -1,5 +1,6 @@
 package com.project.leisure.dogyeom.booking;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -87,5 +88,10 @@ public class BookService {
 	}
 	
 	
+	public List<BookingVO> getbooklist(){
+		List<BookingVO> bookingList = this.bookRepository.findAll();
+	    Collections.reverse(bookingList);
+	    return bookingList;
+	}
 	
 }
