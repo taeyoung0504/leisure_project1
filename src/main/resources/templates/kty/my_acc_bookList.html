@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body id="userinfo_modify">
+<html layout:decorate="~{jjj/header}">
+<div id="my_infomation_modify" layout:fragment="content"class="container my-3">
+
+
+   
+<div class="content-container">
+
+    
+    
+	<!-- 사이드 바 -->
+	<nav id="mypage_sidebar_nav">
+		<ul>
+			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의 정보</a></li>
+			<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
+					내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_productList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 숙소 예약리스트</a></li>	
+		</ul>
+	</nav>
+	
+	
+	
+	 <div class="content-container">
+         <h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+      </div>
+		<!--  여기에 내용ㅇ없음 부분 -->
+
+	</div>
+	
+	
+	
+	</body>
+</html>
+
+
+
+<!-- 
+                <table>
+                 	<tr>
+                        <th>숙소타입</th>
+                        <th>숙소 상세정보</th>
+                        <th>가격</th>
+                    </tr>
+                    <tr th:each="product : ${acc_my.products}">
+                        <td th:text="${product.product_type}"></td>
+                        <td th:text="${product.product_detail}"></td>
+                        <td th:text="${product.product_amount}"></td>
+                    </tr>
+                </table>-->

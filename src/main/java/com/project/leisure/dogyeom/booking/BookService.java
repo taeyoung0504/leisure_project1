@@ -87,5 +87,8 @@ public class BookService {
 	}
 	
 	
+	public List<BookingVO> getbooklist(){
+		 return this.bookRepository.findAll();
+	}
 	
 }

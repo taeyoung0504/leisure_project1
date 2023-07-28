@@ -2138,4 +2138,12 @@ public class AccommodationService {
 		}
 	}
 
+	
+	
+	
+	
+	public List<Accommodation>  my_acc_list() {
+		 return this.accommodationRepository.findAll();
+		
+	}
 }
