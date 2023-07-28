@@ -87,7 +87,7 @@
 				<li class="mypage_sidebar"><a th:href="@{/more/inquiry}">1:1 문의</a></li>
 			</ul>
 		</nav>
-		<div class="content-container">
+		<div class="content-container" th:if="${page.getContent().size() > 0}">
 			<h2 class="notice_header">공지사항</h2>
 
 			<div th:each="notice : ${page}" class="notice-item">
@@ -112,6 +112,9 @@
 				</ul>
 			</div>
 		</div>
+		<div th:if="${page.getContent().size() < 1}" class="center-content3">
+         <h1>등록된 공지사항이 없습니다.</h1>
+      </div>
 	</div>
 </body>
 

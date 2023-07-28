@@ -14,8 +14,7 @@
 			alt="프로필"></td>
 		<tbody th:each="user : ${users2}">
 			<tr>
-				<td class="userinfo_td_gap"><strong
-					style="font-family: Verdana, Geneva, Tahoma, sans-serif;">나의 정보
+				<td class="userinfo_td_gap"><strong class="userinfo_td_gap2">나의 정보
 						</strong></td>
 			<tr>
 				<td class="userinfo_td_gap"><strong>유저명</strong></td>
@@ -41,7 +40,7 @@
 					<div></div> <input name="modify_password" type="password"
 					id="modify_password" class="modify_password"
 					placeholder="기존 비밀번호를 입력하세요">
-					<div style="font-size: 12px; margin: 5px 0;" id="confirm_oldPwd"></div>
+					<div id="confirm_oldPwd"></div>
 					<br> <strong>새 비밀번호 </strong>
 					<div></div>
 					<input type="password" class="modify_password2"
@@ -50,7 +49,7 @@
 					<div></div>
 					<input type="password" class="modify_password3"
 					id="modify_password3_input" placeholder="새 비밀번호를 다시 입력하세요">
-					<div style="font-size: 12px; margin: 5px 0;" id="confirm_newPwd"></div>
+					<div  id="confirm_newPwd"></div>
 					<br>
 				<br> <input class="modifyEmail" name="modifypassword"
 					id="modifypassword" type="button" value="변경할래요"></td>
@@ -98,8 +97,7 @@
 			</tr>
 			<td class="userinfo_td_gap" th:if="${user.sns}"><strong>소셜
 					연동 여부</strong></td>
-			<td class="userinfo_td_gap" th:if="${user.sns}"
-				style="font-size: 15px; color: rgb(95, 95, 95);"
+			<td class="userinfo_td_gap" th:if="${user.sns}" id="unique_userinfo_td_gap"
 				th:text="${user.sns} + ' 연동된 계정입니다.'"></td>
 			</tr>
 
@@ -115,20 +113,17 @@
 						<br>
 						<h5 id="noused_account">
 							저기어때를 이용하고 싶지 않으신가요? <a class="nav-link"
-								sec:authorize="isAuthenticated()" th:href="@{/user/logout}"
-								style="color: rgb(0, 0, 0); text-decoration: underline;">로그아웃</a>
+								sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
 							<span class="nav-link" id="user_del_button"
-								sec:authorize="isAuthenticated()"
-								style="color: rgb(0, 0, 0); text-decoration: underline;">회원탈퇴</span>
+								sec:authorize="isAuthenticated()">회원탈퇴</span>
 						</h5>
 						<div id="user_del_input">
-							<b style="font-size: 15px;">비밀번호 입력</b><br> <input
+							<b id="final_check_pwd">비밀번호 입력</b><br> <input
 								type="password" id="userdel_check_password"
 								placeholder="기존 비밀번호를 입력하세요" required> <input
 								type="button" id="userdel_confirm_button" value="탈퇴하기">
 							</form>
-							<br> <span style="font-size: 13px; font-weight: bold;"
-								id="final_password_check"></span>
+							<br> <span id="final_password_check"></span>
 						</div>
 					</div>
 				</td>
@@ -140,9 +135,7 @@
 
 		<tbody sec:authorize="hasRole('ROLE_SNS')">
 			<tr>
-				<td class="userinfo_td_gap"><strong
-					style="font-family: Verdana, Geneva, Tahoma, sans-serif;">내
-						정보 수정</strong></td>
+				<td class="userinfo_td_gap"><strong>내 정보 </strong></td>
 			</tr>
 			<tr>
 				<td class="userinfo_td_gap"><strong>유저명</strong></td>
@@ -161,8 +154,7 @@
 			</tr>
 			<tr>
 				<td class="userinfo_td_gap"><strong>제공자(경유사이트)</strong></td>
-				<td class="userinfo_td_gap"
-					style="font-size: 15px; color: rgb(95, 95, 95);"
+				<td class="userinfo_td_gap" id="unique_social_provider"
 					th:text="${sub != null ? 'Google 회원으로 로그인' : (connectedAt != null ? 'KakaoTalk 회원으로 로그인' : (response != null ? 'Naver 회원으로 로그인' : ''))}">
 				</td>
 			</tr>
@@ -173,8 +165,7 @@
 						<br>
 						<h5 id="noused_account">
 							저기어때를 이용하고 싶지 않으신가요? <a class="nav-link"
-								sec:authorize="isAuthenticated()" th:href="@{/user/logout}"
-								style="color: rgb(0, 0, 0); text-decoration: underline;">로그아웃</a>
+								sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
 	</table>
 
 
@@ -202,7 +193,7 @@
 
 	<!-- 사이드 바 -->
 	<nav id="mypage_sidebar_nav">
-		<ul class="mypage_sidebar_nav_menu">
+		<ul>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}"
 				class="active">나의 정보</a></li>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
