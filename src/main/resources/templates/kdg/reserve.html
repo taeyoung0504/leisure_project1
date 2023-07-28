@@ -363,16 +363,6 @@ label {
 	margin-top: -12px;
 }
 
-input[type="checkbox"].inp_chk_01 {
-	width: 24px;
-	height: 24px;
-	border: none;
-	background: url(https://image.goodchoice.kr/images/web_v3/ico_chk.png) 0
-		0 no-repeat;
-	background-size: 24px auto;
-	cursor: pointer;
-}
-
 input[type="checkbox"].inp_chk_02 {
 	width: 24px;
 	height: 24px;
@@ -853,10 +843,10 @@ input[type="checkbox"].inp_chk_02 {
 					</select>
 				</section>
 				<section class="agree">
-
 					<p class="all_check">
 						<label for=""> <input type="checkbox" name="checkAll"
-							class="inp_chk_01" id="checkAll"> <span>전체 동의</span>
+							class="inp_chk_02" onclick="selectAll(this)"> <span>전체
+								동의</span>
 						</label>
 					</p>
 					<p>
@@ -882,8 +872,6 @@ input[type="checkbox"].inp_chk_02 {
 									이상 확인</i> <b> (필수)</b> </a>
 						</span>
 					</p>
-
-
 				</section>
 				<!-- <button type="button" class="btn_pay left_right_red"> 결제하기 </button> -->
 			</div>
