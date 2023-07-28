@@ -49,7 +49,7 @@ input[type="button" i] {
 	display: none;
 	color: red;
 	margin-left: 450px;
-	margin-top: 650px;
+	margin-top: 530px;
 }
 
 /*================================*/
@@ -1075,6 +1075,7 @@ li.mypage_sidebar a.active {
 
 .room_info_k {
 	font-size: 20px;
+	display: contents;
 }
 
 .pagination {
