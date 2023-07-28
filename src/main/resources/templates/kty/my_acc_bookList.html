@@ -47,11 +47,15 @@
 
 		<div class="content-container">
 			<h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
-			<span>사장님 명 : </span>  <span th:text="${#authentication.name}"></span>
-			<br>
-			<select class="select_acc_nam_2">
+			<div class="hidden_kty_hidden">
+				<span>사장님 명 : </span> <span id="username"
+					th:text="${#authentication.name}"></span>
+			</div>
+			<select id="accSelect" class="select_acc_nam_2">
+				<option>모두</option>
 				<option th:each="account : ${acc}" th:text="${account.acc_name}"></option>
-			</select> 
+			</select>
+
 			<table id="booking-table" class="boss_sell_name">
 				<thead>
 					<tr>
@@ -130,10 +134,6 @@
 
 
 	</body>
-
-	<script>
-		
-	</script>
 </html>
 
 

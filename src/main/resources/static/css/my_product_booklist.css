@@ -1,12 +1,15 @@
 	.boss_sell_name{
 		margin-top: 20px;
 	}
-	
+	.hidden_kty_hidden{
+	display: none;
+	}
 	.select_acc_nam_2{
 	width:200px;
 	height:30px;
 	margin-top:20px;
 	}
+
 	.boss_acc{
 	display:none;
 	margin-top:200px;
