@@ -1,0 +1,39 @@
+.food_check_type{
+	margin-left: 10px;
+}
+
+#kw3Option7{
+	margin-left: 16px;
+}
+.parking_check_type{
+	margin-left: 10px;
+	color: rgb(87, 87, 87);
+}
+.right-area{
+	overflow-y: auto;
+}
+
+.result_parking{
+	font-size: 15px; 
+	color: #f05650;
+}
+
+#result_parking2{
+	font-size: 30px;
+}
+
+#result_parking3{
+	margin-right: 1ch;
+}
+#result_parking4{
+	font-size: 13px; 
+	color: grey;
+}
+#result_parking5{
+	margin-right: 2ch;
+}
+
+
+#sdd{
+margin-left:10px;
+}

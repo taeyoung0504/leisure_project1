@@ -1,0 +1,51 @@
+.essential_mark{
+	font-weight: bold; 
+	color: orangered;
+}
+
+.partner_table-th2{
+	text-align: center;
+}
+#partner_input-file{
+	display: none;
+}
+
+#ch_file{
+	display: block; 
+	cursor: pointer; 
+	color: rgb(128, 128, 128); 
+	text-align: center; 
+	line-height: 3;
+}
+
+#partner_tel{
+	font-size: 16px;
+}
+#partner_sectors{
+	font-size: 16px;
+}
+#partner_region{
+	font-size: 16px;
+}
+#cau_kty{
+	border: 1px solid white;
+}
+
+#hidden_table_kty{
+	border: 1px solid white; 
+	text-align: right; 
+	vertical-align: middle;
+}
+.tang{
+	border: 1px solid white;
+}
+
+.tang2{
+	border: 1px solid white; 
+	text-align: right; 
+	vertical-align: middle;
+}
+td, th {
+	border: 1px solid rgb(106, 106, 106);
+	padding: 8px;
+}

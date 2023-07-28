@@ -150,6 +150,19 @@
 	margin-top: 18px;
 	font-weight: bold;
 }
+#book_accID{
+display:none;
+}
+#book_roomID{
+display:none;
+}
+
+#intro_acc{
+color:grey;
+}
+.gray-button {
+  filter: grayscale(100%);
+}
 </style>
 </head>
 
@@ -209,8 +222,8 @@
 					[[${book.totalPrice}]] </span><br> <span
 					th:text="${book.paymentDate}"></span> <span
 					th:text="${book.payType}"></span><br>
-					<span th:text="${book.accomID}" style="display:none;"></span>
-					<span th:text="${book.roomID}" style="display:none;"></span>
+					<span th:text="${book.tempAccomId}" id="book_accID" ></span>
+					<span th:text="${book.tempRoomId}" id="book_roomID"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
 				<!-- <button id="cancelBtn" class="cancelBtn"
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
@@ -219,11 +232,21 @@
     th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn')}"
     th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
 					
-			 <button id="cancelBtn2" class="reviewBtn"
-                    th:if="${book.bookStatus == '이용완료'}" 
-                    th:text="'리뷰작성'"
-                    th:attr="data-accomid=${book.accomID},data-roomid=${book.roomID},data-in=${book.checkin}"
-                    onclick="disableButton(this)">리뷰작성</button>
+					<div class="ssss21131231" th:each="acc : ${book.accommodation}">
+					<div th:text="${#authentication.name}"></div>
+			 			<div th:text="${acc.acc_name}">
+			 			</div>
+			 			<div th:each="review : ${acc.reviews}">
+			 					<div th:text="${review.author}"></div>
+			 				</div>
+			 		</div>
+			 		
+			 
+			<button id="cancelBtn2" class="reviewBtn"
+    th:if="${book.bookStatus == '이용완료'}"
+    th:text="'리뷰작성'"
+    th:attr="data-accomid=${book.tempAccomId},data-roomid=${book.tempRoomId},data-in=${book.checkin}"
+    onclick="disableButton(this)">리뷰작성</button>
 				</p>
 				
 			
@@ -234,7 +257,7 @@
 		
 		<div class="center-content" th:if="${bookList.size()<1}">
 			<h1>예약 내역이 없습니다.</h1>
-			<span id="intro_acc" style="color:grey;">다양한 숙소들을 지금 만나보세요</span>
+			<span id="intro_acc">다양한 숙소들을 지금 만나보세요</span>
 			 <a th:href="@{/tour/daegu_room}"	class="btn_red">다양한 숙소 보러가기</a>
 		</div>			
 		
@@ -309,7 +332,7 @@ cancelBtns.forEach(cancelBtn => {
             $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
             var roomID = $(button).attr('data-roomid');
             var checkIn = $(button).attr('data-in')
-            localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
+           // localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
 
             // Update the button text to "작성 완료"
             $(button).text('작성 완료');
@@ -442,7 +465,7 @@ cancelBtns.forEach(cancelBtn => {
       </body>
       </html>
     `);
-    disableButton(this);
+    //disableButton(this);
   });
 });
     
@@ -452,7 +475,6 @@ cancelBtns.forEach(cancelBtn => {
     
     
 	</script>
-
 	</body>
 
 </html>

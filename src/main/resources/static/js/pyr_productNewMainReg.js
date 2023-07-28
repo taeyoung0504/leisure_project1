@@ -42,6 +42,14 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 $(document).ready(
 	function() {
+
+		//값 변경됨을 감지하기 위함
+		var originaAccName = $("#acc_name").val(); //숙소 이름
+		var originaAccAddress = $("#acc_address").val(); //숙소 주소
+		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
+
+
+
 		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
 		var isAccExplainChanged = false; //사장님 한마디 여부를 저장
 
@@ -85,7 +93,9 @@ $(document).ready(
 
 
 		$('#addButton').click(function(event) {
+
 			event.preventDefault(); // 폼의 기본 동작인 서버로의 전송 방지
+
 
 			var form = $('#productForm')[0]; //첫 번째 form요소
 			var formData = new FormData(form);
@@ -98,14 +108,36 @@ $(document).ready(
 			var accPartnerSec = $('#partner_sectors').val();
 			var acc_explain = $('#acc_explain').val();
 
+
 			if (accName.trim() === '') {
-				//alert('숙소 이름을 입력해주세요.');
 				Swal.fire('숙소 이름을 입력해주세요')
 				return;
 			}
 
+
+			if (accName !== originaAccName) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();				
+				return;
+			}
+
+			if (accAddress !== originaAccAddress) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();				
+				return;
+			}
+
+
+			if (accPartnerSec !== originaAccSectors) {
+				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();		
+				return;
+			}
+
+
+
 			if (accAddress.trim() === '') {
-				alert('주소를 입력해주세요.');
+				Swal.fire('주소를 입력해 주세요')
 				return;
 			}
 
@@ -179,6 +211,9 @@ $(document).ready(
 
 		});
 	});
+
+
+
 
 
 

@@ -18,7 +18,7 @@ public class BookStatusUpdateService {
         this.bookRepository = bookRepository;
     }
     
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 60000)
     public void updateBookStatus() {
         LocalDate currentDate = LocalDate.now();
         System.out.println("?????????????????????? currentDate" + currentDate);
@@ -31,7 +31,7 @@ public class BookStatusUpdateService {
     }
     
     // 새로운 스케줄러
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 60000)
     public void updateBookStatusByCheckIn() {
         LocalDate currentDate = LocalDate.now();
         List<BookingVO> booksToBeUpdated = bookRepository.findByBookStatusAndCheckin("예약완료", currentDate);
