@@ -26,7 +26,6 @@
 					정보</a></li>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/test}">예약
 					내역</a></li>
-			<li class="mypage_sidebar"><a th:href="@{/user/mypage}">장바구니</a></li>
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
 			<li class="mypage_sidebar"><a
@@ -36,6 +35,8 @@
 			</li>
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_productList}" class="active"> 내 상품 목록</a></li>
+				<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 

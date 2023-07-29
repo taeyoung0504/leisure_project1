@@ -1,0 +1,104 @@
+#user_count_kty{
+	margin-left:350px;
+	position: absolute;
+	top:115px;
+	font-size:20px;
+	font-weight: bold;
+}
+
+#user_count_kty2{
+
+	margin-left:1180px;
+	position: absolute;
+	top:115px;
+	font-size:20px;
+	font-weight: bold;
+}
+
+
+.roles_count_kty{
+		/* border:1px solid grey; */
+	width:30%;
+	padding : 20px;
+	margin-left:100px;
+	margin-top:150px;
+}
+
+#roleChart{
+	
+}
+
+.roles_count_kty2{
+	/* border:1px solid grey; */
+	width:55%;
+	height:342px;
+	margin-left:750px;
+	margin-top: -340px;
+	
+}
+#sectorChart{	
+	
+}
+
+.roles_count_kty3{
+	padding:30px;
+	 border:1px solid grey; 
+	background-color:white;
+	width:27%;
+	height: 350px;
+	padding : 20px;
+	margin-left:100px;
+	margin-top:50px;
+}
+
+
+#today_booking_kty{
+	margin-top:20px;
+	font-size:20px;
+	font-weight: bold;
+}
+
+#today_total_kty{
+	margin-top:10px;
+	font-size:20px;
+	font-weight: bold;
+	margin-bottom:30px;
+}
+
+#todayBookingCount{
+	
+	margin-left:10px;
+}
+#todayTotalmoney{
+
+	margin-left:5px;
+}
+
+#notice_cal{
+	color:red;
+	margin-right: 10px;
+}
+#start_cal{
+	color:red;
+	margin-top:15px;
+	margin-left: 5px;
+	margin-right: 15px;
+}
+#no_start_cal{
+	color:black;
+}
+
+#today_booking_kty33{
+	font-size:20px;
+	font-weight: bold;
+}
+
+#sum_book{
+	margin-top:50px;	
+}
+
+#today_booking_kty44{
+	margin-top:15px;
+	font-size:20px;
+	font-weight: bold;
+}
