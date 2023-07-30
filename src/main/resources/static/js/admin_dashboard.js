@@ -164,7 +164,7 @@ function updateBookingCount2() {
         // Call the function to update the booking count on page load
         updateBookingCount2();
 
-/* 정산 통계 */
+/* 정산 통계 
 function updateBookingCount3() {
             fetch('/api/today_cal')
                 .then(response => response.text())
@@ -177,8 +177,9 @@ function updateBookingCount3() {
         // Call the function to update the booking count on page load
         updateBookingCount3();
 
-        
-        /* 정산 금액 */
+        */
+	   
+        /* 정산 금액 
         function updateBookingCount4() {
             fetch('/api/today_cal_price')
                 .then(response => response.text())
@@ -190,3 +191,4 @@ function updateBookingCount3() {
 
         // Call the function to update the booking count on page load
         updateBookingCount4();
+        */
