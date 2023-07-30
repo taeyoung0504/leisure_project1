@@ -61,9 +61,9 @@ public class BookService {
 		jdbcTemplate.update(sql, payDate, status, tid);
 	}
 	
-	public void updateCancel(String tid, String status) {
-		String sql = "UPDATE bookingvo SET book_status = ? WHERE tid = ?";
-		jdbcTemplate.update(sql, status, tid);
+	public void updateCancel(String tid, String status, String canceled_at) {
+		String sql = "UPDATE bookingvo SET book_status = ?, canceled_at = ? WHERE tid = ?";
+		jdbcTemplate.update(sql, status, canceled_at, tid);
 	}
 	
 	public List<BookingVO> getBookList() {

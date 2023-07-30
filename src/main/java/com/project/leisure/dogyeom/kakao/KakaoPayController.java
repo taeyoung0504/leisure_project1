@@ -80,7 +80,8 @@ public class KakaoPayController {
 		
 		String tid = cres.getTid();
 		String status = cres.getStatus();
-		bookService.updateCancel(tid, status);
+		String canceled_at = cres.getCanceled_at();
+		bookService.updateCancel(tid, status, canceled_at);
 		
 		return cres;
 	}

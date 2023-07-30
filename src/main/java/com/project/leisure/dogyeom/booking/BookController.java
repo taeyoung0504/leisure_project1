@@ -72,7 +72,8 @@ public class BookController {
 		BookingVO bookingvo = new BookingVO();
 
 		TotalPrice total = new TotalPrice();
-
+		
+		
 
 		LocalDate date1 = LocalDate.parse(checkin);
 		LocalDate date2 = LocalDate.parse(checkOut);
@@ -179,7 +180,7 @@ System.out.println("First Image URL: " + firstImageUrl);
 //		String userID = (String) session.getAttribute("submarine");
 
 		if (bookingVO == null) {
-			// bookingVO가 세션에 없는 경우 적절한 예외를 던집니다.
+			// bookingVO가 세션에 없는 경우 적절한 예외를 던져버리기~
 			throw new DataNotFoundException("bookingVO not found - 왜 없노");
 		}
 		log.info("INFO {}", "============================" + bookingVO.toString());
