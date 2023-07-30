@@ -497,7 +497,8 @@ public class UserController {
 		}
 		return "pyr/my_productlist";
 	}
-
+	
+	// 김도겸 
 	@GetMapping("/mypage/my_booking")
 	public String my_booking(Model model, Principal principal) {
 	    String booker_user = principal.getName();
