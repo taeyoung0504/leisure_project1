@@ -236,6 +236,33 @@
 	                         /* buttonImage: "URL_OF_YOUR_ICON_IMAGE",
 	                         buttonImageOnly: true */
 	                       });
+	                       
+	                    // 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
+	                       const checkin = sessionStorage.getItem("checkin");
+	                       const checkOut = sessionStorage.getItem("checkOut");
+
+	                       if (checkin && checkOut) {
+	                         // 있다면 datepicker가 적용된 input의 기본값으로 출력
+	                         $("#datepicker1").val(checkin + " ~ " + checkOut);
+	                         
+	                       } else {
+	                         // 없다면 오늘날짜와 내일날짜를 구해 기본값으로 출력
+	                         var today = new Date();
+	                         var nextDay = new Date(today);
+	                         nextDay.setDate(nextDay.getDate() + 1);
+	                         var formattedToday = formatDate(today);
+	                         var formattedNextDay = formatDate(nextDay);
+	                         $("#datepicker1").val(formattedToday + " ~ " + formattedNextDay);
+	                       }
+
+	                       // 데이터 형식 지정 : 'YYYY-MM-DD'
+	                       function formatDate(date) {
+	                         var year = date.getFullYear();
+	                         var month = (date.getMonth() + 1).toString().padStart(2, "0");
+	                         var day = date.getDate().toString().padStart(2, "0");
+	                         return year + "-" + month + "-" + day;
+	                       }
+	                       
 	                     });
                      
                   
@@ -245,9 +272,31 @@
                        var selectedDates = $("#datepicker1").val();
                        // 선택한 날짜가 비어있는지(trim()으로 공백 제거 후 확인) 확인. 비어있다면 함수를 종료.
                        if (selectedDates.trim() === "") {
-                         $("#datepicker1").val("");
-                         return;
-                       }
+                    	   var today = new Date();
+                    	    var tomorrow = new Date(today);
+                    	    tomorrow.setDate(tomorrow.getDate() + 1);
+                    	    var formattedToday = formatDate(today);
+                    	    var formattedTomorrow = formatDate(tomorrow);
+                    	    
+                    	    const checkin = formattedToday;
+                    	   
+                    	    const checkOut = formattedTomorrow;
+                    	    
+                    	    // 체크인, 체크아웃 날짜 세션에 담기
+                    	    sessionStorage.setItem("checkin", checkin);
+                    	    sessionStorage.setItem("checkOut", checkOut);
+                    	    
+                    	    // 화면에 보여질 두 날짜 형식 ex) 2023-07-17 ~ 2023-07-18
+                    	    $("#datepicker1").val(formattedToday + " ~ " + formattedTomorrow);
+                    	    
+                    	    // 각 객실의 금액과 숙박 일수를 곱함
+                    	    setReservationSpanValue(1); // Assuming one night stay as the default
+                    	    
+                    	    const accomID = document.getElementById('accomid').textContent;
+                    	    var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
+                    	    location.assign(url);
+                       } else {
+                    	   
                        // 선택한 날짜를 쉼표로 분리하고(trim()으로 각 요소의 공백 제거) 배열로 만듬
                        var datesArray = selectedDates.split(",").map(date => date.trim());
                        // 유효한 날짜만 필터링하여 validDates 배열에 저장합니다. 유효한 날짜는 isDateValid 함수를 사용하여 확인
@@ -257,7 +306,12 @@
                        if (validDates.length > 0) {
                          var minDate = new Date(Math.min(...validDates.map(date => new Date(date))));
                          var maxDate = new Date(Math.max(...validDates.map(date => new Date(date))));
-                        
+                         
+                         if (minDate.getTime() === maxDate.getTime()) {
+                             // If minDate and maxDate are equal, set maxDate to be one day after minDate
+                             maxDate.setDate(maxDate.getDate() + 1);
+                           }
+                         
                          // 각 날짜들을 fomatting해줄 함수에 대입하고 결과 값 변수에 저장.
                          var formattedMinDate = formatDate(minDate);
                          console.log(formattedMinDate);
@@ -287,7 +341,7 @@
                    			var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
  	                   		location.assign(url); 
   	                  
-                       } else {
+                       } 
                          $("#datepicker1").val(""); // 입력값이 공백이라면 datepicker 초기화
                        }
                      }
@@ -486,6 +540,10 @@
                                 console.error("Error occurred:", error);
                                 // 오류 처리를 위한 추가적인 코드를 작성
                               });
+                      
+                      // 예약하기 버튼을 눌렀을 경우 세션에 저장된 날짜들 삭제
+                      sessionStorage.removeItem("checkin");
+                      sessionStorage.removeItem("checkOut");
                       
                   }   
 

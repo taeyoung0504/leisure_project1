@@ -2,6 +2,7 @@ package com.project.leisure.dogyeom.booking;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.project.leisure.dogyeom.base.BaseEntity;
 import com.project.leisure.yuri.product.Accommodation;
@@ -46,6 +47,9 @@ public class BookingVO extends BaseEntity implements Serializable{
 	
 	private int bookHeadCount; // 인원수
 	private String paymentDate; // 결제일
+	
+	private String canceled_at; // 결제 취소일
+	
 	private String payType; // 결제 방식
 	private String totalPrice; // 총 결제 금액
 	

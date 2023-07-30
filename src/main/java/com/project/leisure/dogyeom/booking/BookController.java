@@ -72,7 +72,8 @@ public class BookController {
 		BookingVO bookingvo = new BookingVO();
 
 		TotalPrice total = new TotalPrice();
-
+		
+		
 
 		LocalDate date1 = LocalDate.parse(checkin);
 		LocalDate date2 = LocalDate.parse(checkOut);
