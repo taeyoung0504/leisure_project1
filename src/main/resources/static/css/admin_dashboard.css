@@ -1,27 +1,48 @@
+
 #user_count_kty{
-	margin-left:350px;
+	margin-left:290px;
 	position: absolute;
-	top:115px;
+	top:110px;
 	font-size:20px;
 	font-weight: bold;
 }
-
+#book_count_kty4{
+	margin-left:270px;
+	position: absolute;
+	font-size:20px;
+	top:500px;
+	font-weight: bold;
+}
+#dashboard_title{
+	margin-left:50px;
+	
+}
+#book_count_kty5{
+	margin-left:1100px;
+	position: absolute;
+	font-size:20px;
+	top:505px;
+	font-weight: bold;
+}
 #user_count_kty2{
-
-	margin-left:1180px;
+	margin-left:1100px;
 	position: absolute;
-	top:115px;
+	top:110px;
 	font-size:20px;
 	font-weight: bold;
 }
-
+#admin_dashboard_main{
+	margin-left:-1300px;
+}
 
 .roles_count_kty{
 		/* border:1px solid grey; */
-	width:30%;
+	width:25%;
 	padding : 20px;
-	margin-left:100px;
-	margin-top:150px;
+	margin-left:90px;
+	margin-top:80px;
+	background-color: white;
+	border-radius: 15px;
 }
 
 #roleChart{
@@ -30,9 +51,11 @@
 
 .roles_count_kty2{
 	/* border:1px solid grey; */
-	width:55%;
+	background-color: white;
+	border-radius: 15px;
+	width:60%;
 	height:342px;
-	margin-left:750px;
+	margin-left:650px;
 	margin-top: -340px;
 	
 }
@@ -41,14 +64,16 @@
 }
 
 .roles_count_kty3{
+	text-align: center;
 	padding:30px;
-	 border:1px solid grey; 
+	 border:1px solid rgb(229, 229, 229); 
 	background-color:white;
-	width:27%;
+	border-radius: 15px;
+	width:25%;
 	height: 350px;
 	padding : 20px;
-	margin-left:100px;
-	margin-top:25px;
+	margin-left:90px;
+	margin-top:50px;
 }
 
 
@@ -65,6 +90,12 @@
 	margin-bottom:30px;
 }
 
+#today_total_kty1{
+	margin-top:20px;
+	font-size:20px;
+	font-weight: bold;
+	margin-bottom:30px;
+}
 #todayBookingCount{
 	
 	margin-left:10px;
@@ -101,4 +132,17 @@
 	margin-top:15px;
 	font-size:20px;
 	font-weight: bold;
+}
+
+#today_booking_kty33{
+	margin-top:10px;
+}
+
+.test{
+	width:60%;
+	margin-left:650px;
+	margin-top:-385px;
+	height: 380px;
+	background-color: white;
+	border-radius: 15px;
 }

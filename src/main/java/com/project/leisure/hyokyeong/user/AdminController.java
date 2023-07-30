@@ -292,10 +292,10 @@ public class AdminController {
 	    return "redirect:/admin/adminNoticeList";
 	}
 
-	@GetMapping("/test")
+	@GetMapping("/main")
 	public String admin_dashboard(Model model) {
 		  LocalDate currentDate = LocalDate.now();
 	        model.addAttribute("currentDate", currentDate);
-		return "kty/admintest";
+		return "kty/admin_main";
 	}
 }

@@ -163,25 +163,29 @@ function updateBookingCount2() {
 
         // Call the function to update the booking count on page load
         updateBookingCount2();
+        
+        
+        
+        
+        
+   /* 취소 총 통계 */
 
-/* 정산 통계 
-function updateBookingCount3() {
-            fetch('/api/today_cal')
+function updateCancleCount2() {
+            fetch('/api/today_cancle_total')
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('todayTotalcal').innerText = data;
+                    document.getElementById('todayTotaCancle').innerText = data;
                 })
                 .catch(error => console.error('Error:', error));
         }
 
         // Call the function to update the booking count on page load
-        updateBookingCount3();
+        updateCancleCount2();
 
-        */
-	   
-        /* 정산 금액 
-        function updateBookingCount4() {
-            fetch('/api/today_cal_price')
+
+/* 취소 금액 통계 */createBarChart
+function updateCancleCount33() {
+            fetch('/api/today_benefit_total3')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('todayTotalcal2').innerText = data;
@@ -190,5 +194,79 @@ function updateBookingCount3() {
         }
 
         // Call the function to update the booking count on page load
-        updateBookingCount4();
-        */
+        updateCancleCount33();
+
+
+
+
+
+
+
+
+
+/* 방문자 통계 */
+
+async function fetchVisitData() {
+	try {
+		const response = await fetch('/api/today_visit_count');
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+		const responseData = await response.json();
+		return responseData;
+	} catch (error) {
+		console.error('Error fetching visit data:', error);
+	}
+}
+
+async function updateLineChart() {
+	const visitData = await fetchVisitData();
+
+	const visitDates = Object.keys(visitData);
+	const visitCounts = Object.values(visitData);
+
+	const lineChartCanvas = document.getElementById('lineChart').getContext('2d');
+	new Chart(lineChartCanvas, {
+		type: 'line',
+		data: {
+			labels: visitDates,
+			datasets: [{
+				label: '일 별 방문자 수',
+				data: visitCounts,
+				borderColor: 'rgba(255, 99, 132, 1)',
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderWidth: 2,
+				pointRadius: 5,
+				pointHoverRadius: 7,
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			plugins: {
+				datalabels: {
+					display: false,
+				}
+			},
+			scales: {
+				x: {
+					grid: {
+						display: false,
+					}
+				},
+				y: {
+					beginAtZero: true,
+					stepSize: 10, // You can adjust the step size based on your data
+					title: {
+						display: true,
+						text: '방문자 수',
+					}
+				}
+			}
+		}
+	});
+}
+
+// Call the updateLineChart function initially to load the chart
+updateLineChart();
+

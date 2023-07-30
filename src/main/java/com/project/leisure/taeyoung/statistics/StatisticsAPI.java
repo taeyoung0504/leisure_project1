@@ -1,5 +1,10 @@
 package com.project.leisure.taeyoung.statistics;
 
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +94,62 @@ public class StatisticsAPI {
 	        return countTodayBookings;
 	    }
 	    
+	    /* 취소 건 수 통계  */
+	    @GetMapping("/today_cancle_total")
+	    public String getTodaycancle_total() throws JsonProcessingException {
+	        String sql = "SELECT COUNT(*) AS canceled_today_count FROM bookingvo WHERE DATE(canceled_at) = CURDATE()";
+	        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+
+	        // Extracting the canceled_today_count value from the result
+	        String canceledTodayCount = "0";
+	        if (!result.isEmpty()) {
+	            Map<String, Object> row = result.get(0);
+	            canceledTodayCount = row.get("canceled_today_count").toString();
+	        }
+
+	        return canceledTodayCount;
+	    }
 	    
+	    
+	    /* 취소 건 수  총 액 통계  */
+	    @GetMapping("/today_benefit_total3")
+	    public String getTodayBenefitTotal2() throws JsonProcessingException {
+	        String sql = "SELECT FORMAT(SUM(REPLACE(total_price, ',', '')), 0) AS total_price_sum FROM bookingvo WHERE DATE(canceled_at) = CURDATE()";
+	        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+
+	        // Extracting the total_price_sum value from the result
+	        String totalBenefitToday = "0";
+	        if (!result.isEmpty()) {
+	            Map<String, Object> row = result.get(0);
+	            totalBenefitToday = (String) row.get("total_price_sum");
+	        }
+
+	        return totalBenefitToday;
+	    }
+	    
+	    	/* 방문 통계 */
+	    @GetMapping("/today_visit_count")
+	    public String getTodayVisitCount() throws JsonProcessingException {
+	        String sql = "SELECT DATE(visit_date) AS visit_date, SUM(visit_count) AS total_visit_count " +
+	                     "FROM visit WHERE visit_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) " +
+	                     "GROUP BY DATE(visit_date) " +
+	                     "ORDER BY visit_date ASC;"; // Removing DATE(visit_date) and ordering by visit_date directly
+
+	        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+
+	        // Convert the query result to a JSON string
+	        Map<LocalDate, Integer> visitDataByDate = new LinkedHashMap<>(); // Using LinkedHashMap to preserve insertion order
+	        for (Map<String, Object> row : result) {
+	            LocalDate visitDate = LocalDate.parse(row.get("visit_date").toString());
+	            int totalVisitCount = Integer.parseInt(row.get("total_visit_count").toString());
+	            visitDataByDate.put(visitDate, totalVisitCount);
+	        }
+
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        String jsonResult = objectMapper.writeValueAsString(visitDataByDate);
+
+	        return jsonResult;
+	    }
 	    
 	    /* 정산  건 수 통계 
 	    @GetMapping("/today_cal")
