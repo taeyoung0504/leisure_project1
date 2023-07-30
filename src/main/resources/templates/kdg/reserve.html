@@ -528,21 +528,22 @@ input[type="checkbox"].inp_chk_02 {
 					<span hidden id="roomID" th:value="${bookingvo.roomID}"
 						th:text="${bookingvo.roomID}"></span>
 					<p class="name">
-						<strong>숙소이름</strong> <span th:text="${bookingvo.accomTitle}">양평
-							스마일카라반펜션</span>
+						<strong>숙소이름</strong> <span th:text="${bookingvo.accomTitle}"
+							class="acc_name">양평 스마일카라반펜션</span>
 					</p>
 					<p>
-						<strong>객실타입</strong> <span th:text="${bookingvo.roomTitle}">블루룸</span>
+						<strong>객실타입</strong> <span th:text="${bookingvo.roomTitle}"
+							class="product_type">블루룸</span>
 					</p>
 					<p>
-						<strong>체크인</strong> <span th:text="${bookingvo.checkin}">07.11
-							화 15:00</span>
+						<strong>체크인</strong> <span th:text="${bookingvo.checkin}"
+							class="product_checkin">07.11 화 15:00</span>
 
 
 					</p>
 					<p>
-						<strong>체크아웃</strong> <span th:text="${bookingvo.checkOut}">07.11
-							금 11:00</span>
+						<strong>체크아웃</strong> <span th:text="${bookingvo.checkOut}"
+							class="product_checkout">07.11 금 11:00</span>
 					</p>
 				</section>
 				<section class="total_price_pc">
@@ -607,7 +608,9 @@ input[type="checkbox"].inp_chk_02 {
 							    		const bookerTel = document.getElementById('tel').value;
 							    		console.log(bookerTel);
 							    		
-							    		const url = `/book/create/${roomID}`;
+							    		
+							    		
+							     		const url = `/book/create/${roomID}`;
 							    		
 							    		fetch(url, {
 							    			method: 'POST',
@@ -617,7 +620,8 @@ input[type="checkbox"].inp_chk_02 {
 							    			body: JSON.stringify({
 							    				payType: payType,
 							    				bookerName: bookerName,
-							    				bookerTel: bookerTel
+							    				bookerTel: bookerTel,
+							    			
 							    			})	
 							    		})
 							    		.then(response => {
@@ -636,7 +640,7 @@ input[type="checkbox"].inp_chk_02 {
 							    		})
 							    		.catch(error => {
 							    		    console.error("Error:", error.message);
-							    		});
+							    		}); 
 							    			
 							    		
 							    	})
