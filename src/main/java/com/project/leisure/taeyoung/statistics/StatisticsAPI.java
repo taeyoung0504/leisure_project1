@@ -91,7 +91,7 @@ public class StatisticsAPI {
 	    
 	    
 	    
-	    /* 정산  건 수 통계 */
+	    /* 정산  건 수 통계 
 	    @GetMapping("/today_cal")
 	    public String getTodaycal_total() throws JsonProcessingException {
 	        String sql = "SELECT COUNT(*) AS count_today_bookings " +
@@ -110,18 +110,18 @@ public class StatisticsAPI {
 
 	        return countTodayBookings;
 	    }
+	    */
 	    
-	    /* 정산 금액 통계 */
+	    /* 정산 금액 통계 
 	    @GetMapping("/today_cal_price")
 	    public String getTodaycal_total2() throws JsonProcessingException {
 	        String sql = "SELECT FORMAT(SUM(REPLACE(total_price, ',', '')), 0) AS total_sum " +
 	                     "FROM bookingvo " +
 	                     "WHERE book_status = '이용완료' " +
-	                     "AND DATE(payment_date) >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+	                     "AND payment_date = DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
 
 	        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
 
-	        // Extracting the total_sum value from the result
 	        String totalSum = "0";
 	        if (!result.isEmpty()) {
 	            Map<String, Object> row = result.get(0);
@@ -130,5 +130,5 @@ public class StatisticsAPI {
 
 	        return totalSum;
 	    }
-	    
+	    */
 }
