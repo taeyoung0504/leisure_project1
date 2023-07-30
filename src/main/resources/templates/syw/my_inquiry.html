@@ -198,13 +198,15 @@
    <div id="my_infomation_modify" layout:fragment="content" class="container my-3">
       <nav id="mypage_sidebar_nav">
          <ul>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의정보</a></li>
+            <li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의 정보</a></li>
             <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
             <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_inquiry}" class="active">문의 내역</a></li>
             <li class="mypage_sidebar"><a th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
             <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
             <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_productList}"
                   sec:authorize="hasRole('ROLE_PARTNER')">내 상품 목록</a></li>
+                  <li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
          </ul>
       </nav>
       <div class="content-container" th:if="${inquiries.size()>0}">

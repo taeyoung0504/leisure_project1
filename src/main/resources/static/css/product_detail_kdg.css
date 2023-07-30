@@ -2,14 +2,30 @@
 	margin: 0;
 }
 
-.datepicker {
+/* .datepicker {
 	margin-top: 660px;
 	margin-left: 490px;
-	position: absolute;
+	position: fixed;
 	z-index: 200;
 	background-color: white;
-	width: 256px; /* 추가한 속성 */
+	width: 256px; 추가한 속성
+	
+} */
+
+.datepicker table {
+      background-color: #fff;
+    margin: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: absolute;
+	z-index:10;
+	border: solid 1px gray;
 }
+
 
 /* room 영역 스타일 */
 .room {

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="/css/my_product_booklist.css">
+<script th:src="@{/js/my_product_booklist.js}"></script>
+
+</head>
+
+<body id="userinfo_modify">
+<html layout:decorate="~{jjj/header}">
+<div id="my_infomation_modify" layout:fragment="content"
+	class="container my-3">
+
+
+
+	<div class="content-container">
+
+
+
+		<!-- 사이드 바 -->
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+						정보</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+				</li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_productList}"
+					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+				</li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_acc_bookList}"
+					sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 숙소
+						예약리스트</a></li>
+			</ul>
+		</nav>
+
+
+
+		<div class="content-container">
+			<h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
+			<div class="hidden_kty_hidden">
+				<span>사장님 명 : </span> <span id="username"
+					th:text="${#authentication.name}"></span>
+			</div>
+			<select id="accSelect" class="select_acc_nam_2">
+				<option>모두</option>
+				<option th:each="account : ${acc}" th:text="${account.acc_name}"></option>
+			</select>
+
+			<table id="booking-table" class="boss_sell_name">
+				<thead>
+					<tr>
+						<th>예약 번호</th>
+						<th>숙소명</th>
+						<th>객실명</th>
+						<th>예약자 ID</th>
+						<th>예약자 명</th>
+						<th>예약자 번호</th>
+						<th>체크인</th>
+						<th>체크아웃</th>
+						<th>예약 상태</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${booking}">
+						<td th:text="${book.bookNum}"></td>
+						<td th:text="${book.accomTitle}"></td>
+						<td th:text="${book.roomTitle}"></td>
+						<td th:text="${book.bookerID}"></td>
+						<td th:text="${book.bookerName}"></td>
+						<td th:text="${book.bookerTel}"></td>
+						<td th:text="${book.checkin}"></td>
+						<td th:text="${book.checkOut}"></td>
+						<td th:text="${book.bookStatus}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="detail_warning"></div>
+			<div id="warning_bookcancle">
+				<span id="s_1">*</span> 파트너 임의로 예약취소는 불가능합니다 <b id="cancle_penalty">(패널티
+					부가)</b><br> <span id="sss333">취소를 원할 경우 관리자에게 문의해주세요.</span>
+			</div>
+
+
+
+
+			<table id="acc-table" class="boss_acc">
+				<thead>
+					<tr>
+						<th>객실번호</th>
+						<th>사용자명</th>
+						<th>숙소명</th>
+						<th>객실명 & 객실번호</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="acc: ${acc}">
+						<td th:text="${acc.id}"></td>
+						<td th:text="${acc.username}"></td>
+						<td th:text="${acc.acc_name}"></td>
+						<td>
+							<!-- Access the product_type of each Product entity associated with the Accommodation -->
+							<span th:each="product, iterStat : ${acc.products}"> <span
+								th:text="${product.product_type}"></span> <span
+								th:text="${product.product_id}"></span><span> / </span> <span
+								th:if="${!iterStat.last}"> </span>
+						</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+
+
+
+
+		<!--  여기에 내용ㅇ없음 부분 -->
+
+	</div>
+
+
+
+	</body>
+</html>
+
+

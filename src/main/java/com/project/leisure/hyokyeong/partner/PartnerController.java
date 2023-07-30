@@ -3,6 +3,7 @@ package com.project.leisure.hyokyeong.partner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -109,8 +111,9 @@ public class PartnerController {
 	}
 
 	@PostMapping("/approve/{id}")
-	public String handleApproval(@PathVariable("id") Long id, @RequestParam("status") int status,
+	public String handleApproval(@PathVariable("id") Long id, @RequestBody Map<String, Integer> payload,
 			HttpServletRequest request) {
+		int status = payload.get("status");
 		partnerListService.handleApproval(id, status);
 
 		// 이전 페이지 URL 가져오기

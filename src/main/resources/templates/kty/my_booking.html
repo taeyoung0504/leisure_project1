@@ -160,6 +160,9 @@ display:none;
 #intro_acc{
 color:grey;
 }
+.gray-button {
+  filter: grayscale(100%);
+}
 </style>
 </head>
 
@@ -192,6 +195,8 @@ color:grey;
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_productList}"
 				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+		<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 	<div id="wrap">
@@ -229,11 +234,22 @@ color:grey;
     th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn')}"
     th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
 					
-			 <button id="cancelBtn2" class="reviewBtn"
-                    th:if="${book.bookStatus == '이용완료'}" 
-                    th:text="'리뷰작성'"
-                    th:attr="data-accomid=${book.tempAccomId},data-roomid=${book.tempRoomId},data-in=${book.checkin}"
-                    onclick="disableButton(this)">리뷰작성</button>
+					<!--  수정 중
+					<div class="ssss21131231" th:each="acc : ${book.accommodation}">
+					<div th:text="${#authentication.name}"></div>
+			 			<div th:text="${acc.acc_name}">
+			 			</div>
+			 			<div th:each="review : ${acc.reviews}">
+			 					<div th:text="${review.author}"></div>
+			 				</div>
+			 		</div> -->
+			 		
+			 
+			<button id="cancelBtn2" class="reviewBtn"
+    th:if="${book.bookStatus == '이용완료'}"
+    th:text="'리뷰작성'"
+    th:attr="data-accomid=${book.tempAccomId},data-roomid=${book.tempRoomId},data-in=${book.checkin}"
+    onclick="disableButton(this)">리뷰작성</button>
 				</p>
 				
 			
@@ -322,7 +338,7 @@ cancelBtns.forEach(cancelBtn => {
             localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
 
             // Update the button text to "작성 완료"
-            $(button).text('작성 완료');
+            $(button).text('리뷰 작성 완료');
         }
     }
 
@@ -335,7 +351,7 @@ cancelBtns.forEach(cancelBtn => {
             if (isDisabled === 'true') {
                 $(this).prop('disabled', true);
                 $(this).addClass('gray-button'); // Add the 'gray-button' class to change appearance
-                $(this).text('작성 완료'); // Update the button text to "작성 완료"
+                $(this).text('리뷰 작성 완료'); // Update the button text to "작성 완료"
             }
         });
     }
@@ -462,7 +478,6 @@ cancelBtns.forEach(cancelBtn => {
     
     
 	</script>
-
 	</body>
 
 </html>

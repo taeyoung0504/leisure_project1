@@ -514,4 +514,21 @@ public class UserController {
 	    model.addAttribute("bookList", filteredBook);
 	    return "kty/my_booking";
 	}
+	
+	
+	@GetMapping("/mypage/my_acc_bookList")
+	public String my_acc_bookList(Principal principal,Model model) {
+		String username = principal.getName();
+		 
+		  List<Accommodation> acc = this.accommodationService.my_acc_list();
+		  List<BookingVO> book = this.bookService.getbooklist();
+		  
+		  List<Accommodation> filteredBook = acc.stream()
+		            .filter(Accommodation -> Accommodation.getUsername().equals(username))
+		            .collect(Collectors.toList());
+		  
+		  model.addAttribute("acc",filteredBook);
+		  model.addAttribute("booking",book);
+		  return "kty/my_acc_bookList";
+	}
 }

@@ -11,7 +11,19 @@
 	margin: 0 auto;
 	width: 800px;
 }
-
+#noAcc{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: -300px;
+	margin-left: 25px;
+	/* You can add more styling as needed */
+	height: 100vh;
+	}
+	#noAcc2{
+	color:grey;
+	}
 #mainContent {
 	display: flex;
 	flex-direction: column;

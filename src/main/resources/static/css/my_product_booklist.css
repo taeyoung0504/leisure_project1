@@ -1,0 +1,59 @@
+	.boss_sell_name{
+		margin-top: 20px;
+	}
+	.hidden_kty_hidden{
+	display: none;
+	}
+	.select_acc_nam_2{
+	width:200px;
+	height:30px;
+	margin-top:20px;
+	}
+
+	.boss_acc{
+	display:none;
+	margin-top:200px;
+	}
+	
+	 table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .detail_warning{
+    margin-top:20px;
+    }
+    #warning_bookcancle2{
+    	
+    	margin-top: 50px;
+    }
+    
+    #s_1{
+    color: red;
+	margin-right:10px;
+	}
+	
+	#s_2{
+	margin-left:30px;
+	}
+	
+	#sss333{
+	margin-left:20px;
+	}
+	
+	#cancle_penalty{
+	color:red;
+	}
