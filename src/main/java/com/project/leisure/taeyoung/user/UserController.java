@@ -456,7 +456,7 @@ public class UserController {
 		return "syw/my_inquiry";
 	}
 
-	// 내 상품 리스트
+	// 내 상품 목록
 	@GetMapping("/mypage/my_productList")
 	@PreAuthorize("isAuthenticated()")
 	public String myProducts(Principal principal, Model model,

@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.project.leisure.yuri.product.Product;
+
 public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 //	BookingVO findByRoomID(int roomID);
 //	Optional<BookingVO> findByRoomID(int bookNum);
@@ -23,6 +25,10 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 	// 유리 추가
 	Optional<BookingVO> findByTid(String tid);
 
-	//유리 추가
+	// 유리 추가
 	List<BookingVO> findByCheckinAndBookStatus(LocalDate tomorrow, String string);
+
+	// 유리 추가
+	Optional<BookingVO> findByProduct(Product product);
+
 }
