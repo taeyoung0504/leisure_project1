@@ -1,33 +1,10 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+@charset "UTF-8";
 
-<head>
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/admin_notice.css">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-
-<style>
-.hide {
-	display: none;
-}
-
-body {
-	font-family: Arial, sans-serif;
-	background-color: #fff;
-	color: #333;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
 
 h1 {
 	text-align: center;
-	margin: 20px 0;
+	margin: 30px 0;
+	font-size: 30px;
 }
 
 h3 {
@@ -39,11 +16,11 @@ h3 {
 	font-weight: bold;
 }
 
-.container {
-	margin: 10px auto;
-	width: 90%;
-	height: 100%;
-	padding-left: 80px;
+.container{
+	margin: 10px auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-left: 340px !important;
 }
 
 table {
@@ -61,10 +38,6 @@ th {
 	color: #333;
 }
 
-tr:nth-child(even) {
-	
-}
-
 form {
 	display: inline-block;
 }
@@ -75,6 +48,9 @@ input[type="submit"] {
 	border: none;
 	padding: 5px 10px;
 	cursor: pointer;
+	float: right;
+	width: 80px;
+	height: 35px;
 }
 
 input[type="submit"]:hover {
@@ -227,67 +203,64 @@ span.role-ADMIN {
 }
 
 .content-container {
-	margin: 0 auto;
-	max-width: 800px;
-	padding-top: 60px;
+/* 	margin: 0 200px; */
+	display: table-caption;
+	padding-left: 260px;
+	
+	/* max-width: 800px; */
+}
+.notice-item {
+	border-bottom: 1px solid #ccc;
+	margin-top: 20px;
+	padding: 8px;
+	cursor: pointer;
+}
+
+.notice-item:hover {
+	background-color: #f2f2f2;
+}
+
+.notice-content {
+	display: none;
+}
+
+.pagination ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
+
+.pagination ul li {
+	margin-right: 10px;
+}
+
+.pagination ul li:last-child {
+	margin-right: 0;
+}
+
+.edit-button {
+	display: none;
+}
+
+.delete-button {
+	display: none;
 }
 
 h2 {
 	text-align: center;
 }
 
-form {
-	margin-top: 20px;
+#title {
+	    width: 900px;
+}
+
+textarea {
+width: 900px;
 }
 
 label {
-	text-align: center;
-	display: block;
-	font-weight: bold;
+	float: left;
 }
 
-input[type="text"], textarea {
-	width: 100%;
-	padding: 5px;
-}
 
-input[type="submit"] {
-	margin-top: 10px;
-}
-</style>
-</style>
-
-
-
-</head>
-
-<body>
-<html layout:decorate="~{khk/adminNavbar}">
-<div layout:fragment="adminNav" class="container my-3">
-	<div class="content-container">
-		<h2>공지사항 수정</h2>
-		<form method="post" th:action="@{/admin/modify/{id}(id=${notice.id})}">
-			<div class="notice_title">
-				<label for="title">공지사항 제목</label> <input type="text" id="title"
-					name="title" th:value="${notice.title}" required>
-				<br>
-			</div>
-			<div class="notice_content">
-				<label for="content">공지사항 내용</label><br>
-				<textarea id="content" name="content" rows="40"
-					data-editor="ckeditor" required th:text="${notice.content}">
-				</textarea>
-			</div>
-			<input type="submit" value="등록">
-		</form>
-	</div>
-
-
-	<script>
-    ClassicEditor
-        .create(document.querySelector('[data-editor="ckeditor"]'), {
-            language: "ko"
-        });
-</script>
-	</body>
-</html>

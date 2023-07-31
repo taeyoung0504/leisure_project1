@@ -33,7 +33,7 @@ public class Notice {
 
     private LocalDateTime createDate;
     
-    private String file;
+   
     
     public Notice(String title, String username, String content) {
         this.title = title;
