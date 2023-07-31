@@ -224,7 +224,7 @@ public class ProductController {
 		return ResponseEntity.ok(response);
 	}
 
-	// ====! 예외처리 필수 if-else 로 return된 값 1일 경우에만 다음 코드가 실행되도록 처리 !=========
+	// ====! 예외처리 필수 if-else 로 return된 값 1일 경우에만 다음 코드가 실행되도록 처리 !=======
 
 	// 수정된 상품의 값, 이미지를 받아와서 적용
 	@PostMapping("/updateProduct")
