@@ -24,7 +24,7 @@ public interface JpaAlreadyReserveRepository extends JpaRepository<BookingVO, In
             "   OR (:nextDate BETWEEN b.checkin AND b.checkOut)) " +
             "    AND b.tempAccomId = :tempAccomId " +
             "    AND (:currentDate <> b.checkOut AND :nextDate <> b.checkin)" +
-			" AND b.bookStatus IS NOT NULL AND b.bookStatus != 'CANCEL_PAYMENT' AND b.bookStatus != '이용완료'")
+			" AND b.bookStatus IS NOT NULL AND b.bookStatus != 'CANCEL_PAYMENT' AND b.bookStatus != '이용완료' AND b.bookStatus != 'CANCELED'")
 	List<BookingVO> findTempRoomId(
             @Param("tempAccomId") Long tempAccomId,
             @Param("currentDate") LocalDate currentDate,

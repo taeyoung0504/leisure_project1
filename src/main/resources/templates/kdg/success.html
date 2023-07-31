@@ -72,29 +72,24 @@
     <th>값</th>
   </tr>
   <tr>
-  	<td id="tid">[[${info.tid}]]</td>
     <td>결제일시</td>
-    <td>[[${info.approved_at}]]</td>
+    <td>[[${book.paymentDate}]]</td>
   </tr>
-  <tr>
+   <tr>
     <td>주문번호</td>
-    <td>[[${info.partner_order_id}]]</td>
+   <td id="tid">[[${book.tid}]]</td>
   </tr>
   <tr>
     <td>상품명</td>
-    <td class="item_name">[[${info.item_name}]]</td>
-  </tr>
-  <tr>
-    <td>상품수량</td>
-    <td>[[${info.quantity}]]</td>
+    <td class="item_name">[[${book.roomTitle}]]</td>
   </tr>
   <tr>
     <td>결제금액</td>
-    <td id="amount">[[${info.amount.total}]]</td>
+    <td id="amount">[[${book.totalPrice}]]</td>
   </tr>
   <tr>
     <td>결제방법</td>
-    <td>[[${info.payment_method_type}]]</td>
+    <td>[[${book.payType}]]</td>
   </tr>
 </table>
 	<br>

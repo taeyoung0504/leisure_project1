@@ -22,5 +22,7 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 	
 	List<BookingVO> findByBookStatusAndCheckin(String bookStatus, LocalDate checkIn);
 
+	Optional<BookingVO> findByTid(String tid);
+
 	
 }

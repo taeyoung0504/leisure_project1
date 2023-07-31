@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.kakao.KakaoPayController;
 import com.project.leisure.dogyeom.kakao.KakaoReadyResponseVO;
+import com.project.leisure.dogyeom.toss.PaymentService;
+import com.project.leisure.dogyeom.toss.TossPaymentConfig;
+import com.project.leisure.dogyeom.toss.domain.CancelPaymentDto;
+import com.project.leisure.dogyeom.toss.domain.PaymentDto;
+import com.project.leisure.dogyeom.toss.domain.PaymentResDto;
+import com.project.leisure.dogyeom.toss.domain.PaymentSuccessDto;
 import com.project.leisure.dogyeom.totalPrice.TotalPrice;
 import com.project.leisure.dogyeom.totalPrice.TotalPriceRepository;
 import com.project.leisure.yuri.product.Accommodation;
@@ -31,36 +38,54 @@ import com.project.leisure.yuri.product.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 //@Controller
+@Validated
 @RequestMapping("/book/*")
 @Slf4j
+@RequiredArgsConstructor
 public class BookController {
-
-	private BookService bookService;
-	private RoomService roomService;
-
-	private KakaoPayController kakaoPayController;
-	private ProductService productService;
-
-	private BookingVO bookingVO;
 	
-	private AccommodationService accommodationService;
+private final PaymentService paymentService;
+    
+	private final TossPaymentConfig tossPaymentConfig;
+
+
+	private final BookService bookService;
+	private final RoomService roomService;
+
+	private final KakaoPayController kakaoPayController;
+	private final ProductService productService;
+
+	private final BookingVO bookingVO;
+	
+	private final AccommodationService accommodationService;
 
 	private final TotalPriceRepository totalPriceRepository;
+	
+	private final CancelPaymentDto cancelPaymentDto;
 
-	@Autowired
-	public BookController(BookService bookService, RoomService roomService, KakaoPayController kakaoPayController,
-			ProductService productService, TotalPriceRepository totalPriceRepository, AccommodationService accommodationService) {
-		this.bookService = bookService;
-		this.roomService = roomService;
-		this.kakaoPayController = kakaoPayController;
-		this.productService = productService;
-		this.totalPriceRepository = totalPriceRepository;
-		this.accommodationService = accommodationService;
-	}
+
+//	public BookController(PaymentService paymentService, TossPaymentConfig tossPaymentConfig, BookService bookService,
+//			RoomService roomService, KakaoPayController kakaoPayController, ProductService productService,
+//			BookingVO bookingVO, AccommodationService accommodationService, TotalPriceRepository totalPriceRepository,
+//			CancelPaymentDto cancelPaymentDto) {
+//		super();
+//		this.paymentService = paymentService;
+//		this.tossPaymentConfig = tossPaymentConfig;
+//		this.bookService = bookService;
+//		this.roomService = roomService;
+//		this.kakaoPayController = kakaoPayController;
+//		this.productService = productService;
+//		this.bookingVO = bookingVO;
+//		this.accommodationService = accommodationService;
+//		this.totalPriceRepository = totalPriceRepository;
+//		this.cancelPaymentDto = cancelPaymentDto;
+//	}
 
 	@GetMapping("/toss/{id}")
 	public ResponseEntity<BookingVO> toss(@PathVariable("id") String id, @RequestParam("checkin") String checkin,
@@ -213,5 +238,140 @@ System.out.println("First Image URL: " + firstImageUrl);
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+	@PostMapping("/api/v1/payments/toss/{id}")
+	public ResponseEntity<PaymentResDto> requestTossPayment(Model model, @PathVariable("id") Integer id,
+			@RequestBody @Valid PaymentDto paymentReqDto, 
+			HttpServletRequest params, 
+			HttpServletResponse response,
+			Principal principal
+			)
+					throws IOException {
+//		log.info("INFO {}", params);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@" + id);
+//		@AuthenticationPrincipal Users principal
+		// 세션에서 현재 로그인한 사람의 로그인 아이디도 가져와야함.
+		String username = principal.getName();
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@" + username);
+		
+//		Users user = 
+		
+//		String email = principal.getEmail();
+		
+		String realName = paymentReqDto.getCustomerName();
+		
+		String tel = paymentReqDto.getCustomerTel();
+		
+		Enum payType = paymentReqDto.getPayType();
+		
+		
+		PaymentResDto paymentResDto = paymentService.requestTossPayment(paymentReqDto.toEntity(), principal.getName()).toPaymentResDto();
+        
+    	paymentResDto.setSuccessUrl(paymentReqDto.getYourSuccessUrl() == null ? tossPaymentConfig.getSuccessUrl() : paymentReqDto.getYourSuccessUrl());
+        
+    	paymentResDto.setFailUrl(paymentReqDto.getYourFailUrl() == null ? tossPaymentConfig.getFailUrl() : paymentReqDto.getYourFailUrl());
+		
+		Long convertedId2 = (long) id;
+		Product product = new Product();
+		product = productService.getProduct(convertedId2);
+		
+		String payTypeString = payType.name();
+		
+		Long convertedId3 = product.getAccommodation().getId();
+		Accommodation accommodation = new Accommodation();
+		accommodation = accommodationService.getAccommodation(convertedId3);
+		
+		String name = String.valueOf(id);
+		HttpServletRequest request = params;
+		HttpSession session = request.getSession();
+		BookingVO bookingVO = (BookingVO) session.getAttribute(name);
+		bookingVO.setBookerID(username);
+		bookingVO.setBookerName(realName);
+		bookingVO.setBookerTel(tel);
+		bookingVO.setPayType(payTypeString);
+		bookingVO.setProduct(product);
+		bookingVO.setAccommodation(accommodation);
+		bookingVO.setTid(paymentResDto.getOrderId());
+//		bookingVO.setBookerName(params.getParameter(username));
+//		String userID = (String) session.getAttribute("submarine");
+		
+		if (bookingVO == null) {
+			// bookingVO가 세션에 없는 경우 적절한 예외를 던져버리기~
+			throw new DataNotFoundException("bookingVO not found - 왜 없노");
+		}
+		log.info("INFO {}", "============================" + bookingVO.toString());
+		
+		int result = bookService.create(bookingVO); // params랑 세션에서 불러온 객체 같이 넘겨주기
+		int bookId = id;
+		
+		if (result != 0) {
+			log.info("INFO {}", result);
+			bookingVO = bookService.getBookVO(result);
+			bookingVO.setBookNum(result);
+			log.info("INFO {}", bookingVO);
+			model.addAttribute("bookingVO", bookingVO);
+			log.info("INFO {}", model);
+			
+			Long bookNum = Long.valueOf(result);
+			
+			// bookingVO를 다음 메서드로 전달하기 위해 @ModelAttribute를 사용하여 전달
+			
+			// 여기선 반환받은 예약번호인 result로 해당 예약정보를 찾아서 tid를 넣어준다.(이후 이 tid는 승인, 취소등에서 해당 예약정보를
+			// 찾을 때 사용)
+			
+			// -> 여기서 받아온 tid바로 예약테이블에 저장하고 받아온 아이디에 tid update하기
+			
+			return ResponseEntity.ok().body(paymentResDto);
+			
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		
+	}
+	
+	@GetMapping("/api/v1/payments/toss/success")
+    public ResponseEntity<PaymentSuccessDto> tossPaymentSuccess(
+            @RequestParam String paymentKey,
+            @RequestParam String orderId,
+            @RequestParam Long amount
+    ) {
+		
+		System.out.println("########################## paymentKey" + paymentKey);
+		System.out.println("########################## orderId" + orderId);
+		System.out.println("########################## amount" + amount);
+		
+		PaymentSuccessDto result = paymentService.tossPaymentSuccess(paymentKey, orderId, amount);
+		
+		String payDate = result.getApprovedAt();
+		String tid = result.getOrderId();
+		String status = "예약완료";
+		
+		bookService.updatePaymentDate(tid, payDate, status);
+		
+        return ResponseEntity.ok().body(result);
+    }
+	
+	@PostMapping("/toss/cancel")
+	  public  ResponseEntity<CancelPaymentDto> tossPaymentCancelPoint(
+	  		@RequestBody Map<String, String> requestParams
+	  ) {
+	      
+	  	String paymentKey = requestParams.get("paymentKey");
+	      String cancelReason = requestParams.get("cancelReason");
+	  	
+	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! paymentKey : " + paymentKey);
+	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! cancelReason : " + cancelReason);
+	  	
+	  	CancelPaymentDto cres = paymentService.tossPaymentCancel(paymentKey, cancelReason);
+	  	
+	  	String tid = paymentKey;
+	  	String status = cres.getStatus();
+	  	String canceled_at = cres.getApprovedAt();
+	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! canceled_at : " + canceled_at);
+	  	bookService.updateCancel(tid, status, canceled_at);
+	  	
+	//  	model.addAttribute("info", cres);
+	  	
+	  	return ResponseEntity.ok().body(cres);
+	  }
+	
 
 }

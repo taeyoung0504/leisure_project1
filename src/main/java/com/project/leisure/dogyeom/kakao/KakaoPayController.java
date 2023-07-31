@@ -59,13 +59,17 @@ public class KakaoPayController {
 		
 		kcr = kakaoPayService.approveResponse(pgToken);
 		
-		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
+//		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
         
 		String payDate = kcr.getApproved_at();
 		String tid = kcr.getTid();
 		String status = "예약완료";
 		
 		bookService.updatePaymentDate(tid, payDate, status);
+		
+		BookingVO book = bookService.getBook(tid);
+		
+		model.addAttribute("book", book);
 		
 		return "kdg/success";
 

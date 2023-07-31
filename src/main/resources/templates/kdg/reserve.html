@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="/js/kdg_reserve.js"></script>
 <title>경상도숙박장사</title>
+ <!-- 토스페이먼츠 결제창 SDK 추가 -->
+ <script src="https://js.tosspayments.com/v1/payment"></script>
 <style>
 
 /* 여기어때 예약 페이지 참고 */
@@ -578,14 +580,26 @@ input[type="checkbox"].inp_chk_02 {
 									인증번호 전송</button>
 							</div>
 							<!-- 결제하기 버튼 이벤트 -->
-							<script>
+							<script th:inline="javascript">
     	
 							    	const paybtn = document.getElementById('payment-btn');
 							    	
 							    	paybtn.addEventListener('click', function() {
 							    		const roomIDElement = document.getElementById('roomID');
 							    		const roomID = roomIDElement.textContent;
-							    		console.log(roomID);
+							    		alert(roomID);
+							    		
+							    		const orderName = /*[[ ${bookingvo.roomTitle} ]]*/ null;
+							    		console.log(orderName);
+							    		
+							    		//const amount = /*[[ ${bookingvo.totalPrice} ]]*/ null;
+							    		//console.log(amount);
+							    		
+							    		const amountStr = /*[[ ${bookingvo.totalPrice} ]]*/ null;
+							    		const amount = parseInt(amountStr.replace(/,/g, ''), 10);
+							    		alert(amount);
+							    		
+							    		const customerName = document.getElementById('username').value;
 							    		
 							    		const payType = document.getElementById('payment-select').value;
 							    		console.log(payType);
@@ -598,37 +612,113 @@ input[type="checkbox"].inp_chk_02 {
 							    		
 							    		const url = `/book/create/${roomID}`;
 							    		
-							    		fetch(url, {
-							    			method: 'POST',
-							    			headers: {
-							    				"Content-Type": "application/json",
-							    			},
-							    			body: JSON.stringify({
-							    				payType: payType,
-							    				bookerName: bookerName,
-							    				bookerTel: bookerTel
-							    			})	
-							    		})
-							    		.then(response => {
-							    		    if (response.status === 200) {
-							    		        return response.json();
-							    		    } else {
-							    		        throw new Error("Booking creation failed.");
-							    		    }
-							    		})
-							    		.then(data => {
-							    		    // data에서 "next_redirect_pc_url" 이름의 URL 추출
-							    		    const nextRedirectPcUrl = data.next_redirect_pc_url;
-
-							    		    // 추출한 URL로 사용자를 이동시키기
-							    		    window.location.href = nextRedirectPcUrl;
-							    		})
-							    		.catch(error => {
-							    		    console.error("Error:", error.message);
-							    		});
+								    		function kakao(url, payType, bookerName, bookerTel, orderName) {
+									    		fetch(url, {
+									    			method: 'POST',
+									    			headers: {
+									    				"Content-Type": "application/json",
+									    			},
+									    			body: JSON.stringify({
+									    				payType: payType,
+									    				bookerName: bookerName,
+									    				bookerTel: bookerTel
+									    			})	
+									    		})
+									    		.then(response => {
+									    		    if (response.status === 200) {
+									    		        return response.json();
+									    		    } else {
+									    		        throw new Error("Booking creation failed.");
+									    		    }
+									    		})
+									    		.then(data => {
+									    		    // data에서 "next_redirect_pc_url" 이름의 URL 추출
+									    		    const nextRedirectPcUrl = data.next_redirect_pc_url;
+		
+									    		    // 추출한 URL로 사용자를 이동시키기
+									    		    window.location.href = nextRedirectPcUrl;
+									    		})
+									    		.catch(error => {
+									    		    console.error("Error:", error.message);
+									    		});
+								    			
+								    		}
+								    		
+								    		/* 토스 */
+								    		
+								    		const url2 = `/book/api/v1/payments/toss/${roomID}`;
+								    		/* const url2 = `/api/v1/payments/toss`; */
 							    			
-							    		
-							    	})
+							    			let successUrl =  'http://localhost:8080/api/v1/payments/toss/success';
+							    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail';
+								    		
+							    		       function toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl) {
+									                fetch(url2, {
+									                    method: 'POST',
+									                    headers: {
+									                        "Content-Type": "application/json",
+									                    },
+									                    body: JSON.stringify({
+									                        payType: payType,
+									                        amount : amount,
+									                        orderName : orderName,
+									                        customerName: bookerName,
+									                        customerTel: bookerTel,
+									                        yourSuccessUrl: successUrl,
+									                        yourFailUrl: failUrl,
+									                    }),
+									                })
+									                .then(response => {
+									                    if (!response.ok) {
+									                        throw new Error("Booking creation failed.");
+									                    }
+									                    return response.json();
+									                })
+									                .then(data => {
+									                    // 응답 객체에서 추출한 데이터로 대입
+									                    const {
+									                        amount,
+									                        orderId,
+									                        orderName,
+									                        customerName,
+									                        customerEmail,
+									                        successUrl,
+									                        failUrl
+									                    } = data;
+
+									                    // ------ 클라이언트 키로 객체 초기화 ------
+									                    var clientKey = 'test_ck_7DLJOpm5QrlRWgypka53PNdxbWnY';
+									                    var tossPayments = TossPayments(clientKey);
+
+									                    // ------ 결제창 띄우기 ------
+									                    tossPayments.requestPayment('CARD', {
+									                        amount: amount,
+									                        orderId: orderId,
+									                        orderName: orderName,
+									                        customerName: customerName,
+									                        customerEmail: customerEmail,
+									                        successUrl: successUrl,
+									                        failUrl: failUrl,
+									                    });
+									                })
+									                .catch(error => {
+									                    console.error("Error:", error.message);
+									                });
+									            
+									            }
+								    		
+							    		 if(payType === 'KAKAO') {
+							    			 
+							    			kakao(url, payType, bookerName, bookerTel)
+							    			
+							    		}  else if(payType === 'TOSS') {
+							    			
+								            toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl);
+								            
+							    		}
+							    		 
+							    	});
+							    	
     
    								 </script>
 
@@ -836,6 +926,8 @@ input[type="checkbox"].inp_chk_02 {
 					<select id="payment-select" class="select_type_1">
 						<option data-minprice="0" selected="selected" id="kakao"
 							name="KAKAO" value="KAKAO">카카오페이</option>
+						<option data-minprice="0" id="kg" name="toss" value="TOSS">
+							토스</option>
 						<option data-minprice="0" id="naver" name="NAVER" value="NAVER">
 							네이버페이</option>
 						<option data-minprice="0" id="kg" name="KG" value="KG">
