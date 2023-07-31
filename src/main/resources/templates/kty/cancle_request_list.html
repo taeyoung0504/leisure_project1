@@ -85,13 +85,25 @@
 
 </div>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-
-
-
-
+$(document).ready(function () {
+    // Loop through each row in the table with id "cancelTable"
+    $("#cancelTable tbody tr").each(function () {
+        var statusText = $(this).find("#status_bk").text().trim();
+        // Check if the status text is "예약완료"
+        if (statusText === "예약완료") {
+            // Show the "취소하기" button for this row
+            $(this).find(".cancel-button").show();
+        } else {
+            // Hide the "취소하기" button for rows with other statuses
+        	 $(this).find(".cancel-button")
+             .prop("disabled", true) // Disable the button
+             .addClass("grayscale"); 
+        }
+    });
+});
 
 
 document.addEventListener("DOMContentLoaded", function () {
