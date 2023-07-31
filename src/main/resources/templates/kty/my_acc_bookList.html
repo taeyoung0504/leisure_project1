@@ -68,11 +68,12 @@
 						<th>체크인</th>
 						<th>체크아웃</th>
 						<th>예약 상태</th>
-
+						<th>취소신청</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="book : ${booking}">
+					<tr th:each="book : ${booking}"
+						th:if="${book.accommodation.username == #authentication.name}">
 						<td th:text="${book.bookNum}"></td>
 						<td th:text="${book.accomTitle}"></td>
 						<td th:text="${book.roomTitle}"></td>
@@ -82,55 +83,34 @@
 						<td th:text="${book.checkin}"></td>
 						<td th:text="${book.checkOut}"></td>
 						<td th:text="${book.bookStatus}"></td>
+						<!-- Access the related Accommodation entity from the Booking entity -->
+						<td id="hidden_part_name" th:text="${book.accommodation.username}"></td>
+						<td><button class="cancelButtondd" onclick="openModal()">취소요청</button></td>
 					</tr>
 				</tbody>
 			</table>
-
-			<div class="detail_warning"></div>
-			<div id="warning_bookcancle">
-				<span id="s_1">*</span> 파트너 임의로 예약취소는 불가능합니다 <b id="cancle_penalty">(패널티
-					부가)</b><br> <span id="sss333">취소를 원할 경우 관리자에게 문의해주세요.</span>
+			<div id="noMatchMessage">
+				<strong>예약내역이 없습니다.</strong>
 			</div>
 
 
-
-
-			<table id="acc-table" class="boss_acc">
-				<thead>
-					<tr>
-						<th>객실번호</th>
-						<th>사용자명</th>
-						<th>숙소명</th>
-						<th>객실명 & 객실번호</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="acc: ${acc}">
-						<td th:text="${acc.id}"></td>
-						<td th:text="${acc.username}"></td>
-						<td th:text="${acc.acc_name}"></td>
-						<td>
-							<!-- Access the product_type of each Product entity associated with the Accommodation -->
-							<span th:each="product, iterStat : ${acc.products}"> <span
-								th:text="${product.product_type}"></span> <span
-								th:text="${product.product_id}"></span><span> / </span> <span
-								th:if="${!iterStat.last}"> </span>
-						</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="modal" id="myModal">
+				<div class="modal-content">
+					<span class="close" onclick="closeModal()">&times;</span> <strong>예약
+						취소 요청</strong><br>
+					<textarea id="detail_reasoncan" rows="15" cols="60" placeholder="취소 사유를 입력해주세요..."></textarea>
+					<button>제출하기</button>
+				</div>
+			</div>
 
 
 		</div>
 
 
 
-
 		<!--  여기에 내용ㅇ없음 부분 -->
 
 	</div>
-
 
 
 	</body>
