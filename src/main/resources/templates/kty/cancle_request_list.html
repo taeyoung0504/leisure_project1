@@ -134,12 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-$(document).ready(function() {
-	  const text = $("#status_bk").text();
-	  if (text === "CANCEL_PAYMENT") {
-	    $("#status_bk").text("취소 완료");
-	  }
-	});
 
 
 
@@ -213,5 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
     display: none;  
 }
 
+ .grayscale {
+    filter: grayscale(100%);
+  }
 </style>
 </html>
