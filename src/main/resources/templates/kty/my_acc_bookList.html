@@ -79,14 +79,14 @@
 			<tbody>
 				<tr th:each="book : ${booking}"
 					th:if="${book.accommodation.username == #authentication.name}">
-					<td th:text="${book.bookNum}"></td>
+					<td data-booknum="${book.bookNum}" th:text="${book.bookNum}"></td>
 					<td th:text="${book.accomTitle}"></td>
 					<td th:text="${book.roomTitle}"></td>
 					<td><span
 						th:text="${#strings.substring(book.bookerID, 0, 2)} + '****'"></span>
 					</td>
 					<td>
-					<span th:text="${#strings.replace(#strings.substring(book.bookerTel, 0, 3) + #strings.substring(book.bookerTel, 3, 4) + '*******', '********', '****-****')}"></span>
+ 					 <span th:text="${#strings.replace(#strings.substring(book.bookerTel, 0, 3) + '-' + #strings.substring(book.bookerTel, 3, 4) + '***-****', '********', '****-****')}"></span>
 					</td>
 					<td th:text="${book.checkin}"></td>
 					<td th:text="${book.checkOut}"></td>
@@ -138,63 +138,5 @@
 
 <script>
 
-function openModal(button) {
-    const row = button.parentNode.parentNode;
-    const bookNumValue = row.querySelector('td:first-child').textContent;
-    const authenticatedUserName = document.getElementById('username').textContent;
-
-    console.log(bookNumValue);
-    console.log(authenticatedUserName);
-
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'block';
-
-    // Set the values in the modal form
-    document.getElementById('bookNumValue').value = bookNumValue;
-    document.getElementById('authenticatedUserName').value = authenticatedUserName;
-}
-
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-}
-
-function submitCancellation() {
-    // Get the input value from the textarea
-    const reasonCancleInput = document.getElementById('reasonCancle').value; // Modified this line
-
-    // Get the bookNumValue and authenticatedUserName from the modal
-    const bookNumValue = document.getElementById('bookNumValue').value;
-    const authenticatedUserName = document.getElementById('authenticatedUserName').value;
-
-    // Create a data object to send in the AJAX request
-    const data = {
-        reasonCancel: reasonCancleInput, // Modified this line
-        bookNumValue: bookNumValue,
-        authenticatedUserName: authenticatedUserName
-    };
-    const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
-    
-    fetch(backendEndpointURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            // If the request was successful, you can handle it here (e.g., display a success message)
-            console.log('Cancellation request submitted successfully.');
-            closeModal();
-        } else {
-            // If there was an error, you can handle it here (e.g., display an error message)
-            console.error('Error submitting cancellation request.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
 	</script>
 </html>
