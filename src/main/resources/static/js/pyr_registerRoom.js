@@ -120,7 +120,7 @@ function confirmDelete() {
 		if (result.isConfirmed) {
 
 			$.ajax({
-				url: '/product/deleteAcc/' + accId,
+				url: '/partner/product/deleteAcc/' + accId,
 				type: 'DELETE',
 				success: function(result) {
 					// 요청 성공

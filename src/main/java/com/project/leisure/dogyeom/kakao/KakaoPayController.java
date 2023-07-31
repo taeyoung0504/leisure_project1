@@ -26,6 +26,7 @@ import com.project.leisure.taeyoung.email.EmailService2;
 import com.project.leisure.taeyoung.user.UserService;
 import com.project.leisure.taeyoung.user.Users;
 
+import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 
 //@RequestMapping("/")
@@ -127,7 +128,6 @@ public class KakaoPayController {
 		} // 유리 추가 끝
 
 		return "kdg/success";
-
 	}
 
 	@PostMapping("/refundd")

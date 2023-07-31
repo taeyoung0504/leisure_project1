@@ -307,6 +307,7 @@ public class EmailService2 {
 		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
+
 	}
 
 	// 예약 완료 문자 내용 설정
@@ -852,7 +853,9 @@ public class EmailService2 {
 			javaMailSender.send(message); // 메일 발송
 		} catch (MailException es) {
 			es.printStackTrace();
-			throw new IllegalArgumentException();
+			//throw new IllegalArgumentException();
+		    throw new IllegalArgumentException("Failed to send confirmation email", es); // 에러 메시지 추가
+
 		}
 	}
 

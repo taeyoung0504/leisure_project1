@@ -148,7 +148,7 @@ $(document).ready(
 				}
 
 				$.ajax({
-					url: '/product/productMainInfo',
+					url: '/partner/product/productMainInfo',
 					type: 'POST',
 					data: formData,
 					enctype: 'multipart/form-data',
@@ -157,7 +157,7 @@ $(document).ready(
 					success: function(response) {
 
 						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
-							window.location.href = '/product/registerRoom/' + response;
+							window.location.href = '/partner/product/registerRoom/' + response;
 						});
 
 					},
@@ -175,7 +175,7 @@ $(document).ready(
 				var formData = new FormData(form);
 
 				$.ajax({
-					url: '/product/productMainInfo',
+					url: '/partner/product/productMainInfo',
 					type: 'POST',
 					data: formData,
 					enctype: 'multipart/form-data',
@@ -184,7 +184,7 @@ $(document).ready(
 					success: function(response) {
 
 						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
-							window.location.href = '/product/registerRoom/' + response;
+							window.location.href = '/partner/product/registerRoom/' + response;
 						});
 
 					},

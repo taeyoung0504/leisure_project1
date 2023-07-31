@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.project.leisure.dogyeom.kakao.DataNotFoundException;
+import com.project.leisure.yuri.product.Product;
 
 @Service
 public class BookService {
@@ -103,5 +104,19 @@ public class BookService {
 	    Collections.reverse(bookingList);
 	    return bookingList;
 	}
+	
+	
+	//유리 추가 참조된 productID를 조회하여 보낸다
+	public void updateBookingVoProductToNull(Product product) {
+        // BookingVO 조회
+        Optional<BookingVO> bookingVoOptional = bookRepository.findByProduct(product);
+
+        // BookingVO가 존재할 경우 product 값을 null로 설정
+        bookingVoOptional.ifPresent(bookingVO -> {
+            bookingVO.setProduct(null);
+            bookRepository.save(bookingVO); // 변경된 BookingVO를 저장
+        });
+    }
+
 	
 }
