@@ -45,12 +45,17 @@ tr:nth-child(even) {
 }
 
 button {
-	background-color: var(--sub-color); color : white;
+	background-color: var(--sub-color);
+	color: white;
 	border: none;
 	padding: 5px 10px;
 	cursor: pointer;
 	border-radius: 5px;
 	color: white;
+}
+
+button:hover {
+	background: var(--hover-color);
 }
 
 input[type="submit"] {
@@ -64,6 +69,21 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
 	background-color: rgb(255, 219, 219);
+}
+
+#search_kw {
+	width: 150px;
+	height: 23px;
+	top: 0;
+}
+
+#btn_search {
+	width: 50px;
+	height: 30px;
+}
+
+#btn_search:hover {
+	background: var(--hover-color);
 }
 
 .admin_navbar {
@@ -124,8 +144,8 @@ input[type="submit"]:hover {
 
 h1 {
 	text-align: center;
-    margin: 30px 0;
-    font-size: 30px;
+	margin: 30px 0;
+	font-size: 30px;
 }
 
 h3 {
@@ -344,7 +364,6 @@ select {
 	font-size: 25px;
 	margin-top: 5px;
 }
-
 </style>
 </head>
 <body class="admin_nav_body">
@@ -353,10 +372,9 @@ select {
 		<a href="/admin/adminNoticeList">공지사항</a> <a
 			href="/admin/authorityPage">권한 관리</a> <a
 			href="/admin/accomdationListPage">파트너 관리</a> <a
-			href="/admin/partnerListPage">파트너 신청</a> <a
-			href="/admin/inquiryList">1:1 문의</a> <a
-			href="/admin/decalarationList">신고 관리</a>
-			<a href="/admin/cancle_req">예약 취소 요청</a>
+			href="/admin/partnerListPage">파트너 신청</a> <a href="/admin/inquiryList">1:1
+			문의</a> <a href="/admin/decalarationList">신고 관리</a> <a
+			href="/admin/cancle_req">예약 취소 요청</a>
 	</div>
 	<th:block layout:fragment="adminNav"></th:block>
 </body>

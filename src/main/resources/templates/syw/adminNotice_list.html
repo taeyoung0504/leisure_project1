@@ -23,7 +23,6 @@
 										});
 					});
 </script>
-</style>
 
 
 
@@ -35,42 +34,51 @@
 	<div class="content-container">
 		<h1>공지사항</h1>
 
-		<div th:each="notice : ${page}" class="notice-item">
-			<h3 id="title" th:text="${notice.title}"></h3>
-			<p class="date"
-				th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
-			 <div class="notice-content" style="background-color: rgb(243, 243, 243); white-space: pre-line;">
-                    <p th:utext="${notice.content}"></p>
-                </div>
-			<a class="edit-button"
-				th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a> <a
-				class="delete-button"
-				th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a>
-		</div>
+		<button onclick="window.location.href='/admin/createNotice'"
+			class="btn_createNotice">글쓰기</button>
+		<div class="notice_hk">
+			<div th:each="notice : ${page}" class="notice-item">
+				<h3 id="title" th:text="${notice.title}"></h3>
+				<p class="date"
+					th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
+				<div class="notice-content"
+					style="background-color: rgb(243, 243, 243); white-space: pre-line;">
+					<p th:utext="${notice.content}"></p>
+				</div>
 
-		<div class="pagination" th:if="${page.totalElements > 0}">
-			<ul>
-				<li class="page-item" th:if="${page.number > 0}"><a
-					class="page-link" href="#"
-					th:href="@{/admin/adminNoticeList(page=${page.number - 1})}">이전</a>
-				</li>
-				<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-					th:class="${i == page.number} ? 'active page-item' : 'page-item'">
-					<a class="page-link" href="#"
-					th:href="@{/admin/adminNoticeList(page=${i})}" th:text="${i + 1}"></a>
-				</li>
-				<li class="page-item" th:if="${page.number < page.totalPages - 1}">
-					<a class="page-link" href="#"
-					th:href="@{/admin/adminNoticeList(page=${page.number + 1})}">다음</a>
-				</li>
-			</ul>
+				<!-- 				<a class="modi_btn" th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a> -->
+				<!-- 				<a class="del_btn" th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a> -->
+				<button class="button modi_btn"
+					th:onclick="'window.location.href = \'' + @{/admin/modify/{id}(id=${notice.id})} + '\''">수정</button>
+				<button class="button del_btn"
+					th:onclick="'window.location.href = \'' + @{/admin/delete/{id}(id=${notice.id})} + '\''">삭제</button>
+
+			</div>
+
+			<div class="pagination" th:if="${page.totalElements > 0}">
+				<ul>
+					<li class="page-item" th:if="${page.number > 0}"><a
+						class="page-link" href="#"
+						th:href="@{/admin/adminNoticeList(page=${page.number - 1})}">이전</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+						th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+						<a class="page-link" href="#"
+						th:href="@{/admin/adminNoticeList(page=${i})}" th:text="${i + 1}"></a>
+					</li>
+					<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+						<a class="page-link" href="#"
+						th:href="@{/admin/adminNoticeList(page=${page.number + 1})}">다음</a>
+					</li>
+				</ul>
+			</div>
+			<!-- 		<a href="/admin/createNotice">공지사항 등록</a> -->
 		</div>
-		<a href="/admin/createNotice">공지사항 등록</a>
 	</div>
-	
-	
-	
-	
-	
+
+
+
+
+
 	</body>
 </html>
