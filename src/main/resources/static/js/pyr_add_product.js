@@ -3,7 +3,7 @@
 function modifyRoom(button) {
 	var editButton = $(button);
 	var productId = parseInt(editButton.parents('.Product_contents').find('.product_id').text());
-	var url = '/product/modifyRoom/' + productId;
+	var url = '/partner/product/modifyRoom/' + productId;
 	window.location.href = url;
 }
 
@@ -259,7 +259,7 @@ $(document)
 
 						$
 							.ajax({
-								url: '/product/addproduct',
+								url: '/partner/product/addproduct',
 								type: 'POST',
 								data: formData,
 								enctype: 'multipart/form-data',
@@ -326,7 +326,7 @@ $(document).ready(
 					if (result.isConfirmed) {
 
 						$.ajax({
-							url: '/product/deleteProduct',
+							url: '/partner/product/deleteProduct',
 							method: 'POST',
 							dataType: 'json',
 							data: {
@@ -384,27 +384,6 @@ $(document).ready(
 			});
 	});
 
-/*
-$(document).on('click', '.cancelProduct', function() {
-	swalWithBootstrapButtons.fire({
-		title: '변경 사항이 적용되지 않습니다',
-		text: '이전 페이지로 돌아가시겠습니까?',
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonText: '확인',
-		cancelButtonText: '취소',
-		reverseButtons: true
-
-	}).then((result) => {
-		if (result.isConfirmed) {
-			// Yes 버튼을 눌렀을 때의 동작
-			window.history.back();
-		} else if (result.dismiss === Swal.DismissReason.cancel) {
-			// No 버튼을 눌렀을 때의 동작
-			// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
-		}
-	});
-});*/
 
 /*swal*/
 const swalWithBootstrapButtons = Swal.mixin({

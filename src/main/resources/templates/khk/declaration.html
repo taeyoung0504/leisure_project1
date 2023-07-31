@@ -17,6 +17,15 @@
 					id="btn_search">검색</button>
 			</div>
 
+			<!-- 객체 개수 출력 -->
+			<div>
+				<p>전체 리뷰 신고 수 : [[${objectCount}]] 개</p>
+			</div>
+			<!-- 페이지 번호 및 전체 페이지 수 출력 -->
+			<div>
+				<p>[[${paging.number + 1}]] Page of [[${paging.totalPages}]]
+					Page</p>
+			</div>
 			<div id="searchResults">
 				<table>
 					<thead>

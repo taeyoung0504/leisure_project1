@@ -1,4 +1,4 @@
-/* 변수를 할당해서 전체 색상 변경 가능(전체 수정 필요할때 용이) */
+/* ë³€ìˆ˜ë¥¼ í• ë‹¹í•´ì„œ ì „ì²´ ìƒ‰ìƒ ë³€ê²½ ê°€ëŠ¥(ì „ì²´ ìˆ˜ì • í•„ìš”í• ë•Œ ìš©ì´) */
 :root {
 	--main-color: #e93c3c;
 	--background-color: #ffffff;
@@ -27,25 +27,23 @@
 	font-style: normal;
 }
 
-
-
-.jj_navbar a {
+.jj_navbar a, .jj_navbar li{
 	text-decoration: none;
 	color: var(--main-color);
 }
 
 #header {
-	/* 네비 상단 고정  */
+	/* ë„¤ë¹„ ìƒë‹¨ ê³ ì •  */
 	position: fixed !important;
 	width: -webkit-fill-available;
 	top: 0 !important;
 	z-index: 10 !important;
 	display: flex !important;
-	/* 한 줄로 나란히 하기 */
+	/* í•œ ì¤„ë¡œ ë‚˜ëž€ížˆ í•˜ê¸° */
 	justify-content: space-between !important;
-	/* 같은 중심축으로 해서 중간에 스페이스 넣기*/
+	/* ê°™ì€ ì¤‘ì‹¬ì¶•ìœ¼ë¡œ í•´ì„œ ì¤‘ê°„ì— ìŠ¤íŽ˜ì´ìŠ¤ ë„£ê¸°*/
 	align-items: center !important;
-	/* 수직적으로 중간으로 배치 */
+	/* ìˆ˜ì§ì ìœ¼ë¡œ ì¤‘ê°„ìœ¼ë¡œ ë°°ì¹˜ */
 	/*     background-color: var(--background-color); */
 	padding: 0px 12px !important;
 	font-family: "TheJamsil5Bold", Arial, sans-serif;
@@ -53,6 +51,37 @@
 	font-style: normal !important;
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
+
+    @keyframes anime_textup { 0% { top: 0; } 20% { top: -0.2rem; } 40% { top: 0 } 60% { top: 0 } 80% { top: 0 } 100% { top: 0 } }
+ 
+    .main_logo span {
+        position: relative;
+        animation: anime_textup 1.5s infinite;
+    }
+ 
+    .main_logo span:nth-of-type(1) {
+        animation-delay: .1s;
+    }
+ 
+    .main_logo span:nth-of-type(2) {
+        animation-delay: .2s;
+    }
+ 
+    .main_logo span:nth-of-type(3) {
+        animation-delay: .3s;
+    }
+ 
+    .main_logo span:nth-of-type(4) {
+        animation-delay: .4s;
+    }
+ 
+    .main_logo span:nth-of-type(5) {
+        animation-delay: .5s;
+    }
+    .main_logo span:nth-of-type(6) {
+        animation-delay: .6s;
+    }
+
 
 .weather-temp {
 	color: var(--main-color);
@@ -62,15 +91,13 @@
 	color: var(--background-color);
 }
 
-@media screen and (min-width: 1000px) {
-	
+@media screen and (min-width: 1001px) {
 	.jj_main {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	margin-top: 100px;
-}
-	
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		margin-top: 100px;
+	}
 	#header.activee {
 		background-color: var(--main-color);
 		transition-duration: 0.2s;
@@ -92,14 +119,12 @@
 	nav .jj_menubar ul li a .active:hover {
 		color: pink;
 	}
-
-
 }
 
 .jj_navbar_logo {
-	font-size: 22px;
+	font-size: 30px;
 	/* 	color: var(--main-color); */
-	padding-left: 200px;
+	padding-left: 300px;
 }
 
 .jj_navbar_logo i {
@@ -110,9 +135,9 @@
 .jj_navbar_menu {
 	display: flex;
 	list-style: none;
-	/* 리스트 점 없애기! */
+	/* ë¦¬ìŠ¤íŠ¸ ì  ì—†ì• ê¸°! */
 	padding-left: 0;
-	/* 메뉴 왼쪽 패딩 없애기 */
+	/* ë©”ë‰´ ì™¼ìª½ íŒ¨ë”© ì—†ì• ê¸° */
 }
 
 body:not(.jj_navbar) {
@@ -120,7 +145,7 @@ body:not(.jj_navbar) {
 }
 
 nav .jj_menubar {
-	padding-right: 200px;
+	padding-right: 300px;
 }
 
 nav .jj_menubar ul {
@@ -145,7 +170,7 @@ nav .jj_menubar ul li {
 
 .jj_menubar ul li {
 	padding: 8px 10px;
-	/* 클릭 범위 넓히기 위해서 */
+	/* í´ë¦­ ë²”ìœ„ ë„“ížˆê¸° ìœ„í•´ì„œ */
 }
 
 nav .jj_menubar ul li a:nth-child(6):hover {
@@ -166,7 +191,7 @@ nav .jj_menubar ul li:nth-child(6):hover .fas {
 	transition: rotate(180deg);
 }
 
-/* 더보기 드롭다운 */
+/* ë”ë³´ê¸° ë“œë¡­ë‹¤ìš´ */
 nav .jj_menubar ul li .jj_list {
 	position: absolute;
 	display: flex;
@@ -225,16 +250,16 @@ nav .jj_menubar ul li .jj_list a .active :hover {
 }
 
 .jj_navbar_toogleBtn {
-	/* 화면이 작아졌을 때만 햄버거 버튼 나오게함 */
+	/* í™”ë©´ì´ ìž‘ì•„ì¡Œì„ ë•Œë§Œ í–„ë²„ê±° ë²„íŠ¼ ë‚˜ì˜¤ê²Œí•¨ */
 	display: none;
-	/* 햄버거 아이콘이 현재 플렉스 박스 안 왼쪽 밑에 배치되어 있음, 오른쪽 위에 배치하고 싶을 경우 플렉스 박스에서 나와서(흐름에서 나와서) 재포지션  */
+	/* í–„ë²„ê±° ì•„ì´ì½˜ì´ í˜„ìž¬ í”Œë ‰ìŠ¤ ë°•ìŠ¤ ì•ˆ ì™¼ìª½ ë°‘ì— ë°°ì¹˜ë˜ì–´ ìžˆìŒ, ì˜¤ë¥¸ìª½ ìœ„ì— ë°°ì¹˜í•˜ê³  ì‹¶ì„ ê²½ìš° í”Œë ‰ìŠ¤ ë°•ìŠ¤ì—ì„œ ë‚˜ì™€ì„œ(íë¦„ì—ì„œ ë‚˜ì™€ì„œ) ìž¬í¬ì§€ì…˜  */
 	position: absolute;
 	right: 32px;
 	font-size: 24;
 	color: var(--main-color);
 }
 
-/* 검색창 영역 */
+/* ê²€ìƒ‰ì°½ ì˜ì—­ */
 .jj_menubar {
 	display: flex;
 	align-items: center;
@@ -275,7 +300,7 @@ nav .jj_menubar .jj_search .search_input {
 	height: 30px;
 }
 
-/* 배너 슬라이드  */
+/* ë°°ë„ˆ ìŠ¬ë¼ì´ë“œ  */
 .jj_slide {
 	padding-top: 20px;
 }
@@ -329,7 +354,7 @@ nav .jj_menubar .jj_search .search_input {
 	background: rgb(224, 224, 224);
 }
 
-/* 숙소 카테고리 아이콘 */
+/* ìˆ™ì†Œ ì¹´í…Œê³ ë¦¬ ì•„ì´ì½˜ */
 .jj_icon {
 	text-align: center;
 }
@@ -362,7 +387,7 @@ nav .jj_menubar .jj_search .search_input {
 	opacity: 0.3;
 }
 
-/* 추천 숙소 */
+/* ì¶”ì²œ ìˆ™ì†Œ */
 .jj_wrapper {
 	margin: 0;
 	padding: 0;
@@ -444,7 +469,7 @@ nav .jj_menubar .jj_search .search_input {
 	margin-bottom: 20px;
 }
 
-/* 추천 여행 코스 */
+/* ì¶”ì²œ ì—¬í–‰ ì½”ìŠ¤ */
 .jj_course {
 	padding-top: 60px;
 }
@@ -496,7 +521,7 @@ nav .jj_menubar .jj_search .search_input {
 	width: 100%;
 	height: 100%;
 	border-radius: 8px;
-	/* 이미지 비율 유지*/
+	/* ì´ë¯¸ì§€ ë¹„ìœ¨ ìœ ì§€*/
 	object-fit: cover;
 	filter: brightness(1);
 }
@@ -511,7 +536,7 @@ nav .jj_menubar .jj_search .search_input {
 	width: 450px;
 }
 
-/* 파트너 관련 */
+/* íŒŒíŠ¸ë„ˆ ê´€ë ¨ */
 .jj_partner {
 	padding-top: 30px;
 }
@@ -564,7 +589,7 @@ nav .jj_menubar .jj_search .search_input {
 	width: 100%;
 	height: 100%;
 	border-radius: 8px;
-	/* 이미지 비율 유지*/
+	/* ì´ë¯¸ì§€ ë¹„ìœ¨ ìœ ì§€*/
 	object-fit: cover;
 	filter: brightness(1);
 }
@@ -579,7 +604,7 @@ nav .jj_menubar .jj_search .search_input {
 	width: 450px;
 }
 
-/* 추천 휴양지  */
+/* ì¶”ì²œ íœ´ì–‘ì§€  */
 /* .jj_spot {
     margin-top: 100px;
 }
@@ -823,9 +848,50 @@ footer address .order {
 	padding: 6px 0;
 }
 
-/* ============== 반응형================== */
+/* ============== ë°˜ì‘í˜•================== */
 @media screen and (max-width: 1000px) {
-	/* h2 원래있었음 */
+	.jj_main {
+		margin: 0;
+		padding: 0;
+		margin-top: 100px;
+	}
+
+	/* ========ë„¤ë¹„ */
+	#header {
+		position: absolute !important;
+		top: 0 !important;
+		flex-direction: column;
+		/* align-items: center; */
+		align-items: center;
+		padding: 8px 24px;
+		/* ìˆ˜í‰ ì™¼ìª½ìœ¼ë¡œ*/
+		padding-top: 20px;
+		padding-bottom: 20px;
+		height: 40px;
+	}
+	.activee {
+		position: sticky !important;
+		top: 0 !important;
+		flex-direction: column !important;
+		/* align-items: center; */
+		align-items: center;
+		padding: 8px 24px;
+		/* ìˆ˜í‰ ì™¼ìª½ìœ¼ë¡œ*/
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.jj_navbar {
+		background-color: var(--background-color);
+		transition-duration: 0.2s;
+		transition-timing-function: ease;
+		color: var(--main-color);
+		-webkit-transition-duration: 0.2s;
+		-webkit-transition-timing-function: ease;
+		/* 		margin-top: 20px; */
+		padding-top: 10px;
+	}
+
+	/* h2 ì›ëž˜ìžˆì—ˆìŒ */
 	.main {
 		width: 100%;
 		height: 24px;
@@ -840,30 +906,6 @@ footer address .order {
 		padding-left: 20px;
 		font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 	}
-	/* ========네비 */
-	#header {
-		position: sticky !important;
-		top: 0 !important;
-		flex-direction: column;
-		/* align-items: center; */
-		align-items: center;
-		padding: 8px 24px;
-		/* 수평 왼쪽으로*/
-		padding-top: 20px;
-		padding-bottom: 20px;
-		height: 40px;
-	}
-	.activee {
-		position: sticky !important;
-		top: 0 !important;
-		flex-direction: column !important;
-		/* align-items: center; */
-		align-items: center;
-		padding: 8px 24px;
-		/* 수평 왼쪽으로*/
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
 
 	/*  #header.activee {
     
@@ -874,7 +916,7 @@ footer address .order {
 	-webkit-transition-duration: 0.2s;
 	-webkit-transition-timing-function: ease;
 } */
-	/* 창이 1000보다 작아지면 메뉴와 아이템을 밑으로 내림 */
+	/* ì°½ì´ 1000ë³´ë‹¤ ìž‘ì•„ì§€ë©´ ë©”ë‰´ì™€ ì•„ì´í…œì„ ë°‘ìœ¼ë¡œ ë‚´ë¦¼ */
 	.jj_navbar .jj_navbar_logo {
 		font-size: 18px;
 		color: var(--main-color);
@@ -882,46 +924,38 @@ footer address .order {
 		text-align: center;
 		margin: 0 auto;
 		display: block;
-		/* 		margin-top: 10px; */
+		position: sticky;
+		top: 10px;
 	}
+	
+	
+	
+	.jj_navbar a {
+    text-decoration: none;
+    color: var(--main-color);
+    top: 10px;
+}
 
-	/* 검색창 */
+	/* ê²€ìƒ‰ì°½ */
 	.jj_search.active .jj_search_input {
 		width: 150px;
 	}
 	.jj_search.active .jj_search_btn {
 		transform: translateX(150px);
 	}
-	.jj_navbar {
-		background-color: var(--background-color);
-		transition-duration: 0.2s;
-		transition-timing-function: ease;
-		color: var(--main-color);
-		-webkit-transition-duration: 0.2s;
-		-webkit-transition-timing-function: ease;
-		margin-top: 20px;
-	}
 
-	/* 창이 1000보다 작아지면 메뉴와 아이템을 밑으로 내림 */
-	.jj_navbar .jj_navbar_logo {
-		font-size: 18px;
-		color: var(--main-color);
-		padding-left: 0;
-		text-align: center;
-		margin: 0 auto;
-		display: block;
-	}
+	
 
-	/* 메뉴도 한줄에서 밑으로 내림 */
+	/* ë©”ë‰´ë„ í•œì¤„ì—ì„œ ë°‘ìœ¼ë¡œ ë‚´ë¦¼ */
 	.jj_navbar .jj_navbar_menu {
 		flex-direction: column;
-		/* 햄버거 눌렀을 때만 메뉴 나오게 */
+		/* í–„ë²„ê±° ëˆŒë €ì„ ë•Œë§Œ ë©”ë‰´ ë‚˜ì˜¤ê²Œ */
 		display: none;
 		flex-direction: column;
 		align-items: center;
-		/* 메뉴만 센터로*/
+		/* ë©”ë‰´ë§Œ ì„¼í„°ë¡œ*/
 		width: 100vw;
-		/* 센터로 안감, 메뉴 너비를 최대한으로 바꿔줘야함 */
+		/* ì„¼í„°ë¡œ ì•ˆê°, ë©”ë‰´ ë„ˆë¹„ë¥¼ ìµœëŒ€í•œìœ¼ë¡œ ë°”ê¿”ì¤˜ì•¼í•¨ */
 		height: 100vh;
 		top: 10px;
 		right: 0;
@@ -933,7 +967,7 @@ footer address .order {
 		padding-right: 0px;
 	}
 
-	/* 1000보다 작으면 메뉴 안보여줌 but 햄버거가 클릭됐을 때 메뉴 보여줌*/
+	/* 1000ë³´ë‹¤ ìž‘ìœ¼ë©´ ë©”ë‰´ ì•ˆë³´ì—¬ì¤Œ but í–„ë²„ê±°ê°€ í´ë¦­ëì„ ë•Œ ë©”ë‰´ ë³´ì—¬ì¤Œ*/
 	.jj_menubar .jj_navbar_menu.active {
 		display: flex;
 		transform: translateX(0);
@@ -964,11 +998,11 @@ footer address .order {
 		text-align: center;
 	}
 	.jj_navbar_toogleBtn {
-		/* 화면이 작아졌을 때만 햄버거 버튼 나오게함 */
+		/* í™”ë©´ì´ ìž‘ì•„ì¡Œì„ ë•Œë§Œ í–„ë²„ê±° ë²„íŠ¼ ë‚˜ì˜¤ê²Œí•¨ */
 		display: block;
 	}
 
-	/*     더보기 드롭다운 */
+	/*     ë”ë³´ê¸° ë“œë¡­ë‹¤ìš´ */
 	nav .jj_menubar ul li .jj_list {
 		position: absolute;
 		display: flex;
@@ -987,7 +1021,7 @@ footer address .order {
 		box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
 	}
 
-	/* ========슬라이드 */
+	/* ========ìŠ¬ë¼ì´ë“œ */
 	.jj_slide {
 		width: 100%;
 		height: 250px;
@@ -1021,7 +1055,7 @@ footer address .order {
 		margin-top: 20px;
 	}
 
-	/* 숙소 카테고리 아이콘 */
+	/* ìˆ™ì†Œ ì¹´í…Œê³ ë¦¬ ì•„ì´ì½˜ */
 	.jj_icon {
 		padding-top: 20px;
 		text-align: center;
@@ -1040,7 +1074,7 @@ footer address .order {
 		font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 	}
 
-	/* 추천 여행 코스 */
+	/* ì¶”ì²œ ì—¬í–‰ ì½”ìŠ¤ */
 	h4 {
 		font-size: 12px;
 		padding-left: 20px;
@@ -1069,7 +1103,7 @@ footer address .order {
 		padding: 0px;
 	}
 
-	/* 파트너 관련 */
+	/* íŒŒíŠ¸ë„ˆ ê´€ë ¨ */
 	.jj_partner_container ul li:first-child, .jj_partner_container ul li:last-child
 		{
 		width: 100%;

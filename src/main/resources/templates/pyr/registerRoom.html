@@ -26,7 +26,6 @@
 					정보</a></li>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/test}">예약
 					내역</a></li>
-			<li class="mypage_sidebar"><a th:href="@{/user/mypage}">장바구니</a></li>
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
 			<li class="mypage_sidebar"><a
@@ -36,6 +35,8 @@
 			</li>
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_productList}" class="active"> 내 상품 목록</a></li>
+				<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 
@@ -84,7 +85,7 @@
 				<div id="pdMainEditArea">
 					<button id="deleateAccBtn" type="button" onclick="confirmDelete()">숙소삭제</button>
 
-					<a th:href="@{|/product/productMainReg/${accommodation.id}|}">
+					<a th:href="@{|/partner/product/productMainReg/${accommodation.id}|}">
 						<button id="pdMainEditBtn" type="button">숙소수정</button>
 					</a>
 				</div>
@@ -95,7 +96,7 @@
 
 				<div id="prListEdit">
 					<h2>객실 리스트</h2>
-					<a th:href="@{|/product/addproduct/${accommodation.id}|}">
+					<a th:href="@{|/partner/product/addproduct/${accommodation.id}|}">
 						<button id="prListEditBtn" type="button"
 							onclick="location.href='/product/addproduct'">등록 / 수정 /
 							삭제</button>
@@ -226,7 +227,7 @@
 
 		<script>
 			if (confirm("상품을 등록하시겠습니까?")) {
-				window.location.href = "/product/productNewMainReg";
+				window.location.href = "/partner/product/productNewMainReg";
 			} else {
 				history.back();
 			}

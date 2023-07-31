@@ -65,7 +65,7 @@ public class Users {
 	@Builder
 	public Users(String nickname, UserRole role, String sns,String email) {
 		this.nickname = nickname;
-	    this.username = email; // 소셜 로그인 시 username에 이메일 넣기
+	    //his.username = email; // 소셜 로그인 시 username에 이메일 넣기
 		this.email = email;
 		this.sns = sns;
 		this.role = UserRole.SNS_USER;

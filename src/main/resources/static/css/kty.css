@@ -1,3 +1,10 @@
+:root {
+	--main-color: #e93c3c;
+	--background-color: #ffffff;
+	--hover-color: #ffa6a6;
+	--text-color: rgb(109, 109, 109);
+}
+
 @font-face {
 	font-family: 'TheJamsil5Bold';
 	src:
@@ -49,7 +56,7 @@ input[type="button" i] {
 	display: none;
 	color: red;
 	margin-left: 450px;
-	margin-top: 650px;
+	margin-top: 530px;
 }
 
 /*================================*/
@@ -60,6 +67,7 @@ input[type="button" i] {
 	flex-direction: column;
 	height: 100vh;
 	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+	
 	/* 변경: 전체 뷰포트 높이로 설정 */
 }
 
@@ -68,6 +76,7 @@ input[type="button" i] {
 	/* 	margin-left: 30px; */
 	/* 	margin-top: 70px; */
 	font-size: 30px;
+	color: var(--main-color);
 }
 
 .join_title:hover {
@@ -212,6 +221,7 @@ input[type="button" i] {
 	margin-left: 30px;
 	margin-top: -70px;
 	font-size: 30px;
+	color: var(--main-color);
 }
 
 .login_title:hover {
@@ -1080,6 +1090,7 @@ li.mypage_sidebar a.active {
 
 .room_info_k {
 	font-size: 20px;
+	display: contents;
 }
 
 .pagination {

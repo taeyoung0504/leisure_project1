@@ -19,7 +19,6 @@ class UserListTest {
 	void testCreateUsers() {
 		for (int i = 1; i <= 5; i++) {
             String username = String.format("user%03d", i);
-            String nickname = String.format("user%03d", i);
             String email = String.format("test%d@example.com", i);
             String password = "password";
             String addr1 = "우편번호";
@@ -27,7 +26,7 @@ class UserListTest {
             String addr3 = "상세주소";
             
 
-            userService.create(username, nickname, email, password, addr1, addr2, addr3); // Modified line
+            userService.create(username, email, password, addr1, addr2, addr3); // Modified line
         }
 
 	}

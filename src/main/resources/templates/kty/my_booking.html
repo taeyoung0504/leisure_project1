@@ -195,6 +195,8 @@ color:grey;
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_productList}"
 				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+		<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 	<div id="wrap">
@@ -217,6 +219,7 @@ color:grey;
 						th:text="${book.roomTitle}"></span><Br> <span
 						th:text="${book.checkin}"></span> ~ <span
 						th:text="${book.checkOut}"></span>
+				
 				<hr>
 				<span id="amount" class="in_price" th:inline="text">
 					[[${book.totalPrice}]] </span><br> <span
@@ -232,6 +235,7 @@ color:grey;
     th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn')}"
     th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
 					
+					<!--  수정 중
 					<div class="ssss21131231" th:each="acc : ${book.accommodation}">
 					<div th:text="${#authentication.name}"></div>
 			 			<div th:text="${acc.acc_name}">
@@ -239,7 +243,7 @@ color:grey;
 			 			<div th:each="review : ${acc.reviews}">
 			 					<div th:text="${review.author}"></div>
 			 				</div>
-			 		</div>
+			 		</div> -->
 			 		
 			 
 			<button id="cancelBtn2" class="reviewBtn"
@@ -285,7 +289,7 @@ cancelBtns.forEach(cancelBtn => {
         const tid = cancelBtn.parentElement.parentElement.querySelector("#tid").textContent;
         const cleanedAmount = amount.replace(/,/g, '');
         //console.log(amount);
-        alert(cleanedAmount);
+
 
         fetch(`/refundd`, {
             method: "POST",
@@ -332,10 +336,10 @@ cancelBtns.forEach(cancelBtn => {
             $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
             var roomID = $(button).attr('data-roomid');
             var checkIn = $(button).attr('data-in')
-           // localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
+            localStorage.setItem('disabled_review_button_'+checkIn+'-'+roomID, 'true'); // Store the disabled state in local storage
 
             // Update the button text to "작성 완료"
-            $(button).text('작성 완료');
+            $(button).text('리뷰 작성 완료');
         }
     }
 
@@ -348,7 +352,7 @@ cancelBtns.forEach(cancelBtn => {
             if (isDisabled === 'true') {
                 $(this).prop('disabled', true);
                 $(this).addClass('gray-button'); // Add the 'gray-button' class to change appearance
-                $(this).text('작성 완료'); // Update the button text to "작성 완료"
+                $(this).text('리뷰 작성 완료'); // Update the button text to "작성 완료"
             }
         });
     }
@@ -465,7 +469,7 @@ cancelBtns.forEach(cancelBtn => {
       </body>
       </html>
     `);
-    //disableButton(this);
+    disableButton(this);
   });
 });
     

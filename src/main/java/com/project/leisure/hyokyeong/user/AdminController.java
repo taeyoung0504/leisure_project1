@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.leisure.dogyeom.booking.BookService;
+import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.son.board.Inquiry;
 import com.project.leisure.son.board.InquiryService;
 import com.project.leisure.son.notice.Notice;
@@ -32,6 +35,8 @@ import com.project.leisure.taeyoung.review.Declaration;
 import com.project.leisure.taeyoung.review.DeclarationRepository;
 import com.project.leisure.taeyoung.review.Review;
 import com.project.leisure.taeyoung.review.ReviewRepository;
+import com.project.leisure.taeyoung.user.CancelRequest;
+import com.project.leisure.taeyoung.user.CancelRequestService;
 import com.project.leisure.taeyoung.user.UserRepository;
 import com.project.leisure.taeyoung.user.UserRole;
 import com.project.leisure.taeyoung.user.UserService;
@@ -56,7 +61,10 @@ public class AdminController {
 	private final ReviewRepository reviewRepository;
 	private final InquiryService inquiryService;
 	private final NoticeService noticeService;
-
+	private final CancelRequestService cancelRequestService;
+	private final BookService bookService;
+	
+	
 	@GetMapping("/adminMain")
 	public String adminMain() {
 		System.out.println("메인페이지로 이동");
@@ -174,6 +182,8 @@ public class AdminController {
 		model.addAttribute("kw", kw);
 		declarationListService.declarationList(model);
 		model.addAttribute("decalarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
+		// 전체 객체 수를 전달
+		model.addAttribute("objectCount", paging.getTotalElements());
 		return "khk/declaration";
 	}
 
@@ -223,7 +233,8 @@ public class AdminController {
 ///////////////////////// 1:1 문의 컨트롤러 /////////////////////////////////////
 
 	@GetMapping("/inquiryList")
-	public String inquiryList(Model model, Principal principal, @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+	public String inquiryList(Model model, Principal principal,
+			@PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
 		String username = principal.getName();
 		System.out.print(username);
 		Page<Inquiry> page = inquiryService.getAllInquiries(pageable);
@@ -284,11 +295,28 @@ public class AdminController {
 		noticeService.updateNotice(id, notice);
 		return "redirect:/admin/adminNoticeList";
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public String deleteNotice(@PathVariable Integer id) {
-	    noticeService.deleteNotice(id);
-	    return "redirect:/admin/adminNoticeList";
+		noticeService.deleteNotice(id);
+		return "redirect:/admin/adminNoticeList";
 	}
 
+	@GetMapping("/main")
+	public String admin_dashboard(Model model) {
+		LocalDate currentDate = LocalDate.now();
+		model.addAttribute("currentDate", currentDate);
+		return "kty/admin_main";
+	}
+	
+	@GetMapping("/cancle_req")
+	public String cancle_req(Model model) {
+		List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
+		List<BookingVO> book = this.bookService.getbooklist();
+		
+		model.addAttribute("book",book);
+		model.addAttribute("cancleList",canclereqList);
+		return "kty/cancle_request_list";
+		
+	}
 }

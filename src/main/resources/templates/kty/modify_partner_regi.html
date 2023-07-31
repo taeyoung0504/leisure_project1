@@ -89,7 +89,8 @@
 				<li class="mypage_sidebar"><a
 					th:href="@{/user/mypage/my_productList}"
 					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
-
+				<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -106,7 +107,7 @@
 			const companySec = row.querySelector('td#result_sec').getAttribute(
 					'data-company-sec');
 
-			const url = '/product/productNewMainReg?companyName='
+			const url = '/partner/product/productNewMainReg?companyName='
 					+ encodeURIComponent(companyName) + '&companyAdd='
 					+ encodeURIComponent(companyAdd) + '&companySec='
 					+ encodeURIComponent(companySec);

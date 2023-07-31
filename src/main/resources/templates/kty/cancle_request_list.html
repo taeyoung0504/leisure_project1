@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+<html layout:decorate="~{khk/adminNavbar}">
+<div layout:fragment="adminNav" class="container my-3">
+	<h1>예약 취소 요청</h1>
+	
+	<div class="container">
+		<div>
+			<table id="cancelTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>예약 번호</th>
+						<th>파트너명</th>
+						<th>숙소명</th>
+						<th>객실명</th>
+						<th>취소 사유</th>
+						<th>결제상태</th>
+						<th>결제금액</th>
+						<th>TID</th>
+						<th>처리</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Use Thymeleaf's th:each to iterate over the list in reverse order -->
+					<tr th:each="cancelReq : ${cancleList}">
+						<td th:text="${cancelReq.id}"></td>
+						<td th:text="${cancelReq.bookNumValue}"></td>
+						<td th:text="${cancelReq.authenticatedUserName}"></td>
+						<td id="acc_acc_name"></td>
+						<td id="pro_pro_name"></td>
+						<td th:text="${cancelReq.reasonCancel}"></td>
+						<td id="status_bk"></td>
+						<td id="bbb_total"></td>
+						<td id="paymentNumber"></td>
+						  <td><button class="cancel-button">취소하기</button></td>
+					</tr>
+
+				</tbody>
+			</table>
+
+
+			<br>
+			<table id="bookingTable" disabled >
+				<thead>
+					<tr>
+						<th>예약 번호</th>
+						<th>예약 상태</th>
+						<th>숙소명</th>
+						<th>객실명</th>
+						<th>결제번호</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Use Thymeleaf's th:each to iterate over the list -->
+					<tr th:each="booking : ${book}">
+						<td th:text="${booking.bookNum}"></td>
+						<td th:text="${booking.bookStatus}"></td>
+						<td th:text="${booking.accomTitle}"></td>
+						<td th:text="${booking.roomTitle}"></td>
+						 <td th:text="${booking.tid}"></td>
+						 <td th:text="${booking.totalPrice}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+
+
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+</div>
+</body>
+
+<script>
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to handle the "취소하기" button click
+    function handleCancelClick(cancelBtn) {
+        const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
+        const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
+        const cleanedAmount = amount.replace(/,/g, '');
+        
+        fetch(`/refundd`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tid: tid,
+                cancel_amount: cleanedAmount,
+                cancel_tax_free_amount: "200",
+                cancel_vat_amount: "200"
+            })
+        })
+        .then(response => response.json())
+        .then(cres => {
+            location.replace('/admin/cancle_req');
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+
+    // Add event listener to the "취소하기" buttons to handle click
+    const cancelButtons = document.querySelectorAll(".cancel-button");
+    cancelButtons.forEach((cancelButton) => {
+        cancelButton.addEventListener("click", function () {
+            handleCancelClick(cancelButton);
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get all the rows from both tables
+  const cancelRows = document.querySelectorAll("#cancelTable tbody tr");
+  const bookingRows = document.querySelectorAll("#bookingTable tbody tr");
+
+  // Loop through each row of the cancel table
+  cancelRows.forEach((cancelRow, index) => {
+    const cancelBookNumValue = parseInt(cancelRow.querySelector("td:nth-child(2)").textContent.trim(), 10);
+
+    // Initialize variables to track if a match is found for bookStatus and bookingTid
+    let matchFoundBookStatus = false;
+    let matchFoundBookingTid = false;
+
+    // Loop through each row of the booking table
+    bookingRows.forEach((bookingRow, bookingIndex) => {
+      const bookingBookNum = parseInt(bookingRow.querySelector("td:nth-child(1)").textContent.trim(), 10);
+      const bookingTid = bookingRow.querySelector("td:nth-child(5)").textContent.trim();
+      const bookingStatus = bookingRow.querySelector("td:nth-child(2)").textContent.trim();
+      const bookingTotalPrice = bookingRow.querySelector("td:nth-child(6)").textContent.trim(); // Add this line to get the totalPrice value
+
+      // Compare the values and update the <td id="paymentNumber"> and <td id="status_bk"> accordingly
+      if (cancelBookNumValue === bookingBookNum) {
+        cancelRow.querySelector("#paymentNumber").textContent = bookingTid;
+        matchFoundBookingTid = true;
+
+        // Check if bookingStatus is already found earlier (to avoid duplicate matching)
+        if (!matchFoundBookStatus) {
+          cancelRow.querySelector("#status_bk").textContent = bookingStatus;
+          matchFoundBookStatus = true;
+        }
+        
+        // Update the <td id="bbb_total"> with the booking's totalPrice value
+        cancelRow.querySelector("#bbb_total").textContent = bookingTotalPrice; // Add this line
+
+        // Extract accomTitle and roomTitle values from the corresponding booking row
+        const bookingAccomTitle = bookingRows[bookingIndex].querySelector("td:nth-child(3)").textContent.trim();
+        const bookingRoomTitle = bookingRows[bookingIndex].querySelector("td:nth-child(4)").textContent.trim();
+
+        // Update the <td id="acc_acc_name"> and <td id="pro_pro_name"> with the extracted values
+        cancelRow.querySelector("#acc_acc_name").textContent = bookingAccomTitle;
+        cancelRow.querySelector("#pro_pro_name").textContent = bookingRoomTitle;
+      }
+    });
+
+    // If no match is found for bookingTid, clear the content of the <td id="paymentNumber">
+    if (!matchFoundBookingTid) {
+      cancelRow.querySelector("#paymentNumber").textContent = "";
+    }
+
+    // If no match is found for bookStatus, clear the content of the <td id="status_bk">
+    if (!matchFoundBookStatus) {
+      cancelRow.querySelector("#status_bk").textContent = "";
+    }
+  });
+});
+
+
+
+
+
+</script>
+<style>
+#bookingTable {
+    display: none;  
+}
+
+ .grayscale {
+    filter: grayscale(100%);
+  }
+</style>
+</html>

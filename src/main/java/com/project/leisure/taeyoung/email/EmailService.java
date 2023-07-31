@@ -115,8 +115,8 @@ public class EmailService {
 
 		return message;
 	}
-	
-	//이메일 수정을 위한 인증번호 발송 메일
+
+	// 이메일 수정을 위한 인증번호 발송 메일
 	public MimeMessage createmodifyEamilmessage(String to) throws MessagingException, UnsupportedEncodingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
@@ -155,7 +155,7 @@ public class EmailService {
 
 		return message;
 	}
-	
+
 	// 인증코드 만들기
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
@@ -197,7 +197,7 @@ public class EmailService {
 		}
 		return tempPw; // 메일로 보냈던 인증 코드를 서버로 리턴
 	}
-	
+
 	public String sendmodifyemailCodeMessage(String to) throws Exception {
 		tempPw = createKey();
 		MimeMessage message = createmodifyEamilmessage(to);
@@ -217,4 +217,6 @@ public class EmailService {
 	 * ChangeSetPersister.NotFoundException(); } //redisUtill.deleteData(key);
 	 * return ePw; }
 	 */
+
+
 }
