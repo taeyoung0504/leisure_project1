@@ -242,27 +242,32 @@ $(document).ready(function() {
 	});
 
 	$modifyEmailBtn.click(function() {
-		var newPassword = $inputNewPwd1.val();
+    // Check if any of the input fields is empty
+    if ($inputOldPwd.val() === '' || $inputNewPwd1.val() === '' || $inputNewPwd2.val() === '') {
+        return; // Return early, don't execute the rest of the code
+    }
 
-		$.ajax({
-			type: 'POST',
-			url: '/user/update_pwd',
-			data: { modify_password2: newPassword },
-			success: function(response) {
-				Swal.fire({
-					title: '<span class="centered-title">Success</span>',
-					html: '<b>비밀번호 변경하였습니다. 다시 로그인하세요</b>',
-					icon: 'success'
-				});
-				setTimeout(function() {
-					window.location.href = '/user/logout';
-				}, 2000);
-			},
-			error: function(xhr, status, error) {
-				console.error(error);
-			}
-		});
-	});
+    var newPassword = $inputNewPwd1.val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/user/update_pwd',
+        data: { modify_password2: newPassword },
+        success: function(response) {
+            Swal.fire({
+                title: '<span class="centered-title">Success</span>',
+                html: '<b>비밀번호 변경하였습니다. 다시 로그인하세요</b>',
+                icon: 'success'
+            });
+            setTimeout(function() {
+                window.location.href = '/user/logout';
+            }, 2000);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+});
 });
 
 
