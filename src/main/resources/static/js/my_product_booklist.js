@@ -70,24 +70,20 @@
     
     
     
- 
-  /*
-  
-   document.addEventListener("DOMContentLoaded", function () {
-        const accSelect = document.getElementById("accSelect");
-        const bookingTable = document.getElementById("booking-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-
-        accSelect.addEventListener("change", function () {
-            const selectedAccName = accSelect.value;
-            for (const row of bookingTable) {
-                const accNameCell = row.getElementsByTagName("td")[1];
-                if (selectedAccName === "모두" || accNameCell.textContent === selectedAccName) {
-                    row.style.display = "table-row";
-                } else {
-                    row.style.display = "none";
-                }
-            }
-        });
-    });
     
-    */
+    
+    
+    
+    /*모달 */
+    
+    function openModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+    
+  

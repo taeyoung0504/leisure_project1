@@ -85,30 +85,32 @@
 						<td th:text="${book.bookStatus}"></td>
 						<!-- Access the related Accommodation entity from the Booking entity -->
 						<td id="hidden_part_name" th:text="${book.accommodation.username}"></td>
-						<td><button>취소요청</button></td>
+						<td><button class="cancelButtondd" onclick="openModal()">취소요청</button></td>
 					</tr>
 				</tbody>
 			</table>
-			<div id="noMatchMessage"><strong>예약내역이 없습니다.</strong></div>
-			
-			
-			<div class="detail_warning"></div>
-			<div id="warning_bookcancle">
-				<span id="s_1">*</span> 파트너 임의로 예약취소는 불가능합니다 <b id="cancle_penalty">(패널티
-					부가)</b><br> <span id="sss333">취소를 원할 경우 관리자에게 문의해주세요.</span>
+			<div id="noMatchMessage">
+				<strong>예약내역이 없습니다.</strong>
 			</div>
 
+
+			<div class="modal" id="myModal">
+				<div class="modal-content">
+					<span class="close" onclick="closeModal()">&times;</span> <strong>예약
+						취소 요청</strong><br>
+					<textarea id="detail_reasoncan" rows="15" cols="60" placeholder="취소 사유를 입력해주세요..."></textarea>
+					<button>제출하기</button>
+				</div>
+			</div>
 
 
 		</div>
 
 
 
-
 		<!--  여기에 내용ㅇ없음 부분 -->
 
 	</div>
-
 
 
 	</body>
