@@ -289,7 +289,7 @@ cancelBtns.forEach(cancelBtn => {
         const tid = cancelBtn.parentElement.parentElement.querySelector("#tid").textContent;
         const cleanedAmount = amount.replace(/,/g, '');
         //console.log(amount);
-        alert(cleanedAmount);
+
 
         fetch(`/refundd`, {
             method: "POST",

@@ -117,20 +117,20 @@ $(document).ready(
 
 			if (accName !== originaAccName) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();				
+				location.reload();
 				return;
 			}
 
 			if (accAddress !== originaAccAddress) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();				
+				location.reload();
 				return;
 			}
 
 
 			if (accPartnerSec !== originaAccSectors) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();		
+				location.reload();
 				return;
 			}
 
@@ -179,7 +179,7 @@ $(document).ready(
 
 
 			$.ajax({
-				url: '/product/productNewMainReg',
+				url: '/partner/product/productNewMainReg',
 				type: 'POST',
 				data: formData,
 				enctype: 'multipart/form-data',
