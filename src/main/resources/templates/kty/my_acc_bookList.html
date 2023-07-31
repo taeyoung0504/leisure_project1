@@ -8,6 +8,13 @@
 </head>
 
 <body id="userinfo_modify">
+
+
+
+
+
+
+	
 <html layout:decorate="~{jjj/header}">
 <div id="my_infomation_modify" layout:fragment="content"
 	class="container my-3">
@@ -18,102 +25,176 @@
 
 
 
-		<!-- 사이드 바 -->
-		<nav id="mypage_sidebar_nav">
-			<ul>
-				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
-						정보</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
-				</li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_productList}"
-					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
-				</li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_acc_bookList}"
-					sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 숙소
-						예약리스트</a></li>
-			</ul>
-		</nav>
+		<!-- 사이드 바 --><nav id="mypage_sidebar_nav">
+		<ul>
+			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+					정보</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_productList}"
+				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}"
+				sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 숙소
+					예약리스트</a></li>
+		</ul>
+	</nav>
 
 
 
-		<div class="content-container">
-			<h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
-			<div class="hidden_kty_hidden">
-				<span>사장님 명 : </span> <span id="username"
-					th:text="${#authentication.name}"></span>
+	<div class="content-container">
+		<h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
+		<div class="hidden_kty_hidden">
+			<span>사장님 명 : </span> <span id="username"
+				th:text="${#authentication.name}"></span>
+		</div>
+		<select id="accSelect" class="select_acc_nam_2">
+			<option>모두</option>
+			<option th:each="account : ${acc}" th:text="${account.acc_name}"></option>
+		</select>
+
+		<table id="booking-table" class="boss_sell_name">
+			<thead>
+				<tr>
+					<th>예약 번호</th>
+					<th>숙소명</th>
+					<th>객실명</th>
+					<th>예약자 ID</th>
+					<th>예약자 번호</th>
+					<th>체크인</th>
+					<th>체크아웃</th>
+					<th>예약 상태</th>
+					<th>취소신청</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="book : ${booking}"
+					th:if="${book.accommodation.username == #authentication.name}">
+					<td th:text="${book.bookNum}"></td>
+					<td th:text="${book.accomTitle}"></td>
+					<td th:text="${book.roomTitle}"></td>
+					<td><span
+						th:text="${#strings.substring(book.bookerID, 0, 2)} + '****'"></span>
+					</td>
+					<td>
+					<span th:text="${#strings.replace(#strings.substring(book.bookerTel, 0, 3) + #strings.substring(book.bookerTel, 3, 4) + '*******', '********', '****-****')}"></span>
+					</td>
+					<td th:text="${book.checkin}"></td>
+					<td th:text="${book.checkOut}"></td>
+					<td>
+					<span th:if="${book.bookStatus == 'CANCEL_PAYMENT'}">취소 완료</span> <span th:unless="${book.bookStatus == 'CANCEL_PAYMENT'}"
+						th:text="${book.bookStatus}"></span></td>
+					<td id="hidden_part_name" th:text="${book.accommodation.username}"></td>
+					<td>
+						<button class="cancelButtondd" onclick="openModal(this)"
+							th:if="${book.bookStatus == '예약완료'}">취소요청</button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<!--  모달  -->
+		<div class="modal" id="myModal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal()">&times;</span> <strong>예약
+					취소 요청</strong><br>
+				<form id="cancellationForm">
+					<textarea id="reasonCancle" rows="15" cols="60"
+						placeholder="취소 사유를 입력해주세요..."></textarea>
+					<input type="hidden" id="bookNumValue" /> <input type="hidden"
+						id="authenticatedUserName" />
+					<button type="button" id="submitButton"
+						onclick="submitCancellation()">제출하기</button>
+				</form>
 			</div>
-			<select id="accSelect" class="select_acc_nam_2">
-				<option>모두</option>
-				<option th:each="account : ${acc}" th:text="${account.acc_name}"></option>
-			</select>
-
-			<table id="booking-table" class="boss_sell_name">
-				<thead>
-					<tr>
-						<th>예약 번호</th>
-						<th>숙소명</th>
-						<th>객실명</th>
-						<th>예약자 ID</th>
-						<th>예약자 명</th>
-						<th>예약자 번호</th>
-						<th>체크인</th>
-						<th>체크아웃</th>
-						<th>예약 상태</th>
-						<th>취소신청</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="book : ${booking}"
-						th:if="${book.accommodation.username == #authentication.name}">
-						<td th:text="${book.bookNum}"></td>
-						<td th:text="${book.accomTitle}"></td>
-						<td th:text="${book.roomTitle}"></td>
-						<td th:text="${book.bookerID}"></td>
-						<td th:text="${book.bookerName}"></td>
-						<td th:text="${book.bookerTel}"></td>
-						<td th:text="${book.checkin}"></td>
-						<td th:text="${book.checkOut}"></td>
-						<td th:text="${book.bookStatus}"></td>
-						<!-- Access the related Accommodation entity from the Booking entity -->
-						<td id="hidden_part_name" th:text="${book.accommodation.username}"></td>
-						<td><button class="cancelButtondd" onclick="openModal()">취소요청</button></td>
-					</tr>
-				</tbody>
-			</table>
-			<div id="noMatchMessage">
-				<strong>예약내역이 없습니다.</strong>
-			</div>
+		</div>
+		<!--  모달 끝 -->
 
 
-			<div class="modal" id="myModal">
-				<div class="modal-content">
-					<span class="close" onclick="closeModal()">&times;</span> <strong>예약
-						취소 요청</strong><br>
-					<textarea id="detail_reasoncan" rows="15" cols="60" placeholder="취소 사유를 입력해주세요..."></textarea>
-					<button>제출하기</button>
-				</div>
-			</div>
-
-
+		<div id="noMatchMessage">
+			<strong>예약내역이 없습니다.</strong>
 		</div>
 
-
-
-		<!--  여기에 내용ㅇ없음 부분 -->
 
 	</div>
 
 
-	</body>
+
+	<!--  여기에 내용ㅇ없음 부분 -->
+
+	</div>
+
+
+</body>
+
+<script>
+
+function openModal(button) {
+    const row = button.parentNode.parentNode;
+    const bookNumValue = row.querySelector('td:first-child').textContent;
+    const authenticatedUserName = document.getElementById('username').textContent;
+
+    console.log(bookNumValue);
+    console.log(authenticatedUserName);
+
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+
+    // Set the values in the modal form
+    document.getElementById('bookNumValue').value = bookNumValue;
+    document.getElementById('authenticatedUserName').value = authenticatedUserName;
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+
+function submitCancellation() {
+    // Get the input value from the textarea
+    const reasonCancleInput = document.getElementById('reasonCancle').value; // Modified this line
+
+    // Get the bookNumValue and authenticatedUserName from the modal
+    const bookNumValue = document.getElementById('bookNumValue').value;
+    const authenticatedUserName = document.getElementById('authenticatedUserName').value;
+
+    // Create a data object to send in the AJAX request
+    const data = {
+        reasonCancel: reasonCancleInput, // Modified this line
+        bookNumValue: bookNumValue,
+        authenticatedUserName: authenticatedUserName
+    };
+    const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
+    
+    fetch(backendEndpointURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            // If the request was successful, you can handle it here (e.g., display a success message)
+            console.log('Cancellation request submitted successfully.');
+            closeModal();
+        } else {
+            // If there was an error, you can handle it here (e.g., display an error message)
+            console.error('Error submitting cancellation request.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+	</script>
 </html>
-
-
