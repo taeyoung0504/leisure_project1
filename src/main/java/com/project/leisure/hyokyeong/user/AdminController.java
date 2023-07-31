@@ -175,6 +175,8 @@ public class AdminController {
 		model.addAttribute("kw", kw);
 		declarationListService.declarationList(model);
 		model.addAttribute("decalarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
+		// 전체 객체 수를 전달
+		model.addAttribute("objectCount", paging.getTotalElements());
 		return "khk/declaration";
 	}
 
@@ -224,7 +226,8 @@ public class AdminController {
 ///////////////////////// 1:1 문의 컨트롤러 /////////////////////////////////////
 
 	@GetMapping("/inquiryList")
-	public String inquiryList(Model model, Principal principal, @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+	public String inquiryList(Model model, Principal principal,
+			@PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
 		String username = principal.getName();
 		System.out.print(username);
 		Page<Inquiry> page = inquiryService.getAllInquiries(pageable);
@@ -285,17 +288,17 @@ public class AdminController {
 		noticeService.updateNotice(id, notice);
 		return "redirect:/admin/adminNoticeList";
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public String deleteNotice(@PathVariable Integer id) {
-	    noticeService.deleteNotice(id);
-	    return "redirect:/admin/adminNoticeList";
+		noticeService.deleteNotice(id);
+		return "redirect:/admin/adminNoticeList";
 	}
 
 	@GetMapping("/main")
 	public String admin_dashboard(Model model) {
-		  LocalDate currentDate = LocalDate.now();
-	        model.addAttribute("currentDate", currentDate);
+		LocalDate currentDate = LocalDate.now();
+		model.addAttribute("currentDate", currentDate);
 		return "kty/admin_main";
 	}
 }
