@@ -39,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BookController {
 
+
 	private BookService bookService;
 	private RoomService roomService;
 
@@ -108,16 +109,13 @@ public class BookController {
 
 		// 추가
 		List<ProductImg> images = product.getProductImgs();
-		String firstImageUrl = images.stream()
-                .map(ProductImg::getImg_url) // getImageUrl()은 imageUrl 필드의 getter 메서드를 가정합니다.
-                .findFirst()
-                .orElse(null);
+		String firstImageUrl = images.stream().map(ProductImg::getImg_url) // getImageUrl()은 imageUrl 필드의 getter 메서드를
+																			// 가정합니다.
+				.findFirst().orElse(null);
 
 //첫 번째 객체의 이미지 URL을 출력
-System.out.println("First Image URL: " + firstImageUrl);
+		System.out.println("First Image URL: " + firstImageUrl);
 
-	
-		
 //		String img = (String) selectedImage;
 
 		bookingvo.setProductImg(firstImageUrl);
@@ -174,6 +172,7 @@ System.out.println("First Image URL: " + firstImageUrl);
 		bookingVO.setBookerName(realName);
 		bookingVO.setBookerTel(tel);
 		bookingVO.setPayType(payType);
+
 		bookingVO.setProduct(product);
 		bookingVO.setAccommodation(accommodation);
 //		bookingVO.setBookerName(params.getParameter(username));
@@ -204,8 +203,6 @@ System.out.println("First Image URL: " + firstImageUrl);
 			// 여기선 반환받은 예약번호인 result로 해당 예약정보를 찾아서 tid를 넣어준다.(이후 이 tid는 승인, 취소등에서 해당 예약정보를
 			// 찾을 때 사용)
 			bookService.updateTid(bookNum, res.getTid());
-
-			// -> 여기서 받아온 tid바로 예약테이블에 저장하고 받아온 아이디에 tid update하기
 
 			return new ResponseEntity<>(res, HttpStatus.OK);
 

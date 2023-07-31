@@ -33,5 +33,11 @@ public class RoomService {
 	}
 	
 	
+	//유리 추가
+	public void fineUserBookId(int id) {
+		this.roomRepository.findById(id);
+		
+	}
+	
 	
 }
