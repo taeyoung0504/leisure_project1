@@ -4,6 +4,15 @@
 	.hidden_kty_hidden{
 	display: none;
 	}
+	#hidden_part_name{
+	display: none;
+	}
+	
+	#noMatchMessage{
+	margin-top:10px;
+	display: none;
+	text-align: center;
+	}
 	.select_acc_nam_2{
 	width:200px;
 	height:30px;

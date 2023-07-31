@@ -1,45 +1,77 @@
-function hideNonMatchingRows() {
-    var bookingRows = document.querySelectorAll('#booking-table tbody tr');
-    var accRows = document.querySelectorAll('#acc-table tbody tr');
 
-    bookingRows.forEach(function (bookingRow) {
-        var accomTitle = bookingRow.querySelector('td:nth-child(2)').innerText.trim();
-        var matchingRowExists = false;
+     
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the select element
+        const selectElement = document.getElementById("accSelect");
 
-        accRows.forEach(function (accRow) {
-            var accName = accRow.querySelector('td:nth-child(3)').innerText.trim();
-            if (accomTitle === accName) {
-                matchingRowExists = true;
+        // Add an event listener to the select element
+        selectElement.addEventListener("change", function() {
+            // Get the selected value
+            const selectedValue = selectElement.value;
+
+            // Get all the table rows
+            const tableRows = document.querySelectorAll("#booking-table tbody tr");
+
+            // Loop through each row and check if the accommodation title matches the selected value
+            tableRows.forEach(function(row) {
+                const accomTitleCell = row.querySelector("td:nth-child(2)"); // Assuming the accommodation title is in the second column
+
+                if (selectedValue === "모두" || accomTitleCell.textContent === selectedValue) {
+                    // If the selected value is "모두" or the accommodation title matches the selected value, show the row
+                    row.style.display = "table-row";
+                } else {
+                    // Otherwise, hide the row
+                    row.style.display = "none";
+                }
+            });
+        });
+    });
+     
+         document.addEventListener("DOMContentLoaded", function() {
+        // Get the select element
+        const selectElement = document.getElementById("accSelect");
+        
+        // Get the no match message element
+        const noMatchMessage = document.getElementById("noMatchMessage");
+
+        // Add an event listener to the select element
+        selectElement.addEventListener("change", function() {
+            // Get the selected value
+            const selectedValue = selectElement.value;
+
+            // Get all the table rows
+            const tableRows = document.querySelectorAll("#booking-table tbody tr");
+            
+            // Initialize a variable to keep track of whether there are matching rows or not
+            let hasMatchingRows = false;
+
+            // Loop through each row and check if the accommodation title matches the selected value
+            tableRows.forEach(function(row) {
+                const accomTitleCell = row.querySelector("td:nth-child(2)"); // Assuming the accommodation title is in the second column
+
+                if (selectedValue === "모두" || accomTitleCell.textContent === selectedValue) {
+                    // If the selected value is "모두" or the accommodation title matches the selected value, show the row
+                    row.style.display = "table-row";
+                    hasMatchingRows = true;
+                } else {
+                    // Otherwise, hide the row
+                    row.style.display = "none";
+                }
+            });
+
+            // Show/hide the no match message based on whether there are matching rows
+            if (hasMatchingRows) {
+                noMatchMessage.style.display = "none";
+            } else {
+                noMatchMessage.style.display = "block";
             }
         });
-
-        if (!matchingRowExists) {
-            bookingRow.style.display = 'none';
-            bookingRow.style.color = 'white'; // Add this line to set the font color to white
-        }
     });
-}
-
-// Call the function when the page is loaded
-window.addEventListener('load', function () {
-    hideNonMatchingRows();
-});
-     
-     
-     
-     
-     
-     
-     
-     
-      document.addEventListener("DOMContentLoaded", function() {
-    const usernameElement = document.getElementById("username");
-    if (usernameElement) {
-      usernameElement.textContent = "비밀이지롱~";
-    }
-  });
-  
-  
+    
+    
+    
+ 
+  /*
   
    document.addEventListener("DOMContentLoaded", function () {
         const accSelect = document.getElementById("accSelect");
@@ -57,3 +89,5 @@ window.addEventListener('load', function () {
             }
         });
     });
+    
+    */
