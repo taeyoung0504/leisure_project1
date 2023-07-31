@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.booking.BookService;
+import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.taeyoung.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -186,9 +187,9 @@ public class ProductController {
 		List<Product> products = productService.findProductsByAccommodationId(acc_id);
 
 		// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
-
 		// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
 		for (Product product : products) {
+			this.bookService.updateAllBookingVoProductToNull(product);
 			productService.pdDelete(product.getProduct_id());
 		}
 
@@ -206,8 +207,8 @@ public class ProductController {
 
 		// id를 사용하여 해당 상품을 조회
 		Product product = productService.getProduct(product_id);
-	    
-	    //해당하는 product를 book 에 전송. => book 에서는 그 정보를 토대로 null로 변경
+
+		// 해당하는 product를 book 에 전송. => book 에서는 그 정보를 토대로 null로 변경
 		this.bookService.updateBookingVoProductToNull(product);
 
 		response = this.productService.pdDelete(product_id);

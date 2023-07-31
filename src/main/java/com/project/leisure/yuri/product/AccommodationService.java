@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.DataNotFoundException;
+import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.dogyeom.booking.BookingVO;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -32,6 +33,8 @@ public class AccommodationService {
 
 	private final AccommodationRepository accommodationRepository;
 
+	private final BookService bookService;
+
 	// 현재 로그인한 username을 가져와서 있는지 없는지 찾음
 	public Accommodation accfindUserName(String username) {
 
@@ -45,6 +48,8 @@ public class AccommodationService {
 	public void deleteAcc(long acc_id) {
 		Optional<Accommodation> optionalAccommodation = accommodationRepository.findById(acc_id);
 		if (optionalAccommodation.isPresent()) {
+			// 숙소를 가져옴 + 추가
+			Accommodation accommodation = optionalAccommodation.get();
 
 			// 서버에 있는 숙소 이미지 삭제
 			String baseDirectory = "src/main/resources/static/";
@@ -57,6 +62,9 @@ public class AccommodationService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
+			// 숙소 삭제 전에 bookVO 에 외래키 연결된거 삭제 + 추가
+			bookService.updateBookingVoAccToNull(accommodation);
 
 			// 숙소 삭제
 			accommodationRepository.deleteById(acc_id);
@@ -2138,12 +2146,8 @@ public class AccommodationService {
 		}
 	}
 
-	
-	
-	
-	
-	public List<Accommodation>  my_acc_list() {
-		 return this.accommodationRepository.findAll();
-		
+	public List<Accommodation> my_acc_list() {
+		return this.accommodationRepository.findAll();
+
 	}
 }
