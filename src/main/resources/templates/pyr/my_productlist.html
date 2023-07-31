@@ -29,8 +29,11 @@
 					th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
 				</li>
 				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_productList}" class="active"> 내 상품
+					th:href="@{/user/mypage/my_productList}" class="active"
+					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품
 						목록</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 			</ul>
 		</nav>
 
@@ -116,7 +119,9 @@
 			<div id=noAccfild>
 
 				<div id="noAcc">
-					<h2>현재 등록된 객실이 없습니다</h2>
+				<h1>등록한 숙소가 없습니다.</h1>
+			<span id="noAcc2">지금 숙소를 등록해보세요</span>
+			 <a th:href="@{/user/mypage/my_partner_reg}"	class="btn_red">숙소 등록하러</a>
 				</div>
 
 			</div>
@@ -126,4 +131,6 @@
 		<script src="/js/pyr_add_product.js"></script>
 
 	</body>
+	
+
 </html>

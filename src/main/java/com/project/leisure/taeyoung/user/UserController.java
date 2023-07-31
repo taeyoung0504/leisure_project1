@@ -497,7 +497,8 @@ public class UserController {
 		}
 		return "pyr/my_productlist";
 	}
-
+	
+	// 김도겸 
 	@GetMapping("/mypage/my_booking")
 	public String my_booking(Model model, Principal principal) {
 	    String booker_user = principal.getName();
@@ -512,5 +513,22 @@ public class UserController {
 	    */
 	    model.addAttribute("bookList", filteredBook);
 	    return "kty/my_booking";
+	}
+	
+	
+	@GetMapping("/mypage/my_acc_bookList")
+	public String my_acc_bookList(Principal principal,Model model) {
+		String username = principal.getName();
+		 
+		  List<Accommodation> acc = this.accommodationService.my_acc_list();
+		  List<BookingVO> book = this.bookService.getbooklist();
+		  
+		  List<Accommodation> filteredBook = acc.stream()
+		            .filter(Accommodation -> Accommodation.getUsername().equals(username))
+		            .collect(Collectors.toList());
+		  
+		  model.addAttribute("acc",filteredBook);
+		  model.addAttribute("booking",book);
+		  return "kty/my_acc_bookList";
 	}
 }

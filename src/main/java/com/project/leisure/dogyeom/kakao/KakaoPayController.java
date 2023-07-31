@@ -104,7 +104,7 @@ public class KakaoPayController {
 			LocalDate checkIn = bookingVO.get().getCheckin(); // 체크인 시간
 			LocalDate checkOut = bookingVO.get().getCheckOut(); // 체크아웃 시간
 
-			 // 결제 날짜 년-월-일 식으로 보여주기 위함
+			// 결제 날짜 년-월-일 식으로 보여주기 위함
 			String paymentDateTimeStr = bookingVO.get().getPaymentDate();
 			DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 			LocalDateTime paymentDateTime = LocalDateTime.parse(paymentDateTimeStr, parser);
@@ -123,15 +123,16 @@ public class KakaoPayController {
 			}
 		} else {
 			model.addAttribute("error", "Booking not found.");
-			return "kdg/error"; //메세지 전달 실패 에러 페이지 추후에 만들기
-		}//유리 추가 끝
+			return "kdg/error"; // 메세지 전달 실패 에러 페이지 추후에 만들기
+		} // 유리 추가 끝
 
 		return "kdg/success";
 
 	}
 
 	@PostMapping("/refundd")
-	public @ResponseBody KakaoCancelResponse kakaoPayCancel(@RequestBody Map<String, Object> params, Model model,Principal principal) {
+	public @ResponseBody KakaoCancelResponse kakaoPayCancel(@RequestBody Map<String, Object> params, Model model,
+			Principal principal) {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@amount : " + params.toString());
 		cres = kakaoPayService.kakaoCancel(params);
 		log.info(cres.toString());
@@ -139,9 +140,10 @@ public class KakaoPayController {
 
 		String tid = cres.getTid();
 		String status = cres.getStatus();
-		bookService.updateCancel(tid, status);
-		
-		// 유리 추가 카카오 승인이 되면 이메일 보내도록 처리
+		String canceled_at = cres.getCanceled_at();
+		bookService.updateCancel(tid, status, canceled_at);
+
+		// 유리 추가 예약 취소시 전송 문자
 		// 현재 로그인한 유저의 정보를 가져온다.
 		String username = principal.getName();
 		List<Users> findUserEmail = userService.check(username); // 유저가 있는지 없는지 확인
@@ -161,28 +163,34 @@ public class KakaoPayController {
 			LocalDate checkIn = bookingVO.get().getCheckin(); // 체크인 시간
 			LocalDate checkOut = bookingVO.get().getCheckOut(); // 체크아웃 시간
 
-			 // 결제 날짜 년-월-일 식으로 보여주기 위함
-			String paymentDateTimeStr = bookingVO.get().getPaymentDate();
+			// 결제 날짜 년-월-일 식으로 보여주기 위함 (취소시에 Canceled_at을 넣어서 사용)
+			String paymentDateTimeStr = bookingVO.get().getCanceled_at();
 			DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 			LocalDateTime paymentDateTime = LocalDateTime.parse(paymentDateTimeStr, parser);
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String pay_Date = paymentDateTime.format(formatter);
 
+			// 결제 날짜 년-월-일 식으로 보여주기 위함 (취소시에 Canceled_at을 넣어서 사용)
+			String cancelDateTimeStr = bookingVO.get().getCanceled_at();
+			DateTimeFormatter canceParser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+			LocalDateTime cancelDateTime = LocalDateTime.parse(cancelDateTimeStr, canceParser);
+
+			DateTimeFormatter cancelformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String can_Date = cancelDateTime.format(cancelformatter);
+
 			String totalPrict = bookingVO.get().getTotalPrice();
 			String realName = bookingVO.get().getBookerName();
 
 			try {
 				emailService2.sendCancelEmailMessage(userEmail, username, realName, accName, productType, checkIn,
-						checkOut, pay_Date, totalPrict);
+						checkOut, pay_Date, totalPrict, can_Date);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
 			model.addAttribute("error", "Booking not found.");
-		}//유리 추가 끝
-		
-		
+		} // 유리 추가 끝
 
 		return cres;
 	}

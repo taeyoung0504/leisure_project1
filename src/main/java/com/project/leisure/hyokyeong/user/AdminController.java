@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -291,4 +292,10 @@ public class AdminController {
 	    return "redirect:/admin/adminNoticeList";
 	}
 
+	@GetMapping("/main")
+	public String admin_dashboard(Model model) {
+		  LocalDate currentDate = LocalDate.now();
+	        model.addAttribute("currentDate", currentDate);
+		return "kty/admin_main";
+	}
 }

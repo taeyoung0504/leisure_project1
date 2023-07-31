@@ -30,7 +30,9 @@ dependencies {
    implementation 'org.springframework.boot:spring-boot-starter-mail'
       implementation 'com.fasterxml.jackson.core:jackson-databind'
       implementation 'org.commonmark:commonmark:0.21.0'
-
+      
+      //2023-07-29 추가
+ implementation 'com.fasterxml.jackson.core:jackson-databind'
       
       // nurigo 문자인증
       implementation 'net.nurigo:sdk:4.2.7'

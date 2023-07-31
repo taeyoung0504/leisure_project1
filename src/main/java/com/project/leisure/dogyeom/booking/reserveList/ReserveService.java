@@ -18,9 +18,9 @@ public class ReserveService {
 //		this.entityManager = entityManager;
 	}
 	
-	public List<BookingVO> getReservedRoomList(Long accomid, LocalDate currentDate,
+	public List<BookingVO> getReservedRoomList(Long tempAccomId, LocalDate currentDate,
 			LocalDate nextDate) {
-		List<BookingVO> reservedRooms = jpaAlreadyReserveRepository.findRoomId(accomid, currentDate, nextDate);
+		List<BookingVO> reservedRooms = jpaAlreadyReserveRepository.findTempRoomId(tempAccomId, currentDate, nextDate);
 		
 		return reservedRooms;
 	}

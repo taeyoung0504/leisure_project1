@@ -524,9 +524,8 @@ input[type="checkbox"].inp_chk_02 {
 		<div class="reserve">
 			<div class="right">
 				<section class="info">
-
-					<span hidden id="roomID" th:value="${bookingvo.roomID}"
-						th:text="${bookingvo.roomID}"></span>
+					<span hidden id="roomID" th:value="${bookingvo.tempRoomId}"
+						th:text="${bookingvo.tempRoomId}"></span>
 					<p class="name">
 						<strong>숙소이름</strong> <span th:text="${bookingvo.accomTitle}"
 							class="acc_name">양평 스마일카라반펜션</span>
@@ -594,6 +593,8 @@ input[type="checkbox"].inp_chk_02 {
     	
 							    	const paybtn = document.getElementById('payment-btn');
 							    	
+							    	//휴대폰 인증 검사
+							    	var phondConfirm = false;
 							    	paybtn.addEventListener('click', function() {
 							    		const roomIDElement = document.getElementById('roomID');
 							    		const roomID = roomIDElement.textContent;
@@ -605,10 +606,40 @@ input[type="checkbox"].inp_chk_02 {
 							    		const bookerName = document.getElementById('username').value;
 							    		console.log(bookerName);
 							    		
+							    		//이름 특수문자, 송백, 숫자 확인
+							    	    const specialCharRegex = /[0-9 `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+							    		    if (bookerName.trim() === '' || specialCharRegex.test(bookerName)) {
+							    		    	Swal.fire("이름에 공백, 숫자, 특수 문자를 사용할 수 없습니다");
+							    		        return;
+							    		    }
+							    		
+							    		
 							    		const bookerTel = document.getElementById('tel').value;
 							    		console.log(bookerTel);
 							    		
 							    		
+							    	    //휴대폰 인증이 되지 않아 false 인 경우 
+									    if (phondConfirm == false) {
+									    	Swal.fire("휴대폰 인증이 필요합니다");
+									        return;
+									    }
+								
+							    		
+							    		
+							    		//추가 결제시 체크박스 여부 확인
+							    		const checkboxes = document.querySelectorAll('.inp_chk_02');
+									    const checkedCnt = document.querySelectorAll('.inp_chk_02:checked').length;
+									    const totalCnt = checkboxes.length;
+									
+																		    
+									    if (totalCnt !== checkedCnt) {
+											Swal.fire('전체동의가 필요합니다')
+											return;
+										}
+
+									   
+									
 							    		
 							     		const url = `/book/create/${roomID}`;
 							    		
@@ -786,8 +817,10 @@ input[type="checkbox"].inp_chk_02 {
 		    									
 		    									const verificationCodeDiv = document.getElementById('verificationCode');
 				    						    verificationCodeDiv.style.display = 'none';
-				    						    
-		    									
+				    						
+				    						    //휴대폰 인증 되면 전역변수로 설정한 phondConfirm 가 true로 변함
+				    						    phondConfirm = true;
+				    						
 		    									/* const input_code = document.getElementById("input_code")
 		    									input_code.readOnly = true */
 		    									
@@ -887,7 +920,6 @@ input[type="checkbox"].inp_chk_02 {
 									이상 확인</i> <b> (필수)</b> </a>
 						</span>
 					</p>
-
 
 				</section>
 				<!-- <button type="button" class="btn_pay left_right_red"> 결제하기 </button> -->
@@ -1018,4 +1050,6 @@ input[type="checkbox"].inp_chk_02 {
 			</div>
 		</div>
 	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
 </html>

@@ -22,4 +22,7 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 
 	// 유리 추가
 	Optional<BookingVO> findByTid(String tid);
+
+	//유리 추가
+	List<BookingVO> findByCheckinAndBookStatus(LocalDate tomorrow, String string);
 }

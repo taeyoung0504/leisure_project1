@@ -1,5 +1,6 @@
 package com.project.leisure.dogyeom.booking;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -62,10 +63,10 @@ public class BookService {
 	}
 	
 
+	public void updateCancel(String tid, String status, String canceled_at) {
+		String sql = "UPDATE bookingvo SET book_status = ?, canceled_at = ? WHERE tid = ?";
+		jdbcTemplate.update(sql, status, canceled_at, tid);
 
-	public void updateCancel(String tid, String status) {
-		String sql = "UPDATE bookingvo SET book_status = ? WHERE tid = ?";
-		jdbcTemplate.update(sql, status, tid);
 	}
 
 	public List<BookingVO> getBookList() {
@@ -89,9 +90,18 @@ public class BookService {
 		}
 	}
 	
+
 	//유리 추가 Tid 로 해당 bookVo를 조회하여 넘겨준다
 	  public Optional<BookingVO> findBookTid(String tid) {
 	        return bookRepository.findByTid(tid);
 	    }
 
+
+	
+	public List<BookingVO> getbooklist(){
+		List<BookingVO> bookingList = this.bookRepository.findAll();
+	    Collections.reverse(bookingList);
+	    return bookingList;
+	}
+	
 }

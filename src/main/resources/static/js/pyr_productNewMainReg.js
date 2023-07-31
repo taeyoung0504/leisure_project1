@@ -117,17 +117,20 @@ $(document).ready(
 
 			if (accName !== originaAccName) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();				
 				return;
 			}
 
 			if (accAddress !== originaAccAddress) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();				
 				return;
 			}
 
 
 			if (accPartnerSec !== originaAccSectors) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
+				location.reload();		
 				return;
 			}
 

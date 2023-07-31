@@ -52,6 +52,7 @@ public class KakaoPayService {
 //		payParams.add("fail_url", "http://192.168.10.67:8080/fail"); // 결제실패시 넘어갈 url
 //		payParams.add("cancel_url", "http://192.168.10.67:8080/cancel"); // 결제취소시 넘어갈 url
 
+
 		// 카카오페이 결제준비 api 요청
 		// 파라미터, 헤더
 		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(payParams, this.getHeaders());

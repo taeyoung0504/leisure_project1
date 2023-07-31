@@ -151,7 +151,7 @@ public class TourController {
 					@RequestParam(name = "checkOut", required = false) String checkOut) {
 			// 넘어온 아이다와 현재의 날짜로 사용자가 아무 날짜도 입력하지 않고 상세페이지에 들어왔을 때
 			// 보여질 객실 목록 - 현재 날짜를 기준으로 체크인, 아웃을 비교하여 예약 가능한 객실만 보이기
-			Long accomid = id;
+			Long tempAccomId = id;
 			LocalDate currentDate = LocalDate.now();
 	        String reqDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	        LocalDate nextDate = currentDate.plusDays(1);
@@ -181,6 +181,12 @@ public class TourController {
 	            LocalDate currentDate1 = LocalDate.now();
 	            localDate = currentDate1;
 	            localDate2 = currentDate1.plusDays(1);
+	            
+	         // 두 날짜 사이의 차이를 구함
+	            long difference = ChronoUnit.DAYS.between(localDate, localDate2);
+
+	            // int 타입의 변수에 저장
+	            num = (int) difference;
 
 	        }
 
@@ -190,20 +196,21 @@ public class TourController {
 	        List<BookingVO> reservedRoomList;
 	        
 	        if(checkin != null && checkOut != null) {
-	        	reservedRoomList = reserveService.getReservedRoomList(accomid, localDate, localDate2);
+	        	reservedRoomList = reserveService.getReservedRoomList(tempAccomId, localDate, localDate2);
 	        }else {
-	        	reservedRoomList = reserveService.getReservedRoomList(accomid, currentDate, nextDate);
+	        	reservedRoomList = reserveService.getReservedRoomList(tempAccomId, currentDate, nextDate);
 	        }
 
 	        Page<Review> paging = reviewService.getList(page);
 		     model.addAttribute("paging", paging);
 	        //model.addAttribute("reservedRoomList", reservedRoomList);
 	        if(reservedRoomList != null) {
-	        	Accommodation accom = accommodationService.getAccomList(accomid, reservedRoomList);
+	        	Accommodation accom = accommodationService.getAccomList(tempAccomId, reservedRoomList);
 	        	if(accom != null) {
 			            for(Product product: accom.getProducts()) {
 			            	
 			            	String result = String.valueOf(num * product.getProduct_amount());
+			            	System.out.println("!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@ result : " + result);
 			            	product.setTotalPrice(result);
 			        }
 			        model.addAttribute("acc", accom);

@@ -27,9 +27,7 @@
 	font-style: normal;
 }
 
-
-
-.jj_navbar a {
+.jj_navbar a, .jj_navbar li{
 	text-decoration: none;
 	color: var(--main-color);
 }
@@ -54,6 +52,37 @@
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
+    @keyframes anime_textup { 0% { top: 0; } 20% { top: -0.2rem; } 40% { top: 0 } 60% { top: 0 } 80% { top: 0 } 100% { top: 0 } }
+ 
+    .main_logo span {
+        position: relative;
+        animation: anime_textup 1.5s infinite;
+    }
+ 
+    .main_logo span:nth-of-type(1) {
+        animation-delay: .1s;
+    }
+ 
+    .main_logo span:nth-of-type(2) {
+        animation-delay: .2s;
+    }
+ 
+    .main_logo span:nth-of-type(3) {
+        animation-delay: .3s;
+    }
+ 
+    .main_logo span:nth-of-type(4) {
+        animation-delay: .4s;
+    }
+ 
+    .main_logo span:nth-of-type(5) {
+        animation-delay: .5s;
+    }
+    .main_logo span:nth-of-type(6) {
+        animation-delay: .6s;
+    }
+
+
 .weather-temp {
 	color: var(--main-color);
 }
@@ -62,15 +91,13 @@
 	color: var(--background-color);
 }
 
-@media screen and (min-width: 1000px) {
-	
+@media screen and (min-width: 1001px) {
 	.jj_main {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	margin-top: 100px;
-}
-	
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		margin-top: 100px;
+	}
 	#header.activee {
 		background-color: var(--main-color);
 		transition-duration: 0.2s;
@@ -95,9 +122,9 @@
 }
 
 .jj_navbar_logo {
-	font-size: 22px;
+	font-size: 30px;
 	/* 	color: var(--main-color); */
-	padding-left: 200px;
+	padding-left: 300px;
 }
 
 .jj_navbar_logo i {
@@ -118,7 +145,7 @@ body:not(.jj_navbar) {
 }
 
 nav .jj_menubar {
-	padding-right: 200px;
+	padding-right: 300px;
 }
 
 nav .jj_menubar ul {
@@ -823,24 +850,15 @@ footer address .order {
 
 /* ============== 반응형================== */
 @media screen and (max-width: 1000px) {
-	/* h2 원래있었음 */
-	.main {
-		width: 100%;
-		height: 24px;
-		font-size: 15px;
-		line-height: 1;
-		color: var(--text-color);
-		text-align: left;
-		display: block;
-		margin: auto;
-		margin-top: 50px;
-		margin-bottom: 20px;
-		padding-left: 20px;
-		font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+	.jj_main {
+		margin: 0;
+		padding: 0;
+		margin-top: 100px;
 	}
+
 	/* ========네비 */
 	#header {
-		position: sticky !important;
+		position: absolute !important;
 		top: 0 !important;
 		flex-direction: column;
 		/* align-items: center; */
@@ -862,6 +880,32 @@ footer address .order {
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
+	.jj_navbar {
+		background-color: var(--background-color);
+		transition-duration: 0.2s;
+		transition-timing-function: ease;
+		color: var(--main-color);
+		-webkit-transition-duration: 0.2s;
+		-webkit-transition-timing-function: ease;
+		/* 		margin-top: 20px; */
+		padding-top: 10px;
+	}
+
+	/* h2 원래있었음 */
+	.main {
+		width: 100%;
+		height: 24px;
+		font-size: 15px;
+		line-height: 1;
+		color: var(--text-color);
+		text-align: left;
+		display: block;
+		margin: auto;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		padding-left: 20px;
+		font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+	}
 
 	/*  #header.activee {
     
@@ -880,8 +924,17 @@ footer address .order {
 		text-align: center;
 		margin: 0 auto;
 		display: block;
-		/* 		margin-top: 10px; */
+		position: sticky;
+		top: 10px;
 	}
+	
+	
+	
+	.jj_navbar a {
+    text-decoration: none;
+    color: var(--main-color);
+    top: 10px;
+}
 
 	/* 검색창 */
 	.jj_search.active .jj_search_input {
@@ -890,25 +943,8 @@ footer address .order {
 	.jj_search.active .jj_search_btn {
 		transform: translateX(150px);
 	}
-	.jj_navbar {
-		background-color: var(--background-color);
-		transition-duration: 0.2s;
-		transition-timing-function: ease;
-		color: var(--main-color);
-		-webkit-transition-duration: 0.2s;
-		-webkit-transition-timing-function: ease;
-		margin-top: 20px;
-	}
 
-	/* 창이 1000보다 작아지면 메뉴와 아이템을 밑으로 내림 */
-	.jj_navbar .jj_navbar_logo {
-		font-size: 18px;
-		color: var(--main-color);
-		padding-left: 0;
-		text-align: center;
-		margin: 0 auto;
-		display: block;
-	}
+	
 
 	/* 메뉴도 한줄에서 밑으로 내림 */
 	.jj_navbar .jj_navbar_menu {
