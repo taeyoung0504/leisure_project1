@@ -4,14 +4,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<meta charset="utf-8">	
+<meta charset="utf-8">
 
 <title>관리자 메인 페이지</title>
 
 <style>
+:root {
+	--main-color: #e93c3c;
+	--background-color: #ffffff;
+	--hover-color: #ffa6a6;
+	--text-color: rgb(109, 109, 109);
+	--sub-color: rgb(255, 102, 102);
+}
+
 @font-face {
 	font-family: 'The-Jamsil-OTF-2-Light';
 	src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
@@ -24,9 +32,6 @@
 	font-style: normal;
 }
 
-
-
-
 .admin_nav_body {
 	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 	box-sizing: border-box;
@@ -35,23 +40,21 @@
 	background-color: #f2f2f2;
 }
 
-
-
 tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
 
 button {
-	background-color: rgb(255, 102, 102);
-	color: white;
+	background-color: var(--sub-color); color : white;
 	border: none;
 	padding: 5px 10px;
 	cursor: pointer;
 	border-radius: 5px;
+	color: white;
 }
 
 input[type="submit"] {
-	background-color: rgb(255, 102, 102);
+	background-color: var(--sub-color);
 	color: white;
 	border: none;
 	padding: 5px 10px;
@@ -82,7 +85,7 @@ input[type="submit"]:hover {
 	width: 150px;
 	padding: 20px 0px;
 	text-decoration: none;
-	color: #e40000d3;
+	color: var(--main-color);
 	transition: background-color 0.3s;
 	background-color: #fff;
 	display: inline-block;
@@ -115,16 +118,14 @@ input[type="submit"]:hover {
 	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 }
 
-
 .hide {
 	display: none;
 }
 
-
-
 h1 {
 	text-align: center;
-	margin: 20px 0;
+    margin: 30px 0;
+    font-size: 30px;
 }
 
 h3 {
@@ -154,14 +155,9 @@ th, td {
 	border-bottom: 1px solid #ddd;
 }
 
-
-
 form {
 	display: inline-block;
 }
-
-
-
 
 .input-group {
 	right: 100px;
@@ -180,31 +176,20 @@ span.role-ADMIN {
 	color: red;
 }
 
-
 select {
-
-   -webkit-appearance: none; /* for chrome */
-
-   -moz-appearance: none; /*for firefox*/
-
-   appearance: none;
-
+	-webkit-appearance: none; /* for chrome */
+	-moz-appearance: none; /*for firefox*/
+	appearance: none;
 }
 
-select::-ms-expand{
-
-   display:none;
-   /*for IE10,11*/
-
+select::-ms-expand {
+	display: none;
+	/*for IE10,11*/
 }
 
 select {
-
-   background:url('arr_pink.gif') no-repeat 97% 50%/15px auto;
-
+	background: url('arr_pink.gif') no-repeat 97% 50%/15px auto;
 }
-
-
 
 .pagination {
 	display: flex;
@@ -233,21 +218,23 @@ select {
 }
 
 /* 모달 창 폼 css */
-#editForm {
+.modal_hk {
 	margin-top: 20px;
 	text-align: center;
+	margin-right: 20px;
 }
 
-#editForm div {
+.modal_hk div {
 	margin-bottom: 10px;
 }
 
-#editForm label {
+.modal_hk label {
 	display: inline-block;
 	width: 120px;
 }
 
-#editNickname, #editZipcode, #editAddress1, #editAddress2 {
+#editNickname, #editZipcode, #editAddress1, #editAddress2,
+	#userIdDisplay, #userNameDisplay {
 	padding: 5px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -255,14 +242,16 @@ select {
 }
 
 #editForm button[type="submit"] {
-	margin: 10px auto;
-	display: block;
+	margin: 10px 10px 10px 50px;
 	padding: 5px 10px;
 	background-color: rgb(255, 128, 128);
 	color: white;
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
+	position: relative;
+	margin-left: 50px;
+	margin: 10px 10px 10px 40px;
 }
 
 .account-status-disabled {
@@ -332,11 +321,15 @@ select {
 }
 
 .approve_btn:hover {
-	background: #01939A;
+	background: #b4dbed;
 }
 
 .reject_btn {
-/* 	background-color: pink; */
+	border-style: none;
+}
+
+.reject_btn:hover {
+	background-color: pink;
 	border-style: none;
 }
 
@@ -347,19 +340,22 @@ select {
 
 #home {
 	font-weight: bold;
-	padding-bottom: 60px;
+	padding-bottom: 70px;
+	font-size: 25px;
+	margin-top: 5px;
 }
+
 </style>
 </head>
 <body class="admin_nav_body">
 	<div class="admin_navbar">
-		<a href="/" id="home">경상도숙박장사</a> 
-		<a href="/admin/main">어드민 홈</a>
-		<a href="/admin/adminNoticeList">공지사항</a>
-		<a href="/admin/authorityPage">권한 관리</a> <a
-			href="/admin/accomdationListPage">업체 관리</a> <a
-			href="/admin/partnerListPage">파트너 관리</a> <a href="/admin/inquiryList">1:1
-			문의</a> <a href="/admin/decalarationList">신고 관리</a>
+		<a href="/" id="home"> DAE BAK </a> <a href="/admin/main">DashBoard</a>
+		<a href="/admin/adminNoticeList">공지사항</a> <a
+			href="/admin/authorityPage">권한 관리</a> <a
+			href="/admin/accomdationListPage">파트너 관리</a> <a
+			href="/admin/partnerListPage">파트너 신청</a> <a
+			href="/admin/inquiryList">1:1 문의</a> <a
+			href="/admin/decalarationList">신고 관리</a>
 	</div>
 	<th:block layout:fragment="adminNav"></th:block>
 </body>

@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+<script th:src="@{/js/kty_mypage.js}"></script>
 </head>
 <body class="adminbody">
 <html layout:decorate="~{khk/adminNavbar}">
@@ -114,7 +116,15 @@
 				<button class="close-modal" onclick="toggleModal()">&times;</button>
 				<h3>회원상세 정보</h3>
 				<div class="user_container">
-					<div>
+					<div class="modal_hk">
+						<div>
+							<label for="userIdDisplay">회원 번호 : </label> <input type="text"
+								id="userIdDisplay" disabled />
+						</div>
+						<div>
+							<label for="userNameDisplay">아이디 : </label> <input type="text"
+								id="userNameDisplay" disabled />
+						</div>
 						<table style="display: none;">
 							<thead>
 								<tr>
@@ -143,6 +153,7 @@
 						</table>
 						<form id="editForm" method="POST" action="/admin/userInfoUpdate">
 							<input type="hidden" name="id" id="editUserId" />
+							
 							<div>
 								<label for="editNickname">닉네임:</label> <input type="text"
 									id="editNickname" name="nickname" />
@@ -497,7 +508,12 @@ function toggleAccount(event, button) {
 			modal.style.display = "block";
 
 			// 회원 정보 가져오기
-			var userId = element.closest('tr').dataset.userId;
+			// 회원 번호, 아이디는 수정 불가 
+			var userId = element.closest('tr').querySelector('td:nth-child(1)').textContent;
+        document.getElementById('userIdDisplay').value = userId;
+			 var username = element.closest('tr').querySelector('td:nth-child(2)').textContent;
+        document.getElementById('userNameDisplay').value = username;
+			
 			var username = element.querySelector('#modal_username').textContent;
 			var email = element.closest('tr').querySelector('td:nth-child(3)').textContent;
 			var nickname = element.closest('tr').querySelector(
@@ -556,6 +572,10 @@ function toggleAccount(event, button) {
 				closeModal();
 			});
 		});
+		
+		
+	
 	</script>
+	<script th:src="@{/js/kty_mypage.js}"></script>
 	</body>
 </html>
