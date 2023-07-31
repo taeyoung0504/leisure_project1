@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.leisure.dogyeom.booking.BookService;
+import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.son.board.Inquiry;
 import com.project.leisure.son.board.InquiryService;
 import com.project.leisure.son.notice.Notice;
@@ -33,6 +35,8 @@ import com.project.leisure.taeyoung.review.Declaration;
 import com.project.leisure.taeyoung.review.DeclarationRepository;
 import com.project.leisure.taeyoung.review.Review;
 import com.project.leisure.taeyoung.review.ReviewRepository;
+import com.project.leisure.taeyoung.user.CancelRequest;
+import com.project.leisure.taeyoung.user.CancelRequestService;
 import com.project.leisure.taeyoung.user.UserRepository;
 import com.project.leisure.taeyoung.user.UserRole;
 import com.project.leisure.taeyoung.user.UserService;
@@ -57,7 +61,10 @@ public class AdminController {
 	private final ReviewRepository reviewRepository;
 	private final InquiryService inquiryService;
 	private final NoticeService noticeService;
-
+	private final CancelRequestService cancelRequestService;
+	private final BookService bookService;
+	
+	
 	@GetMapping("/adminMain")
 	public String adminMain() {
 		System.out.println("메인페이지로 이동");
@@ -300,5 +307,16 @@ public class AdminController {
 		LocalDate currentDate = LocalDate.now();
 		model.addAttribute("currentDate", currentDate);
 		return "kty/admin_main";
+	}
+	
+	@GetMapping("/cancle_req")
+	public String cancle_req(Model model) {
+		List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
+		List<BookingVO> book = this.bookService.getbooklist();
+		
+		model.addAttribute("book",book);
+		model.addAttribute("cancleList",canclereqList);
+		return "kty/cancle_request_list";
+		
 	}
 }

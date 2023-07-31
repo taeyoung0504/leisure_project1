@@ -1,3 +1,4 @@
+
 	.boss_sell_name{
 		margin-top: 20px;
 	}
@@ -7,7 +8,9 @@
 	#hidden_part_name{
 	display: none;
 	}
-	
+	.content-container{
+	margin-top:-30px;
+	}
 	#noMatchMessage{
 	margin-top:10px;
 	display: none;
