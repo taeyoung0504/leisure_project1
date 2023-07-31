@@ -85,43 +85,72 @@
 
 </div>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 <script>
 
+$(document).ready(function () {
+    // Loop through each row in the table with id "cancelTable"
+    $("#cancelTable tbody tr").each(function () {
+        var statusText = $(this).find("#status_bk").text().trim();
+        // Check if the status text is "예약완료"
+        if (statusText === "예약완료") {
+            // Show the "취소하기" button for this row
+            $(this).find(".cancel-button").show();
+        } else {
+            // Hide the "취소하기" button for rows with other statuses
+        	 $(this).find(".cancel-button")
+             .prop("disabled", true) // Disable the button
+             .addClass("grayscale"); 
+        }
+    });
+});
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to handle the "취소하기" button click
+        function handleCancelClick(cancelBtn) {
+            const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
+            const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
+            const cleanedAmount = amount.replace(/,/g, '');
 
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Function to handle the "취소하기" button click
-    function handleCancelClick(cancelBtn) {
-        const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
-        const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
-        const cleanedAmount = amount.replace(/,/g, '');
-        
-        fetch(`/refundd`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                tid: tid,
-                cancel_amount: cleanedAmount,
-                cancel_tax_free_amount: "200",
-                cancel_vat_amount: "200"
-            })
-        })
-        .then(response => response.json())
-        .then(cres => {
-            location.replace('/admin/cancle_req');
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    }
-
+            // Show SweetAlert confirmation popup
+            Swal.fire({
+                title: '취소하시겠습니까?',
+                text: '(취소 하시면 결제가 자동 취소 됩니다.)',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '네, 취소합니다',
+                cancelButtonText: '아니오',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User confirmed the cancellation, proceed with cancellation logic
+                    fetch(`/refundd`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            tid: tid,
+                            cancel_amount: cleanedAmount,
+                            cancel_tax_free_amount: "200",
+                            cancel_vat_amount: "200"
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(cres => {
+                            location.replace('/admin/cancle_req');
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                        });
+                }
+                // If user clicks "Cancel" or dismisses the popup, do nothing
+            });
+        }
+    
+    
     // Add event listener to the "취소하기" buttons to handle click
     const cancelButtons = document.querySelectorAll(".cancel-button");
     cancelButtons.forEach((cancelButton) => {
@@ -209,6 +238,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
  .grayscale {
     filter: grayscale(100%);
+  }
+  
+  
+  .cancel-button{
   }
 </style>
 </html>

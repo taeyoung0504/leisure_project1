@@ -1,22 +1,66 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<script
+   src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 <meta charset="utf-8">
-
+<link rel="stylesheet" href="/css/admin_notice.css">
+<script
+   src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script
+   src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
 <body>
 <html layout:decorate="~{khk/adminNavbar}">
 <div layout:fragment="adminNav" class="container my-3">
-	<div class="content-container">
-		<h1 class="title">공지사항 등록</h1>
-		<form method="post" th:action="@{/admin/createNotice}" style="display: flex; flex-direction: column; align-items: center;">
-			<label for="title" style="padding: 10px 0px;">공지사항 제목</label>
-			<input type="text" id="title" name="title" required><br><br>
-			<label for="content">공지사항 내용</label><br>
-			<textarea id="content" name="content" rows="40" required style="padding: 10px 0px;"></textarea><br><br>
-			<input type="submit" value="등록" style="margin-top: -20px; padding: 5px 10px;">
-		</form>
-	</div>
-	</body>
+   <div class="content-container">
+      <h1 class="title">공지사항 등록</h1>
+      <form method="post" th:action="@{/admin/createNotice}">
+         <div class="notice_title">
+            <label for="title">공지사항 제목</label> <input type="text" id="title"
+               name="title" required>
+         </div>
+      <div class="notice_content">
+                <label for="content">공지사항 내용</label><br>
+                <!-- CKEditor의 내용을 담을 textarea -->
+                <textarea id="hiddenContent" name="content" style="display:none;"></textarea>
+                <!-- CKEditor의 내용을 담을 div -->
+                <div id="content" data-editor="ckeditor" required></div>
+            </div>
+            <input type="submit" value="등록" onclick="convertContent()">
+      </form>
+   </div>
+
+
+   <script>
+     ClassicEditor
+  .create(document.querySelector('[data-editor="ckeditor"]'), {
+      language: "ko",
+      enterMode: 2,
+      shiftEnterMode: 1,
+      removePlugins: ['Indent'],
+      autoParagraph: false,
+  })
+  .then(editor => {
+      // 에디터의 내용이 변경될 때마다 숨겨진 textarea에 값을 설정
+      editor.model.document.on('change:data', () => {
+          let editorData = editor.getData();
+          // Remove the <p> and </p> tags from the editor data
+          editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
+          document.getElementById('hiddenContent').value = editorData;
+      });
+  })
+  .catch(error => {
+      console.error(error);
+  });
+
+function convertContent() {
+  // CKEditor의 내용을 textarea에 설정
+  let editorData = CKEDITOR.instances.content.getData();
+  // Remove the <p> and </p> tags from the editor data
+  editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
+  document.getElementById('hiddenContent').value = editorData;
+}
+</script>
+   </body>
 </html>
