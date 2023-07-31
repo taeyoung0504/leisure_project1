@@ -74,6 +74,8 @@ public class PartnerController {
 		model.addAttribute("totalPages", partnerPage.getTotalPages());
 		partnerListService.partnerList(model);
 		model.addAttribute("partners", partnerPage.getContent());
+		// 전체 객체 수를 전달
+		model.addAttribute("objectCount", partnerPage.getTotalElements());
 
 		return "khk/partnerListPage";
 	}
@@ -88,6 +90,7 @@ public class PartnerController {
 		model.addAttribute("totalPages", accomdationListPage.getTotalPages());
 		accomdationListService.accommodationList(model);
 		model.addAttribute("accomdations", accomdationListPage.getContent());
+		model.addAttribute("objectCount", accomdationListPage.getTotalElements());
 
 		return "khk/accomdationListPage";
 	}
