@@ -107,34 +107,6 @@ $(document).ready(function () {
 });
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Function to handle the "취소하기" button click
-//     function handleCancelClick(cancelBtn) {
-//         const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
-//         const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
-//         const cleanedAmount = amount.replace(/,/g, '');
-        
-//         fetch(`/refundd`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 tid: tid,
-//                 cancel_amount: cleanedAmount,
-//                 cancel_tax_free_amount: "200",
-//                 cancel_vat_amount: "200"
-//             })
-//         })
-//         .then(response => response.json())
-//         .then(cres => {
-//             location.replace('/admin/cancle_req');
-//         })
-//         .catch(error => {
-//             console.error("Error:", error);
-//         });
-//     }
-
     document.addEventListener("DOMContentLoaded", function () {
         // Function to handle the "취소하기" button click
         function handleCancelClick(cancelBtn) {

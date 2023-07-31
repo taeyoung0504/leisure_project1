@@ -52,7 +52,7 @@ public class EmailService {
 		msg += "<span style=\"color: {$point_color}; border-bottom: 2px solid green;\">회원가입 인증번호 안내입니다. </span>";
 		msg += "</h1>";
 		msg += "<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">";
-		msg += "안녕하세요 경상도숙박장사 입니다.<br />";
+		msg += "안녕하세요 DAEBAK 입니다.<br />";
 		msg += "요청하신 회원가입을 위한 인증번호가 생성되었습니다.<br />";
 		msg += "아래 <b style=\"color: {$point_color};\">'인증번호'</b>를 , 인증번호 입력 창에 입력하세요.<br />";
 		msg += "감사합니다.";
@@ -71,7 +71,7 @@ public class EmailService {
 		msg += "</div>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 	}
@@ -92,7 +92,7 @@ public class EmailService {
 		msg += "<span style=\"color: {$point_color}; border-bottom: 2px solid green;\">임시 비밀번호 안내입니다. </span>";
 		msg += "</h1>";
 		msg += "<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">";
-		msg += "안녕하세요 경상도숙박장사 입니다.<br />";
+		msg += "안녕하세요 DAEBAK 입니다.<br />";
 		msg += "요청하신 임시비밀번호가 생성되었습니다.<br />";
 		msg += "아래 <b style=\"color: {$point_color};\">'임시비밀번호를 '</b>를 , 비밀번호 입력창에 입력하세요.<br />";
 		msg += "감사합니다.";
@@ -111,12 +111,12 @@ public class EmailService {
 		msg += "</div>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 	}
-
-	// 이메일 수정을 위한 인증번호 발송 메일
+	
+	//이메일 수정을 위한 인증번호 발송 메일
 	public MimeMessage createmodifyEamilmessage(String to) throws MessagingException, UnsupportedEncodingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
@@ -132,7 +132,7 @@ public class EmailService {
 		msg += "<span style=\"color: {$point_color}; border-bottom: 2px solid green;\">이메일 수정을 위한 인증 번호 안내입니다. </span>";
 		msg += "</h1>";
 		msg += "<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">";
-		msg += "안녕하세요 경상도숙박장사 입니다.<br />";
+		msg += "안녕하세요 DAEBAK 입니다.<br />";
 		msg += "요청하신 이메일 수정을 위한 인증번호가 생성되었습니다.<br />";
 		msg += "아래 <b style=\"color: {$point_color};\">'인증번호'</b>를 , 인증번호 입력 창에 입력하세요.<br />";
 		msg += "감사합니다.";
@@ -151,11 +151,11 @@ public class EmailService {
 		msg += "</div>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 	}
-
+	
 	// 인증코드 만들기
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
@@ -197,7 +197,7 @@ public class EmailService {
 		}
 		return tempPw; // 메일로 보냈던 인증 코드를 서버로 리턴
 	}
-
+	
 	public String sendmodifyemailCodeMessage(String to) throws Exception {
 		tempPw = createKey();
 		MimeMessage message = createmodifyEamilmessage(to);
@@ -217,6 +217,4 @@ public class EmailService {
 	 * ChangeSetPersister.NotFoundException(); } //redisUtill.deleteData(key);
 	 * return ePw; }
 	 */
-
-
 }
