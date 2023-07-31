@@ -401,6 +401,11 @@ h5 .nav-link{
 	font-size: 12px;
 	margin: 5px 0;
 }
+
+#confirm_newPwd1{
+	font-size: 12px;
+	margin: 5px 0;
+}
 #confirm_oldPwd{
 	font-size: 12px; 
 	margin: 5px 0;
