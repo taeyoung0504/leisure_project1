@@ -601,7 +601,7 @@ public class EmailService2 {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formattedDateTime = paymentDateTime.format(formatter);
 
-		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용 가능
+		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용
 		String msg = "";
 
 		msg += " <table text-align=\"center\" margin=\"0\" cellpadding=\"0\" cellspacing=\"0\"\r\n"
@@ -880,7 +880,7 @@ public class EmailService2 {
 		// 내일 체크인이고 예약 상태가 '예약 완료'인 예약들을 대상으로 알림 메세지 전송
 		List<BookingVO> bookings = bookRepository.findByCheckinAndBookStatus(tomorrow, "예약완료");
 
-		// 해당하는 bookings 에서 bookerid 에서 userName을 가져와서 해당 User의 이메일을 조회 후 전송
+		// 해당하는 bookings 에서 bookerid 에서 userName을 가져와서 User의 이메일을 조회 후 전송
 		bookings.forEach(booking -> {
 			List<Users> users = userRepository.findByUsername(booking.getBookerID());
 			users.forEach(user -> {
