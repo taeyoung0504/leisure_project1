@@ -11,7 +11,7 @@ $(function() {
 		});
 	});
 
-	/* 주소 변경 활성화 */
+	/* 주소 변경 활성화 * /
 	/* 비밀번호 변경 활성화 */
 	$(document).ready(function() {
 		$("#mypage_addr_modify").on("click", function() {
@@ -201,7 +201,7 @@ $(document).ready(function() {
         $inputNewPwd2.prop('disabled', false);
         $modifyEmailBtn.prop('disabled', false); // Enable the button when the new password is valid
     } else {
-        $NewPwdError1.text('영자,숫자,특수기호 포함 6-12자리 X').show();
+        $NewPwdError1.text('문자,숫자,특수기호 포함 6-12자리 X').show();
         $NewPwdError.hide();
         $inputNewPwd2.prop('disabled', true);
         $modifyEmailBtn.prop('disabled', true); // Disable the button when the new password is invalid
