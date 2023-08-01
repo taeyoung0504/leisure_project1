@@ -24,17 +24,19 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; // 회원 번호(PK)
 
-	 @Column(unique = true)
+	@Column(unique = true)
 	private String username; // 회원 ID
 
 	private String password; // 회원 PWD
-	
+
 	@Column(unique = true)
 	private String email; // 회원 Email
 
 	private LocalDateTime create_userTime = LocalDateTime.now(); // 계정생성일
 
 	private int partner_code; // 파트너 등급 권한 설정
+	
+	private String nickname; // social에서 제공받은 닉네임(일반 회원 가입 시 기본값은 null)
 
 	private int admin_code; // 관리자 등급 권한 설정
 
@@ -50,8 +52,8 @@ public class Users {
 	private String addr3; // 상세 주소
 
 	private int islock = 0; // 계정 잠금 여부(1: 계정 잠김, 0: 계정 안잠김)
-	
-	private LocalDateTime lockTime = LocalDateTime.now(); //계정 잠금 시간
+
+	private LocalDateTime lockTime = LocalDateTime.now(); // 계정 잠금 시간
 
 	public Users update(String username) {
 		this.username = username;
@@ -61,9 +63,9 @@ public class Users {
 
 	// 소셜 로그인 시 등록되는 정보
 	@Builder
-	public Users(String nickname, UserRole role, String sns,String email) {
+	public Users(String nickname, UserRole role, String sns, String email) {
 		this.nickname = nickname;
-	    //his.username = email; // 소셜 로그인 시 username에 이메일 넣기
+		// his.username = email; // 소셜 로그인 시 username에 이메일 넣기
 		this.email = email;
 		this.sns = sns;
 		this.role = UserRole.SNS_USER;
@@ -73,7 +75,7 @@ public class Users {
 	public Users update(String nickname, String email, String sns) {
 		this.nickname = nickname;
 		this.sns = sns;
-		//this.username = email;
+		// this.username = email;
 		this.email = email;
 		return this;
 	}
@@ -81,8 +83,6 @@ public class Users {
 	public String getRoleKey() {
 		return this.role.getValue();
 	}
-
-
 
 	public UserRole getCurrentRole() {
 
@@ -102,11 +102,8 @@ public class Users {
 
 	}
 
-
 	public LocalDateTime getLockTime() {
-	    return this.lockTime;
+		return this.lockTime;
 	}
 
-	
-	
 }
