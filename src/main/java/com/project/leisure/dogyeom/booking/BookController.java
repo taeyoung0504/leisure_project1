@@ -78,7 +78,7 @@ private final PaymentService paymentService;
 
 		BookingVO bookingvo = new BookingVO();
 
-		TotalPrice total = new TotalPrice();
+//		TotalPrice total = new TotalPrice();
 		
 		
 
@@ -91,25 +91,26 @@ private final PaymentService paymentService;
 
 		String totalPrice1 = null;
 
-		List<TotalPrice> totalArrays = totalPriceRepository.findByTotalPrice(totalPrice);
-		for (TotalPrice totals : totalArrays) {
-			if (totalPrice.equals(totals.getTotalPrice())) {
-				totalPrice1 = totalPrice;
-				break;
-			} else {
-				totalPrice1 = null;
-			}
-		}
+//		List<TotalPrice> totalArrays = totalPriceRepository.findByTotalPrice(totalPrice);
+//		for (TotalPrice totals : totalArrays) {
+//			if (totalPrice.equals(totals.getTotalPrice())) {
+//				totalPrice1 = totalPrice;
+//				break;
+//			} else {
+//				totalPrice1 = null;
+//			}
+//		}
 
 		// request로 받은 값들 예약객체에 넣기 // -> build 써야하나? -> 몇몇 정보만 넣고 싶다.
-		bookingvo.setBookerID("username");
+		bookingvo.setBookerID("username"); // principal 넣어야함.
 		bookingvo.setBookerName(params.getParameter("username"));
 		bookingvo.setAccomTitle(product.getAccommodation().getAcc_name());
 		bookingvo.setRoomTitle(product.getProduct_type());
 		bookingvo.setCheckin(date1);
 		bookingvo.setCheckOut(date2);
 		bookingvo.setBookHeadCount(4);
-		bookingvo.setTotalPrice(totalPrice1);
+//		bookingvo.setTotalPrice(totalPrice1);
+		bookingvo.setTotalPrice(totalPrice);
 		bookingvo.setTempRoomId(product.getProduct_id());
 		bookingvo.setTempAccomId(product.getAccommodation().getId());
 

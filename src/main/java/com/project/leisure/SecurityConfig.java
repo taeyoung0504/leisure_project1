@@ -38,14 +38,28 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authorizeHttpRequests().requestMatchers(new AntPathRequestMatcher("/admin/*")).hasRole("ADMIN") //amin route => only Admin role
-		.requestMatchers(new AntPathRequestMatcher("/user/mypage/my_productList")).hasRole("PARTNER") // 숙소등록 및 확인 => only Partner role
-				.requestMatchers(new AntPathRequestMatcher("/user/mypage/*")) // etc... 
-				.hasAnyRole("USER", "PARTNER", "SNS", "ADMIN").anyRequest().permitAll().and().csrf().disable()
-				.formLogin().loginPage("/user/login").failureHandler(userLoginFailHandler).defaultSuccessUrl("/").and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")).logoutSuccessUrl("/")
-				.invalidateHttpSession(true).and().oauth2Login().defaultSuccessUrl("/").userInfoEndpoint()
-				.userService(customOAuth2UserService);
+		http.authorizeHttpRequests()
+        .requestMatchers(new AntPathRequestMatcher("/admin/*")).hasRole("ADMIN") // admin route => only Admin role
+        .requestMatchers(new AntPathRequestMatcher("/user/mypage/my_productList")).hasRole("PARTNER") // 숙소등록 및 확인 => only Partner role
+        .requestMatchers("/partner/*").hasRole("PARTNER") // /partner/* => only Partner role
+        .requestMatchers(new AntPathRequestMatcher("/user/mypage/*")).hasAnyRole("USER", "PARTNER", "SNS", "ADMIN") // etc...
+        .requestMatchers("/**").permitAll() // allow all other requests (you can customize this as needed)
+        .and()
+        .csrf().disable()
+        .formLogin()
+            .loginPage("/user/login")
+            .failureHandler(userLoginFailHandler)
+            .defaultSuccessUrl("/")
+        .and()
+        .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+            .logoutSuccessUrl("/")
+            .invalidateHttpSession(true)
+        .and()
+        .oauth2Login()
+            .defaultSuccessUrl("/")
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService);
 
 		http.rememberMe() // 사용자 계정 저장
 				.rememberMeParameter("remember") // default 파라미터는 remember-me

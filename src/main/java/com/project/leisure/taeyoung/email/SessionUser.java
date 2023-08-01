@@ -1,12 +1,10 @@
 package com.project.leisure.taeyoung.email;
 
-
 import java.io.Serializable;
 
 import com.project.leisure.taeyoung.user.Users;
 
 import lombok.Getter;
-
 
 //OAuth2 사용자 세션 정보
 @Getter

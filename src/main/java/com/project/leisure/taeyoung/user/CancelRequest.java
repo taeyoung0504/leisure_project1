@@ -17,6 +17,6 @@ public class CancelRequest {
     private String reasonCancel;
     private Long bookNumValue;
     private String authenticatedUserName;
-
+   private String result;
     // Add constructors, getters, setters, and other fields as needed
 }

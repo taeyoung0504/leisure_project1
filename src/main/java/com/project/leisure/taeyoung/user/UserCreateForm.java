@@ -1,7 +1,6 @@
 package com.project.leisure.taeyoung.user;
 
-
-// 회원가입 입력검증 클래스
+// 회원가입 입력검증 클래ss스
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

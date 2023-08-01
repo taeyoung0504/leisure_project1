@@ -121,7 +121,7 @@ public class KakaoPayController {
 			String realName = bookingVO.get().getBookerName();
 
 			try {
-				emailService2.sendConfirmationEmail(userEmail, username, realName, accName, productType, checkIn,
+				emailService2.sendConfirmationEmail(userEmail, realName, accName, productType, checkIn,
 						checkOut, pay_Date, totalPrict);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -187,7 +187,7 @@ public class KakaoPayController {
 			String realName = bookingVO.get().getBookerName();
 
 			try {
-				emailService2.sendCancelEmailMessage(userEmail, username, realName, accName, productType, checkIn,
+				emailService2.sendCancelEmailMessage(userEmail,  realName, accName, productType, checkIn,
 						checkOut, pay_Date, totalPrict, can_Date);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -203,14 +203,14 @@ public class KakaoPayController {
 	@GetMapping("/cancel")
 	public String payCancel() {
 //		return "redirect:/carts";
-		return "cancel";
+		return "kdg/cancel";
 	}
 
 	// 결제 실패시 실행 url
 	@GetMapping("/fail")
 	public String payFail() {
 //		return "redirect:/carts";
-		return "fail";
+		return "kdg/fail";
 	}
 
 	// 취소 에러 던지는 법 - 나중에 하기

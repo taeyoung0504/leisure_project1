@@ -250,7 +250,15 @@
 	                         nextDay.setDate(nextDay.getDate() + 1);
 	                         var formattedToday = formatDate(today);
 	                         var formattedNextDay = formatDate(nextDay);
-	                         $("#datepicker1").val(formattedToday + " ~ " + formattedNextDay);
+	                         
+	                         const checkin = formattedToday;
+	                    	   
+	                    	 const checkOut = formattedNextDay;
+	                         
+	                         sessionStorage.setItem("checkin", checkin);
+	                    	 sessionStorage.setItem("checkOut", checkOut);
+	                         
+	                         $("#datepicker1").val(checkin + " ~ " + checkOut);
 	                       }
 
 	                       // 데이터 형식 지정 : 'YYYY-MM-DD'
@@ -261,6 +269,35 @@
 	                         return year + "-" + month + "-" + day;
 	                       }
 	                       
+	                       // 페이지가 로드 될 때 totalAmount들 모두 가져와서 세션에 저장하고
+	                       // 예약하기 눌렀을 때 예약에 넘어가는 값들과 세션에 있는 값들 비교해서 유효한 값만 백에 넘기기
+	                       // 예약하기 마지막에 세션 삭제
+	                       
+	                    // #totalAmount 아이디를 가진 요소의 텍스트 값을 추출하여 배열에 저장
+	                       const totalAmountElements = document.querySelectorAll("#totalAmount");
+	                       const reservePriceArray = [];
+
+	                       totalAmountElements.forEach((element) => {
+	                         const textValue = element.textContent.trim(); // 요소의 텍스트 값을 추출하고 앞뒤 공백 제거
+	                         reservePriceArray.push(textValue);
+	                       });
+
+	                       // reservePriceArray를 세션에 저장하기 위해 배열을 스트링 타입으로 차례대로 저장
+	                       let stringifiedArray = "";
+	                       reservePriceArray.forEach((value, index) => {
+	                         if (index > 0) {
+	                           stringifiedArray += ","; // 각 값 사이에 쉼표(,) 추가
+	                         }
+	                         stringifiedArray += value;
+	                       });
+
+	                       // reservePriceArray를 세션에 저장
+	                       sessionStorage.setItem("reservePriceArray", stringifiedArray);
+
+	                       // 세션에 저장한 배열을 확인하기 위해 alert로 출력
+	                       const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
+	                       /* alert(storedReservePriceArray); */
+	                       
 	                     });
                      
                   
@@ -268,9 +305,10 @@
                      function totalPrice() {
                        // #datepicker1 요소에서 선택한 날짜 범위를 가져옴
                        var selectedDates = $("#datepicker1").val();
+                       console.log("selectedDates:", selectedDates);
                        // 선택한 날짜가 비어있는지(trim()으로 공백 제거 후 확인) 확인. 비어있다면 함수를 종료.
                        if (selectedDates.trim() === "") {
-                    	   var today = new Date();
+                    	  /*  var today = new Date();
                     	    var tomorrow = new Date(today);
                     	    tomorrow.setDate(tomorrow.getDate() + 1);
                     	    var formattedToday = formatDate(today);
@@ -280,6 +318,9 @@
                     	   
                     	    const checkOut = formattedTomorrow;
                     	    
+                    	    console.log(checkin);
+                    	    console.log(checkOut);
+                    	    
                     	    // 체크인, 체크아웃 날짜 세션에 담기
                     	    sessionStorage.setItem("checkin", checkin);
                     	    sessionStorage.setItem("checkOut", checkOut);
@@ -288,11 +329,15 @@
                     	    $("#datepicker1").val(formattedToday + " ~ " + formattedTomorrow);
                     	    
                     	    // 각 객실의 금액과 숙박 일수를 곱함
-                    	    setReservationSpanValue(1); // Assuming one night stay as the default
+                    	    setReservationSpanValue(1);  */// Assuming one night stay as the default
                     	    
+                    	    const checkin = sessionStorage.getItem("checkin");
+	                    	 const checkOut = sessionStorage.getItem("checkOut");
+	                    	 
                     	    const accomID = document.getElementById('accomid').textContent;
                     	    var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
                     	    location.assign(url);
+                    	
                        } else {
                     	   
                        // 선택한 날짜를 쉼표로 분리하고(trim()으로 각 요소의 공백 제거) 배열로 만듬
@@ -340,7 +385,7 @@
  	                   		location.assign(url); 
   	                  
                        } 
-                         $("#datepicker1").val(""); // 입력값이 공백이라면 datepicker 초기화
+                         $("#datepicker1").val("");  // 입력값이 공백이라면 datepicker 초기화
                        }
                      }
                      
@@ -435,15 +480,40 @@
                      function handleClick(button) {
                       const reservePriceElement = button.querySelector("#reservePrice");
                       const totalPrice1 = reservePriceElement.textContent;
-                      const totalPrice = addCommas(totalPrice1);
+                      
+                      
+                      function findMatchingTotalPrice(totalPrice1) {
+                    	  // 세션에서 reservePriceArray 배열 불러오기
+                    	  const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
+
+                    	  // totalPrice1과 일치하는 값을 찾기 위한 변수 초기화
+                    	  let matchingTotalPrice = null;
+
+                    	  // storedReservePriceArray를 순회하면서 totalPrice1과 일치하는 값 찾기
+                    	  for (const value of storedReservePriceArray) {
+                    	    if (value === totalPrice1) {
+                    	      matchingTotalPrice = value;
+                    	      break; // 일치하는 값이 발견되면 순회 중단
+                    	    }
+                    	  }
+
+                    	  // 일치하는 값을 반환
+                    	  return matchingTotalPrice;
+                    	}
+                      
+                      let totalPrice2 = findMatchingTotalPrice(totalPrice1);
+                      
+                      
+                      const totalPrice = addCommas(totalPrice2);
+                      /* alert(totalPrice); */
                   
                       console.log("totalPrice: ", totalPrice);
                   
                       // 세션에 저장한 checkin, checkOut 꺼냄
                       const checkin = sessionStorage.getItem("checkin");
-                      console.log(checkin);
+                     /* alert(checkin); */
                       const checkOut = sessionStorage.getItem("checkOut");
-                      console.log(checkOut);
+                      /* alert(checkOut); */
                   
                       // value값 꺼내기
                       const roomID = reservePriceElement.getAttribute("value");

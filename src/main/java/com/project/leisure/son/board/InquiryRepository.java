@@ -16,4 +16,10 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Integer> {
     
 	Optional<Inquiry> findById(Integer id);
 
+	Page<Inquiry> findInquiriesByInquiryAnswerIsNotEmptyOrderByCreateDateDesc(Pageable pageable);
+
+	Page<Inquiry> findInquiriesByInquiryAnswerIsEmptyOrderByCreateDateDesc(Pageable pageable);
+	
+	
+
 }

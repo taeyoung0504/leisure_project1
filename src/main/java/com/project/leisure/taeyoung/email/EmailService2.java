@@ -47,13 +47,12 @@ public class EmailService2 {
 	private String id;
 
 	// 예약 취소 문자 내용 설정
-	public MimeMessage confirmationEmailMessage(String to, String username, String realName, String accName,
-			String productType, LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict)
+	public MimeMessage confirmationEmailMessage(String to, String realName, String accName, String productType,
+			LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict)
 			throws MessagingException, UnsupportedEncodingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
-		String user_Name = username;
 		String real_name = realName;
 		String acc_name = accName;
 		String pay_date = payDate;
@@ -66,7 +65,7 @@ public class EmailService2 {
 		String maskedName = real_name.charAt(0) + "*" + real_name.substring(2);
 
 		message.addRecipients(MimeMessage.RecipientType.TO, to); // to 보내는 대상
-		message.setSubject("[경상도숙박장사] 예약완료"); // 메일 제목
+		message.setSubject("[DAEBAK] 예약완료"); // 메일 제목
 
 		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용 가능
 		String msg = "";
@@ -87,12 +86,12 @@ public class EmailService2 {
 				+ "                                                <tr>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"font-size:28px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#424240;line-height:34px;vertical-align:top\">\r\n"
-				+ "                                                        [경상도숙박장사] 예약완료 안내\r\n"
+				+ "                                                        [DAEBAK] 예약완료 안내\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n" + "\r\n"
 				+ "                                                <tr>\r\n"
-				+ "                                                    <td height=\"80\">" + user_Name
-				+ " 님의 예약이 완료되었습니다. <br> 아래의 정보를 확인해 주세요.\r\n"
+				+ "                                                    <td height=\"80\">"
+				+ "예약이 완료되었습니다. <br> 아래의 정보를 확인해 주세요.\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -138,7 +137,7 @@ public class EmailService2 {
 				+ "                                                    </td>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"padding-bottom:9px;font-size:14px;font-family:Helvetica;color:#333;vertical-align:top\">\r\n"
-				+ "                                                        경상북도숙박장사\r\n"
+				+ "                                                        DAEBAK\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -245,7 +244,7 @@ public class EmailService2 {
 				+ "                                                                                    style=\"padding-top:10px;font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#696969;line-height:23px;vertical-align:top\">\r\n"
 				+ "                                                                                    상세한 주문 내역 및 주문\r\n"
 				+ "                                                                                    진행\r\n"
-				+ "                                                                                    상태는 경상도숙박장사에서 확인\r\n"
+				+ "                                                                                    상태는 DAEBAK에서 확인\r\n"
 				+ "                                                                                    가능합니다.\r\n"
 				+ "                                                                                </td>\r\n"
 				+ "                                                                            </tr>\r\n"
@@ -299,25 +298,24 @@ public class EmailService2 {
 				+ "                </td>\r\n" + "            </tr>\r\n" + "\r\n" + "            <tr>\r\n"
 				+ "                <td colspan=\"3\"\r\n"
 				+ "                    style=\"padding-left:21px;padding-right:21px;padding-bottom:57px;background:#e5e5e5;font-size:12px;font-family:Helvetica;color:#696969;line-height:17px\">\r\n"
-				+ "                    <strong>경상도숙박장사</strong>\r\n" + "                </td>\r\n"
+				+ "                    <strong>DAEBAK</strong>\r\n" + "                </td>\r\n"
 				+ "            </tr>\r\n" + "        </tbody>\r\n" + "    </table>\r\n" + "    </div>\r\n" + "\r\n"
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 
 	}
 
 	// 예약 완료 문자 내용 설정
-	public MimeMessage cancelEmailMessage(String to, String username, String realName, String accName,
-			String productType, LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict,
-			String canDate) throws MessagingException, UnsupportedEncodingException {
+	public MimeMessage cancelEmailMessage(String to, String realName, String accName, String productType,
+			LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict, String canDate)
+			throws MessagingException, UnsupportedEncodingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
-		String user_Name = username;
 		String real_name = realName;
 		String acc_name = accName;
 		String pay_date = payDate;
@@ -328,7 +326,7 @@ public class EmailService2 {
 		String can_Date = canDate;
 
 		message.addRecipients(MimeMessage.RecipientType.TO, to); // to 보내는 대상
-		message.setSubject("[경상도숙박장사] 예약취소"); // 메일 제목
+		message.setSubject("[DAEBAK] 예약취소"); // 메일 제목
 
 		// 예약자 이름 중간에 * 문자 삽입
 		String maskedName = real_name.charAt(0) + "*" + real_name.substring(2);
@@ -352,12 +350,12 @@ public class EmailService2 {
 				+ "                                                <tr>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"font-size:28px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#424240;line-height:34px;vertical-align:top\">\r\n"
-				+ "                                                        [경상도숙박장사] 예약취소 안내\r\n"
+				+ "                                                        [DAEBAK] 예약취소 안내\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n" + "\r\n"
 				+ "                                                <tr>\r\n"
-				+ "                                                    <td height=\"80\">" + user_Name
-				+ " 님의 예약이 취소되었습니다. <br> 아래의 정보를 확인해 주세요.\r\n"
+				+ "                                                    <td height=\"80\">"
+				+ "예약이 취소되었습니다. <br> 아래의 정보를 확인해 주세요.\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -413,7 +411,7 @@ public class EmailService2 {
 				+ "                                                    </td>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"padding-bottom:9px;font-size:14px;font-family:Helvetica;color:#333;vertical-align:top\">\r\n"
-				+ "                                                        경상북도숙박장사\r\n"
+				+ "                                                        DAEBAK\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -520,7 +518,7 @@ public class EmailService2 {
 				+ "                                                                                    style=\"padding-top:10px;font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#696969;line-height:23px;vertical-align:top\">\r\n"
 				+ "                                                                                   상세한 예약취소\r\n"
 				+ "                                                                                    진행\r\n"
-				+ "                                                                                    상태는 경상도숙박장사에서 확인\r\n"
+				+ "                                                                                    상태는 DAEBAK에서 확인\r\n"
 				+ "                                                                                    가능합니다.\r\n"
 				+ "                                                                                </td>\r\n"
 				+ "                                                                            </tr>\r\n"
@@ -574,12 +572,12 @@ public class EmailService2 {
 				+ "                </td>\r\n" + "            </tr>\r\n" + "\r\n" + "            <tr>\r\n"
 				+ "                <td colspan=\"3\"\r\n"
 				+ "                    style=\"padding-left:21px;padding-right:21px;padding-bottom:57px;background:#e5e5e5;font-size:12px;font-family:Helvetica;color:#696969;line-height:17px\">\r\n"
-				+ "                    <strong>경상도숙박장사</strong>\r\n" + "                </td>\r\n"
+				+ "                    <strong>DAEBAK</strong>\r\n" + "                </td>\r\n"
 				+ "            </tr>\r\n" + "        </tbody>\r\n" + "    </table>\r\n" + "    </div>\r\n" + "\r\n"
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 	}
@@ -590,7 +588,7 @@ public class EmailService2 {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 		message.addRecipients(MimeMessage.RecipientType.TO, to); // to 보내는 대상
-		message.setSubject("[경상도숙박장사] 예약알림"); // 메일 제목
+		message.setSubject("[DAEBAK] 예약알림"); // 메일 제목
 
 		// 예약자 이름 중간에 * 문자 삽입
 		String maskedName = booking.getBookerName().charAt(0) + "*" + booking.getBookerName().substring(2);
@@ -621,12 +619,12 @@ public class EmailService2 {
 				+ "                                                <tr>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"font-size:28px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#424240;line-height:34px;vertical-align:top\">\r\n"
-				+ "                                                        [경상도숙박장사] 예약알림 안내\r\n"
+				+ "                                                        [DAEBAK] 예약알림 안내\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n" + "\r\n"
 				+ "                                                <tr>\r\n"
-				+ "                                                    <td height=\"80\">" + booking.getBookerID()
-				+ " 님의 예약알림 메세지 입니다. <br> 아래의 정보를 확인해 주세요.\r\n"
+				+ "                                                    <td height=\"80\">"
+				+ "예약알림 메세지 입니다. <br> 아래의 정보를 확인해 주세요.\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -672,7 +670,7 @@ public class EmailService2 {
 				+ "                                                    </td>\r\n"
 				+ "                                                    <td\r\n"
 				+ "                                                        style=\"padding-bottom:9px;font-size:14px;font-family:Helvetica;color:#333;vertical-align:top\">\r\n"
-				+ "                                                        경상북도숙박장사\r\n"
+				+ "                                                        DAEBAK\r\n"
 				+ "                                                    </td>\r\n"
 				+ "                                                </tr>\r\n"
 				+ "                                                <tr>\r\n"
@@ -777,7 +775,7 @@ public class EmailService2 {
 				+ "                                                                                </td>\r\n"
 				+ "                                                                                <td\r\n"
 				+ "                                                                                    style=\"padding-top:10px;font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#696969;line-height:23px;vertical-align:top\">\r\n"
-				+ "                                                                                    상세한 주문 내역 및 주문 진행 상태는 경상도숙박장사에서 확인\r\n"
+				+ "                                                                                    상세한 주문 내역 및 주문 진행 상태는 DAEBAK에서 확인\r\n"
 				+ "                                                                                    가능합니다.\r\n"
 				+ "                                                                                </td>\r\n"
 				+ "                                                                            </tr>\r\n"
@@ -831,40 +829,40 @@ public class EmailService2 {
 				+ "                </td>\r\n" + "            </tr>\r\n" + "\r\n" + "            <tr>\r\n"
 				+ "                <td colspan=\"3\"\r\n"
 				+ "                    style=\"padding-left:21px;padding-right:21px;padding-bottom:57px;background:#e5e5e5;font-size:12px;font-family:Helvetica;color:#696969;line-height:17px\">\r\n"
-				+ "                    <strong>경상도숙박장사</strong>\r\n" + "                </td>\r\n"
+				+ "                    <strong>DAEBAK</strong>\r\n" + "                </td>\r\n"
 				+ "            </tr>\r\n" + "        </tbody>\r\n" + "    </table>\r\n" + "    </div>\r\n" + "\r\n"
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "경상도숙박장사")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
 
 		return message;
 
 	}
 
 	// 예약 완료 메세지 전송
-	public void sendConfirmationEmail(String to, String username, String realName, String accName, String productType,
-			LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict) throws Exception {
+	public void sendConfirmationEmail(String to, String realName, String accName, String productType, LocalDate checkIn,
+			LocalDate checkOut, String payDate, String totalPrict) throws Exception {
 		// 위에 지정한 형식으로 메세지를 보낸다
-		MimeMessage message = confirmationEmailMessage(to, username, realName, accName, productType, checkIn, checkOut,
-				payDate, totalPrict);
+		MimeMessage message = confirmationEmailMessage(to, realName, accName, productType, checkIn, checkOut, payDate,
+				totalPrict);
 
 		try {
 			javaMailSender.send(message); // 메일 발송
 		} catch (MailException es) {
 			es.printStackTrace();
-			//throw new IllegalArgumentException();
-		    throw new IllegalArgumentException("Failed to send confirmation email", es); // 에러 메시지 추가
+			// throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Failed to send confirmation email", es); // 에러 메시지 추가
 
 		}
 	}
 
 	// 예약취소 메세지 전송
-	public void sendCancelEmailMessage(String to, String username, String realName, String accName, String productType,
+	public void sendCancelEmailMessage(String to, String realName, String accName, String productType,
 			LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict, String canDate) throws Exception {
 		// 위에 지정한 형식으로 메세지를 보낸다
-		MimeMessage message = cancelEmailMessage(to, username, realName, accName, productType, checkIn, checkOut,
-				payDate, totalPrict, canDate);
+		MimeMessage message = cancelEmailMessage(to, realName, accName, productType, checkIn, checkOut, payDate,
+				totalPrict, canDate);
 
 		try {
 			javaMailSender.send(message); // 메일 발송
@@ -879,7 +877,7 @@ public class EmailService2 {
 	@Scheduled(cron = "0 0 10 * * ?") // 매일 아침 10시에 메서드를 실행하도록 스케줄링
 	public void sendNotification() {
 		LocalDate tomorrow = LocalDate.now().plusDays(1); // 내일 날짜를 가져옴
-	
+
 		// 내일 체크인이고 예약 상태가 '예약 완료'인 예약들을 대상으로 알림 메세지 전송
 		List<BookingVO> bookings = bookRepository.findByCheckinAndBookStatus(tomorrow, "예약완료");
 

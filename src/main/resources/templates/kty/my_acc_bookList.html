@@ -45,7 +45,7 @@
 			</li>
 			<li class="mypage_sidebar"><a
 				th:href="@{/user/mypage/my_acc_bookList}"
-				sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 숙소
+				sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 업소
 					예약리스트</a></li>
 		</ul>
 	</nav>
@@ -58,7 +58,8 @@
 			<span>사장님 명 : </span> <span id="username"
 				th:text="${#authentication.name}"></span>
 		</div>
-		<select id="accSelect" class="select_acc_nam_2">
+		    <input type="date" id="datePicker" class="select_acc_nam_2" onchange="filterByDateAndAcc()">
+                <select id="accSelect" class="select_acc_nam_2" onchange="filterByDateAndAcc()">
 			<option>모두</option>
 			<option th:each="account : ${acc}" th:text="${account.acc_name}"></option>
 		</select>
@@ -75,6 +76,7 @@
 					<th>체크아웃</th>
 					<th>예약 상태</th>
 					<th>취소신청</th>
+					<th>신청결과</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -98,6 +100,9 @@
 					<td>
 						<button class="cancelButtondd" onclick="openModal(this)"
 							th:if="${book.bookStatus == '예약완료'}">취소요청</button>
+					</td>
+					<td>
+						<span th:each="cancelReq : ${cancleList}" th:if="${cancelReq.bookNumValue == book.bookNum && cancelReq.result == '1'}">거절</span>			
 					</td>
 				</tr>
 
@@ -137,7 +142,5 @@
 
 </body>
 
-<script>
 
-	</script>
 </html>
