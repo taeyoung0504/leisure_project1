@@ -17,13 +17,13 @@
       <h1 class="title">공지사항 등록</h1>
       <form method="post" th:action="@{/admin/createNotice}">
          <div class="notice_title">
-            <label for="title">공지사항 제목</label> <input type="text" id="title"
+            <label for="title" style="padding-bottom: 10px;">공지사항 제목</label> <input type="text" id="title"
                name="title" required>
          </div>
       <div class="notice_content">
-                <label for="content">공지사항 내용</label><br>
+                <label for="content" class="content">공지사항 내용</label><br>
                 <!-- CKEditor의 내용을 담을 textarea -->
-                <textarea id="hiddenContent" name="content" style="display:none;"></textarea>
+                <textarea id="hiddenContent" name="content"></textarea>
                 <!-- CKEditor의 내용을 담을 div -->
                 <div id="content" data-editor="ckeditor" required></div>
             </div>

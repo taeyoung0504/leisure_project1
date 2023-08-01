@@ -18,15 +18,13 @@ $(function() {
 	/* 비밀번호 변경 활성화 */
 	$(document).ready(function() {
     $("#mypage_addr_modify").on("click", function() {
-        $(this).hide();  // 주소 변경 버튼 숨기기
-        $("#modifyaddr").show();  // 변경할래요 버튼 보이기
-        $("#cancel_modify").show();  // 취소 버튼 보이기
+        $("#address_display").hide();  // 주소 표시 영역 숨기기
+        $("#mypage_addr_modify").hide();  // 주소 변경 버튼 숨기기
         $("#modify_address_input").show();  // 주소 변경 폼 보이기
     });
     
     $("#cancel_modify").on("click", function() {
-        $(this).hide();  // 취소 버튼 숨기기
-        $("#modifyaddr").hide();  // 변경할래요 버튼 숨기기
+        $("#address_display").show();  // 주소 표시 영역 보이기
         $("#mypage_addr_modify").show();  // 주소 변경 버튼 보이기
         $("#modify_address_input").hide();  // 주소 변경 폼 숨기기
     });

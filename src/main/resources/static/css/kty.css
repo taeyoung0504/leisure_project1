@@ -89,7 +89,7 @@ input[type="button" i] {
 	flex: 1;
 }
 
-.join_username, .join_password1, .join_password2, .join_nickname {
+.join_username, .join_password1, .join_password2 {
 	width: 100%;
 	border: none;
 	outline: none;
@@ -357,18 +357,16 @@ a {
 .userinfo_table {
 	position: relative;
 	font-size: 18px;
-	margin-left: -50px;
-	margin-top: -30px;
-	border-collapse: collapse;
-	text-align: left;
-	width: 700px;
 }
 
-
 .userinfo_td_gap {
+
 	white-space: nowrap;
 	position: relative;
-	padding: 20px 0px;
+	padding-bottom: 40px;
+	/* 아래쪽 간격 크기 조절 */
+	padding-left: 100px;
+	/* 좌측 간격 크기 조절 */
 }
 
 #unique_social_provider{
@@ -390,11 +388,14 @@ h5 .nav-link{
 }
 
 .btns-wrap__edit-btn {
-    border: 1px solid #000000;
-    background-color: white;
-    border-radius: 3px;
-    width: 100px;;
-	padding: 8px 0px;
+	position: absolute;
+	border: 1px solid grey;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	top: -20px;
+	width: 200px;
+	height: 50px;
 }
 #confirm_newPwd{
 	font-size: 12px;
@@ -412,7 +413,9 @@ h5 .nav-link{
 	list-style-type: none;
 	padding-bottom: 40px;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 #mypage_sidebar_nav {
@@ -446,7 +449,7 @@ li.mypage_sidebar a.active {
 
 .modify_password {
 	height: 30px;
-	width: 300px;
+	width: 185px;
 	border: none;
 	border-bottom: 1px solid rgb(128, 128, 128);
 }
@@ -470,38 +473,30 @@ li.mypage_sidebar a.active {
 
 .modify_password2 {
 	height: 30px;
-	width: 300px;
+	width: 185px;
 	border: none;
 	border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 .modify_password3 {
 	height: 30px;
-	width: 300px;
+	width: 185px;
 	border: none;
 	border-bottom: 1px solid rgb(128, 128, 128);
 }
 
-#modifypassword, #cancelBtn, #cancelBtnAddr {
+#modifypassword {
 	position: relative;
 	border: 1px solid grey;
 	border-radius: 8px;
 	background-color: rgb(255, 159, 159);
 	color: rgb(255, 255, 255);
-	width: 100px;
+	width: 200px;
 	height: 50px;
 	font-weight: bold;
 }
 
 #modifypassword:hover {
-	cursor: pointer;
-}
-
-#cancelBtnAddr:hover {
-	cursor: pointer;
-}
-
-#cancelBtn:hover {
 	cursor: pointer;
 }
 
@@ -536,7 +531,7 @@ li.mypage_sidebar a.active {
 	border-radius: 8px;
 	background-color: rgb(255, 159, 159);
 	color: rgb(255, 255, 255);
-	width: 100px;
+	width: 200px;
 	height: 50px;
 	font-weight: bold;
 }
@@ -1130,9 +1125,4 @@ li.mypage_sidebar a.active {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-}
-
-.mypage_sidebar_nav_menu{
-	padding: 0px;
-	text-align: left;
 }

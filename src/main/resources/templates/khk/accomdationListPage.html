@@ -290,8 +290,9 @@ function confirmDelete(buttonElement) {
     }
 
     Swal.fire({
-        title: "숙소를 삭제하시겠습니까?",
-        icon: "warning",
+        title: "숙소 삭제",
+        text: "숙소를 삭제하시겠습니까?",
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "예",
         cancelButtonText: "아니오",
@@ -307,7 +308,13 @@ function confirmDelete(buttonElement) {
             .then(response => {
                 if (response.ok) {
                     // 요청 성공
-                    window.location.href = "/admin/accomdationListPage";
+                    Swal.fire({
+                        title: "숙소 삭제",
+                        text: "숙소를 삭제하였습니다.",
+                        icon: "success",
+                    }).then(() => {
+                        window.location.href = "/admin/accomdationListPage";
+                    });
                 } else {
                     // 요청 실패
                     console.log("Error: " + response.status + " " + response.statusText);
@@ -315,6 +322,12 @@ function confirmDelete(buttonElement) {
             })
             .catch(error => {
                 console.log("Error: " + error);
+            });
+        } else {
+            Swal.fire({
+                title: "숙소 삭제",
+                text: "숙소 삭제가 취소되었습니다.",
+                icon: "info",
             });
         }
     });

@@ -146,122 +146,161 @@ span.role-ADMIN {
 		}
 
 		function approve_btn(id, page) {
-			// 승인 요청
-			if (!id) {
-				console.log("Error: partner id not found.");
-				return;
-			}
+    // 승인 요청
+    if (!id) {
+        console.log("Error: partner id not found.");
+        return;
+    }
 
-			Swal.fire({
-				title: "파트너 권한을 승인 하시겠습니까?",
-				icon: "question",
-				showCancelButton: true,
-				confirmButtonText: "예",
-				cancelButtonText: "아니오",
-			}).then((result) => {
-				if (result.isConfirmed) {
-					fetch(`/admin/approve/${id}`, { // here changed the URL
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-CSRF-TOKEN': '${_csrf.token}' // Thymeleaf 코드로 CSRF 토큰을 가져옵니다.
-						},
-						body: JSON.stringify({status: 1})
-					})
-						.then(response => {
-							if (response.ok) {
-								// 요청 성공
-								window.location.href = "/admin/partnerListPage"; // here changed the redirect page
-							} else {
-								// 요청 실패
-								console.log("Error: " + response.status + " " + response.statusText);
-							}
-						})
-						.catch(error => {
-							console.log("Error: " + error);
-						});
-				}
-			});
-		}
+    Swal.fire({
+        title: "파트너 권한",
+        text: "파트너 권한을 승인하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/admin/approve/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                },
+                body: JSON.stringify({status: 1})
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 요청 성공
+                    Swal.fire({
+                        title: "파트너 권한",
+                        text: "파트너 권한을 승인하였습니다.",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.href = "/admin/partnerListPage";
+                    });
+                } else {
+                    // 요청 실패
+                    console.log("Error: " + response.status + " " + response.statusText);
+                }
+            })
+            .catch(error => {
+                console.log("Error: " + error);
+            });
+        } else {
+            Swal.fire({
+                title: "파트너 권한",
+                text: "승인을 취소하였습니다.",
+                icon: "info"
+            });
+        }
+    });
+}
 
 
 		function approveCancel_btn(id, page) {
-			// 승인 취소
-			if (!id) {
-				console.log("Error: partner id not found.");
-				return;
-			}
+    // 승인 취소
+    if (!id) {
+        console.log("Error: partner id not found.");
+        return;
+    }
 
-			Swal.fire({
-				title: "파트너 권한을 취소 하시겠습니까?",
-				icon: "question",
-				showCancelButton: true,
-				confirmButtonText: "예",
-				cancelButtonText: "아니오",
-			}).then((result) => {
-				if (result.isConfirmed) {
-					fetch(`/admin/approve/${id}`, { // here changed the URL
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-CSRF-TOKEN': '${_csrf.token}' // Thymeleaf 코드로 CSRF 토큰을 가져옵니다.
-						},
-						body: JSON.stringify({status: 0})
-					})
-						.then(response => {
-							if (response.ok) {
-								// 요청 성공
-								window.location.href = "/admin/partnerListPage"; // here changed the redirect page
-							} else {
-								// 요청 실패
-								console.log("Error: " + response.status + " " + response.statusText);
-							}
-						})
-						.catch(error => {
-							console.log("Error: " + error);
-						});
-				}
-			});
-		}
+    Swal.fire({
+        title: "파트너 권한",
+        text: "파트너 권한 승인을 취소 하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/admin/approve/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                },
+                body: JSON.stringify({status: 0})
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 요청 성공
+                    Swal.fire({
+                        title: "파트너 권한",
+                        text: "파트너 권한 승인을 취소하였습니다.",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.href = "/admin/partnerListPage";
+                    });
+                } else {
+                    // 요청 실패
+                    console.log("Error: " + response.status + " " + response.statusText);
+                }
+            })
+            .catch(error => {
+                console.log("Error: " + error);
+            });
+        } else {
+            Swal.fire({
+                title: "파트너 권한",
+                text: "취소하였습니다.",
+                icon: "info"
+            });
+        }
+    });
+}
 
 		function reject_btn(id, page) {
-			// 승인 취소
-			if (!id) {
-				console.log("Error: partner id not found.");
-				return;
-			}
+    // 반려
+    if (!id) {
+        console.log("Error: partner id not found.");
+        return;
+    }
 
-			Swal.fire({
-				title: "파트너 권한을 반려하시겠습니까?",
-				icon: "question",
-				showCancelButton: true,
-				confirmButtonText: "예",
-				cancelButtonText: "아니오",
-			}).then((result) => {
-				if (result.isConfirmed) {
-					fetch(`/admin/approve/${id}`, { // here changed the URL
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-CSRF-TOKEN': '${_csrf.token}' // Thymeleaf 코드로 CSRF 토큰을 가져옵니다.
-						},
-						body: JSON.stringify({status: 2})
-					})
-						.then(response => {
-							if (response.ok) {
-								// 요청 성공
-								window.location.href = "/admin/partnerListPage"; // here changed the redirect page
-							} else {
-								// 요청 실패
-								console.log("Error: " + response.status + " " + response.statusText);
-							}
-						})
-						.catch(error => {
-							console.log("Error: " + error);
-						});
-				}
-			});
-		}
+    Swal.fire({
+        title: "파트너 권한",
+        text: "파트너 권한을 반려하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/admin/approve/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                },
+                body: JSON.stringify({status: 2})
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 요청 성공
+                    Swal.fire({
+                        title: "파트너 권한",
+                        text: "파트너 권한을 반려하였습니다.",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.href = "/admin/partnerListPage";
+                    });
+                } else {
+                    // 요청 실패
+                    console.log("Error: " + response.status + " " + response.statusText);
+                }
+            })
+            .catch(error => {
+                console.log("Error: " + error);
+            });
+        } else {
+            Swal.fire({
+                title: "파트너 권한",
+                text: "취소하였습니다.",
+                icon: "info"
+            });
+        }
+    });
+}
 	</script>
 
 </head>
