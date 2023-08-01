@@ -220,7 +220,7 @@ $(document).on('click', '.editOkProduct', function() {
 
 	// AJAX 요청을 통해 데이터를 서버에 전송하고 값을 변경
 	$.ajax({
-		url: '/product/updateProduct',
+		url: '/partner/product/updateProduct',
 		type: 'POST',
 		data: formData,
 		enctype: 'multipart/form-data',

@@ -398,6 +398,12 @@ h5 .nav-link{
 	height: 50px;
 }
 #confirm_newPwd{
+	height:2px;
+	font-size: 12px;
+	margin: 5px 0;
+}
+
+#confirm_newPwd1{
 	font-size: 12px;
 	margin: 5px 0;
 }

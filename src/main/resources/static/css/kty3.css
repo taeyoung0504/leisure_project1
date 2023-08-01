@@ -7,7 +7,7 @@
 	display: block;
 	margin: 0 auto;
 	width: 1000px;
-	margin-top: 30px;
+/* 	margin-top: 30px; */
 }
 
 #kty_left-side_test {
@@ -42,7 +42,7 @@ label {
 	display: inline;
 }
 
-/* 반응형 미디어 쿼리: 화면 너비가 1000px 이하일 때 */
+/* ë°˜ì‘í˜• ë¯¸ë””ì–´ ì¿¼ë¦¬: í™”ë©´ ë„ˆë¹„ê°€ 1000px ì´í•˜ì¼ ë•Œ */
 @media ( max-width : 1000px) {
 	body {
 		overflow-x: hidden;
@@ -51,12 +51,12 @@ label {
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
-	/* #test의 크기를 100%로 확장하여 가로 폭에 맞게 조절 */
+	/* #testì˜ í¬ê¸°ë¥¼ 100%ë¡œ í™•ìž¥í•˜ì—¬ ê°€ë¡œ í­ì— ë§žê²Œ ì¡°ì ˆ */
 	#test {
 		width: 80%;
 	}
 
-	/* #kty_left-side_test와 #kty_right-side_test를 아래로 배치하여 세로 정렬 */
+	/* #kty_left-side_testì™€ #kty_right-side_testë¥¼ ì•„ëž˜ë¡œ ë°°ì¹˜í•˜ì—¬ ì„¸ë¡œ ì •ë ¬ */
 	.search_deagu_home, #kty_left-side_test {
 		float: none;
 		width: 100%;
@@ -336,7 +336,7 @@ label {
 	background-color: #77af9c;
 	color: rgb(244, 245, 244);
 	height: 40px;
-	/* 버튼 디자인 */
+	/* ë²„íŠ¼ ë””ìžì¸ */
 	border: none;
 	display: inline-block;
 	border-radius: 15px;
@@ -354,7 +354,7 @@ label {
 	background-color: rgb(255, 128, 128);
 	color: rgb(244, 245, 244);
 	height: 50px;
-	/* 버튼 디자인 */
+	/* ë²„íŠ¼ ë””ìžì¸ */
 	border: none;
 	display: inline-block;
 	border-radius: 15px;
@@ -382,7 +382,7 @@ label {
 	border-bottom: 1px solid grey;
 	height: 50%;
 	background-repeat: no-repeat;
-	background-size: cover; /* 전체를 보이면서 요소에 꽉 차게 설정 */
+	background-size: cover; /* ì „ì²´ë¥¼ ë³´ì´ë©´ì„œ ìš”ì†Œì— ê½‰ ì°¨ê²Œ ì„¤ì • */
 }
 
 .acc_content {

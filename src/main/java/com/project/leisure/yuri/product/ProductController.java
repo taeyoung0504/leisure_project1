@@ -1,7 +1,6 @@
 
 package com.project.leisure.yuri.product;
 
-import java.io.Console;
 import java.security.Principal;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.DataNotFoundException;
+import com.project.leisure.dogyeom.booking.BookService;
+import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.taeyoung.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@RequestMapping("/product")
+@RequestMapping("/partner/product")
 @RequiredArgsConstructor
 @Controller
 public class ProductController {
@@ -31,6 +32,8 @@ public class ProductController {
 	private final UserRepository userRepository;
 
 	private final AccommodationService accommodationService;
+
+	private final BookService bookService;
 
 	// productNewMainReg 해당 유저가 새로운 숙소를 추가
 	@GetMapping("/productNewMainReg")
@@ -77,7 +80,6 @@ public class ProductController {
 		return "pyr/productMainReg";
 	}
 
-
 	// productMainReg 해당 유저 등록된 숙소 수정하기에서 수정된 값을 받아서 update
 	@PostMapping("/productMainInfo") // required = false => 해당 파라미터가 필수가 아님
 	public ResponseEntity<String> productMainInfo(Principal principal, @RequestParam("acc_name") String acc_name,
@@ -96,7 +98,7 @@ public class ProductController {
 		if (result == 1) {
 			return ResponseEntity.ok().body(acc_id.toString()); // Long을 String으로 변환
 		}
-		return null; 
+		return null;
 	}
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
@@ -185,9 +187,9 @@ public class ProductController {
 		List<Product> products = productService.findProductsByAccommodationId(acc_id);
 
 		// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
-
 		// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
 		for (Product product : products) {
+			this.bookService.updateAllBookingVoProductToNull(product);
 			productService.pdDelete(product.getProduct_id());
 		}
 
@@ -197,7 +199,7 @@ public class ProductController {
 		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 	}
 
-	// 버튼을 누르면 상품을 삭제한다
+	// 버튼을 누르면 숙소의 상품을 삭제한다
 	@PostMapping("/deleteProduct")
 	public ResponseEntity<Integer> deleateProduct(@RequestParam("productId") Long product_id) {
 
@@ -205,6 +207,9 @@ public class ProductController {
 
 		// id를 사용하여 해당 상품을 조회
 		Product product = productService.getProduct(product_id);
+
+		// 해당하는 product를 book 에 전송. => book 에서는 그 정보를 토대로 null로 변경
+		this.bookService.updateBookingVoProductToNull(product);
 
 		response = this.productService.pdDelete(product_id);
 
@@ -220,7 +225,7 @@ public class ProductController {
 		return ResponseEntity.ok(response);
 	}
 
-	// ====! 예외처리 필수 if-else 로 return된 값 1일 경우에만 다음 코드가 실행되도록 처리 !=========
+	// ====! 예외처리 필수 if-else 로 return된 값 1일 경우에만 다음 코드가 실행되도록 처리 !=======
 
 	// 수정된 상품의 값, 이미지를 받아와서 적용
 	@PostMapping("/updateProduct")
