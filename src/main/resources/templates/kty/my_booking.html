@@ -223,8 +223,8 @@ color:grey;
 				<hr>
 				<span id="amount" class="in_price" th:inline="text">
 					[[${book.totalPrice}]] </span><br> <span
-					th:text="${book.paymentDate}"></span> <span
-					th:text="${book.payType}"></span><br>
+					th:text="${book.paymentDate}"></span> 
+					<span id="payType" th:text="${book.payType}"></span><br>
 					<span th:text="${book.tempAccomId}" id="book_accID" ></span>
 					<span th:text="${book.tempRoomId}" id="book_roomID"></span>
 				<!-- <button id="cancelBtn">예약취소</button> -->
@@ -232,7 +232,7 @@ color:grey;
 					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
 					th:text="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button> -->
 					<button id="cancelBtn" class="cancelBtn"
-    th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn')}"
+    th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' or book.bookStatus == 'CANCELED'? 'gray-button' : 'cancelBtn')}"
     th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
 					
 					<!--  수정 중
@@ -288,28 +288,65 @@ cancelBtns.forEach(cancelBtn => {
         const amount = cancelBtn.parentElement.querySelector(".in_price").textContent;
         const tid = cancelBtn.parentElement.parentElement.querySelector("#tid").textContent;
         const cleanedAmount = amount.replace(/,/g, '');
+        const cancelReason = '단순 변심';
+        /* const payType = document.getElementById('payType').textContent; */
+        /* const payTypeElements = document.querySelectorAll('#payType'); */
+        
+        const payType = cancelBtn.parentElement.querySelector("#payType").textContent;
+        
         //console.log(amount);
 
 
-        fetch(`/refundd`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                tid: tid,
-                cancel_amount: cleanedAmount,
-                cancel_tax_free_amount: "200",
-                cancel_vat_amount: "200"
-            })
-        })
-        .then(response => response.json())
-        .then(cres => {
-            location.replace('/user/mypage/my_booking');
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+        if(payType === "KAKAO") {
+        	
+	        fetch(`/refundd`, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json"
+	            },
+	            body: JSON.stringify({
+	                tid: tid,
+	                cancel_amount: cleanedAmount,
+	                cancel_tax_free_amount: "200",
+	                cancel_vat_amount: "200"
+	            })
+	        })
+	        .then(response => response.json())
+	        .then(cres => {
+	            location.replace('/user/mypage/my_booking');
+	        })
+	        .catch(error => {
+	            console.error("Error:", error);
+	        });
+        } else if(payType === "TOSS") {
+        	
+        	const paymentKey = tid;
+        	
+        	alert(paymentKey);
+        	alert(typeof paymentKey);
+        	
+        	 fetch(`/book/toss/cancel`, {
+ 	            method: "POST",
+ 	            headers: {
+ 	                "Content-Type": "application/json"
+ 	            },
+ 	            body: JSON.stringify({
+ 	            	paymentKey: paymentKey,
+ 	            	cancelReason : cancelReason
+ 	            })
+ 	        })
+ 	        .then(response => response.json())
+ 	        .then(cres => {
+ 	            location.replace('/user/mypage/my_booking');
+ 	        })
+ 	        .catch(error => {
+ 	            console.error("Error:", error);
+ 	        });
+        }else {
+            // payType 값이 "KAKAO" 또는 "TOSS"가 아닌 경우
+            console.error("Invalid payType:", payType);
+        }
+        
     });
 });
     /* 리뷰 id 출력

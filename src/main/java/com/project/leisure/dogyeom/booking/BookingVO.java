@@ -2,7 +2,8 @@ package com.project.leisure.dogyeom.booking;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Component;
 
 import com.project.leisure.dogyeom.base.BaseEntity;
 import com.project.leisure.yuri.product.Accommodation;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class BookingVO extends BaseEntity implements Serializable{
 
 	@Id
