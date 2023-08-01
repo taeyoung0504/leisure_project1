@@ -200,6 +200,14 @@ span.role-ADMIN {
 						</tr>
 					</tbody>
 				</table>
+				
+				<!-- 검색 결과가 없는 경우에 해당하는 메시지 -->
+				<div th:if="${paging.empty}">
+					<p>
+						해당하는 업체가 없습니다. <a href="/admin/accomdationListPage">전체 목록으로 돌아가기</a>
+					</p>
+				</div>
+				
 			</div>
 		</div>
 		<!-- 페이징처리 시작 -->
@@ -243,8 +251,24 @@ span.role-ADMIN {
 						.getElementById('search_kw').value;
 				document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
 				document.getElementById('searchForm').submit();
+				// 검색 후에 검색창으로 포커스를 이동시킵니다.
+			    document.getElementById("search_kw").focus();
 			});
 
+			
+			 document.getElementById("search_kw").addEventListener("keyup", function (event) {
+				    if (event.keyCode === 13) {
+				      event.preventDefault(); // 기본 엔터키 동작 방지
+				      document.getElementById("btn_search").click(); // 검색 버튼 클릭
+				    }
+				  });
+
+				  document.getElementById("btn_search").addEventListener("click", function () {
+				    button(); // 여기서 button()은 검색을 실행하는 함수입니다.
+				  });
+
+
+			
 // 			// 해당 숙소를 삭제한다.
 // 			function confirmDelete(buttonElement) {
 // 				var accId = buttonElement.closest('tr').dataset.accId;

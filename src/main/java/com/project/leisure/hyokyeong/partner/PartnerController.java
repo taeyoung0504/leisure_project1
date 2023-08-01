@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.hyokyeong.user.UserListService;
 import com.project.leisure.taeyoung.user.RegPartner;
 import com.project.leisure.taeyoung.user.RegRepository;
@@ -47,11 +48,13 @@ public class PartnerController {
 	private final AccomdationListService accomdationListService;
 	private final ProductService productService;
 	private final AccommodationService accommodationService;
+	private final BookService bookService; //추가
+
 
 	public PartnerController(PartnerListService partnerListService, RegService regService, RegRepository regRepository,
 			UserListService userListService, HttpServletRequest request, UserRepository userRepository,
 			AccomdationListService accomdationListService, ProductService productService,
-			AccommodationService accommodationService) {
+			AccommodationService accommodationService,BookService bookService) {
 		this.partnerListService = partnerListService;
 		this.regService = regService;
 		this.regRepository = regRepository;
@@ -61,6 +64,7 @@ public class PartnerController {
 		this.accomdationListService = accomdationListService;
 		this.productService = productService;
 		this.accommodationService = accommodationService;
+		this.bookService = bookService; //추가
 	}
 
 	@GetMapping("/partnerListPage")
@@ -156,6 +160,7 @@ public class PartnerController {
 
 			// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
 			for (Product product : products) {
+				this.bookService.updateAllBookingVoProductToNull(product);
 				productService.pdDelete(product.getProduct_id());
 			}
 

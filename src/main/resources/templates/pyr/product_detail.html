@@ -13,7 +13,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <meta charset="UTF-8">
-<title>경상도숙박장사</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -172,7 +171,7 @@
 								</div>
 								</p>
 								<p class="start_score">
-									<span th:if="${review.rating == 1}" class="start_repeat">★
+									<span th:if="${review.rating == 1}" class="star act_repeat">★
 										✩ ✩ ✩ ✩</span> <span th:if="${review.rating == 2}"
 										class="start_repeat">★ ★ ✩ ✩ ✩</span> <span
 										th:if="${review.rating == 3}" class="start_repeat">★ ★
@@ -215,7 +214,7 @@
 							</form>
 						</div>
 					</div>
-					
+
 
 					<!-- datepicker 적용 -->
 					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>

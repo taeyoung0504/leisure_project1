@@ -174,14 +174,14 @@ public class AdminController {
 	}
 
 	// 신고리스트 불러오기
-	@GetMapping("/decalarationList")
-	public String decalarationList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+	@GetMapping("/declarationList")
+	public String declarationList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw", defaultValue = "") String kw) {
 		Page<Declaration> paging = this.declarationListService.getList(page, kw);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw", kw);
 		declarationListService.declarationList(model);
-		model.addAttribute("decalarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
+		model.addAttribute("declarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
 		// 전체 객체 수를 전달
 		model.addAttribute("objectCount", paging.getTotalElements());
 		return "khk/declaration";

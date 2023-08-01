@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- sweetalert2 CDN-->
 <link rel="stylesheet" href="/css/my_product_booklist.css">
 <script th:src="@{/js/my_product_booklist.js}"></script>
 
@@ -91,7 +92,7 @@
 					<td th:text="${book.checkin}"></td>
 					<td th:text="${book.checkOut}"></td>
 					<td>
-					<span th:if="${book.bookStatus == 'CANCEL_PAYMENT'}">취소 완료</span> <span th:unless="${book.bookStatus == 'CANCEL_PAYMENT'}"
+					<span th:block th:if="${book.bookStatus == 'CANCEL_PAYMENT' || book.bookStatus == 'CANCELED'}">취소 완료</span> <span th:unless="${book.bookStatus == 'CANCEL_PAYMENT' || book.bookStatus == 'CANCELED'}"
 						th:text="${book.bookStatus}"></span></td>
 					<td id="hidden_part_name" th:text="${book.accommodation.username}"></td>
 					<td>
@@ -105,11 +106,11 @@
 		<!--  모달  -->
 		<div class="modal" id="myModal">
 			<div class="modal-content">
-				<span class="close" onclick="closeModal()">&times;</span> <strong>예약
+				<span class="close" onclick="closeModal()">&times;</span> <strong id="st_kty_title">예약
 					취소 요청</strong><br>
 				<form id="cancellationForm">
 					<textarea id="reasonCancle" rows="15" cols="60"
-						placeholder="취소 사유를 입력해주세요..."></textarea>
+						placeholder="취소 사유를 입력해주세요."></textarea>
 					<input type="hidden" id="bookNumValue" /> <input type="hidden"
 						id="authenticatedUserName" />
 					<button type="button" id="submitButton"
