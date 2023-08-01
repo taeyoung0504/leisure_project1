@@ -40,6 +40,13 @@ public class InquiryService {
         return inquiryRepository.findAllByOrderByCreateDateDesc(pageable);
     }
     
+    public Page<Inquiry> getAnsweredInquiries(Pageable pageable) {
+        return inquiryRepository.findInquiriesByInquiryAnswerIsNotEmptyOrderByCreateDateDesc(pageable);
+    }
+
+    public Page<Inquiry> getPendingInquiries(Pageable pageable) {
+        return inquiryRepository.findInquiriesByInquiryAnswerIsEmptyOrderByCreateDateDesc(pageable);
+    }
 
 	public List<Inquiry> getFindByUsername(String username) {
 		return inquiryRepository.findByUsernameOrderByCreateDateDesc(username);

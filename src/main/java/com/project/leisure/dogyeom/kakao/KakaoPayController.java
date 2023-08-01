@@ -76,13 +76,17 @@ public class KakaoPayController {
 
 		kcr = kakaoPayService.approveResponse(pgToken);
 
-		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
+//		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
 
 		String payDate = kcr.getApproved_at();
 		String tid = kcr.getTid();
 		String status = "예약완료";
 
 		bookService.updatePaymentDate(tid, payDate, status);
+		
+		BookingVO book = bookService.getBook(tid);
+		
+		model.addAttribute("book", book);	
 
 		// 유리 추가 카카오 승인이 되면 이메일 보내도록 처리
 		// 현재 로그인한 유저의 정보를 가져온다.

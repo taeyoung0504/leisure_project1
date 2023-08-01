@@ -23,4 +23,8 @@ public class CancelRequestService {
 		Sort sort = Sort.by(Sort.Direction.DESC, "id"); // Assuming "id" is the field used for sorting
 		return cancelRequestRepository.findAll(sort);
 	}
+	
+	 public CancelRequest getCancelRequestById(Long id) {
+	        return cancelRequestRepository.findById(id).orElse(null);
+	    }
 }

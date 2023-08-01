@@ -174,14 +174,14 @@ public class AdminController {
 	}
 
 	// 신고리스트 불러오기
-	@GetMapping("/decalarationList")
-	public String decalarationList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+	@GetMapping("/declarationList")
+	public String declarationList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw", defaultValue = "") String kw) {
 		Page<Declaration> paging = this.declarationListService.getList(page, kw);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw", kw);
 		declarationListService.declarationList(model);
-		model.addAttribute("decalarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
+		model.addAttribute("declarationList", paging.getContent()); // 신고 목록을 decalarationList라는 속성으로 추가
 		// 전체 객체 수를 전달
 		model.addAttribute("objectCount", paging.getTotalElements());
 		return "khk/declaration";
@@ -233,13 +233,23 @@ public class AdminController {
 ///////////////////////// 1:1 문의 컨트롤러 /////////////////////////////////////
 
 	@GetMapping("/inquiryList")
-	public String inquiryList(Model model, Principal principal,
-			@PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
-		String username = principal.getName();
-		System.out.print(username);
-		Page<Inquiry> page = inquiryService.getAllInquiries(pageable);
-		model.addAttribute("page", page);
-		return "syw/inquiry_list";
+	public String inquiryList(Model model, Principal principal, 
+	    @RequestParam(required = false) String filter,
+	    @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+	        
+	    String username = principal.getName();
+	    Page<Inquiry> page;
+
+	    if ("answered".equalsIgnoreCase(filter)) {
+	        page = inquiryService.getAnsweredInquiries(pageable);
+	    } else if ("pending".equalsIgnoreCase(filter)) {
+	        page = inquiryService.getPendingInquiries(pageable);
+	    } else {
+	        page = inquiryService.getAllInquiries(pageable);
+	    }
+	    
+	    model.addAttribute("page", page);
+	    return "syw/inquiry_list";
 	}
 
 	@GetMapping("/inquiryAnswer/{id}")

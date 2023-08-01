@@ -85,6 +85,12 @@
 					</tbody>
 				</table>
 
+				<!-- 검색 결과가 없는 경우에 해당하는 메시지 -->
+				<div th:if="${paging.empty}">
+					<p>
+						해당하는 회원이 없습니다. <a href="/admin/declarationList">전체 목록으로 돌아가기</a>
+					</p>
+				</div>
 
 
 				<!-- 페이징처리 시작 -->
@@ -107,7 +113,7 @@
 						</a></li>
 					</ul>
 					<!-- 					페이징처리 끝 -->
-					<form th:action="@{/admin/decalarationList}" method="get"
+					<form th:action="@{/admin/declarationList}" method="get"
 						id="searchForm">
 						<input type="hidden" id="kw" name="kw" th:value="${kw}"> <input
 							type="hidden" id="page" name="page" th:value="${paging.number}">
@@ -133,6 +139,24 @@
 			document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
 			document.getElementById('searchForm').submit();
 		});
+		
+		 document.getElementById("search_kw").addEventListener("keyup", function (event) {
+			    if (event.keyCode === 13) {
+			      event.preventDefault(); // 기본 엔터키 동작 방지
+			      document.getElementById("btn_search").click(); // 검색 버튼 클릭
+			    }
+			  });
+
+			  document.getElementById("btn_search").addEventListener("click", function () {
+			    button(); // 여기서 button()은 검색을 실행하는 함수입니다.
+			  });
+
+			  function button() {
+			    var searchKeyword = document.getElementById("search_kw").value;
+			    // 검색 실행에 필요한 코드를 작성하세요.
+			    console.log("검색어: ", searchKeyword);
+			    // 이후에 검색 결과를 처리하는 로직을 추가하세요.
+			  }
 		
 		
 		//블라인드 버튼 비동기 처리

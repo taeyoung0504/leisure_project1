@@ -200,6 +200,14 @@ span.role-ADMIN {
 						</tr>
 					</tbody>
 				</table>
+				
+				<!-- 검색 결과가 없는 경우에 해당하는 메시지 -->
+				<div th:if="${paging.empty}">
+					<p>
+						해당하는 업체가 없습니다. <a href="/admin/accomdationListPage">전체 목록으로 돌아가기</a>
+					</p>
+				</div>
+				
 			</div>
 		</div>
 		<!-- 페이징처리 시작 -->
@@ -243,8 +251,24 @@ span.role-ADMIN {
 						.getElementById('search_kw').value;
 				document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
 				document.getElementById('searchForm').submit();
+				// 검색 후에 검색창으로 포커스를 이동시킵니다.
+			    document.getElementById("search_kw").focus();
 			});
 
+			
+			 document.getElementById("search_kw").addEventListener("keyup", function (event) {
+				    if (event.keyCode === 13) {
+				      event.preventDefault(); // 기본 엔터키 동작 방지
+				      document.getElementById("btn_search").click(); // 검색 버튼 클릭
+				    }
+				  });
+
+				  document.getElementById("btn_search").addEventListener("click", function () {
+				    button(); // 여기서 button()은 검색을 실행하는 함수입니다.
+				  });
+
+
+			
 // 			// 해당 숙소를 삭제한다.
 // 			function confirmDelete(buttonElement) {
 // 				var accId = buttonElement.closest('tr').dataset.accId;
@@ -290,8 +314,9 @@ function confirmDelete(buttonElement) {
     }
 
     Swal.fire({
-        title: "숙소를 삭제하시겠습니까?",
-        icon: "warning",
+        title: "숙소 삭제",
+        text: "숙소를 삭제하시겠습니까?",
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "예",
         cancelButtonText: "아니오",
@@ -307,7 +332,13 @@ function confirmDelete(buttonElement) {
             .then(response => {
                 if (response.ok) {
                     // 요청 성공
-                    window.location.href = "/admin/accomdationListPage";
+                    Swal.fire({
+                        title: "숙소 삭제",
+                        text: "숙소를 삭제하였습니다.",
+                        icon: "success",
+                    }).then(() => {
+                        window.location.href = "/admin/accomdationListPage";
+                    });
                 } else {
                     // 요청 실패
                     console.log("Error: " + response.status + " " + response.statusText);
@@ -315,6 +346,12 @@ function confirmDelete(buttonElement) {
             })
             .catch(error => {
                 console.log("Error: " + error);
+            });
+        } else {
+            Swal.fire({
+                title: "숙소 삭제",
+                text: "숙소 삭제가 취소되었습니다.",
+                icon: "info",
             });
         }
     });

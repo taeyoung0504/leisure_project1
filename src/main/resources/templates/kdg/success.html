@@ -63,7 +63,7 @@
 		crossorigin="anonymous">
 	</script>
 	
-    <h1>카카오페이 결제가 정상적으로 완료되었습니다.</h1>
+    <h1> 결제가 정상적으로 완료되었습니다.</h1>
 <h3>결제 상세 정보:</h3>
 
 <table>
@@ -72,56 +72,28 @@
     <th>값</th>
   </tr>
   <tr>
-  	<td id="tid">[[${info.tid}]]</td>
     <td>결제일시</td>
-    <td>[[${info.approved_at}]]</td>
+    <td>[[${book.paymentDate}]]</td>
   </tr>
-  <tr>
+   <tr>
     <td>주문번호</td>
-    <td>[[${info.partner_order_id}]]</td>
+   <td id="tid">[[${book.tid}]]</td>
   </tr>
   <tr>
     <td>상품명</td>
-    <td class="item_name">[[${info.item_name}]]</td>
-  </tr>
-  <tr>
-    <td>상품수량</td>
-    <td>[[${info.quantity}]]</td>
+    <td class="item_name">[[${book.roomTitle}]]</td>
   </tr>
   <tr>
     <td>결제금액</td>
-    <td id="amount">[[${info.amount.total}]]</td>
+    <td id="amount">[[${book.totalPrice}]]</td>
   </tr>
   <tr>
     <td>결제방법</td>
-    <td>[[${info.payment_method_type}]]</td>
+    <td>[[${book.payType}]]</td>
   </tr>
 </table>
 	<br>
 	 <button id="reservebtn" onclick="location.href='/user/mypage/my_booking'">예약내역으로 이동</button>
-     <!-- <button id="kaobtn2">결제취소</button> -->
-    
-    <!-- <script>
-		$(function() {
-		$("#kaobtn2").click(function (){ 
-			const amount = document.getElementById('amount').textContent;
-			const tid = document.getElementById('tid').textContent;
-			$.ajax({
-				type: 'post',
-				url: "/refundd",
-				data: {
-					tid: tid, 
-					cancel_amount: amount,
-					cancel_tax_free_amount: "200",
-					cancel_vat_amount: "200",
-				},
-				success: function(cres) {
-					location.href = "/user/mypage/my_booking";
-				}
-			});
-		});
-	});
-	</script>  -->
     
 </body>
 </html>

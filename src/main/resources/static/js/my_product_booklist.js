@@ -1,5 +1,5 @@
 
-
+/*
 document.addEventListener("DOMContentLoaded", function() {
 	// Get the select element
 	const selectElement = document.getElementById("accSelect");
@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	});
 });
-
+*/
+/*
 document.addEventListener("DOMContentLoaded", function() {
 	// Get the select element
 	const selectElement = document.getElementById("accSelect");
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 });
-
+*/
 
 
 
@@ -101,7 +102,7 @@ function closeModal() {
 
 function submitCancellation() {
 	// Get the input value from the textarea
-	const reasonCancleInput = document.getElementById('reasonCancle').value; // Modified this line
+	const reasonCancelInput = document.getElementById('reasonCancle').value;
 
 	// Get the bookNumValue and authenticatedUserName from the modal
 	const bookNumValue = document.getElementById('bookNumValue').value;
@@ -109,9 +110,10 @@ function submitCancellation() {
 
 	// Create a data object to send in the AJAX request
 	const data = {
-		reasonCancel: reasonCancleInput, // Modified this line
+		reasonCancel: reasonCancelInput,
 		bookNumValue: bookNumValue,
-		authenticatedUserName: authenticatedUserName
+		authenticatedUserName: authenticatedUserName,
+		result: null // Set the initial value of the "result" field to null (optional)
 	};
 	const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
 
@@ -141,6 +143,130 @@ function submitCancellation() {
 			console.error('Error:', error);
 		});
 }
+
+
+
+
+
+function hideCancelButton() {
+  // Get all the span elements within the table body
+  const spanElements = document.querySelectorAll("tbody span");
+
+  // Loop through each span element
+  spanElements.forEach((spanElement) => {
+    // Get the text value of the span element
+    const spanText = spanElement.textContent.trim();
+    console.log("Span Text:", spanText);
+
+    // Check if the span text value is "거절"
+    if (spanText === "거절") {
+      // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+      const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
+      if (cancelButton) {
+        cancelButton.style.display = "none";
+        console.log("CancelButton Hidden");
+      } else {
+        console.log("CancelButton not found");
+      }
+    }
+  });
+}
+
+// Call the hideCancelButton function when the page loads
+document.addEventListener("DOMContentLoaded", hideCancelButton);
+
+
+
+
+
+
+/* 달력 */
+function filterByDate() {
+    var selectedDate = document.getElementById("datePicker").value;
+    var rows = document.querySelectorAll("#booking-table tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var checkinDate = rows[i].querySelector("td:nth-child(6)").innerText;
+        if (checkinDate === selectedDate) {
+            rows[i].style.display = "table-row";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+
+function filterByDateAndAcc() {
+    var selectedDate = document.getElementById("datePicker").value;
+    var selectedAcc = document.getElementById("accSelect").value;
+    var rows = document.querySelectorAll("#booking-table tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var checkinDate = rows[i].querySelector("td:nth-child(6)").innerText;
+        var accTitle = rows[i].querySelector("td:nth-child(2)").innerText;
+        var displayRow = true;
+
+        if (selectedDate !== "" && checkinDate !== selectedDate) {
+            displayRow = false;
+        }
+
+        if (selectedAcc !== "모두" && accTitle !== selectedAcc) {
+            displayRow = false;
+        }
+
+        rows[i].style.display = displayRow ? "table-row" : "none";
+    }
+}
+
+
+
+function setDefaultDate() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = String(today.getMonth() + 1).padStart(2, '0');
+        var day = String(today.getDate()).padStart(2, '0');
+        var formattedDate = year + '-' + month + '-' + day;
+        document.getElementById('datePicker').value = formattedDate;
+    }
+
+    // Call the function when the page loads
+    window.onload = function () {
+        setDefaultDate();
+        filterByDateAndAcc(); // Optionally, apply the initial filter based on the default date
+    };
+    
+    
+
+
+/* 거절 시 숨기기 
+
+
+
+
+
+ function hideCancelButton() {
+    // Get all the span elements within the table body
+    const spanElements = document.querySelectorAll("tbody span");
+
+    // Loop through each span element
+    spanElements.forEach((spanElement) => {
+      // Get the text value of the span element
+      const spanText = spanElement.textContent.trim();
+
+      // Check if the span text value is "거절"
+      if (spanText === "거절") {
+        // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+        const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
+        cancelButton.style.display = "none";
+      }
+    });
+  }
+
+  // Call the hideCancelButton function when the page loads
+  document.addEventListener("DOMContentLoaded", hideCancelButton);
+*/
+
+
+
 /*
 function openModal() {
 	var modal = document.getElementById('myModal');
