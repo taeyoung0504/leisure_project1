@@ -11,6 +11,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- sweetalert2 CDN-->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 검색 api-->
 	<script th:src="@{/js/kty_mypage.js}"></script>
+	<style></style>
 </head>
 
 <div class="container_my-3">
@@ -27,8 +28,7 @@
 			<input type="text" th:field="*{username}" id="join_username" class="join_username"
 				placeholder="6-12 길이의 문자열 입력">
 		</div>
-		<div id="username-error"></div>
-		<br>
+		<div id="nickname-error"></div><br>
 		<div class="mb-join">
 			<label for="password1" class="form-label">비밀번호</label>
 			<input type="password" th:field="*{password1}" id="join_password1" class="join_password1"

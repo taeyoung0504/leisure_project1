@@ -1,0 +1,154 @@
+.my-inquiry {
+         width: 900px;
+         margin-left: -50px;
+         margin-top: 40px;
+      }
+
+      .inquiry-item {
+         position: relative;
+         border-bottom: 1px solid #ccc;
+         margin-top: 20px;
+         cursor: pointer;
+      }
+
+
+      .inquiry-content,
+      .answer-content {
+         display: none;
+      }
+
+      .inquiry_date {
+         font-weight: normal;
+         color: rgb(193, 193, 193);
+      }
+
+      .date {
+         font-weight: normal;
+      }
+
+      .answer {
+         margin-left: 20px;
+      }
+
+      .title {
+         font-weight: normal;
+      }
+
+      .answer-content {
+         margin-left: 50px;
+         padding-bottom: 30px;
+      }
+
+
+
+      .inquiry-content {
+         margin-left: 10px;
+         margin-top: 10px;
+         margin-bottom: 10px;
+         overflow: auto;
+      }
+
+      .inquiry-content p {
+         margin-top: 0;
+         margin-bottom: 0;
+      }
+
+      .answer-prefix {
+         display: inline-block;
+         width: 50px;
+         text-align: right;
+      }
+
+      .content-container {
+         margin-left: -50px;
+      }
+
+      .button-container {
+         position: absolute;
+         right: 0;
+         bottom: 0;
+         display: none;
+         margin-top: 10px;
+      }
+
+      .edit-button {
+         padding: 1px 5px;
+         cursor: pointer;
+      }
+
+      .delete-button {
+         padding: 1px 5px;
+         cursor: pointer;
+      }
+
+      .answer-content h4 {
+         display: inline-block;
+         margin-bottom: 0;
+         margin-left: -50px;
+      }
+
+      .inquiry-item .type {
+         font-weight: bold;
+      }
+
+      .inquiry-heading {
+         color: #e40000d3;
+      }
+
+      .inquiry_pre .title,
+      .inquiry_pre .answer {
+         font-weight: normal;
+      }
+
+      .inquiryMessage {
+         padding: 20px;
+         border-radius: 7px;
+      }
+
+      .center-content3 {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         margin-top: -250px;
+         margin-left: 300px;
+         height: 100vh;
+      }
+
+
+      .btn_red {
+         display: inline-block;
+         padding: 10px 20px;
+         border: none;
+         border-radius: 4px;
+         background-color: #ff0000;
+         color: #fff;
+         text-decoration: none;
+         font-size: 16px;
+         font-weight: bold;
+
+      }
+
+      .btn_red:hover {
+         background-color: #cc0000;
+      }
+
+      .btn-toggle {
+         background: none;
+         border: none;
+         cursor: pointer;
+         font-size: 1.5rem;
+      }
+
+      .button-container {
+      display: none;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 3px;
+      margin-bottom: 17px;
+      margin-right: 20px;
+   }
+   
+   .swal2-styled.swal2-confirm {
+    background-color: #7367f0 !important;
+}

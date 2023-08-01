@@ -233,13 +233,23 @@ public class AdminController {
 ///////////////////////// 1:1 문의 컨트롤러 /////////////////////////////////////
 
 	@GetMapping("/inquiryList")
-	public String inquiryList(Model model, Principal principal,
-			@PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
-		String username = principal.getName();
-		System.out.print(username);
-		Page<Inquiry> page = inquiryService.getAllInquiries(pageable);
-		model.addAttribute("page", page);
-		return "syw/inquiry_list";
+	public String inquiryList(Model model, Principal principal, 
+	    @RequestParam(required = false) String filter,
+	    @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+	        
+	    String username = principal.getName();
+	    Page<Inquiry> page;
+
+	    if ("answered".equalsIgnoreCase(filter)) {
+	        page = inquiryService.getAnsweredInquiries(pageable);
+	    } else if ("pending".equalsIgnoreCase(filter)) {
+	        page = inquiryService.getPendingInquiries(pageable);
+	    } else {
+	        page = inquiryService.getAllInquiries(pageable);
+	    }
+	    
+	    model.addAttribute("page", page);
+	    return "syw/inquiry_list";
 	}
 
 	@GetMapping("/inquiryAnswer/{id}")
