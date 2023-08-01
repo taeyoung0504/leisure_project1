@@ -240,3 +240,12 @@ const dragstop = () => {
 jj_carousel.addEventListener("mousedown", dragStart);
 jj_carousel.addEventListener("mousemove", dragging);
 jj_carousel.addEventListener("mouseup", dragstop);
+
+// 메인로고 클릭되면 세션에 저장되어있던 체크인, 아웃 날짜 삭제
+function mainlogoOnClick(event) {
+	/*event.preventDefault();*/
+	
+	sessionStorage.removeItem('checkin');
+	sessionStorage.removeItem('checkOut');
+}
+
