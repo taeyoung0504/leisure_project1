@@ -23,6 +23,7 @@
 						<th>취소 사유</th>
 						<th>결제상태</th>
 						<th>결제금액</th>
+						<th>결제타입</th>
 						<th>TID</th>
 						<th>처리</th>
 					</tr>
@@ -38,6 +39,7 @@
 						<td th:text="${cancelReq.reasonCancel}"></td>
 						<td id="status_bk"></td>
 						<td id="bbb_total"></td>
+						<td id="paymenttype"></td>
 						<td id="paymentNumber"></td>
 						  <td><button class="cancel-button">취소하기</button></td>
 					</tr>
@@ -55,6 +57,7 @@
 						<th>숙소명</th>
 						<th>객실명</th>
 						<th>결제번호</th>
+						<th>결제타입</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,7 +68,9 @@
 						<td th:text="${booking.accomTitle}"></td>
 						<td th:text="${booking.roomTitle}"></td>
 						 <td th:text="${booking.tid}"></td>
+						 <td th:text="${booking.payType}"></td>
 						 <td th:text="${booking.totalPrice}"></td>
+						
 					</tr>
 				</tbody>
 			</table>
@@ -89,88 +94,127 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 <script>
 
+
+
 $(document).ready(function () {
-    // Loop through each row in the table with id "cancelTable"
-    $("#cancelTable tbody tr").each(function () {
-        var statusText = $(this).find("#status_bk").text().trim();
-        // Check if the status text is "예약완료"
-        if (statusText === "예약완료") {
-            // Show the "취소하기" button for this row
-            $(this).find(".cancel-button").show();
-        } else {
-            // Hide the "취소하기" button for rows with other statuses
-        	 $(this).find(".cancel-button")
-             .prop("disabled", true) // Disable the button
-             .addClass("grayscale"); 
-        }
-    });
+  // Loop through each row in the table with id "cancelTable"
+  $("#cancelTable tbody tr").each(function () {
+    var statusText = $(this).find("#status_bk").text().trim();
+    // Check if the status text is "예약완료"
+    if (statusText === "예약완료") {
+      // Show the "취소하기" button for this row
+      $(this).find(".cancel-button").show();
+    } else {
+      // Hide the "취소하기" button for rows with other statuses
+      $(this).find(".cancel-button")
+        .prop("disabled", true) // Disable the button
+        .addClass("grayscale"); 
+    }
+  });
 });
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // Function to handle the "취소하기" button click
-        function handleCancelClick(cancelBtn) {
-            const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
-            const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
-            const cleanedAmount = amount.replace(/,/g, '');
-
-            // Show SweetAlert confirmation popup
-            Swal.fire({
-                title: '취소하시겠습니까?',
-                text: '(취소 하시면 결제가 자동 취소 됩니다.)',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '네, 취소합니다',
-                cancelButtonText: '아니오',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // User confirmed the cancellation, proceed with cancellation logic
-                    fetch(`/refundd`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            tid: tid,
-                            cancel_amount: cleanedAmount,
-                            cancel_tax_free_amount: "200",
-                            cancel_vat_amount: "200"
-                        })
-                    })
-                        .then(response => response.json())
-                        .then(cres => {
-                            location.replace('/admin/cancle_req');
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                        });
-                }
-                // If user clicks "Cancel" or dismisses the popup, do nothing
-            });
-        }
-    
-    
-    // Add event listener to the "취소하기" buttons to handle click
-    const cancelButtons = document.querySelectorAll(".cancel-button");
-    cancelButtons.forEach((cancelButton) => {
-        cancelButton.addEventListener("click", function () {
-            handleCancelClick(cancelButton);
-        });
-    });
-});
-
-
-
-
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Function to handle the "취소하기" button click
+  function handleCancelClick(cancelBtn) {
+    // Get the value from <td id="paymenttype"></td>
+    const paymentType = cancelBtn.parentElement.parentElement.querySelector("#paymenttype").textContent.trim();
+
+    // Show SweetAlert confirmation popup for both "KAKAO" and "TOSS" payment types
+    Swal.fire({
+      title: '취소하시겠습니까?',
+      text: '(취소 하시면 결제가 자동 취소 됩니다.)',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '네, 취소합니다',
+      cancelButtonText: '아니오',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (paymentType === "KAKAO") {
+          // Proceed with KAKAO cancellation logic
+          const tid = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
+          const amount = cancelBtn.parentElement.parentElement.querySelector("#bbb_total").textContent;
+          const cleanedAmount = amount.replace(/,/g, '');
+
+          fetch(`/refundd`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              tid: tid,
+              cancel_amount: cleanedAmount,
+              cancel_tax_free_amount: "200",
+              cancel_vat_amount: "200"
+            })
+          })
+            .then(response => response.json())
+            .then(cres => {
+              location.replace('/admin/cancle_req');
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+        } else if (paymentType === "TOSS") {
+          // Proceed with TOSS cancellation logic
+          const paymentKey = cancelBtn.parentElement.parentElement.querySelector("#paymentNumber").textContent;
+          const cancelReason = cancelBtn.parentElement.parentElement.querySelector("td:nth-child(6)").textContent;
+
+          fetch(`/book/toss/cancel`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              paymentKey: paymentKey,
+              cancelReason: cancelReason
+            })
+          })
+            .then(response => response.json())
+            .then(cres => {
+              Swal.fire({
+                title: 'TOSS 취소 완료',
+                text: 'TOSS 결제가 취소되었습니다.',
+                icon: 'success'
+              });
+              location.replace('/admin/cancle_req');
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+        } else {
+          // If paymentType is neither "KAKAO" nor "TOSS", display an error message or perform alternative actions
+          console.error("Invalid payType:", paymentType);
+          // Or any other logic you want to perform for other payment types
+        }
+      }
+      // If user clicks "Cancel" or dismisses the popup, do nothing
+    });
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Add event listener to the "취소하기" buttons to handle click
+  const cancelButtons = document.querySelectorAll(".cancel-button");
+  cancelButtons.forEach((cancelButton) => {
+    cancelButton.addEventListener("click", function () {
+      handleCancelClick(cancelButton);
+    });
+  });
+
   // Get all the rows from both tables
   const cancelRows = document.querySelectorAll("#cancelTable tbody tr");
   const bookingRows = document.querySelectorAll("#bookingTable tbody tr");
@@ -188,7 +232,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const bookingBookNum = parseInt(bookingRow.querySelector("td:nth-child(1)").textContent.trim(), 10);
       const bookingTid = bookingRow.querySelector("td:nth-child(5)").textContent.trim();
       const bookingStatus = bookingRow.querySelector("td:nth-child(2)").textContent.trim();
-      const bookingTotalPrice = bookingRow.querySelector("td:nth-child(6)").textContent.trim(); // Add this line to get the totalPrice value
+      const bookingPayType = bookingRow.querySelector("td:nth-child(6)").textContent.trim(); // Add this line to get the payType value
+      const bookingTotalPrice = bookingRow.querySelector("td:nth-child(7)").textContent.trim(); // Add this line to get the totalPrice value
 
       // Compare the values and update the <td id="paymentNumber"> and <td id="status_bk"> accordingly
       if (cancelBookNumValue === bookingBookNum) {
@@ -202,8 +247,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         
         // Update the <td id="bbb_total"> with the booking's totalPrice value
-        cancelRow.querySelector("#bbb_total").textContent = bookingTotalPrice; // Add this line
+        cancelRow.querySelector("#bbb_total").textContent = bookingTotalPrice;
 
+        // Update the <td id="paymenttype"> with the booking's payType value
+        cancelRow.querySelector("#paymenttype").textContent = bookingPayType;
+        
         // Extract accomTitle and roomTitle values from the corresponding booking row
         const bookingAccomTitle = bookingRows[bookingIndex].querySelector("td:nth-child(3)").textContent.trim();
         const bookingRoomTitle = bookingRows[bookingIndex].querySelector("td:nth-child(4)").textContent.trim();
@@ -228,12 +276,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
 </script>
 <style>
 #bookingTable {
-    display: none;  
+     display: none;  
 }
 
  .grayscale {
