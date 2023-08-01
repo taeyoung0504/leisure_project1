@@ -181,7 +181,7 @@ $(document).ready(function() {
 	});
 
 	function enableNewPwdInputs() {
-		
+
 		if ($inputOldPwd.val() === $inputNewPwd1.val()) {
 			$inputNewPwd1.prop('disabled', false);
 			$inputNewPwd2.prop('disabled', true);
@@ -193,28 +193,28 @@ $(document).ready(function() {
 	}
 
 	function validateNewPwd() {
-    var newPassword = $inputNewPwd1.val();
-    var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
-    var oldPwd = $inputOldPwd.val();
+		var newPassword = $inputNewPwd1.val();
+		var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
+		var oldPwd = $inputOldPwd.val();
 
-    if (newPassword === oldPwd) {
-        $NewPwdError1.text('기존 비밀번호와 같습니다').show();
-        $NewPwdError.hide();
-        $inputNewPwd2.prop('disabled', true);
-        $modifyEmailBtn.prop('disabled', true); // Disable the button when passwords are the same
-    } else if (passwordRegex.test(newPassword)) {
-        $NewPwdError1.text('사용 가능한 비밀번호입니다').show();
-        $inputNewPwd2.prop('disabled', false);
-        $modifyEmailBtn.prop('disabled', false); // Enable the button when the new password is valid
-    } else {
-        $NewPwdError1.text('문자,숫자,특수기호 포함 6-12자리 X').show();
-        $NewPwdError.hide();
-        $inputNewPwd2.prop('disabled', true);
-        $modifyEmailBtn.prop('disabled', true); // Disable the button when the new password is invalid
-    }
+		if (newPassword === oldPwd) {
+			$NewPwdError1.text('기존 비밀번호와 같습니다').show();
+			$NewPwdError.hide();
+			$inputNewPwd2.prop('disabled', true);
+			$modifyEmailBtn.prop('disabled', true); // Disable the button when passwords are the same
+		} else if (passwordRegex.test(newPassword)) {
+			$NewPwdError1.text('사용 가능한 비밀번호입니다').show();
+			$inputNewPwd2.prop('disabled', false);
+			$modifyEmailBtn.prop('disabled', false); // Enable the button when the new password is valid
+		} else {
+			$NewPwdError1.text('문자,숫자,특수기호 포함 6-12자리 X').show();
+			$NewPwdError.hide();
+			$inputNewPwd2.prop('disabled', true);
+			$modifyEmailBtn.prop('disabled', true); // Disable the button when the new password is invalid
+		}
 
-    validateBothPwdInputs();
-}
+		validateBothPwdInputs();
+	}
 
 
 	function validateBothPwdInputs() {
@@ -228,7 +228,7 @@ $(document).ready(function() {
 		} else {
 			$modifyEmailBtn.prop('disabled', true);
 			$NewPwdError.text('새 비밀번호와 입력값이 일치하지 않습니다').show();
-		} 
+		}
 	}
 
 	function disableNewPwdInputs() {
@@ -248,32 +248,32 @@ $(document).ready(function() {
 	});
 
 	$modifyEmailBtn.click(function() {
-    // Check if any of the input fields is empty
-    if ($inputOldPwd.val() === '' || $inputNewPwd1.val() === '' || $inputNewPwd2.val() === '') {
-        return; // Return early, don't execute the rest of the code
-    }
+		// Check if any of the input fields is empty
+		if ($inputOldPwd.val() === '' || $inputNewPwd1.val() === '' || $inputNewPwd2.val() === '') {
+			return; // Return early, don't execute the rest of the code
+		}
 
-    var newPassword = $inputNewPwd1.val();
+		var newPassword = $inputNewPwd1.val();
 
-    $.ajax({
-        type: 'POST',
-        url: '/user/update_pwd',
-        data: { modify_password2: newPassword },
-        success: function(response) {
-            Swal.fire({
-                title: '<span class="centered-title">Success</span>',
-                html: '<b>비밀번호 변경하였습니다. 다시 로그인하세요</b>',
-                icon: 'success'
-            });
-            setTimeout(function() {
-                window.location.href = '/user/logout';
-            }, 2000);
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
-        }
-    });
-});
+		$.ajax({
+			type: 'POST',
+			url: '/user/update_pwd',
+			data: { modify_password2: newPassword },
+			success: function(response) {
+				Swal.fire({
+					title: '<span class="centered-title">Success</span>',
+					html: '<b>비밀번호 변경하였습니다. 다시 로그인하세요</b>',
+					icon: 'success'
+				});
+				setTimeout(function() {
+					window.location.href = '/user/logout';
+				}, 2000);
+			},
+			error: function(xhr, status, error) {
+				console.error(error);
+			}
+		});
+	});
 });
 
 
@@ -285,61 +285,60 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-	$("#reg_partner_final").on("click", function() {
-		var a1 = $('#company_name').val();
-		var a2 = $('#company_address').val();
-		var a3 = $('#partner_name').val();
-		var a4 = $('#partner_tel').val();
-		var a5 = $('#partner_sectors').val();
-		var a6 = $('#partner_region').val();
-		var file = $('#partner_input-file')[0].files[0];
+    $("#reg_partner_final").on("click", function() {
+        var a1 = $('#company_name').val();
+        var a2 = $('#company_address').val();
+        var a3 = $('#partner_name').val();
+        var a4 = $('#partner_tel').val();
+        var a5 = $('#partner_sectors').val();
+        var a6 = $('#partner_region').val();
+        var file = $('#partner_input-file')[0].files[0];
 
+        if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || a5 === null || a5 === '선택하세요' || file === undefined) {
+            $("#reg_partner_final").val("필수값 미입력").css({ "color": "red", "font-weight": "bold" });
+            return; // Stop execution here if any value is empty or if '업종' is not selected
+        } else {
+            $("#reg_partner_final").val("파트너 신청하기").css("color", "");
+        }
 
-		if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || file === undefined) {
-			$("#reg_partner_final").val("필수값 미입력").css({ "color": "red", "font-weight": "bold" });
-			return;
-		} else {
-			$("#reg_partner_final").val("파트너 신청하기").css("color", "");
-		}
+        var formData = new FormData();
+        formData.append("company_name", a1);
+        formData.append("company_address", a2);
+        formData.append("partner_name", a3);
+        formData.append("partner_tel", a4);
+        formData.append("partner_sectors", a5);
+        formData.append("partner_region", a6);
+        formData.append("file", file);
 
-		var formData = new FormData();
-		formData.append("company_name", a1);
-		formData.append("company_address", a2);
-		formData.append("partner_name", a3);
-		formData.append("partner_tel", a4);
-		formData.append("partner_sectors", a5);
-		formData.append("partner_region", a6);
-		formData.append("file", file);
-		//sss
-		$.ajax({
-			url: "/user/reg_p",
-			type: "POST",
-			data: formData,
-			contentType: false,
-			processData: false,
-			success: function(response) {
-				Swal.fire({
-					position: 'center',
-					title: '<span class="centered-title">Success</span>',
-					html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다.</b>',
-					icon: 'success'
-				}).then(function() {
-					window.location.href = 'http://192.168.10.67:8080/user/mypage/my_partner_reg';
-				});
-			},
-			error: function(xhr, status, error) {
-				Swal.fire({
-					position: 'center',
-					title: '<span class="centered-title">Success</span>',
-					html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다. </b>',
-					icon: 'success'
-				}).then(function() {
-
-					window.location.href = 'http://192.168.10.67:80/user/mypage/my_partner_reg';
-				});
-			}
-		});
-	});
+        // Execute the AJAX call only if the '업종' field is selected
+        $.ajax({
+            url: "/user/reg_p",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                Swal.fire({
+                    position: 'center',
+                    title: '<span class="centered-title">Success</span>',
+                    html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다.</b>',
+                    icon: 'success'
+                }).then(function() {
+                    window.location.href = 'http://192.168.10.67:8080/user/mypage/my_partner_reg';
+                });
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    position: 'center',
+                    title: '<span class="centered-title">Success</span>',
+                    html: '<b>파트너 신청 완료되었습니다.</b><br><b>검토 후 개별연락으로 결과 전달드립니다. </b>',
+                    icon: 'success'
+                }).then(function() {
+                    window.location.href = 'http://192.168.10.67:80/user/mypage/my_partner_reg';
+                });
+            }
+        });
+    });
 });
 /* 인감증명서 파일 첨부 */
 

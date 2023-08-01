@@ -599,25 +599,19 @@ input[type="checkbox"].inp_chk_02 {
 							    	paybtn.addEventListener('click', function() {
 							    		const roomIDElement = document.getElementById('roomID');
 							    		const roomID = roomIDElement.textContent;
-							    		alert(roomID);
 							    		
 							    		const orderName = /*[[ ${bookingvo.roomTitle} ]]*/ null;
-							    		console.log(orderName);
 							    		
 							    		//const amount = /*[[ ${bookingvo.totalPrice} ]]*/ null;
-							    		//console.log(amount);
 							    		
 							    		const amountStr = /*[[ ${bookingvo.totalPrice} ]]*/ null;
 							    		const amount = parseInt(amountStr.replace(/,/g, ''), 10);
-							    		alert(amount);
 							    		
 							    		const customerName = document.getElementById('username').value;
 							    		
 							    		const payType = document.getElementById('payment-select').value;
-							    		console.log(payType);
 							    		
 							    		const bookerName = document.getElementById('username').value;
-							    		console.log(bookerName);
 							    		
 							    		//이름 특수문자, 송백, 숫자 확인
 							    	    const specialCharRegex = /[0-9 `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -628,7 +622,6 @@ input[type="checkbox"].inp_chk_02 {
 							    		    }
 							    		
 							    		const bookerTel = document.getElementById('tel').value;
-							    		console.log(bookerTel);
 							    		
 							    		//휴대폰 인증이 되지 않아 false 인 경우 
 									    if (phondConfirm == false) {
@@ -688,8 +681,10 @@ input[type="checkbox"].inp_chk_02 {
 								    		const url2 = `/book/api/v1/payments/toss/${roomID}`;
 								    		/* const url2 = `/api/v1/payments/toss`; */
 							    			
-							    			let successUrl =  'http://localhost:8080/api/v1/payments/toss/success';
-							    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail';
+								    		/* let successUrl =  'http://localhost:8080/api/v1/payments/toss/success';
+							    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail'; */
+							    			let successUrl =  'http://192.168.10.67:8080/api/v1/payments/toss/success';
+							    			let failUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/fail';
 								    		
 							    		       function toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl) {
 									                fetch(url2, {
@@ -790,8 +785,8 @@ input[type="checkbox"].inp_chk_02 {
 	    						    verificationCodeDiv.style.display = 'block';
 	    						    
 	    						    const phoneNumber = document.getElementById('tel').value;
-	    						   	alert(phoneNumber);
-	    						   	console.log(typeof phoneNumber);
+	    						   	/* alert(phoneNumber);
+	    						   	console.log(typeof phoneNumber); */
 	    						   	
 	    						   	const url = `/check/sendSMS?phoneNumber=${phoneNumber}`;
 	    						    
@@ -812,7 +807,10 @@ input[type="checkbox"].inp_chk_02 {
 	    						    .then(responseData => {
 	    						     
 	    						     
-	    						    	alert('인증번호 발송 완료!');
+	    						    	/* alert('인증번호 발송 완료!'); */
+	    						    	
+											Swal.fire('인증번호 발송 완료')
+									
 	    						    	
 	    						    })
 	    						    .catch(error => {
@@ -864,8 +862,8 @@ input[type="checkbox"].inp_chk_02 {
 		    						    /* const verificationCodeDiv = document.getElementById('verificationCode');
 		    						    verificationCodeDiv.style.display = 'block'; */
 		    							const code = document.getElementById('digit').value;
-		    						   	alert(code);
-		    						   	console.log(typeof code);
+		    						   	/* alert(code); */
+		    						   	/* console.log(typeof code); */
 		    						    
 		    						    const url = `/check/codeCheck?code=${code}`;
 		    						    
@@ -885,11 +883,13 @@ input[type="checkbox"].inp_chk_02 {
 		    						    })
 		    						    .then(responseData => {
 		    						    	if(responseData == true){
-		    									alert('인증 번호가 다릅니다.')
+		    									/* alert('인증 번호가 다릅니다.') */
+		    									Swal.fire('인증 번호가 다릅니다.')
 		    									/* phoneAuth=true
 		    									inputCheck() */
 		    								} else {
-		    									alert('인증되었습니다')
+		    									/* alert('인증되었습니다') */
+		    									Swal.fire('인증되었습니다.')
 		    									const input_tel = document.getElementById("tel")
 		    									input_tel.readOnly = true
 		    									

@@ -75,6 +75,7 @@
 					<th>체크아웃</th>
 					<th>예약 상태</th>
 					<th>취소신청</th>
+					<th>신청결과</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -98,6 +99,9 @@
 					<td>
 						<button class="cancelButtondd" onclick="openModal(this)"
 							th:if="${book.bookStatus == '예약완료'}">취소요청</button>
+					</td>
+					<td>
+						<span th:each="cancelReq : ${cancleList}" th:if="${cancelReq.bookNumValue == book.bookNum && cancelReq.result == '1'}">거절</span>			
 					</td>
 				</tr>
 
