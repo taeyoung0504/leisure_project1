@@ -67,10 +67,10 @@ payment:
   toss:
     test_client_api_key : test_ck_7DLJOpm5QrlRWgypka53PNdxbWnY
     test_secret_api_key : test_sk_GKNbdOvk5rkAagvKm1y3n07xlzmj
-    success_url : "http://192.168.10.67:8080/api/v1/payments/toss/success"
-    fail_url : "http://192.168.10.67:8080/api/v1/payments/toss/fail"
-    #success_url : "http://localhost:8080/api/v1/payments/toss/success"
-    #fail_url : "http://localhost:8080/api/v1/payments/toss/fail"
+    #success_url : "http://192.168.10.67:8080/api/v1/payments/toss/success"
+    #fail_url : "http://192.168.10.67:8080/api/v1/payments/toss/fail"
+    success_url : "http://localhost:8080/api/v1/payments/toss/success"
+    fail_url : "http://localhost:8080/api/v1/payments/toss/fail"
 
 
              

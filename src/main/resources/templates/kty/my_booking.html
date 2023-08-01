@@ -284,8 +284,21 @@ cancelBtns.forEach(cancelBtn => {
         if (buttonText === "이용중") {
             return;
         }
+        
+       
+			swal.fire({
+				title: '예약 취소',
+				text: '정말 예약을 취소하시겠습니까?',
+				icon: 'question',
+				reverseButtons: true,
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',
+				showCancelButton: true
 
-        const amount = cancelBtn.parentElement.querySelector(".in_price").textContent;
+			}).then((result) => {
+				if (result.isConfirmed) {
+					// Yes 버튼을 눌렀을 때의 동작
+					  const amount = cancelBtn.parentElement.querySelector(".in_price").textContent;
         const tid = cancelBtn.parentElement.parentElement.querySelector("#tid").textContent;
         const cleanedAmount = amount.replace(/,/g, '');
         const cancelReason = '단순 변심';
@@ -346,6 +359,16 @@ cancelBtns.forEach(cancelBtn => {
             // payType 값이 "KAKAO" 또는 "TOSS"가 아닌 경우
             console.error("Invalid payType:", payType);
         }
+					
+					/* window.history.back(); */
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					// No 버튼을 눌렀을 때의 동작
+					// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
+				}
+			});
+
+
+      
         
     });
 });
