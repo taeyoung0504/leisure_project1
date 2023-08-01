@@ -41,7 +41,12 @@
 						<td id="bbb_total"></td>
 						<td id="paymenttype"></td>
 						<td id="paymentNumber"></td>
-						  <td><button class="cancel-button">취소하기</button></td>
+						  <td>
+						 <button class="cancel-button"
+                            th:attr="class=${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result)) ? 'cancel-button grayscale-button' : 'cancel-button'}"
+                            th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">취소하기
+                        <button class="reject-button">거절하기</button>
+						  </td>	
 					</tr>
 
 				</tbody>
@@ -276,6 +281,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* 거절 */
+  function rejectCancelRequest(id) {
+    $.ajax({
+      type: "POST",
+      url: "/cancel-requests/reject/" + id,
+      success: function (data) {
+        // Reload the page or update the UI as needed
+        // For example, you can reload the page after successful rejection
+        location.reload();
+      },
+      error: function (error) {
+        // Handle error if needed
+        console.error(error);
+      },
+    });
+  }
+
+  // Bind the "거절하기" button click event to call the rejectCancelRequest function
+  $(document).ready(function () {
+    $(".reject-button").click(function () {
+      var id = $(this).closest("tr").find("td:first-child").text();
+      rejectCancelRequest(id);
+    });
+  });
+
+
+
+
+
+
 </script>
 <style>
 #bookingTable {
@@ -286,8 +333,14 @@ document.addEventListener("DOMContentLoaded", function () {
     filter: grayscale(100%);
   }
   
-  
-  .cancel-button{
-  }
+.reject-button{
+	margin-left:5px;
+	background: #50BCDF;
+}
+
+  .grayscale-button {
+        /* Apply grayscale filter to the button */
+        filter: grayscale(100%);
+    }
 </style>
 </html>

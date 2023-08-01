@@ -101,7 +101,7 @@ function closeModal() {
 
 function submitCancellation() {
 	// Get the input value from the textarea
-	const reasonCancleInput = document.getElementById('reasonCancle').value; // Modified this line
+	const reasonCancelInput = document.getElementById('reasonCancle').value;
 
 	// Get the bookNumValue and authenticatedUserName from the modal
 	const bookNumValue = document.getElementById('bookNumValue').value;
@@ -109,9 +109,10 @@ function submitCancellation() {
 
 	// Create a data object to send in the AJAX request
 	const data = {
-		reasonCancel: reasonCancleInput, // Modified this line
+		reasonCancel: reasonCancelInput,
 		bookNumValue: bookNumValue,
-		authenticatedUserName: authenticatedUserName
+		authenticatedUserName: authenticatedUserName,
+		result: null // Set the initial value of the "result" field to null (optional)
 	};
 	const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
 
@@ -141,6 +142,34 @@ function submitCancellation() {
 			console.error('Error:', error);
 		});
 }
+
+
+
+/* 거절 시 숨기기 */
+ function hideCancelButton() {
+    // Get all the span elements within the table body
+    const spanElements = document.querySelectorAll("tbody span");
+
+    // Loop through each span element
+    spanElements.forEach((spanElement) => {
+      // Get the text value of the span element
+      const spanText = spanElement.textContent.trim();
+
+      // Check if the span text value is "거절"
+      if (spanText === "거절") {
+        // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+        const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
+        cancelButton.style.display = "none";
+      }
+    });
+  }
+
+  // Call the hideCancelButton function when the page loads
+  document.addEventListener("DOMContentLoaded", hideCancelButton);
+
+
+
+
 /*
 function openModal() {
 	var modal = document.getElementById('myModal');
