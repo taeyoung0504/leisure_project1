@@ -55,31 +55,39 @@ form {
 	
 }
 
-/*  /* 버튼 스타일 */ */
-/*   .modi_btn { */
-/*     display: inline-block; */
-/*     background-color: var(--sub-color); */
-/*     color: #fff; */
-/*     border: none; */
-/*     padding: 8px 16px; */
-/*     cursor: pointer; */
-/*     text-decoration: none; */
-/*     border-radius: 5px; */
-/*     right: 0; */
-/*     width: 30px; */
-/*   } */
-/*   .del_btn { */
-/*     display: inline-block; */
-/*     background-color: #007bff; */
-/*     color: #fff; */
-/*     border: none; */
-/*     padding: 8px 16px; */
-/*     cursor: pointer; */
-/*     text-decoration: none; */
-/*     border-radius: 5px; */
-/*     right: 0; */
-/*   } */
-
+/* /*  버튼 스타일 */
+  .modi_btn {
+   display: block;
+    background-color: var(--sub-color);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+   position: absolute;
+    right: 50px;
+  }
+  .del_btn {
+   display: flex;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    right: 0;
+    /* bottom: 20px; */
+    top: 191px;
+     position: absolute;
+  } 
+  
+  
+.notice_hk .notice-item .notice-content .button {
+  display: flex; /* 버튼을 블록 레벨 요소로 만들어 수직 배치합니다. */
+  margin-top: 10px; /* 버튼 사이에 간격을 추가합니다. */
+}
 
 .btn_createNotice{
 	
@@ -245,6 +253,16 @@ span.role-ADMIN {
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
+}
+
+.create_notice_btn{
+margin-top: 20px;	
+	
+}
+
+
+.notice_title{
+	
 }
 
 .content-container {

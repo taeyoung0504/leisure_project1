@@ -79,7 +79,9 @@ input[type="submit"]:hover {
 
 #btn_search {
 	width: 50px;
-	height: 30px;
+    height: 30px;
+    top: 1px;
+    position: relative;
 }
 
 #btn_search:hover {
@@ -196,11 +198,7 @@ span.role-ADMIN {
 	color: red;
 }
 
-select {
-	-webkit-appearance: none; /* for chrome */
-	-moz-appearance: none; /*for firefox*/
-	appearance: none;
-}
+
 
 select::-ms-expand {
 	display: none;
@@ -358,6 +356,19 @@ select {
 	/* border-style: none;  */
 }
 
+.select_btn_hk{
+background-color: var(--sub-color);
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    margin-top: 0px;
+    top: 2px;
+    position: relative;
+}
+
 #home {
 	font-weight: bold;
 	padding-bottom: 70px;
@@ -373,7 +384,7 @@ select {
 			href="/admin/authorityPage">권한 관리</a> <a
 			href="/admin/accomdationListPage">파트너 관리</a> <a
 			href="/admin/partnerListPage">파트너 신청</a> <a href="/admin/inquiryList">1:1
-			문의</a> <a href="/admin/decalarationList">신고 관리</a> <a
+			문의</a> <a href="/admin/declarationList">신고 관리</a> <a
 			href="/admin/cancle_req">예약 취소 요청</a>
 	</div>
 	<th:block layout:fragment="adminNav"></th:block>

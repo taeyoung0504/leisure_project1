@@ -44,14 +44,14 @@
 				<div class="notice-content"
 					style="background-color: rgb(243, 243, 243); white-space: pre-line;">
 					<p th:utext="${notice.content}"></p>
-				</div>
-
-				<!-- 				<a class="modi_btn" th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a> -->
-				<!-- 				<a class="del_btn" th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a> -->
 				<button class="button modi_btn"
 					th:onclick="'window.location.href = \'' + @{/admin/modify/{id}(id=${notice.id})} + '\''">수정</button>
 				<button class="button del_btn"
 					th:onclick="'window.location.href = \'' + @{/admin/delete/{id}(id=${notice.id})} + '\''">삭제</button>
+				</div>
+
+				<!-- 				<a class="modi_btn" th:href="@{/admin/modify/{id}(id=${notice.id})}">수정</a> -->
+				<!-- 				<a class="del_btn" th:href="@{/admin/delete/{id}(id=${notice.id})}">삭제</a> -->
 
 			</div>
 
