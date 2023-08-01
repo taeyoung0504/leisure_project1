@@ -203,14 +203,14 @@ public class KakaoPayController {
 	@GetMapping("/cancel")
 	public String payCancel() {
 //		return "redirect:/carts";
-		return "cancel";
+		return "kdg/cancel";
 	}
 
 	// 결제 실패시 실행 url
 	@GetMapping("/fail")
 	public String payFail() {
 //		return "redirect:/carts";
-		return "fail";
+		return "kdg/fail";
 	}
 
 	// 취소 에러 던지는 법 - 나중에 하기

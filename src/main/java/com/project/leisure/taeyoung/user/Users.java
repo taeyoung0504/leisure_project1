@@ -36,8 +36,6 @@ public class Users {
 
 	private int partner_code; // 파트너 등급 권한 설정
 
-	private String nickname; // social에서 제공받은 닉네임(일반 회원 가입 시 기본값은 null)
-
 	private int admin_code; // 관리자 등급 권한 설정
 
 	@Enumerated(EnumType.STRING)
