@@ -52,6 +52,16 @@ public class BookService {
 			throw new DataNotFoundException("bookingVO not found");
 		}
 	}
+	
+	public BookingVO getBook(String tid) {
+//		int roomID = bookNum;
+		 Optional<BookingVO> bookingVO = this.bookRepository.findByTid(tid);
+	        if (bookingVO.isPresent()) {
+	            return bookingVO.get();
+	        } else {
+	            throw new DataNotFoundException("bookingVO not found");
+	        }
+	}
 
 	public void updateTid(Long bookNum, String tid) {
 		String sql = "UPDATE bookingvo SET tid = ? WHERE book_num = ?";
@@ -62,11 +72,21 @@ public class BookService {
 		String sql = "UPDATE bookingvo SET payment_date = ?, book_status = ? WHERE tid = ?";
 		jdbcTemplate.update(sql, payDate, status, tid);
 	}
+	
+	public void updatePaymentDate2(String tid, String payDate, String status, String newTid) {
+		String sql = "UPDATE bookingvo SET payment_date = ?, book_status = ?, tid = ? WHERE tid = ?";
+		jdbcTemplate.update(sql, payDate, status, newTid, tid);
+	}
 
 	public void updateCancel(String tid, String status, String canceled_at) {
 		String sql = "UPDATE bookingvo SET book_status = ?, canceled_at = ? WHERE tid = ?";
 		jdbcTemplate.update(sql, status, canceled_at, tid);
 
+	}
+	
+	public void updateFail(String tid, String status) {
+		String sql = "UPDATE bookingvo SET book_status = ? where tid = ?";
+		jdbcTemplate.update(sql, status, tid);
 	}
 
 	public List<BookingVO> getBookList() {
