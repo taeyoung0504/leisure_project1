@@ -121,7 +121,7 @@ public class KakaoPayController {
 			String realName = bookingVO.get().getBookerName();
 
 			try {
-				emailService2.sendConfirmationEmail(userEmail, username, realName, accName, productType, checkIn,
+				emailService2.sendConfirmationEmail(userEmail, realName, accName, productType, checkIn,
 						checkOut, pay_Date, totalPrict);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -187,7 +187,7 @@ public class KakaoPayController {
 			String realName = bookingVO.get().getBookerName();
 
 			try {
-				emailService2.sendCancelEmailMessage(userEmail, username, realName, accName, productType, checkIn,
+				emailService2.sendCancelEmailMessage(userEmail,  realName, accName, productType, checkIn,
 						checkOut, pay_Date, totalPrict, can_Date);
 			} catch (Exception e) {
 				e.printStackTrace();

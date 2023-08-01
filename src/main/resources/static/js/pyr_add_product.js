@@ -9,7 +9,7 @@ function modifyRoom(button) {
 
 
 
-
+/*
 //최초 등록시 사진은 최대 5개 까지만 등록 가능하도록 설정
 $(document).ready(function() {
 	$('#addPhoto').on('change', function() {
@@ -19,11 +19,12 @@ $(document).ready(function() {
 		if (files.length > maxAllowedFiles) {
 			alert('객실 사진은 최대 5장까지 등록할 수 있습니다.');
 			// 선택한 파일 초기화
-			$(this).val('');
+			//$(this).val('');
+			$(this).prop('value', null);
 		}
 	});
 });
-
+*/
 //=============== 유효성 검사 ===============
 
 $(document).ready(function() {
@@ -165,6 +166,8 @@ $(document).ready(function() {
 				clearError('product_count');
 				clearError('product_pernum');
 				$('#productForm').trigger('reset');
+				deleteAllFiles();//전체 삭제 함수 호출
+
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				//아무런 작업을 하지 않는다
 			}
@@ -177,6 +180,129 @@ $(document).ready(function() {
 
 //=============== 유효성 검사 끝 =================
 
+//========================= 이미지 추가 부분 =========================
+
+
+var tempFiles = [];  // 전역 변수로 생성
+
+// 파일이 등록되었을 때 이벤트 리스너를 추가합니다.
+document.querySelector('#addPhoto').addEventListener('change', function(e) {
+	var files = e.target.files; // 선택된 파일들을 가져옵니다.
+
+
+	var files = $(this).get(0).files; // 새로 추가하려는 이미지들
+	var maxAllowedFiles = 5; //이미지 최대 등록 수 
+	var existingImages = $('.file_info_li').length; // 기존에 등록된 이미지의 수
+
+
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		tempFiles.push(file);  // 파일 정보를 임시 배열에 저장
+
+		// 파일의 MIME 타입을 확인하여 png 또는 jpg인지 검사
+		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다.');
+			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
+		}
+	}
+
+
+	//만약에 이미지를 5개 이상 한번에 등록하려 한다면 
+	if (files.length > maxAllowedFiles) {
+		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
+		// 선택한 파일 초기화
+		$(this).val('');
+	}
+
+	//만약 기존에 등록된 이미지가 있는데 새로 추가한거와 수를 비교했을 시 5개가 넘을때
+	if (existingImages + files.length > maxAllowedFiles) {
+		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
+		// 선택한 파일 초기화
+		$(this).get(0).value = '';
+	}
+
+
+	for (var i = 0; i < files.length; i++) { // 선택된 파일들에 대하여 반복
+		var file = files[i];
+		var reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체를 생성
+
+		reader.onload = (function(file) { // 파일 읽기가 완료되면 실행되는 콜백 함수
+			return function(e) {
+				var li = document.createElement('li'); // 새로운 <li> 엘리먼트를 생성
+				li.className = 'file_info_li'; // 클래스 이름을 설정
+				li.innerHTML = `
+                    <div class="file_img_and_link">
+                        <img class="show_file_img" src="${e.target.result}" alt="${file.name}">
+                        <div class="file_link_name">${file.name}</div>
+                    </div>
+                    <button class="file_img_deleate"  onclick="deleteFileItem(event)">x</button>
+                `; // li 내부의 HTML을 설정
+
+				document.querySelector('.file_infos').appendChild(li); // <ul> 안에 새로운 <li> 엘리먼트를 추가
+			};
+		})(file);
+
+
+
+		reader.readAsDataURL(file); // 파일을 읽움. 비동기로 실행
+
+
+	}
+
+
+
+	// 이벤트 처리 후 파일 선택 필드 초기화 => 삭제 후에도 동일한 이름 이미지 올릴 수 있도록
+	e.target.value = '';
+
+	//전체 삭제 버튼 클릭시 전체 이미지 삭제
+	document.querySelector('.file_list_header_del').addEventListener('click', deleteAllFiles);
+
+
+});
+
+//전체 삭제 버튼 클릭시 전체 이미지 삭제
+function deleteAllFiles() {
+	// 모든 <li> 엘리먼트를 선택
+	var listItems = document.querySelectorAll('.file_info_li');
+
+	// 모든 <li> 요소를 삭제
+	listItems.forEach(function(listItem) {
+		listItem.remove();
+	});
+
+	// tempFiles 배열 비우기
+	tempFiles = [];
+}
+
+
+
+// 삭제 버튼 클릭 시 해당 파일 항목을 리스트에서 제거 (개당 제거)
+function deleteFileItem(event) {
+	var listItem = event.target.parentElement;
+
+	console.log(listItem + "listItem");
+
+	// <li> 요소들이 포함된 부모 요소인 리스트(listItems)를 찾아야 함
+	var listItems = listItem.parentElement.children;
+
+	// <li> 요소들 중에서 삭제 버튼이 위치한 <li> 요소의 인덱스를 찾음
+	var index = Array.prototype.indexOf.call(listItems, listItem);
+
+	console.log(index);
+
+	// tempFiles 배열에서 해당 인덱스의 파일을 삭제합니다.
+	tempFiles.splice(index, 1); //이거 전역변수로 하던가 그래야 할거 같은뎅..
+	tempFiles.forEach(function(file) {
+		console.log("삭제 후 배열 정보들 모음집");
+		console.log(file);
+	});
+	console.log(tempFiles.length)
+
+	// <li> 요소를 삭제하여 UI에서 제거
+	listItem.remove();
+
+}
+
 
 //등록하기 버튼 클릭 이벤트 처리
 $(document)
@@ -188,6 +314,24 @@ $(document)
 
 						var form = $('#productForm')[0]; //첫 번째 form요소
 						var formData = new FormData(form);
+
+
+						// 'change' 이벤트에서 처리했던 파일들을 다시 가져옴
+						var files = document.querySelector('#addPhoto').files;
+
+						// 각각의 파일을 FormData에 추가
+						for (var i = 0; i < files.length; i++) {
+							var file = files[i];
+							formData.append('product_photo', file, file.name);
+						}
+
+
+
+						for (var i = 0; i < tempFiles.length; i++) {  // 임시 배열에 저장된 파일 정보 사용
+							var file = tempFiles[i];
+							formData.append('product_photo', file, file.name);
+						}
+
 
 						//방 등록 시 유효성 검사 (해당 사항 불 충족 시 값 전송 안됌)
 
@@ -248,11 +392,12 @@ $(document)
 						}
 
 
-
 						// 이미지 파일이 선택되었는지 확인
-						var files = $('#addPhoto').get(0).files;
-						if (files.length === 0) {
-							alert('이미지가 최소 1개가 필요합니다.');
+						//var files = $('#addPhoto').get(0).files;
+						var files = $('.file_info_li').length;
+						if (files === 0) {
+							//	alert('이미지가 최소 1개가 필요합니다.');
+							Swal.fire('이미지는 최소 1개가 필요합니다')
 							return; // 이미지가 선택되지 않았으므로 함수 종료
 						}
 
@@ -398,7 +543,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 
 // 이미지 업로드 인풋 필드의 값이 변경되면 실행되는 이벤트 핸들러
-$('.imageUploadInput').change(function() {
+/*$('.imageUploadInput').change(function() {
 
 	var files = this.files;
 	//var imageList = $('.image-list');
@@ -450,7 +595,7 @@ $('.imageUploadInput').change(function() {
 		reader.readAsDataURL(file);
 	}
 });
-
+*/
 
 //========== 이미지 슬라이드 ==========
 
