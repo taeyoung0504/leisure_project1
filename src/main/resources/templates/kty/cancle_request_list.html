@@ -295,11 +295,11 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 거절 */
  function rejectCancelRequest(id) {
   Swal.fire({
-    title: '취소하시겠습니까?',
-    text: '(취소 하시면 결제가 자동 취소 됩니다.)',
+    title: '거절하시겠습니까?',
+    text: '(거절하시면 예약 취소 요청이 거절됩니다.)',
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: '네, 취소합니다',
+    confirmButtonText: '네, 거절합니다',
     cancelButtonText: '아니오',
     reverseButtons: true,
   }).then((result) => {
