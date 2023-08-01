@@ -1,18 +1,24 @@
 package com.project.leisure.hyokyeong.user;
 
-import org.springframework.data.domain.Pageable;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.dogyeom.booking.BookingVO;
@@ -268,15 +275,55 @@ public class AdminController {
 		model.addAttribute("notice", new Notice());
 		return "syw/notice";
 	}
+//
+//	@PostMapping("/createNotice")
+//	public String saveNotice(@ModelAttribute("notice") Notice notice, Principal principal) {
+//		String username = principal.getName();
+//		notice.setUsername(username);
+//		notice.setCreateDate(LocalDateTime.now());
+//		noticeService.createNotice(notice);
+//		return "redirect:/admin/adminNoticeList";
+//	}
+//	
+	
+	// 이미지를 저장할 경로를 아래 변수에 지정합니다.
+    private static final String UPLOAD_DIR = "src/main/resources/static/img/notice_img/";
 
-	@PostMapping("/createNotice")
-	public String saveNotice(@ModelAttribute("notice") Notice notice, Principal principal) {
-		String username = principal.getName();
-		notice.setUsername(username);
-		notice.setCreateDate(LocalDateTime.now());
-		noticeService.createNotice(notice);
-		return "redirect:/admin/adminNoticeList";
-	}
+
+    @PostMapping("/createNotice")
+    public String saveNotice(@ModelAttribute("notice") Notice notice,
+                             @RequestParam("image") MultipartFile imageFile,
+                             Principal principal) {
+        // 사용자 정보를 가져옵니다.
+        String username = principal.getName();
+        notice.setUsername(username);
+        notice.setCreateDate(LocalDateTime.now());
+
+     // 이미지 업로드와 이미지 경로 저장을 처리합니다.
+        if (!imageFile.isEmpty()) {
+            try {
+                String imageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+                Path imagePath = Paths.get(UPLOAD_DIR + imageName);
+                Files.createDirectories(imagePath.getParent());
+                Files.write(imagePath, imageFile.getBytes());
+                String imagePathString = imageName;
+                notice.setImagePath(imagePathString);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 필요에 따라 예외를 처리할 수 있습니다.
+            }
+        }
+
+        // 공지사항을 데이터베이스에 저장합니다.
+        noticeService.createNotice(notice);
+
+        // 공지사항 목록 페이지로 리다이렉트합니다.
+        return "redirect:/admin/adminNoticeList";
+    }
+	
+	
+
+	
 
 	@GetMapping("/modify/{id}")
 	public String editNotice(@PathVariable Integer id, Model model, Principal principal) {
@@ -285,16 +332,49 @@ public class AdminController {
 		return "syw/notice_modify";
 	}
 
-	@PostMapping("/modify/{id}")
-	public String updateNotice(@PathVariable Integer id, @ModelAttribute("notice") Notice updatedNotice,
-			Principal principal) {
-		Notice notice = noticeService.getNotice(id);
-		notice.setTitle(updatedNotice.getTitle());
-		notice.setContent(updatedNotice.getContent());
-		notice.setUsername(principal.getName());
-		noticeService.updateNotice(id, notice);
-		return "redirect:/admin/adminNoticeList";
-	}
+//	@PostMapping("/modify/{id}")
+//	public String updateNotice(@PathVariable Integer id, @ModelAttribute("notice") Notice updatedNotice,
+//			Principal principal) {
+//		Notice notice = noticeService.getNotice(id);
+//		notice.setTitle(updatedNotice.getTitle());
+//		notice.setContent(updatedNotice.getContent());
+//		notice.setUsername(principal.getName());
+//		noticeService.updateNotice(id, notice);
+//		return "redirect:/admin/adminNoticeList";
+//	}
+	
+	 @PostMapping("/modify/{id}")
+	    public String updateNotice(@PathVariable Integer id, @ModelAttribute("notice") Notice updatedNotice,
+	                               @RequestParam("image") MultipartFile imageFile, Principal principal) {
+	        Notice notice = noticeService.getNotice(id);
+	        notice.setTitle(updatedNotice.getTitle());
+	        notice.setContent(updatedNotice.getContent());
+	        notice.setUsername(principal.getName());
+
+	        // 이미지 업로드와 이미지 경로 저장을 처리합니다.
+	        if (!imageFile.isEmpty()) {
+	            try {
+	                String imageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+	                Path imagePath = Paths.get(UPLOAD_DIR + imageName);
+	                Files.createDirectories(imagePath.getParent());
+	                Files.write(imagePath, imageFile.getBytes());
+	                String imagePathString = imageName;
+	                notice.setImagePath(imagePathString);
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                // 필요에 따라 예외를 처리할 수 있습니다.
+	            }
+	        }
+
+	        // 공지사항을 데이터베이스에 저장합니다.
+	        noticeService.updateNotice(id, notice, imageFile);
+
+	        // 공지사항 목록 페이지로 리다이렉트합니다.
+	        return "redirect:/admin/adminNoticeList";
+	    }
+
+	        
+
 
 	@GetMapping("/delete/{id}")
 	public String deleteNotice(@PathVariable Integer id) {
