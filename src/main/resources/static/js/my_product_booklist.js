@@ -145,7 +145,60 @@ function submitCancellation() {
 
 
 
-/* 거절 시 숨기기 */
+
+
+function hideCancelButton() {
+  // Get all the span elements within the table body
+  const spanElements = document.querySelectorAll("tbody span");
+
+  // Loop through each span element
+  spanElements.forEach((spanElement) => {
+    // Get the text value of the span element
+    const spanText = spanElement.textContent.trim();
+    console.log("Span Text:", spanText);
+
+    // Check if the span text value is "거절"
+    if (spanText === "거절") {
+      // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+      const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
+      if (cancelButton) {
+        cancelButton.style.display = "none";
+        console.log("CancelButton Hidden");
+      } else {
+        console.log("CancelButton not found");
+      }
+    }
+  });
+}
+
+// Call the hideCancelButton function when the page loads
+document.addEventListener("DOMContentLoaded", hideCancelButton);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 거절 시 숨기기 
+
+
+
+
+
  function hideCancelButton() {
     // Get all the span elements within the table body
     const spanElements = document.querySelectorAll("tbody span");
@@ -166,7 +219,7 @@ function submitCancellation() {
 
   // Call the hideCancelButton function when the page loads
   document.addEventListener("DOMContentLoaded", hideCancelButton);
-
+*/
 
 
 

@@ -228,3 +228,25 @@ $(document).ready(function () {
 });
 
 
+  document.addEventListener('DOMContentLoaded', function() {
+        // Get all the <td> elements with id "status_bk"
+        var statusElements = document.querySelectorAll('#status_bk');
+
+        // Loop through each element to update the text
+        statusElements.forEach(function(element) {
+            var status = element.textContent.trim();
+            if (status === 'CANCEL_PAYMENT' || status === 'CANCELED') {
+                element.textContent = '취소완료';
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
