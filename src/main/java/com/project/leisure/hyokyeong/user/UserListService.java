@@ -116,7 +116,7 @@ public class UserListService {
 		return users;
 	}
 
-	@Scheduled(fixedDelay = 10000)
+	@Scheduled(fixedRate = 3600000)
 	public void toggleAccountStatusScheduled() {
 		System.out.println("Scheduled task: Toggle account status");
 
@@ -124,7 +124,7 @@ public class UserListService {
 		for (Users user : users) {
 			if (user.getIslock() == 1) {
 				LocalDateTime lockTime = user.getLockTime(); // 잠금 시간 가져오기
-				LocalDateTime unlockTime = lockTime.plusMinutes(1); // 1분 후에 잠금 해제 시간 계산
+				LocalDateTime unlockTime = lockTime.plusDays(7); // 7일후에 잠금 해제 시간 계산
 
 				LocalDateTime now = LocalDateTime.now();
 				if (now.isAfter(unlockTime)) {
