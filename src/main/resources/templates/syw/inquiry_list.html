@@ -72,6 +72,11 @@
 			background-color: gray;
 			color: #fff;
 		}
+		
+		#filter-dropdown{
+			padding: 5px 10px;
+			border-radius: 3px;
+		}
 	</style>
 </head>
 
@@ -88,7 +93,20 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>답변 여부</th>
+						<th>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>답변 여부</span>
+                    <div>
+                        <select id="filter-dropdown">
+                            <option value="">전체 보기</option>
+                            <option value="answered">답변 완료</option>
+                            <option value="pending">답변 대기</option>
+                        </select>
+                        <button id="apply-filter-btn">적용</button>
+                    </div>
+                </div>
+            </th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -124,7 +142,18 @@
 				</li>
 			</ul>
 		</div>
+<script>
 
+
+document.addEventListener("DOMContentLoaded", function () {
+            var applyFilterBtn = document.getElementById("apply-filter-btn");
+            applyFilterBtn.addEventListener("click", function () {
+                var filterValue = document.getElementById("filter-dropdown").value;
+                var currentUrl = window.location.href.split("?")[0]; // Remove query parameters
+                window.location.href = currentUrl + (filterValue ? "?filter=" + filterValue : "");
+            });
+        });
+</script>
 </body>
 
 </html>

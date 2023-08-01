@@ -63,7 +63,8 @@ public class UserController {
 	private final ProductService productService;
 	private final InquiryService inquiryService;
 	private final InquiryAnswerService inquiryAnswerService;
-
+	private final CancelRequestService cancelRequestService;
+	
 	@Autowired
 	private final BookService bookService;
 	
@@ -522,13 +523,15 @@ public class UserController {
 		 
 		  List<Accommodation> acc = this.accommodationService.my_acc_list();
 		  List<BookingVO> book = this.bookService.getbooklist();
-		  
+		  List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
+
 		  List<Accommodation> filteredBook = acc.stream()
 		            .filter(Accommodation -> Accommodation.getUsername().equals(username))
 		            .collect(Collectors.toList());
 		  
 		  model.addAttribute("acc",filteredBook);
 		  model.addAttribute("booking",book);
+		  model.addAttribute("cancleList",canclereqList);
 		  return "kty/my_acc_bookList";
 	}
 }

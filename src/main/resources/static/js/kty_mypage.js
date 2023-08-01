@@ -1,28 +1,34 @@
 $(function() {
 	/* 비밀번호 변경 활성화 */
 	$(document).ready(function() {
-		$("#mypage_password_modify").on("click", function() {
-			var modifyEmailInput = $("#modify_password_input");
-			if (modifyEmailInput.css("display") === "none") {
-				modifyEmailInput.css("display", "block");
-			} else {
-				modifyEmailInput.css("display", "none");
-			}
-		});
-	});
+    $("#mypage_password_modify").on("click", function() {
+        $("#password_display").hide();
+        $("#modify_password_input").show();
+        $(this).hide(); // hide the '비밀번호 변경' button
+    });
+
+    $("#cancelBtn").on("click", function() {
+        $("#password_display").show();
+        $("#modify_password_input").hide();
+        $("#mypage_password_modify").show(); // show the '비밀번호 변경' button again
+    });
+});
 
 	/* 주소 변경 활성화 * /
 	/* 비밀번호 변경 활성화 */
 	$(document).ready(function() {
-		$("#mypage_addr_modify").on("click", function() {
-			var modifyEmailInput = $("#modify_address_input");
-			if (modifyEmailInput.css("display") === "none") {
-				modifyEmailInput.css("display", "block");
-			} else {
-				modifyEmailInput.css("display", "none");
-			}
-		});
-	});
+    $("#mypage_addr_modify").on("click", function() {
+        $("#address_display").hide();  // 주소 표시 영역 숨기기
+        $("#mypage_addr_modify").hide();  // 주소 변경 버튼 숨기기
+        $("#modify_address_input").show();  // 주소 변경 폼 보이기
+    });
+    
+    $("#cancel_modify").on("click", function() {
+        $("#address_display").show();  // 주소 표시 영역 보이기
+        $("#mypage_addr_modify").show();  // 주소 변경 버튼 보이기
+        $("#modify_address_input").hide();  // 주소 변경 폼 숨기기
+    });
+});
 
 
 

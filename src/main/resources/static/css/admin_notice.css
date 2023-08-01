@@ -55,9 +55,13 @@ form {
 	
 }
 
-/* /*  버튼 스타일 */
+ .notice_btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*  버튼 스타일 */
   .modi_btn {
-   display: block;
     background-color: var(--sub-color);
     color: #fff;
     border: none;
@@ -65,11 +69,8 @@ form {
     cursor: pointer;
     text-decoration: none;
     border-radius: 5px;
-   position: absolute;
-    right: 50px;
   }
   .del_btn {
-   display: flex;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -77,10 +78,6 @@ form {
     cursor: pointer;
     text-decoration: none;
     border-radius: 5px;
-    right: 0;
-    /* bottom: 20px; */
-    top: 191px;
-     position: absolute;
   } 
   
   
@@ -261,16 +258,9 @@ margin-top: 20px;
 }
 
 
-.notice_title{
-	
-}
-
 .content-container {
 	margin: 0 200px;
-	display: table-caption;
-/* 	padding-left: 350px; */
-	
-	/* max-width: 800px; */
+	max-width: 900px;
 }
 .notice-item {
 	border-bottom: 1px solid #ccc;
@@ -279,12 +269,13 @@ margin-top: 20px;
 	cursor: pointer;
 }
 
-.notice-item:hover {
-	background-color: #f2f2f2;
-}
+
 
 .notice-content {
 	display: none;
+	background-color: rgb(248, 248, 248);
+	padding: 5px 15px;
+	margin-bottom: 10px;
 }
 
 .pagination ul {

@@ -42,11 +42,8 @@
       autoParagraph: false,
   })
   .then(editor => {
-      // 에디터의 내용이 변경될 때마다 숨겨진 textarea에 값을 설정
       editor.model.document.on('change:data', () => {
           let editorData = editor.getData();
-          // Remove the <p> and </p> tags from the editor data
-          editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
           document.getElementById('hiddenContent').value = editorData;
       });
   })
@@ -55,12 +52,11 @@
   });
 
 function convertContent() {
-  // CKEditor의 내용을 textarea에 설정
   let editorData = CKEDITOR.instances.content.getData();
-  // Remove the <p> and </p> tags from the editor data
-  editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
   document.getElementById('hiddenContent').value = editorData;
 }
+
+
 </script>
    </body>
 </html>
