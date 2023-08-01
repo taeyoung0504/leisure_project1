@@ -211,8 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   
   
-  
-  // Add event listener to the "취소하기" buttons to handle click
+
   const cancelButtons = document.querySelectorAll(".cancel-button");
   cancelButtons.forEach((cancelButton) => {
     cancelButton.addEventListener("click", function () {
@@ -294,30 +293,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* 거절 */
-  function rejectCancelRequest(id) {
-    $.ajax({
-      type: "POST",
-      url: "/cancel-requests/reject/" + id,
-      success: function (data) {
-        // Reload the page or update the UI as needed
-        // For example, you can reload the page after successful rejection
-        location.reload();
-      },
-      error: function (error) {
-        // Handle error if needed
-        console.error(error);
-      },
-    });
-  }
-
-  // Bind the "거절하기" button click event to call the rejectCancelRequest function
-  $(document).ready(function () {
-    $(".reject-button").click(function () {
-      var id = $(this).closest("tr").find("td:first-child").text();
-      rejectCancelRequest(id);
-    });
+ function rejectCancelRequest(id) {
+  Swal.fire({
+    title: '취소하시겠습니까?',
+    text: '(취소 하시면 결제가 자동 취소 됩니다.)',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '네, 취소합니다',
+    cancelButtonText: '아니오',
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // User clicked "네" in the confirmation dialog, proceed with the AJAX request
+      $.ajax({
+        type: "POST",
+        url: "/cancel-requests/reject/" + id,
+        success: function (data) {
+          // Reload the page or update the UI as needed
+          // For example, you can reload the page after successful rejection
+          location.reload();
+        },
+        error: function (error) {
+          // Handle error if needed
+          console.error(error);
+        },
+      });
+    } else {
+      // User clicked "아니오" in the confirmation dialog, do nothing
+      // You can add additional behavior here if needed
+    }
   });
+}
 
+// Bind the "거절하기" button click event to call the rejectCancelRequest function
+$(document).ready(function () {
+  $(".reject-button").click(function () {
+    var id = $(this).closest("tr").find("td:first-child").text();
+    rejectCancelRequest(id);
+  });
+});
 
 
 
