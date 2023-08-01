@@ -200,8 +200,8 @@ color:grey;
 		</ul>
 	</nav>
 	<div id="wrap">
-		<div id="container" th:each="book : ${bookList}">
-			<div id="left">
+		<div id="container" th:each="book : ${bookList} ">
+			   <div id="left">
 				<!-- <img th:src="${book.productImg}" 
 								alt="Product Image" width="100%"
 								height="100%" class="">    -->
@@ -219,7 +219,7 @@ color:grey;
 						th:text="${book.roomTitle}"></span><Br> <span
 						th:text="${book.checkin}"></span> ~ <span
 						th:text="${book.checkOut}"></span>
-				
+			
 				<hr>
 				<span id="amount" class="in_price" th:inline="text">
 					[[${book.totalPrice}]] </span><br> <span
