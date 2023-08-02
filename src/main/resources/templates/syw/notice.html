@@ -1,62 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<script
-   src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/admin_notice.css">
-<script
-   src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script
-   src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+	<title>DAEBAK</title>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/admin_notice.css">
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
+
 <body>
-<html layout:decorate="~{khk/adminNavbar}">
-<div layout:fragment="adminNav" class="container my-3">
-   <div class="content-container">
-      <h1 class="title">공지사항 등록</h1>
-      <form method="post" th:action="@{/admin/createNotice}">
-         <div class="notice_title">
-            <label for="title">공지사항 제목</label> <input type="text" id="title"
-               name="title" required>
-         </div>
-      <div class="notice_content">
-                <label for="content">공지사항 내용</label><br>
-                <!-- CKEditor의 내용을 담을 textarea -->
-                <textarea id="hiddenContent" name="content" style="display:none;"></textarea>
-                <!-- CKEditor의 내용을 담을 div -->
-                <div id="content" data-editor="ckeditor" required></div>
-            </div>
-            <input type="submit" value="등록" onclick="convertContent()" class="create_notice_btn">
-      </form>
-   </div>
+	<html layout:decorate="~{khk/adminNavbar}">
+	<div layout:fragment="adminNav" class="container my-3">
+		<div class="content-container">
+			<h1 class="title">공지사항 등록</h1>
+			<form method="post" th:action="@{/admin/createNotice}">
+				<div class="notice_title">
+					<label for="title">공지사항 제목</label> <input type="text" id="title" name="title" required>
+				</div>
+				<div class="notice_content">
+					<label for="content">공지사항 내용</label><br>
+					<!-- CKEditor의 내용을 담을 textarea -->
+					<textarea id="hiddenContent" name="content" style="display:none;" required></textarea>
+					<!-- CKEditor의 내용을 담을 div -->
+					<div id="content" data-editor="ckeditor" required></div>
+				</div>
+				<input type="submit" value="등록" onclick="convertContent()" class="create_notice_btn">
+			</form>
+		</div>
 
+		<script th:src="@{/js/notice.js}"></script>
+</body>
 
-   <script>
-     ClassicEditor
-  .create(document.querySelector('[data-editor="ckeditor"]'), {
-      language: "ko",
-      enterMode: 2,
-      shiftEnterMode: 1,
-      removePlugins: ['Indent'],
-      autoParagraph: false,
-  })
-  .then(editor => {
-      editor.model.document.on('change:data', () => {
-          let editorData = editor.getData();
-          document.getElementById('hiddenContent').value = editorData;
-      });
-  })
-  .catch(error => {
-      console.error(error);
-  });
-
-function convertContent() {
-  let editorData = CKEDITOR.instances.content.getData();
-  document.getElementById('hiddenContent').value = editorData;
-}
-
-
-</script>
-   </body>
 </html>

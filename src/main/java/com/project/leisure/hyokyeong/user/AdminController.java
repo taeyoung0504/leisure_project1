@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.son.board.Inquiry;
+import com.project.leisure.son.board.InquiryAnswerService;
 import com.project.leisure.son.board.InquiryService;
 import com.project.leisure.son.notice.Notice;
 import com.project.leisure.son.notice.NoticeService;
@@ -63,6 +65,7 @@ public class AdminController {
 	private final NoticeService noticeService;
 	private final CancelRequestService cancelRequestService;
 	private final BookService bookService;
+	private final InquiryAnswerService inquiryAnswerService;
 	
 	
 	@GetMapping("/adminMain")

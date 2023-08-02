@@ -80,6 +80,9 @@ form {
     border-radius: 5px;
   } 
   
+  .del_btn:hover{
+	  background-color: rgb(100, 177, 255);
+  }
   
 .notice_hk .notice-item .notice-content .button {
   display: flex; /* 버튼을 블록 레벨 요소로 만들어 수직 배치합니다. */
@@ -307,14 +310,29 @@ h2 {
 
 #title {
 	    width: 900px;
+	    height: 30px;
+	    padding: 1px 8px;
+	    margin: 10px 0px;
+	    border-radius: 3px;
 }
 
-textarea {
-width: 900px;
-}
 
 label {
 	float: left;
 }
+
+.ck ck-toolbar__items{
+	margin-top: 10px;
+}
+
+
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{
+	margin-top: 10px;
+}
+
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners{
+		 height: 600px;
+	 }
+
 
 
