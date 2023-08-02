@@ -14,10 +14,10 @@
 			alt="프로필"></td>
 		<tbody th:each="user : ${users2}">
 			<tr>
-				<td class="userinfo_td_gap"><strong class="userinfo_td_gap2">나의 정보
+				<td class="userinfo_td_gap"><strong class="userinfo_td_gap2">내 정보
 						</strong></td>
 			<tr>
-				<td class="userinfo_td_gap"><strong>유저명</strong></td>
+				<td class="userinfo_td_gap"><strong>ID</strong></td>
 				<td class="userinfo_td_gap" th:text=" ${user.username}"></td>
 			</tr>
 			<tr>
@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<td class="userinfo_td_gap"><strong>비밀번호</strong></td>
-				<td class="userinfo_td_gap">**************</td>
+				<td class="userinfo_td_gap">***********</td>
 			</tr>
 			<tr class="mypage_tr_gap">
 				<td colspan="3" class="userinfo_td_gap">
@@ -113,7 +113,7 @@
 						<br>
 						<br>
 						<h5 id="noused_account">
-							저기어때를 이용하고 싶지 않으신가요? <a class="nav-link"
+							DAEBAK을 이용하고 싶지 않으신가요? <a class="nav-link"
 								sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
 							<span class="nav-link" id="user_del_button"
 								sec:authorize="isAuthenticated()">회원탈퇴</span>
@@ -139,7 +139,7 @@
 				<td class="userinfo_td_gap"><strong>내 정보 </strong></td>
 			</tr>
 			<tr>
-				<td class="userinfo_td_gap"><strong>유저명</strong></td>
+				<td class="userinfo_td_gap"><strong>ID</strong></td>
 				<td class="userinfo_td_gap"
 					th:text="(${sub != null ? 'google' : (connectedAt != null ? 'kakao' : (response != null ? 'naver' : ''))})+'_' + (${givenName != null ? name + givenName : name})">
 				</td>
@@ -165,7 +165,7 @@
 						<br>
 						<br>
 						<h5 id="noused_account">
-							저기어때를 이용하고 싶지 않으신가요? <a class="nav-link"
+							DAEBAK을 이용하고 싶지 않으신가요? <a class="nav-link"
 								sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
 	</table>
 
@@ -196,7 +196,7 @@
 	<nav id="mypage_sidebar_nav">
 		<ul>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}"
-				class="active">나의 정보</a></li>
+				class="active">내 정보</a></li>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
 					내역</a></li>
 			<li class="mypage_sidebar"><a

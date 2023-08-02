@@ -276,6 +276,13 @@ a {
 	cursor: pointer;
 }
 
+
+#wrap{
+	
+left: 0;	
+	
+}
+
 .danger {
 	font-size: 13px;
 	text-align: center;
@@ -349,14 +356,15 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	left: 800px;
-	top: 180px;
+	left: 700px;
+	top: 120px;
 	margin: 0;
 }
 
 .userinfo_table {
 	position: relative;
 	font-size: 18px;
+/* 	right: 90px; */
 }
 
 .userinfo_td_gap {
@@ -426,12 +434,11 @@ h5 .nav-link{
 
 #mypage_sidebar_nav {
 	white-space: nowrap;
-	position: absolute;
-	top: 50px;
-	/* 원하는 여백 크기로 조정 */
-	left: -300px;
-	font-size: 20px;
-	color: rgb(69, 69, 69);
+    position: fixed;
+    top: 180px;
+    font-size: 20px;
+    color: rgb(69, 69, 69);
+    left: 280px;
 }
 
 #profile_lion {
@@ -569,6 +576,11 @@ li.mypage_sidebar a.active {
 	height: 30px;
 }
 
+td{
+	font-size:17px;
+	color: rgb(83 83 83);
+}
+
 #userdel_confirm_button:hover {
 	cursor: pointer;
 }
@@ -597,7 +609,7 @@ li.mypage_sidebar a.active {
 	
 }
 /* 파트너 신청 페이지 css */
-#mypage_partner_reg {
+/* #mypage_partner_reg {
 	position: absolute;
 	display: flex;
 	justify-content: center;
@@ -606,6 +618,11 @@ li.mypage_sidebar a.active {
 	left: 800px;
 	top: 180px;
 	margin: 0;
+} */
+
+.partner_reg_hk{
+	top: 60px;
+    position: relative;
 }
 
 #mypage_partner_reg_table {
@@ -667,7 +684,10 @@ li.mypage_sidebar a.active {
 	color: black;
 	width: 160px;
 	height: 50px;
+	font-size: 16px;
 }
+
+
 
 #reg_partner_final:hover {
 	cursor: pointer;
@@ -680,9 +700,9 @@ li.mypage_sidebar a.active {
 }
 
 #ch_file {
-	width: 96%;
+	width: 95%;
 	display: inline-block;
-	margin-left: 10px;
+/* 	margin-left: 10px; */
 	/* 오른쪽으로 10px 이동 */
 	height: 45px;
 	border: 1px solid rgb(207, 207, 207);
