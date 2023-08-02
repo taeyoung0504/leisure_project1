@@ -52,11 +52,11 @@
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-section {
+/* section {
 	width: 1500px;
 	margin: 0 auto;
 	
-	}
+	} */
 
     @keyframes anime_textup { 0% { top: 0; } 20% { top: -0.2rem; } 40% { top: 0 } 60% { top: 0 } 80% { top: 0 } 100% { top: 0 } }
  
