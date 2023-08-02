@@ -428,16 +428,12 @@ $(document)
 								error: function(xhr,
 									status, error) {
 									// 처리 중에 에러가 발생한 경우의 동작 
-
 									console.log(xhr);
 									console.log(status);
 									console.log(error);
-
-									// 요청 실패 시 실행할 코드
-									console
-										.log('AJAX 요청 실패');
-									console
-										.log(xhr.responseText);
+									// 서버에서 반환된 에러 메시지를 가져옴
+									var errorMessage = xhr.responseText;
+									Swal.fire(errorMessage)
 
 								}
 							});

@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.booking.BookService;
-import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.taeyoung.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -144,7 +144,7 @@ public class ProductController {
 
 	// 숙소를 등록한다. 객실 등록 시 해당 숙소의 pk도 가져온다
 	@PostMapping("/addproduct")
-	public ResponseEntity<Product> addProduct(@RequestParam("product_photo") MultipartFile[] product_photo,
+	public ResponseEntity<String> addProduct(@RequestParam("product_photo") MultipartFile[] product_photo,
 			@RequestParam("product_type") String product_type, @RequestParam("product_detail") String product_detail,
 			@RequestParam("product_count") Integer product_count,
 			@RequestParam("product_amount") Integer product_amount,
@@ -156,6 +156,11 @@ public class ProductController {
 
 		// id를 사용하여 해당 acc를 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
+
+		// 방 등록시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
+		if (accommodation.getAcc_max_people() < product_pernum) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
+		}
 
 		// 상품 등록 처리
 		long product_id = this.productService.pdCreate(product_type, product_detail, product_count, product_amount,
