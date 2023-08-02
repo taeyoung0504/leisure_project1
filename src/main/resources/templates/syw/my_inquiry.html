@@ -1,137 +1,82 @@
 <!DOCTYPE html>
 <html>
 
-	<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
 <head>
+	<title>DAEBAK</title>
 	<link rel="stylesheet" href="/css/my_inquiry.css">
-   <title>Inquiry List</title>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script>
-      $(document).ready(function () {
-   $(".inquiry-item").click(function (event) {
-      if (!$(event.target).hasClass("content-toggle")) {
-         var content = $(this).find(".inquiry-content, .answer-content");
-         var image = $(this).find(".toggle-image");
-
-         content.slideToggle(function () {
-
-            if (content.is(":visible")) {
-               image.attr("src", "/img/key/up.png");
-            } else {
-               image.attr("src", "/img/key/down.png");
-            }
-         });
-      }
-   });
-   
-   
-
-   $(".content-toggle").click(function (event) {
-            event.stopPropagation();
-            $(this).closest(".inquiry-item").find(".button-container").toggle();
-         });
-
-        $(".delete-button").click(function (event) {
-    event.stopPropagation();
-    event.preventDefault();
-    var href = $(this).attr('href');
-
-    Swal.fire({
-        title: '정말 삭제하시겠습니까?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: '예',
-        cancelButtonText: '아니요'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: '삭제 완료',
-                text: '삭제 되었습니다.',
-                icon: 'success'
-            }).then(() => {
-                window.location.href = href;
-            });
-        } else {
-            Swal.fire({
-                title: '삭제 취소',
-                text: '삭제가 취소되었습니다.',
-                icon: 'info'
-            });
-        }
-    });
-});
-});
-   </script>
+	<title>Inquiry List</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script th:src="@{/js/my_inquiry.js}"></script>
 </head>
 
 <body>
-   <html layout:decorate="~{jjj/header}">
-   <div id="my_infomation_modify" layout:fragment="content" class="container my-3">
-      <nav id="mypage_sidebar_nav">
-         <ul>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내 정보</a></li>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_inquiry}" class="active">문의 내역</a></li>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
-            <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_productList}"
-                  sec:authorize="hasRole('ROLE_PARTNER')">내 상품 목록</a></li>
-                  <li class="mypage_sidebar"><a
-            th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
-         </ul>
-      </nav>
-      <div class="my-inquiry" th:if="${inquiries.size()>0}">
-         <h2 class="inquiry-heading">나의 문의 내역</h2>
-         <div th:each="inquiry : ${inquiries}" class="inquiry-item" data-inquiry-id="${inquiry.id}">
-            <h3 class="inquiry_pre">
-               <span class="type" th:text="${inquiry.type}"></span> <span
-                  th:if="${inquiry.inquiryAnswer.size() > 0}" class="answer">답변
-                  완료</span>
-            </h3>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <span class="title" th:text="${inquiry.title}" style="font-size: 18px;"></span>
-               <img class="toggle-image" src="/img/key/down.png" style="width: 20px; height: 20px;">
-            </div>
-            <div>
-               <h4 class="inquiry_date">
-                  작성일 <span class="date"
-                     th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></span>
-               </h4>
-            </div>
-            <div class="inquiry-content">
-               <div
-                  style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                  <h4 style="margin-left: 5px;">문의 내용</h4>
-                  <div class="button-container">
-                     <a th:href="@{/inquiry/modify/{id}(id=${inquiry.id})}" class="edit-button">수정</a>
-                     <a th:href="@{/inquiry/delete/{id}(id=${inquiry.id})}" class="delete-button">삭제</a>
-                  </div>
-                  <button class="btn-toggle content-toggle" th:if="${inquiry.inquiryAnswer.size() == 0}">&#x205D;</button>
-               </div>
-               <p class="inquiryMessage" th:utext="${inquiry.message}"
-                  style="background-color: #f2f2f2; white-space: pre-line;"></p>
-            </div>
-            <div th:each="answer : ${inquiry.inquiryAnswer}" class="answer-content">
-               <h4>
-                  <span class="answer-prefix">└></span> 답변 </span>
-               </h4>
-               <p th:text="${answer.message}"
-                  style="background-color: #f2f2f2; padding: 20px; white-space: pre-line; border-radius: 7px;" ></p>
-                  <span class="date"
-                     style="font-size: 13px; color: rgb(193, 193, 193);">  <span
-                        th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></span>
-            </div>
+	<html layout:decorate="~{jjj/header}">
+	<div id="my_infomation_modify" layout:fragment="content" class="container my-3">
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의 정보</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_inquiry}" class="active">문의 내역</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_productList}"
+						sec:authorize="hasRole('ROLE_PARTNER')">내 상품 목록</a></li>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_acc_bookList}"
+						sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
+			</ul>
+		</nav>
+		<div class="my-inquiry" th:if="${inquiries.size()>0}">
+			<h2 class="inquiry-heading">나의 문의 내역</h2>
+			<div th:each="inquiry : ${inquiries}" class="inquiry-item" data-inquiry-id="${inquiry.id}">
+				<h3 class="inquiry_pre">
+					<span class="type" th:text="${inquiry.type}"></span> <span
+						th:if="${inquiry.inquiryAnswer.size() > 0}" class="answer">답변
+						완료</span>
+				</h3>
+				<div style="display: flex; justify-content: space-between; align-items: center;">
+					<span class="title" th:text="${inquiry.title}" style="font-size: 18px;"></span>
+					<img class="toggle-image" src="/img/key/down.png" style="width: 20px; height: 20px;">
+				</div>
+				<div>
+					<h4 class="inquiry_date">
+						작성일 <span class="date"
+							th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+					</h4>
+				</div>
+				<div class="inquiry-content">
+					<div
+						style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+						<h4 style="margin-left: 5px;">문의 내용</h4>
+						<div class="button-container">
+							<a th:href="@{/inquiry/modify/{id}(id=${inquiry.id})}" class="edit-button">수정</a>
+							<a th:href="@{/inquiry/delete/{id}(id=${inquiry.id})}" class="delete-button">삭제</a>
+						</div>
+						<button class="btn-toggle content-toggle"
+							th:if="${inquiry.inquiryAnswer.size() == 0}">&#x205D;</button>
+					</div>
+					<p class="inquiryMessage" th:utext="${inquiry.message}"
+						style="background-color: #f2f2f2; white-space: pre-line;"></p>
+				</div>
+				<div th:each="answer : ${inquiry.inquiryAnswer}" class="answer-content">
+					<h4>
+						<span class="answer-prefix">└></span> 답변 </span>
+					</h4>
+					<p th:text="${answer.message}"></p>
+					<span class="date" style="font-size: 13px; color: rgb(193, 193, 193);"> <span
+							th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+				</div>
 
-         </div>
-      </div>
-      <div th:if="${inquiries.size() < 1}" class="center-content3">
-         <h1>문의 내역이 없습니다.</h1>
-         <span id="go_inquiries" style="color: grey;">궁금하신 점은 언제든 문의주세요</span></span>
-         <a th:href="@{/more/inquiry}" class="btn_red">문의하기</a>
-      </div>
+			</div>
+		</div>
+		<div th:if="${inquiries.size() < 1}" class="center-content3">
+			<h1>문의 내역이 없습니다.</h1>
+			<span id="go_inquiries" style="color: grey;">궁금하신 점은 언제든 문의주세요</span></span>
+			<a th:href="@{/more/inquiry}" class="btn_red">문의하기</a>
+		</div>
 
-   </div>
+	</div>
 </body>
 
 </html>
