@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DAEBAK</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/admin_dashboard.css}">
+    <link rel="stylesheet" href="/css/kty.css">
+    <script th:src="@{/js/admin_dashboard.js}"></script>
+</head>
+
+<body>
+<!-- 사이드 바 -->
+<div th:fragment="myPage_Nav">
+    <nav id="mypage_sidebar_nav">
+        <ul>
+            <li class="mypage_sidebar"><a href="/user/mypage/me">내 정보</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/my_booking">예약 내역</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/my_inquiry">문의 내역</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/partner_reg">파트너 신청</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/my_partner_reg">파트너 신청 내역</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/my_productList"
+                                          sec:authorize="hasRole('ROLE_PARTNER')">내 상품 목록</a></li>
+            <li class="mypage_sidebar"><a href="/user/mypage/my_acc_bookList"
+                                          sec:authorize="hasRole('ROLE_PARTNER')">내 숙소 예약리스트</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    // 페이지가 로드되었을 때 실행되는 함수
+    document.addEventListener("DOMContentLoaded", function() {
+        // 현재 페이지의 경로를 가져옴
+        var currentPath = window.location.pathname;
+        var navLinks = document.querySelectorAll("#mypage_sidebar_nav a");
+
+        // 각 링크를 순회하면서 현재 경로와 일치하는 경우 active 클래스를 부여
+        navLinks.forEach(function(link) {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

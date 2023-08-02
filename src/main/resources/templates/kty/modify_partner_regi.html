@@ -9,90 +9,92 @@
 </html>
 
 <body id="userinfo_modify2">
-	<div id="mypage_partner_reg">
+	<div id="my_infomation_modify">
+		<div id="mypage_partner_reg">
 
 
-		<table id="my_regi_result">
-			<div id="my_reg_info" th:if="${regList.size() > 0}">나의 신청 내역</div>
-			<thead>
-				<tr id="sss2" th:if="${regList.size() > 0}">
-					<th id="result_th">업체명</th>
-					<th id="result_th">업체주소</th>
-					<th id="result_th">담당자명</th>
-					<th id="result_th">담당자번호</th>
-					<th id="result_th">업종</th>
-					<th id="result_th">지역</th>
-					<th id="result_th">첨부파일</th>
-					<th id="result_th">신청자 아이디</th>
-					<th id="result_th">신청 상태</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:if="${regList.size() > 0}" th:each="regPartner : ${regList}">
-					<td id="result_name"
-						th:data-company-name="${regPartner.getCompany_name()}"
-						th:text="${regPartner.getCompany_name()}"></td>
-					<td id="result_add"
-						th:data-company-add="${regPartner.getCompany_address()}"
-						th:text="${regPartner.getCompany_address()}"></td>
-					<td id="result_td" th:text="${regPartner.getPartner_name()}"></td>
-					<td id="result_td" th:text="${regPartner.getPartner_tel()}"></td>
+			<table id="my_regi_result">
+				<div id="my_reg_info" th:if="${regList.size() > 0}">나의 신청 내역</div>
+				<thead>
+					<tr id="sss2" th:if="${regList.size() > 0}">
+						<th id="result_th">업체명</th>
+						<th id="result_th">업체주소</th>
+						<th id="result_th">담당자명</th>
+						<th id="result_th">담당자번호</th>
+						<th id="result_th">업종</th>
+						<th id="result_th">지역</th>
+						<th id="result_th">첨부파일</th>
+						<th id="result_th">신청자 아이디</th>
+						<th id="result_th">신청 상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${regList.size() > 0}" th:each="regPartner : ${regList}">
+						<td id="result_name"
+							th:data-company-name="${regPartner.getCompany_name()}"
+							th:text="${regPartner.getCompany_name()}"></td>
+						<td id="result_add"
+							th:data-company-add="${regPartner.getCompany_address()}"
+							th:text="${regPartner.getCompany_address()}"></td>
+						<td id="result_td" th:text="${regPartner.getPartner_name()}"></td>
+						<td id="result_td" th:text="${regPartner.getPartner_tel()}"></td>
 
-					<td id="result_sec" th:text="${regPartner.getPartner_sectors()}"
-						th:data-company-sec="${regPartner.getPartner_sectors()}"></td>
-					<td id="result_td" th:text="${regPartner.getPartner_region()}"></td>
-					<td id="result_td"
-						th:text="${regPartner.getOrigFilename() != null && regPartner.getOrigFilename() != '' ? 'OK' : 'NO'}"></td>
-					<td id="result_td" th:text="${regPartner.getReg_username()}"></td>
+						<td id="result_sec" th:text="${regPartner.getPartner_sectors()}"
+							th:data-company-sec="${regPartner.getPartner_sectors()}"></td>
+						<td id="result_td" th:text="${regPartner.getPartner_region()}"></td>
+						<td id="result_td"
+							th:text="${regPartner.getOrigFilename() != null && regPartner.getOrigFilename() != '' ? 'OK' : 'NO'}"></td>
+						<td id="result_td" th:text="${regPartner.getReg_username()}"></td>
 
-					<!-- 승인이면서 등록된 경우 -->
-					<td
-						th:if="${regPartner.getResult_partner_reg() == 1 and accRegMap[regPartner.getId().toString()] != null && accRegMap[regPartner.getId().toString()]}">등록
-						완료</td>
+						<!-- 승인이면서 등록된 경우 -->
+						<td
+							th:if="${regPartner.getResult_partner_reg() == 1 and accRegMap[regPartner.getId().toString()] != null && accRegMap[regPartner.getId().toString()]}">등록
+							완료</td>
 
-					<!-- 승인이면서 숙소가 등록 안된 경우 -->
-					<td
-						th:if="${regPartner.getResult_partner_reg() == 1 and (accRegMap[regPartner.getId().toString()] == null || !accRegMap[regPartner.getId().toString()])}">
-						<span>승인</span>
-						<button type="button" onclick="goToProductRegistration(this)"
-							class="addProductBtn">상품등록</button>
-					</td>
+						<!-- 승인이면서 숙소가 등록 안된 경우 -->
+						<td
+							th:if="${regPartner.getResult_partner_reg() == 1 and (accRegMap[regPartner.getId().toString()] == null || !accRegMap[regPartner.getId().toString()])}">
+							<span>승인</span>
+							<button type="button" onclick="goToProductRegistration(this)"
+								class="addProductBtn">상품등록</button>
+						</td>
 
 
-					<!-- 승인이 아닌 경우 -->
-					<td th:unless="${regPartner.getResult_partner_reg() == 1}"><span
-						th:utext="${regPartner.getResult_partner_reg() == 0 ? '심사 중' : '반려'}"></span></td>
-				</tr>
-			</tbody>
-			<div th:if="${regList.size() < 1}" class="center-content2">
-				<h1>파트너 신청 내역이 없습니다.</h1>
-				<span id="go_reg_partner">지금 파트너 등록을
-					해보세요</span></span> <a th:href="@{/user/mypage/partner_reg}" class="btn_red">파트너
-					등록하기</a>
-			</div>
-		</table>
-
+						<!-- 승인이 아닌 경우 -->
+						<td th:unless="${regPartner.getResult_partner_reg() == 1}"><span
+							th:utext="${regPartner.getResult_partner_reg() == 0 ? '심사 중' : '반려'}"></span></td>
+					</tr>
+				</tbody>
+				<div th:if="${regList.size() < 1}" class="center-content2">
+					<h1>파트너 신청 내역이 없습니다.</h1>
+					<span id="go_reg_partner">지금 파트너 등록을 해보세요</span></span> <a
+						th:href="@{/user/mypage/partner_reg}" class="btn_red">파트너 등록하기</a>
+				</div>
+			</table>
+		</div>
 		<!-- 사이드 바 -->
-		<nav id="mypage_sidebar_nav">
-			<ul>
-				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
-						정보</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_partner_reg}" class="active">파트너 신청
-						내역</a></li>
-				<li class="mypage_sidebar"><a
-					th:href="@{/user/mypage/my_productList}"
-					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
-				<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
-			</ul>
-		</nav>
+	<nav id="mypage_sidebar_nav">
+		<ul>
+			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내
+					정보</a></li>
+			<!-- <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}" class="active">예약
+						내역</a></li> -->
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_partner_reg}"  class="active">파트너 신청 내역</a></li>
+			</li>
+			<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_productList}"
+				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+		<li class="mypage_sidebar"><a
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
+		</ul>
+	</nav>
 	</div>
 
 	<script type="text/javascript">

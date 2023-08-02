@@ -1,7 +1,6 @@
 package com.project.leisure.taeyoung.user;
 
-
-// 회원가입 입력검증 클래스
+// 회원가입 입력검증 클래ss스
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -34,6 +33,5 @@ public class UserCreateForm {
 	private String addr2;
 	@NotEmpty(message = "상세주소는 필수 입력 값입니다.")
 	private String addr3;
-	
 
 }

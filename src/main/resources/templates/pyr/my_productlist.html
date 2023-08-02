@@ -17,7 +17,7 @@
 		<!-- 사이드 바 -->
 		<nav id="mypage_sidebar_nav">
 			<ul>
-				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내
 						정보</a></li>
 				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
 						내역</a></li>
@@ -33,7 +33,7 @@
 					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품
 						목록</a></li>
 			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
 			</ul>
 		</nav>
 

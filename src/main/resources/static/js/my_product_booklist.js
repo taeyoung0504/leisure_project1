@@ -1,5 +1,5 @@
 
-
+/*
 document.addEventListener("DOMContentLoaded", function() {
 	// Get the select element
 	const selectElement = document.getElementById("accSelect");
@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	});
 });
-
+*/
+/*
 document.addEventListener("DOMContentLoaded", function() {
 	// Get the select element
 	const selectElement = document.getElementById("accSelect");
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 });
-
+*/
 
 
 
@@ -179,18 +180,61 @@ document.addEventListener("DOMContentLoaded", hideCancelButton);
 
 
 
+/* 달력 */
+function filterByDate() {
+    var selectedDate = document.getElementById("datePicker").value;
+    var rows = document.querySelectorAll("#booking-table tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var checkinDate = rows[i].querySelector("td:nth-child(6)").innerText;
+        if (checkinDate === selectedDate) {
+            rows[i].style.display = "table-row";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+
+function filterByDateAndAcc() {
+    var selectedDate = document.getElementById("datePicker").value;
+    var selectedAcc = document.getElementById("accSelect").value;
+    var rows = document.querySelectorAll("#booking-table tbody tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var checkinDate = rows[i].querySelector("td:nth-child(6)").innerText;
+        var accTitle = rows[i].querySelector("td:nth-child(2)").innerText;
+        var displayRow = true;
+
+        if (selectedDate !== "" && checkinDate !== selectedDate) {
+            displayRow = false;
+        }
+
+        if (selectedAcc !== "모두" && accTitle !== selectedAcc) {
+            displayRow = false;
+        }
+
+        rows[i].style.display = displayRow ? "table-row" : "none";
+    }
+}
 
 
 
+function setDefaultDate() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = String(today.getMonth() + 1).padStart(2, '0');
+        var day = String(today.getDate()).padStart(2, '0');
+        var formattedDate = year + '-' + month + '-' + day;
+        document.getElementById('datePicker').value = formattedDate;
+    }
 
-
-
-
-
-
-
-
-
+    // Call the function when the page loads
+    window.onload = function () {
+        setDefaultDate();
+        filterByDateAndAcc(); // Optionally, apply the initial filter based on the default date
+    };
+    
+    
 
 
 /* 거절 시 숨기기 
