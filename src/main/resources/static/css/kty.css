@@ -1111,7 +1111,8 @@ td{
 
 .room_info_k {
 	font-size: 20px;
-	display: contents;
+	display: inline-flex;
+	color: rgba(0,0,0,0.87);
 }
 
 .pagination {
@@ -1131,13 +1132,16 @@ td{
 }
 
 .room-photo {
-	right: 50%;
+	/* right: 50%; */
 	flex: 1;
 	border-radius: 5px;
 	margin-left: px;
 	/* margin-top: 10px; */
 	background-size: cover;
 	background-position: center;
+	position: relative;
+	width: 200px;
+	height: 230px;
 }
 
 .room-entry:hover {
