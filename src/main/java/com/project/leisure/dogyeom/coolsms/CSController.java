@@ -19,7 +19,6 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class CSController {
 	private final DefaultMessageService messageService;
 	private final HttpSession session;
-	
 	public CSController() {
 		this.messageService = NurigoApp.INSTANCE.initialize("NCSYYCM7VEPHHNBD", "2AVV1N6SG40ENQFYQUSGUFFVMTXGVYNL", "https://api.coolsms.co.kr");
 		this.session = null;
