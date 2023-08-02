@@ -473,14 +473,16 @@
                      
                      // 정규 표현식을 사용하여 세 자리 마다 콤마를 추가하는 함수
                      function addCommas(num) {
+                    	/*  alert(num); */
                        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
                      }
                            
                      /* 컨트롤러로 객실정보 보내는 함수 */
                      function handleClick(button) {
                       const reservePriceElement = button.querySelector("#reservePrice");
+                      /* alert(reservePriceElement); */
                       const totalPrice1 = reservePriceElement.textContent;
-                      
+                      /* alert('totalPrice1 : ', totalPrice1) */
                       
                       function findMatchingTotalPrice(totalPrice1) {
                     	  // 세션에서 reservePriceArray 배열 불러오기
@@ -494,6 +496,15 @@
                     	    if (value === totalPrice1) {
                     	      matchingTotalPrice = value;
                     	      break; // 일치하는 값이 발견되면 순회 중단
+                    	    } else if(matchingTotalPrice === null){
+                    	    	 const reservePriceElements = document.querySelectorAll("#reservePrice");
+                    	    	 for(const rpe of reservePriceElements){
+                    	    		 if (rpe.textContent === totalPrice1) {
+                    	    		        matchingTotalPrice = rpe.textContent;
+                    	    		        /* alert('matchingTotalPrice : ' + matchingTotalPrice); */
+                    	    		        break; // 일치하는 값이 발견되면 순회 중단
+                    	    		    }
+                    	    	 }
                     	    }
                     	  }
 
@@ -503,6 +514,7 @@
                       
                       let totalPrice2 = findMatchingTotalPrice(totalPrice1);
                       
+                      /* alert(totalPrice2); */
                       
                       const totalPrice = addCommas(totalPrice2);
                       /* alert(totalPrice); */
