@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body id="userinfo_modify">
+<html layout:decorate="~{jjj/header}">
+<div id="my_infomation_modify" layout:fragment="content"
+   class="container my-3">
+
+   <table class="userinfo_table">
+      <td><img src="/img/profile_img/pro_img2.jpg" id="profile_lion"
+         alt="프로필"></td>
+      <tbody th:each="user : ${users2}">
+         <tr>
+            <td class="userinfo_td_gap"><strong class="userinfo_td_gap2">내 정보
+                  </strong></td>
+         <tr>
+            <td class="userinfo_td_gap"><strong>ID</strong></td>
+            <td class="userinfo_td_gap" th:text=" ${user.username}"></td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>이메일</strong></td>
+            <td class="userinfo_td_gap" th:text=" ${user.email}"></td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>비밀번호</strong></td>
+            <td class="userinfo_td_gap">***********</td>
+         </tr>
+         <tr class="mypage_tr_gap">
+            <td colspan="3" class="userinfo_td_gap">
+               <button class="btns-wrap__edit-btn" id="mypage_password_modify"
+                  type="button">변경할래요</button>
+            </td>
+         </tr>
+         <!-- 비밀번호 수정 폼 -->
+         <tr id="modify_password_input">
+            <td colspan="4" class="userinfo_td_gap"><strong>비밀번호 </strong>
+               <div></div> <input name="modify_password" type="password"
+               id="modify_password" class="modify_password"
+               placeholder="기존 비밀번호를 입력하세요">
+               <div id="confirm_oldPwd"></div>
+               <br> <strong>새 비밀번호 </strong>
+               <div></div>
+               <input type="password" class="modify_password2"
+               id="modify_password2_input" placeholder="새 비밀번호를 입력하세요">
+               <div  id="confirm_newPwd1"></div>
+            <br> <strong>새 비밀번호 확인 </strong>
+               <div></div>
+               <input type="password" class="modify_password3"
+               id="modify_password3_input" placeholder="새 비밀번호를 다시 입력하세요">
+               <div  id="confirm_newPwd"></div>
+               <br>
+            <br> <input class="modifyEmail" name="modifypassword"
+               id="modifypassword" type="button" value="변경할래요"></td>
+         </tr>
+         <tr class="mypage_tr_gap">
+            <td class="userinfo_td_gap"><strong>주소</strong></td>
+            <td class="userinfo_td_gap"
+               th:text="'('+${user.addr1}+')  '+${user.addr3}"></td>
+         </tr>
+
+
+         <tr>
+            <td colspan="3" class="userinfo_td_gap">
+               <button class="btns-wrap__edit-btn" id="mypage_addr_modify"
+                  type="button">변경할래요</button>
+            </td>
+         </tr>
+         <!-- 주소 수정 폼 -->
+         <tr id="modify_address_input">
+            <td colspan="4" class="userinfo_td_gap">
+               <!--<form class="form-signin" method="POST">--> <label
+               for="modify_addr1" class="form-label"><strong>우편번호</strong></label><br>
+               <input type="text" class="modify_addr1" name="modify_addr1"
+               id="modify_addr1" placeholder="우편번호를 입력하세요"> <input
+               class="modify_addr_button" name="modify_addr_button"
+               id="modify_addr_button" type="button" onclick="execPostCode2();"
+               value="우편번호 찾기"><br>
+            <br> <strong>지번주소 </strong><br> <input
+               class="modify_addr2" name="modify_addr2" id="modify_addr2"
+               placeholder="도로명 주소를 입력해주세요" readonly="readonly"><br>
+            <br> <strong>상세주소 </strong><br> <input type="text"
+               name="modify_addr3" class="modify_addr3" id="modify_addr3"
+               placeholder="상세주소를 입력하세요"> <br>
+            <br> <input class="modifyaddr" name="modifyaddr"
+               id="modifyaddr" type="button" value="변경할래요">
+               </form>
+            </td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>회원등급</strong></td>
+            <td class="userinfo_td_gap" sec:authorize="hasRole('ROLE_USER')">일반회원</td>
+            <td class="userinfo_td_gap" sec:authorize="hasRole('ROLE_PARTNER')">파트너회원</td>
+            <td class="userinfo_td_gap" sec:authorize="hasRole('ROLE_ADMIN')">관리자</td>
+         </tr>
+         </tr>
+         <td class="userinfo_td_gap" th:if="${user.sns}"><strong>소셜
+               연동 여부</strong></td>
+         <td class="userinfo_td_gap" th:if="${user.sns}" id="unique_userinfo_td_gap"
+            th:text="${user.sns} + ' 연동된 계정입니다.'"></td>
+         </tr>
+
+         <tr>
+            <td class="userinfo_td_gap"><strong>계정 생성일</strong></td>
+            <td class="userinfo_td_gap"
+               th:text="${#temporals.format(user.create_userTime,'yyyy-MM-dd')}"></td>
+         </tr>
+         <tr>
+            <td colspan="5" class="userinfo_td_gap">
+               <div class="bot_btn">
+                  <br>
+                  <br>
+                  <h5 id="noused_account">
+                     DAEBAK을 이용하고 싶지 않으신가요? <a class="nav-link"
+                        sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                     <span class="nav-link" id="user_del_button"
+                        sec:authorize="isAuthenticated()">회원탈퇴</span>
+                  </h5>
+                  <div id="user_del_input">
+                     <b id="final_check_pwd">비밀번호 입력</b><br> <input
+                        type="password" id="userdel_check_password"
+                        placeholder="기존 비밀번호를 입력하세요" required> <input
+                        type="button" id="userdel_confirm_button" value="탈퇴하기">
+                     </form>
+                     <br> <span id="final_password_check"></span>
+                  </div>
+               </div>
+            </td>
+         </tr>
+
+      </tbody>
+
+      <!-- 마이페이지 -> 소셜회원 정보 표시 -->
+
+      <tbody sec:authorize="hasRole('ROLE_SNS')">
+         <tr>
+            <td class="userinfo_td_gap"><strong>내 정보 </strong></td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>ID</strong></td>
+            <td class="userinfo_td_gap"
+               th:text="(${sub != null ? 'google' : (connectedAt != null ? 'kakao' : (response != null ? 'naver' : ''))})+'_' + (${givenName != null ? name + givenName : name})">
+            </td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>이메일</strong></td>
+            <td class="userinfo_td_gap" th:text=" ${email}"></td>
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>회원등급</strong></td>
+            <td class="userinfo_td_gap" sec:authorize="hasRole('ROLE_SNS')">소셜회원</td>
+
+         </tr>
+         <tr>
+            <td class="userinfo_td_gap"><strong>제공자(경유사이트)</strong></td>
+            <td class="userinfo_td_gap" id="unique_social_provider"
+               th:text="${sub != null ? 'Google 회원으로 로그인' : (connectedAt != null ? 'KakaoTalk 회원으로 로그인' : (response != null ? 'Naver 회원으로 로그인' : ''))}">
+            </td>
+         </tr>
+         <tr>
+            <td colspan="5" class="userinfo_td_gap">
+               <div class="bot_btn">
+                  <br>
+                  <br>
+                  <h5 id="noused_account">
+                     DAEBAK을 이용하고 싶지 않으신가요? <a class="nav-link"
+                        sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+   </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!-- sns 유저 정보 표시 테이블(미구현)
+<table class="userinfo_table">
+<tbody>
+</tbody>
+</table>
+-->
+
+
+   <!-- 사이드 바 -->
+   <nav id="mypage_sidebar_nav">
+      <ul>
+         <li class="mypage_sidebar"><a th:href="@{/user/mypage/me}"
+            class="active">내 정보</a></li>
+         <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}">예약
+               내역</a></li>
+         <li class="mypage_sidebar"><a
+            th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+         <li class="mypage_sidebar"><a
+            th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+         <li class="mypage_sidebar"><a
+            th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+         </li>
+         <li class="mypage_sidebar"><a
+            th:href="@{/user/mypage/my_productList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+         </li>
+         <li class="mypage_sidebar"><a
+            th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>   
+      </ul>
+   </nav>
+   </body>
+</html>
