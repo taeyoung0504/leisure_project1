@@ -236,7 +236,7 @@ public class ProductController {
 
 	// 수정된 상품의 값, 이미지를 받아와서 적용
 	@PostMapping("/updateProduct")
-	public ResponseEntity<Integer> uploadFiles(@RequestParam("productId") Long product_id,
+	public ResponseEntity<String> uploadFiles(@RequestParam("productId") Long product_id,
 			@RequestParam("detail") String detail,
 			@RequestParam(value = "images[]", required = false) MultipartFile[] editedImages,
 			@RequestParam(value = "deletedImages[]", required = false) List<Long> deletedImageIds,
@@ -249,6 +249,11 @@ public class ProductController {
 
 		if (product == null) {
 			throw new DataNotFoundException("상품을 찾을 수 없습니다.");
+		}
+
+		// 방 수정시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
+		if (product.getAccommodation().getAcc_max_people() < pernum) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
 		}
 
 		// 개별 이미지 삭제 (해당 이미지의 pk를 가져와서 삭제한다)
@@ -268,8 +273,8 @@ public class ProductController {
 		}
 
 		// 다시 업데이트 해야 한다.
-		int updateProduct = this.productService.updateProduct(product_id, type, detail, count, amount, pernum, checkin,
-				checkout);
+		// int updateProduct =
+		this.productService.updateProduct(product_id, type, detail, count, amount, pernum, checkin, checkout);
 
 		// 금액 평균 구함
 		// 해당하는 상품의 accommodation
@@ -281,7 +286,7 @@ public class ProductController {
 		// 금액을 서비스에 저장
 		this.accommodationService.saveAverPrice(accommodation, averagePrice);
 
-		return ResponseEntity.ok(updateProduct);
+		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 	}
 
 	// 평균 계산 함수
