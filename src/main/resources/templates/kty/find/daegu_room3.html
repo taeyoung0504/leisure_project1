@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/kty3.css">
+<link rel="stylesheet" href="/css/kty.css">
 </head>
 <body id="userinfo_modify" onload="showPosition()">
 <html layout:decorate="~{jjj/header}">
@@ -142,42 +143,56 @@
 
 
 		<div id="kty_right-side_test">
-			<div th:each="accommodations : ${paging}" class="room-entry">
-				<div class="room_info_k">
-					<a th:href="@{|/tour/product/detail/${accommodations.id}|}"> <span
-						th:text="${accommodations.acc_name}"></span>&nbsp&nbsp&nbsp <span
-						th:text="${accommodations.acc_sectors}"
-						style="font-size: 15px; color: grey;"></span><br> <span
-						th:switch="${accommodations.acc_rating}" style="color: orange;">
-							<span th:case="1">★ ✩ ✩ ✩ ✩</span> <span th:case="2">★ ★ ✩
-								✩ ✩</span> <span th:case="3">★ ★ ★ ✩ ✩</span> <span th:case="4">★
-								★ ★ ★ ✩</span> <span th:case="5">★ ★ ★ ★ ★</span> <span th:case="0">✩
-								✩ ✩ ✩ ✩</span>
-					</span>&nbsp </span> <span
-						th:text="${accommodations.acc_rating != 0 ? accommodations.acc_rating:''}"
-						style="font-size: 13px;"></span> <span
-						style="font-size: 12px; font-weight: bold;"
-						th:if="${#lists.size(accommodations.reviews) > 0}"
-						th:text="'(' + ${#lists.size(accommodations.reviews)} + ')'"></span>
+		<div th:each="accommodations : ${paging}" class="room-entry">
+			<div class="room_info_k">
+				<a th:href="@{|/tour/product/detail/${accommodations.id}|}">
+					<div class="hotel_name_hk">
+						<span th:text="${accommodations.acc_name}"></span>&nbsp&nbsp&nbsp
+					</div>
+					<div class="hotel_sectors_hk">
+						<span th:text="${accommodations.acc_sectors}"
+							style="color: grey;"> </span>
+					
+					<div class="hotel_rating_hk">
+						<span th:switch="${accommodations.acc_rating}"
+							style="color: orange;"> <span th:case="1">★ ✩ ✩ ✩ ✩</span>
+							<span th:case="2">★ ★ ✩ ✩ ✩</span> <span th:case="3">★ ★ ★
+								✩ ✩</span> <span th:case="4">★ ★ ★ ★ ✩</span> <span th:case="5">★
+								★ ★ ★ ★</span> <span th:case="0">✩ ✩ ✩ ✩ ✩</span>
+						</span>&nbsp </span> <span
+							th:text="${accommodations.acc_rating != 0 ? accommodations.acc_rating:''}"
+							></span>
+					</div>
+					</div>
+					
+					<div class="hotel_reviews_hk">
+						<span
+							th:if="${#lists.size(accommodations.reviews) > 0}"
+							th:text="'(' + ${#lists.size(accommodations.reviews)} + ')'"></span>
+					</div>
+					<div class="hotel_address_hk">
+						<span th:text="${accommodations.acc_address}"
+							></span>
+					</div>
+					<div class="hotel_max_people_hk">
+						<span>투숙 인원 (최대) : </span>&nbsp <span
+							th:text="${accommodations.acc_max_people}"
+							></span><span>
+							명 </span>
+<!-- 							<span style="color: red; font-size: 12px; font-weight: bold;"></span> -->
+					</div>
 
-						<br> <br> <span th:text="${accommodations.acc_address}"
-						style="font-size: 15px;"></span><br> <br> <span
-						style="font-size: 15px;">투숙 인원 (최대) : </span>&nbsp<span
-						th:text="${accommodations.acc_max_people}"
-						style="font-size: 15px;"></span><span style="font-size: 15px;">
-							명 </span><span style="color: red; font-size: 12px; font-weight: bold;"></span><br>
-						<br> <span class="feefee"> <span
-							style="font-size: 20px; font-weight: bold;">평균금액 : </span>&nbsp&nbsp
+					<div class="hotel_averPrice_hk">
+						<span class="feefee"> <span>평균금액: </span>&nbsp&nbsp
 							<span class="productAmount"
-							th:text="${accommodations.acc_averPrice}"
-							style="font-size: 20px; font-weight: bold;"></span> &nbsp <span
-							style="font-size: 20px; font-weight: bold;"> 원</span>&nbsp&nbsp
-					</span>
-					</a>
-				</div>
-				<div class="room-photo"
-					th:style="'background-image: url(' + ${accommodations.acc_img} + ');'"></div>
-
+							th:text="${accommodations.acc_averPrice}"></span> &nbsp
+							<span> 원</span>&nbsp&nbsp
+						</span>
+					</div>
+			</div>
+			<div class="room-photo"
+				th:style="'background-image: url(' + ${accommodations.acc_img} + ');'"></div>
+			</a>
 
 
 			</div>
