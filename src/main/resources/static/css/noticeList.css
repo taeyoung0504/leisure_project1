@@ -1,6 +1,6 @@
 .content-container {
 			width: 900px;
-			margin-left: -200px;
+			margin-left: -100px;
 			margin-top: 25px;
 		}
 
@@ -48,3 +48,7 @@
 		.mypage_sidebar a {
 			color: black;
 		}
+		
+		p {
+    margin: 0;
+}

@@ -71,10 +71,6 @@ label {
 			margin-top: 40px;
 		}
 
-		#container {
-			margin-left: -80px;
-		}
-
 		input[type="submit"] {
 			background-color: #e40000d3;
 			color: white;

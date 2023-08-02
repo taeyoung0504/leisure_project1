@@ -10,7 +10,6 @@
 	<html layout:decorate="~{jjj/header}">
 	<div id="my_infomation_modify" layout:fragment="content" class="container my-3">
 		<div id="container">
-
 			<div id="new-inquiry-form">
 				<h4>경상도숙박장사 이용 중 불편하신 점을 문의주시면 최대한 빠른 시간에 답변 드리겠습니다.</h4>
 				<form th:action="@{/inquiry/modify/{id}(id=${inquiry.id})}" th:object="${inquiry}" method="post">
