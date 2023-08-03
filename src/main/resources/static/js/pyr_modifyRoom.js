@@ -31,16 +31,19 @@ function isValidProductZeroAmount(value) {
 	return true;
 }
 
+//초기화 버튼을 눌렀을 때를 위해 기존의 값들을 저장
 
-/* ====================  수정버튼 기능 구현  시작 ===================== */
-
-//기존에 있는 값을 담기 위한 객체선언
-var originalValues = {}; //
+//기존에 있는 값을 담기 위한 객체
+var originalValues = {}; //전역
 
 
 //기존에 있는 이미지를 담기 위한 배열
-var originalImageUrls = []; //배열
+var originalImageUrls = []; //전역
 
+
+
+//이미지 슬라이드 전역 변수로 설정 => 이미지 추가시 슬라이드에도 보여주가 위함
+let images = [];
 
 // formData 전역 변수로 선언
 var formData = new FormData();
@@ -48,7 +51,7 @@ var formData = new FormData();
 
 $(document).ready(function() {
 
-	// 각 필드의 값을 가져와 변수에 저장
+	// 각 필드의 기본 값을 가져와서 저장
 	originalValues['type'] = $('.edit_type').val();
 	originalValues['detail'] = $('.edit_detail').val();
 	originalValues['amount'] = $('.edit_amount').val();
@@ -58,36 +61,24 @@ $(document).ready(function() {
 	originalValues['checkout'] = $('.edit_checkout').val();
 
 
-	console.log("originalValues:", originalValues);
-
-
-
 	$('.imgContainer').each(function() {
-
-		var imgid = $(this).find('.img_id').text();
-
+		//var imgid = $(this).find('.img_id').text();
 		var imageInfo = {
 			imageUrl: $(this).find('.showImgs').attr('src'),
-			imgid: imgid
+			//imgid: imgid
 		};
 		originalImageUrls.push(imageInfo);
 	});
-
 
 });
 
 
 
-// 초기화 버튼 클릭 이벤트 처리 ===========================================
 
-
-//수정 완료 버튼 클릭 시 이벤트를 처리 ===============
+//수정 완료 버튼 클릭 시 값을 전송
 $(document).on('click', '.editOkProduct', function() {
 	//입력값 받은 값들을 가져온다
 	var productContainer = $(this).closest('#productContainer');
-
-	//해당 영역의 pk를 가져온다
-	var productContentsContainer = $(this).closest('.Product_contents');
 
 	var productId = parseInt($(this).closest('.box')
 		.find('.product_id').text());
@@ -170,10 +161,6 @@ $(document).on('click', '.editOkProduct', function() {
 		checkout: productContainer.find('.edit_checkout').val()
 	};
 
-
-	//위에 수정된 값을 FormData에 추가
-	//  var formData = new FormData(); // FormData 객체 초기화
-
 	for (var key in editedValues) {
 		formData.append(key, editedValues[key]);
 	}
@@ -182,7 +169,6 @@ $(document).on('click', '.editOkProduct', function() {
 	// 수정된 이미지 파일들과 삭제된 이미지 파일들을 FormData 객체에 추가
 	var editedImages = productContainer.find('.edited_images');
 	var deletedImages = productContainer.find('.deleted_images');
-
 
 
 	// 개별 이미지 추가
@@ -196,7 +182,6 @@ $(document).on('click', '.editOkProduct', function() {
 	}
 
 
-
 	//개별 이미지 삭제
 	for (var i = 0; i < deletedImages.length; i++) {
 		var deletedImageId = deletedImages[i].getAttribute('data-image-id');
@@ -205,18 +190,6 @@ $(document).on('click', '.editOkProduct', function() {
 			formData.append('deletedImages[]', deletedImageId);
 		}
 	}
-
-
-
-
-	// =============== 키 값 확인 ===============
-
-	// FormData 객체의 키-값 쌍 확인
-	for (let pair of formData.entries()) {
-		console.log(pair[0], pair[1]);
-	}
-
-
 
 	// AJAX 요청을 통해 데이터를 서버에 전송하고 값을 변경
 	$.ajax({
@@ -227,44 +200,18 @@ $(document).on('click', '.editOkProduct', function() {
 		processData: false,
 		contentType: false,
 		success: function(response) {
-			// 서버 응답에 따른 처리
-			//console.log("요청성공!!");
-			//console.log(response);
 
-			//alert("수정이 완료되었습니다.");
-
-			//다시 이전페이지로 이동
-			//  window.history.back();
-
-			/*	Swal.fire('수정완료되었습니다');
-				//1.5초 후에 이동
-				setTimeout(function() {
-					window.history.back();
-				}, 1500); // 1.5초 후에 이전 페이지로 이동 
-	*/
-
-			Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
-				// 알림창이 닫힌 후에 1.5초 후에 이동
-				setTimeout(function() {
-					window.history.back();
-				}, 1000); // 1초 후에 이전 페이지로 이동 
+			Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
+				window.location.href = '/partner/product/addproduct/' + response;
 			});
-
-
 		},
-		error: function(xhr, status, error, product) {
-			// 처리 중에 에러가 발생한 경우의 동작 
-			console.log('AJAX 요청 실패');
+		error: function(xhr) {
 			// 서버에서 반환된 에러 메시지를 가져옴
 			var errorMessage = xhr.responseText;
 			Swal.fire(errorMessage)
-
 		}
 	});
-
 });
-
-
 
 
 // 이미지 개당 삭제버튼 클릭
@@ -273,42 +220,6 @@ $('.imgLists').on('click', '.imgLists_deleteButton', function() {
 	var deletedImageId = $(this).closest('.img_list_position').find('.list_img_id').text();
 	var deletedImageContainer = $(this).closest('li');
 	var imageName = $(this).closest('li').find('.image_name').text();
-
-
-	console.log(imageName + "이미지 이름입니다."); //추가된 이미지 이름
-	console.log(deletedImageId + "deletedImageId");  //이미지 id
-
-	// 삭제된 이미지 파일을 FormData 객체에 추가
-	//  formData.append('deletedImages[]', deletedImageId); //기존 삭제된 이미지의 id 값을 가져온다
-
-	/*
-		console.log(formData.get('images[]') + "들어온 이미지 입니다.");
-	
-	
-	
-		//해당 name이랑 form에 있는 images[] 와 이름 검사
-		for (var file of formData.getAll('images[]')) {
-			console.log(file.name + "for문 처음의 images");
-	
-			//파일 이름과 imageName이 같다면
-			if (file.name === imageName) {
-				console.log("============");
-				console.log(file.name);
-				console.log(imageName);
-				console.log("============");
-	
-				//formData에서 해당 file을 삭제
-				formData.delete('images[]', file);
-				
-			}
-			console.log(file.name + "for문 마지막의 images");
-			console.log(formData.getAll('images[]'));
-	
-		}
-	
-		console.log(formData.get('images[]') + " 이후의 images");
-		console.log(formData.getAll('images[]'));
-	*/
 
 	//새로운 FormData 객체 생성
 	var newFormData = new FormData();
@@ -325,13 +236,10 @@ $('.imgLists').on('click', '.imgLists_deleteButton', function() {
 	//새로운 FormData 객체를 원래의 formData에 할당
 	formData = newFormData;
 
-
-
 	// 삭제된 이미지의 id를 유효한 값으로 확인 후 추가
 	if (deletedImageId.trim() !== '') {
 		formData.append('deletedImages[]', deletedImageId);
 	}
-
 
 	// 이미지 개수 체크
 	var imageCount = $(this).closest('.imgLists').find('.image-list li').length;
@@ -342,9 +250,22 @@ $('.imgLists').on('click', '.imgLists_deleteButton', function() {
 		return;
 	}
 
+	// imageURL에 해당하는 이미지를 images 배열에서 찾아 제거(개별 삭제된 이미지 슬라이드에서 제거)
+	for (var i = 0; i < images.length; i++) {
+		if (images[i].imgUrl === imageURL) {
+			images.splice(i, 1);  // i번째 요소를 제거
+			break;
+		}
+	}
+	const productContainers = $('.slideshow-container');
+
+	// 슬라이드 쇼 재시작
+	startSlideshow(productContainers, images);
+
 	//중복되는 이미지를 여러개 올릴 수 있도록 
 	const fileInput = document.querySelector('.imageUploadInput');
 	fileInput.value = ''; // 파일 선택 필드의 값을 초기화
+
 
 	// 화면에서 삭제된 이미지를 제거
 	deletedImageContainer.remove();  // 이미지 요소 제거
@@ -362,14 +283,10 @@ $('.addImagesButton').click(
 	});
 
 
-// =================== 이미지 길이 제한 =====================
-
-
 // 이미지 업로드 인풋 필드의 값이 변경되면 실행되는 이벤트 핸들러
 $('.imageUploadInput').change(function() {
 
 	var files = this.files;
-	//var imageList = $('.image-list');
 
 	var imageList = $(this).closest('.imgLists').find('.image-list');
 
@@ -380,7 +297,7 @@ $('.imageUploadInput').change(function() {
 	var totalImgCount = files.length + MaxImgCount;
 	//최대 이미지 개수보다 많으면 알림 메시지 표시
 	if (totalImgCount > 5) {
-		alert('이미지는 최대 5개만 가능합니다.');
+		Swal.fire('이미지는 최대 5개만 가능합니다')
 		return;
 	}
 
@@ -413,17 +330,14 @@ $('.imageUploadInput').change(function() {
 			listItem.append(imageName); // 이미지 이름 추가
 
 
-
-
 			// 이미지 파일을 FormData 객체에 추가
 			formData.append('images[]', file);
 
-			var imagesArray = formData.getAll('images[]');
-			for (var i = 0; i < imagesArray.length; i++) {
-				console.log(imagesArray[i]); // 각 이미지 파일 정보 출력
-			}
 
-
+			// 슬라이드 이미지에 추가한 이미지 보여주기 위해서 추가
+			images.push({
+				imgUrl: imageURL,
+			});
 
 		};
 
@@ -432,27 +346,23 @@ $('.imageUploadInput').change(function() {
 
 });
 
-
-//========== 이미지 슬라이드 ==========
-
+/*
+//이미지 슬라이드
 $(document).ready(
 	function() {
 		const productContainers = $('.slideshow-container');
 
 		productContainers.each(function() {
 			const slideshowContainer = $(this);
-			const images = [];
+			const images = []; //이미지 배열을 담음
 
 			$(this).find('.imgContainer').each(
 				function() {
 					const img = $(this).find('img');
 					const imgUrl = img.attr('src');
 
-
-
 					var roomId = parseInt($(this).closest('.box')
 						.find('.product_id').text());
-
 
 					images.push({
 						imgUrl: imgUrl,
@@ -464,19 +374,163 @@ $(document).ready(
 
 		});
 	});
+*/
 
+
+
+//수정 취소 버튼을 누름
+$(document).on('click', '.cancelProduct', function() {
+	swalWithBootstrapButtons.fire({
+		title: '변경 사항이 적용되지 않습니다',
+		text: '이전 페이지로 돌아가시겠습니까?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+		reverseButtons: true
+
+	}).then((result) => {
+		if (result.isConfirmed) {
+			window.history.back();
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+			// No 버튼을 눌렀을 시 아무런 동작 없음
+		}
+	});
+});
+
+/*swal*/
+const swalWithBootstrapButtons = Swal.mixin({
+	customClass: {
+		confirmButton: 'btn btn-success',
+		cancelButton: 'btn btn-danger'
+	}
+
+});
+
+
+
+// 초기화 버튼 클릭 이벤트 처리
+$(document).on('click', '.resetProduct', function() {
+
+
+	swalWithBootstrapButtons.fire({
+		title: '변경 사항이 적용되지 않습니다',
+		text: '초기화 하시겠습니까?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+		reverseButtons: true
+
+	}).then((result) => {
+		if (result.isConfirmed) {
+
+			//초기화 버튼을 누른 경우 값을 전송하는 formdata 초기화
+			formData = new FormData();
+
+			// 초기화 버튼 클릭 시 처리할 로직 작성
+			// 해당 컨테이너 찾기
+			var productContainer = $(this).closest('#productContainer');
+			var slideshowContainer = productContainer.find('.slideshow-container');
+			console.dir(slideshowContainer);
+
+			//해당 영역만을 초기화 시킴
+			productContainer.find('.edit_count').val(originalValues['count']);
+			productContainer.find('.edit_type').val(originalValues['type']);
+			productContainer.find('.edit_pernum').val(originalValues['pernum']);
+			productContainer.find('.edit_amount').val(originalValues['amount']);
+			productContainer.find('.edit_checkin').val(originalValues['checkin']);
+			productContainer.find('.edit_checkout').val(originalValues['checkout']);
+			productContainer.find('.edit_detail').val(originalValues['detail']);
+
+			//이미지 다시 초기화
+			resetImages(productContainer);
+
+			//이미지 슬라이드 이미지 초기화
+			//images = originalImageUrls.slice();
+			images = [];
+			originalImageUrls.forEach(function(imageObj) {
+				images.push({imgUrl: imageObj.imageUrl});
+			});
+
+			// 슬라이드 쇼 재시작
+			startSlideshow(slideshowContainer, images);
+
+			//오류 메세지가 있다면 제거
+			clearEditInputError('edit_type');
+			clearEditInputError('edit_detail');
+			clearEditInputError('edit_amount');
+			clearEditInputError('edit_count');
+			clearEditInputError('edit_pernum');
+
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+			//아무런 작업을 하지 않는다
+		}
+	});
+
+});
+
+
+
+// 이미지 초기화 (이미지 추가시 해다 영역에 이미지를 보여준다)
+function resetImages(productContainer) {
+	var imageListContainer = productContainer.find('.imgLists .image-list');
+	imageListContainer.empty();
+
+	for (var i = 0; i < originalImageUrls.length; i++) {
+		var imageInfo = originalImageUrls[i];
+		var imageUrl = imageInfo.imageUrl || '';
+		var imgId = imageInfo.imgId; // 수정: 변수명 imgId로 변경
+
+		var listItem = $('<li><div class="img_list_position"><img src="' + imageUrl + '" alt="Product Image" class="list_img"><span th:text="' + imgId + '" style="display: none;" class="img_id"></span></div><div class="imgLists_deleteButton_position"><button class="imgLists_deleteButton">x</button></div></li>');
+
+		imageListContainer.append(listItem);
+	}
+}
+
+
+
+//이미지 슬라이드
+$(document).ready(
+	function() {
+		let productContainers = $('.slideshow-container');
+
+		//productContainers 를 순회하며 images 배열에 이미지를 담는다
+		productContainers.each(function() {
+			let slideshowContainer = $(this);
+
+
+			$(this).find('.imgContainer').each(
+				function() {
+					const img = $(this).find('img');
+					const imgUrl = img.attr('src');
+
+
+					images.push({
+						imgUrl: imgUrl,
+					});
+				});
+
+			//이미지 슬라이드 시작
+			startSlideshow(slideshowContainer, images);
+
+		});
+	});
+
+
+//이미지 슬라이드
 function startSlideshow(slideshowContainer, images) {
 	let currentSlideIndex = 0;
 	const slide = slideshowContainer.find('.slide');
 	const prevButton = slideshowContainer.find('.prev');
 	const nextButton = slideshowContainer.find('.next');
 
-
-	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
-	function updateSlide() {
-		const imgUrl = images[currentSlideIndex].imgUrl;
-		slide.css('background-image', `url(${imgUrl})`);
-	}
+	/*	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
+		function updateSlide() {
+			const imgUrl = images[currentSlideIndex].imgUrl;
+			slide.css('background-image', `url(${imgUrl})`);
+		}
+	*/
 
 	// 첫 번째 이미지로 초기화
 	updateSlide();
@@ -504,133 +558,13 @@ function startSlideshow(slideshowContainer, images) {
 	function updateSlide() {
 		const imgUrl = images[currentSlideIndex].imgUrl;
 		slide.find('img').attr('src', imgUrl);
+		console.log(imgUrl);
 	}
 
 	prevButton.on('click', goToPrevSlide);
 	nextButton.on('click', goToNextSlide);
 
 }
-
-
-
-//수정 취소 버튼을 눌렀을 시  ==========================
-//이전 페이지로 돌아가도록 기능 구현(alert창 넣어서)
-
-/*$(document).on('click', '.cancelProduct', function() {
-	if (confirm('취소하시겠습니까?')) {
-		window.history.back(); // 이전 페이지로 이동
-	} else {
-		// 아무 작업 없음, 현재 페이지에 머무름
-	}
-});*/
-
-$(document).on('click', '.cancelProduct', function() {
-	swalWithBootstrapButtons.fire({
-		title: '변경 사항이 적용되지 않습니다',
-		text: '이전 페이지로 돌아가시겠습니까?',
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonText: '확인',
-		cancelButtonText: '취소',
-		reverseButtons: true
-
-	}).then((result) => {
-		if (result.isConfirmed) {
-			// Yes 버튼을 눌렀을 때의 동작
-			window.history.back();
-		} else if (result.dismiss === Swal.DismissReason.cancel) {
-			// No 버튼을 눌렀을 때의 동작
-			// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
-		}
-	});
-});
-
-/*swal*/
-const swalWithBootstrapButtons = Swal.mixin({
-	customClass: {
-		confirmButton: 'btn btn-success',
-		cancelButton: 'btn btn-danger'
-	}
-
-});
-
-
-
-
-
-
-
-// 초기화 버튼 클릭 이벤트 처리 ===========================================
-
-$(document).on('click', '.resetProduct', function() {
-
-
-	swalWithBootstrapButtons.fire({
-		title: '변경 사항이 적용되지 않습니다',
-		text: '초기화 하시겠습니까?',
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonText: '확인',
-		cancelButtonText: '취소',
-		reverseButtons: true
-
-	}).then((result) => {
-		if (result.isConfirmed) {
-
-
-			// 초기화 버튼 클릭 시 처리할 로직 작성
-			// 해당 컨테이너 찾기
-			var productContainer = $(this).closest('#productContainer');
-			var productId = parseInt(productContainer.find('.Product_contents .product_id').text());
-
-
-
-			//해당 영역만을 초기화 시킴
-			productContainer.find('.edit_count').val(originalValues['count']);
-			productContainer.find('.edit_type').val(originalValues['type']);
-			productContainer.find('.edit_pernum').val(originalValues['pernum']);
-			productContainer.find('.edit_amount').val(originalValues['amount']);
-			productContainer.find('.edit_checkin').val(originalValues['checkin']);
-			productContainer.find('.edit_checkout').val(originalValues['checkout']);
-			productContainer.find('.edit_detail').val(originalValues['detail']);
-
-
-			resetImages(productContainer);
-
-			//오류 메세지가 있다면 제거
-			clearEditInputError('edit_type');
-			clearEditInputError('edit_detail');
-			clearEditInputError('edit_amount');
-			clearEditInputError('edit_count');
-			clearEditInputError('edit_pernum');
-
-
-		} else if (result.dismiss === Swal.DismissReason.cancel) {
-			//아무런 작업을 하지 않는다
-		}
-	});
-
-});
-
-
-
-// 이미지 초기화 (이미지 추가시 해다 영역에 이미지를 보여준다)
-function resetImages(productContainer) {
-	var imageListContainer = productContainer.find('.imgLists .image-list');
-	imageListContainer.empty();
-
-	for (var i = 0; i < originalImageUrls.length; i++) {
-		var imageInfo = originalImageUrls[i];
-		var imageUrl = imageInfo.imageUrl || '';
-		var imgId = imageInfo.imgId; // 수정: 변수명 imgId로 변경
-
-
-		var listItem = $('<li><div class="img_list_position"><img src="' + imageUrl + '" alt="Product Image" class="list_img"><span th:text="' + imgId + '" style="display: none;" class="img_id"></span></div><div class="imgLists_deleteButton_position"><button class="imgLists_deleteButton">x</button></div></li>');
-
-		imageListContainer.append(listItem);
-	}
-}
-
 
 
 
@@ -642,11 +576,8 @@ $(document).ready(function() {
 		var classValue = $(this).val();
 
 		editInputValueCheck(className, classValue);
-
 	});
-
 });
-
 
 
 function editInputValueCheck(className, classValue) {
@@ -703,10 +634,9 @@ function editInputValueCheck(className, classValue) {
 	}
 }
 
-
+// 에러 메시지를 표시
 function showEditInputError(className, errorMessage) {
-	var errorContainer = $('#' + className + '_error'); // 에러 메시지를 표시할 컨테이너 요소 선택
-
+	var errorContainer = $('#' + className + '_error'); //에러 메세지 표시 컨테이너 찾음
 
 	if (errorContainer.length === 0) {
 		// 컨테이너 요소가 없는 경우, 동적으로 생성하여 추가
@@ -730,7 +660,6 @@ function clearEditInputError(className) {
 $('.product_amount').each(
 	function() {
 		var amountText = $(this).text();
-		console.log(typeof amountText); //String 
 		var amountNumber = parseFloat(amountText.replace(
 			/[^0-9.]/g, '')); //숫자로 변환
 		var formattedNumber = amountNumber.toLocaleString(); //통화 기호

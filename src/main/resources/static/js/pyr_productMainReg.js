@@ -1,3 +1,12 @@
+/*swal*/
+const swalWithBootstrapButtons = Swal.mixin({
+	customClass: {
+		confirmButton: 'btn btn-success',
+		cancelButton: 'btn btn-danger'
+	}
+
+});
+
 
 //취소 버튼을 이전 페이지 이동
 document
@@ -27,16 +36,6 @@ document
 		});
 
 
-/*swal*/
-const swalWithBootstrapButtons = Swal.mixin({
-	customClass: {
-		confirmButton: 'btn btn-success',
-		cancelButton: 'btn btn-danger'
-	}
-
-});
-
-
 
 $(document).ready(
 	function() {
@@ -51,7 +50,7 @@ $(document).ready(
 
 
 
-		//값 변경됨을 감지하기 위함
+		//값 변경됨을 감지하기 위함(기존의 값들을 저장)
 		var originaAccName = $("#acc_name").val(); //숙소 이름
 		var originaAccAddress = $("#acc_address").val(); //숙소 주소
 		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
@@ -84,6 +83,7 @@ $(document).ready(
 			var acc_explain = $('#acc_explain').val(); //사장님 한마디
 			var acc_info = $('#acc_info').val(); //숙소 정보
 
+			//현재 값들을 불러온다
 			var accName = $('#acc_name').val();
 			var accAddress = $('#acc_address').val();
 			var accPartnerSec = $('#partner_sectors').val();
@@ -92,24 +92,22 @@ $(document).ready(
 			//기존 이름 변경 검사
 			if (accName !== originaAccName) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();	
+				location.reload();
 				return;
 			}
 
 			if (accAddress !== originaAccAddress) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();	
+				location.reload();
 				return;
 			}
 
 
 			if (accPartnerSec !== originaAccSectors) {
 				Swal.fire('기본 값은 변경 불가능 합니다')
-				location.reload();	
+				location.reload();
 				return;
 			}
-
-
 
 
 			if (accMaxPeople.trim() === '') {
@@ -156,16 +154,14 @@ $(document).ready(
 					contentType: false,
 					success: function(response) {
 
-						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
+						Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
 							window.location.href = '/partner/product/registerRoom/' + response;
 						});
 
 					},
-					error: function(xhr, status, error) {
-						console.log('AJAX 요청 실패');
-						console.log(xhr);
-						console.log(status);
-						console.log(error);
+					error: function(xhr) {
+						Swal.fire(xhr.responseText) // 수정 실패 알림 메세지
+						window.location.href = '/partner/product/registerRoom/' + response;
 					}
 				});
 			} else {
@@ -183,16 +179,14 @@ $(document).ready(
 					contentType: false,
 					success: function(response) {
 
-						Swal.fire('수정성공', '수정완료되었습니다', 'success').then(() => {
+						Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
 							window.location.href = '/partner/product/registerRoom/' + response;
 						});
 
 					},
-					error: function(xhr, status, error) {
-						console.log('AJAX 요청 실패');
-						console.log(xhr);
-						console.log(status);
-						console.log(error);
+					error: function(xhr) {
+						Swal.fire(xhr.responseText) // 수정 실패 알림 메세지
+						window.location.href = '/partner/product/registerRoom/' + response;
 					}
 				});
 
