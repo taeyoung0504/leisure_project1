@@ -33,17 +33,13 @@
 
 
 #header {
-	/* ë„¤ë¹„ ìƒë‹¨ ê³ ì •  */
 	position: fixed !important;
 	width: -webkit-fill-available;
 	top: 0 !important;
 	z-index: 10 !important;
 	display: flex !important;
-	/* í•œ ì¤„ë¡œ ë‚˜ëž€ížˆ í•˜ê¸° */
 	justify-content: space-between !important;
-	/* ê°™ì€ ì¤‘ì‹¬ì¶•ìœ¼ë¡œ í•´ì„œ ì¤‘ê°„ì— ìŠ¤íŽ˜ì´ìŠ¤ ë„£ê¸°*/
 	align-items: center !important;
-	/* ìˆ˜ì§ì ìœ¼ë¡œ ì¤‘ê°„ìœ¼ë¡œ ë°°ì¹˜ */
 	/*     background-color: var(--background-color); */
 	padding: 0px 12px !important;
 	font-family: "TheJamsil5Bold", Arial, sans-serif;
@@ -52,11 +48,11 @@
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-section {
+/* section {
 	width: 1500px;
 	margin: 0 auto;
 	
-	}
+	} */
 
     @keyframes anime_textup { 0% { top: 0; } 20% { top: -0.2rem; } 40% { top: 0 } 60% { top: 0 } 80% { top: 0 } 100% { top: 0 } }
  
@@ -130,7 +126,7 @@ section {
 .jj_navbar_logo {
 	font-size: 30px;
 	/* 	color: var(--main-color); */
-	padding-left: 15%;
+	padding-left: 17%;
 }
 
 .jj_navbar_logo i {
@@ -146,12 +142,18 @@ section {
 	/* ë©”ë‰´ ì™¼ìª½ íŒ¨ë”© ì—†ì• ê¸° */
 }
 
+@font-face { /* 애플산돌고딕 폰트 적용 */
+  font-family: "SDGothic";
+  src: url("/font/AppleSDGothicNeoM.ttf") format("truetype");
+  font-weight: normal;
+} /* 이후 "SDGothic"으로 폰트 적용 가능 */
+
 body:not(.jj_navbar) {
-	font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 }
 
 nav .jj_menubar {
-	padding-right: 15%;
+	padding-right: 17%;
 }
 
 nav .jj_menubar ul {
