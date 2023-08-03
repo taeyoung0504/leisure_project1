@@ -2,58 +2,8 @@
 <html>
 
 <head>
-<title>숙박업소 홈페이지</title>
-<style>
-.content-container {
-	width: 900px;
-	margin-left: -200px;
-	margin-top: 25px;
-}
-
-.notice-item {
-	border-bottom: 1px solid #ccc;
-	margin-top: 20px;
-	padding: 8px 0px;
-	cursor: pointer;
-}
-
-.notice-content {
-	display: none;
-	border-radius: 7px;
-}
-
-.pagination ul {
-	list-style-type: none;
-	display: flex;
-	justify-content: center;
-	padding: 0;
-}
-
-.pagination ul li {
-	margin-right: 10px;
-}
-
-.pagination ul li:last-child {
-	margin-right: 0;
-}
-
-#mypage_sidebar_nav {
-	margin-left: -100px;
-}
-
-.date {
-	color: rgb(193, 193, 193);
-}
-
-.notice_header {
-	color: #e40000d3;
-	margin-top: 40px;
-}
-
-.mypage_sidebar a {
-	color: black;
-}
-</style>
+	<link rel="stylesheet" href="/css/noticeList.css">
+	<title>DAEBAK</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		$(document).ready(function () {
@@ -100,7 +50,7 @@
 				<p th:utext="${notice.content}"></p>
 
 				<!-- 이미지 경로를 Thymeleaf 태그로 불러옴 -->
-				<div class="notice_img">
+				<div class="notice_img" th:if="${notice.imagePath}">
 					<img th:if="${notice.imagePath}"
 						th:src="@{/img/notice_img/{imageName}(imageName=${notice.imagePath})}"
 						alt="이미지 없음"  width="100%" height="80%"/>

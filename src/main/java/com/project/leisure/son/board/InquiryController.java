@@ -17,14 +17,17 @@ public class InquiryController {
 	private final InquiryAnswerRepository inquiryAnswerRepository;
 	
 
-	public InquiryController(InquiryRepository inquiryRepository, InquiryService inquiryService, InquiryAnswerRepository inquiryAnswerRepository) {
+	public InquiryController(InquiryRepository inquiryRepository, InquiryService inquiryService, InquiryAnswerRepository inquiryAnswerRepository,
+			InquiryAnswerService inquiryAnswerService) {
 	    this.inquiryRepository = inquiryRepository;
 	    this.inquiryService = inquiryService;
 	    this.inquiryAnswerRepository = inquiryAnswerRepository;
+	    this.inquiryAnswerService = inquiryAnswerService;
 	}
 
     private final InquiryRepository inquiryRepository;
     private final InquiryService inquiryService;
+    private final InquiryAnswerService inquiryAnswerService;
 
 
     @GetMapping("/more/inquiry")
@@ -111,7 +114,5 @@ public class InquiryController {
 
         return "redirect:/user/mypage/my_inquiry";
     }
-    
-    
     
 }

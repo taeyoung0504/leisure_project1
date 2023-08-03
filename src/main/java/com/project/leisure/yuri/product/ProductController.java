@@ -31,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
 	private final ProductService productService;
-	private final UserRepository userRepository;
 
 	private final AccommodationService accommodationService;
 
@@ -51,7 +50,7 @@ public class ProductController {
 
 	// 기존 숙소가 있는데 새로운 객실 생성
 	@PostMapping("/productNewMainReg")
-	public String productNewMainReg(Principal principal, @RequestParam("acc_name") String acc_name,
+	public ResponseEntity<String> productNewMainReg(Principal principal, @RequestParam("acc_name") String acc_name,
 			@RequestParam("acc_address") String acc_address, @RequestParam("acc_sectors") String acc_sectors,
 			@RequestParam("acc_explain") String acc_explain,
 			@RequestParam(value = "acc_img", required = false) MultipartFile acc_img,
@@ -64,14 +63,12 @@ public class ProductController {
 				acc_address, acc_max_people, acc_info);
 
 		if (result == 1) {
-			// return "pyr/my_productlist";
-			return "redirect:/user/mypage/my_productList";
+			return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 		}
-		return null; // 수정해야한다
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("등록에 실패하였습니다"); // 에러 메시지와 함께 HTTP 400
 	}
 
-	// productMainReg 해당 유저 등록된 숙소 수정하기에서 기존 데이터 가져오기
-	// @GetMapping("/productMainReg")
+	// 숙박업소 수정
 	@GetMapping(value = "productMainReg/{id}")
 	public String productMainReg(Model model, Principal principal, @PathVariable("id") Long acc_id) {
 
@@ -100,7 +97,7 @@ public class ProductController {
 		if (result == 1) {
 			return ResponseEntity.ok().body(acc_id.toString()); // Long을 String으로 변환
 		}
-		return null;
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정에 실패하였습니다");
 	}
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
@@ -181,28 +178,30 @@ public class ProductController {
 		Product product = this.productService.getProduct(product_id);
 
 		// 성공하면 해당 product_id값을 보냄 추후 비동기로 상품 추가 보여준다.
-		// return ResponseEntity.ok(product);
 		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 
 	}
 
 	// 해당 숙소를 삭제
 	@DeleteMapping(value = "deleteAcc/{id}")
-	public ResponseEntity<?> deleteAcc(@PathVariable("id") Long acc_id) {
+	public ResponseEntity<String> deleteAcc(@PathVariable("id") Long acc_id) {
+		try {
+			// 해당 숙소에 연결된 상품들 조회
+			List<Product> products = productService.findProductsByAccommodationId(acc_id);
 
-		// 해당 숙소에 연결된 상품들 조회
-		List<Product> products = productService.findProductsByAccommodationId(acc_id);
+			// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
+			// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
+			for (Product product : products) {
+				this.bookService.updateAllBookingVoProductToNull(product);
+				productService.pdDelete(product.getProduct_id());
+			}
+			// 숙소 삭제
+			accommodationService.deleteAcc(acc_id);
+		} catch (Exception e) {
 
-		// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
-		// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
-		for (Product product : products) {
-			this.bookService.updateAllBookingVoProductToNull(product);
-			productService.pdDelete(product.getProduct_id());
+			// 예외가 발생한 경우, 에러 메시지와 함께 HTTP 500 상태 코드를 반환
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패하였습니다");
 		}
-
-		// 숙소 삭제
-		accommodationService.deleteAcc(acc_id);
-
 		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 	}
 
@@ -232,11 +231,9 @@ public class ProductController {
 		return ResponseEntity.ok(response);
 	}
 
-	// ====! 예외처리 필수 if-else 로 return된 값 1일 경우에만 다음 코드가 실행되도록 처리 !=======
-
 	// 수정된 상품의 값, 이미지를 받아와서 적용
 	@PostMapping("/updateProduct")
-	public ResponseEntity<String> uploadFiles(@RequestParam("productId") Long product_id,
+	public ResponseEntity<?> uploadFiles(@RequestParam("productId") Long product_id,
 			@RequestParam("detail") String detail,
 			@RequestParam(value = "images[]", required = false) MultipartFile[] editedImages,
 			@RequestParam(value = "deletedImages[]", required = false) List<Long> deletedImageIds,
@@ -246,11 +243,7 @@ public class ProductController {
 
 		// 상품 조회 해당하는 상픔의 pk를 가져와서 조회한다.
 		Product product = this.productService.getProduct(product_id);
-
-		if (product == null) {
-			throw new DataNotFoundException("상품을 찾을 수 없습니다.");
-		}
-
+	
 		// 방 수정시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
 		if (product.getAccommodation().getAcc_max_people() < pernum) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
@@ -279,14 +272,16 @@ public class ProductController {
 		// 금액 평균 구함
 		// 해당하는 상품의 accommodation
 		Accommodation accommodation = product.getAccommodation();
-
+		
+		
+		
 		// 평균 가격 계산
 		int averagePrice = calculateAveragePrice(accommodation);
 
 		// 금액을 서비스에 저장
 		this.accommodationService.saveAverPrice(accommodation, averagePrice);
 
-		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
+		return ResponseEntity.ok(accommodation.getId()); // HTTP 200 상태 코드를 반환하고 accommodation.getId()를 본문으로 포함
 	}
 
 	// 평균 계산 함수

@@ -388,9 +388,9 @@ public class UserController {
 
 	/* 파트너 신청 페이지 */
 	@GetMapping("/mypage/partner_reg")
-	public String partner_registration(Model model, Principal principal) {
+	public String partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
 		String current_user = principal.getName();
-		List<RegPartner> regList = regService.getList();
+		Page<RegPartner> regList = regService.getList(page);
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -399,9 +399,9 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage/my_partner_reg")
-	public String modify_partner_registration(Model model, Principal principal) {
+	public String modify_partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
 		String current_user = principal.getName();
-		List<RegPartner> regList = regService.getList();
+		Page<RegPartner> regList = regService.getList(page);
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -418,6 +418,7 @@ public class UserController {
 		}
 
 		model.addAttribute("regList", filteredRegList);
+		model.addAttribute("paging",regList);
 		model.addAttribute("accRegMap", accRegMap);
 		// model.addAttribute("regList", filteredRegList);
 		return "kty/modify_partner_regi";
