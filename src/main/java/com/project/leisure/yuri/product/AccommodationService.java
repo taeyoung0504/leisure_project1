@@ -166,9 +166,8 @@ public class AccommodationService {
 				// 이미지를 저장한 파일 경로 설정
 				acc.setAcc_img("/img/acc_img/" + fileName);
 			} catch (IOException e) {
-				// 예외 처리
 				e.printStackTrace();
-				return null; // 실패
+				return -1; // 실패
 			}
 		}
 

@@ -6,6 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,8 +55,9 @@ public class RegService {
 
 	}
 
-	public List<RegPartner> getList() {
-		return regRepository.findAll();
+	public Page<RegPartner> getList(int page) {
+		 Pageable pageable = PageRequest.of(page, 10);
+		return regRepository.findAll(pageable);
 	}
 
 
