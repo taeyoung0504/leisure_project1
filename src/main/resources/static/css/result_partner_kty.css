@@ -36,3 +36,7 @@ td, th {
     .pagination-horizontal li {
         margin: 0 5px;
     }
+ .active-page {
+        color: red;
+        font-weight: bold;
+    }
