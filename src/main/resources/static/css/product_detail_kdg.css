@@ -1,5 +1,6 @@
 #view1 {
 	margin: 0;
+	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 }
 
 /* .datepicker {
@@ -24,6 +25,7 @@
     position: absolute;
 	z-index:10;
 	border: solid 1px gray;
+	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 }
 
 
@@ -119,19 +121,21 @@
     border-radius: 4px 4px 4px 4px;
     margin-top: 28px;
     font-weight: bold;
+    font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 }
 
 #datepicker1 {
 	width: 190px;
-	height: 48px;
+	height: 40px;
 	border: 1px solid rgba(0,0,0,0.08);
-	padding-left: 20px;
+	padding-left: 12px;
 	border-radius: 4px 4px 4px 4px;
 	background-color: #fff;
+	font-size: 16px;
 }
 
 #date-choose {
-	height: 50px;
+	height: 43px;
 	line-height: 1px;
 	background-color: #e61c51;
 	border-color: #e61c51;

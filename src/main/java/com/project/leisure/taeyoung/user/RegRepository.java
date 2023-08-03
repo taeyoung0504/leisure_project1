@@ -1,5 +1,6 @@
 package com.project.leisure.taeyoung.user;
 
+import java.util.List;
 //ㄴㄴㄴ테스트
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface RegRepository extends JpaRepository<RegPartner, Long> {
 
@@ -28,5 +30,8 @@ public interface RegRepository extends JpaRepository<RegPartner, Long> {
 	Page<RegPartner> findAll(Specification<RegPartner> spec, Pageable pageable);
 
 	Optional<RegPartner> findByUsers(Users users);
+
+	@Query("SELECT rp FROM RegPartner rp WHERE rp.reg_username =:regUsername AND rp.result_partner_reg = 1")
+	List<RegPartner> findByReg_username(@Param("regUsername") String regUsername);
 
 }

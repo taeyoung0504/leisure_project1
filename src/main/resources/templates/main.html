@@ -45,6 +45,7 @@
 		</div>
 
 		<!-- 숙소 카테고리 아이콘 -->
+		
 		<div class="jj_icon">
 			<a th:href="@{/tour/daegu_room3?kw5=호텔}"> <span
 				class="fa-solid fa-hotel fa-3x"></span>
@@ -64,23 +65,50 @@
 			</a>
 		</div>
 
-		<!-- 추천 숙소 -->
-		<h2 class="main">추천 숙소</h2>
-		<div class="jj_wrapper">
-			<i id="left" class="fa-solid fa-angle-left"></i>
-			<div class="jj_carousel">
-				<img src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-4.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-5.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-6.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지"> <img
-					src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지">
-			</div>
-			<i id="right" class="fa-solid fa-angle-right"></i>
-		</div>
+		<!-- 추천 숙소 
+ <h2 class="main">추천 숙소</h2>
+    <div class="jj_wrapper">
+        <i id="left" class="fa-solid fa-angle-left"></i>
+        <div class="jj_carousel">
+            <img src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-4.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-5.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-6.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-1.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-2.jpg" alt="첫번째 이미지">
+            <img src="./img/main_jjj/rc-3.jpg" alt="첫번째 이미지">
+        </div>
+        <i id="right" class="fa-solid fa-angle-right"></i>
+    </div> -->
+
+
+
+<h2 class="main">추천 숙소</h2>
+<div class="jj_wrapper2">
+  <div class="jj_carousel2">
+    <div class="card-container" id="cardContainer">
+      <div th:each="accommodation : ${acc}" class="card" th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 70%;'">
+        <!-- Your content goes here -->
+    <!-- Your content goes here -->
+        <h2 class="reco_accname" th:text="${accommodation.acc_name}"></h2>
+        <p class="start_reco_acc">
+     <span th:switch="${accommodation.acc_rating}">
+        <span th:case="1"><span class="orange-star">★</span> ☆ ☆ ☆ ☆</span>
+        <span th:case="2"><span class="orange-star">★</span> <span class="orange-star">★</span> ☆ ☆ ☆</span>
+        <span th:case="3"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> ☆ ☆</span>
+        <span th:case="4"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> </span>
+        <span th:case="5"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span></span>
+    </span>
+    <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}">
+</p>
+        <p id="acc_num_kty" th:text="${accommodation.id}"></p>
+        <span class="reco_price_kty" th:text="${'평균가 '+accommodation.acc_averPrice + '원'}"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 		<!-- 추천 여행 코스 -->
 		<div class="jj_course">
@@ -119,45 +147,7 @@
 			</div>
 		</div>
 
-		<!-- 추천 휴양지 -->
-		<!-- <div class="jj_spot">
-            <h2>추천 휴양지(필요시 사용)</h2>
-            <div class="jj_spot_container">
-                <div class="jj_spot_slide">
-                    <li>
-                        <div class="jj_spot_img_1">
-                            <a href="#">
-                                <img src="./img/sp-1.jpg">
-                                <h4 class="jj_spot_text_1">제주도</h4>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="./img/sp-2.jpg">
-                            <h4 class="jj_spot_text_2">부산</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="./img/sp-3.jpg">
-                            <h4 class="jj_spot_text_3">강원도</h4 </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="./img/sp-4.jpg">
-                            <h4 class="jj_spot_text_4">울릉도</h4 </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="./img/sp-5.jpg">
-                            <h4 class="jj_spot_text_5">서울</h4 </a>
-                    </li>
-                </div>
-            </div>
-        </div>
- -->
-
+	
 	</div>
 	<!-- 푸터 -->
 	<footer>
@@ -192,4 +182,185 @@
 
 
 	</body>
+
+	<style>
+	.font_kty_acc_rating{
+	margin-left:5px;
+	color:black;
+	font-size:12px;
+	}
+ .jj_wrapper2 {
+  margin-bottom: -100px;
+}
+.reco_accname{
+  font-size:10px;
+  margin-top:230px;
+  color:black;
+}
+.start_reco_acc{
+margin-bottom:40px;
+margin-left:10px;
+}
+.reco_price_kty{
+  margin-top:0px;
+  margin-left:170px;
+  color:black;
+
+}
+.jj_carousel2 {
+  margin-left: 330px;
+  width: 1200px;
+  height: 300px;
+  padding-top: 50px;
+  overflow: hidden;
+}
+
+.card-container {
+  border-radius:8px;
+  margin-left:80px;
+  height:350px;
+  margin-top: -50px;
+  display: flex; /* Use flex to align cards horizontally */
+  gap: 20px;
+  padding-left: 0;
+  overflow-x: scroll; /* Enable horizontal scrolling */
+  scroll-behavior: smooth; /* Add smooth scrolling effect */
+  cursor: grab; /* Change cursor to indicate grabbing */
+  scrollbar-width: none; /* Hide the scrollbar on Firefox */
+  -ms-overflow-style: none; /* Hide the scrollbar on IE/Edge */
+}
+
+.card-container::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar on Chrome, Safari, and Opera */
+}
+
+.card {
+margin-bottom:50px;
+  position: relative; /* 위치를 상대적으로 설정합니다. */
+  display: inline-block;
+  color:white;
+  background-color: rgb(246, 246, 246);
+  padding: 20px;
+  border-radius: 8px;
+  width: 240px;
+  height:300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: normal;
+  flex-shrink: 0;
+}
+
+.card h2 {
+  font-size: 20px;
+}
+
+.card p {
+  position: absolute; /* 위치를 절대적으로 설정합니다. */
+  bottom: 10px; /* 하단 여백을 조정하여 이미지 위에 배치합니다. */
+  left: 10px; /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
+  z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
+  color: white; /* 텍스트 색상을 설정합니다. */
+  font-size: 18px; /* 원하는 크기로 폰트 크기를 설정합니다. */
+  /* 추가적인 스타일링을 원하면 여기에 추가하세요. */
+}
+
+#acc_num_kty {
+  position: absolute; /* 위치를 절대적으로 설정합니다. */
+  top: 30px; /* 상단 여백을 조정하여 이미지 위에 배치합니다. */
+  left: 10px; /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
+  z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
+  color: white; /* 텍스트 색상을 설정합니다. */
+  font-size: 16px; /* 원하는 크기로 폰트 크기를 설정합니다. */
+  /* 추가적인 스타일링을 원하면 여기에 추가하세요. */
+  display: none;
+}
+.jj_carousel {
+  overflow: hidden;
+}
+
+.card.visible {
+  display: block;
+}
+
+/* Remove left margin for the first card */
+.card:first-child {
+  margin-left: 0;
+}
+
+.orange-star {
+    color: orange;
+}
+</style>
+<script>
+
+// JavaScript code to handle continuous horizontal scrolling
+
+  // JavaScript code to handle continuous circular horizontal scrolling
+  document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.querySelector('.card-container');
+    const cards = document.querySelectorAll('.card');
+    const totalCards = cards.length;
+    const cardWidth = cards[0].offsetWidth;
+    const scrollInterval = 5; // Adjust the scrolling speed
+
+    let isScrolling = false;
+    let startPoint = 0;
+
+    // Function to loop scroll position between 0 and totalCards * cardWidth
+    function adjustScrollPosition(scrollAmount) {
+      cardContainer.scrollLeft += scrollAmount;
+
+      if (cardContainer.scrollLeft < 0) {
+        cardContainer.scrollLeft += totalCards * cardWidth;
+      } else if (cardContainer.scrollLeft >= totalCards * cardWidth) {
+        cardContainer.scrollLeft -= totalCards * cardWidth;
+      }
+    }
+
+    // Event listener to start scrolling when the mouse button is pressed
+    cardContainer.addEventListener('mousedown', (e) => {
+      isScrolling = true;
+      startPoint = e.clientX;
+    });
+
+    // Event listener to stop scrolling when the mouse button is released
+    document.addEventListener('mouseup', () => {
+      isScrolling = false;
+    });
+
+    // Event listener for mousemove to handle scrolling
+    cardContainer.addEventListener('mousemove', (e) => {
+      if (isScrolling) {
+        const scrollAmount = (e.clientX - startPoint) * scrollInterval;
+        startPoint = e.clientX;
+        adjustScrollPosition(scrollAmount);
+      }
+    });
+
+    // Event listener for touchmove to handle scrolling on touch devices
+    cardContainer.addEventListener('touchmove', (e) => {
+      e.preventDefault(); // Prevent page scrolling on touch devices
+      if (isScrolling) {
+        const scrollAmount = (e.touches[0].clientX - startPoint) * scrollInterval;
+        startPoint = e.touches[0].clientX;
+        adjustScrollPosition(scrollAmount);
+      }
+      
+      
+    });
+  });
+  
+  
+  document.addEventListener("DOMContentLoaded", function() {
+	    const cards = document.querySelectorAll(".card");
+	    cards.forEach(function(card) {
+	      card.addEventListener("click", function() {
+	        const id = card.querySelector("#acc_num_kty").textContent;
+	        const url = `/tour/product/detail/${id}`;
+	        window.location.href = url;
+	      });
+	    });
+	  });
+</script>
 </html>
