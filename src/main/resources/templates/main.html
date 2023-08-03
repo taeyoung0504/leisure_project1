@@ -86,8 +86,8 @@
 
 
 <h2 class="main">추천 숙소</h2>
-<div class="jj_wrapper2">
-  <div class="jj_carousel2">
+<div class="jj_wrapper">
+  <div class="jj_carousel">
     <div class="card-container" id="cardContainer">
       <div th:each="accommodation : ${acc}" class="card" th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 70%;'">
     
@@ -101,10 +101,10 @@
         <span th:case="5"><span class="orange-star">★ ★ ★ ★ ★</span>
         
     </span>
-      <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}">
+      <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}"></span>
+      <span  class="money_prive_aver_kty" th:text="${accommodation.acc_averPrice + ' 원'}"></span>
 </p>
-        <p id="acc_num_kty" th:text="${accommodation.id}"></p>
-        <span class="reco_price_kty" th:text="${'평균가 '+accommodation.acc_averPrice + '원'}"></span>
+        <span id="acc_num_kty" th:text="${accommodation.id}"></span>
       </div>
     </div>
   </div>
@@ -184,40 +184,46 @@
 	</body>
 
 	<style>
+	
+	.money_prive_aver_kty{
+	position:absolute;
+	color:black;
+	top:40px;
+	width:100px;
+	left:170px;
+	}
 	.font_kty_acc_rating{
 	color:black;
 	font-size:12px;
 	}
  .jj_wrapper2 {
+  overflow-x: hidden;
   margin-bottom: -100px;
     overflow-y: hidden;
 }
 #reco_accname{
-
   font-size:15px;
-  margin-top:230px;
+  margin-top:190px;
   color:black;
 }
 .start_reco_acc{
 margin-bottom:40px;
 margin-left:10px;
 }
-.reco_price_kty{
-  margin-top:0px;
-  margin-left:170px;
-  color:black;
 
-}
+
 .jj_carousel2 {
+margin-bottom:50px;
   margin-left: 330px;
   width: 1200px;
   height: 300px;
   padding-top: 50px;
   overflow: hidden;
+
 }
 
 .card-container {
-
+  
   overflow-y: hidden;
   border-radius:10px;
   margin-left:80px;
@@ -260,12 +266,10 @@ margin-left:10px;
   user-select: none;
 }
 
-.card .orange-star,
-.card .font_kty_acc_rating,
-.card .reco_price_kty {
-  user-select: none;
-}
 
+.reco_price_kty{
+color:red;
+}
 
 .card {
 
@@ -396,5 +400,23 @@ margin-bottom:50px;
 	      });
 	    });
 	  });
+  
+  
+  
+  /* 구분자 */
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const moneyPriveAverElements = document.querySelectorAll(".money_prive_aver_kty");
+
+    moneyPriveAverElements.forEach(function (element) {
+        const price = parseInt(element.textContent);
+        const formattedPrice = formatNumberWithCommas(price);
+        element.textContent = formattedPrice + " 원";
+    });
+});
+
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 </script>
 </html>
