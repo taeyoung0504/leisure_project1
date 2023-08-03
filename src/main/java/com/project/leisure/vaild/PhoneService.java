@@ -60,7 +60,7 @@ public class PhoneService {
 	}
 	
 	// 개인정보 때문에 시간이 지나면 해당 폰번호도 테이블에서 삭제하는 기능을 추가 해야할 수도 있다. - 임시테이블로 만들면 가장 좋다.(session temp table)
-	 @Scheduled(fixedDelay = 30000) // 근데 한 번호당 24시간은 아니고 그냥 여기 루틴에 맞춘거다.
+	 @Scheduled(fixedDelay = 180000) // 근데 한 번호당 24시간은 아니고 그냥 여기 루틴에 맞춘거다.
 	    public void updatePhoneEnable() {
 	        List<Phone> phoneToBeUpdated = phoneRepository.findAll();
 
