@@ -196,7 +196,7 @@ color:grey;
 				th:href="@{/user/mypage/my_productList}"
 				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
 		<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 	<div id="wrap">
@@ -421,12 +421,20 @@ cancelBtns.forEach(cancelBtn => {
     checkAndUpdateButtonState();
 	  
   $('.reviewBtn').click(function() {
-    var accomID = $(this).attr('data-accomid');
-    console.log(accomID);
+	  var accomID = $(this).attr('data-accomid');
+	    console.log(accomID);
 
+	    var screenWidth = $(window).width();
+	    var screenHeight = $(window).height();
 
-    var newWindow = window.open('', '_blank', 'width=500,height=400');
-    newWindow.document.write(`
+	    var newWindowWidth = 950;
+	    var newWindowHeight = 800;
+
+	    var leftPosition = (screenWidth - newWindowWidth) / 2;
+	    var topPosition = (screenHeight - newWindowHeight) / 2;
+
+	    var newWindow = window.open('', '_blank', `width=${newWindowWidth},height=${newWindowHeight},left=${leftPosition},top=${topPosition}`);
+	    newWindow.document.write(`
       <html>
       <head>
         <style>
@@ -435,16 +443,17 @@ cancelBtns.forEach(cancelBtn => {
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
-                margin: 0;
+                margin-left: -130px;
             }
             #review_title {
-                margin-top: -120px;
-                margin-left: 60px;
-                font-size: 20px;
+                margin-top: 100px;
+                margin-left: 200px;
+                font-size:30px;
                 font-weight: bold;
             }
             #room_start_k {
-                margin-left: 50px;
+                margin-left: 220px;
+            	font-size:20px;
             }
             #myform fieldset {
                 display: inline-block;
@@ -483,13 +492,14 @@ cancelBtns.forEach(cancelBtn => {
                 border-radius: 5px;
                 font-size: 16px;
                 resize: none;
+            	margin-left:200px;
             }
             #review_confirm {
                 border: none;
-                margin-top: 10px;
-                margin-left: 330px;
-                width: 70px;
-                height: 40px;
+                margin-top: 30px;
+                margin-left: 300px;
+                width: 200px;
+                height: 50px;
                 background-color: black;
                 color: white;
             }
@@ -517,7 +527,7 @@ cancelBtns.forEach(cancelBtn => {
               <textarea class="col-auto form-control" 
                         name="reviewContents" 
                         id="reviewContents" 
-                        placeholder="좋은 수강평을 남겨주시면 요기어때에 큰 힘이 됩니다!"></textarea>
+                        placeholder="좋은 리뷰를 남겨주시면 DAE BAK에 큰 힘이 됩니다!"></textarea>
             </div>
             <div id="error_message"></div>
             <input sec:authorize="isAuthenticated()" 
