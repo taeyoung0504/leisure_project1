@@ -1,4 +1,10 @@
-
+/*swal*/
+const swalWithBootstrapButtons = Swal.mixin({
+	customClass: {
+		confirmButton: 'btn btn-success',
+		cancelButton: 'btn btn-danger'
+	}
+});
 
 //취소 버튼을 이전 페이지 이동
 document
@@ -6,7 +12,6 @@ document
 	.addEventListener(
 		"click",
 		function() {
-
 			swalWithBootstrapButtons.fire({
 				title: '변경 사항이 적용되지 않습니다',
 				text: '이전 페이지로 돌아가시겠습니까?',
@@ -18,41 +23,26 @@ document
 
 			}).then((result) => {
 				if (result.isConfirmed) {
-					// Yes 버튼을 눌렀을 때의 동작
+					// 확인 누를 시 이전 페이지로 이동
 					window.history.back();
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
-					// No 버튼을 눌렀을 때의 동작
-					// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
+					// 취소 버튼 동작 => 아무런 동작 없음
 				}
 			});
 
 		});
 
 
-/*swal*/
-const swalWithBootstrapButtons = Swal.mixin({
-	customClass: {
-		confirmButton: 'btn btn-success',
-		cancelButton: 'btn btn-danger'
-	}
-
-});
-
-
-
 $(document).ready(
 	function() {
 
-		//값 변경됨을 감지하기 위함
 		var originaAccName = $("#acc_name").val(); //숙소 이름
 		var originaAccAddress = $("#acc_address").val(); //숙소 주소
 		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
 
-
-
+		//값 변경됨을 감지하기 위함(입력값이 있으면 등록 가능)
 		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
-		var isAccExplainChanged = false; //사장님 한마디 여부를 저장
-
+		var isAccExplainChanged = false; //사장님 한마디 변경 여부를 저장
 
 		//이미지
 		const imageInput = document
@@ -64,6 +54,7 @@ $(document).ready(
 		//사장님 한마디 
 		const acc_explain = document.getElementById('acc_explain');
 
+		//이미지 변경
 		imageInput.addEventListener('change', function(event) {
 			const file = event.target.files[0];
 			const reader = new FileReader();
@@ -95,7 +86,6 @@ $(document).ready(
 		$('#addButton').click(function(event) {
 
 			event.preventDefault(); // 폼의 기본 동작인 서버로의 전송 방지
-
 
 			var form = $('#productForm')[0]; //첫 번째 form요소
 			var formData = new FormData(form);
@@ -177,7 +167,6 @@ $(document).ready(
 				return;
 			}
 
-
 			$.ajax({
 				url: '/partner/product/productNewMainReg',
 				type: 'POST',
@@ -185,7 +174,7 @@ $(document).ready(
 				enctype: 'multipart/form-data',
 				processData: false,
 				contentType: false,
-				success: function(response) {
+				success: function() {
 
 					Swal.fire({
 						title: '숙소 등록이 완료되었습니다',
@@ -194,17 +183,9 @@ $(document).ready(
 					}).then(() => {
 						window.location.href = '/user/mypage/my_productList';
 					});
-
-
 				},
-				error: function(xhr, status, error) {
-					console.log('AJAX 요청 실패');
-					console.log(xhr);
-					console.log(status);
-					console.log(error);
-					console.log(product);
-
-					alert("변경에 실패하였습니다."); // 변경 실패 알림 메세지
+				error: function(xhr) {
+					Swal.fire(xhr.responseText) // 등록 실패 알림 메세지
 					window.location.href = '/user/mypage/my_productList';
 				}
 			});

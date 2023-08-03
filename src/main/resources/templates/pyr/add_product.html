@@ -194,11 +194,9 @@
 							</p>
 							<p>
 								체크아웃 <span th:text="${product.checkout}" class="checkout"></span>
-
 							</p>
-
+							
 						</div>
-						<!-- 	<button class="addEditImg">이미지 추가</button> -->
 
 						<div class="btnArea">
 							<button class="editProduct" onclick="modifyRoom(this)">객실수정</button>
@@ -208,7 +206,6 @@
 				</div>
 			</div>
 
-			<!-- 이 부분 추후 수정해야한다. -->
 			<div th:if="${#lists.isEmpty(productList)}" id="noProduct">
 				<h3>현재 등록된 상품이 없습니다.</h3>
 			</div>
