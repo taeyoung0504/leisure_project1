@@ -1,51 +1,57 @@
-.essential_mark{
-	font-weight: bold; 
+.essential_mark {
+	font-weight: bold;
 	color: orangered;
 }
 
-.partner_table-th2{
+.partner_table-th2 {
 	text-align: center;
 }
-#partner_input-file{
+
+#partner_input-file {
 	display: none;
 }
 
-#ch_file{
-	display: block; 
-	cursor: pointer; 
-	color: rgb(128, 128, 128); 
-	text-align: center; 
+#ch_file {
+	display: block;
+	cursor: pointer;
+	color: rgb(128, 128, 128);
+	text-align: center;
 	line-height: 3;
 }
 
-#partner_tel{
+#partner_tel {
 	font-size: 16px;
 }
-#partner_sectors{
+
+#partner_sectors {
 	font-size: 16px;
 }
-#partner_region{
+
+#partner_region {
 	font-size: 16px;
 }
-#cau_kty{
+
+#cau_kty {
 	border: 1px solid white;
 }
 
-#hidden_table_kty{
-	border: 1px solid white; 
-	text-align: right; 
+#hidden_table_kty {
+	border: 1px solid white;
+	text-align: right;
 	vertical-align: middle;
 }
-.tang{
+
+.tang {
 	border: 1px solid white;
 }
 
-.tang2{
-	border: 1px solid white; 
-	text-align: right; 
+.tang2 {
+	border: 1px solid white;
+	text-align: right;
 	vertical-align: middle;
 }
+
 td, th {
-	border: 1px solid rgb(106, 106, 106);
+	border: 1px solid rgb(205, 205, 205);
 	padding: 8px;
 }

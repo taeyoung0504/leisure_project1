@@ -1,0 +1,54 @@
+.content-container {
+			width: 900px;
+			margin-left: -100px;
+			margin-top: 25px;
+		}
+
+		.notice-item {
+			border-bottom: 1px solid #ccc;
+			margin-top: 20px;
+			padding: 8px 0px;
+			cursor: pointer;
+		}
+
+		.notice-content {
+			display: none;
+			border-radius: 7px;
+			padding: 0px 20px;
+		}
+
+		.pagination ul {
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+			padding: 0;
+		}
+
+		.pagination ul li {
+			margin-right: 10px;
+		}
+
+		.pagination ul li:last-child {
+			margin-right: 0;
+		}
+
+		#mypage_sidebar_nav {
+			margin-left: -100px;
+		}
+
+		.date {
+			color: rgb(193, 193, 193);
+		}
+
+		.notice_header {
+			color: #e40000d3;
+			margin-top: 40px;
+		}
+
+		.mypage_sidebar a {
+			color: black;
+		}
+		
+		p {
+    margin: 0;
+}

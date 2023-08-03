@@ -2,107 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/admin_notice.css">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-
-<style type="text/css">
-.ck-editor__editable {
-	min-height: 500px;
-}
-
-.img_hk {
-	margin: 15px 0;
-}
-
-.img {
-	margin-right: 20px;
-}
-
-input #title {
-	height: 30px;
-}
-</style>
-
-
-
+	
+	
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/admin_notice.css">
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
 
 <body>
-<html layout:decorate="~{khk/adminNavbar}">
-<div layout:fragment="adminNav" class="container my-3">
-	<div class="content-container">
-		<h1>공지사항 수정</h1>
-		<form method="post" th:action="@{/admin/modify/{id}(id=${notice.id})}" enctype="multipart/form-data">
-			<div class="notice_title">
-				<label for="title">공지사항 제목</label> <input type="text" id="title"
-					name="title" th:value="${notice.title}" required>
-				<br>
-			</div>
-			<div class="notice_content">
-				<label for="content">공지사항 내용</label><br>
-				<textarea id="content" name="content" rows="40"
-					data-editor="ckeditor" required th:text="${notice.content}">
+	<html layout:decorate="~{khk/adminNavbar}">
+	<div layout:fragment="adminNav" class="container my-3">
+		<div class="content-container">
+			<h1>공지사항 수정</h1>
+			<form method="post" th:action="@{/admin/modify/{id}(id=${notice.id})}" enctype="multipart/form-data" onsubmit="convertContent()">
+				<div class="notice_title">
+					<label for="title">공지사항 제목</label> <input type="text" id="title" name="title"
+						th:value="${notice.title}" required>
+					<br>
+				</div>
+				<div class="notice_content">
+					<label for="content">공지사항 내용</label><br>
+					<textarea id="content" name="content" rows="40" required
+						th:text="${notice.content}">
 				</textarea>
-				
-				
-				<div class="img_hk">
-				<label for="image" class="img">이미지 업로드 : </label> <input type="file"
-					id="image" name="image" accept="image/jpeg, image/png">
-			</div>
-			</div>
-			<input type="submit" value="등록" onclick="convertContent()"
-				class="create_notice_btn">
-		</form>
-	</div>
 
 
-	<script>
-	ClassicEditor.create(document.querySelector('[data-editor="ckeditor"]'), {
-	    language: "ko",
-	    enterMode: 2,
-	    shiftEnterMode: 1,
-	    removePlugins: ['Indent'],
-	    autoParagraph: false,
-	    toolbar: {
-	      items: [
-	        'heading',
-	        '|',
-	        'bold',
-	        'italic',
-	        'underline',
-	        'link',
-	        'bulletedList',
-	        'numberedList',
-	        'blockQuote',
-	        'alignment',
-	        'undo',
-	        'redo',
-	      ]
-	    }
-	  })
-	  .then(editor => {
-	    // Editor configuration and change events remain the same
-	    editor.model.document.on('change:data', () => {
-	      let editorData = editor.getData();
-	      editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
-	      document.getElementById('hiddenContent').value = editorData;
-	    });
-	  })
-	  .catch(error => {
-	    console.error(error);
-	  });
+					<div class="img_hk">
+						<label for="image" class="img">이미지 업로드 : </label> <input type="file" id="image" name="image"
+							accept="image/jpeg, image/png">
+					</div>
+				</div>
+				<input type="submit" value="등록" class="create_notice_btn">
+			</form>
+		</div>
 
-	  function convertContent() {
-	    let editorData = CKEDITOR.instances.content.getData();
-	    editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
-	    document.getElementById('hiddenContent').value = editorData;
-	  }
-</script>
-	</body>
+
+		<script>
+			let editorInstance;
+
+			ClassicEditor
+				.create( document.querySelector( '#content' ), {
+					language: "ko",
+					removePlugins: ['Indent'],
+					toolbar: {
+						items: [
+							'heading',
+							'|',
+							'bold',
+							'italic',
+							'underline',
+							'link',
+							'bulletedList',
+							'numberedList',
+							'blockQuote',
+							'alignment',
+							'undo',
+							'redo',
+						]
+					}
+				})
+				.then(editor => {
+					editorInstance = editor;
+					editor.model.document.on('change:data', () => {
+						let editorData = editor.getData();
+						editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
+						document.getElementById('content').value = editorData;
+					});
+				})
+				.catch(error => {
+					console.error(error);
+				});
+
+			function convertContent() {
+				let editorData = editorInstance.getData();
+				editorData = editorData.replace(/<p>/g, '').replace(/<\/p>/g, '');
+				document.getElementById('content').value = editorData;
+			}
+		</script>
+</body>
+
 </html>

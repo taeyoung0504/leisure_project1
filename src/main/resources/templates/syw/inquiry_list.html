@@ -2,82 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<title>DAEBAK</title>
+	<link rel="stylesheet" href="/css/inquiry_list.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 	<meta charset="utf-8">
-	<style>
-		.container {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		.content-container {
-			margin: 0 auto;
-			max-width: 80%;
-		}
-
-		table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		th,
-		td {
-			padding: 15px 8px;
-			border-bottom: 1px solid #ccc;
-			text-align: left;
-		}
-
-		.pagination ul {
-			list-style-type: none;
-			display: flex;
-			justify-content: center;
-			padding: 0;
-		}
-
-		.pagination ul li {
-			margin-right: 10px;
-		}
-
-		.pagination ul li:last-child {
-			margin-right: 0;
-		}
-
-		.pagination {
-			display: flex;
-			justify-content: center;
-			list-style: none;
-			padding: 0;
-			margin-top: 20px;
-		}
-
-		.page-item {
-			margin: 0 5px;
-		}
-
-		.page-link {
-			display: inline-block;
-			padding: 5px 10px;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-			text-decoration: none;
-			color: #333;
-			background-color: #f2f2f2;
-		}
-
-		.page-link:hover {
-			background-color: #e0e0e0;
-		}
-
-		.page-item.active .page-link {
-			background-color: gray;
-			color: #fff;
-		}
-		
-		#filter-dropdown{
-			padding: 5px 10px;
-			border-radius: 3px;
-		}
-	</style>
 </head>
 
 <body>
@@ -94,18 +22,18 @@
 						<th>작성자</th>
 						<th>작성일</th>
 						<th>
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <span>답변 여부</span>
-                    <div>
-                        <select id="filter-dropdown">
-                            <option value="">전체 보기</option>
-                            <option value="answered">답변 완료</option>
-                            <option value="pending">답변 대기</option>
-                        </select>
-                        <button id="apply-filter-btn">적용</button>
-                    </div>
-                </div>
-            </th>
+							<div style="display: flex; align-items: center; justify-content: space-between;">
+								<span>답변 여부</span>
+								<div>
+									<select id="filter-dropdown">
+										<option value="">전체 보기</option>
+										<option value="answered">답변 완료</option>
+										<option value="pending">답변 대기</option>
+									</select>
+									<button id="apply-filter-btn">적용</button>
+								</div>
+							</div>
+						</th>
 
 					</tr>
 				</thead>
@@ -113,14 +41,16 @@
 					<tr th:each="inquiry : ${page}">
 						<td th:text="${inquiry.type}"></td>
 						<td>
-							<a th:href="@{/admin/inquiryAnswer/{id}(id=${inquiry.id})}" style="text-decoration: none; font-weight: bold; cursor: pointer;">
+							<a th:href="@{/admin/inquiryAnswer/{id}(id=${inquiry.id})}"
+								style="text-decoration: none; font-weight: bold; cursor: pointer;">
 								<span th:text="${inquiry.title}"></span>
 							</a>
 						</td>
 						<td th:text="${inquiry.username}"></td>
 						<td th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 						<td>
-							<span th:if="${#lists.size(inquiry.inquiryAnswer) > 0}" style="color: #e40000d3;">답변 완료</span>
+							<span th:if="${#lists.size(inquiry.inquiryAnswer) > 0}" style="color: #e40000d3;">답변
+								완료</span>
 							<span th:unless="${#lists.size(inquiry.inquiryAnswer) > 0}">답변 대기</span>
 						</td>
 					</tr>
@@ -142,18 +72,18 @@
 				</li>
 			</ul>
 		</div>
-<script>
+		<script>
 
 
-document.addEventListener("DOMContentLoaded", function () {
-            var applyFilterBtn = document.getElementById("apply-filter-btn");
-            applyFilterBtn.addEventListener("click", function () {
-                var filterValue = document.getElementById("filter-dropdown").value;
-                var currentUrl = window.location.href.split("?")[0]; // Remove query parameters
-                window.location.href = currentUrl + (filterValue ? "?filter=" + filterValue : "");
-            });
-        });
-</script>
+			document.addEventListener("DOMContentLoaded", function () {
+				var applyFilterBtn = document.getElementById("apply-filter-btn");
+				applyFilterBtn.addEventListener("click", function () {
+					var filterValue = document.getElementById("filter-dropdown").value;
+					var currentUrl = window.location.href.split("?")[0];
+					window.location.href = currentUrl + (filterValue ? "?filter=" + filterValue : "");
+				});
+			});
+		</script>
 </body>
 
 </html>

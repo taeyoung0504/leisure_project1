@@ -7,13 +7,13 @@
 	display: block;
 	margin: 0 auto;
 	width: 1000px;
-/* 	margin-top: 30px; */
+	/* 	margin-top: 30px; */
 }
 
 #kty_left-side_test {
 	float: left;
 	width: 200px;
-	margin-left: 80px;
+	/* 	margin-left: 80px; */
 	height: 870px;
 	/* 	display: flex; */
 	/* 	justify-content: center; */
@@ -21,21 +21,21 @@
 
 #kty_right-side_test {
 	float: right;
-	width: 60%;
+	width: 65%;
 	height: 820px;
-	margin-left: 100px;
+	/* 	margin-left: 100px; */
 	overflow: visible;
 }
 
 .search_deagu_home {
 	width: 300PX !important;
-    display: grid !important;
-    height: fit-content !important;
-    position: fixed !important;
-    border: 1px solid #c7c7c7;
-    border-radius: 10px;
-    padding: 10px;
-/*     margin: 10px; */
+	display: grid !important;
+	height: fit-content !important;
+	position: fixed !important;
+	border: 1px solid #c7c7c7;
+	border-radius: 10px;
+	padding: 10px;
+	/*     margin: 10px; */
 }
 
 label {
@@ -99,18 +99,13 @@ label {
 		margin: 10px 0;
 		display: inline-table;
 	}
-	
-	
 	#range {
-    margin-left:  3% !important;
-}
+		margin-left: 3% !important;
+	}
 	#room_clo label {
 		display: inline;
 		margin-right: 20px;
 	}
-	
-	
-	
 }
 
 .search_kw {
@@ -314,7 +309,7 @@ label {
 	background-color: rgb(240, 240, 240);
 	height: 30px;
 	float: left;
-/* 		margin-right: px */
+	/* 		margin-right: px */
 }
 
 .max {
@@ -382,7 +377,7 @@ label {
 	border-bottom: 1px solid grey;
 	height: 50%;
 	background-repeat: no-repeat;
-	background-size: cover; /* ì „ì²´ë¥¼ ë³´ì´ë©´ì„œ ìš”ì†Œì— ê½‰ ì°¨ê²Œ ì„¤ì • */
+	background-size: cover;
 }
 
 .acc_content {
@@ -393,14 +388,15 @@ label {
 }
 
 .room-entry {
-	display: flex;
+	display: inline-flex;
 	border-bottom: 1px solid #d7d7d7;
-	padding: 20px;
-	width: 600px;
+	padding: 10px;
+	width: 100%;
 	/* border-radius: 20px; */
-	height: 250px;
+	/*     height: 250px; */
 	position: relative;
-	margin: 15px 20px;
+	margin: 1px 20px;
+	color: rgba(0,0,0,0.87);
 }
 
 .room-entry2 {
@@ -411,7 +407,43 @@ label {
 	/* 	width: 450px; */
 	border: 1px solid grey;
 	border-radius: 5px;
+	
 }
+
+.feefee {
+/* 	margin-top: 20px; */
+	position: absolute;
+	font-size: 18px;
+}
+
+.hotel_name_hk {
+	font-size: 25px;
+	font-weight: bold;
+}
+.hotel_sectors_hk  {
+	font-size: 16px;
+	    display: flex;
+	
+}
+
+.hotel_rating_hk{
+	margin-left: 10px;
+}
+
+.hotel_address_hk{
+	font-size: 16px;
+	margin-top: 90px;
+	
+	
+	
+}
+
+.hotel_max_people_hk{
+	font-size: 18px;
+	margin-top: 5px;
+	
+}
+
 
 .right-align {
 	text-align: right;

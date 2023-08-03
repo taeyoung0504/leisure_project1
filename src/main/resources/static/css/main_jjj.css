@@ -31,6 +31,7 @@
 	color: var(--main-color);
 }
 
+
 #header {
 	/* ë„¤ë¹„ ìƒë‹¨ ê³ ì •  */
 	position: fixed !important;
@@ -50,6 +51,12 @@
 	font-style: normal !important;
 	box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
+
+/* section {
+	width: 1500px;
+	margin: 0 auto;
+	
+	} */
 
     @keyframes anime_textup { 0% { top: 0; } 20% { top: -0.2rem; } 40% { top: 0 } 60% { top: 0 } 80% { top: 0 } 100% { top: 0 } }
  
@@ -123,7 +130,7 @@
 .jj_navbar_logo {
 	font-size: 30px;
 	/* 	color: var(--main-color); */
-	padding-left: 300px;
+	padding-left: 15%;
 }
 
 .jj_navbar_logo i {
@@ -144,7 +151,7 @@ body:not(.jj_navbar) {
 }
 
 nav .jj_menubar {
-	padding-right: 300px;
+	padding-right: 15%;
 }
 
 nav .jj_menubar ul {
@@ -990,7 +997,7 @@ footer address .order {
 		border-radius: 0;
 	}
 	.jj_navbar_menu li a {
-		display: block;
+		display: -webkit-inline-box;
 		margin: auto;
 		margin-bottom: 8px;
 		padding: 5px;
@@ -1000,13 +1007,22 @@ footer address .order {
 		/* í™”ë©´ì´ ìž‘ì•„ì¡Œì„ ë•Œë§Œ í–„ë²„ê±° ë²„íŠ¼ ë‚˜ì˜¤ê²Œí•¨ */
 		display: block;
 	}
-
+div .jj_list {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    z-index: -1;
+    left: 200px;
+}
 	/*     ë”ë³´ê¸° ë“œë¡­ë‹¤ìš´ */
 	nav .jj_menubar ul li .jj_list {
 		position: absolute;
 		display: flex;
 		top: 30px;
-		left: 0;
+		left: 250px;
 		width: 430px;
 		height: auto;
 		justify-content: center;
