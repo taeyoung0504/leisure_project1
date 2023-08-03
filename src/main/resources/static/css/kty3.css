@@ -98,6 +98,7 @@ label {
 		background-color: rgb(240, 240, 240);
 		margin: 10px 0;
 		display: inline-table;
+		    width: -webkit-fill-available;
 	}
 	#range {
 		margin-left: 3% !important;
@@ -396,7 +397,7 @@ label {
 	/*     height: 250px; */
 	position: relative;
 	margin: 1px 20px;
-	color: rgba(0,0,0,0.87);
+	color: rgba(0, 0, 0, 0.87);
 }
 
 .room-entry2 {
@@ -407,44 +408,57 @@ label {
 	/* 	width: 450px; */
 	border: 1px solid grey;
 	border-radius: 5px;
-	
 }
 
 .feefee {
-/* 	margin-top: 20px; */
-	position: absolute;
-	font-size: 18px;
+	/* 	margin-top: 20px; */
+/* 	position: absolute; */
+	font-size: 22px;
 }
 
 .hotel_name_hk {
 	font-size: 25px;
 	font-weight: bold;
 }
-.hotel_sectors_hk  {
+
+.hotel_sectors_hk {
 	font-size: 16px;
-	    display: flex;
-	
+	display: flex;
 }
 
-.hotel_rating_hk{
+.hotel_rating_hk {
 	margin-left: 10px;
+	color: orange;
 }
 
-.hotel_address_hk{
+.hotel_reviews_hk {
+	color: orange;
+}
+
+.hotel_address_hk {
 	font-size: 16px;
+}
+
+.hotel_max_people_hk {
+	display: none; font-size : 18px;
 	margin-top: 90px;
-	
-	
-	
-}
-
-.hotel_max_people_hk{
 	font-size: 18px;
-	margin-top: 5px;
-	
 }
 
+.cancle_hk{
+	font-size: 16px;
+	color: grey;
+}
+.hotel_averPrice_hk {
+	font-size: 20px;
+	margin-top: 90px;
+	position: relative;
+}
 
+.productAmount{
+	font-weight: bold;
+	
+}
 .right-align {
 	text-align: right;
 }

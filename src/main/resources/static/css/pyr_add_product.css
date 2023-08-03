@@ -14,7 +14,7 @@
 
 a {
     text-decoration: none;
-    color: black;
+/*     color: black; */
 }
 
 /* 유효성 검사 조건 불충족 시 에러 메세지  */
