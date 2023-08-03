@@ -101,13 +101,36 @@ public class CSController {
 		
 		String rand = (String)session.getAttribute("rand");
 		
-		if (rand.equals(code)) {
+		if (rand != null && rand.equals(code)) {
 			phoneService.updateEnableOne(phoneNumber);
 	        session.removeAttribute("rand");
 	        return false;
-	    } 
+	    } else {
+	    	return true;
+	    }
 		
-		return true;
+	}
+	
+	@GetMapping("/check/timeout")
+	public int timeout(HttpSession session) {
+		
+//		String rand = (String)session.getAttribute("rand");
+		
+//		if (rand.equals(code)) {
+//			phoneService.updateEnableOne(phoneNumber);
+//	        session.removeAttribute("rand");
+//	        return false;
+//	    } 
+		
+		if(session != null) {
+			if (session.getAttribute("rand") != null) {
+	            // Remove the session attribute with the key 'rand'
+	            session.removeAttribute("rand");
+	            return 0;
+	        }
+		}
+		
+		return 1;
 	}
 
 

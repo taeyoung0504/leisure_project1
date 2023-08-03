@@ -785,6 +785,8 @@ input[type="checkbox"].inp_chk_02 {
 	    						    /* const verificationCodeDiv = document.getElementById('verificationCode');
 	    						    verificationCodeDiv.style.display = 'block'; */
 	    						    
+	    						    
+	    						    
 	    						    const phoneNumber = document.getElementById('tel').value;
 	    						   	/* alert(phoneNumber);
 	    						   	console.log(typeof phoneNumber); */
@@ -854,12 +856,36 @@ input[type="checkbox"].inp_chk_02 {
     								                clearInterval(timer);
     								                display.textContent = "";
     								                isRunning = false;
-    								                tel_btn.disabled = false
-    								                /* input_tel.readOnly = false */
-    								                input_tel.disabled = false
-    		    									tel_btn.innerText = '재전송';
-    								                tel_btn.style.backgroundColor = "red";
-    								                verificationCodeDiv.style.display = 'none';
+    								           
+    								                
+    								                fetch(`/check/timeout`, {
+    					    						      method: 'GET',
+    					    						      headers: {
+    					    						        'Content-Type': 'application/json'
+    					    						      }/* ,
+    					    						      body: JSON.stringify(requestBody) */
+    					    						    })
+    					    						    .then(response => response.json())
+    					    						    .then(responseData => {
+    					    						    	if(responseData == 1){
+    					    									/* Swal.fire('그런 세션은 없습니다.') */
+    					    									return
+    					    								} else {
+    					    									Swal.fire('인증번호를 다시 요청해주세요.')
+    					    									/* const verificationCodeDiv = document.getElementById('verificationCode'); */
+			    								                /* input_tel.readOnly = false */
+    					    									tel_btn.disabled = false
+			    								                input_tel.disabled = false
+			    		    									tel_btn.innerText = '재전송';
+			    								                tel_btn.style.backgroundColor = "red";
+    					    									/* verificationCodeDiv.textContent = '';  */
+    					    									return
+    					    								}
+    					    						    })
+    					    						    .catch(error => {
+    					    						      console.error('오류가 발생했습니다:', error);
+    					    						    });
+    								                
     								            }
     								        }, 1000);
     								        isRunning = true;
@@ -950,7 +976,7 @@ input[type="checkbox"].inp_chk_02 {
 		    									/* alert('인증되었습니다') */
 		    									Swal.fire('인증되었습니다.')
 		    									const input_tel = document.getElementById("tel")
-		    									input_tel.readOnly = true
+		    									input_tel.disabled = true
 		    									
 		    									const tel_btn = document.getElementById("code_btn")
 		    									tel_btn.disabled = true
@@ -979,7 +1005,7 @@ input[type="checkbox"].inp_chk_02 {
 		    						    
 		    						})
 		    						
-		    						window.onload = function() {
+		    						window.onpageshow = function(e) {
 		    							const input_tel = document.getElementById("tel")
 		    							tel_btn.style.backgroundColor = "red";
     									input_tel.disabled = false;
