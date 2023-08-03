@@ -88,8 +88,9 @@
 <h2 class="main">추천 숙소</h2>
 <div class="jj_wrapper2">
   <div class="jj_carousel2">
-    <div class="card-container">
+    <div class="card-container" id="cardContainer">
       <div th:each="accommodation : ${acc}" class="card" th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 70%;'">
+        <!-- Your content goes here -->
     <!-- Your content goes here -->
         <h2 class="reco_accname" th:text="${accommodation.acc_name}"></h2>
         <p class="start_reco_acc">
@@ -103,7 +104,7 @@
     <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}">
 </p>
         <p id="acc_num_kty" th:text="${accommodation.id}"></p>
-        <span class="reco_price_kty" th:text="${'(평균) '+accommodation.acc_averPrice + ' 원'}"></span>
+        <span class="reco_price_kty" th:text="${'평균가 '+accommodation.acc_averPrice + '원'}"></span>
       </div>
     </div>
   </div>
@@ -193,18 +194,16 @@
 }
 .reco_accname{
   font-size:10px;
-  
   margin-top:230px;
   color:black;
- 
 }
 .start_reco_acc{
-margin-bottom:30px;
+margin-bottom:40px;
 margin-left:10px;
 }
 .reco_price_kty{
-  margin-top:20px;
-  margin-left:120px;
+  margin-top:0px;
+  margin-left:170px;
   color:black;
 
 }
@@ -217,6 +216,7 @@ margin-left:10px;
 }
 
 .card-container {
+  border-radius:8px;
   margin-left:80px;
   height:350px;
   margin-top: -50px;
@@ -350,5 +350,17 @@ margin-bottom:50px;
       
     });
   });
+  
+  
+  document.addEventListener("DOMContentLoaded", function() {
+	    const cards = document.querySelectorAll(".card");
+	    cards.forEach(function(card) {
+	      card.addEventListener("click", function() {
+	        const id = card.querySelector("#acc_num_kty").textContent;
+	        const url = `/tour/product/detail/${id}`;
+	        window.location.href = url;
+	      });
+	    });
+	  });
 </script>
 </html>
