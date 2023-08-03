@@ -685,7 +685,7 @@ input[type="checkbox"].inp_chk_02 {
 								    		/* let successUrl =  'http://localhost:8080/api/v1/payments/toss/success';
 							    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail';  */
 							    			let successUrl =  'http://192.168.10.67:8080/api/v1/payments/toss/success';
-							    			let failUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/fail';   
+							    			let failUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/fail';    
 								    		
 							    		       function toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl) {
 									                fetch(url2, {
@@ -859,6 +859,7 @@ input[type="checkbox"].inp_chk_02 {
     								                input_tel.disabled = false
     		    									tel_btn.innerText = '재전송';
     								                tel_btn.style.backgroundColor = "red";
+    								                verificationCodeDiv.style.display = 'none';
     								            }
     								        }, 1000);
     								        isRunning = true;
@@ -977,6 +978,16 @@ input[type="checkbox"].inp_chk_02 {
 		    						    });
 		    						    
 		    						})
+		    						
+		    						window.onload = function() {
+		    							const input_tel = document.getElementById("tel")
+		    							tel_btn.style.backgroundColor = "red";
+    									input_tel.disabled = false;
+    									
+    									const tel_btn = document.getElementById("code_btn")
+    									document.getElementById('digit').innerText = ''; // -> 이거 안먹히는 듯
+    									tel_btn.disabled = false
+		    						}
 		    						
 		    						 // 모달부분 //   
 		    				    function openModal() {
