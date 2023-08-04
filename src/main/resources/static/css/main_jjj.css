@@ -203,7 +203,7 @@ nav .jj_menubar ul li:nth-child(6):hover .fas {
 nav .jj_menubar ul li .jj_list {
 	position: absolute;
 	display: flex;
-	width: 70px;
+	width: 90px;
 	left: -10px;
 	height: auto;
 	justify-content: center;
