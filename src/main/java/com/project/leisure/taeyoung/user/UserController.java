@@ -541,7 +541,7 @@ public class UserController {
 	            .filter(Accommodation -> Accommodation.getUsername().equals(username))
 	            .collect(Collectors.toList());
 
-	    model.addAttribute("acc", filteredBook);
+	    model.addAttribute("acc", filteredBook); 
 	    model.addAttribute("booking", book);
 	    model.addAttribute("cancleList", canclereqList);
 	    return "kty/my_acc_bookList";
