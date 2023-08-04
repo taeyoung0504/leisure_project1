@@ -537,6 +537,7 @@ public class UserController {
 	    return "kty/my_booking";
 	}
 	
+	// PRG(Post-Redirect-Get) 패턴 이슈
 	@GetMapping("/mypage/my_booking_del/{id}")
 	public String bookingDelete(@PathVariable("id") int id,
 								Principal principal,
