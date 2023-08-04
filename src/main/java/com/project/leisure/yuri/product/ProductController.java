@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.booking.BookService;
-import com.project.leisure.taeyoung.user.UserRepository;
+import com.project.leisure.taeyoung.user.UserRole;
+import com.project.leisure.taeyoung.user.UserService;
+import com.project.leisure.taeyoung.user.Users;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +36,8 @@ public class ProductController {
 	private final AccommodationService accommodationService;
 
 	private final BookService bookService;
-
+	private final UserService userService;
+	
 	// productNewMainReg 해당 유저가 새로운 숙소를 추가
 	@GetMapping("/productNewMainReg")
 	public String productNewMainReg(Principal principal, @RequestParam(name = "companyName") String companyName,
@@ -72,6 +74,19 @@ public class ProductController {
 	@GetMapping(value = "productMainReg/{id}")
 	public String productMainReg(Model model, Principal principal, @PathVariable("id") Long acc_id) {
 
+		
+		String username = principal.getName();
+
+	  
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    
+	    
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
@@ -102,8 +117,20 @@ public class ProductController {
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
 	@GetMapping(value = "registerRoom/{id}")
-	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id) {
+	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id,Principal principal) {
 
+		
+		String username = principal.getName();
+
+	    
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+		
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
@@ -123,8 +150,19 @@ public class ProductController {
 
 	// 객실 등록 페이지 이동 및 해당 pk조회하여 product 가져오기
 	@GetMapping(value = "addproduct/{id}")
-	public String setAddProduct(Model model, @PathVariable("id") Long acc_id) {
+	public String setAddProduct(Model model, @PathVariable("id") Long acc_id,Principal principal) {
 
+		String username = principal.getName();
+
+	  
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+		
 		// 해당 id로 product를 조회
 		List<Product> product = productService.findProductsByAccommodationId(acc_id);
 
@@ -302,8 +340,20 @@ public class ProductController {
 
 //방 수정하기위해 해당 방 ID를 가져오고 또한 해당 방을 조회해서 찾음
 	@GetMapping(value = "modifyRoom/{productId}")
-	public String modifyRoom(Model model, @PathVariable("productId") Long productId) {
+	public String modifyRoom(Model model, @PathVariable("productId") Long productId,Principal principal) {
 
+		
+		String username = principal.getName();
+
+	    
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+		
+		
 		Product product = this.productService.getProduct(productId);
 
 		model.addAttribute("product", product);

@@ -35,8 +35,9 @@
 #address-map {
 	position: fixed;
 	top: -15px;
-	left: 400px;
-	width: calc(100% - 400px);
+	left: 420px;
+	width: calc(100% - 450px);
+	border-radius:15px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -59,7 +60,7 @@
 	padding: 10px 10px 10px 10px;
 	margin-left: 20px;
 	overflow: auto;
-	margin-top: 50px;
+	margin-top: 10px;
 	/* Added margin-top */
 }
 
@@ -72,7 +73,7 @@
 	padding-top: 15px;
 	padding-left: 5px;
 	font-size: 14px;
-	background-color: rgb(255, 232, 236);
+
 }
 
 .right-area{
@@ -92,10 +93,8 @@
 }
 
 #daegu_top10_title {
-	position: absolute;
-	top: 30px;
-	font-size: 18px;
-	left: 40px;
+	font-size:20px;
+	margin-top:20px;
 	text-align: center;
 }
 

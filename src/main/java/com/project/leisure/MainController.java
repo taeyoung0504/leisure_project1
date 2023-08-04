@@ -40,7 +40,7 @@ public class MainController {
         allAccommodations.sort(Comparator.comparingInt(Accommodation::getAcc_rating).reversed());
 
         // Get the top 6 accommodations based on acc_rating
-        List<Accommodation> topAccommodations = allAccommodations.stream().limit(6).collect(Collectors.toList());
+        List<Accommodation> topAccommodations = allAccommodations.stream().limit(8).collect(Collectors.toList());
 
         // Add the top 6 accommodations to the model
         model.addAttribute("acc", topAccommodations);
