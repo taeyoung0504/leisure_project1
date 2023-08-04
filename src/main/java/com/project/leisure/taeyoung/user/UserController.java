@@ -391,9 +391,9 @@ public class UserController {
 
 	/* 파트너 신청 페이지 */
 	@GetMapping("/mypage/partner_reg")
-	public String partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
+	public String partner_registration(Model model, Principal principal) {
 		String current_user = principal.getName();
-		Page<RegPartner> regList = regService.getList(page);
+		List<RegPartner> regList = regService.getList();
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -402,11 +402,23 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage/my_partner_reg")
-	public String modify_partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
-		String current_user = principal.getName();
-		Page<RegPartner> regList = regService.getList(page);
-		List<RegPartner> filteredRegList = regList.stream()
-				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
+	public String modify_partner_registration(Model model, Principal principal,
+	                                         @RequestParam(name = "page", defaultValue = "1") int page) {
+	    int itemsPerPage = 7;
+	    String current_user = principal.getName();
+	    List<RegPartner> regList = regService.getList();
+	    List<RegPartner> filteredRegList = regList.stream()
+	            .filter(regPartner -> regPartner.getReg_username().equals(current_user))
+	            .collect(Collectors.toList());
+
+	    // Pagination logic
+	    int totalItems = filteredRegList.size();
+	    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+	    int startIndex = (page - 1) * itemsPerPage;
+	    int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+	    // Extract the relevant sublist for the current page
+	    List<RegPartner> paginatedRegList = filteredRegList.subList(startIndex, endIndex);
 
 		// 해당 유저의 이름을 가져와 ACC에 해당 숙소가 이미 동록이 되었는지 안 되었는지 확인
 		List<Accommodation> findHaveAcc = this.accommodationService.findAccommodationsByUsername(current_user);
@@ -420,9 +432,11 @@ public class UserController {
 			accRegMap.put(String.valueOf(regPartner.getId()), isRegistered);
 		}
 
-		model.addAttribute("regList", filteredRegList);
-		model.addAttribute("paging",regList);
-		model.addAttribute("accRegMap", accRegMap);
+		  model.addAttribute("regList", paginatedRegList);
+		    model.addAttribute("accRegMap", accRegMap);
+		    model.addAttribute("totalPages", totalPages);
+		    model.addAttribute("currentPage", page);
+
 		// model.addAttribute("regList", filteredRegList);
 		return "kty/modify_partner_regi";
 	}

@@ -55,11 +55,9 @@ public class RegService {
 
 	}
 
-	public Page<RegPartner> getList(int page) {
-		 Pageable pageable = PageRequest.of(page, 10);
-		return regRepository.findAll(pageable);
+	public List<RegPartner> getList() {
+		return regRepository.findAll();
 	}
-
 
 
 }

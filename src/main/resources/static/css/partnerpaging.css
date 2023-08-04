@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+  margin-top:680px;
+  margin-left:310px;
+  font-size:17px;
+  justify-content: center;
+  align-items: center;
+}
+
+.horizontal-pagination {
+  list-style-type: none;
+  display: flex;
+  gap: 5px;
+}
+
+.horizontal-pagination li {
+  display: inline;
+}
+
+.horizontal-pagination li a {
+  padding: 3px 3px;
+  
+  }
