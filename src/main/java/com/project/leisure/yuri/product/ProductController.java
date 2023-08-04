@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.booking.BookService;
-import com.project.leisure.taeyoung.user.UserRepository;
 import com.project.leisure.taeyoung.user.UserRole;
 import com.project.leisure.taeyoung.user.UserService;
 import com.project.leisure.taeyoung.user.Users;
