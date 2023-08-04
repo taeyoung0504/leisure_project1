@@ -361,15 +361,18 @@ a {
 	z-index: 1;
 }
 
+/*효경 수정*/
 .imgLists_deleteButton {
-	font-size: 20px;
-	color: #080808;
-	background-color: rgb(206, 206, 206);
-	border: none;
-	cursor: pointer;
-	outline: none;
-	padding: 4px;
-	margin-top: 3px
+	font-size: 13px;
+    color: #ffffff;
+    background-color: rgb(206 206 206 / 50%);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 6px;
+    margin-top: 3px;
+    height: 20px;
+    line-height: 0;
 }
 
 /* 상품리스트 이미지 추가 관련  */
@@ -555,18 +558,19 @@ a {
 .Product_contents .resetProduct {
 	padding: 10px 20px;
 	margin-top: 10px;
-	background-color: #f11d1dd3;
+	background-color: var(--main-color);
 	color: #fff;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	transition: background-color 0.3s ease;
 	width: 150px;
+	text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .Product_contents .resetProduct:hover {
-	background-color: #ff4747d3;
-	transition: opacity 0.4s ease-in-out;
+	background-color: #cc0000;
 }
 
 .Product_contents .cancelProduct {
@@ -577,8 +581,10 @@ a {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	transition: background-color 0.3s ease;
 	width: 150px;
+	text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .Product_contents .cancelProduct:hover {
@@ -589,18 +595,19 @@ a {
 .Product_contents .editOkProduct {
 	padding: 10px 20px;
 	margin-top: 10px;
-	background-color: #e40000d3;
-	color: #fff;
+	background-color: var(--main-color);
+	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	transition: background-color 0.3s ease;
 	width: 336px;
+	text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .Product_contents .editOkProduct:hover {
-	background-color: #e400008e;
-	transition: opacity 0.4s ease-in-out;
+	background-color: #cc0000;
 }
 
 .Product_contents button:not(:last-child) {

@@ -308,6 +308,15 @@ color:grey;
   filter: grayscale(100%);
 }
 
+.delParents {
+	cursor : pointer;
+	height: 10px;
+}
+
+.delParents:hover {
+	color: red;
+}
+
 #del {
 	position: relative;
 	top : 0;

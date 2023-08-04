@@ -12,8 +12,11 @@
 	width: 256px; 추가한 속성
 	
 } */
+ .ui-datepicker{
+        width: 450px !important;
+    }
 
-.datepicker table {
+.ui-datepicker table {
       background-color: #fff;
     margin: 0;
     -webkit-touch-callout: none;
@@ -26,8 +29,12 @@
 	z-index:10;
 	border: solid 1px gray;
 	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
+	width: 200px !important;
 }
 
+.table-condensed{
+	width: 200px;
+}
 
 /* room 영역 스타일 */
 .room {
@@ -125,7 +132,7 @@
 }
 
 #datepicker1 {
-	width: 190px;
+	width: 230px;
 	height: 40px;
 	border: 1px solid rgba(0,0,0,0.08);
 	padding-left: 12px;

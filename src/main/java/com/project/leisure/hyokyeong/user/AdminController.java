@@ -84,7 +84,20 @@ public class AdminController {
 	// 권한 변경 페이지
 	@GetMapping("/authorityPage")
 	public String authorityPage(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw", defaultValue = "") String kw) {
+			@RequestParam(value = "kw", defaultValue = "") String kw,Principal principal) {
+		
+		String username = principal.getName();
+
+	    // 해당 유저의 role이 admin인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    
+	    
 		Page<Users> paging = this.userListService.getList(page, kw);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw", kw);
@@ -186,7 +199,18 @@ public class AdminController {
 	// 신고리스트 불러오기
 	@GetMapping("/declarationList")
 	public String declarationList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw", defaultValue = "") String kw) {
+			@RequestParam(value = "kw", defaultValue = "") String kw,Principal principal) {
+		String username = principal.getName();
+
+	    // 해당 유저의 role이 admin인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    
 		Page<Declaration> paging = this.declarationListService.getList(page, kw);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw", kw);
@@ -246,6 +270,9 @@ public class AdminController {
 	public String inquiryList(Model model, Principal principal, 
 	    @RequestParam(required = false) String filter,
 	    @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+		
+	
+
 	        
 	    String username = principal.getName();
 	    Page<Inquiry> page;
@@ -275,7 +302,19 @@ public class AdminController {
 
 	@GetMapping("/adminNoticeList")
 	public String adminNoticeList(Model model,
-			@PageableDefault(size = 5, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(size = 5, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable,Principal principal) {
+		
+		String username = principal.getName();
+
+	    // 해당 유저의 role이 admin인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    
 		Page<Notice> page = noticeService.getAllNotices(pageable);
 		model.addAttribute("page", page);
 		return "syw/adminNotice_list";
@@ -396,11 +435,22 @@ public class AdminController {
 	}
 
 	@GetMapping("/main")
-	public String admin_dashboard(Model model) {
-		LocalDate currentDate = LocalDate.now();
-		model.addAttribute("currentDate", currentDate);
-		return "kty/admin_main";
+	public String admin_dashboard(Model model, Principal principal) {
+	    String username = principal.getName();
+
+	    // 해당 유저의 role이 admin인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    LocalDate currentDate = LocalDate.now();
+	    model.addAttribute("currentDate", currentDate);
+	    return "kty/admin_main";
 	}
+	
 	
 	@GetMapping("/cancle_req")
 	public String cancle_req(Model model) {
