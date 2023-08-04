@@ -561,4 +561,9 @@ public class UserController {
 	    return "kty/my_acc_bookList";
 	}
 
+	
+	@GetMapping("/event")
+	public String event_page() {
+		return "kty/event";
+	}
 }

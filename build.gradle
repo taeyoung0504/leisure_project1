@@ -30,6 +30,8 @@ dependencies {
    implementation 'org.springframework.boot:spring-boot-starter-mail'
       implementation 'com.fasterxml.jackson.core:jackson-databind'
       implementation 'org.commonmark:commonmark:0.21.0'
+    
+      
       
       //2023-07-29 추가
  implementation 'com.fasterxml.jackson.core:jackson-databind'
@@ -38,6 +40,8 @@ dependencies {
       implementation 'net.nurigo:sdk:4.2.7'
       
       
+      //리플릿
+      implementation 'io.github.awant:spring-boot-starter-leaflet:1.1.0'  
 }
 
 tasks.named('test') {
