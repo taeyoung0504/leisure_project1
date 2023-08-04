@@ -2,10 +2,12 @@ package com.project.leisure.dogyeom.booking;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
 import com.project.leisure.dogyeom.base.BaseEntity;
+import com.project.leisure.dogyeom.garbage.Garbage;
 import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.Product;
 
@@ -17,6 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
+@Builder
 public class BookingVO extends BaseEntity implements Serializable{
 
 	@Id
@@ -136,9 +140,28 @@ public class BookingVO extends BaseEntity implements Serializable{
 	        this.accommodation = accommodation;
 	    }
 	
-	
-
 	// 빌드패턴 생성하기
+	 public Garbage toGarbage() {
+	        return Garbage.builder()
+	                .bookNum(bookNum)
+	                .bookStatus(bookStatus)
+	                .bookerID(bookerID)
+	                .bookerName(bookerName)
+	                .bookerTel(bookerTel)
+	                .accomTitle(accomTitle)
+	                .roomTitle(roomTitle)
+	                .checkin(checkin)
+	                .checkOut(checkOut)
+	                .bookHeadCount(bookHeadCount)
+	                .paymentDate(paymentDate)
+	                .canceled_at(canceled_at)
+	                .payType(payType)
+	                .totalPrice(totalPrice)
+	                .tempRoomId(tempRoomId)
+	                .tempAccomId(tempAccomId)
+	                .tid(tid)
+	                .build();
+	    }
 
 	 @Override
 	    public String toString() {

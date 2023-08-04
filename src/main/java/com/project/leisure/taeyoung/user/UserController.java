@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +66,7 @@ public class UserController {
 	private final InquiryAnswerService inquiryAnswerService;
 	private final CancelRequestService cancelRequestService;
 	
-	@Autowired
+	@Autowired 
 	private final BookService bookService;
 	
 
@@ -499,24 +500,6 @@ public class UserController {
 		}
 		return "pyr/my_productlist";
 	}
-	
-	// 김도겸 
-	@GetMapping("/mypage/my_booking")
-	public String my_booking(Model model, Principal principal) {
-	    String booker_user = principal.getName();
-	    List<BookingVO> bookList = bookService.getBookList();
-	    List<BookingVO> filteredBook = bookList.stream()
-	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
-	            .collect(Collectors.toList());
-	    /*
-	    for (BookingVO book : bookList) {
-	        System.out.println("************** book : " + book.toString());
-	    }
-	    */
-	    model.addAttribute("bookList", filteredBook);
-	    return "kty/my_booking";
-	}
-	
 	
 	@GetMapping("/mypage/my_acc_bookList")
 	public String my_acc_bookList(Principal principal,Model model) {
