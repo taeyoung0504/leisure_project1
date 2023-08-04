@@ -398,12 +398,16 @@ h5 .nav-link{
 .btns-wrap__edit-btn {
 	position: absolute;
 	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
 	top: -20px;
 	width: 200px;
 	height: 50px;
+	background-color: var(--main-color);
+    border-radius: 4px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 #confirm_newPwd{
 	height:2px;
@@ -421,6 +425,7 @@ h5 .nav-link{
 }
 .btns-wrap__edit-btn:hover {
 	cursor: pointer;
+	background-color: #cc0000;
 }
 
 .mypage_sidebar {
@@ -500,19 +505,21 @@ li.mypage_sidebar a.active {
 
 #modifypassword {
 	position: relative;
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: rgb(255, 159, 159);
-	color: rgb(255, 255, 255);
+	border: none;
+	border-radius: 4px;
+	background-color: var(--main-color);
+	color: white;
 	width: 200px;
 	height: 50px;
 	font-weight: bold;
+	text-decoration: none;
+    font-size: 16px;
 }
 
 #modifypassword:hover {
 	cursor: pointer;
+	background-color: #cc0000;
 }
-
 #noused_account {
 	color: rgb(113, 126, 132);
 }
@@ -540,13 +547,15 @@ li.mypage_sidebar a.active {
 
 #modifyaddr {
 	position: relative;
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: rgb(255, 159, 159);
-	color: rgb(255, 255, 255);
+	border-radius: 4px;
+	background-color: var(--main-color);
+	color: white;
 	width: 200px;
 	height: 50px;
 	font-weight: bold;
+	border: none;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 #modify_addr_button {
@@ -559,9 +568,11 @@ li.mypage_sidebar a.active {
 	height: 30px;
 }
 
-#modifyaddr {
+#modifyaddr:hover {
 	cursor: pointer;
+	background-color: #cc0000;
 }
+
 
 #user_del_input {
 	display: none;
@@ -678,19 +689,23 @@ td{
 }
 
 #reg_partner_final {
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
+	border: none;
+	border-radius: 4px;
+	background-color: var(--main-color);
 	width: 160px;
 	height: 50px;
 	font-size: 16px;
+	color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 
 
 #reg_partner_final:hover {
 	cursor: pointer;
+	background-color: #cc0000;
 }
 
 #partner_input-file {
@@ -969,9 +984,9 @@ td{
 
 #my_regi_result {
 	position: absolute;
-	left: -10px;
-	top: 80px;
-	width: 800px;
+	left: -70px;
+	top: 130px;
+	width: 1000px;
 	border-collapse: collapse;
 }
 
@@ -1028,9 +1043,11 @@ td{
 }
 
 #my_reg_info {
-	margin-top: 20px;
+	margin-top: 70px;
 	font-size: 25px;
 	font-weight: bold;
+	margin-left: -70px;
+	color: var(--main-color);
 }
 
 .parking_check_type {
