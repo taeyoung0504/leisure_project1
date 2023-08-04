@@ -86,25 +86,25 @@
 
 
 <h2 class="main">추천 숙소</h2>
-<div class="jj_wrapper2">
-  <div class="jj_carousel2">
+<div class="jj_wrapper">
+  <div class="jj_carousel">
     <div class="card-container" id="cardContainer">
       <div th:each="accommodation : ${acc}" class="card" th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 70%;'">
-        <!-- Your content goes here -->
-    <!-- Your content goes here -->
-        <h2 class="reco_accname" th:text="${accommodation.acc_name}"></h2>
+    
+        <h2 id="reco_accname" th:text="${accommodation.acc_name}"></h2>
         <p class="start_reco_acc">
      <span th:switch="${accommodation.acc_rating}">
-        <span th:case="1"><span class="orange-star">★</span> ☆ ☆ ☆ ☆</span>
-        <span th:case="2"><span class="orange-star">★</span> <span class="orange-star">★</span> ☆ ☆ ☆</span>
-        <span th:case="3"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> ☆ ☆</span>
-        <span th:case="4"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> </span>
-        <span th:case="5"><span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span> <span class="orange-star">★</span></span>
+        <span th:case="1"><span class="orange-star">★</span></span>
+        <span th:case="2"><span class="orange-star">★ ★ ★</span></span>
+        <span th:case="3"><span class="orange-star">★ ★ ★</span></span>
+        <span th:case="4"><span class="orange-star">★ ★ ★ ★</span> </span>
+        <span th:case="5"><span class="orange-star">★ ★ ★ ★ ★</span>
+        
     </span>
-    <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}">
+      <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}"></span>
+      <span  class="money_prive_aver_kty" th:text="${accommodation.acc_averPrice + ' 원'}"></span>
 </p>
-        <p id="acc_num_kty" th:text="${accommodation.id}"></p>
-        <span class="reco_price_kty" th:text="${'평균가 '+accommodation.acc_averPrice + '원'}"></span>
+        <span id="acc_num_kty" th:text="${accommodation.id}"></span>
       </div>
     </div>
   </div>
@@ -149,7 +149,7 @@
 
 	
 	</div>
-	<!-- 푸터 -->
+	<!-- 푸터 .-->
 	<footer>
 		<div class="jj_align">
 			<ul class="jj_link">
@@ -184,39 +184,48 @@
 	</body>
 
 	<style>
+	
+	.money_prive_aver_kty{
+	position:absolute;
+	color:black;
+	top:40px;
+	width:100px;
+	left:170px;
+	}
 	.font_kty_acc_rating{
-	margin-left:5px;
 	color:black;
 	font-size:12px;
 	}
  .jj_wrapper2 {
+  overflow-x: hidden;
   margin-bottom: -100px;
+    overflow-y: hidden;
 }
-.reco_accname{
-  font-size:10px;
-  margin-top:230px;
+#reco_accname{
+  font-size:15px;
+  margin-top:190px;
   color:black;
 }
 .start_reco_acc{
 margin-bottom:40px;
 margin-left:10px;
 }
-.reco_price_kty{
-  margin-top:0px;
-  margin-left:170px;
-  color:black;
 
-}
+
 .jj_carousel2 {
+margin-bottom:50px;
   margin-left: 330px;
   width: 1200px;
   height: 300px;
   padding-top: 50px;
   overflow: hidden;
+
 }
 
 .card-container {
-  border-radius:8px;
+  
+  overflow-y: hidden;
+  border-radius:10px;
   margin-left:80px;
   height:350px;
   margin-top: -50px;
@@ -233,8 +242,37 @@ margin-left:10px;
 .card-container::-webkit-scrollbar {
   display: none; /* Hide the scrollbar on Chrome, Safari, and Opera */
 }
+ ::selection {
+        background-color: transparent;
+    }
+
+    /* 드래그 중인 텍스트 스타일 변경 (옵션) */
+    ::-moz-selection {
+        background-color: transparent;
+    }
+    ::-webkit-selection {
+        background-color: transparent;
+    }
+    ::-ms-selection {
+        background-color: transparent;
+    }
+
+.stop-dragging
+{
+  -ms-user-select: none; 
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+.reco_price_kty{
+color:red;
+}
 
 .card {
+
 margin-bottom:50px;
   position: relative; /* 위치를 상대적으로 설정합니다. */
   display: inline-block;
@@ -362,5 +400,23 @@ margin-bottom:50px;
 	      });
 	    });
 	  });
+  
+  
+  
+  /* 구분자 */
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const moneyPriveAverElements = document.querySelectorAll(".money_prive_aver_kty");
+
+    moneyPriveAverElements.forEach(function (element) {
+        const price = parseInt(element.textContent);
+        const formattedPrice = formatNumberWithCommas(price);
+        element.textContent = formattedPrice + " 원";
+    });
+});
+
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 </script>
 </html>
