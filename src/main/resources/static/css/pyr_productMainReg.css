@@ -13,14 +13,16 @@ h1 {
 #productForm {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	width: 800px;
 }
 
 #namdAddrSecFlex {
 	display: flex;
-	margin-bottom: 20px;
-	margin-top: 20px;
+	margin-bottom: 110px;
+	margin-top: -320px;
+	margin-top: -320px;
 	width: 600px;
+	margin-left: 500px;
 }
 
 #namdAddrSecFlex #nameAndAddr {
@@ -29,22 +31,30 @@ h1 {
 
 #acc_name {
 	width: 200px;
-}
+	height: 25px;
+	padding-left: 5px;
+	}
 
 .acc_addr_fild {
-	margin-top: 15px;
+	margin-top: 20px;
+	height: 25px;
 }
 
 #acc_address {
 	width: 200px;
+	height: 25px;
+	padding-left: 5px;
 }
 
 .acc_max_peop_field {
-	margin-top: 15px;
+	margin-top: 20px;
+	margin-left: -7.5px;
 }
 
 #acc_max_people {
 	width: 200px;
+	height: 25px;
+	padding-left: 5px;
 }
 
 #mainPrCom hr {
@@ -55,20 +65,16 @@ h1 {
 	margin-bottom: 0px;
 }
 
-#main_img_area {
-	width: 600px;
-	height: 400px;
-	display: inline-block;
-}
 
 #mainPrCom textarea {
 	margin-top: 10px;
-	width: 594px;
-	height: 105px;
+	width: 795px;
+	height: 150px;
 	resize: vertical;
 	font-size: 15px;
 	border: 2px solid #b6b3b3;
-	border-radius: 8px;
+	border-radius: 3px;
+	padding: 10px;
 }
 
 #accInfoArea h3 {
@@ -77,12 +83,13 @@ h1 {
 
 #accInfoArea textarea {
 	margin-top: 10px;
-	width: 594px;
+	width: 795px;
 	height: 150px;
 	resize: vertical;
 	font-size: 15px;
 	border: 2px solid #b6b3b3;
-	border-radius: 8px;
+	border-radius: 3px;
+	padding: 10px;
 }
 
 #imgFileArea {
@@ -91,14 +98,14 @@ h1 {
 }
 
 #showImg {
-	width: 50%;
-	height: 200px;
+	width: 300px;
+    height: 350px;
+    margin-right: 300px;
 }
 
 #mainImgView {
-	width: 100%;
+	width: 450px;
 	height: 100%;
-	border-radius: 5px;
 }
 
 #fileArea {
@@ -112,13 +119,13 @@ h1 {
 }
 
 #roomPhotos input[type="file"] {
-	margin-left: 20px;
 	padding: 10px;
 	border: 1px solid #ccc;
-	border-radius: 8px;
 	background-color: #f2f2f2;
 	font-size: 14px;
 	cursor: pointer;
+	margin-top: 20px;
+	margin-left: 8px;
 }
 
 #roomPhotos label {
@@ -138,28 +145,27 @@ h1 {
 	justify-content: center;
 }
 
-#acc_explain {
-	margin-bottom: 20px;
-}
-
 #addResetBtn #addButton {
 	font-size: 15px;
 	padding: 10px 35px;
 	margin: 0 10px;
-	background-color: #e40000d3;
+	background-color: var(--main-color);
 	transition: opacity 0.4s ease-in-out;
 	color: white;
 	border: none;
 	cursor: pointer;
-	border-radius: 8px;
+	border-radius: 4px;
+	text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 #addResetBtn {
-	margin-top: 15px;
+	margin: 20px 0px;
 }
 
 #addResetBtn #addButton:hover {
-	background-color: #e400008e;
+	background-color: #cc0000;
 	transition: opacity 0.4s ease-in-out;
 }
 
@@ -172,8 +178,11 @@ h1 {
 	color: white;
 	border: none;
 	cursor: pointer;
-	border-radius: 8px;
+	border-radius: 4px;
 	margin: 0 10px;
+	text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 #addResetBtn #CancelButton:hover {
@@ -182,9 +191,45 @@ h1 {
 }
 
 #partner_sectors {
-	margin-top: 8px;
-	padding-left: 3px; 
-	font-size : 16px;
-	font-weight: bold;
-	font-size: 16px;
+	width: 200px;
+	height: 25px;
+	padding-left: 5px;
+}
+
+#sectors{
+	margin-top: 20px;
+}
+productImg{
+	margin: 5px;
+}
+.h4Message{
+	color: rgb(193, 193, 193);
+	font-weight: normal;
+}
+
+#mainPrCom{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid  #dddddd;
+}
+
+#accInfoArea{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 200px;
+}
+
+.h4Message {
+  margin-left: 85px;
+}
+.acc_name1, .acc_address1, .acc_sectors2, .acc_max_people2{
+	font-size: 17px;
 }

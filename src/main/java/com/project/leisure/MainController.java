@@ -48,4 +48,11 @@ public class MainController {
         
         return "main";
     }
+    
+    
+    @GetMapping("/sss")
+    public String ssds() {
+    	return "kty/ssss";
+    }
+   
 }

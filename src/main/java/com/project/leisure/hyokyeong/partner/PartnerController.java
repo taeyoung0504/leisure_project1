@@ -48,13 +48,12 @@ public class PartnerController {
 	private final AccomdationListService accomdationListService;
 	private final ProductService productService;
 	private final AccommodationService accommodationService;
-	private final BookService bookService; //추가
-
+	private final BookService bookService; // 추가
 
 	public PartnerController(PartnerListService partnerListService, RegService regService, RegRepository regRepository,
 			UserListService userListService, HttpServletRequest request, UserRepository userRepository,
 			AccomdationListService accomdationListService, ProductService productService,
-			AccommodationService accommodationService,BookService bookService) {
+			AccommodationService accommodationService, BookService bookService) {
 		this.partnerListService = partnerListService;
 		this.regService = regService;
 		this.regRepository = regRepository;
@@ -64,7 +63,7 @@ public class PartnerController {
 		this.accomdationListService = accomdationListService;
 		this.productService = productService;
 		this.accommodationService = accommodationService;
-		this.bookService = bookService; //추가
+		this.bookService = bookService; // 추가
 	}
 
 	@GetMapping("/partnerListPage")
@@ -121,7 +120,27 @@ public class PartnerController {
 	public String handleApproval(@PathVariable("id") Long id, @RequestBody Map<String, Integer> payload,
 			HttpServletRequest request) {
 		int status = payload.get("status");
-		partnerListService.handleApproval(id, status);
+		Long acc_id = partnerListService.handleApproval(id, status);
+
+		// 삭제하는 로직 추가
+		if (acc_id != null) {
+			// 해당 숙소에 연결된 상품들 조회
+			List<Product> products = productService.findProductsByAccommodationId(acc_id);
+			
+			System.out.println("@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("products" + products);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@");
+
+			
+			// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
+			for (Product product : products) {
+				this.bookService.updateAllBookingVoProductToNull(product);
+				productService.pdDelete(product.getProduct_id());
+			}
+
+			// 숙소 삭제
+			accommodationService.deleteAcc(acc_id);
+		}
 
 		// 이전 페이지 URL 가져오기
 		String referer = request.getHeader("Referer");
