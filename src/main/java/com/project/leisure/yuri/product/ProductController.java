@@ -76,6 +76,19 @@ public class ProductController {
 	@GetMapping(value = "productMainReg/{id}")
 	public String productMainReg(Model model, Principal principal, @PathVariable("id") Long acc_id) {
 
+		
+		String username = principal.getName();
+
+	  
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+	    
+	    
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
@@ -111,7 +124,7 @@ public class ProductController {
 		
 		String username = principal.getName();
 
-	    // 해당 유저의 role이 admin인지 확인
+	    
 	    List<Users> userList = this.userService.check(username);
 	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
@@ -139,8 +152,19 @@ public class ProductController {
 
 	// 객실 등록 페이지 이동 및 해당 pk조회하여 product 가져오기
 	@GetMapping(value = "addproduct/{id}")
-	public String setAddProduct(Model model, @PathVariable("id") Long acc_id) {
+	public String setAddProduct(Model model, @PathVariable("id") Long acc_id,Principal principal) {
 
+		String username = principal.getName();
+
+	  
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+		
 		// 해당 id로 product를 조회
 		List<Product> product = productService.findProductsByAccommodationId(acc_id);
 
@@ -318,8 +342,20 @@ public class ProductController {
 
 //방 수정하기위해 해당 방 ID를 가져오고 또한 해당 방을 조회해서 찾음
 	@GetMapping(value = "modifyRoom/{productId}")
-	public String modifyRoom(Model model, @PathVariable("productId") Long productId) {
+	public String modifyRoom(Model model, @PathVariable("productId") Long productId,Principal principal) {
 
+		
+		String username = principal.getName();
+
+	    
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+		
+		
 		Product product = this.productService.getProduct(productId);
 
 		model.addAttribute("product", product);
