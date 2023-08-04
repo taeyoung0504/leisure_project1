@@ -21,6 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.leisure.DataNotFoundException;
 import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.taeyoung.user.UserRepository;
+import com.project.leisure.taeyoung.user.UserRole;
+import com.project.leisure.taeyoung.user.UserService;
+import com.project.leisure.taeyoung.user.Users;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +38,8 @@ public class ProductController {
 	private final AccommodationService accommodationService;
 
 	private final BookService bookService;
-
+	private final UserService userService;
+	
 	// productNewMainReg 해당 유저가 새로운 숙소를 추가
 	@GetMapping("/productNewMainReg")
 	public String productNewMainReg(Principal principal, @RequestParam(name = "companyName") String companyName,
@@ -102,8 +106,20 @@ public class ProductController {
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
 	@GetMapping(value = "registerRoom/{id}")
-	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id) {
+	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id,Principal principal) {
 
+		
+		String username = principal.getName();
+
+	    // 해당 유저의 role이 admin인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isAdmin) {
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
+	    }
+
+		
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
