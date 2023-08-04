@@ -185,6 +185,24 @@ document.querySelector('#addPhoto').addEventListener('change', function(e) {
 	var existingImages = $('.file_info_li').length; // 기존에 등록된 이미지의 수
 
 
+
+	//만약에 이미지를 5개 이상 한번에 등록하려 한다면 
+	if (files.length > maxAllowedFiles) {
+		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
+		// 선택한 파일 초기화
+		$(this).val('');
+		return;  // 즉시 함수를 종료
+	}
+
+	//만약 기존에 등록된 이미지가 있는데 새로 추가한거와 수를 비교했을 시 5개가 넘을때
+	if (existingImages + files.length > maxAllowedFiles) {
+		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
+		// 선택한 파일 초기화
+		$(this).get(0).value = '';
+		return;  // 즉시 함수를 종료
+
+	}
+
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 		tempFiles.push(file);  // 파일 정보를 임시 배열에 저장
@@ -194,21 +212,6 @@ document.querySelector('#addPhoto').addEventListener('change', function(e) {
 			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다.');
 			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
 		}
-	}
-
-
-	//만약에 이미지를 5개 이상 한번에 등록하려 한다면 
-	if (files.length > maxAllowedFiles) {
-		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
-		// 선택한 파일 초기화
-		$(this).val('');
-	}
-
-	//만약 기존에 등록된 이미지가 있는데 새로 추가한거와 수를 비교했을 시 5개가 넘을때
-	if (existingImages + files.length > maxAllowedFiles) {
-		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
-		// 선택한 파일 초기화
-		$(this).get(0).value = '';
 	}
 
 
@@ -241,7 +244,6 @@ document.querySelector('#addPhoto').addEventListener('change', function(e) {
 
 	//전체 삭제 버튼 클릭시 전체 이미지 삭제
 	document.querySelector('.file_list_header_del').addEventListener('click', deleteAllFiles);
-
 
 });
 
