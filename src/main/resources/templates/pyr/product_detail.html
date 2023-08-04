@@ -52,13 +52,16 @@
                                  '✩ ✩ ✩ ✩ ✩'}"></span>
 			<span id="acc_score"
 				th:text="${acc.acc_rating eq 0 ? '': acc.acc_rating}"></span> <span
-				class="acc_rating_tang" th:if="${#lists.size(acc.reviews) > 0}"
+				class="acc_rating_tang"
 				th:text="'(' + ${#lists.size(acc.reviews)} + ')'"></span>
 
 			<p class="hoteladdress" th:text="${acc.acc_address}"></p>
-			<span class="room_detail_fee1">평균 이용가 - </span>&nbsp<span
+			
+			<div class="room_detail_fee">
+			<span class="room_detail_fee1">평균 숙박 가격 </span>&nbsp<span
 				class="room_detail_fee2" th:text="${acc.acc_averPrice}"></span><span>
 				원</span>
+			</div>
 			<div class="coment_author">
 				<p class="boss_coments">사장님 한마디</p>
 				<p class="hotelcomment" th:text="${acc.acc_explain}"></p>
@@ -101,6 +104,10 @@
 									th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
 									th:text="${product.product_amount}"></strong><strong
 									id="totalAmount_won">원 </strong>
+							</div>
+							<div>
+							<strong>최대 수용 인원 -  <span th:text="${product.product_pernum}"></span>명</strong>
+							
 							</div>
 							<!-- <button type="button" onclick="pop_room_detail()">" 객실
                         이용 안내"</button> -->
@@ -222,6 +229,24 @@
 						src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 					<!-- <scirpt src="../static/js/kdg_datepicker.js"></scirpt> -->
 					<script th:inline="javascript">
+				/* 	$.datepicker.setDefaults({
+						  dateFormat: 'yy-mm-dd',
+						  prevText: '이전 달',
+						  nextText: '다음 달',
+						  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+						  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+						  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+						  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+						  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+						  showMonthAfterYear: true,
+						  yearSuffix: '년'
+						});
+
+						$(function () {
+						  $('.datepicker').datepicker();
+						});
+					 */
+					
 	                  $(document).ready(function() {
 	                       $("#datepicker1").datepicker({
 	                         multidate: 2,

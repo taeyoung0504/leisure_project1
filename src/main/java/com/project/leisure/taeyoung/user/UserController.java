@@ -46,6 +46,8 @@ import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.ProductService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -64,7 +66,8 @@ public class UserController {
 	private final InquiryService inquiryService;
 	private final InquiryAnswerService inquiryAnswerService;
 	private final CancelRequestService cancelRequestService;
-	
+	  private final UserSecurityService userSecurityService;
+	  
 	@Autowired
 	private final BookService bookService;
 	
@@ -388,9 +391,9 @@ public class UserController {
 
 	/* 파트너 신청 페이지 */
 	@GetMapping("/mypage/partner_reg")
-	public String partner_registration(Model model, Principal principal) {
+	public String partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
 		String current_user = principal.getName();
-		List<RegPartner> regList = regService.getList();
+		Page<RegPartner> regList = regService.getList(page);
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -399,9 +402,9 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage/my_partner_reg")
-	public String modify_partner_registration(Model model, Principal principal) {
+	public String modify_partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
 		String current_user = principal.getName();
-		List<RegPartner> regList = regService.getList();
+		Page<RegPartner> regList = regService.getList(page);
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -418,6 +421,7 @@ public class UserController {
 		}
 
 		model.addAttribute("regList", filteredRegList);
+		model.addAttribute("paging",regList);
 		model.addAttribute("accRegMap", accRegMap);
 		// model.addAttribute("regList", filteredRegList);
 		return "kty/modify_partner_regi";
@@ -461,42 +465,42 @@ public class UserController {
 	@GetMapping("/mypage/my_productList")
 	@PreAuthorize("isAuthenticated()")
 	public String myProducts(Principal principal, Model model,
-			@RequestParam(value = "page", defaultValue = "0") int page) {
-		// 유저 이름을 가져옴
-		String username = principal.getName();
+	        @RequestParam(value = "page", defaultValue = "0") int page) {
+	    // 유저 이름을 가져옴
+	    String username = principal.getName();
 
-		// 해당 유저의 role이 partner인지 확인
-		List<Users> userList = this.userService.check(username);
-		boolean isPartner = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+	    // 해당 유저의 role이 partner인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isPartner = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-		// role이 파트너라면
-		if (isPartner) {
+	    // role이 파트너라면
+	    if (isPartner) {
 
-			// accommodations 해당 유저이름을 조회하여 있다면 false, 없으면 true
-			List<Accommodation> accommodations = accommodationService.findAccommodationsByUsername(username);
+	        // accommodations 해당 유저이름을 조회하여 있다면 false, 없으면 true
+	        List<Accommodation> accommodations = accommodationService.findAccommodationsByUsername(username);
 
-			// 등록된 PK(id)를 기준으로 내림차순 정렬
-			accommodations.sort(Comparator.comparing(Accommodation::getId).reversed());
+	        // 등록된 PK(id)를 기준으로 내림차순 정렬
+	        accommodations.sort(Comparator.comparing(Accommodation::getId).reversed());
 
-			// 페이징 처리
-			int pageSize = 10; // 페이지당 숙소 개수 설정
-			int start = page * pageSize; // 0 * 10 = 0 으로 시작 인덱스를 나타낸다
-			int end = Math.min((start + pageSize), accommodations.size()); // 종료 인덱스 계산 0부터 9 까지의 숙소를 표시
-			if (start > end) {
-				start = 0; // 시작 인덱스가 범위를 벗어나면 0으로 설정
-			}
-			// 페이징된 숙소 목록을 추출(시작, 종료 인덱스 목록 추출)
-			List<Accommodation> pagedAccommodations = accommodations.subList(start, end);
+	        // 페이징 처리
+	        int pageSize = 10; // 페이지당 숙소 개수 설정
+	        int start = page * pageSize; // 0 * 10 = 0 으로 시작 인덱스를 나타낸다
+	        int end = Math.min((start + pageSize), accommodations.size()); // 종료 인덱스 계산 0부터 9 까지의 숙소를 표시
+	        if (start > end) {
+	            start = 0; // 시작 인덱스가 범위를 벗어나면 0으로 설정
+	        }
+	        // 페이징된 숙소 목록을 추출(시작, 종료 인덱스 목록 추출)
+	        List<Accommodation> pagedAccommodations = accommodations.subList(start, end);
 
-			Page<Accommodation> paging = new PageImpl<>(pagedAccommodations, PageRequest.of(page, pageSize),
-					accommodations.size());
+	        Page<Accommodation> paging = new PageImpl<>(pagedAccommodations, PageRequest.of(page, pageSize),
+	                accommodations.size());
 
-			model.addAttribute("isEmpty", pagedAccommodations.isEmpty());
-			model.addAttribute("paging", paging);
-		} else {
-			model.addAttribute("noPartner", true); // partner가 아니라면
-		}
-		return "pyr/my_productlist";
+	        model.addAttribute("isEmpty", pagedAccommodations.isEmpty());
+	        model.addAttribute("paging", paging);
+	    } else {
+	        return "redirect:/user/login"; // partner가 아니라면 /user/logout으로 이동
+	    }
+	    return "pyr/my_productlist";
 	}
 	
 	// 김도겸 
@@ -518,20 +522,29 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage/my_acc_bookList")
-	public String my_acc_bookList(Principal principal,Model model) {
-		String username = principal.getName();
-		 
-		  List<Accommodation> acc = this.accommodationService.my_acc_list();
-		  List<BookingVO> book = this.bookService.getbooklist();
-		  List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
+	public String my_acc_bookList(Principal principal, Model model) {
+	    String username = principal.getName();
 
-		  List<Accommodation> filteredBook = acc.stream()
-		            .filter(Accommodation -> Accommodation.getUsername().equals(username))
-		            .collect(Collectors.toList());
-		  
-		  model.addAttribute("acc",filteredBook);
-		  model.addAttribute("booking",book);
-		  model.addAttribute("cancleList",canclereqList);
-		  return "kty/my_acc_bookList";
+	    // 해당 유저의 role이 partner인지 확인
+	    List<Users> userList = this.userService.check(username);
+	    boolean isPartner = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+
+	    if (!isPartner) {
+	        return "redirect:/user/login"; // If not a partner, redirect to /user/logout
+	    }
+
+	    List<Accommodation> acc = this.accommodationService.my_acc_list();
+	    List<BookingVO> book = this.bookService.getbooklist();
+	    List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
+
+	    List<Accommodation> filteredBook = acc.stream()
+	            .filter(Accommodation -> Accommodation.getUsername().equals(username))
+	            .collect(Collectors.toList());
+
+	    model.addAttribute("acc", filteredBook); 
+	    model.addAttribute("booking", book);
+	    model.addAttribute("cancleList", canclereqList);
+	    return "kty/my_acc_bookList";
 	}
+
 }

@@ -1134,7 +1134,7 @@ td{
 .room-photo {
 	/* right: 50%; */
 	flex: 1;
-	border-radius: 5px;
+/* 	border-radius: 5px; */
 	margin-left: px;
 	/* margin-top: 10px; */
 	background-size: cover;

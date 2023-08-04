@@ -15,12 +15,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.project.leisure.hyokyeong.user.UserListService;
+import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.taeyoung.user.RegPartner;
 import com.project.leisure.taeyoung.user.RegRepository;
 import com.project.leisure.taeyoung.user.UserRepository;
 import com.project.leisure.taeyoung.user.UserRole;
 import com.project.leisure.taeyoung.user.Users;
+import com.project.leisure.yuri.product.Accommodation;
+import com.project.leisure.yuri.product.AccommodationRepository;
+import com.project.leisure.yuri.product.AccommodationService;
+import com.project.leisure.yuri.product.Product;
+import com.project.leisure.yuri.product.ProductService;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -33,8 +38,18 @@ public class PartnerListService {
 
 	@Autowired
 	private final RegRepository regRepository;
-	private UserListService userListService;
+	// private UserListService userListService;
 	private UserRepository userRepository;
+
+	@Autowired
+	private ProductService productService;
+
+	@Autowired
+	private AccommodationRepository accommodationRepository;
+	@Autowired
+	private BookService bookService;
+	@Autowired
+	private AccommodationService accommodationService;
 
 	@Autowired
 	public PartnerListService(RegRepository regRepository, UserRepository userRepository) {
@@ -113,16 +128,151 @@ public class PartnerListService {
 			} else if (status == 0) {
 				String regUsername = partner.getReg_username();
 				Users user = userRepository.findFirstByUsername(regUsername);
-				if (user != null) {
-					user.setRole(UserRole.USER);
-					user.setAdmin_code(0);
-					user.setPartner_code(0);
+				// 해당 사용자 이름을 가진 숙소 정보를 조회
+				List<Accommodation> partnersWithUsername = accommodationRepository.findByusername(regUsername);
+				// 해당 사용자 이름을 가진 파트너 등록 정보를 조회
+				List<RegPartner> partnerRegList = regRepository.findByReg_username(regUsername);
 
-					userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+				// 등록된 숙소가 0일 경우에 사용자로 전환
+				if (partnersWithUsername.size() == 0) {
+					// 파트너 신청을 이미 해서 승인된 경우가 존재.(아직 등록전)
+					if (partnerRegList.size() > 0) {
+						user.setRole(UserRole.PARTNER);
+						user.setAdmin_code(0);
+						user.setPartner_code(3333);
+						userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+					}
+					// 파트너 신청을 했던 안했던 그냥 승인이 없어. 그럼 USER
+					if (partnerRegList.size() == 0) {
+						user.setRole(UserRole.USER);
+						user.setAdmin_code(0);
+						user.setPartner_code(0);
+						userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+					}
+
+				}
+				// 등록된 숙소는 있어.
+				else {
+					// 파트너신청을 해서 승인이 있는경우
+					if (partnerRegList.size() > 0) {
+						user.setRole(UserRole.PARTNER);
+						user.setAdmin_code(0);
+						user.setPartner_code(3333);
+						userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+					}
+					// 파트너 신청했지만 승인다 취소==없음. 근데 숙소 있음. => 숙소지워줘야함.
+					else {
+
+						user.setRole(UserRole.USER);
+						user.setAdmin_code(0);
+						user.setPartner_code(0);
+						userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+//
+//						partnerOptional.get().getCompany_address();
+//						
+//						 for (Accommodation accInfo : partnersWithUsername) {
+//						        Long accId = accInfo.getId();
+//						        }
+//						
+//						
+						
+						
+//						// Accommodation accInfo = (Accommodation) partnersWithUsername;
+//						String partnerAdd = partnerRegList.get(0).getCompany_address();
+//						Accommodation accInfo = null;
+//						for (Accommodation accommodation : partnersWithUsername) {
+//							if (partnerAdd.equals(accommodation.getAcc_address())) {
+//								accInfo = accommodation;
+//								break; // 주소가 맞는 숙소를 찾았으므로 루프 종료
+//							}
+//						}
+//
+//						System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//						System.out.println(accInfo);
+//						System.out.println(partnerAdd);
+//						System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//
+//						if (accInfo != null) {
+//							Long accId = accInfo.getId(); // 숙소 객체의 id 값을 가져옴
+//							// 해당 숙소에 연결된 상품들 조회
+//							List<Product> products = productService.findProductsByAccommodationId(accId);
+//							System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//							System.out.println(accId);
+//							System.out.println(products);
+//							System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//							// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
+//							// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
+//							for (Product product : products) {
+//								this.bookService.updateAllBookingVoProductToNull(product);
+//								productService.pdDelete(product.getProduct_id());
+//							}
+
+//						if (partnerAdd.equals(accInfo.getAcc_address())) {
+//							Long accId = accInfo.getId(); // 숙소 객체의 id 값을 가져옴
+//							// 해당 숙소에 연결된 상품들 조회
+//							List<Product> products = productService.findProductsByAccommodationId(accId);
+//							System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//							System.out.println(accId);
+//							System.out.println(products);
+//							System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//							// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
+//							// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
+//							for (Product product : products) {
+//								this.bookService.updateAllBookingVoProductToNull(product);
+//								productService.pdDelete(product.getProduct_id());
+//							}
+
+						// 숙소 삭제
+//							accommodationService.deleteAcc(accId);
+
+//						}
+					}
+
 				}
 			}
 		}
+
 	}
+
+//	public void handleApproval(Long id, int status) {
+//		Optional<RegPartner> partnerOptional = regRepository.findById(id);
+//
+//		System.out.println("@@@@@@@@@@@@@@@@");
+//		System.out.println(partnerOptional);
+//		System.out.println("@@@@@@@@@@@@@@@@");
+//		System.out.println("@@@@@@@@@@@@@@@@");
+//
+//		if (partnerOptional.isPresent()) {
+//			RegPartner partner = partnerOptional.get();
+//			partner.setResult_partner_reg(status);
+//			regRepository.save(partner);
+//
+//			String regUsername = partner.getReg_username();
+//
+//			if (status == 1) {
+//				Users user = userRepository.findFirstByUsername(regUsername);
+//				if (user != null) {
+//					user.setRole(UserRole.PARTNER);
+//					user.setAdmin_code(0);
+//					user.setPartner_code(3333);
+//					userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+//				}
+//	        } else if (status == 0) {
+//	            List<Accommodation> partnersWithUsername = accommodationRepository.findByusername(regUsername);
+//
+//	            if (partnersWithUsername.size() == 1) {
+//	                Users user = userRepository.findFirstByUsername(regUsername);
+//	                if (user != null) {
+//	                    user.setRole(UserRole.USER);
+//	                    user.setAdmin_code(0);
+//	                    user.setPartner_code(0);
+//	                    userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
+//	                }
+//	            }
+//	        }
+//			}
+//		}
+//	}
 
 	// 검색기능
 	private Specification<RegPartner> search(String kw) {
