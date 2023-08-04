@@ -1,6 +1,9 @@
 package com.project.leisure.taeyoung.user;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -563,7 +566,20 @@ public class UserController {
 
 	
 	@GetMapping("/event")
-	public String event_page() {
+	public String event_page(Model model) {
+		YearMonth yearMonth = YearMonth.now();
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstDayOfMonth = yearMonth.atDay(1);
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            dates.add(firstDayOfMonth.withDayOfMonth(day));
+        }
+
+        model.addAttribute("dates", dates);
+        model.addAttribute("yearMonth", yearMonth);
+		
 		return "kty/event";
 	}
 }
