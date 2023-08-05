@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +50,6 @@ import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.ProductService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -535,6 +535,45 @@ public class UserController {
 	    */
 	    model.addAttribute("bookList", filteredBook);
 	    return "kty/my_booking";
+	}
+	
+	// PRG(Post-Redirect-Get) 패턴 이슈
+	@GetMapping("/mypage/my_booking_del/{id}")
+	public String bookingDelete(@PathVariable("id") int id,
+								Principal principal,
+								Model model,
+								HttpServletResponse response) {
+		
+		boolean bool = bookService.moveAndDelete(id);
+		
+		 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	        response.setHeader("Pragma", "no-cache");
+	        response.setHeader("Expires", "0");
+		
+		if(bool) {
+			String booker_user = principal.getName();
+			List<BookingVO> bookList = bookService.getBookList();
+			List<BookingVO> filteredBook = bookList.stream()
+					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+					.collect(Collectors.toList());
+			
+			filteredBook.stream().forEach(System.out::println);
+			
+			model.addAttribute("bookList", filteredBook);
+			
+			return "redirect:/user/mypage/my_booking";
+		} 
+//			else {
+//			String booker_user = principal.getName();
+//			List<BookingVO> bookList = bookService.getBookList();
+//			List<BookingVO> filteredBook = bookList.stream()
+//					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+//					.collect(Collectors.toList());
+//			return "kty/my_booking";
+//		}
+		
+		 return null; 
+		
 	}
 	
 	

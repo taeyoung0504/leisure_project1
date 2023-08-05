@@ -40,6 +40,7 @@
 	</nav>
 	<div id="wrap">
 		<div id="container" th:each="book : ${bookList} ">
+				
 			   <div id="left">
 				<!-- <img th:src="${book.productImg}" 
 								alt="Product Image" width="100%"
@@ -93,8 +94,13 @@
 				</p>
 				
 			
-
 			</div>
+			<!-- <span><span id="del" th:onclick="|location.href='/user/mypage/my_booking_del/${book.bookNum}'|">&#215;</span></span> -->
+			<span class="delParents">
+			  <span id="del" th:if="${book.bookStatus == '예약완료'}" th:onclick=warnning()>&#215;</span>
+			  <span id="del" th:if="${book.bookStatus == '이용중'}" th:onclick=warnning2()>&#215;</span>
+			  <span th:if="${book.bookStatus != '이용중' and book.bookStatus != '예약완료'}" th:onclick="|location.href='/user/mypage/my_booking_del/${book.bookNum}'|">&#215;</span>
+			</span>
 		</div> <!--  영역끝 -->
 
 		
@@ -110,6 +116,14 @@
 
 	<!-- 이게 아니라 버튼에서 바로 매핑된 컨트롤러로 이동해야함. fetch를 거치는게 아니라 button에 매핑된 url로 s바로 이동해야함. -->
 	<script>
+	
+	function warnning() {
+		Swal.fire('취소 후에 가능합니다.')
+	}
+	
+	function warnning2() {
+		Swal.fire('이용완료 이후 가능합니다.')
+	}
 	
 	 // 모든 id가 "cancelBtn"인 요소들을 선택하여 NodeList로 반환
     const cancelBtns = document.querySelectorAll("#cancelBtn");
