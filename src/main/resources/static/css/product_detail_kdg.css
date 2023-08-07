@@ -169,16 +169,16 @@ input:focus, input:active, button:focus, button:active {
 
 .gray-button {
 	width: 100%;
-	height: 56px;
-	border: none;
-	font-size: 15px;
-	line-height: 56px;
-	background-color: gray;
-	color: white;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 4px 4px 4px 4px;
-	margin-top: 28px;
-	font-weight: bold;
-	pointer-events: none; /* 버튼 클릭 비활성화 */
+    height: 56px;
+    border: none;
+    font-size: 15px;
+    line-height: 56px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+    cursor: pointer;
+    border-radius: 4px 4px 4px 4px;
+    margin-top: 28px;
+    font-weight: bold;
+   pointer-events: none; /* 버튼 클릭 비활성화 */
 }

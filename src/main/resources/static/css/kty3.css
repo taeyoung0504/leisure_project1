@@ -21,7 +21,7 @@
 
 #kty_right-side_test {
 	float: right;
-	width: 65%;
+	width: 72%;
 	height: 820px;
 	/* 	margin-left: 100px; */
 	overflow: visible;
@@ -39,6 +39,7 @@
 	/* margin: 10px; */
 	box-shadow: 0px 0px 5px #9b9b9b;
 	margin-top: 30px;
+	left: 400px;
 }
 
 label {
@@ -81,6 +82,7 @@ label {
 		display: grid !important;
 		height: fit-content !important;
 		position: absolute !important;
+		left: 0;
 		/* 	margin: 0 20%; */
 	}
 	.room-entry {
@@ -404,6 +406,7 @@ label {
 	position: relative;
 	margin: 1px 20px;
 	color: rgba(0, 0, 0, 0.87);
+	left: 30px;
 }
 
 .room-entry2 {

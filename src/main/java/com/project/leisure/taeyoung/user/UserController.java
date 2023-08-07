@@ -522,18 +522,36 @@ public class UserController {
 	
 	// 김도겸 
 	@GetMapping("/mypage/my_booking")
-	public String my_booking(Model model, Principal principal) {
+	public String my_booking(Model model, Principal principal,
+			@RequestParam(value = "page", defaultValue = "0") int page) {
 	    String booker_user = principal.getName();
 	    List<BookingVO> bookList = bookService.getBookList();
 	    List<BookingVO> filteredBook = bookList.stream()
 	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
 	            .collect(Collectors.toList());
-	    /*
-	    for (BookingVO book : bookList) {
-	        System.out.println("************** book : " + book.toString());
-	    }
-	    */
-	    model.addAttribute("bookList", filteredBook);
+	 // 페이징 처리
+        int pageSize = 5; // 페이지당 숙소 개수 설정
+//        int start = page * pageSize; // 0 * 5 = 0 으로 시작 인덱스를 나타낸다
+        int start = Math.max(page * pageSize, 0);
+        int end = Math.min((start + pageSize), filteredBook.size()); // 종료 인덱스 계산 0부터 4 까지의 숙소를 표시
+        if (start >= filteredBook.size()) {
+            start = 0;
+            end = 0;
+        }
+        // 페이징된 숙소 목록을 추출(시작, 종료 인덱스 목록 추출)
+        List<BookingVO> pagedFilteredBook = filteredBook.subList(start, end);
+
+        if (page < 0) {
+            page = 0;
+        }
+        
+        Page<BookingVO> paging = new PageImpl<>(pagedFilteredBook, PageRequest.of(page, pageSize),
+        		filteredBook.size());
+
+//        model.addAttribute("isEmpty", pagedFilteredBook.isEmpty());
+        model.addAttribute("paging", paging);
+	    
+//	    model.addAttribute("bookList", filteredBook);
 	    return "kty/my_booking";
 	}
 	

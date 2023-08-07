@@ -39,7 +39,7 @@
 		</ul>
 	</nav>
 	<div id="wrap">
-		<div id="container" th:each="book : ${bookList} ">
+		<div id="container" th:each="book : ${paging.content} ">
 				
 			   <div id="left">
 				<!-- <img th:src="${book.productImg}" 
@@ -52,7 +52,7 @@
 					alt="Product Image" width="100%" height="100%" />
 			</div>
 			<span id="tid" hidden th:text="${book.tid}"></span><Br>
-			<div th:if="${bookList.size() >0}" id="right">
+			<div th:if="${paging.content.size() >0}" id="right">
 				<p id="p-right"
 					th:class="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-text' : ''}">
 					<b th:text="${book.AccomTitle}"></b><br> <span
@@ -103,8 +103,34 @@
 			</span>
 		</div> <!--  영역끝 -->
 
+
+		<!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link page_previous"
+                    th:href="@{|?page=${paging.number-1}|}">
+                    <span>◀</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            	th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                th:classappend="${page == paging.number} ? 'active'" 
+                class="page-item">
+                <a th:text="${page+1}" class="page-link page-number" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link page_next" th:href="@{|?page=${paging.number+1}|}">
+                    <span>▶</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
+
+
 		
-		<div class="center-content" th:if="${bookList.size()<1}">
+		<div class="center-content" th:if="${paging.content.size()<1}">
 			<h1>예약 내역이 없습니다.</h1>
 			<span id="intro_acc">다양한 숙소들을 지금 만나보세요</span>
 			 <a th:href="@{/tour/daegu_room}"	class="btn_red">다양한 숙소 보러가기</a>

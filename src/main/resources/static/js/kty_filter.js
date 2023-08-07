@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		const selectedFoodTypes2 = Array.from(checkboxes2).map(checkbox => checkbox.value);
 
 		if (selectedRegion && selectedFoodTypes.length > 0) {
-			let url = "/tour/daegu_food2";
+			let url = "/tour/daegu_food";
 			url += "?kw2=" + encodeURIComponent(selectedRegion);
 			url += "&kw3=" + encodeURIComponent(selectedFoodTypes.join(','));
 			window.location.href = url;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 
 		else if (selectedRegion) {
-			let url = "/tour/daegu_food3";
+			let url = "/tour/daegu_food";
 			url += "?kw2=" + encodeURIComponent(selectedRegion);
 			window.location.href = url;
 		}
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		const checkboxes2 = document.querySelectorAll('input[name="ParkingType"]:checked');
 		const selectedFoodTypes2 = Array.from(checkboxes2).map(checkbox => checkbox.value);
 		if (selectedRegion && selectedFoodTypes.length > 0 && selectedFoodTypes2.length > 0) {
-			let url = "/tour/daegu_food5";
+			let url = "/tour/daegu_food";
 			url += "?kw2=" + encodeURIComponent(selectedRegion);
 			url += "&kw3=" + encodeURIComponent(selectedFoodTypes.join(','));
 			url += "&kw4=" + encodeURIComponent(selectedFoodTypes2.join(','));
