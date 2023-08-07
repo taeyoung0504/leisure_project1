@@ -1,167 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-           table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-           
-            vertical-align: top; /* 일자가 상단에 위치하도록 설정 */
-        }
-        
-        td{
-        cursor:pointer;
-          border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-           
-            vertical-align: top;
-            height: 100px;
-          
-          
-            
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        
-       .checkcheck{
-        width:1300px;
-        margin-left:400px;
-        margin-top:150px;
-        }
-         th:first-child,
-        td:first-child {
-            color: red;
-            font-weight: bold;
-        }
-         th:last-child,
-        td:last-child {
-            color: blue;
-        }
-        
-       .td-img-container {
-    display: flex;
-    width: 10px;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0); /* 투명한 배경색 설정 */
-}
-             .td-img{
-             
-             width:100px;
-             height:80px;
-             margin-top:10px;
-             margin-left:180px;
-             }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css" rel="stylesheet">
 </head>
 <body>
-<div class="checkcheck">
-<h2>2023년 8월 달력</h2>
+   	<span>출석체크 하기!</span>
+   	  <img src="/img/stamp2.png" id="stamp2" alt="로고 이미지">
+    <div id="calendar">
+    </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>일</th>
-            <th>월</th>
-            <th>화</th>
-            <th>수</th>
-            <th>목</th>
-            <th>금</th>
-            <th>토</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>13</td>
-            <td>14</td>
-            <td>15</td>
-            <td>16</td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>18</td>
-            <td>19</td>
-            <td>20</td>
-            <td>21</td>
-            <td>22</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>25</td>
-            <td>26</td>
-            <td>27</td>
-            <td>28</td>
-            <td>29</td>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>31</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-</div>
-<script>
-var tdElements = document.querySelectorAll('td');
-for (var i = 0; i < tdElements.length; i++) {
-    var td = tdElements[i];
+    <!-- FullCalendar JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        calendarEl.style.width = '1200px';
+        calendarEl.style.marginLeft = '500px';
+        calendarEl.style.marginTop = '200px';
 
-    // td 요소의 텍스트를 가져와서 비어있는지 확인
-    if (td.textContent.trim() !== '' && !td.classList.contains('image-inserted')) {
-        td.addEventListener('click', function() {
-            // 이미지 엘리먼트 생성
-            var imgElement = document.createElement('img');
-            imgElement.src = '/img/stamp.jpg'; // 이미지 파일의 경로
-            imgElement.alt = '스탬프 이미지';
-            imgElement.className = 'td-img';
-            
-            // 이미지를 담을 컨테이너 엘리먼트 생성
-            var imgContainer = document.createElement('div');
-            imgContainer.className = 'td-img-container';
-            
-            imgContainer.appendChild(imgElement);
-            
-            // 클릭한 td 요소의 내용을 비우고, 이미지 컨테이너를 삽입하고 클래스 추가
-            this.innerHTML = '';
-            this.appendChild(imgContainer);
-            this.classList.add('image-inserted');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            contentHeight: 600,
+
+            events: [
+                // 이벤트 데이터를 여기에 추가할 수 있습니다.
+            ],
+            dayCellDidMount: function(info) {
+                var cellEl = info.el;
+                cellEl.addEventListener('click', function() {
+                    var confirmAttendance = confirm('출석체크 하시겠습니까?');
+                    if (confirmAttendance) {
+                        var stampImage = document.createElement('img');
+                        stampImage.src = '/img/stamp.jpg';
+                        stampImage.classList.add('stamp-image'); // 이미지에 클래스 추가
+                        cellEl.appendChild(stampImage);
+                    }
+                });
+
+                cellEl.style.cursor = 'pointer';
+                cellEl.style.position = 'relative'; // 상대적 위치 설정
+            },
+            dayCellUnmounted: function(info) {
+                var cellEl = info.el;
+                var stampImage = cellEl.querySelector('.stamp-image');
+                if (stampImage) {
+                    stampImage.remove();
+                }
+                cellEl.style.cursor = '';
+            }
         });
-    }
-}
-</script>
+
+        calendar.render();
+
+        // 이미지 클릭할 때의 이벤트 핸들러를 추가합니다.
+        var stampImage2 = document.getElementById('stamp2');
+        stampImage2.addEventListener('click', function() {
+            var today = new Date();
+            var dateString = today.toISOString().substr(0, 10); // 날짜 형식 변환
+            var targetCell = document.querySelector(`td[data-date="${dateString}"]`);
+
+            if (targetCell) {
+                var existingStamp = targetCell.querySelector('.stamp-image');
+                if (!existingStamp) {
+                    var newStampImage = document.createElement('img');
+                    newStampImage.src = '/img/stamp.jpg';
+                    newStampImage.classList.add('stamp-image');
+                    targetCell.appendChild(newStampImage);
+                }
+            }
+        });
+    });
+    </script>
+    <script>
+    
+    stampImage2.addEventListener('click', function() {
+        var today = new Date();
+        var dateString = today.toISOString().substr(0, 10); // 날짜 형식 변환
+        var targetCell = document.querySelector(`td[data-date="${dateString}"]`);
+
+        if (targetCell) {
+            var existingStamp = targetCell.querySelector('.stamp-image');
+            if (!existingStamp) {
+                var newStampImage = document.createElement('img');
+                newStampImage.src = '/img/stamp2.png';
+                newStampImage.classList.add('stamp-image');
+                targetCell.appendChild(newStampImage);
+                
+                // 이미지 클릭 시 포인트 업데이트 및 저장
+                fetch('/update-point', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        pointAmount: 10 // 포인트 증가량
+                    })
+                });
+            }
+        }
+    });
+    
+    </script>
 </body>
+<style>
+.stamp-image {
+    position: absolute;
+    top: 50%; /* 이미지의 상단을 칸의 중앙에 위치시킴 */
+    left: 50%; /* 이미지의 왼쪽을 칸의 중앙에 위치시킴 */
+    transform: translate(-50%, -50%); /* 이미지를 중앙 정렬 */
+    max-width: 70%; /* 이미지의 최대 너비를 칸의 절반으로 제한 */
+    max-height: 70%; /* 이미지의 최대 높이를 칸의 절반으로 제한 */
+    object-fit: contain; /* 이미지를 확대/축소하여 전체가 보이도록 설정 */
+}
+
+/* 일자별 칸 스타일 설정 */
+.fc-daygrid-day {
+    height: 80px; /* 일자별 칸 높이 설정 */
+}
+#stamp2{
+width: 100px; 
+height: auto;
+position: absolute;
+bottom: 800px;
+left:620px;
+cursor: pointer;
+
+}
+</style>
 </html>
