@@ -2,11 +2,8 @@
 <html>
 <head>
 <script th:src="@{/js/kty_filter.js}"></script>
-<link rel="stylesheet" href="/css/toursearch_kty.css">
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5084cc8a2f9c3459393c15e560d75404&libraries=services"></script>
-
 </head>
-<body id="userinfo_modify" onload="showPosition()" >
+<body id="userinfo_modify">
 <html layout:decorate="~{jjj/header}">
 <div id="my_infomation_modify" layout:fragment="content"
 	class="container my-3">
@@ -15,9 +12,7 @@
 	</div>
 	<div class="left-area">
 		<div class="search_food">
-		<div>
-			<span id="search_food_title">키워드 검색</span><br>
-			</div>
+			<span id="search_food_title"> 키워드 검색</span><br>
 			<div class="row my-3">
 				<div class="col-6">
 					<div class="input-group">
@@ -28,80 +23,73 @@
 					</div>
 				</div>
 				<form th:action="@{/tour/daegu_food}" method="get" id="searchForm">
-					<input type="hidden" id="kw" name="kw" th:value="${kw}"> <input
-						type="hidden" id="page" name="page" th:value="${paging.number}">
+					<input type="hidden" id="kw" name="kw" th:value="${kw}"> 
+
+					<input type="hidden" id="page" name="page" th:value="${paging.number}">
 
 				</form>
 			</div>
 			<br>
 			<span id="filter_food_title">상세검색</span><br> <br> <span
 				id="region_type">구역 선택</span><br><br> <select id="region_dropdown">
-				<option id="kw2Option1" value="중구" th:selected="${kw2 == '중구'}">중구</option>
-				<option id="kw2Option2" value="북구" th:selected="${kw2 == '북구'}">북구</option>
-				<option id="kw2Option3" value="서구" th:selected="${kw2 == '서구'}">서구</option>
-				<option id="kw2Option4" value="남구" th:selected="${kw2 == '남구'}">남구</option>
-				<option id="kw2Option5" value="동구" th:selected="${kw2 == '동구'}">동구</option>
-				<option id="kw2Option6" value="달서구" th:selected="${kw2 == '달서구'}">달서구</option>
-				<option id="kw2Option7" value="수성구" th:selected="${kw2 == '수성구'}">수성구</option>
-				<option id="kw2Option8" value="달성군" th:selected="${kw2 == '달성군'}">달성군</option>
-			</select> <br> <br> <span id="food_type">음식 종류</span>
-			<div class="food_check_type">
-				<input type="checkbox" id="kw3Option1" name="foodType" value="한식"
-					th:checked="${kw3 != null and kw3.contains('한식')}"> <label
-					for="kw3Option1">한식</label> <input type="checkbox" id="kw3Option2"
-					name="foodType" value="디저트"
-					th:checked="${kw3 != null and kw3.contains('디저트')}"> <label
-					for="kw3Option2">디저트</label> <input type="checkbox" id="kw3Option3"
-					name="foodType" value="카페"
-					th:checked="${kw3 != null and kw3.contains('카페')}"> <label
-					for="kw3Option3">카페</label> <input type="checkbox" id="kw3Option4"
-					name="foodType" value="중식"
-					th:checked="${kw3 != null and kw3.contains('중식')}"> <label
-					for="kw3Option4">중식</label> <br> <input type="checkbox"
-					id="kw3Option5" name="foodType" value="일식"
-					th:checked="${kw3 != null and kw3.contains('일식')}"> <label
-					for="kw3Option5">일식</label> <input type="checkbox" id="kw3Option6"
-					name="foodType" value="양식"
-					th:checked="${kw3 != null and kw3.contains('양식')}"> <label
-					for="kw3Option6">양식</label> <input type="checkbox" id="kw3Option7"
-					name="foodType" value="뷔페"
-					th:checked="${kw3 != null and kw3.contains('뷔페')}"> <label
-					for="kw3Option7">뷔페</label> <input type="checkbox" id="kw3Option8"
-					name="foodType" value="술집"
-					th:checked="${kw3 != null and kw3.contains('술집')}"> <label
-					for="kw3Option8">술집</label>
-			</div>
-			<div class="parking_check_type">
-				<span id="parking_type">주차 공간</span><br> <input type="checkbox"
-					id="kw4Option1" class="chk_par" name="ParkingType" value="있음"
-					th:checked="${kw4 != null and kw4.contains('있음')}"> <label
-					for="kw4Option1">있음</label> <input
-					type="checkbox" id="kw4Option2" class="chk_par" name="ParkingType"
-					value="없음"
-					th:checked="${kw4 != null and kw4.contains('없음')}"> <label
-					for="kw4Option2">없음</label>
-			</div>
+				  <option id="kw2Option1" value="중구" th:selected="${kw2 == '중구'}">중구</option>
+  <option id="kw2Option2" value="북구" th:selected="${kw2 == '북구'}">북구</option>
+  <option id="kw2Option3" value="서구" th:selected="${kw2 == '서구'}">서구</option>
+  <option id="kw2Option4" value="남구" th:selected="${kw2 == '남구'}">남구</option>
+  <option id="kw2Option5" value="동구" th:selected="${kw2 == '동구'}">동구</option>
+  <option id="kw2Option6" value="달서구" th:selected="${kw2 == '달서구'}">달서구</option>
+  <option id="kw2Option7" value="수성구" th:selected="${kw2 == '수성구'}">수성구</option>
+  <option id="kw2Option8" value="달성군" th:selected="${kw2 == '달성군'}">달성군</option>
+</select>
+<br>
+<br>
+<span id="food_type">음식 종류</span>
+<div class="food_check_type">
+  <input type="checkbox" id="kw3Option1" name="foodType" value="한식" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('한식')}">
+  <label for="kw3Option1">한식</label>
+  <input type="checkbox" id="kw3Option2" name="foodType" value="디저트" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('디저트')}">
+  <label for="kw3Option2">디저트</label>
+  <input type="checkbox" id="kw3Option3" name="foodType" value="카페" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('카페')}">
+  <label for="kw3Option3">카페</label>
+  <input type="checkbox" id="kw3Option4" name="foodType" value="중식" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('중식')}">
+  <label for="kw3Option4">중식</label>
+  <br>
+  <input type="checkbox" id="kw3Option5" name="foodType" value="일식" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('일식')}">
+  <label for="kw3Option5">일식</label>
+  <input type="checkbox" id="kw3Option6" name="foodType" value="양식" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('양식')}">
+  <label for="kw3Option6">양식</label>
+  <input type="checkbox" id="kw3Option7" name="foodType" value="뷔페" style="margin-left: 23px;" th:checked="${kw3 != null and kw3.contains('뷔페')}">
+  <label for="kw3Option7">뷔페</label>
+  <input type="checkbox" id="kw3Option8" name="foodType" value="술집" style="margin-left: 10px;" th:checked="${kw3 != null and kw3.contains('술집')}">
+  <label for="kw3Option8">술집</label>
+</div>
+<div class="parking_check_type">
+  <span id="parking_type">주차 공간</span><br>
+  <input type="checkbox" id="kw4Option1" class="chk_par" name="ParkingType" value="있음" style="margin-left: 10px;" th:checked="${kw4 != null and kw4.contains('있음')}">
+  <label for="kw4Option1" style="color: rgb(87, 87, 87);">있음</label>
+  <input type="checkbox" id="kw4Option2" class="chk_par" name="ParkingType" value="없음" style="margin-left: 10px;" th:checked="${kw4 != null and kw4.contains('없음')}">
+  <label for="kw4Option2" style="color: rgb(87, 87, 87);">없음</label>
+</div>
 			<button id="searchBtn">검색</button>
-			<form th:action="@{/tour/daegu_food2}" method="get" id="searchForm2">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm2">
 				<input type="hidden" id="kw2" th:value="${kw2}"> <input
 					type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
-				<input type="hidden" id="page" name="page"
-					th:value="${paging.number}">
+				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
-			<form th:action="@{/tour/daegu_food3}" method="get" id="searchForm3">
-				<input type="hidden" id="kw2" th:value="${kw2}"> <input
-					type="hidden" id="page" name="page" th:value="${paging.number}">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm3">
+				<input type="hidden" id="kw2" th:value="${kw2}">
+				<input type="hidden" id="page" name="page" th:value="${paging.number}">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm4">
+				<input type="hidden" id="kw2" th:value="${kw2}">
+				<input type="hidden" id="kw4" th:value="${kw4}">
+				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
-			<form th:action="@{/tour/daegu_food4}" method="get" id="searchForm4">
-				<input type="hidden" id="kw2" th:value="${kw2}"> <input
-					type="hidden" id="kw4" th:value="${kw4}"> <input
-					type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
-			<form th:action="@{/tour/daegu_food5}" method="get" id="searchForm5">
-				<input type="hidden" id="kw2" th:value="${kw2}"> <input
-					type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
-				<input type="hidden" id="kw4" th:value="${kw4}"> <input
-					type="hidden" id="page" name="page" th:value="${paging.number}">
+				<form th:action="@{/tour/daegu_food}" method="get" id="searchForm5">
+				<input type="hidden" id="kw2" th:value="${kw2}"> 
+				<input	type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
+				<input	type="hidden" id="kw4" th:if="${kw4 != null}" th:value="${kw4}">
+				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
 			<br>
 
@@ -110,29 +98,29 @@
 
 		</div>
 	</div>
-	<div class="right-area">
+	<div class="right-area" style="overflow-y: auto;">
 		<div th:each="food : ${foodList}" class="food-entry">
 			<p>
-				<span  class="result_parking"
-					th:if="${food.shopParking == '없음'}">주차 불가능</span> 
-					<span  class="result_parking"
-					th:if="${food.shopParking == '없음(인근유료주차장이용)'}">주차 불가능</span> 
-					<span class="result_parking"
-					th:if="${food.shopParking == '없음(저녁시간주차가능)'}">주차 불가능</span> 
-					<span class="result_parking"
-					th:if="${food.shopParking == '있음'}">주차 가능</span><br> 
-					<span th:text="${food.shopName}" id="result_parking2"></span> <span
-					id="result_parking3"></span> <span
-					th:text="${food.shopCategory}" id="result_parking4"></span>  <a th:href="@{'https://map.kakao.com/?q=' + ${food.shopAddr}}" style="margin-left:10px;" class="marker-link" target="_blank"></a>
-					<span id="result_parking5"></span><br> 
-					<span th:text="${food.shopAddr}" class="shop-address"></span>
-					<span id="sdd"></span><br> 
-					<span class="shop-opening-text" th:text="${food.shopOpening}"></span> <span
+				<span style="font-size: 15px; color: #f05650;" id="result_parking"
+					th:if="${food.shopParking == '없음'}">주차 불가능</span> <span
+					style="font-size: 15px; color: #f05650;" id="result_parking"
+					th:if="${food.shopParking == '없음(인근유료주차장이용)'}">주차 불가능</span> <span
+					style="font-size: 15px; color: #f05650;" id="result_parking"
+					th:if="${food.shopParking == '없음(저녁시간주차가능)'}">주차 불가능</span> <span
+					style="font-size: 15px; color: #f05650;" id="result_parking"
+					th:if="${food.shopParking == '있음'}">주차 가능</span><br> <span
+					th:text="${food.shopName}" style="font-size: 30px;"></span> <span
+					style="margin-right: 1ch;"></span> <span
+					th:text="${food.shopCategory}"
+					style="font-size: 13px; color: grey;"></span> <a th:href="@{'https://map.kakao.com/?q=' + ${food.shopAddr}}" style="margin-left:10px;" class="marker-link" target="_blank"></a> <span
+					style="margin-right: 2ch;"></span><br> <span
+					th:text="${food.shopAddr}" class="shop-address"></span><br> <span
+					class="shop-opening-text" th:text="${food.shopOpening}"></span> <span
 					class="result_opening"></span><br> <br> <span
 					th:text="${#strings.replace(#strings.replace(#strings.replace(food.shopInfo, '&lt;br /&gt;', ' '), '&amp;', ' '), 'amp;', ' ')}"></span><br>
 				<br> <span id="food_menu_title">- 메뉴 - </span><br> <span
 					th:text="${food.shopMenu}"></span><br> <br> Tel. <span
-					th:text="${food.shopTel}"></span>
+					th:text="${food.shopTel}"></span> 
 			</p>
 			<p class="food_shop_photo"></p>
 		</div>
@@ -142,28 +130,35 @@
 				<img src="/img/no_search.PNG">
 			</p>
 		</div>
-
+		<div th:if="${paging.content.size() == 0}">
+			<p id="no_search_data">
+				<img src="/img/no_search.PNG">
+			</p>
+		</div>
+ 
 		<div th:if="${!paging.isEmpty()}"
 			style="display: flex; justify-content: center;">
 			<ul class="pagination" style="flex-direction: row;">
-				<li class="page-item" style="white-space: nowrap;  "><a
-					class="page-link" th:if="${paging.number > 0}"
-					th:href="@{|?page=${paging.number-1}&kw=${kw}|}"> <span>이전</span>
+				<li class="page-item" style="white-space: nowrap;"><a
+					class="page-link4" th:if="${paging.number > 0}"
+					th:href="@{/tour/daegu_food(page=${paging.number-1},kw2=${kw2},kw4=${kw4})}">
+						<span>이전</span>
 				</a> <th:block
 						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
 						<a th:if="${page >= 0 and page < paging.totalPages}"
-							th:classappend="${page == paging.number} ? 'page-link active' : 'page-link'"
-							th:href="@{|?page=${page}&kw=${kw}|}"> <span
-							th:text="${page}"
+							th:classappend="${page == paging.number} ? 'page-link4 active' : 'page-link4'"
+							th:href="@{/tour/daegu_food(page=${page},kw2=${kw2},kw4=${kw4})}"
+							th:data-page="${page}"> <span th:text="${page}"
 							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
 						</a>
-					</th:block> <a class="page-link"
+					</th:block> <a class="page-link4"
 					th:if="${paging.number < paging.totalPages - 1}"
-					th:href="@{|?page=${paging.number+1}&kw=${kw}|}"> <span>다음</span>
+					th:href="@{/tour/daegu_food(page=${paging.number+1},kw2=${kw2},kw4=${kw4})}">
+						<span>다음</span>
 				</a></li>
 			</ul>
 		</div>
-	</div>
+	</div> 
 </div>
 </body>
 
