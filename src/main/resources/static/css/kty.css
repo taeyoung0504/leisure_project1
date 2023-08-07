@@ -811,13 +811,17 @@ td{
 }
 
 .search_food {
-	width: 80%;
-	height: 90%;
-	margin-top: 10%;
+	/* width: 80%; */
+	/* height: 90%; */
+	/* margin-top: 10%; */
 	/*display: flex;
             justify-content: center;
             align-items: center;*/
-	padding: 40px;
+	padding: 15px;
+	left: 320px;
+	position: fixed;
+	display: inline-block;
+	top: 200px;
 }
 
 #search_food_title {
@@ -843,7 +847,7 @@ td{
 }
 
 #search_food {
-	width: 70%;
+	/* width: 70%; */
 	border: none;
 	outline: none;
 	color: #636e72;
@@ -912,11 +916,10 @@ td{
 
 .right-area {
 	position: fixed;
-	width: 55.3%;
+	width: 900px;
 	height: 80%;
-	right: 72px;
-	top: 150px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
-
+	right: 335px;
+	top: 130px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
 	/*border:1px solid black;*/
 }
 
@@ -929,14 +932,25 @@ td{
 	border-radius: 20px;
 }
 
+food_shop_photo{
+	width: 250px;
+	
+}
+
+
 .food-entry>p:first-child {
-	width: 60%;
+	width: 100%;
+	background-repeat: no-repeat;
 	padding: 10px;
 }
 
 .food-entry>p:last-child {
-	width: 40%;
+	width: 100%;
+	background-repeat: no-repeat;
 	padding: 10px;
+	overflow-clip-margin: content-box;
+    overflow: clip;
+
 }
 
 .result_opening {
@@ -944,6 +958,9 @@ td{
 	color: #f05650;
 	font-weight: light;
 }
+
+
+
 
 #searchBtn {
 	background-color: rgb(255, 128, 128);
@@ -1071,15 +1088,20 @@ td{
 
 .my_position {
 	position: absolute;
-	left: -460px;
-	bottom: 480px;
-	/*border:1px solid grey;*/
+	/* left: -388px; */
+	/* bottom: 480px; */
+	/* border:1px solid grey; */
 	padding-left: 10px;
 	padding-top: 10px;
 	width: 300px;
 	height: 100px;
-	font-size: 30px;
-	font-weight: bold;
+	font-size: 25px;
+	top: 26px;
+	/* font-weight: bold; */
+	float: left;
+	display: flex;
+	right: 63px;
+	color: #292929;
 }
 
 #modify_partner {
