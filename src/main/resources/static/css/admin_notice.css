@@ -23,12 +23,6 @@ h3 {
 	font-weight: bold;
 }
 
-.container {
-	margin: 10px auto !important;
-	width: 100% !important;
-	height: 100% !important;
-	padding-left: 340px !important;
-}
 
 table {
 	width: 100%;
@@ -142,10 +136,8 @@ span.role-ADMIN {
 }
 
 .page-item.active .page-link {
-	background-color: gray;
-	/* 선택된 페이지 번호의 배경색 */
-	color: #fff;
-	/* 선택된 페이지 번호의 글자색 */
+	background-color: var(--main-color);
+	color: white;
 }
 
 #myModal {
@@ -223,9 +215,6 @@ span.role-ADMIN {
 	background-color: #f2f2f2;
 }
 
-.page-link:hover {
-	background-color: #e0e0e0;
-}
 
 /* 모달 창 폼 css */
 #editForm {
@@ -269,8 +258,8 @@ span.role-ADMIN {
 }
 
 .content-container {
-	margin: 0 200px;
 	max-width: 900px;
+	margin-left: 430px;
 }
 
 .notice-item {
