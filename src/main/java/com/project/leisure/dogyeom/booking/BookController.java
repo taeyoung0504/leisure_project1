@@ -27,7 +27,6 @@ import com.project.leisure.dogyeom.toss.domain.CancelPaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentResDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentSuccessDto;
-import com.project.leisure.dogyeom.totalPrice.TotalPrice;
 import com.project.leisure.dogyeom.totalPrice.TotalPriceRepository;
 import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
@@ -155,7 +154,7 @@ private final PaymentService paymentService;
 		// 세션에서 현재 로그인한 사람의 로그인 아이디도 가져와야함.
 		String username = principal.getName();
 
-		String realName = bvo.getBookerName();
+		String realName = bvo.getBookerName(); 
 
 		String tel = bvo.getBookerTel();
 
@@ -191,31 +190,30 @@ private final PaymentService paymentService;
 		}
 		log.info("INFO {}", "============================" + bookingVO.toString());
 
-		int result = bookService.create(bookingVO); // params랑 세션에서 불러온 객체 같이 넘겨주기
-		int bookId = id;
+            int result = bookService.create(bookingVO); // params랑 세션에서 불러온 객체 같이 넘겨주기
+    		int bookId = id;
 
-		if (result != 0) {
-			log.info("INFO {}", result);
-			bookingVO = bookService.getBookVO(result);
-			bookingVO.setBookNum(result);
-			log.info("INFO {}", bookingVO);
-			model.addAttribute("bookingVO", bookingVO);
-			log.info("INFO {}", model);
+    		if (result != 0) {
+    			log.info("INFO {}", result);
+    			bookingVO = bookService.getBookVO(result);
+    			bookingVO.setBookNum(result);
+    			log.info("INFO {}", bookingVO);
+    			model.addAttribute("bookingVO", bookingVO);
+    			log.info("INFO {}", model);
 
-			Long bookNum = Long.valueOf(result);
+    			Long bookNum = Long.valueOf(result);
 
-			// bookingVO를 다음 메서드로 전달하기 위해 @ModelAttribute를 사용하여 전달
-			KakaoReadyResponseVO res = kakaoPayController.kakaoPay(bookingVO);
+    			// bookingVO를 다음 메서드로 전달하기 위해 @ModelAttribute를 사용하여 전달
+    			KakaoReadyResponseVO res = kakaoPayController.kakaoPay(bookingVO);
 
-			// 여기선 반환받은 예약번호인 result로 해당 예약정보를 찾아서 tid를 넣어준다.(이후 이 tid는 승인, 취소등에서 해당 예약정보를
-			// 찾을 때 사용)
-			bookService.updateTid(bookNum, res.getTid());
+    			// 여기선 반환받은 예약번호인 result로 해당 예약정보를 찾아서 tid를 넣어준다.(이후 이 tid는 승인, 취소등에서 해당 예약정보를
+    			// 찾을 때 사용)
+    			bookService.updateTid(bookNum, res.getTid());
 
-			return new ResponseEntity<>(res, HttpStatus.OK);
+    			return new ResponseEntity<>(res, HttpStatus.OK);
 
-		}
-		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
+    		}
+    		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	@PostMapping("/api/v1/payments/toss/{id}")
 	public ResponseEntity<PaymentResDto> requestTossPayment(Model model, @PathVariable("id") Integer id,
