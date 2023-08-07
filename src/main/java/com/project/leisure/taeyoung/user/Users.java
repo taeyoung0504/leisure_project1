@@ -2,6 +2,7 @@ package com.project.leisure.taeyoung.user;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +57,12 @@ public class Users {
 
 	private LocalDateTime lockTime = LocalDateTime.now(); // 계정 잠금 시간
 
+	
+	
+	
+	
+	
+	
 	public Users update(String username) {
 		this.username = username;
 

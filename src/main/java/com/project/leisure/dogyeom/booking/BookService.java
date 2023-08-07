@@ -10,9 +10,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.project.leisure.dogyeom.garbage.Garbage;
+import com.project.leisure.dogyeom.garbage.GarbageRepository;
 import com.project.leisure.dogyeom.kakao.DataNotFoundException;
 import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.Product;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class BookService {
@@ -22,6 +26,9 @@ public class BookService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+    private GarbageRepository garbageRepository;
 
 	@Autowired
 	public BookService(BookRepository bookRepository, RoomRepository roomRepository) {
@@ -99,7 +106,28 @@ public class BookService {
 		}
 		return null;
 	}
+	
+	
+	// garbage
+	@Transactional
+    public boolean moveAndDelete(int bookNum) {
+        BookingVO bookingVO = bookRepository.findById(bookNum).orElse(null);
 
+        if (bookingVO != null) {
+            Garbage garbage = bookingVO.toGarbage();
+
+            garbage = garbageRepository.save(garbage);
+
+            bookRepository.delete(bookingVO);
+            
+            return true;
+        }
+        
+        return false;
+    }
+	
+	
+	// 이거 안쓰는 코드 인듯
 	public Room getRoom(int id) {
 
 		Optional<Room> room = this.roomRepository.findById(id);

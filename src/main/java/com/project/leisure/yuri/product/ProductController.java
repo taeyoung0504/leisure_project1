@@ -37,7 +37,7 @@ public class ProductController {
 
 	private final BookService bookService;
 	private final UserService userService;
-	
+
 	// productNewMainReg 해당 유저가 새로운 숙소를 추가
 	@GetMapping("/productNewMainReg")
 	public String productNewMainReg(Principal principal, @RequestParam(name = "companyName") String companyName,
@@ -74,19 +74,15 @@ public class ProductController {
 	@GetMapping(value = "productMainReg/{id}")
 	public String productMainReg(Model model, Principal principal, @PathVariable("id") Long acc_id) {
 
-		
 		String username = principal.getName();
 
-	  
-	    List<Users> userList = this.userService.check(username);
-	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+		List<Users> userList = this.userService.check(username);
+		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-	    if (!isAdmin) {
-	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
-	    }
+		if (!isAdmin) {
+			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+		}
 
-	    
-	    
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
@@ -117,20 +113,17 @@ public class ProductController {
 
 	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
 	@GetMapping(value = "registerRoom/{id}")
-	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id,Principal principal) {
+	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id, Principal principal) {
 
-		
 		String username = principal.getName();
 
-	    
-	    List<Users> userList = this.userService.check(username);
-	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+		List<Users> userList = this.userService.check(username);
+		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-	    if (!isAdmin) {
-	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
-	    }
+		if (!isAdmin) {
+			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+		}
 
-		
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
@@ -150,19 +143,17 @@ public class ProductController {
 
 	// 객실 등록 페이지 이동 및 해당 pk조회하여 product 가져오기
 	@GetMapping(value = "addproduct/{id}")
-	public String setAddProduct(Model model, @PathVariable("id") Long acc_id,Principal principal) {
+	public String setAddProduct(Model model, @PathVariable("id") Long acc_id, Principal principal) {
 
 		String username = principal.getName();
 
-	  
-	    List<Users> userList = this.userService.check(username);
-	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+		List<Users> userList = this.userService.check(username);
+		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-	    if (!isAdmin) {
-	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
-	    }
+		if (!isAdmin) {
+			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+		}
 
-		
 		// 해당 id로 product를 조회
 		List<Product> product = productService.findProductsByAccommodationId(acc_id);
 
@@ -273,7 +264,7 @@ public class ProductController {
 	@PostMapping("/updateProduct")
 	public ResponseEntity<?> uploadFiles(@RequestParam("productId") Long product_id,
 			@RequestParam("detail") String detail,
-			@RequestParam(value = "images[]", required = false) MultipartFile[] editedImages,
+			@RequestParam(value = "newImages[]", required = false) MultipartFile[] editedImages,
 			@RequestParam(value = "deletedImages[]", required = false) List<Long> deletedImageIds,
 			@RequestParam("count") Integer count, @RequestParam("type") String type,
 			@RequestParam("pernum") Integer pernum, @RequestParam("amount") Integer amount,
@@ -281,7 +272,7 @@ public class ProductController {
 
 		// 상품 조회 해당하는 상픔의 pk를 가져와서 조회한다.
 		Product product = this.productService.getProduct(product_id);
-	
+
 		// 방 수정시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
 		if (product.getAccommodation().getAcc_max_people() < pernum) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
@@ -310,9 +301,7 @@ public class ProductController {
 		// 금액 평균 구함
 		// 해당하는 상품의 accommodation
 		Accommodation accommodation = product.getAccommodation();
-		
-		
-		
+
 		// 평균 가격 계산
 		int averagePrice = calculateAveragePrice(accommodation);
 
@@ -340,20 +329,17 @@ public class ProductController {
 
 //방 수정하기위해 해당 방 ID를 가져오고 또한 해당 방을 조회해서 찾음
 	@GetMapping(value = "modifyRoom/{productId}")
-	public String modifyRoom(Model model, @PathVariable("productId") Long productId,Principal principal) {
+	public String modifyRoom(Model model, @PathVariable("productId") Long productId, Principal principal) {
 
-		
 		String username = principal.getName();
 
-	    
-	    List<Users> userList = this.userService.check(username);
-	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
+		List<Users> userList = this.userService.check(username);
+		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-	    if (!isAdmin) {
-	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
-	    }
-		
-		
+		if (!isAdmin) {
+			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+		}
+
 		Product product = this.productService.getProduct(productId);
 
 		model.addAttribute("product", product);

@@ -307,3 +307,25 @@ color:grey;
 .gray-button {
   filter: grayscale(100%);
 }
+
+.delParents {
+	cursor : pointer;
+	height: 10px;
+}
+
+.delParents:hover {
+	color: red;
+}
+
+#del {
+	position: relative;
+	top : 0;
+	left: 0px;
+	display : inline-block;
+	cursor : pointer;
+	height: 10px;
+}
+
+#del:hover {
+	color: red;
+}
