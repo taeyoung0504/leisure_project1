@@ -474,3 +474,37 @@ label {
 .right-align {
 	text-align: right;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination .page-item a[class*="page-link"] {
+    pointer-events: auto;
+    cursor: pointer;
+    background-color: #ffdcdcd3;
+    color: white;
+    border-color: #e9ecef;
+}
+
+.pagination .page-item a[class*="page-link"].active {
+    background-color: var(--main-color);
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination .page-item a[class*="page-link"] {
+    color: #fff;
+}
+
+.pagination .page-item a[class*="page-link"] {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #ff7b7ba3;
+    border-radius: 0 6px 6px 0;
+}

@@ -209,7 +209,6 @@
 				th:if="${kw2 == null && kw5 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 ==null}">
 				<ul class="pagination">
 					<li class="page-item"><a class="page-link16"
-						th:if="${paging.number > 0}"
 						th:href="@{/tour/daegu_room16(page=${paging.number-1},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -220,7 +219,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link16"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room16(page=${paging.number+1},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -233,7 +231,7 @@
 				th:if="${kw2 == null && kw5 == null && kw6 == null && kw7 == null && kw8 ==null && kw9 !=null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link17" th:if="${paging.number > 0}"
+						class="page-link17" 
 						th:href="@{/tour/daegu_room17(page=${paging.number-1},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -244,7 +242,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link17"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room17(page=${paging.number+1},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -258,7 +255,7 @@
 				th:if="${kw2 == null && kw5 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 !=null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link18" th:if="${paging.number > 0}"
+						class="page-link18"
 						th:href="@{/tour/daegu_room18(page=${paging.number-1},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -269,7 +266,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link18"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room18(page=${paging.number+1},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -281,7 +277,7 @@
 				th:if="${kw2 != null && kw5 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 ==null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link19" th:if="${paging.number > 0}"
+						class="page-link19"
 						th:href="@{/tour/daegu_room19(page=${paging.number-1},kw2=${kw2},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -292,7 +288,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link19"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room19(page=${paging.number+1},kw2=${kw2},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -304,7 +299,7 @@
 				th:if="${kw2 != null && kw5 == null && kw6 == null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link20" th:if="${paging.number > 0}"
+						class="page-link20"
 						th:href="@{/tour/daegu_room20(page=${paging.number-1},kw2=${kw2},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -315,7 +310,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link20"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room20(page=${paging.number+1},kw2=${kw2},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -327,7 +321,7 @@
 				th:if="${kw2 != null && kw5 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link21" th:if="${paging.number > 0}"
+						class="page-link21"
 						th:href="@{/tour/daegu_room21(page=${paging.number-1},kw2=${kw2},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -338,7 +332,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link21"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room21(page=${paging.number+1},kw2=${kw2},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -350,7 +343,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link22" th:if="${paging.number > 0}"
+						class="page-link22"
 						th:href="@{/tour/daegu_room22(page=${paging.number-1},kw5=${kw5},kw8=${kw8} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -361,7 +354,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link22"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room22(page=${paging.number+1},kw5=${kw5},kw8=${kw8} )}">
 							<span>다음</span>
 					</a></li>
@@ -373,7 +365,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link23" th:if="${paging.number > 0}"
+						class="page-link23"
 						th:href="@{/tour/daegu_room23(page=${paging.number-1},kw5=${kw5},kw9=${kw9} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -384,7 +376,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link23"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room23(page=${paging.number+1},kw5=${kw5},kw9=${kw9} )}">
 							<span>다음</span>
 					</a></li>
@@ -397,7 +388,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link24" th:if="${paging.number > 0}"
+						class="page-link24"
 						th:href="@{/tour/daegu_room24(page=${paging.number-1},kw5=${kw5},kw8=${kw8},kw9=${kw9} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -408,7 +399,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link24"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room23(page=${paging.number+1},kw5=${kw5},kw8=${kw8},kw9=${kw9} )}">
 							<span>다음</span>
 					</a></li>
@@ -420,7 +410,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link25" th:if="${paging.number > 0}"
+						class="page-link25"
 						th:href="@{/tour/daegu_room25(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw8=${kw8} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -431,7 +421,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link25"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room25(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw8=${kw8} )}">
 							<span>다음</span>
 					</a></li>
@@ -443,7 +432,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link26" th:if="${paging.number > 0}"
+						class="page-link26"
 						th:href="@{/tour/daegu_room26(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw9=${kw9} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -454,7 +443,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link26"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room26(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw9=${kw9} )}">
 							<span>다음</span>
 					</a></li>
@@ -466,7 +454,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link27" th:if="${paging.number > 0}"
+						class="page-link27"
 						th:href="@{/tour/daegu_room27(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw8=${kw8},kw9=${kw9} )}">
 							<span>이전</span>
 					</a> <th:block
@@ -477,7 +465,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link27"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room27(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw8=${kw8},kw9=${kw9} )}">
 							<span>다음</span>
 					</a></li>
@@ -491,7 +478,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link28" th:if="${paging.number > 0}"
+						class="page-link28" 
 						th:href="@{/tour/daegu_room28(page=${paging.number-1},kw6=${kw6},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -502,7 +489,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link28"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room28(page=${paging.number+1},kw6=${kw6},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -514,7 +500,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link29" th:if="${paging.number > 0}"
+						class="page-link29"
 						th:href="@{/tour/daegu_room29(page=${paging.number-1},kw6=${kw6},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -525,7 +511,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link29"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room29(page=${paging.number+1},kw6=${kw6},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -538,7 +523,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link30" th:if="${paging.number > 0}"
+						class="page-link30"
 						th:href="@{/tour/daegu_room30(page=${paging.number-1},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -549,7 +534,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link30"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room30(page=${paging.number+1},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -562,7 +546,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 != null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link31" th:if="${paging.number > 0}"
+						class="page-link31"
 						th:href="@{/tour/daegu_room31(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -573,7 +557,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link31"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room31(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -588,7 +571,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 != null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link32" th:if="${paging.number > 0}"
+						class="page-link32"
 						th:href="@{/tour/daegu_room32(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -599,7 +582,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link32"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room32(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -612,7 +594,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 != null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link33" th:if="${paging.number > 0}"
+						class="page-link33"
 						th:href="@{/tour/daegu_room33(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -623,7 +605,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link33"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room33(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -637,7 +618,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link34" th:if="${paging.number > 0}"
+						class="page-link34"
 						th:href="@{/tour/daegu_room34(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -648,7 +629,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link34"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room34(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -661,7 +641,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link35" th:if="${paging.number > 0}"
+						class="page-link35"
 						th:href="@{/tour/daegu_room35(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -672,7 +652,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link35"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room35(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -684,7 +663,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link36" th:if="${paging.number > 0}"
+						class="page-link36"
 						th:href="@{/tour/daegu_room36(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -695,7 +674,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link36"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room36(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -708,7 +686,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 == null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link37" th:if="${paging.number > 0}"
+						class="page-link37"
 						th:href="@{/tour/daegu_room37(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -719,7 +697,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link37"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room37(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -734,7 +711,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 == null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link38" th:if="${paging.number > 0}"
+						class="page-link38"
 						th:href="@{/tour/daegu_room38(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -745,7 +722,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link38"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room38(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -757,7 +733,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 == null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link39" th:if="${paging.number > 0}"
+						class="page-link39"
 						th:href="@{/tour/daegu_room39(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -768,7 +744,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link39"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room39(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -782,7 +757,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 == null && kw7 != null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link40" th:if="${paging.number > 0}"
+						class="page-link40" 
 						th:href="@{/tour/daegu_room40(page=${paging.number-1},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -793,7 +768,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link40"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room40(page=${paging.number+1},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -806,7 +780,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 == null && kw7 != null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link41" th:if="${paging.number > 0}"
+						class="page-link41" 
 						th:href="@{/tour/daegu_room41(page=${paging.number-1},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -817,7 +791,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link41"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room41(page=${paging.number+1},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -830,7 +803,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 == null && kw7 != null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link42" th:if="${paging.number > 0}"
+						class="page-link42" 
 						th:href="@{/tour/daegu_room42(page=${paging.number-1},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -841,7 +814,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link42"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room42(page=${paging.number+1},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -853,7 +825,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 == null && kw7 != null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link43" th:if="${paging.number > 0}"
+						class="page-link43"
 						th:href="@{/tour/daegu_room43(page=${paging.number-1},kw2=${kw2},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -864,7 +836,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link43"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room43(page=${paging.number+1},kw2=${kw2},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -879,7 +850,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 == null && kw7 != null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link44" th:if="${paging.number > 0}"
+						class="page-link44" 
 						th:href="@{/tour/daegu_room44(page=${paging.number-1},kw2=${kw2},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -890,7 +861,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link44"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room44(page=${paging.number+1},kw2=${kw2},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -902,7 +872,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 == null && kw7 != null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link45" th:if="${paging.number > 0}"
+						class="page-link45"
 						th:href="@{/tour/daegu_room45(page=${paging.number-1},kw2=${kw2},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -913,7 +883,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link45"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room45(page=${paging.number+1},kw2=${kw2},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -927,7 +896,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 != null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link46" th:if="${paging.number > 0}"
+						class="page-link46"
 						th:href="@{/tour/daegu_room46(page=${paging.number-1},kw5=${kw5},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -938,7 +907,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link46"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room46(page=${paging.number+1},kw5=${kw5},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -951,7 +919,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 != null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link47" th:if="${paging.number > 0}"
+						class="page-link47"
 						th:href="@{/tour/daegu_room47(page=${paging.number-1},kw5=${kw5},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -962,7 +930,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link47"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room47(page=${paging.number+1},kw5=${kw5},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -974,7 +941,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 == null && kw7 != null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link48" th:if="${paging.number > 0}"
+						class="page-link48"
 						th:href="@{/tour/daegu_room48(page=${paging.number-1},kw5=${kw5},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -985,7 +952,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link48"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room48(page=${paging.number+1},kw5=${kw5},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1000,7 +966,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 != null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link49" th:if="${paging.number > 0}"
+						class="page-link49"
 						th:href="@{/tour/daegu_room49(page=${paging.number-1},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1011,7 +977,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link49"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room49(page=${paging.number+1},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -1026,7 +991,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 != null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link50" th:if="${paging.number > 0}"
+						class="page-link50"
 						th:href="@{/tour/daegu_room50(page=${paging.number-1},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1037,7 +1002,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link50"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room50(page=${paging.number+1},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1049,7 +1013,7 @@
 				th:if="${kw5 == null && kw2 == null && kw6 != null && kw7 != null && kw8 !=null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link51" th:if="${paging.number > 0}"
+						class="page-link51"
 						th:href="@{/tour/daegu_room51(page=${paging.number-1},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1060,7 +1024,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link51"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room51(page=${paging.number+1},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1073,7 +1036,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 != null && kw8 !=null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link52" th:if="${paging.number > 0}"
+						class="page-link52"
 						th:href="@{/tour/daegu_room52(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1084,7 +1047,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link52"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room52(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -1097,7 +1059,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 != null && kw8 ==null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link53" th:if="${paging.number > 0}"
+						class="page-link53"
 						th:href="@{/tour/daegu_room53(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1108,7 +1070,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link53"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room53(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1125,7 +1086,7 @@
 				th:if="${kw5 != null && kw2 == null && kw6 != null && kw7 != null && kw8 != null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link54" th:if="${paging.number > 0}"
+						class="page-link54"
 						th:href="@{/tour/daegu_room54(page=${paging.number-1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1136,7 +1097,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link54"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room54(page=${paging.number+1},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1148,7 +1108,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 != null && kw8 != null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link55" th:if="${paging.number > 0}"
+						class="page-link55"
 						th:href="@{/tour/daegu_room55(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1159,7 +1119,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link55"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room55(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -1172,7 +1131,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 != null && kw8 == null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link56" th:if="${paging.number > 0}"
+						class="page-link56"
 						th:href="@{/tour/daegu_room56(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1183,7 +1142,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link56"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room56(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1197,7 +1155,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 == null && kw7 != null && kw8 != null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link57" th:if="${paging.number > 0}"
+						class="page-link57"
 						th:href="@{/tour/daegu_room57(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1208,7 +1166,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link57"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room57(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1223,7 +1180,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 != null && kw8 != null && kw9 == null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link58" th:if="${paging.number > 0}"
+						class="page-link58"
 						th:href="@{/tour/daegu_room58(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1234,7 +1191,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link58"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room58(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw8=${kw8})}">
 							<span>다음</span>
 					</a></li>
@@ -1251,7 +1207,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 != null && kw8 == null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link59" th:if="${paging.number > 0}"
+						class="page-link59"
 						th:href="@{/tour/daegu_room59(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1262,7 +1218,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link59"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room59(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1275,7 +1230,7 @@
 				th:if="${kw5 == null && kw2 != null && kw6 != null && kw7 != null && kw8 != null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link60" th:if="${paging.number > 0}"
+						class="page-link60"
 						th:href="@{/tour/daegu_room60(page=${paging.number-1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1286,7 +1241,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link60"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room60(page=${paging.number+1},kw2=${kw2},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
@@ -1299,7 +1253,7 @@
 				th:if="${kw5 != null && kw2 != null && kw6 != null && kw7 != null && kw8 != null && kw9 != null}">
 				<ul class="pagination">
 					<li class="page-item" style="white-space: nowrap;"><a
-						class="page-link61" th:if="${paging.number > 0}"
+						class="page-link61"
 						th:href="@{/tour/daegu_room61(page=${paging.number-1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>이전</span>
 					</a> <th:block
@@ -1310,7 +1264,6 @@
 								th:data-page="${page}"> <span th:text="${page + 1}"></span>
 							</a>
 						</th:block> <a class="page-link61"
-						th:if="${paging.number < paging.totalPages - 1}"
 						th:href="@{/tour/daegu_room61(page=${paging.number+1},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw7=${kw7},kw8=${kw8},kw9=${kw9})}">
 							<span>다음</span>
 					</a></li>
