@@ -211,44 +211,122 @@ public class TourController {
 	
 	
 	/* 1. 숙소 리스트 게시판 이동 컨트롤러_간소화 1 */
-		@GetMapping({"/daegu_room", "/daegu_room2", "/daegu_room3", "/daegu_room4", "/daegu_room5", "/daegu_room6", "/daegu_room7", "/daegu_room8", "/daegu_room9"})
-		public String room(Model model,
-		                   @RequestParam(value = "page", defaultValue = "0") int page,
-		                   @RequestParam(value = "kw", defaultValue = "") String kw,
-		                   @RequestParam(value = "kw2", defaultValue = "") String kw2,
-		                   @RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
-		                   @RequestParam(value = "kw6", defaultValue = "") List<String> kw6,
-		                   @RequestParam(value = "kw7", defaultValue = "") String kw7) {
-		    Page<Accommodation> paging = null;
+		@GetMapping("/daegu_room")
+		public String room1(Model model, @RequestParam(value="page", defaultValue="0") int page,
+				  @RequestParam(value = "kw", defaultValue = "") String kw) {
+			Page<Accommodation> paging = accommodationService.getList(page,kw);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw", kw);
+			return "kty/find/daegu_room";
+		}
+		
 
-		    if (kw2.isEmpty() && kw5.isEmpty() && kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList(page, kw);
-		    } else if (!kw2.isEmpty() && kw5.isEmpty() && kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList2(page, kw2);
-		    } else if (kw2.isEmpty() && !kw5.isEmpty() && kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList3(page, kw5);
-		    } else if (kw2.isEmpty() && kw5.isEmpty() && !kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList5(page, kw6);
-		    } else if (kw2.isEmpty() && kw5.isEmpty() && kw6.isEmpty() && !kw7.isEmpty()) {
-		        paging = accommodationService.getList4(page, Integer.parseInt(kw7));
-		    } else if (!kw2.isEmpty() && !kw5.isEmpty() && kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList7(page, kw2, kw5);
-		    } else if (!kw2.isEmpty() && kw5.isEmpty() && !kw6.isEmpty() && kw7.isEmpty()) {
-		        paging = accommodationService.getList8(page, kw2, kw5, kw6);
-		    } else if (!kw2.isEmpty() && kw5.isEmpty() && kw6.isEmpty() && !kw7.isEmpty()) {
-		        paging = accommodationService.getList9(page, kw2, kw5, kw7);
-		    } else if (!kw2.isEmpty() && !kw5.isEmpty() && !kw6.isEmpty() && !kw7.isEmpty()) {
-		        paging = accommodationService.getList6(page, kw2, kw5, kw6, kw7);
-		    }
+		/* 구역검색 컨트롤러*/
+		
+		
+		@GetMapping("/daegu_room2")
+		public String room2(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw2", defaultValue = "") String kw2) {
+			Page<Accommodation> paging = accommodationService.getList2(page,kw2);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw2", kw2);
 
-		    model.addAttribute("paging", paging);
-		    model.addAttribute("kw", kw);
-		    model.addAttribute("kw2", kw2);
-		    model.addAttribute("kw5", kw5);
-		    model.addAttribute("kw6", kw6);
-		    model.addAttribute("kw7", kw7);
+			return "kty/find/daegu_room";
+		}
+		
+		
+		@GetMapping("/daegu_room3")
+		public String room3(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw5", defaultValue = "") List<String> kw5) {
+			Page<Accommodation> paging = accommodationService.getList3(page,kw5);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw5", kw5);
 
-		    return "kty/find/daegu_room";
+			return "kty/find/daegu_room";
+		}
+		
+
+		@GetMapping("/daegu_room4")
+		public String room4(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw6", defaultValue = "") List<String> kw6) {
+			Page<Accommodation> paging = accommodationService.getList5(page,kw6);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw6", kw6);
+
+			return "kty/find/daegu_room";
+		}
+		
+		@GetMapping("/daegu_room5")
+		public String room5(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw7", defaultValue = "") int kw7) {
+			Page<Accommodation> paging = accommodationService.getList4(page,kw7);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw7", kw7);
+
+			return "kty/find/daegu_room";
+		}
+		
+		
+		/* 구역+숙소 타입+평점+투숙인원 */
+		@GetMapping("/daegu_room6")
+		public String room6(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw2", defaultValue = "") String kw2,
+				@RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
+				@RequestParam(value = "kw6", defaultValue = "") List<String> kw6,
+				@RequestParam(value = "kw7", defaultValue = "") String kw7) {
+			Page<Accommodation> paging = accommodationService.getList6(page,kw2,kw5,kw6,kw7);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw2", kw2);
+			model.addAttribute("kw5", kw5);
+			model.addAttribute("kw6", kw6);
+			model.addAttribute("kw7", kw7);
+
+			return "kty/find/daegu_room";
+		}
+		
+		/* 구역 + 숙소타입 */
+		@GetMapping("/daegu_room7")
+		public String room7(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw2", defaultValue = "") String kw2,
+				@RequestParam(value = "kw5", defaultValue = "") List<String> kw5) {
+			Page<Accommodation> paging = accommodationService.getList7(page,kw2,kw5);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw2", kw2);
+			model.addAttribute("kw5", kw5);
+
+			return "kty/find/daegu_room";
+		}
+		
+		
+		/* 구역 + 숙소타입 + 평점 s*/
+		@GetMapping("/daegu_room8")
+		public String room8(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw2", defaultValue = "") String kw2,
+				@RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
+				@RequestParam(value = "kw6", defaultValue = "") List<String> kw6) {
+			Page<Accommodation> paging = accommodationService.getList8(page,kw2,kw5,kw6);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw2", kw2);
+			model.addAttribute("kw5", kw5);
+			model.addAttribute("kw6", kw6);
+
+			return "kty/find/daegu_room";
+		}
+		
+		/* 구역 + 숙소타입 + 투숙인원 */
+		
+		@GetMapping("/daegu_room9")
+		public String room9(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+				@RequestParam(value = "kw2", defaultValue = "") String kw2,
+				@RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
+				@RequestParam(value = "kw7", defaultValue = "") String kw7) {
+			Page<Accommodation> paging = accommodationService.getList9(page,kw2,kw5,kw7);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw2", kw2);
+			model.addAttribute("kw5", kw5);
+			model.addAttribute("kw7", kw7);
+
+			return "kty/find/daegu_room";
 		}
 		
 		
