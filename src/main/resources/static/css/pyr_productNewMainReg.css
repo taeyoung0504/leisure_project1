@@ -12,15 +12,16 @@ h1 {
 
 #productForm {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+    flex-direction: column;
+    width: 800px;
 }
 
 #namdAddrSecFlex {
 	display: flex;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	width: 600px;
+    margin-bottom: 110px;
+    margin-top: -355px;
+    width: 600px;
+    margin-left: 500px;
 }
 
 #namdAddrSecFlex #nameAndAddr {
@@ -28,23 +29,30 @@ h1 {
 }
 
 #acc_name {
-	width: 200px;
+	    width: 200px;
+    height: 25px;
+    padding-left: 5px;
 }
-
 .acc_addr_fild {
-	margin-top: 15px;
+	margin-top: 20px;
+    height: 25px;
 }
 
 #acc_address {
-	width: 200px;
+	    width: 200px;
+    height: 25px;
+    padding-left: 5px;
 }
 
 .acc_max_peop_field {
-	margin-top: 15px;
+	    margin-top: 20px;
+    margin-left: -5px;
 }
 
 #acc_max_people {
 	width: 200px;
+    height: 25px;
+    padding-left: 5px;
 }
 
 #mainPrCom hr {
@@ -63,12 +71,13 @@ h1 {
 
 #mainPrCom textarea {
 	margin-top: 10px;
-	width: 594px;
-	height: 105px;
-	resize: vertical;
-	font-size: 15px;
-	border: 2px solid #b6b3b3;
-	border-radius: 8px;
+    width: 780px;
+    height: 150px;
+    resize: vertical;
+    font-size: 15px;
+    border: 2px solid #b6b3b3;
+    border-radius: 3px;
+    padding: 10px;
 }
 
 #accInfoArea h3 {
@@ -91,14 +100,14 @@ h1 {
 }
 
 #showImg {
-	width: 50%;
-	height: 200px;
+	width: 300px;
+    height: 350px;
+    margin-right: 300px;
 }
 
 #mainImgView {
-	width: 100%;
-	height: 100%;
-	border-radius: 5px;
+	width: 450px;
+    height: 100%;
 }
 
 #fileArea {
@@ -112,13 +121,12 @@ h1 {
 }
 
 #roomPhotos input[type="file"] {
-	margin-left: 20px;
 	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	background-color: #f2f2f2;
-	font-size: 14px;
-	cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 #roomPhotos label {
@@ -183,9 +191,28 @@ h1 {
 
 
 #partner_sectors {
-	margin-top: 8px;
-	padding-left: 3px; 
-	font-size : 16px;
-	font-weight: bold;
-	font-size: 16px;
+	    width: 200px;
+    height: 25px;
+    padding-left: 5px;
+}
+
+label{
+	font-size: 17px;
+}
+
+#sectors {
+    margin-top: 20px;
+}
+
+.h4Message {
+    margin-left: 95px;
+    color: rgb(193, 193, 193);
+    font-weight: normal;
+}
+
+#mainPrCom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid #dddddd;
 }
