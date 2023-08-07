@@ -163,6 +163,7 @@ div.tabcontents {
 	height: 125px;
 	margin-top: 58px;
 	padding: 20px;
+	overflow-wrap: break-word;
 	/*    border: 0.5px solid rgb(224, 224, 224); */
 }
 

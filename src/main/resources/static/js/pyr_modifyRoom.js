@@ -36,14 +36,20 @@ function isValidProductZeroAmount(value) {
 //기존에 있는 값을 담기 위한 객체
 var originalValues = {}; //전역
 
-
 //기존에 있는 이미지를 담기 위한 배열
 var originalImageUrls = []; //전역
 
 
+//전송 및 이미지 슬라이드를 위한 값들을 담는 배열
 
 //이미지 슬라이드 전역 변수로 설정 => 이미지 추가시 슬라이드에도 보여주가 위함
 let images = [];
+
+//새로생긴 이미지 전송을 위한 배열
+let newImages = [];
+
+//삭제된 이미지를 담을 배열(pk만 저장)
+var deletedImageIds = [];
 
 // formData 전역 변수로 선언
 var formData = new FormData();
@@ -166,30 +172,23 @@ $(document).on('click', '.editOkProduct', function() {
 	}
 
 
-	// 수정된 이미지 파일들과 삭제된 이미지 파일들을 FormData 객체에 추가
-	var editedImages = productContainer.find('.edited_images');
-	var deletedImages = productContainer.find('.deleted_images');
-
-
-	// 개별 이미지 추가
-	for (var i = 0; i < editedImages.length; i++) {
-		var editedImageFile = editedImages[i].files[0];
-
-		if (editedImageFile !== undefined && editedImageFile !== null) {
-			formData.append('images[]', editedImageFile);
-		}
-
+	// formData에 저장된 이미지들을 순회하며 콘솔에 출력(출력용) ==========
+	for (var file of formData.getAll('images[]')) {
+		console.log(file); // 각 이미지 파일을 콘솔에 출력
 	}
 
 
-	//개별 이미지 삭제
-	for (var i = 0; i < deletedImages.length; i++) {
-		var deletedImageId = deletedImages[i].getAttribute('data-image-id');
-
-		if (deletedImageId !== undefined && deletedImageId !== null) {
-			formData.append('deletedImages[]', deletedImageId);
-		}
+	// 최종적으로 배열에 새롭게 추가된 이미지들을 넣음
+	for (var i = 0; i < newImages.length; i++) {
+		formData.append('newImages[]', newImages[i]);
 	}
+
+
+	// 최종적으로 배열에 저장된 삭제된 이미지들의 PK들을 formData에 추가
+	for (var i = 0; i < deletedImageIds.length; i++) {
+		formData.append('deletedImages[]', deletedImageIds[i]);
+	}
+
 
 	// AJAX 요청을 통해 데이터를 서버에 전송하고 값을 변경
 	$.ajax({
@@ -211,44 +210,48 @@ $(document).on('click', '.editOkProduct', function() {
 			Swal.fire(errorMessage)
 		}
 	});
+
 });
 
 
 // 이미지 개당 삭제버튼 클릭
 $('.imgLists').on('click', '.imgLists_deleteButton', function() {
 	var imageURL = $(this).closest('li').find('.list_img').attr('src');
-	var deletedImageId = $(this).closest('.img_list_position').find('.list_img_id').text();
+	var deletedImageId = $(this).closest('.img_list_position').find('.list_img_id').text(); //이미지 PK 를 가져온다
 	var deletedImageContainer = $(this).closest('li');
 	var imageName = $(this).closest('li').find('.image_name').text();
-
-	//새로운 FormData 객체 생성
-	var newFormData = new FormData();
-
-	//기존의 formData에서 모든 파일을 순회
-	for (var file of formData.getAll('images[]')) {
-		//만약 파일의 이름이 삭제하고자 하는 파일의 이름과 같지 않다면
-		if (file.name !== imageName) {
-			//새로운 FormData에 해당 파일 추가
-			newFormData.append('images[]', file);
-		}
-	}
-
-	//새로운 FormData 객체를 원래의 formData에 할당
-	formData = newFormData;
-
-	// 삭제된 이미지의 id를 유효한 값으로 확인 후 추가
-	if (deletedImageId.trim() !== '') {
-		formData.append('deletedImages[]', deletedImageId);
-	}
 
 	// 이미지 개수 체크
 	var imageCount = $(this).closest('.imgLists').find('.image-list li').length;
 
 	// 최소 이미지 개수보다 작으면 알림 메시지 표시
 	if (imageCount <= 1) {
-		alert('이미지는 최소 1개가 필요합니다.');
+		Swal.fire('이미지는 최소 1개가 필요합니다')
 		return;
 	}
+
+
+	//새로운 FormData 객체 생성 후 기존의 FormData에 추가
+	var newFormData = new FormData();
+
+
+	// 새로운 이미지 배열에서 삭제하고자 하는 이미지를 제외한 나머지 이미지만을 남김
+	newImages = newImages.filter(function(image) {
+		//image의 이름이 imageName과 다른 경우에만 true를 반환
+		return image.name !== imageName; // 이미지 이름이 일치하지 않는 요소만 반환하므로, 해당 이미지는 배열에서 제거
+	});
+
+	//새로운 FormData 객체를 원래의 formData에 할당
+	formData = newFormData;
+
+	//===== 여기서 부터 기존의 이미지들 삭제할 때 배열에 담는 기능 ======
+
+	if (deletedImageId.trim() !== '') {
+		console.log(deletedImageId + "값을 추가한다. ");
+		deletedImageIds.push(deletedImageId); // 삭제된 이미지의 PK를 "배열"에 추가
+		console.log(deletedImageIds);
+	}
+
 
 	// imageURL에 해당하는 이미지를 images 배열에서 찾아 제거(개별 삭제된 이미지 슬라이드에서 제거)
 	for (var i = 0; i < images.length; i++) {
@@ -283,11 +286,11 @@ $('.addImagesButton').click(
 	});
 
 
+
 // 이미지 업로드 인풋 필드의 값이 변경되면 실행되는 이벤트 핸들러
 $('.imageUploadInput').change(function() {
 
 	var files = this.files;
-
 	var imageList = $(this).closest('.imgLists').find('.image-list');
 
 	//이미지 추가 갯수 제한
@@ -303,78 +306,54 @@ $('.imageUploadInput').change(function() {
 
 	// 선택된 파일들을 순회하며 이미지를 화면에 추가
 	for (var i = 0; i < files.length; i++) {
-		var file = files[i];
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-			var imageURL = e.target.result;
-			var listItem = $('<li></li>');
-			var imageContainer = $('<div></div>').addClass('img_list_position');
-			var image = $('<img>').attr('src', imageURL).addClass('list_img');
-			var imageName = $('<span></span>')
-				.text(file.name)
-				.addClass('image_name')
-				.css('display', 'none'); // 이미지 이름 요소를 숨김
-
-			var deleteButton = $('<button></button>').text('x').addClass('imgLists_deleteButton');
-			var buttonContainer = $('<div></div>').addClass('imgLists_deleteButton_position');
-
-
-			// 이미지를 리스트에 추가
-			imageContainer.append(image);
-			buttonContainer.append(deleteButton);
-			listItem.append(imageContainer);
-			listItem.append(buttonContainer);
-			imageList.append(listItem);
-
-			listItem.append(imageName); // 이미지 이름 추가
-
-
-			// 이미지 파일을 FormData 객체에 추가
-			formData.append('images[]', file);
-
-
-			// 슬라이드 이미지에 추가한 이미지 보여주기 위해서 추가
-			images.push({
-				imgUrl: imageURL,
-			});
-
-		};
-
-		reader.readAsDataURL(file);
+		createImageListItem(files[i], imageList);
 	}
 
 });
 
-/*
-//이미지 슬라이드
-$(document).ready(
-	function() {
-		const productContainers = $('.slideshow-container');
 
-		productContainers.each(function() {
-			const slideshowContainer = $(this);
-			const images = []; //이미지 배열을 담음
+function createImageListItem(file, imageList) {
+	var reader = new FileReader();
 
-			$(this).find('.imgContainer').each(
-				function() {
-					const img = $(this).find('img');
-					const imgUrl = img.attr('src');
+	reader.onload = function(e) {
+		var imageURL = e.target.result;
+		var listItem = $('<li></li>');
+		var imageContainer = $('<div></div>').addClass('img_list_position');
+		var image = $('<img>').attr('src', imageURL).addClass('list_img');
+		var imageName = $('<span></span>')
+			.text(file.name)
+			.addClass('image_name')
+			.css('display', 'none'); // 이미지 이름 요소를 숨김
 
-					var roomId = parseInt($(this).closest('.box')
-						.find('.product_id').text());
+		var deleteButton = $('<button></button>').text('x').addClass('imgLists_deleteButton');
+		var buttonContainer = $('<div></div>').addClass('imgLists_deleteButton_position');
 
-					images.push({
-						imgUrl: imgUrl,
-						roomId: roomId
-					});
-				});
+		// 이미지를 리스트에 추가
+		imageContainer.append(image);
+		buttonContainer.append(deleteButton);
+		listItem.append(imageContainer);
+		listItem.append(buttonContainer);
+		imageList.append(listItem);
 
-			startSlideshow(slideshowContainer, images);
+		listItem.append(imageName); // 이미지 이름 추가
 
+		// 새로운 이미지들을 저장하는 newImages 배열에 추가
+		newImages.push(file);
+		console.log(file + " newImages . file 값을 추가한다. ");
+		console.log(newImages);
+
+
+		// 이미지 파일을 FormData 객체에 추가
+		formData.append('images[]', file);
+
+		// 슬라이드 이미지에 추가한 이미지 보여주기 위해서 추가
+		images.push({
+			imgUrl: imageURL,
 		});
-	});
-*/
+	};
+
+	reader.readAsDataURL(file);
+}
 
 
 
@@ -450,7 +429,7 @@ $(document).on('click', '.resetProduct', function() {
 			//images = originalImageUrls.slice();
 			images = [];
 			originalImageUrls.forEach(function(imageObj) {
-				images.push({imgUrl: imageObj.imageUrl});
+				images.push({ imgUrl: imageObj.imageUrl });
 			});
 
 			// 슬라이드 쇼 재시작
@@ -525,12 +504,6 @@ function startSlideshow(slideshowContainer, images) {
 	const prevButton = slideshowContainer.find('.prev');
 	const nextButton = slideshowContainer.find('.next');
 
-	/*	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
-		function updateSlide() {
-			const imgUrl = images[currentSlideIndex].imgUrl;
-			slide.css('background-image', `url(${imgUrl})`);
-		}
-	*/
 
 	// 첫 번째 이미지로 초기화
 	updateSlide();
@@ -558,7 +531,6 @@ function startSlideshow(slideshowContainer, images) {
 	function updateSlide() {
 		const imgUrl = images[currentSlideIndex].imgUrl;
 		slide.find('img').attr('src', imgUrl);
-		console.log(imgUrl);
 	}
 
 	prevButton.on('click', goToPrevSlide);

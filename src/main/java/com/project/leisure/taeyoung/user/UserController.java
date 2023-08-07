@@ -1,6 +1,9 @@
 package com.project.leisure.taeyoung.user;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +50,6 @@ import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.ProductService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -391,9 +394,9 @@ public class UserController {
 
 	/* 파트너 신청 페이지 */
 	@GetMapping("/mypage/partner_reg")
-	public String partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
+	public String partner_registration(Model model, Principal principal) {
 		String current_user = principal.getName();
-		Page<RegPartner> regList = regService.getList(page);
+		List<RegPartner> regList = regService.getList();
 		List<RegPartner> filteredRegList = regList.stream()
 				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
 
@@ -402,11 +405,23 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage/my_partner_reg")
-	public String modify_partner_registration(Model model, Principal principal,@RequestParam(value="page", defaultValue="0") int page) {
-		String current_user = principal.getName();
-		Page<RegPartner> regList = regService.getList(page);
-		List<RegPartner> filteredRegList = regList.stream()
-				.filter(regPartner -> regPartner.getReg_username().equals(current_user)).collect(Collectors.toList());
+	public String modify_partner_registration(Model model, Principal principal,
+	                                         @RequestParam(name = "page", defaultValue = "1") int page) {
+	    int itemsPerPage = 7;
+	    String current_user = principal.getName();
+	    List<RegPartner> regList = regService.getList();
+	    List<RegPartner> filteredRegList = regList.stream()
+	            .filter(regPartner -> regPartner.getReg_username().equals(current_user))
+	            .collect(Collectors.toList());
+
+	    // Pagination logic
+	    int totalItems = filteredRegList.size();
+	    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+	    int startIndex = (page - 1) * itemsPerPage;
+	    int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+	    // Extract the relevant sublist for the current page
+	    List<RegPartner> paginatedRegList = filteredRegList.subList(startIndex, endIndex);
 
 		// 해당 유저의 이름을 가져와 ACC에 해당 숙소가 이미 동록이 되었는지 안 되었는지 확인
 		List<Accommodation> findHaveAcc = this.accommodationService.findAccommodationsByUsername(current_user);
@@ -420,9 +435,11 @@ public class UserController {
 			accRegMap.put(String.valueOf(regPartner.getId()), isRegistered);
 		}
 
-		model.addAttribute("regList", filteredRegList);
-		model.addAttribute("paging",regList);
-		model.addAttribute("accRegMap", accRegMap);
+		  model.addAttribute("regList", paginatedRegList);
+		    model.addAttribute("accRegMap", accRegMap);
+		    model.addAttribute("totalPages", totalPages);
+		    model.addAttribute("currentPage", page);
+
 		// model.addAttribute("regList", filteredRegList);
 		return "kty/modify_partner_regi";
 	}
@@ -520,6 +537,45 @@ public class UserController {
 	    return "kty/my_booking";
 	}
 	
+	// PRG(Post-Redirect-Get) 패턴 이슈
+	@GetMapping("/mypage/my_booking_del/{id}")
+	public String bookingDelete(@PathVariable("id") int id,
+								Principal principal,
+								Model model,
+								HttpServletResponse response) {
+		
+		boolean bool = bookService.moveAndDelete(id);
+		
+		 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	        response.setHeader("Pragma", "no-cache");
+	        response.setHeader("Expires", "0");
+		
+		if(bool) {
+			String booker_user = principal.getName();
+			List<BookingVO> bookList = bookService.getBookList();
+			List<BookingVO> filteredBook = bookList.stream()
+					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+					.collect(Collectors.toList());
+			
+			filteredBook.stream().forEach(System.out::println);
+			
+			model.addAttribute("bookList", filteredBook);
+			
+			return "redirect:/user/mypage/my_booking";
+		} 
+//			else {
+//			String booker_user = principal.getName();
+//			List<BookingVO> bookList = bookService.getBookList();
+//			List<BookingVO> filteredBook = bookList.stream()
+//					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+//					.collect(Collectors.toList());
+//			return "kty/my_booking";
+//		}
+		
+		 return null; 
+		
+	}
+	
 	
 	@GetMapping("/mypage/my_acc_bookList")
 	public String my_acc_bookList(Principal principal, Model model) {
@@ -547,4 +603,22 @@ public class UserController {
 	    return "kty/my_acc_bookList";
 	}
 
+	
+	@GetMapping("/event")
+	public String event_page(Model model) {
+		YearMonth yearMonth = YearMonth.now();
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstDayOfMonth = yearMonth.atDay(1);
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            dates.add(firstDayOfMonth.withDayOfMonth(day));
+        }
+
+        model.addAttribute("dates", dates);
+        model.addAttribute("yearMonth", yearMonth);
+		
+		return "kty/event";
+	}
 }
