@@ -188,14 +188,14 @@ public class AccommodationService {
 
 	/* 방찾기 페이지 페이징 */
 	public Page<Accommodation> getList(int page) {
-		Pageable pageable = PageRequest.of(page, 3); // 10개씩 보이게
+		Pageable pageable = PageRequest.of(page, 10); // 10개씩 보이게
 		return this.accommodationRepository.findAll(pageable);
 	}
 
 	/* 키워드 검색 */
 
 	public Page<Accommodation> getList(int page, String kw) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search(kw);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -230,7 +230,7 @@ public class AccommodationService {
 	/* 구역 선택 필터 */
 
 	public Page<Accommodation> getList2(int page, String kw2) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search2(kw2);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -253,7 +253,7 @@ public class AccommodationService {
 
 	/* 숙소 타입 필터 */
 	public Page<Accommodation> getList3(int page, List<String> kw5) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search3(kw5);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -277,7 +277,7 @@ public class AccommodationService {
 
 	/* 투숙 인원 필터 */
 	public Page<Accommodation> getList4(int page, int kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search4(kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -301,7 +301,7 @@ public class AccommodationService {
 	/* 평점 필터 */
 
 	public Page<Accommodation> getList5(int page, List<String> kw6) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search5(kw6);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -325,13 +325,13 @@ public class AccommodationService {
 
 	/* 구역 + 숙소타입 + 투숙인원 + 평점 필터 */
 
-	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, int kw7) {
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search6(kw2, kw5, kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, String kw7) {
+	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, int kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -356,7 +356,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
 						
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, categoryPredicate2, keywordPredicate2);
@@ -366,7 +366,7 @@ public class AccommodationService {
 
 	/* 구역 + 숙소타입 */
 	public Page<Accommodation> getList7(int page, String kw2, List<String> kw5) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search7(kw2, kw5);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -395,7 +395,7 @@ public class AccommodationService {
 
 	/* 구역 + 숙소타입+평점 */
 	public Page<Accommodation> getList8(int page, String kw2, List<String> kw5, List<String> kw6) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search8(kw2, kw5, kw6);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -430,13 +430,13 @@ public class AccommodationService {
 	}
 
 	/* 구역 + 숙소타입+투숙인원 */
-	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, int kw7) {
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search9(kw2, kw5, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search9(String kw2, List<String> kw5, String kw7) {
+	private Specification<Accommodation> search9(String kw2, List<String> kw5, int kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -454,7 +454,7 @@ public class AccommodationService {
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates1.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, keywordPredicate2);
 			}
@@ -463,7 +463,7 @@ public class AccommodationService {
 
 	/* 구역 + 평점 */
 	public Page<Accommodation> getList10(int page, String kw2, List<String> kw6) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search10(kw2, kw6);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -492,7 +492,7 @@ public class AccommodationService {
 
 	/* 구역 + 평점 + 투숙인원 */
 	public Page<Accommodation> getList11(int page, String kw2, List<String> kw6, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search11(kw2, kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -524,7 +524,7 @@ public class AccommodationService {
 
 	/* 구역 + 평점 + 투숙인원 */
 	public Page<Accommodation> getList12(int page, String kw2, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search12(kw2, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -549,7 +549,7 @@ public class AccommodationService {
 
 	/* 구역 + 평점 + 투숙인원 */
 	public Page<Accommodation> getList13(int page, List<String> kw5, List<String> kw6) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search13(kw5, kw6);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -583,7 +583,7 @@ public class AccommodationService {
 
 	/* 숙소타입 + 평점 + 투숙인원 */
 	public Page<Accommodation> getList14(int page, List<String> kw5, List<String> kw6, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search14(kw5, kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -619,7 +619,7 @@ public class AccommodationService {
 
 	/* 숙소타입 + 평점 + 투숙인원 */
 	public Page<Accommodation> getList15(int page, List<String> kw6, String kw7) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search15(kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -648,7 +648,7 @@ public class AccommodationService {
 
 	/* 최소금액 */
 	public Page<Accommodation> getList16(int page, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search16(kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -670,7 +670,7 @@ public class AccommodationService {
 
 	/* 최대금액 */
 	public Page<Accommodation> getList17(int page, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search17(kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -692,7 +692,7 @@ public class AccommodationService {
 
 	/* 최소+최대금액 */
 	public Page<Accommodation> getList18(int page, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search18(kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -717,7 +717,7 @@ public class AccommodationService {
 
 	/* 지역+최소금액 */
 	public Page<Accommodation> getList19(int page, String kw2, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search19(kw2, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -743,7 +743,7 @@ public class AccommodationService {
 
 	/* 지역+최소금액 */
 	public Page<Accommodation> getList20(int page, String kw2, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search20(kw2, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -769,7 +769,7 @@ public class AccommodationService {
 
 	/* 지역+최소+최대금액 */
 	public Page<Accommodation> getList21(int page, String kw2, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search21(kw2, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -797,7 +797,7 @@ public class AccommodationService {
 
 	/* 숙소+최소금액 */
 	public Page<Accommodation> getList22(int page, List<String> kw5, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search22(kw5, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -825,7 +825,7 @@ public class AccommodationService {
 
 	/* 숙소+최대금액 */
 	public Page<Accommodation> getList23(int page, List<String> kw5, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search23(kw5, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -859,7 +859,7 @@ public class AccommodationService {
 
 	/* 숙소+최소+최대금액 */
 	public Page<Accommodation> getList24(int page, List<String> kw5, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search24(kw5, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -889,7 +889,7 @@ public class AccommodationService {
 
 	/* 지역+숙소+최소 */
 	public Page<Accommodation> getList25(int page, String kw2, List<String> kw5, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search25(kw2, kw5, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -920,7 +920,7 @@ public class AccommodationService {
 
 	/* 지역+숙소+최소 */
 	public Page<Accommodation> getList26(int page, String kw2, List<String> kw5, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search26(kw2, kw5, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -951,7 +951,7 @@ public class AccommodationService {
 
 	/* 지역+숙소+최소+최대 */
 	public Page<Accommodation> getList27(int page, String kw2, List<String> kw5, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search27(kw2, kw5, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -984,7 +984,7 @@ public class AccommodationService {
 
 	/* 평점+최소 */
 	public Page<Accommodation> getList28(int page, List<String> kw6, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search28(kw6, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1011,7 +1011,7 @@ public class AccommodationService {
 
 	/* 평점+최대 */
 	public Page<Accommodation> getList29(int page, List<String> kw6, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search29(kw6, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1038,7 +1038,7 @@ public class AccommodationService {
 
 	/* 평점+최소+최대 */
 	public Page<Accommodation> getList30(int page, List<String> kw6, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search30(kw6, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1069,7 +1069,7 @@ public class AccommodationService {
 
 	/* 지역+숙소+평점+최소 */
 	public Page<Accommodation> getList31(int page, String kw2, List<String> kw5, List<String> kw6, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search31(kw2, kw5, kw6, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1106,7 +1106,7 @@ public class AccommodationService {
 
 	/* 지역+숙소+평점+최대 */
 	public Page<Accommodation> getList32(int page, String kw2, List<String> kw5, List<String> kw6, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search32(kw2, kw5, kw6, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1144,7 +1144,7 @@ public class AccommodationService {
 	/* 지역+숙소+평점+최소+최대 */
 	public Page<Accommodation> getList33(int page, String kw2, List<String> kw5, List<String> kw6, String kw8,
 			String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search33(kw2, kw5, kw6, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1185,7 +1185,7 @@ public class AccommodationService {
 
 	/* 지역+평점+최소 */
 	public Page<Accommodation> getList34(int page, String kw2, List<String> kw6, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search34(kw2, kw6, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1216,7 +1216,7 @@ public class AccommodationService {
 
 	/* 지역+평점+최대 */
 	public Page<Accommodation> getList35(int page, String kw2, List<String> kw6, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search35(kw2, kw6, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1247,7 +1247,7 @@ public class AccommodationService {
 
 	/* 지역+평점+최소+최대 */
 	public Page<Accommodation> getList36(int page, String kw2, List<String> kw6, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search36(kw2, kw6, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1280,7 +1280,7 @@ public class AccommodationService {
 
 	/* 숙소+평점+최소 */
 	public Page<Accommodation> getList37(int page, List<String> kw5, List<String> kw6, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search37(kw5, kw6, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1315,7 +1315,7 @@ public class AccommodationService {
 
 	/* 숙소+평점+최대 */
 	public Page<Accommodation> getList38(int page, List<String> kw5, List<String> kw6, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search38(kw5, kw6, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1349,7 +1349,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList39(int page, List<String> kw5, List<String> kw6, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search39(kw5, kw6, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1385,7 +1385,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList40(int page, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search40(kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1410,7 +1410,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList41(int page, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search41(kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1435,7 +1435,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList42(int page, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search42(kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1461,7 +1461,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList43(int page, String kw2, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search43(kw2, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1488,7 +1488,7 @@ public class AccommodationService {
 
 	/* 지역 + 투숙인원 + 최대 */
 	public Page<Accommodation> getList44(int page, String kw2, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search44(kw2, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1514,7 +1514,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList45(int page, String kw2, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search45(kw2, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1542,7 +1542,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList46(int page, List<String> kw5, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search46(kw5, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1572,7 +1572,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList47(int page, List<String> kw5, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search47(kw5, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1602,7 +1602,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList48(int page, List<String> kw5, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search48(kw5, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1634,7 +1634,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList49(int page, List<String> kw6, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search49(kw6, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1664,7 +1664,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList50(int page, List<String> kw6, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search50(kw6, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1694,7 +1694,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList51(int page, List<String> kw6, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search51(kw6, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1727,7 +1727,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList52(int page, List<String> kw5, List<String> kw6, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search52(kw5, kw6, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1763,7 +1763,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList53(int page, List<String> kw5, List<String> kw6, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search53(kw5, kw6, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1800,7 +1800,7 @@ public class AccommodationService {
 
 	public Page<Accommodation> getList54(int page, List<String> kw5, List<String> kw6, int kw7, String kw8,
 			String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search54(kw5, kw6, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1839,7 +1839,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList55(int page, String kw2, List<String> kw5, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search55(kw2, kw5, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1871,7 +1871,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList56(int page, String kw2, List<String> kw5, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search56(kw2, kw5, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1903,7 +1903,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList57(int page, String kw2, List<String> kw5, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search57(kw2, kw5, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1938,7 +1938,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList58(int page, String kw2, List<String> kw6, int kw7, String kw8) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search58(kw2, kw6, kw7, kw8);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -1970,7 +1970,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList59(int page, String kw2, List<String> kw6, int kw7, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search59(kw2, kw6, kw7, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -2002,7 +2002,7 @@ public class AccommodationService {
 	}
 
 	public Page<Accommodation> getList60(int page, String kw2, List<String> kw6, int kw7, String kw8, String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search60(kw2, kw6, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -2038,7 +2038,7 @@ public class AccommodationService {
 
 	public Page<Accommodation> getList61(int page, String kw2, List<String> kw5, List<String> kw6, int kw7, String kw8,
 			String kw9) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search61(kw2, kw5, kw6, kw7, kw8, kw9);
 		return accommodationRepository.findAll(spec, pageable);
 	}
