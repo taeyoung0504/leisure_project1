@@ -205,12 +205,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // 추천 숙소
-const jj_carousel = document.querySelector(".jj_carousel"),
-	firstImg = jj_carousel.querySelectorAll("img")[0];
+const jj_carousel = document.querySelector(".card-container"),
+	firstImg = jj_carousel.querySelectorAll(".card")[0];
 arrowIcons = document.querySelectorAll(".jj_wrapper i");
 
 let isDragStrart = false, prevPageX, prevScrollLeft;
-let firstImgWidth = firstImg.clientWidth + 14;
+let firstImgWidth = firstImg.clientWidth + 270;
 
 arrowIcons.forEach(icon => {
 	icon.addEventListener("click", () => {
