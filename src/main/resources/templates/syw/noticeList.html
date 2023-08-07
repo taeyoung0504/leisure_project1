@@ -61,9 +61,9 @@
 					<li class="page-item" th:if="${page.number > 0}"><a class="page-link" href="#"
 							th:href="@{/more/noticeList(page=${page.number - 1})}">이전</a></li>
 					<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-						th:class="${i == page.number} ? 'active page-item' : 'page-item'">
-						<a class="page-link" href="#" th:href="@{/noticeList(page=${i})}" th:text="${i + 1}"></a>
-					</li>
+	th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+	<a class="page-link" href="#" th:href="@{/more/noticeList(page=${i})}" th:text="${i + 1}"></a>
+</li>
 					<li class="page-item" th:if="${page.number < page.totalPages - 1}">
 						<a class="page-link" href="#" th:href="@{/more/noticeList(page=${page.number + 1})}">다음</a>
 					</li>
