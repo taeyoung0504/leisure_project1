@@ -29,14 +29,15 @@
 
 .search_deagu_home {
 	width: 300PX !important;
-	display: grid !important;
-	height: fit-content !important;
-	position: fixed !important;
-	border: 1px solid #c7c7c7;
-	border-radius: 10px;
-	padding: 10px;
-	/*     margin: 10px; */
-}
+    display: grid !important;
+    height: fit-content !important;
+    position: fixed !important;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    /* margin: 10px; */
+    box-shadow: 0px 0px 5px #9b9b9b;
+    }
 
 label {
 	display: inline;
@@ -432,7 +433,7 @@ label {
 }
 
 .hotel_reviews_hk {
-	color: orange;
+/* 	color: orange; */
 }
 
 .hotel_address_hk {

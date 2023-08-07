@@ -82,22 +82,22 @@
 
 			<button id="searchBtn">검색</button>
 
-			<form th:action="@{/tour/daegu_food2}" method="get" id="searchForm2">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm2">
 				<input type="hidden" id="kw2" th:value="${kw2}"> <input
 					type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
 			
-			<form th:action="@{/tour/daegu_food3}" method="get" id="searchForm3">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm3">
 				<input type="hidden" id="kw2" th:value="${kw2}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
-			<form th:action="@{/tour/daegu_food4}" method="get" id="searchForm4">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm4">
 				<input type="hidden" id="kw2" th:value="${kw2}">
 				<input type="hidden" id="kw4" th:value="${kw4}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
 			</form>
-				<form th:action="@{/tour/daegu_food5}" method="get" id="searchForm5">
+				<form th:action="@{/tour/daegu_food}" method="get" id="searchForm5">
 				<input type="hidden" id="kw2" th:value="${kw2}"> 
 				<input	type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
 				<input	type="hidden" id="kw4" th:if="${kw4 != null}" th:value="${kw4}">

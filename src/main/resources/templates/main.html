@@ -45,7 +45,7 @@
 		</div>
 
 		<!-- 숙소 카테고리 아이콘 -->
-		
+
 		<div class="jj_icon">
 			<a th:href="@{/tour/daegu_room3?kw5=호텔}"> <span
 				class="fa-solid fa-hotel fa-3x"></span>
@@ -84,31 +84,34 @@
     </div> -->
 
 
-
-<h2 class="main">추천 숙소</h2>
-<div class="jj_wrapper">
-  <div class="jj_carousel">
-    <div class="card-container" id="cardContainer">
-      <div th:each="accommodation : ${acc}" class="card" th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 70%;'">
-    
-        <h2 id="reco_accname" th:text="${accommodation.acc_name}"></h2>
-        <p class="start_reco_acc">
-     <span th:switch="${accommodation.acc_rating}">
-        <span th:case="1"><span class="orange-star">★</span></span>
-        <span th:case="2"><span class="orange-star">★ ★ ★</span></span>
-        <span th:case="3"><span class="orange-star">★ ★ ★</span></span>
-        <span th:case="4"><span class="orange-star">★ ★ ★ ★</span> </span>
-        <span th:case="5"><span class="orange-star">★ ★ ★ ★ ★</span>
-        
-    </span>
-      <span class="font_kty_acc_rating" th:text="${accommodation.acc_rating}"></span>
-      <span  class="money_prive_aver_kty" th:text="${accommodation.acc_averPrice + ' 원'}"></span>
-</p>
-        <span id="acc_num_kty" th:text="${accommodation.id}"></span>
-      </div>
-    </div>
-  </div>
-</div>
+		<h2 class="main">추천 숙소</h2>
+		<div class="jj_wrapper">
+			<div class="jj_carousel">
+				<div class="card-container" id="cardContainer">
+					<i id="left" class="fa-solid fa-angle-left"></i>
+					<div th:each="accommodation : ${acc}" class="card"
+						th:style="'background-image: url(' + ${accommodation.acc_img} + '); background-repeat: no-repeat; background-size: 100% 100%;'">
+						<div class="hk_slidceback">
+							<h2 id="reco_accname" th:text="${accommodation.acc_name}"></h2>
+							<p class="start_reco_acc">
+								<span th:switch="${accommodation.acc_rating}"> <span
+									th:case="1"><span class="orange-star">★</span></span> <span
+									th:case="2"><span class="orange-star">★ ★ ★</span></span> <span
+									th:case="3"><span class="orange-star">★ ★ ★</span></span> <span
+									th:case="4"><span class="orange-star">★ ★ ★ ★</span> </span> <span
+									th:case="5"><span class="orange-star">★ ★ ★ ★ ★</span> </span>
+									<span class="font_kty_acc_rating"
+									th:text="${accommodation.acc_rating}"></span> <span
+									class="money_prive_aver_kty"
+									th:text="${accommodation.acc_averPrice + ' 원'}"></span>
+							</p>
+							<span id="acc_num_kty" th:text="${accommodation.id}"></span>
+						</div>
+					</div>
+					<i id="right" class="fa-solid fa-angle-right"></i>
+				</div>
+			</div>
+		</div>
 
 		<!-- 추천 여행 코스 -->
 		<div class="jj_course">
@@ -147,7 +150,7 @@
 			</div>
 		</div>
 
-	
+
 	</div>
 	<!-- 푸터 .-->
 	<footer>
@@ -184,153 +187,187 @@
 	</body>
 
 	<style>
-	
-	.money_prive_aver_kty{
-	position:absolute;
-	color:black;
-	top:40px;
-	width:100px;
-	left:170px;
-	}
-	.font_kty_acc_rating{
-	color:black;
-	font-size:12px;
-	}
- .jj_wrapper2 {
-  overflow-x: hidden;
-  margin-bottom: -100px;
-    overflow-y: hidden;
-}
-#reco_accname{
-  font-size:15px;
-  margin-top:190px;
-  color:black;
-}
-.start_reco_acc{
-margin-bottom:40px;
-margin-left:10px;
+.money_prive_aver_kty {
+	position: absolute;
+	color: #232323;
+	/* top: 0; */
+	width: 100px;
+	/* left: 170px; */
+	font-weight: 700;
+	/* top: 40px; */
+	width: 100px;
+	/* left: 170px; */
+	bottom: 5px;
+	text-align: right;
+	float: right;
+	margin-left: 148px;
+	font-size: 20px;
 }
 
+.font_kty_acc_rating {
+	color: #757575;
+	font-size: 15px;
+	position: absolute;
+	/* right: 10px; */
+	left: 12px;
+	/* margin-top: 10px; */
+	top: 50px;
+}
+
+.jj_wrapper2 {
+	overflow-x: hidden;
+	/* 	margin-bottom: -100px; */
+	overflow-y: hidden;
+}
+
+#reco_accname {
+	font-size: 20px;
+	margin: 10px;
+	color: #232323;
+	top: 0px;
+	position: absolute;
+	font-weight: 300;
+}
 
 .jj_carousel2 {
-margin-bottom:50px;
-  margin-left: 330px;
-  width: 1200px;
-  height: 300px;
-  padding-top: 50px;
-  overflow: hidden;
-
+	margin-bottom: 50px;
+	margin-left: 330px;
+	width: 1200px;
+	height: 300px;
+	padding-top: 50px;
+	overflow: hidden;
 }
 
 .card-container {
-  overflow-y: hidden;
-  border-radius:10px;
-  margin-left:80px;
-  width:1040px;
-  height:350px;
-  margin-top: -50px;
-  display: flex; /* Use flex to align cards horizontally */
-  gap: 20px;
-  padding-left: 0;
-  overflow-x: scroll; /* Enable horizontal scrolling */
-  scroll-behavior: smooth; /* Add smooth scrolling effect */
-  cursor: grab; /* Change cursor to indicate grabbing */
-  scrollbar-width: none; /* Hide the scrollbar on Firefox */
-  -ms-overflow-style: none; /* Hide the scrollbar on IE/Edge */
+	overflow-y: hidden;
+	/* 	border-radius: 10px; */
+	/* 	margin-left: 80px; */
+	width: 1040px;
+	height: 280px;
+	/* 	margin-top: -50px; */
+	display: flex; /* Use flex to align cards horizontally */
+	gap: 20px;
+	padding-left: 0;
+	overflow-x: scroll; /* Enable horizontal scrolling */
+	scroll-behavior: smooth; /* Add smooth scrolling effect */
+	cursor: grab; /* Change cursor to indicate grabbing */
+	scrollbar-width: none; /* Hide the scrollbar on Firefox */
+	-ms-overflow-style: none; /* Hide the scrollbar on IE/Edge */
 }
 
 .card-container::-webkit-scrollbar {
-  display: none; /* Hide the scrollbar on Chrome, Safari, and Opera */
-}
- ::selection {
-        background-color: transparent;
-    }
-
-    /* 드래그 중인 텍스트 스타일 변경 (옵션) */
-    ::-moz-selection {
-        background-color: transparent;
-    }
-    ::-webkit-selection {
-        background-color: transparent;
-    }
-    ::-ms-selection {
-        background-color: transparent;
-    }
-
-.stop-dragging
-{
-  -ms-user-select: none; 
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+	display: none; /* Hide the scrollbar on Chrome, Safari, and Opera */
 }
 
+::selection {
+	background-color: transparent;
+}
 
-.reco_price_kty{
-color:red;
+/* 드래그 중인 텍스트 스타일 변경 (옵션) */
+::-moz-selection {
+	background-color: transparent;
+}
+
+::-webkit-selection {
+	background-color: transparent;
+}
+
+::-ms-selection {
+	background-color: transparent;
+}
+
+.stop-dragging {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.reco_price_kty {
+	color: red;
 }
 
 .card {
-
-margin-bottom:50px;
-  position: relative; /* 위치를 상대적으로 설정합니다. */
-  display: inline-block;
-  color:white;
-  background-color: rgb(246, 246, 246);
-  padding: 20px;
-  border-radius: 8px;
-  width: 240px;
-  height:300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  white-space: normal;
-  flex-shrink: 0;
+	/* 	margin-bottom: 50px; */
+	position: relative; /* 위치를 상대적으로 설정합니다. */
+	display: inline-block;
+	color: white;
+	background-color: rgb(246, 246, 246);
+	/* padding: 20px; */
+	/* 	border-radius: 8px; */
+	width: 260px;
+	/* 	height: 300px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	white-space: normal;
+	flex-shrink: 0;
+	box-shadow: 5px 5px 3px #cbcbcb;
+	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
 .card h2 {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 .card p {
-  position: absolute; /* 위치를 절대적으로 설정합니다. */
-  bottom: 10px; /* 하단 여백을 조정하여 이미지 위에 배치합니다. */
-  left: 10px; /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
-  z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
-  color: white; /* 텍스트 색상을 설정합니다. */
-  font-size: 18px; /* 원하는 크기로 폰트 크기를 설정합니다. */
-  /* 추가적인 스타일링을 원하면 여기에 추가하세요. */
+	/* position: absolute; */ /* 위치를 절대적으로 설정합니다. */
+	/* bottom: 10px; */ /* 하단 여백을 조정하여 이미지 위에 배치합니다. */
+	/* left: 10px; */ /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
+	z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
+	color: white; /* 텍스트 색상을 설정합니다. */
+	font-size: 18px; /* 원하는 크기로 폰트 크기를 설정합니다. */
+	/* 추가적인 스타일링을 원하면 여기에 추가하세요. */
 }
 
 #acc_num_kty {
-  position: absolute; /* 위치를 절대적으로 설정합니다. */
-  top: 30px; /* 상단 여백을 조정하여 이미지 위에 배치합니다. */
-  left: 10px; /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
-  z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
-  color: white; /* 텍스트 색상을 설정합니다. */
-  font-size: 16px; /* 원하는 크기로 폰트 크기를 설정합니다. */
-  /* 추가적인 스타일링을 원하면 여기에 추가하세요. */
-  display: none;
+	position: absolute; /* 위치를 절대적으로 설정합니다. */
+	top: 30px; /* 상단 여백을 조정하여 이미지 위에 배치합니다. */
+	left: 10px; /* 왼쪽 여백을 조정하여 이미지 위에 배치합니다. */
+	z-index: 1; /* 다른 요소보다 더 위에 배치합니다. */
+	color: white; /* 텍스트 색상을 설정합니다. */
+	font-size: 16px; /* 원하는 크기로 폰트 크기를 설정합니다. */
+	/* 추가적인 스타일링을 원하면 여기에 추가하세요. */
+	display: none;
 }
+
+.hk_slidceback {
+	background-color: #f9f9f9e3;
+	bottom: 0;
+	top: 95px;
+	position: relative;
+	width: 100%;
+	height: 90px;
+	/* margin-top: 113px; */
+	float: inherit;
+	border-radius: 0 0 5px;
+	margin-bottom: 10px;
+}
+
 .jj_carousel {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .card.visible {
-  display: block;
+	display: block;
 }
 
 /* Remove left margin for the first card */
 .card:first-child {
-  margin-left: 0;
+	margin-left: 0;
 }
 
 .orange-star {
-    color: orange;
+	color: orange;
+	position: absolute;
+	left: 10px;
+	top: 33px;
+	text-shadow: 1px 1px 1px #777777;
 }
 </style>
-<script>
+	<script>
 
 // JavaScript code to handle continuous horizontal scrolling
 

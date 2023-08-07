@@ -82,22 +82,22 @@
 
 			<button id="searchBtn">검 색</button>
 
-			<form th:action="@{/tour/daegu_food2}" method="get" id="searchForm2">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm2">
 				<input type="hidden" id="kw2" th:value="${kw2}"> <input
 					type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
-			<form id="searchForm3" th:action="@{/tour/daegu_food3}" method="get">
+			<form id="searchForm3" th:action="@{/tour/daegu_food}" method="get">
 			<input type="hidden" id="kw2" th:value="${kw2}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
-			<form th:action="@{/tour/daegu_food4}" method="get" id="searchForm4">
+			<form th:action="@{/tour/daegu_food}" method="get" id="searchForm4">
 				<input type="hidden" id="kw2" th:value="${kw2}">
 				<input type="hidden" id="kw4" th:value="${kw4}">
 				<input type="hidden" id="page" name="page" th:value="${paging.number}">
 			</form>
 			</form>
-				<form th:action="@{/tour/daegu_food5}" method="get" id="searchForm5">
+				<form th:action="@{/tour/daegu_food}" method="get" id="searchForm5">
 				<input type="hidden" id="kw2" th:value="${kw2}"> 
 				<input	type="hidden" id="kw3" th:if="${kw3 != null}" th:value="${kw3}">
 				<input	type="hidden" id="kw4" th:if="${kw4 != null}" th:value="${kw4}">
@@ -147,19 +147,19 @@
 			<ul class="pagination" style="flex-direction: row;">
 				<li class="page-item" style="white-space: nowrap;"><a
 					class="page-link2" th:if="${paging.number > 0}"
-					th:href="@{/tour/daegu_food2(page=${paging.number-1},kw2=${kw2},kw3=${kw3})}">
+					th:href="@{/tour/daegu_food(page=${paging.number-1},kw2=${kw2},kw3=${kw3})}">
 						<span>이전</span>
 				</a> <th:block
 						th:each="page: ${#numbers.sequence(paging.number-5, paging.number+5)}">
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link2 active' : 'page-link2'"
-							th:href="@{/tour/daegu_food2(page=${page},kw2=${kw2},kw3=${kw3})}"
+							th:href="@{/tour/daegu_food(page=${page},kw2=${kw2},kw3=${kw3})}"
 							th:data-page="${page}"> <span th:text="${page}"
 							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
 						</a>
 					</th:block> <a class="page-link2"
 					th:if="${paging.number < paging.totalPages - 1}"
-					th:href="@{/tour/daegu_food2(page=${paging.number+1},kw2=${kw2},kw3=${kw3})}">
+					th:href="@{/tour/daegu_food(page=${paging.number+1},kw2=${kw2},kw3=${kw3})}">
 						<span>다음</span>
 				</a></li>
 			</ul>

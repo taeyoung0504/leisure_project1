@@ -31,8 +31,6 @@ import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.Product;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/tour")
 public class TourController {
@@ -79,42 +77,46 @@ public class TourController {
 	}
 
 	/* 키워드 검색 ㄴ*/
-	  @GetMapping({"/daegu_food", "/daegu_food2", "/daegu_food3", "/daegu_food4", "/daegu_food5"})
-	    public String foodTests(Model model,
-	                           @RequestParam(value = "page", defaultValue = "0") int page,
-	                           @RequestParam(value = "kw2", defaultValue = "") String kw2,
-	                           @RequestParam(value = "kw3", defaultValue = "") List<String> kw3,
-	                           @RequestParam(value = "kw4", defaultValue = "") String kw4,
-	                           HttpServletRequest request) {
+	@GetMapping("/daegu_food")
+	public String foodSearch(Model model,
+	                         @RequestParam(value = "page", defaultValue = "0") int page,
+	                         @RequestParam(value = "kw", defaultValue = "") String kw,
+	                         @RequestParam(value = "kw2", defaultValue = "") String kw2,
+	                         @RequestParam(value = "kw3", defaultValue = "") List<String> kw3,
+	                         @RequestParam(value = "kw4", defaultValue = "") String kw4) {
 
-	        Page<Food> paging = null;
-	        String viewName = "";
+	    Page<Food> paging;
 
-	        if (request.getRequestURI().contains("/daegu_food2")) {
-	            paging = this.foodService.getList3(page, kw2, kw3);
-	            viewName = "kty/find_food/food_test3";
-	        } else if (request.getRequestURI().contains("/daegu_food3")) {
-	            paging = this.foodService.getList4(page, kw2);
-	            viewName = "kty/find_food/food_test4";
-	        } else if (request.getRequestURI().contains("/daegu_food4")) {
-	            paging = this.foodService.getList5(page, kw2, kw4);
-	            viewName = "kty/find_food/food_test5";
-	        } else if (request.getRequestURI().contains("/daegu_food5")) {
-	            paging = this.foodService.getList6(page, kw2, kw3, kw4);
-	            viewName = "kty/find_food/food_test6";
-	        } else {
-	            paging = this.foodService.getList2(page, kw2);
-	            viewName = "kty/find_food/food_test2";
-	        }
-
-	        model.addAttribute("paging", paging);
-	        model.addAttribute("foodList", paging.getContent());
-	        model.addAttribute("kw2", kw2);
+	    if (!kw2.isEmpty() && !kw3.isEmpty() && !kw4.isEmpty()) {
+	        paging = this.foodService.getList6(page, kw2, kw3, kw4);
 	        model.addAttribute("kw3", kw3);
-	        model.addAttribute("kw4", kw4);
-
-	        return viewName;
+	    } else if (!kw2.isEmpty() && !kw4.isEmpty()) {
+	        paging = this.foodService.getList5(page, kw2, kw4);
+	    } else if (!kw2.isEmpty() && !kw3.isEmpty()) {
+	        paging = this.foodService.getList3(page, kw2, kw3);
+	        model.addAttribute("kw3", kw3);
+	    } else if (!kw2.isEmpty()) {
+	        paging = this.foodService.getList4(page, kw2);
+	    } else {
+	        paging = this.foodService.getList2(page, kw);
 	    }
+
+	    model.addAttribute("paging", paging);
+	    model.addAttribute("foodList", paging.getContent());
+	    model.addAttribute("kw", kw);
+	    model.addAttribute("kw2", kw2);
+	    model.addAttribute("kw4", kw4);
+
+	    if (kw3.isEmpty()) {
+	        model.addAttribute("kw3", kw3);
+	    }
+
+	    if (kw4.isEmpty()) {
+	        model.addAttribute("kw4", kw4);
+	    }
+
+	    return "kty/find_food/food_test" + (kw3.isEmpty() && kw4.isEmpty() ? "2" : "6");
+	}
 		
 		// 예약불가 객실 조회 하여
 		// 예약가능 객실 조회
@@ -1100,5 +1102,3 @@ public String room61(Model model, @RequestParam(value = "page", defaultValue = "
 }
 
 }
-
-
