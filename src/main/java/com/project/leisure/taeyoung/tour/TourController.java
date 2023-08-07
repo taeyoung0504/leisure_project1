@@ -249,7 +249,7 @@ public class TourController {
 		    return "kty/find/daegu_room";
 		}
 		
-		
+		// 2023-08-07 간소화 //
 		
 		
 		
