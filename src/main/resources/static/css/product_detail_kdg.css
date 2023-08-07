@@ -12,27 +12,27 @@
 	width: 256px; 추가한 속성
 	
 } */
- .ui-datepicker{
-        width: 450px !important;
-    }
+.ui-datepicker {
+	width: 450px !important;
+}
 
 .ui-datepicker table {
-      background-color: #fff;
-    margin: 0;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: absolute;
-	z-index:10;
+	background-color: #fff;
+	margin: 0;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: absolute;
+	z-index: 10;
 	border: solid 1px gray;
 	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 	width: 200px !important;
 }
 
-.table-condensed{
+.table-condensed {
 	width: 200px;
 }
 
@@ -44,7 +44,7 @@
 	margin: 40px 0 24px 0;
 	background: #fff;
 	padding: 20px 24px 20px 24px;
-	border: 1px solid rgba(0,0,0,0.08);
+	border: 1px solid rgba(0, 0, 0, 0.08);
 	border-radius: 4px;
 	box-sizing: border-box;
 }
@@ -63,8 +63,8 @@
 .imgContainer {
 	width: 376px;
 	height: 226px;
-	overflow:hidden;
-    margin:0 auto;
+	overflow: hidden;
+	margin: 0 auto;
 }
 
 .pic_view img {
@@ -117,24 +117,24 @@
 
 .room_info .hotel .btn_reserve {
 	width: 100%;
-    height: 56px;
-    border: none;
-    font-size: 15px;
-    line-height: 56px;
-    color: #fff;
-    background-color: #e61c51;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 4px 4px 4px 4px;
-    margin-top: 28px;
-    font-weight: bold;
-    font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
+	height: 56px;
+	border: none;
+	font-size: 15px;
+	line-height: 56px;
+	color: #fff;
+	background-color: var(--main-color);
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 66px;
+	font-weight: bold;
+	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
 }
 
 #datepicker1 {
 	width: 230px;
 	height: 40px;
-	border: 1px solid rgba(0,0,0,0.08);
+	border: 1px solid rgba(0, 0, 0, 0.08);
 	padding-left: 12px;
 	border-radius: 4px 4px 4px 4px;
 	background-color: #fff;
@@ -144,8 +144,7 @@
 #date-choose {
 	height: 43px;
 	line-height: 1px;
-	background-color: #e61c51;
-	border-color: #e61c51;
+	background-color: var(--main-color);
 	box-shadow: none;
 	border: none;
 	cursor: pointer;
@@ -154,21 +153,18 @@
 	font-weight: bold;
 }
 
-input:focus,
-input:active,
-button:focus,
-button:active {
-  outline: none;
-  box-shadow: none;
+input:focus, input:active, button:focus, button:active {
+	outline: none;
+	box-shadow: none;
 }
 
 /* 스타일링을 추가할 클래스들에 적절한 스타일을 정의 - 타임리프 조건에 따라 적용 */
 .gray-filter {
-  filter: grayscale(100%);
+	filter: grayscale(100%);
 }
 
 .gray-text {
-  color: gray;
+	color: gray;
 }
 
 .gray-button {
