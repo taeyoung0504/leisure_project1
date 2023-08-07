@@ -149,16 +149,16 @@
 
 .name_fild span {
 	font-size: 18px;
-	margin: 5px 5px 0px 0px;
-	padding: 1px 3px;
-	border: 1px solid rgb(253, 194, 194);
-	background-color: rgb(253, 194, 194);
-	border-radius: 5px;
+    margin: 5px 5px 0px 0px;
+    padding: 6px 3px;
+    border: 1px solid rgb(253, 194, 194);
+    background-color: rgb(253, 194, 194);
+    border-radius: 5px;
 }
 
 .name_fild p {
 	font-size: 25px;
-	margin: 2px 0 0 0;
+	margin-top: 8px;
 }
 
 /* 여기서 가져온거 */
@@ -653,9 +653,6 @@
 	color: #fff;
 }
 
-.pagination .page_item a:hover {
-	background-color: #ddd;
-}
 
 .pagination .page_previous.disabled a {
 	pointer-events: none;
@@ -675,7 +672,11 @@
 }
 
 .pagination .page_item.active a {
-	background-color: #ff3434a3;
+	background-color: var(--main-color);
 	color: #fff;
 	border-color: #007bff;
+}
+
+.pagination .page_item.active a:hoover{
+	background-color: #cc0000;
 }

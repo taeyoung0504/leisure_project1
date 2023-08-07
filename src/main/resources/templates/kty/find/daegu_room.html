@@ -237,8 +237,8 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link2 active' : 'page-link'"
 							th:href="@{|?page=${page}&kw=${kw}|}"> <span
-							th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:text="${page + 1}"
+							></span>
 						</a>
 					</th:block> <a class="page-link"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -260,8 +260,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link2 active' : 'page-link'"
 							th:href="@{|?page=${page}&kw=${kw}|}"> <span
-							th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -282,8 +281,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link3 active' : 'page-link2'"
 							th:href="@{|?page=${page}&kw2=${kw2}|}"> <span
-							th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link2"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -304,8 +302,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link3 active' : 'page-link3'"
 							th:href="@{/tour/daegu_room3(page=${page},kw5=${kw5})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link2"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -330,8 +327,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link4 active' : 'page-link4'"
 							th:href="@{/tour/daegu_room4(page=${page},kw6=${kw6})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link4"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -353,8 +349,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link5 active' : 'page-link5'"
 							th:href="@{/tour/daegu_room5(page=${page},kw7=${kw7})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link5"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -378,8 +373,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link5 active' : 'page-link6'"
 							th:href="@{/tour/daegu_room6(page=${page},kw2=${kw2},kw5=${kw5},kw6=${kw6},kw7=${kw7})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link6"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -403,8 +397,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link5 active' : 'page-link7'"
 							th:href="@{/tour/daegu_room7(page=${page},kw2=${kw2},kw5=${kw5})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link7"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -428,8 +421,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link8 active' : 'page-link8'"
 							th:href="@{/tour/daegu_room8(page=${page},kw2=${kw2},kw5=${kw5},kw6=${kw6})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link8"
 					th:if="${paging.number < paging.totalPages - 1}"
@@ -453,8 +445,7 @@
 						<a th:if="${page >= 0 and page < paging.totalPages}"
 							th:classappend="${page == paging.number} ? 'page-link9 active' : 'page-link9'"
 							th:href="@{/tour/daegu_room9(page=${page},kw2=${kw2},kw5=${kw5},kw7=${kw7})}"
-							th:data-page="${page}"> <span th:text="${page}"
-							th:style="${page == paging.number ? 'color: #00BFFF;' : ''}"></span>
+							th:data-page="${page}"> <span th:text="${page + 1}"></span>
 						</a>
 					</th:block> <a class="page-link9"
 					th:if="${paging.number < paging.totalPages - 1}"
