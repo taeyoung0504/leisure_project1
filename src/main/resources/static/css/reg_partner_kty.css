@@ -32,7 +32,9 @@
 }
 
 #cau_kty {
-	border: 1px solid white;
+	border: none;
+	margin-top: 10px;
+	padding-top: 10px;
 }
 
 #hidden_table_kty {

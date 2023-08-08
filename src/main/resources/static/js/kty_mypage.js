@@ -295,7 +295,7 @@ $(document).ready(function() {
         var file = $('#partner_input-file')[0].files[0];
 
         if (a1 === '' || a2 === '' || a3 === '' || a4 === '' || a5 === '' || a5 === null || a5 === '선택하세요' || file === undefined) {
-            $("#reg_partner_final").val("필수값 미입력").css({ "color": "red", "font-weight": "bold" });
+            $("#reg_partner_final").val("필수값 미입력").css({ "color": "#fff"});
             return; // Stop execution here if any value is empty or if '업종' is not selected
         } else {
             $("#reg_partner_final").val("파트너 신청하기").css("color", "");

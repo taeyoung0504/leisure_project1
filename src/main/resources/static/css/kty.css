@@ -432,7 +432,7 @@ h5 .nav-link {
 	list-style-type: none;
 	padding-bottom: 40px;
 	display: flex;
-	align-items: center;
+/* 	align-items: center; */
 	justify-content: center;
 	flex-direction: column;
 }
@@ -443,7 +443,7 @@ h5 .nav-link {
 	top: 180px;
 	font-size: 20px;
 	color: rgb(69, 69, 69);
-	left: 410px;
+	left: 320px;
 }
 
 #profile_lion {
@@ -588,8 +588,11 @@ li.mypage_sidebar a.active {
 }
 
 td {
-	font-size: 17px;
-	color: rgb(83, 83, 83);
+	font-size: 16px;
+	padding: 7px 5px;
+	color: #232323;
+	height: 35px;
+	padding-top: 2px 17px;
 }
 
 #userdel_confirm_button:hover {
@@ -651,6 +654,7 @@ td {
 	background-color: rgb(235, 237, 237);
 	width: 100vh;
 	height: 5vh;
+	color: #242424;
 }
 
 .partner_table-th2 {
@@ -675,12 +679,15 @@ td {
 #partner_name, #partner_sectors {
 	width: 80%;
 	height: 45px;
+	border: solid 1px #dddddd;
+	font-size: 14px;
 }
 
 #partner_tel, #partner_region {
 	width: 90%;
 	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
+	border: 1px solid #dddddd;
+	font-size: 14px;
 }
 
 #mypage_partner_reg_table {
@@ -691,18 +698,18 @@ td {
 	border: none;
 	border-radius: 4px;
 	background-color: var(--main-color);
-	width: 160px;
+	width: 140px;
 	height: 50px;
 	font-size: 16px;
 	color: #fff;
 	text-decoration: none;
 	font-size: 16px;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 #reg_partner_final:hover {
 	cursor: pointer;
-	background-color: #cc0000;
+	background-color: #e93c3c;
 }
 
 #partner_input-file {
@@ -1012,15 +1019,18 @@ td {
 
 #my_regi_result {
 	position: absolute;
-	left: -70px;
-	top: 130px;
-	width: 1000px;
+	/* left: -70px; */
+	top: 80px;
+	width: 800px;
 	border-collapse: collapse;
+	/* height: 700px; */
 }
 
 #result_th {
 	height: 50px;
-	background-color: rgb(235, 237, 237);
+	/* background-color: rgb(235, 237, 237); */
+	font-size: 16px;
+	border-bottom: solid 1px #dddddd;
 }
 
 #result_td {
@@ -1047,17 +1057,15 @@ td {
 	/* You can add more styling as needed */
 	height: 100vh;
 	/* This will center the content vertically within the viewport */
-	
 }
 
 /* 주석 */
-
 .btn_red {
 	display: inline-block;
 	padding: 10px 20px;
 	border: none;
 	border-radius: 4px;
-	background-color: #ff0000; /* Red color for the button */
+	background-color: #e93c3c; /* Red color for the button */
 	color: #fff; /* Text color for the button */
 	text-decoration: none; /* Remove underline for the link */
 	font-size: 16px;
@@ -1074,10 +1082,10 @@ td {
 }
 
 #my_reg_info {
-	margin-top: 70px;
-	font-size: 25px;
+	margin-top: 30px;
+	font-size: 22px;
 	font-weight: bold;
-	margin-left: -70px;
+	/* margin-left: -70px; */
 	color: var(--main-color);
 }
 
@@ -1134,6 +1142,11 @@ td {
 	cursor: pointer;
 }
 
+.inquiry-heading {
+	color: var(--main-color);
+	font-size: 22px;
+}
+
 /* 
 숙소검색
 .room-entry {
@@ -1168,10 +1181,16 @@ td {
 	color: rgba(0, 0, 0, 0.87);
 }
 
+#mypage_partner_reg {
+	height: 90vh;
+}
+
 .pagination {
 	position: relative !important;
 	bottom: 10px;
 	text-align: center;
+	/* height: 500px; */
+	margin: auto;
 }
 
 .room-entry>div {
