@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/dec_kty.css">
 <!-- 김도겸 css -->
 <link rel="stylesheet" href="/css/product_detail_kdg.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <!-- 김도겸 css 끝 -->
 
 </head>
@@ -71,29 +72,73 @@
 
    <div class="page_tab">
       <ul class="page_tabs">
-         <li><a href="#view1" onclick="changeTabColor(0)">객실안내/예약</a></li>
+         <li><a href="#view1" onclick="changeTabColor(0)" class="active">객실안내/예약</a></li>
          <li><a href="#view2" onclick="changeTabColor(1)">숙소정보</a></li>
          <li><a href="#view3" onclick="changeTabColor(2)">리뷰</a></li>
       </ul>
       <div class="tabcontents">
          <!--  객실 부분 --->
-         <div id="view1">
-            <section id="datepicker-container">
-               <input type="text" id="datepicker1" name="checkin" required>
-               <button id="date-choose" onclick="totalPrice()">선택완료</button>
-            </section>
-            <div class="room" th:each="product : ${acc.products}">
-               <span id="accomid" th:text="${acc.id}" hidden></span>
+			<div id="view1">
+				<section id="datepicker-container">
+					<input type="text" id="datepicker1" name="checkin" required>
+					<button id="date-choose" onclick="totalPrice()">선택완료</button>
+				</section>
+				<div class="room" th:each="product : ${acc.products}">
+					<span id="accomid" th:text="${acc.id}" hidden></span>
 
-               <div class="pic_view">
-                  <!--    <div th:each="img : ${product.productImgs}" class="imgContainer">
-                <img th:src="${img.img_url[0]}" alt="Product Image" width="100%"
-                                 height="100%" class=""></div> -->
-                  <!-- 나중에 이부분 스와이퍼 슬라이드로 여러개 사진 다보이게 해야함. -->
-                  <img th:src="${product.productImgs[0].img_url}"
-                     th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
-                     alt="Product Image" width="100%" height="100%" class="">
-               </div>
+					<div class="pic_view">
+						<!-- <img th:src="${product.productImgs[0].img_url}"
+							th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
+							alt="Product Image" width="100%" height="100%" class=""> -->
+							<div th:if="${not #lists.isEmpty(product.productImgs)}" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+							    <div class="swiper-wrapper">
+							      <div th:each="img : ${product.productImgs}" class="swiper-slide">
+							        <img th:src="${img.img_url}" th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}" alt="Product Image" width="100%" height="100%" class="">
+							      </div>
+							    </div>
+					    <div class="swiper-button-next"></div>
+					    <div class="swiper-button-prev"></div>
+					  </div>
+					  <div thumbsSlider="" class="swiper mySwiper">
+					    <div class="swiper-wrapper">
+							      <div th:each="img : ${product.productImgs}" class="swiper-slide">
+							        <img th:src="${img.img_url}" th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}" alt="Product Image" width="100%" height="100%" class="">
+							      </div>
+							    </div>
+					  </div>
+					</div>
+					
+					<!-- Swiper JS -->
+					<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+					
+					<!-- Initialize Swiper -->
+					<script>
+					    // Get all elements with class "room"
+					    var roomElements = document.getElementsByClassName("room");
+					
+					    // Loop through each "room" element and apply Swiper
+					    for (var i = 0; i < roomElements.length; i++) {
+					        var roomElement = roomElements[i];
+					        var swiper = new Swiper(roomElement.querySelector(".mySwiper"), {
+					            loop: true,
+					            spaceBetween: 10,
+					            slidesPerView: 4,
+					            freeMode: true,
+					            watchSlidesProgress: true,
+					        });
+					        var swiper2 = new Swiper(roomElement.querySelector(".mySwiper2"), {
+					            loop: true,
+					            spaceBetween: 10,
+					            navigation: {
+					                nextEl: roomElement.querySelector(".swiper-button-next"),
+					                prevEl: roomElement.querySelector(".swiper-button-prev"),
+					            },
+					            thumbs: {
+					                swiper: swiper,
+					            },
+					        });
+					    }
+					</script>
                <div class="room_info"
                   th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
                   <strong class="title" th:text="${product.product_type}"></strong>
