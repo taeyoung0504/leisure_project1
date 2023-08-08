@@ -55,21 +55,21 @@
 			<table id="booking-table" class="boss_sell_name">
 				<thead>
 					<tr>
-						<th>예약 번호</th>
+						<th>예약번호</th>
 						<th>숙소명</th>
 						<th>객실명</th>
-						<th>예약자 ID</th>
-						<th>예약자 번호</th>
+						<th>예약자ID</th>
+						<th>예약자번호</th>
 						<th>체크인</th>
 						<th>체크아웃</th>
-						<th>예약 상태</th>
+						<th>예약상태</th>
 						<th>취소신청</th>
 						<th>신청결과</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="book : ${booking}"
-						th:if="${book.accommodation.username == #authentication.name}">
+						th:if="${book.accommodation != null and book.accommodation.username == #authentication.name}">
 						<td data-booknum="${book.bookNum}" th:text="${book.bookNum}"></td>
 						<td th:text="${book.accomTitle}"></td>
 						<td th:text="${book.roomTitle}"></td>

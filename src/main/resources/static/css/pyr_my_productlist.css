@@ -37,7 +37,7 @@
 	justify-content: space-around;
 	box-sizing: border-box;
 	width: 800px;
-	border: 1px solid rgb(149, 148, 153);
+	border: 1px solid rgb(221 221 221);
 	border-radius: 8px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .right .info {
-	padding: 18px 20px 5px;
+	padding: 15px;
 }
 
 .right h2 {
@@ -64,11 +64,11 @@
 }
 
 .right .info .score_cnt {
-	margin: 9px 0 6px 0;
+	margin: 9px 0px 11px 6px;
 }
 
 .right .info .address {
-	margin: 6px 0 8px 0;
+	margin: 6px 0 8px 5px;
 	padding-top: 6px;
 	font-size: 18px;
 }
@@ -76,16 +76,23 @@
 .right .partner_comment strong {
 	display: block;
 	font-size: 16px;
+	FONT-WEIGHT: 100;
 }
 
 .right .partner_comment {
-	padding: 15px 26px 20px;
+	padding: 15px;
 	background: rgb(250, 250, 250);
 	overflow-wrap: break-word;
+	/* bottom: -19px; */
+	position: relative;
+	height: 100px;
+	margin: 10px;
+	border-radius: 5px;
 }
 
 .partner_comment p {
 	margin-bottom: 0px;
+	font-size: 15px;
 }
 
 #pdMainEditArea {
@@ -111,7 +118,7 @@
 	width: 120px;
 	height: 40px;
 	margin-top: 10px;
-	margin-left: 650px;
+	margin-left: 675px;
 	background-color: var(--main-color);
 	transition: opacity 0.4s ease-in-out;
 	border-radius: 4px;
@@ -119,20 +126,20 @@
 	cursor: pointer;
 	transition: opacity 0.4s ease-in-out;
 	border: none;
-	font-size: 15px;
-    font-weight: bold;
-    border: none;
+	font-size: 14px;
+	/* font-weight: bold; */
+	border: none;
 }
 
 #pdShowAddRoonBtn:hover {
 	transition: opacity 0.4s ease-in-out;
 	border-radius: 4px;
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #cc0000;
+	color: #fff;
+	border: none;
+	text-decoration: none;
+	font-size: 15px;
+	/* font-weight: bold; */
+	background-color: #cc0000;
 }
 
 /*productContent CSS  */
@@ -149,16 +156,18 @@
 
 .name_fild span {
 	font-size: 18px;
-    margin: 5px 5px 0px 0px;
-    padding: 6px 3px;
-    border: 1px solid rgb(253, 194, 194);
-    background-color: rgb(253, 194, 194);
-    border-radius: 5px;
+	margin: 5px;
+	padding: 2px 5px;
+	border: 1px solid rgb(253, 194, 194);
+	background-color: rgb(253, 194, 194);
+	border-radius: 5px;
+	text-align: center;
+	align-content: center;
 }
 
 .name_fild p {
 	font-size: 25px;
-	margin-top: 8px;
+	margin: 2px 0 0 0;
 }
 
 /* 여기서 가져온거 */
@@ -653,6 +662,9 @@
 	color: #fff;
 }
 
+.pagination .page_item a:hover {
+	background-color: #ddd;
+}
 
 .pagination .page_previous.disabled a {
 	pointer-events: none;
@@ -672,11 +684,7 @@
 }
 
 .pagination .page_item.active a {
-	background-color: var(--main-color);
+	background-color: #ff3434a3;
 	color: #fff;
 	border-color: #007bff;
-}
-
-.pagination .page_item.active a:hoover{
-	background-color: #cc0000;
 }

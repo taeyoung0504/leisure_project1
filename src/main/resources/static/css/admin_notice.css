@@ -57,17 +57,18 @@ form {
 
 /*  버튼 스타일 */
 .modi_btn {
-	background-color: var(--sub-color);
+	background-color: rgb(91 91 91);
 	color: #fff;
 	border: none;
 	padding: 5px 10px;
 	cursor: pointer;
 	text-decoration: none;
 	border-radius: 5px;
+	margin: 0 5px;
 }
 
 .del_btn {
-	background-color: #007bff;
+	background-color: #ff5d5db8;
 	color: #fff;
 	border: none;
 	padding: 5px 10px;
@@ -77,7 +78,10 @@ form {
 }
 
 .del_btn:hover {
-	background-color: rgb(100, 177, 255);
+	background-color: rgb(243 176 176 / 59%);
+}
+.modi_btn:hover {
+	background-color: rgb(198 198 198 / 59%);
 }
 
 .notice_hk .notice-item .notice-content .button {

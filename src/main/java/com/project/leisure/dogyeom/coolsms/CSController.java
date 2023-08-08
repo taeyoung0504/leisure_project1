@@ -72,7 +72,7 @@ public class CSController {
 			    		Message message = new Message();
 			    		message.setFrom("01093365038");
 			    		message.setTo(phoneNumber); // phoneNumber 매개변수 사용
-			    		message.setText("[경상도숙박장사]입력하셔야할 인증번호는[" + numStr + "]입니다.");
+			    		message.setText("[DAE BAK]입력하셔야할 인증번호는[" + numStr + "]입니다.");
 			    		
 			    		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 			    		System.out.println(response);

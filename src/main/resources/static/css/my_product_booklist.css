@@ -1,5 +1,6 @@
 .boss_sell_name {
 	margin-top: 20px;
+	width: 800px;
 }
 
 .hidden_kty_hidden {
@@ -43,13 +44,17 @@ table {
 }
 
 th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
+	/* border: 1px solid #ddd; */
+	padding: 0px;
 	text-align: center;
+	height: 35px;
 }
 
 th {
-	background-color: #f2f2f2;
+	/* background-color: #f2f2f2; */
+	width: 800px;
+	color: #232323;
+	border-bottom: solid 1px #dddddd;
 }
 
 tr:nth-child(even) {
