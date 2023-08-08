@@ -325,13 +325,13 @@ public class AccommodationService {
 
 	/* 구역 + 숙소타입 + 투숙인원 + 평점 필터 */
 
-	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, String kw7) {
+	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, int kw7) {
 		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search6(kw2, kw5, kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, String kw7) {
+	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, int kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -356,7 +356,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
 						
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, categoryPredicate2, keywordPredicate2);
@@ -430,13 +430,13 @@ public class AccommodationService {
 	}
 
 	/* 구역 + 숙소타입+투숙인원 */
-	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, String kw7) {
+	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, int kw7) {
 		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search9(kw2, kw5, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search9(String kw2, List<String> kw5, String kw7) {
+	private Specification<Accommodation> search9(String kw2, List<String> kw5, int kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -454,7 +454,7 @@ public class AccommodationService {
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates1.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, keywordPredicate2);
 			}
