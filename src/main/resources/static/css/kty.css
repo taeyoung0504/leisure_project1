@@ -1047,7 +1047,10 @@ td {
 	/* You can add more styling as needed */
 	height: 100vh;
 	/* This will center the content vertically within the viewport */
+	
 }
+
+/* 주석 */
 
 .btn_red {
 	display: inline-block;
