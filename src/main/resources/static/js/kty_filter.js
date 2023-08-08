@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			url += "&kw3=" + encodeURIComponent(selectedFoodTypes.join(','));
 			window.location.href = url;
 		} else if (selectedRegion && selectedFoodTypes2.length > 0) {
-			let url = "/tour/daegu_food4";
+			let url = "/tour/daegu_food";
 			url += "?kw2=" + encodeURIComponent(selectedRegion);
 			url += "&kw4=" + encodeURIComponent(selectedFoodTypes2.join(','));
 			window.location.href = url;
