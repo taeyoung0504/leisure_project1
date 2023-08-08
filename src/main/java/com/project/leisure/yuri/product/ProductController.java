@@ -50,12 +50,11 @@ public class ProductController {
 		return "pyr/productNewMainReg";
 	}
 
-	// 기존 숙소가 있는데 새로운 객실 생성
+	// 새로운 숙소를 생성
 	@PostMapping("/productNewMainReg")
 	public ResponseEntity<String> productNewMainReg(Principal principal, @RequestParam("acc_name") String acc_name,
 			@RequestParam("acc_address") String acc_address, @RequestParam("acc_sectors") String acc_sectors,
-			@RequestParam("acc_explain") String acc_explain,
-			@RequestParam(value = "acc_img", required = false) MultipartFile acc_img,
+			@RequestParam("acc_explain") String acc_explain, @RequestParam("acc_img") MultipartFile acc_img,
 			@RequestParam("acc_max_people") int acc_max_people, @RequestParam("acc_info") String acc_info) {
 		String username = principal.getName(); // 현재 로그인 한 유저 이름
 
@@ -78,16 +77,24 @@ public class ProductController {
 
 		List<Users> userList = this.userService.check(username);
 		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
-
+		//만약 admin이 아닌 경우 로그인 페이지로 이동
 		if (!isAdmin) {
-			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+			return "redirect:/user/login";
 		}
 
-		// id를 사용하여 해당 데이터 조회
-		Accommodation accommodation = accommodationService.findByAccId(acc_id);
+		// 해당 숙소의 소유자인지 확인 하는 코드 생성해야함
 
-		model.addAttribute("accommodation", accommodation); // 해당 내용 보여주기
-		return "pyr/productMainReg";
+		try {
+			// id를 사용하여 해당 데이터 조회
+			Accommodation accommodation = accommodationService.findByAccId(acc_id);
+
+			model.addAttribute("accommodation", accommodation); // 해당 내용 보여주기
+			return "pyr/productMainReg";
+		} catch (RuntimeException e) {
+			// Accommodation not found 예외 처리(해당 숙소는 없음)
+			return "redirect:error/500.html";
+		}
+
 	}
 
 	// productMainReg 해당 유저 등록된 숙소 수정하기에서 수정된 값을 받아서 update
