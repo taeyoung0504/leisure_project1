@@ -1,0 +1,24 @@
+h1 {
+	    font-family: "Arial", sans-serif;
+	    font-size: 28px;
+	    font-weight: bold;
+	    color: #333;
+	    text-align: center;
+	    margin: 20px 0;
+	    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	  }
+	  
+	  .backBtn {
+		width: 100%;
+	    height: 56px;
+	    border: none;
+	    font-size: 15px;
+	    line-height: 56px;
+	    color: #fff;
+	    background-color: #e61c51;
+	    text-align: center;
+	    cursor: pointer;
+	    border-radius: 4px 4px 4px 4px;
+	    margin-top: 28px;
+	    font-weight: bold;
+}
