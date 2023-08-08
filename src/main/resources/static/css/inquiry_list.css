@@ -1,72 +1,81 @@
 .container {
-			flex-direction: column;
-			align-items: flex-start;
-		}
+	flex-direction: column;
+	align-items: flex-start;
+}
 
-		.content-container {
-			margin: 0 auto;
-			max-width: 80%;
-		}
+.content-container {
+	margin: 10px auto;
+	width: 90%;
+	height: 100%;
+	padding-left: 80px;
+}
 
-		table {
-			width: 100%;
-			border-collapse: collapse;
-		}
 
-		th,
-		td {
-			padding: 15px 8px;
-			border-bottom: 1px solid #ccc;
-			text-align: left;
-		}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
 
-		.pagination ul {
-			list-style-type: none;
-			display: flex;
-			justify-content: center;
-			padding: 0;
-		}
+th,
+td {
+	padding: 15px 8px;
+	border-bottom: 1px solid #ccc;
+	text-align: left;
+}
 
-		.pagination ul li {
-			margin-right: 10px;
-		}
+.pagination ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
 
-		.pagination ul li:last-child {
-			margin-right: 0;
-		}
+.pagination ul li {
+	margin-right: 10px;
+}
 
-		.pagination {
-			display: flex;
-			justify-content: center;
-			list-style: none;
-			padding: 0;
-			margin-top: 20px;
-		}
+.pagination ul li:last-child {
+	margin-right: 0;
+}
 
-		.page-item {
-			margin: 0 5px;
-		}
+.pagination {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
+	margin-top: 20px;
+}
 
-		.page-link {
-			display: inline-block;
-			padding: 5px 10px;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-			text-decoration: none;
-			color: #333;
-			background-color: #f2f2f2;
-		}
+.page-item {
+	margin: 0 5px;
+}
 
-		.page-link:hover {
-			background-color: #e0e0e0;
-		}
+.page-link {
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	text-decoration: none;
+	color: #333;
+	background-color: #f2f2f2;
+}
 
-		.page-item.active .page-link {
-			background-color: gray;
-			color: #fff;
-		}
-		
-		#filter-dropdown{
-			padding: 5px 10px;
-			border-radius: 3px;
-		}
+.page-link:hover {
+	background-color: #e0e0e0;
+}
+
+.page-item.active .page-link {
+	background-color: gray;
+	color: #fff;
+}
+
+#filter-dropdown {
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 30px;
+}
