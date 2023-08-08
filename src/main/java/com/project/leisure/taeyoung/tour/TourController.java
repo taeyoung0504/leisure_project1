@@ -295,7 +295,7 @@ public class TourController {
 			@RequestParam(value = "kw2", defaultValue = "") String kw2,
 			@RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
 			@RequestParam(value = "kw6", defaultValue = "") List<String> kw6,
-			@RequestParam(value = "kw7", defaultValue = "") int kw7) {
+			@RequestParam(value = "kw7", defaultValue = "") String kw7) {
 		Page<Accommodation> paging = accommodationService.getList6(page,kw2,kw5,kw6,kw7);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw2", kw2);
@@ -341,7 +341,7 @@ public class TourController {
 	public String room9(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw2", defaultValue = "") String kw2,
 			@RequestParam(value = "kw5", defaultValue = "") List<String> kw5,
-			@RequestParam(value = "kw7", defaultValue = "") int kw7) {
+			@RequestParam(value = "kw7", defaultValue = "") String kw7) {
 		Page<Accommodation> paging = accommodationService.getList9(page,kw2,kw5,kw7);
 		model.addAttribute("paging", paging);
 		model.addAttribute("kw2", kw2);
