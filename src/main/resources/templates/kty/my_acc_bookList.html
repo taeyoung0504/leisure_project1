@@ -69,7 +69,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="book : ${booking}"
-						th:if="${book.accommodation.username == #authentication.name}">
+						th:if="${book.accommodation != null and book.accommodation.username == #authentication.name}">
 						<td data-booknum="${book.bookNum}" th:text="${book.bookNum}"></td>
 						<td th:text="${book.accomTitle}"></td>
 						<td th:text="${book.roomTitle}"></td>
