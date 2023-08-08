@@ -527,7 +527,7 @@ public class UserController {
 	    String booker_user = principal.getName();
 	    List<BookingVO> bookList = bookService.getBookList2();
 	    List<BookingVO> filteredBook = bookList.stream()
-	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user) && !bookingVO.getBookStatus().trim().isEmpty())
 	            .collect(Collectors.toList());
 	 // 페이징 처리
         int pageSize = 5; // 페이지당 숙소 개수 설정

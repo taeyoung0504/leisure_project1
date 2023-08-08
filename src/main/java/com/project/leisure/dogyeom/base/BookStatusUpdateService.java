@@ -45,10 +45,15 @@ public class BookStatusUpdateService {
         }
     }
     
-    @Scheduled(fixedDelay = 60000) // 1분(1 * 60 * 1000)마다 실행
+//    @Scheduled(fixedDelay = 60000) // 1분(1 * 60 * 1000)마다 실행
+//    @Transactional
+//    public void deleteNullBookStatus() {
+//        bookRepository.deleteByBookStatusIsNull();
+//    }
+    @Scheduled(fixedDelay = 90000) // 1분(1 * 60 * 1000)마다 실행
     @Transactional
     public void deleteNullBookStatus() {
-        bookRepository.deleteByBookStatusIsNull();
+    	bookRepository.deleteByBookStatusIsNullAndBookStatusIsEmpty();
     }
 	
 }

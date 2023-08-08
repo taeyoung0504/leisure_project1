@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.project.leisure.yuri.product.Accommodation;
@@ -21,11 +22,16 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 	
 	// bookStatus가 null인 것 제외하고 가져옴
 //	List<BookingVO> findByBookStatusIsNotNull();
-//	@Query("SELECT b FROM BookingVO b WHERE b.bookStatus IS NOT NULL")
-//    List<BookingVO> findBooksByNonNullStatus();
+	
+	// bookStatus가 null이고 공백이면 삭제
+	@Modifying
+	@Query("DELETE FROM BookingVO b WHERE b.bookStatus IS NULL OR (b.bookStatus <> '')")
+	void deleteByBookStatusIsNullAndBookStatusIsEmpty();
+
+	
 	List<BookingVO> findByBookStatusNotNull();
 	
-	void deleteByBookStatusIsNull();
+//	void deleteByBookStatusIsNull();
 
 //	@Transactional
 	List<BookingVO> findByBookStatusAndCheckOut(String bookStatus, LocalDate currentDate);
