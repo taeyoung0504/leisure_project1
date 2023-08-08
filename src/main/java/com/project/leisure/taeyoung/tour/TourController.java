@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.StringUtils;
 
 import com.project.leisure.dogyeom.booking.BookingVO;
 import com.project.leisure.dogyeom.booking.reserveList.ReserveService;
@@ -79,69 +80,41 @@ public class TourController {
 	}
 
 	/* 키워드 검색 ㄴ*/
-	@GetMapping("/daegu_food")
-	public String food_test2(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw", defaultValue = "") String kw) {
-		Page<Food> paging = this.foodService.getList2(page, kw);
-		model.addAttribute("paging", paging);
-		model.addAttribute("foodList", paging.getContent());
-		model.addAttribute("kw", kw);
-		return "kty/find_food/food_test2";
-	}
-
-	/* 구역 + 음식종류 선택 */
-	@GetMapping("/daegu_food2")
-	public String food_test2(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw2", defaultValue = "") String kw2,
-			@RequestParam(value = "kw3", defaultValue = "") List<String> kw3) {
-		Page<Food> paging = this.foodService.getList3(page, kw2, kw3);
-		model.addAttribute("paging", paging);
-		model.addAttribute("foodList", paging.getContent());
-		model.addAttribute("kw2", kw2);
-		model.addAttribute("kw3", kw3);
-
-		return "kty/find_food/food_test3";
-	}
-
-	/* 구역 선택 */
-	@GetMapping("/daegu_food3")
-	public String food_test3(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw2", defaultValue = "") String kw2) {
-		Page<Food> paging = this.foodService.getList4(page, kw2);
-		model.addAttribute("paging", paging);
-		model.addAttribute("foodList", paging.getContent());
-		model.addAttribute("kw2", kw2);
-
-		return "kty/find_food/food_test4";
-	}
-
-	/* 구역 + 주차 가능 여부 */
-	@GetMapping("/daegu_food4")
-	public String food_test4(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw2", defaultValue = "") String kw2,
-			@RequestParam(value = "kw4", defaultValue = "") String kw4) {
-		Page<Food> paging = this.foodService.getList5(page, kw2, kw4);
-		model.addAttribute("paging", paging);
-		model.addAttribute("foodList", paging.getContent());
-		model.addAttribute("kw2", kw2);
-		model.addAttribute("kw4", kw4);
-
-		return "kty/find_food/food_test5";
-	}
-
-	@GetMapping("/daegu_food5")
-	public String food_test5(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "kw2", defaultValue = "") String kw2,
-			@RequestParam(value = "kw3", defaultValue = "") List<String> kw3,
-			@RequestParam(value = "kw4", defaultValue = "") String kw4) {
-		Page<Food> paging = this.foodService.getList6(page, kw2, kw3, kw4);
-		model.addAttribute("paging", paging);
-		model.addAttribute("foodList", paging.getContent());
-		model.addAttribute("kw2", kw2);
-		model.addAttribute("kw3", kw3);
-		model.addAttribute("kw4", kw4);
-
-		return "kty/find_food/food_test6";
+	@GetMapping({ "/daegu_food", "/daegu_food2", "/daegu_food3", "/daegu_food4", "/daegu_food5" })
+	public String foodTest(Model model, 
+	                      @RequestParam(value = "page", defaultValue = "0") int page,
+	                      @RequestParam(value = "kw", defaultValue = "") String kw,
+	                      @RequestParam(value = "kw2", defaultValue = "") String kw2,
+	                      @RequestParam(value = "kw3", defaultValue = "") List<String> kw3,
+	                      @RequestParam(value = "kw4", defaultValue = "") String kw4) {
+	    Page<Food> paging;
+	    String viewName;
+	    
+	    if (StringUtils.isEmpty(kw2)) {
+	        paging = this.foodService.getList2(page, kw);
+	        viewName = "kty/find_food/food_test2";
+	    } else if (!kw3.isEmpty() && !StringUtils.isEmpty(kw4)) {
+	        paging = this.foodService.getList6(page, kw2, kw3, kw4);
+	        viewName = "kty/find_food/food_test6";
+	    } else if (!StringUtils.isEmpty(kw4)) {
+	        paging = this.foodService.getList5(page, kw2, kw4);
+	        viewName = "kty/find_food/food_test5";
+	    } else if (!kw3.isEmpty()) {
+	        paging = this.foodService.getList3(page, kw2, kw3);
+	        viewName = "kty/find_food/food_test3";
+	    } else {
+	        paging = this.foodService.getList4(page, kw2);
+	        viewName = "kty/find_food/food_test4";
+	    }
+	    
+	    model.addAttribute("paging", paging);
+	    model.addAttribute("foodList", paging.getContent());
+	    model.addAttribute("kw", kw);
+	    model.addAttribute("kw2", kw2);
+	    model.addAttribute("kw3", kw3);
+	    model.addAttribute("kw4", kw4);
+	    
+	    return viewName;
 	}
 		
 		// 예약불가 객실 조회 하여
