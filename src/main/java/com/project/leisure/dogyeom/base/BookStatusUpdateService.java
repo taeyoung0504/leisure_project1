@@ -50,10 +50,5 @@ public class BookStatusUpdateService {
 //    public void deleteNullBookStatus() {
 //        bookRepository.deleteByBookStatusIsNull();
 //    }
-//    @Scheduled(cron = "0 0 0 * * ?") // 매일 자정에 실행 (UTC 기준)
-//    @Transactional
-//    public void deleteNullBookStatus() {
-//    	bookRepository.deleteByBookStatusIsNullOrBookStatusIsEmpty();
-//    }
-//	
+
 }
