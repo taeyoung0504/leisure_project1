@@ -5,517 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="/js/kdg_reserve.js"></script>
-<title>경상도숙박장사</title>
+<title>DAE BAK</title>
  <!-- 토스페이먼츠 결제창 SDK 추가 -->
  <script src="https://js.tosspayments.com/v1/payment"></script>
-<style>
-
-/* 여기어때 예약 페이지 참고 */
-
-/* 전체 가운데 정렬 */
-div#content {
-	display: flex;
-	justify-content: center;
-	/* align-items: center; */
-	height: 100vh;
-	/* background-color: rgba(241, 243, 244, 1.00); */
-}
-
-div.reserve {
-	
-}
-
-/* 예약자 정보 왼쪽 정렬 */
-div.left {
-	float: left;
-	width: 564px;
-	margin: 40px 88px 0 0;
-}
-
-/* 예약 객실 정보 오른쪽 정렬 */
-div.right {
-	float: right;
-	width: 310px;
-	margin: 40px 31px 0 0;
-	background: rgb(250, 250, 250);
-	box-sizing: border-box;
-
-	/* display: block; */
-}
-
-/* 예약객실정보 strong태그 설정 */
-.reserve .info p strong, .reserve .info div strong {
-	display: block !important;
-	position: relative;
-	margin-bottom: 6px;
-	font-size: 18px !important;
-	line-height: 1;
-	color: rgba(0, 0, 0, 0.38);
-}
-
-/* 예약객실정보 p태그 설정 */
-.reserve .info .name {
-	height: auto;
-	margin: 0 0 29px 0;
-	padding: 0;
-	border-bottom: none;
-	line-height: 32px;
-	text-align: left;
-}
-
-.reserve .info p {
-	position: relative;
-	margin-bottom: 29px;
-	padding-left: 0;
-	font-size: 20px;
-	line-height: 32px;
-	color: rgba(0, 0, 0, 0.87);
-	text-align: left;
-	box-sizing: border-box;
-}
-
-.reserve .info {
-	margin: 39px 24px 0 24px;
-	padding: 0 0 31px 0;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-	background: none;
-}
-
-.total_price_pc {
-	display: block;
-	padding: 39px 24px 33px !important;
-	background: none !important;
-}
-
-.total_price_pc p strong {
-	display: block;
-	font-size: 16px;
-	font-weight: 400;
-}
-
-.total_price_pc p span {
-	display: block;
-	padding: 19px 0 23px;
-	font-size: 24px;
-	font-weight: 700;
-	color: #e61c51;
-}
-
-ul, ol, li {
-	list-style: none;
-}
-
-ul {
-	padding: 0px;
-}
-
-.total_price_pc ul li {
-	margin-bottom: 2px;
-	padding-left: 16px;
-	background: url(//image.goodchoice.kr/images/web_v3/ico_bul.png) 0 0
-		no-repeat;
-	background-size: 14px auto;
-	font-size: 16px;
-	line-height: 26px;
-	color: rgba(0, 0, 0, .72);
-	text-align: left;
-}
-
-.total_price_pc ul li span {
-	color: #e61c51;
-}
-
-.reserve .right .btn_pay {
-	display: block;
-	border-radius: 0 0 4px 4px;
-}
-
-.btn_pay {
-	/* display: block; */
-	width: 100%;
-	height: 56px;
-	border: none;
-	font-size: 15px;
-	line-height: 56px;
-	color: #fff;
-	text-align: center;
-}
-
-.gra_left_right_red {
-	/*    background: rgb(255, 0, 85);
-    background: -moz-linear-gradient( left, rgba(255, 0, 85, 1) 1%, rgba(230, 34, 67, 1) 100% );
-    background: -webkit-linear-gradient( left, rgba(255, 0, 85, 1) 1%, rgba(230, 34, 67, 1) 100% ); */
-	background: linear-gradient(to right, rgba(255, 0, 85, 1) 1%,
-		rgba(230, 34, 67, 1) 100%);
-	cursor: pointer;
-}
-
-/* 왼쪽 div 예약자 정보 섹션 */
-.reserve h3 {
-	display: block;
-	margin: 54px 0 42px 0;
-}
-
-.info_chkin strong {
-	display: block;
-	padding: 0 0 12px 0;
-	font-size: 18px;
-	/* font-weight: normal; */
-	color: rgba(0, 0, 0, 0.56);
-}
-
-/* 진주 수정(230719) */
-/* .inp_wrap {
-            position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            padding: 8px 14px 8px 16px;
-            height: 48px;
-            border-radius: 4px;
-            display: inline;
-        } */
-.inp_wrap input {
-	box-sizing: border-box;
-	padding: 8px 14px 8px 16px;
-	width: 100%;
-	height: 48px;
-	border: none;
-	border: 1px solid rgba(0, 0, 0, .08);
-	border-radius: 4px;
-	font-weight: 400;
-	font-size: 18px;
-	color: rgba(0, 0, 0, .56);
-}
-
-.alert_txt {
-	height: 46px;
-	padding-top: 5px;
-	font-size: 14px;
-	color: rgb(230, 28, 81);
-	visibility: hidden;
-}
-
-.info_chkin {
-	padding: 0 0 10px 0 !important;
-}
-
-.info_chkin strong {
-	display: block;
-	padding: 0 0 12px 0;
-	font-size: 18px;
-	/* font-weight: normal; */
-	color: rgba(0, 0, 0, 0.56);
-}
-
-.guest-phone {
-	margin-bottom: 36px;
-}
-
-.phone_confirm {
-	position: relative;
-}
-
-.phone_confirm {
-	margin-top: 16px;
-}
-
-.safety_txt {
-	padding-bottom: 14px;
-	font-size: 14px;
-	color: rgba(0, 0, 0, 0.56);
-}
-
-.input-box {
-	position: relative;
-}
-
-.input-box .input.validation-required-input {
-	margin-right: 12px;
-	width: calc(100% - 110px);
-}
-
-.input-box .input {
-	box-sizing: border-box;
-	padding: 8px 14px 8px 16px;
-	width: 100%;
-	height: 48px;
-	border: none;
-	border: 1px solid rgba(0, 0, 0, .08);
-	border-radius: 4px;
-	font-weight: 400;
-	font-size: 18px;
-	color: rgba(0, 0, 0, .56);
-}
-
-/* 인증번호 전송 버튼 */
-.phone-auth-btn {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 100px;
-	height: 48px;
-	padding: 13px 0 10px;
-	border: none;
-	border-radius: 4px;
-	background: #ccc;
-	font-size: 15px;
-	color: #fff;
-	cursor: pointer;
-}
-
-/* 휴대폰 번호 유효성 검사 */
-.error-message {
-	margin: 8px 0;
-}
-
-.alert_txt {
-	height: 46px;
-	padding-top: 5px;
-	font-size: 14px;
-	color: rgb(230, 28, 81);
-}
-
-/* 결제수단 선택 */
-.pay_select {
-	padding: 0 0 0 0 !important;
-	border-bottom: none !important;
-}
-
-.pay_select h3 {
-	display: block;
-	margin-bottom: 19px;
-	font-size: 20px;
-	font-weight: bold;
-	margin-top: 0px !important;
-}
-
-/* 결제 수단 select */
-#pay_select select {
-	width: 288px;
-}
-
-.select_type_1 {
-	height: 48px;
-	padding: 0 12px;
-	border: 1px solid rgba(0, 0, 0, .08);
-	border-radius: 4px;
-	background: #fafafa
-		url(https://image.goodchoice.kr/images/web_v3/ico_arr_down.png) right
-		10px top 50% no-repeat;
-	background-size: 25px auto;
-	font-size: 18px;
-	color: rgba(0, 0, 0, .56);
-	cursor: pointer;
-}
-
-.select_type_1 option {
-	color: rgba(0, 0, 0, 0.56);
-}
-
-input:focus, select:focus, option:focus, textarea:focus, button:focus {
-	outline: none;
-}
-
-select {
-	-webkit-appearance: none; /* for chrome */
-	-moz-appearance: none; /*for firefox*/
-	appearance: none;
-}
-
-select::-ms-expand {
-	display: none; /*for IE10,11*/
-}
-
-/* 딱히 없어도 상관 없는 듯 */
-option {
-	font-weight: normal;
-	display: block;
-	white-space-collapse: collapse;
-	text-wrap: nowrap;
-	min-height: 1.2em;
-	padding: 0px 2px 1px;
-}
-
-/* 약관동의 */
-.reserve .agree {
-	padding: 23px 0;
-	font-size: 16px;
-	border: none;
-}
-
-.reserve .agree .all_check {
-	font-weight: 700;
-}
-
-.reserve .agree p {
-	position: relative;
-	padding-top: 11px;
-	padding-bottom: 10px;
-	line-height: 1.2;
-	padding-left: 37px;
-}
-
-label {
-	cursor: pointer;
-}
-
-.reserve .agree input {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	margin-top: -12px;
-}
-
-input[type="checkbox"].inp_chk_01 {
-	width: 24px;
-	height: 24px;
-	border: none;
-	background: url(https://image.goodchoice.kr/images/web_v3/ico_chk.png) 0
-		0 no-repeat;
-	background-size: 24px auto;
-	cursor: pointer;
-}
-
-input[type="checkbox"].inp_chk_02 {
-	width: 24px;
-	height: 24px;
-	border: none;
-	background: url(https://image.goodchoice.kr/images/web_v3/ico_chk.png) 0
-		0 no-repeat;
-	background-size: 24px auto;
-	cursor: pointer;
-}
-
-.reserve .agree span {
-	display: inline-block;
-	color: rgba(0, 0, 0, .56);
-	cursor: pointer;
-}
-
-.agree p i {
-	font-style: normal;
-	text-decoration: underline;
-}
-
-.reserve .agree span b {
-	font-weight: 400;
-	color: #e61c51;
-}
-
-.btn_pay {
-	display: block;
-	width: 100%;
-	height: 56px;
-	border: none;
-	font-size: 15px;
-	line-height: 56px;
-	color: #fff;
-	text-align: center;
-	cursor: pointer;
-}
-
-#tel_check {
-	color: red;
-	font-size: 13px;
-}
-
-#code_check {
-	color: red;
-	font-size: 13px;
-}
-
-#auth_sec {
-	position: relative;
-	display: inline-block
-}
-
-.btn_ok {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 100px;
-	height: 48px;
-	padding: 13px 0 10px;
-	border: none;
-	border-radius: 4px;
-	background: #ccc;
-	font-size: 15px;
-	color: #fff;
-	cursor: pointer;
-}
-
-.modal-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Style for the modal content */
-.modal-content {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.role_room {
-	color: grey;
-	margin-bottom: 10px;
-}
-
-.x:hover {
-	cursor: pointer;
-}
-
-.x {
-	margin-left: 100px;
-}
-
-#x2 {
-	margin-left: 300px;
-}
-
-.role_room table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.role_room th, .role_room td {
-	border: 1px solid black;
-	padding: 8px;
-	width: 30px;
-	text-align: center;
-}
-
-.role_room th {
-	background-color: #f2f2f2;
-	/* Optional: Add a background color for header cells */
-	width: 30px;
-	text-align: center;
-}
-
-#x3 {
-	margin-left: 500px;
-}
-
-.talbe3 {
-	width: 100px;
-}
-
-#x4 {
-	position: absolute;
-	top: 10px;
-	margin-top: 10px;
-	margin-left: 1000px;
-}
-</style>
+ <link rel="stylesheet" href="/css/kdg_reserve.css">
 </head>
 
 <body>
@@ -591,317 +84,175 @@ input[type="checkbox"].inp_chk_02 {
 									인증번호 전송</button>
 							</div>
 							<!-- 결제하기 버튼 이벤트 -->
+							<!-- <script th:inline="javascript" src="/js/reserve_payment_kdg.js"></script> -->
 							<script th:inline="javascript">
-    	
-							    	const paybtn = document.getElementById('payment-btn');
-							    	
-							    	//휴대폰 인증 검사
-							    	var phondConfirm = false;
-							    	paybtn.addEventListener('click', function() {
-							    		const roomIDElement = document.getElementById('roomID');
-							    		const roomID = roomIDElement.textContent;
-							    		
-							    		const orderName = /*[[ ${bookingvo.roomTitle} ]]*/ null;
-							    		
-							    		//const amount = /*[[ ${bookingvo.totalPrice} ]]*/ null;
-							    		
-							    		const amountStr = /*[[ ${bookingvo.totalPrice} ]]*/ null;
-							    		const amount = parseInt(amountStr.replace(/,/g, ''), 10);
-							    		
-							    		const customerName = document.getElementById('username').value;
-							    		
-							    		const payType = document.getElementById('payment-select').value;
-							    		
-							    		const bookerName = document.getElementById('username').value;
-							    		
-							    		//이름 특수문자, 송백, 숫자 확인
-							    	    const specialCharRegex = /[0-9 `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+							const paybtn = document.getElementById('payment-btn');
+					    	
+					    	//휴대폰 인증 검사
+					    	var phondConfirm = false;
+					    	paybtn.addEventListener('click', function() {
+					    		const roomIDElement = document.getElementById('roomID');
+					    		const roomID = roomIDElement.textContent;
+					    		
+					    		const orderName = /*[[ ${bookingvo.roomTitle} ]]*/ null;
+					    		
+					    		//const amount = /*[[ ${bookingvo.totalPrice} ]]*/ null;
+					    		
+					    		const amountStr = /*[[ ${bookingvo.totalPrice} ]]*/ null;
 
-							    		    if (bookerName.trim() === '' || specialCharRegex.test(bookerName)) {
-							    		    	Swal.fire("이름에 공백, 숫자, 특수 문자를 사용할 수 없습니다");
-							    		        return;
+					    		const amount = parseInt(amountStr.replace(/,/g, ''), 10);
+					    		
+					    		const customerName = document.getElementById('username').value;
+					    		
+					    		const payType = document.getElementById('payment-select').value;
+					    		
+					    		const bookerName = document.getElementById('username').value;
+					    		
+					    		//이름 특수문자, 송백, 숫자 확인
+					    	    const specialCharRegex = /[0-9 `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+					    		    if (bookerName.trim() === '' || specialCharRegex.test(bookerName)) {
+					    		    	Swal.fire("이름에 공백, 숫자, 특수 문자를 사용할 수 없습니다");
+					    		        return;
+					    		    }
+					    		
+					    		const bookerTel = document.getElementById('tel').value;
+					    		
+					    		//휴대폰 인증이 되지 않아 false 인 경우 
+							    if (phondConfirm == false) {
+							    	Swal.fire("휴대폰 인증이 필요합니다");
+							        return;
+							    }
+					    		
+					    		
+					    		
+							  //추가 결제시 체크박스 여부 확인
+					    		const checkboxes = document.querySelectorAll('.inp_chk_02');
+							    const checkedCnt = document.querySelectorAll('.inp_chk_02:checked').length;
+							    const totalCnt = checkboxes.length;
+							
+																    
+							    if (totalCnt !== checkedCnt) {
+									Swal.fire('전체동의가 필요합니다')
+									return;
+								}
+					    		
+					    		const url = `/book/create/${roomID}`;
+					    		
+						    		function kakao(url, payType, bookerName, bookerTel, orderName) {
+							    		fetch(url, {
+							    			method: 'POST',
+							    			headers: {
+							    				"Content-Type": "application/json",
+							    			},
+							    			body: JSON.stringify({
+							    				payType: payType,
+							    				bookerName: bookerName,
+							    				bookerTel: bookerTel
+							    			})	
+							    		})
+							    		.then(response => {
+							    		    if (response.status === 200) {
+							    		        return response.json();
+							    		    } else {
+							    		        throw new Error("Booking creation failed.");
 							    		    }
-							    		
-							    		const bookerTel = document.getElementById('tel').value;
-							    		
-							    		//휴대폰 인증이 되지 않아 false 인 경우 
-									    if (phondConfirm == false) {
-									    	Swal.fire("휴대폰 인증이 필요합니다");
-									        return;
-									    }
-							    		
-							    		
-							    		
-									  //추가 결제시 체크박스 여부 확인
-							    		const checkboxes = document.querySelectorAll('.inp_chk_02');
-									    const checkedCnt = document.querySelectorAll('.inp_chk_02:checked').length;
-									    const totalCnt = checkboxes.length;
-									
-																		    
-									    if (totalCnt !== checkedCnt) {
-											Swal.fire('전체동의가 필요합니다')
-											return;
-										}
-							    		
-							    		const url = `/book/create/${roomID}`;
-							    		
-								    		function kakao(url, payType, bookerName, bookerTel, orderName) {
-									    		fetch(url, {
-									    			method: 'POST',
-									    			headers: {
-									    				"Content-Type": "application/json",
-									    			},
-									    			body: JSON.stringify({
-									    				payType: payType,
-									    				bookerName: bookerName,
-									    				bookerTel: bookerTel
-									    			})	
-									    		})
-									    		.then(response => {
-									    		    if (response.status === 200) {
-									    		        return response.json();
-									    		    } else {
-									    		        throw new Error("Booking creation failed.");
-									    		    }
-									    		})
-									    		.then(data => {
-									    		    // data에서 "next_redirect_pc_url" 이름의 URL 추출
-									    		    const nextRedirectPcUrl = data.next_redirect_pc_url;
-		
-									    		    // 추출한 URL로 사용자를 이동시키기
-									    		    window.location.href = nextRedirectPcUrl;
-									    		})
-									    		.catch(error => {
-									    		    console.error("Error:", error.message);
-									    		});
-								    			
-								    		}
-								    		
-								    		/* 토스 */
-								    		
-								    		const url2 = `/book/api/v1/payments/toss/${roomID}`;
-								    		/* const url2 = `/api/v1/payments/toss`; */
-							    			
-								    	 	/* let successUrl = 'http://localhost:8080/api/v1/payments/toss/success';
-							    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail';  */
-							    			let successUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/success';
-							    			let failUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/fail';     
-								    		
-							    		       function toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl) {
-									                fetch(url2, {
-									                    method: 'POST',
-									                    headers: {
-									                        "Content-Type": "application/json",
-									                    },
-									                    body: JSON.stringify({
-									                        payType: payType,
-									                        amount : amount,
-									                        orderName : orderName,
-									                        customerName: bookerName,
-									                        customerTel: bookerTel,
-									                        yourSuccessUrl: successUrl,
-									                        yourFailUrl: failUrl,
-									                    }),
-									                })
-									                .then(response => {
-									                    if (!response.ok) {
-									                        throw new Error("Booking creation failed.");
-									                    }
-									                    return response.json();
-									                })
-									                .then(data => {
-									                    // 응답 객체에서 추출한 데이터로 대입
-									                    const {
-									                        amount,
-									                        orderId,
-									                        orderName,
-									                        customerName,
-									                        customerEmail,
-									                        successUrl,
-									                        failUrl
-									                    } = data;
+							    		})
+							    		.then(data => {
+							    		    // data에서 "next_redirect_pc_url" 이름의 URL 추출
+							    		    const nextRedirectPcUrl = data.next_redirect_pc_url;
 
-									                    // ------ 클라이언트 키로 객체 초기화 ------
-									                    var clientKey = 'test_ck_7DLJOpm5QrlRWgypka53PNdxbWnY';
-									                    var tossPayments = TossPayments(clientKey);
+							    		    // 추출한 URL로 사용자를 이동시키기
+							    		    window.location.href = nextRedirectPcUrl;
+							    		})
+							    		.catch(error => {
+							    		    console.error("Error:", error.message);
+							    		});
+						    			
+						    		}
+						    		
+						    		/* 토스 */
+						    		
+						    		const url2 = `/book/api/v1/payments/toss/${roomID}`;
+						    		/* const url2 = `/api/v1/payments/toss`; */
+					    			
+						    	 	/* let successUrl = 'http://localhost:8080/api/v1/payments/toss/success';
+					    			let failUrl = 'http://localhost:8080/api/v1/payments/toss/fail';  */
+					    			let successUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/success';
+					    			let failUrl = 'http://192.168.10.67:8080/api/v1/payments/toss/fail';     
+						    		
+					    		       function toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl) {
+							                fetch(url2, {
+							                    method: 'POST',
+							                    headers: {
+							                        "Content-Type": "application/json",
+							                    },
+							                    body: JSON.stringify({
+							                        payType: payType,
+							                        amount : amount,
+							                        orderName : orderName,
+							                        customerName: bookerName,
+							                        customerTel: bookerTel,
+							                        yourSuccessUrl: successUrl,
+							                        yourFailUrl: failUrl,
+							                    }),
+							                })
+							                .then(response => {
+							                    if (!response.ok) {
+							                        throw new Error("Booking creation failed.");
+							                    }
+							                    return response.json();
+							                })
+							                .then(data => {
+							                    // 응답 객체에서 추출한 데이터로 대입
+							                    const {
+							                        amount,
+							                        orderId,
+							                        orderName,
+							                        customerName,
+							                        customerEmail,
+							                        successUrl,
+							                        failUrl
+							                    } = data;
 
-									                    // ------ 결제창 띄우기 ------
-									                    tossPayments.requestPayment('CARD', {
-									                        amount: amount,
-									                        orderId: orderId,
-									                        orderName: orderName,
-									                        customerName: customerName,
-									                        customerEmail: customerEmail,
-									                        successUrl: successUrl,
-									                        failUrl: failUrl,
-									                    });
-									                })
-									                .catch(error => {
-									                    console.error("Error:", error.message);
-									                });
-									            
-									            }
-								    		
-							    		 if(payType === 'KAKAO') {
-							    			 
-							    			kakao(url, payType, bookerName, bookerTel)
-							    			
-							    		}  else if(payType === 'TOSS') {
-							    			
-								            toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl);
-								            
-							    		}
-							    		 
-							    	});
-							    	
-    
-   								 </script>
+							                    // ------ 클라이언트 키로 객체 초기화 ------
+							                    var clientKey = 'test_ck_7DLJOpm5QrlRWgypka53PNdxbWnY';
+							                    var tossPayments = TossPayments(clientKey);
+
+							                    // ------ 결제창 띄우기 ------
+							                    tossPayments.requestPayment('CARD', {
+							                        amount: amount,
+							                        orderId: orderId,
+							                        orderName: orderName,
+							                        customerName: customerName,
+							                        customerEmail: customerEmail,
+							                        successUrl: successUrl,
+							                        failUrl: failUrl,
+							                    });
+							                })
+							                .catch(error => {
+							                    console.error("Error:", error.message);
+							                });
+							            
+							            }
+						    		
+					    		 if(payType === 'KAKAO') {
+					    			 
+					    			kakao(url, payType, bookerName, bookerTel)
+					    			
+					    		}  else if(payType === 'TOSS') {
+					    			
+						            toss(url2, payType, bookerName, bookerTel, amount, orderName, successUrl, failUrl);
+						            
+					    		}
+					    		 
+					    	});
+					    	
+
+							</script> 
 
 							<!-- 휴대폰 번호 인증 -->
-							<script>
-							    	// 휴대폰 번호 입력란에 keyup 이벤트 리스너를 등록
-							    	document.getElementById('tel').addEventListener('keyup', function() {
-							        // 입력된 휴대폰 번호를 가져옴
-							        var phoneNumber = this.value;
-									
-							        // 입력된 휴대폰 번호의 앞 3글자가 '010'이 아니거나, 숫자가 아니거나, 공백이 있는지 체크
-							        if (!/^010/.test(phoneNumber) || isNaN(phoneNumber) || phoneNumber.indexOf(' ') !== -1
-							        		|| phoneNumber.length < 10 || phoneNumber.length >= 12) {
-							            // 조건에 맞지 않을 경우, tel_check 요소에 메시지를 표시
-							            document.getElementById('tel_check').innerText = '휴대폰 번호를 확인해주세요.';
-							        } else {
-							            // 조건에 맞을 경우, tel_check 요소를 비움
-							            document.getElementById('tel_check').innerText = '';
-							            const code_btn = document.getElementById("code_btn")
-							            code_btn.style.backgroundColor = "red";
-										code_btn.disabled = false
-							        }
-							    });
-	
-	    						// 인증번호 전송 버튼을 눌렀을 때의 동작을 정의해야 함. (작성하지 않음)
-	    						
-	    						document.getElementById('code_btn').addEventListener('click', function() {
-	    							// 인증번호 전송 버튼을 눌렀을 때 verificationCode div의 display 속성을 block으로 변경
-	    						    /* const verificationCodeDiv = document.getElementById('verificationCode');
-	    						    verificationCodeDiv.style.display = 'block'; */
-	    						    
-	    						    
-	    						    
-	    						    const phoneNumber = document.getElementById('tel').value;
-	    						   	/* alert(phoneNumber);
-	    						   	console.log(typeof phoneNumber); */
-	    						   	
-	    						   	const url = `/check/sendSMS?phoneNumber=${phoneNumber}`;
-	    						    
-	    						    fetch(url, {
-	    						      method: 'GET',
-	    						      headers: {
-	    						        'Content-Type': 'application/json'
-	    						      }/* ,
-	    						      body: JSON.stringify(requestBody) */
-	    						    })
-	    						    .then(response => {
-	    						      if (!response.ok) {
-	    						        // 오류 처리 로직
-	    						        // 에러메시지가 올 경우 swal로 창을 띄워주고 1분후 다시 시도하라는 메시지를 준다.
-	    						        throw new Error('서버 응답이 실패했습니다.');
-	    						      }
-	    						      return response.json();
-	    						    })
-	    						    .then(responseData => {
-	    						     	if(responseData.count > 3) {
-	    						     		Swal.fire('나중에 다시 시도해 주세요.')
-	    						     	} else {
-	    						     		
-	    						    	// 현재 인증번호가 성공적으로 발송된 후가 아니라 전송 버튼이 기준임
-	    						    	const verificationCodeDiv = document.getElementById('verificationCode');
-		    						    verificationCodeDiv.style.display = 'block'; 
-		    						    const tel_btn = document.getElementById("code_btn")
-    									tel_btn.disabled = true
-    									tel_btn.style.backgroundColor = "gray";
-		    						    const input_tel = document.getElementById("tel")
-    									/* input_tel.readOnly = true */
-    									input_tel.disabled = true
-	    						    	
-		    						    /* alert('인증번호 발송 완료!'); */
-		    						    
-    									var timer;
-    								    var isRunning = false;
-    								    
-    								    
-    								    sendAuthNum();
-    								    
-    								    // 인증번호 발송 및 타이머 함수 실행
-    								    function sendAuthNum(){
-    								        // 남은 시간(초)
-    								        var leftSec = 10,
-    								        display = document.querySelector('#timer');
-    								        // 이미 타이머가 작동중이면 중지
-    								        if (isRunning){
-    								            clearInterval(timer);
-    								        }
-    								        startTimer(leftSec, display);
-    								    }
-
-    								    function startTimer(count, display) {
-    								        var minutes, seconds;
-    								        timer = setInterval(function () {
-    								            minutes = parseInt(count / 60, 10);
-    								            seconds = parseInt(count % 60, 10);
-    								            minutes = minutes < 10 ? "0" + minutes : minutes;
-    								            seconds = seconds < 10 ? "0" + seconds : seconds;
-    								            display.textContent = minutes + ":" + seconds;
-    								            // 타이머 종료
-    								            if (--count < 0) {
-    								                clearInterval(timer);
-    								                display.textContent = "";
-    								                isRunning = false;
-    								           
-    								                
-    								                fetch(`/check/timeout`, {
-    					    						      method: 'GET',
-    					    						      headers: {
-    					    						        'Content-Type': 'application/json'
-    					    						      }/* ,
-    					    						      body: JSON.stringify(requestBody) */
-    					    						    })
-    					    						    .then(response => response.json())
-    					    						    .then(responseData => {
-    					    						    	if(responseData == 1){
-    					    									/* Swal.fire('그런 세션은 없습니다.') */
-    					    									return
-    					    								} else {
-    					    									Swal.fire('인증번호를 다시 요청해주세요.')
-    					    									/* const verificationCodeDiv = document.getElementById('verificationCode'); */
-			    								                /* input_tel.readOnly = false */
-    					    									tel_btn.disabled = false
-			    								                input_tel.disabled = false
-			    		    									tel_btn.innerText = '재전송';
-			    								                tel_btn.style.backgroundColor = "red";
-    					    									/* verificationCodeDiv.textContent = '';  */
-    					    									return
-    					    								}
-    					    						    })
-    					    						    .catch(error => {
-    					    						      console.error('오류가 발생했습니다:', error);
-    					    						    });
-    								                
-    								            }
-    								        }, 1000);
-    								        isRunning = true;
-    								    }
-	    						    	
-											Swal.fire('인증번호 발송 완료')
-	    						     	}
-									
-	    						    	
-	    						    })
-	    						    .catch(error => {
-	    						    	// 에러메시지가 올 경우 swal로 창을 띄워주고 1분후 다시 시도하라는 메시지를 준다.
-	    						      console.error('오류가 발생했습니다:', error);
-	    						    });
-	    						  });
-	    						</script>
+							<script src="/js/reserve_phone_kdg.js"></script>
 
 
 
@@ -919,141 +270,8 @@ input[type="checkbox"].inp_chk_02 {
 								</section>
 								<span id="timer"></span>
 							</div>
-							<!-- 휴대폰 문자인증 -->
-							<script>
-								    	// 인증번호 번호 입력란에 keyup 이벤트 리스너를 등록
-								    	document.getElementById('digit').addEventListener('keyup', function() {
-								        // 입력된 인증번호를 가져옴
-								        var codeNumber = this.value;
-										
-								        // 입력된 인증번호 체크
-								        if (isNaN(codeNumber) || codeNumber.indexOf(' ') !== -1
-								        		|| codeNumber.length < 4 || codeNumber.length >= 5) {
-								            // 조건에 맞지 않을 경우, code_check 요소에 메시지를 표시
-								            document.getElementById('code_check').innerText = '유효한 인증번호가 아닙니다.';
-								        } else {
-								            // 조건에 맞을 경우, code_check 요소를 비움
-								            document.getElementById('code_check').innerText = '';
-								            const code_btn = document.getElementById("code_btn2")
-								            code_btn.style.backgroundColor = "red";
-											code_btn.disabled = false
-								        }
-								    });
-		
-		    						// 인증번호 전송 버튼을 눌렀을 때의 동작을 정의해야 함. (작성하지 않음)
-		    						
-		    						document.getElementById('code_btn2').addEventListener('click', function() {
-		    							// 인증번호 전송 버튼을 눌렀을 때 verificationCode div의 display 속성을 block으로 변경
-		    						    /* const verificationCodeDiv = document.getElementById('verificationCode');
-		    						    verificationCodeDiv.style.display = 'block'; */
-		    							const code = document.getElementById('digit').value;
-		    						   	/* alert(code); */
-		    						   	/* console.log(typeof code); */
-		    						    const phoneNumber = document.getElementById('tel').value;
-		    						    const url = `/check/codeCheck?code=${code}&phoneNumber=${phoneNumber}`;
-		    						    
-		    						    fetch(url, {
-		    						      method: 'GET',
-		    						      headers: {
-		    						        'Content-Type': 'application/json'
-		    						      }/* ,
-		    						      body: JSON.stringify(requestBody) */
-		    						    })
-		    						    .then(response => {
-		    						      if (!response.ok) {
-		    						        // 오류 처리 로직
-		    						        throw new Error('서버 응답이 실패했습니다.');
-		    						      }
-		    						      return response.json();
-		    						    })
-		    						    .then(responseData => {
-		    						    	if(responseData == true){
-		    									/* alert('인증 번호가 다릅니다.') */
-		    									Swal.fire('인증 번호가 다릅니다.')
-		    									/* phoneAuth=true
-		    									inputCheck() */
-		    								} else {
-		    									/* alert('인증되었습니다') */
-		    									Swal.fire('인증되었습니다.')
-		    									const input_tel = document.getElementById("tel")
-		    									input_tel.disabled = true
-		    									
-		    									const tel_btn = document.getElementById("code_btn")
-		    									tel_btn.disabled = true
-		    									
-		    									tel_btn.style.backgroundColor = "gray";
-		    									
-		    									const verificationCodeDiv = document.getElementById('verificationCode');
-				    						    verificationCodeDiv.style.display = 'none';
-				    						    
-				    						  //휴대폰 인증 되면 전역변수로 설정한 phondConfirm 가 true로 변함 
-				    						    phondConfirm = true;
-				    						    
-		    									/* const input_code = document.getElementById("input_code")
-		    									input_code.readOnly = true */
-		    									
-		    									/* const code_btn = document.getElementById("code_btn")
-		    									code_btn.disabled = true */
-		    									
-		    									/* phoneAuth=false */
-		    									/* inputCheck()  */
-		    								}
-		    						    })
-		    						    .catch(error => {
-		    						      console.error('오류가 발생했습니다:', error);
-		    						    });
-		    						    
-		    						})
-		    						
-		    						window.onpageshow = function(e) {
-		    							const input_tel = document.getElementById("tel")
-		    							tel_btn.style.backgroundColor = "red";
-    									input_tel.disabled = false;
-    									
-    									const tel_btn = document.getElementById("code_btn")
-    									document.getElementById('digit').innerText = ''; // -> 이거 안먹히는 듯
-    									tel_btn.disabled = false
-		    						}
-		    						
-		    						 // 모달부분 //   
-		    				    function openModal() {
-        document.getElementById('modalOverlay').style.display = 'block';
-        document.getElementById('modalOverlay2').style.display = 'none';
-        document.getElementById('modalOverlay3').style.display = 'none';
-        document.getElementById('modalOverlay4').style.display = 'none';
-    }
-
-    
-    function openModal2() {
-        document.getElementById('modalOverlay').style.display = 'none';
-        document.getElementById('modalOverlay2').style.display = 'block';
-        document.getElementById('modalOverlay3').style.display = 'none';
-        document.getElementById('modalOverlay4').style.display = 'none';
-    }
-    
-    function openModal3() {
-        document.getElementById('modalOverlay').style.display = 'none';
-        document.getElementById('modalOverlay2').style.display = 'none';
-        document.getElementById('modalOverlay3').style.display = 'block';
-        document.getElementById('modalOverlay4').style.display = 'none';
-    }
-    
-    function openModal4() {
-        document.getElementById('modalOverlay').style.display = 'none';
-        document.getElementById('modalOverlay2').style.display = 'none';
-        document.getElementById('modalOverlay3').style.display = 'none';
-        document.getElementById('modalOverlay4').style.display = 'block';
-    }
-
-    
-    
-    function closeModal() {
-        document.getElementById('modalOverlay').style.display = 'none';
-        document.getElementById('modalOverlay2').style.display = 'none';
-        document.getElementById('modalOverlay3').style.display = 'none';
-        document.getElementById('modalOverlay4').style.display = 'none';
-    }
-									</script>
+							<!-- 휴대폰 문자인증 & 모달 -->
+							<script src="/js/reserve_modal_sms_kdg.js"></script>
 						</div>
 					</section>
 				</div>
