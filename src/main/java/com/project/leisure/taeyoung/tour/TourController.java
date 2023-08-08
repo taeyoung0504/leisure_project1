@@ -143,7 +143,6 @@ public class TourController {
 
 		return "kty/find_food/food_test6";
 	}
-
 		
 		// 예약불가 객실 조회 하여
 		// 예약가능 객실 조회
@@ -184,6 +183,12 @@ public class TourController {
 	            LocalDate currentDate1 = LocalDate.now();
 	            localDate = currentDate1;
 	            localDate2 = currentDate1.plusDays(1);
+	            
+	         // 두 날짜 사이의 차이를 구함
+	            long difference = ChronoUnit.DAYS.between(localDate, localDate2);
+
+	            // int 타입의 변수에 저장
+	            num = (int) difference;
 
 	        }
 
@@ -207,6 +212,7 @@ public class TourController {
 			            for(Product product: accom.getProducts()) {
 			            	
 			            	String result = String.valueOf(num * product.getProduct_amount());
+			            	System.out.println("!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@ result : " + result);
 			            	product.setTotalPrice(result);
 			        }
 			        model.addAttribute("acc", accom);
@@ -711,7 +717,6 @@ public class TourController {
 
 	    return "kty/find/daegu_room3";
 	}
-
 
 }
 
