@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <html xmlns:th="http://www.thymeleaf.org">
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=976e820c4563105a585eb83c8ea88bd6&libraries=services"></script>
+   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=976e820c4563105a585eb83c8ea88bd6&libraries=services"></script>
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script th:src="@{/js/kty_review.js}"></script>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link rel="stylesheet" href="/css/product_detail.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -30,280 +30,300 @@
 <body>
 <html layout:decorate="~{jjj/header}">
 <div layout:fragment="content" class="container my-3">
-	<div class="page_container">
-		<div class="page_left">
-			<div class="left_main_image">
-				<img class="fixed_image" th:src="${acc.acc_img}" alt="숙소">
-			</div>
-		</div>
-		<!--  page container 끝 -->
+   <div class="page_container">
+      <div class="page_left">
+         <div class="left_main_image">
+            <img class="fixed_image" th:src="${acc.acc_img}" alt="숙소">
+         </div>
+      </div>
+      <!--  page container 끝 -->
 
 
-		<div class="page_right">
-			<!--  숙소명 -->
-			<p class="hotelname" th:text="${acc.acc_name}"></p>
-			<!--  평점 -->
-			<span class="score_start"
-				th:text="${acc.acc_rating eq 1 ? '★ ✩ ✩ ✩ ✩' : 
+      <div class="page_right">
+         <!--  숙소명 -->
+         <p class="hotelname" th:text="${acc.acc_name}"></p>
+         <!--  평점 -->
+         <span class="score_start"
+            th:text="${acc.acc_rating eq 1 ? '★ ✩ ✩ ✩ ✩' : 
                                  acc.acc_rating eq 2 ? '★ ★ ✩ ✩ ✩' :
                                  acc.acc_rating eq 3 ? '★ ★ ★ ✩ ✩' :
                                  acc.acc_rating eq 4 ? '★ ★ ★ ★ ✩ ' :
                                  acc.acc_rating eq 5 ? '★ ★ ★ ★ ★' :
                                  '✩ ✩ ✩ ✩ ✩'}"></span>
-			<span id="acc_score"
-				th:text="${acc.acc_rating eq 0 ? '': acc.acc_rating}"></span> <span
-				class="acc_rating_tang"
-				th:text="'(' + ${#lists.size(acc.reviews)} + ')'"></span>
+         <span id="acc_score"
+            th:text="${acc.acc_rating eq 0 ? '': acc.acc_rating}"></span> <span
+            class="acc_rating_tang"
+            th:text="'(' + ${#lists.size(acc.reviews)} + ')'"></span>
 
-			<p class="hoteladdress" th:text="${acc.acc_address}"></p>
-			
-			<div class="room_detail_fee">
-			<span class="room_detail_fee1">평균 숙박 가격 </span>&nbsp<span
-				class="room_detail_fee2" th:text="${acc.acc_averPrice}"></span><span>
-				원</span>
-			</div>
-			<div class="coment_author">
-				<p class="boss_coments">사장님 한마디</p>
-				<p class="hotelcomment" th:text="${acc.acc_explain}"></p>
-			</div>
-		</div>
-	</div>
+         <p class="hoteladdress" th:text="${acc.acc_address}"></p>
+         
+         <div class="room_detail_fee">
+         <span class="room_detail_fee1">평균 숙박 가격 </span>&nbsp<span
+            class="room_detail_fee2" th:text="${acc.acc_averPrice}"></span><span>
+            원</span>
+         </div>
+         <div class="coment_author">
+            <p class="boss_coments">사장님 한마디</p>
+            <p class="hotelcomment" th:text="${acc.acc_explain}"></p>
+         </div>
+      </div>
+   </div>
 
-	<div class="page_tab">
-		<ul class="page_tabs">
-			<li><a href="#view1" onclick="changeTabColor(0)" class="active">객실안내/예약</a></li>
-			<li><a href="#view2" onclick="changeTabColor(1)">숙소정보</a></li>
-			<li><a href="#view3" onclick="changeTabColor(2)">리뷰</a></li>
-		</ul>
-		<div class="tabcontents">
-			<!--  객실 부분 --->
-			<div id="view1">
-				<section id="datepicker-container">
-					<input type="text" id="datepicker1" name="checkin" required>
-					<button id="date-choose" onclick="totalPrice()">선택완료</button>
-				</section>
-				<div class="room" th:each="product : ${acc.products}">
-					<span id="accomid" th:text="${acc.id}" hidden></span>
+   <div class="page_tab">
+      <ul class="page_tabs">
+         <li><a href="#view1" onclick="changeTabColor(0)">객실안내/예약</a></li>
+         <li><a href="#view2" onclick="changeTabColor(1)">숙소정보</a></li>
+         <li><a href="#view3" onclick="changeTabColor(2)">리뷰</a></li>
+      </ul>
+      <div class="tabcontents">
+         <!--  객실 부분 --->
+         <div id="view1">
+            <section id="datepicker-container">
+               <input type="text" id="datepicker1" name="checkin" required>
+               <button id="date-choose" onclick="totalPrice()">선택완료</button>
+            </section>
+            <div class="room" th:each="product : ${acc.products}">
+               <span id="accomid" th:text="${acc.id}" hidden></span>
 
-					<div class="pic_view">
-						<!--    <div th:each="img : ${product.productImgs}" class="imgContainer">
+               <div class="pic_view">
+                  <!--    <div th:each="img : ${product.productImgs}" class="imgContainer">
                 <img th:src="${img.img_url[0]}" alt="Product Image" width="100%"
                                  height="100%" class=""></div> -->
-						<!-- 나중에 이부분 스와이퍼 슬라이드로 여러개 사진 다보이게 해야함. -->
-						<img th:src="${product.productImgs[0].img_url}"
-							th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
-							alt="Product Image" width="100%" height="100%" class="">
-					</div>
-					<div class="room_info"
-						th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
-						<strong class="title" th:text="${product.product_type}"></strong>
-						<div class="hotel">
-							<div class="price">
-								<strong class="oneday_room"> 1박 가격 </strong> <strong
-									class="oneday_room2">-</strong> <strong id="totalAmount"
-									th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
-									th:text="${product.product_amount}"></strong><strong
-									id="totalAmount_won">원 </strong>
-							</div>
-							<!-- <button type="button" onclick="pop_room_detail()">" 객실
+                  <!-- 나중에 이부분 스와이퍼 슬라이드로 여러개 사진 다보이게 해야함. -->
+                  <img th:src="${product.productImgs[0].img_url}"
+                     th:classappend="${product.product_count <= 0 ? 'gray-filter' : ''}"
+                     alt="Product Image" width="100%" height="100%" class="">
+               </div>
+               <div class="room_info"
+                  th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}">
+                  <strong class="title" th:text="${product.product_type}"></strong>
+                  <div class="hotel">
+                     <div class="price">
+                        <strong class="oneday_room"> 1박 가격 </strong> <strong
+                           class="oneday_room2">-</strong> <strong id="totalAmount"
+                           th:classappend="${product.product_count <= 0 ? 'gray-text' : ''}"
+                           th:text="${product.product_amount}"></strong><strong
+                           id="totalAmount_won">원 </strong>
+                     </div>
+                     <div>
+                     <strong>최대 수용 인원 -  <span th:text="${product.product_pernum}"></span>명</strong>
+                     
+                     </div>
+                     <!-- <button type="button" onclick="pop_room_detail()">" 객실
                         이용 안내"</button> -->
-							<!-- <button type="button"> 판매완료 </button> -->
-							<span id="hidden" hidden th:text="${product.product_id}"
-								th:value="${product.product_id}"></span>
-							<button type="button" id="button"
-								th:classappend="${product.product_count <= 0 ? 'gray-button' : 'btn_reserve'}"
-								th:id="${product.product_id}" onclick="handleClick(this)">
-								<strong>총</strong> <span name=""
-									th:value="${product.product_id}" id="reservePrice"
-									th:text="${product.totalPrice}"> <!-- onclick="handleClick(event)" -->
-									<p></p></span>원 예약하기
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--  객실 끝  -->
+                     <!-- <button type="button"> 판매완료 </button> -->
+                     <span id="hidden" hidden th:text="${product.product_id}"
+                        th:value="${product.product_id}"></span>
+                     <button type="button" id="button"
+                        th:classappend="${product.product_count <= 0 ? 'gray-button' : 'btn_reserve'}"
+                        th:id="${product.product_id}" onclick="handleClick(this)">
+                        <strong>총</strong> <span name=""
+                           th:value="${product.product_id}" id="reservePrice"
+                           th:text="${product.totalPrice}"> <!-- onclick="handleClick(event)" -->
+                           <p></p></span>원 예약하기
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--  객실 끝  -->
 
-			<div id="view2">
-				<!-- 불러오기 성공 이제 수정들어가야 함 -->
-				<pre class="pre_pre">
+         <div id="view2">
+            <!-- 불러오기 성공 이제 수정들어가야 함 -->
+            <pre class="pre_pre">
               <p th:utext="${@commonUtil.markdown(acc?.acc_info) ?: ''}"></p>
             </pre>
 
-				<!--  map -->
-				<div class="map" id="kakao_maps">
+            <!--  map -->
+            <div class="map" id="kakao_maps">
 
-					<body>
-						<p class="mapbody"></p>
-						<span class="intro_load">찾아오시는 길</span>
-						<div id="map"></div>
-						<script th:src="@{/js/kty_map.js}"></script>
-					</body>
+               <body>
+                  <p class="mapbody"></p>
+                  <span class="intro_load">찾아오시는 길</span>
+                  <div id="map"></div>
+                  <script th:src="@{/js/kty_map.js}"></script>
+               </body>
 
-					<!--  지도 -->
+               <!--  지도 -->
 
 
-				</div>
+            </div>
 
-			</div>
-			<div id="view3">
-				<body>
+         </div>
+         <div id="view3">
+            <body>
 
-					<div class="sss">
-						<div th:text="${#authentication.name}" id="current_detail_user"></div>
-						<h2 id="title_revieww">리뷰 내역</h2>
-						<ul id="review_list">
-							<li class="ssss1" th:each="review : ${acc.reviews}">
-								<p class="rating-white">
-									<span
-										th:text="${review.author.contains('name') ? 'Social_네이버회원' : (review.author.length() > 16 ? 'Social_구글회원' : 
+               <div class="sss">
+                  <div th:text="${#authentication.name}" id="current_detail_user"></div>
+                  <h2 id="title_revieww">리뷰 내역</h2>
+                  <ul id="review_list">
+                     <li class="ssss1" th:each="review : ${acc.reviews}">
+                        <p class="rating-white">
+                           <span
+                              th:text="${review.author.contains('name') ? 'Social_네이버회원' : (review.author.length() > 16 ? 'Social_구글회원' : 
                      (review.author.length()>9 && review.author.length() < 13 ? 'Social_카카오회원' : review.author))}"
-										class="contain_author"></span>
-								<div sec:authorize="isAuthenticated()">
+                              class="contain_author"></span>
+                        <div sec:authorize="isAuthenticated()">
 
-									<button type="button" class="declaration"
-										data-target="modal_declaration"
-										th:id="'declaration_button_' + ${review.id}"
-										th:attr="data-accomid=${review.id}"
-										th:data-review-id="${review.id}"
-										th:data-should-hide="${#lists.contains(review.declarations.![repoter], #authentication.name)}">신고</button>
-								</div>
-								<div th:each="dec : ${review.declarations}"
-									class="dec_repoter_info">
-									<div th:text="${dec.repoter}"></div>
-								</div>
-								</p>
-								<p class="start_score">
-									<span th:if="${review.rating == 1}" class="star act_repeat">★
-										✩ ✩ ✩ ✩</span> <span th:if="${review.rating == 2}"
-										class="start_repeat">★ ★ ✩ ✩ ✩</span> <span
-										th:if="${review.rating == 3}" class="start_repeat">★ ★
-										★ ✩ ✩</span> <span th:if="${review.rating == 4}" class="start_repeat">★
-										★ ★ ★ ✩</span> <span th:if="${review.rating == 5}"
-										class="start_repeat"> ★ ★ ★ ★ ★</span> <span
-										class="score_number" th:text="${review.rating}"> </span>
-								</p> <!-- 신고 누락적시 블라인드 처리된 내용 표시 -->
-								<p class="blind1">
-									<span th:text="${review.contentForDisplay}"></span>
-								</p>
-								<p>
-									<span class="time_real"
-										th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"></span>
-								</p> <br>
-							</li>
-						</ul>
-					</div>
-					<!--  모달 (신고) -->
-					<div id="myModa" class="modal_declaration">
-						<div class="modal-content_declaration">
-							<span class="close">&times;</span>
-							<h3 class="user_dec">회원 신고</h3>
-							<div class="reason_decl">신고 사유</div>
-							<br>
-							<form id="declarationForm" data-review-id="${review.id}">
-								<select id="reason_dec" name="reason">
-									<option value="">선택하세요</option>
-									<option value="욕설">욕설</option>
-									<option value="도배">도배</option>
-									<option value="광고">광고</option>
-									<option value="욕설 및 비방">욕설 및 비방</option>
-									<option value="허위·과장">허위·과장</option>
-									<option value="기타">기타</option>
-								</select><br> <br>
-								<div class="decl_detail_con">상세 내용</div>
-								<br>
-								<textarea id="decl_detail" placeholder="상세 사유를 작성하세요"></textarea>
-								<br> <input type="submit" value="제출" id="declr_btn">
-							</form>
-						</div>
-					</div>
+                           <button type="button" class="declaration"
+                              data-target="modal_declaration"
+                              th:id="'declaration_button_' + ${review.id}"
+                              th:attr="data-accomid=${review.id}"
+                              th:data-review-id="${review.id}"
+                              th:data-should-hide="${#lists.contains(review.declarations.![repoter], #authentication.name)}">신고</button>
+                        </div>
+                        <div th:each="dec : ${review.declarations}"
+                           class="dec_repoter_info">
+                           <div th:text="${dec.repoter}"></div>
+                        </div>
+                        </p>
+                        <p class="start_score">
+                           <span th:if="${review.rating == 1}" class="star act_repeat">★
+                              ✩ ✩ ✩ ✩</span> <span th:if="${review.rating == 2}"
+                              class="start_repeat">★ ★ ✩ ✩ ✩</span> <span
+                              th:if="${review.rating == 3}" class="start_repeat">★ ★
+                              ★ ✩ ✩</span> <span th:if="${review.rating == 4}" class="start_repeat">★
+                              ★ ★ ★ ✩</span> <span th:if="${review.rating == 5}"
+                              class="start_repeat"> ★ ★ ★ ★ ★</span> <span
+                              class="score_number" th:text="${review.rating}"> </span>
+                        </p> <!-- 신고 누락적시 블라인드 처리된 내용 표시 -->
+                        <p class="blind1">
+                           <span th:text="${review.contentForDisplay}"></span>
+                        </p>
+                        <p>
+                           <span class="time_real"
+                              th:text="${#temporals.format(review.create_reivew_Time, 'yyyy. MM. dd.  HH:mm')}"></span>
+                        </p> <br>
+                     </li>
+                  </ul>
+               </div>
+               <!--  모달 (신고) -->
+               <div id="myModa" class="modal_declaration">
+                  <div class="modal-content_declaration">
+                     <span class="close">&times;</span>
+                     <h3 class="user_dec">회원 신고</h3>
+                     <div class="reason_decl">신고 사유</div>
+                     <br>
+                     <form id="declarationForm" data-review-id="${review.id}">
+                        <select id="reason_dec" name="reason">
+                           <option value="">선택하세요</option>
+                           <option value="욕설">욕설</option>
+                           <option value="도배">도배</option>
+                           <option value="광고">광고</option>
+                           <option value="욕설 및 비방">욕설 및 비방</option>
+                           <option value="허위·과장">허위·과장</option>
+                           <option value="기타">기타</option>
+                        </select><br> <br>
+                        <div class="decl_detail_con">상세 내용</div>
+                        <br>
+                        <textarea id="decl_detail" placeholder="상세 사유를 작성하세요"></textarea>
+                        <br> <input type="submit" value="제출" id="declr_btn">
+                     </form>
+                  </div>
+               </div>
 
 
-					<!-- datepicker 적용 -->
-					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-					<script
-						src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-					<!-- <scirpt src="../static/js/kdg_datepicker.js"></scirpt> -->
-					<script th:inline="javascript">
-			
-					
-	                  $(document).ready(function() {
-	                       $("#datepicker1").datepicker({
-	                         multidate: 2,
-	                         format: 'yyyy-mm-dd',
-	                         startDate: '-0d',
-	                         endDate: '+2m +15d',
-	                         container: '#datepicker-container',
-	                         showOn: "button",
-	                          minDate: 0
-	                         /* buttonImage: "URL_OF_YOUR_ICON_IMAGE",
-	                         buttonImageOnly: true */
-	                       });
-	                       
-	                    // 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
-	                       const checkin = sessionStorage.getItem("checkin");
-	                       const checkOut = sessionStorage.getItem("checkOut");
+               <!-- datepicker 적용 -->
+               <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+               <script
+                  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+               <!-- <scirpt src="../static/js/kdg_datepicker.js"></scirpt> -->
+               <script th:inline="javascript">
+            /*    $.datepicker.setDefaults({
+                    dateFormat: 'yy-mm-dd',
+                    prevText: '이전 달',
+                    nextText: '다음 달',
+                    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                    showMonthAfterYear: true,
+                    yearSuffix: '년'
+                  });
 
-	                       if (checkin && checkOut) {
-	                         // 있다면 datepicker가 적용된 input의 기본값으로 출력
-	                         $("#datepicker1").val(checkin + " ~ " + checkOut);
-	                         
-	                       } else {
-	                         // 없다면 오늘날짜와 내일날짜를 구해 기본값으로 출력
-	                         var today = new Date();
-	                         var nextDay = new Date(today);
-	                         nextDay.setDate(nextDay.getDate() + 1);
-	                         var formattedToday = formatDate(today);
-	                         var formattedNextDay = formatDate(nextDay);
-	                         
-	                         const checkin = formattedToday;
-	                    	   
-	                    	 const checkOut = formattedNextDay;
-	                         
-	                         sessionStorage.setItem("checkin", checkin);
-	                    	 sessionStorage.setItem("checkOut", checkOut);
-	                         
-	                         $("#datepicker1").val(checkin + " ~ " + checkOut);
-	                       }
+                  $(function () {
+                    $('.datepicker').datepicker();
+                  });
+                */
+               
+                     $(document).ready(function() {
+                          $("#datepicker1").datepicker({
+                            multidate: 2,
+                            format: 'yyyy-mm-dd',
+                            startDate: '-0d',
+                            endDate: '+2m +15d',
+                            container: '#datepicker-container',
+                            showOn: "button",
+                             minDate: 0
+                            /* buttonImage: "URL_OF_YOUR_ICON_IMAGE",
+                            buttonImageOnly: true */
+                          });
+                          
+                       // 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
+                          const checkin = sessionStorage.getItem("checkin");
+                          const checkOut = sessionStorage.getItem("checkOut");
 
-	                       // 데이터 형식 지정 : 'YYYY-MM-DD'
-	                       function formatDate(date) {
-	                         var year = date.getFullYear();
-	                         var month = (date.getMonth() + 1).toString().padStart(2, "0");
-	                         var day = date.getDate().toString().padStart(2, "0");
-	                         return year + "-" + month + "-" + day;
-	                       }
-	                       
-	                       // 페이지가 로드 될 때 totalAmount들 모두 가져와서 세션에 저장하고
-	                       // 예약하기 눌렀을 때 예약에 넘어가는 값들과 세션에 있는 값들 비교해서 유효한 값만 백에 넘기기
-	                       // 예약하기 마지막에 세션 삭제
-	                       
-	                    // #totalAmount 아이디를 가진 요소의 텍스트 값을 추출하여 배열에 저장
-	                       const totalAmountElements = document.querySelectorAll("#totalAmount");
-	                       const reservePriceArray = [];
+                          if (checkin && checkOut) {
+                            // 있다면 datepicker가 적용된 input의 기본값으로 출력
+                            $("#datepicker1").val(checkin + " ~ " + checkOut);
+                            
+                          } else {
+                            // 없다면 오늘날짜와 내일날짜를 구해 기본값으로 출력
+                            var today = new Date();
+                            var nextDay = new Date(today);
+                            nextDay.setDate(nextDay.getDate() + 1);
+                            var formattedToday = formatDate(today);
+                            var formattedNextDay = formatDate(nextDay);
+                            
+                            const checkin = formattedToday;
+                             
+                           const checkOut = formattedNextDay;
+                            
+                            sessionStorage.setItem("checkin", checkin);
+                           sessionStorage.setItem("checkOut", checkOut);
+                            
+                            $("#datepicker1").val(checkin + " ~ " + checkOut);
+                          }
 
-	                       totalAmountElements.forEach((element) => {
-	                         const textValue = element.textContent.trim(); // 요소의 텍스트 값을 추출하고 앞뒤 공백 제거
-	                         reservePriceArray.push(textValue);
-	                       });
+                          // 데이터 형식 지정 : 'YYYY-MM-DD'
+                          function formatDate(date) {
+                            var year = date.getFullYear();
+                            var month = (date.getMonth() + 1).toString().padStart(2, "0");
+                            var day = date.getDate().toString().padStart(2, "0");
+                            return year + "-" + month + "-" + day;
+                          }
+                          
+                          // 페이지가 로드 될 때 totalAmount들 모두 가져와서 세션에 저장하고
+                          // 예약하기 눌렀을 때 예약에 넘어가는 값들과 세션에 있는 값들 비교해서 유효한 값만 백에 넘기기
+                          // 예약하기 마지막에 세션 삭제
+                          
+                       // #totalAmount 아이디를 가진 요소의 텍스트 값을 추출하여 배열에 저장
+                          const totalAmountElements = document.querySelectorAll("#totalAmount");
+                          const reservePriceArray = [];
 
-	                       // reservePriceArray를 세션에 저장하기 위해 배열을 스트링 타입으로 차례대로 저장
-	                       let stringifiedArray = "";
-	                       reservePriceArray.forEach((value, index) => {
-	                         if (index > 0) {
-	                           stringifiedArray += ","; // 각 값 사이에 쉼표(,) 추가
-	                         }
-	                         stringifiedArray += value;
-	                       });
+                          totalAmountElements.forEach((element) => {
+                            const textValue = element.textContent.trim(); // 요소의 텍스트 값을 추출하고 앞뒤 공백 제거
+                            reservePriceArray.push(textValue);
+                          });
 
-	                       // reservePriceArray를 세션에 저장
-	                       sessionStorage.setItem("reservePriceArray", stringifiedArray);
+                          // reservePriceArray를 세션에 저장하기 위해 배열을 스트링 타입으로 차례대로 저장
+                          let stringifiedArray = "";
+                          reservePriceArray.forEach((value, index) => {
+                            if (index > 0) {
+                              stringifiedArray += ","; // 각 값 사이에 쉼표(,) 추가
+                            }
+                            stringifiedArray += value;
+                          });
 
-	                       // 세션에 저장한 배열을 확인하기 위해 alert로 출력
-	                       const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
-	                       /* alert(storedReservePriceArray); */
-	                       
-	                     });
+                          // reservePriceArray를 세션에 저장
+                          sessionStorage.setItem("reservePriceArray", stringifiedArray);
+
+                          // 세션에 저장한 배열을 확인하기 위해 alert로 출력
+                          const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
+                          /* alert(storedReservePriceArray); */
+                          
+                        });
                      
                   
                      /* 여러날짜를 입력받고 여러 날짜들중 가장 빠른날짜(체크인)와 가장 늦은 날짜를(체크아웃) 추출하는 함수*/
@@ -313,38 +333,38 @@
                        console.log("selectedDates:", selectedDates);
                        // 선택한 날짜가 비어있는지(trim()으로 공백 제거 후 확인) 확인. 비어있다면 함수를 종료.
                        if (selectedDates.trim() === "") {
-                    	  /*  var today = new Date();
-                    	    var tomorrow = new Date(today);
-                    	    tomorrow.setDate(tomorrow.getDate() + 1);
-                    	    var formattedToday = formatDate(today);
-                    	    var formattedTomorrow = formatDate(tomorrow);
-                    	    
-                    	    const checkin = formattedToday;
-                    	   
-                    	    const checkOut = formattedTomorrow;
-                    	    
-                    	    console.log(checkin);
-                    	    console.log(checkOut);
-                    	    
-                    	    // 체크인, 체크아웃 날짜 세션에 담기
-                    	    sessionStorage.setItem("checkin", checkin);
-                    	    sessionStorage.setItem("checkOut", checkOut);
-                    	    
-                    	    // 화면에 보여질 두 날짜 형식 ex) 2023-07-17 ~ 2023-07-18
-                    	    $("#datepicker1").val(formattedToday + " ~ " + formattedTomorrow);
-                    	    
-                    	    // 각 객실의 금액과 숙박 일수를 곱함
-                    	    setReservationSpanValue(1);  */// Assuming one night stay as the default
-                    	    
-                    	    const checkin = sessionStorage.getItem("checkin");
-	                    	 const checkOut = sessionStorage.getItem("checkOut");
-	                    	 
-                    	    const accomID = document.getElementById('accomid').textContent;
-                    	    var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
-                    	    location.assign(url);
-                    	
+                         /*  var today = new Date();
+                           var tomorrow = new Date(today);
+                           tomorrow.setDate(tomorrow.getDate() + 1);
+                           var formattedToday = formatDate(today);
+                           var formattedTomorrow = formatDate(tomorrow);
+                           
+                           const checkin = formattedToday;
+                          
+                           const checkOut = formattedTomorrow;
+                           
+                           console.log(checkin);
+                           console.log(checkOut);
+                           
+                           // 체크인, 체크아웃 날짜 세션에 담기
+                           sessionStorage.setItem("checkin", checkin);
+                           sessionStorage.setItem("checkOut", checkOut);
+                           
+                           // 화면에 보여질 두 날짜 형식 ex) 2023-07-17 ~ 2023-07-18
+                           $("#datepicker1").val(formattedToday + " ~ " + formattedTomorrow);
+                           
+                           // 각 객실의 금액과 숙박 일수를 곱함
+                           setReservationSpanValue(1);  */// Assuming one night stay as the default
+                           
+                           const checkin = sessionStorage.getItem("checkin");
+                           const checkOut = sessionStorage.getItem("checkOut");
+                           
+                           const accomID = document.getElementById('accomid').textContent;
+                           var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
+                           location.assign(url);
+                       
                        } else {
-                    	   
+                          
                        // 선택한 날짜를 쉼표로 분리하고(trim()으로 각 요소의 공백 제거) 배열로 만듬
                        var datesArray = selectedDates.split(",").map(date => date.trim());
                        // 유효한 날짜만 필터링하여 validDates 배열에 저장합니다. 유효한 날짜는 isDateValid 함수를 사용하여 확인
@@ -382,13 +402,13 @@
                          console.log(num);
                          
                           // 각 객실의 금액과 숙박 일수를 곱함
-  	                    	setReservationSpanValue(num); 
-  	            
+                            setReservationSpanValue(num); 
+                 
                          const accomID = document.getElementById('accomid').textContent;
                  
-                   			var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
- 	                   		location.assign(url); 
-  	                  
+                            var url = `/tour/product/detail/${accomID}?checkin=${checkin}&checkOut=${checkOut}`;
+                             location.assign(url); 
+                       
                        } 
                          $("#datepicker1").val("");  // 입력값이 공백이라면 datepicker 초기화
                        }
@@ -478,36 +498,48 @@
                      
                      // 정규 표현식을 사용하여 세 자리 마다 콤마를 추가하는 함수
                      function addCommas(num) {
+                       /*  alert(num); */
                        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
                      }
                            
                      /* 컨트롤러로 객실정보 보내는 함수 */
                      function handleClick(button) {
                       const reservePriceElement = button.querySelector("#reservePrice");
+                      /* alert(reservePriceElement); */
                       const totalPrice1 = reservePriceElement.textContent;
-                      
+                      /* alert('totalPrice1 : ', totalPrice1) */
                       
                       function findMatchingTotalPrice(totalPrice1) {
-                    	  // 세션에서 reservePriceArray 배열 불러오기
-                    	  const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
+                         // 세션에서 reservePriceArray 배열 불러오기
+                         const storedReservePriceArray = sessionStorage.getItem("reservePriceArray").split(',');
 
-                    	  // totalPrice1과 일치하는 값을 찾기 위한 변수 초기화
-                    	  let matchingTotalPrice = null;
+                         // totalPrice1과 일치하는 값을 찾기 위한 변수 초기화
+                         let matchingTotalPrice = null;
 
-                    	  // storedReservePriceArray를 순회하면서 totalPrice1과 일치하는 값 찾기
-                    	  for (const value of storedReservePriceArray) {
-                    	    if (value === totalPrice1) {
-                    	      matchingTotalPrice = value;
-                    	      break; // 일치하는 값이 발견되면 순회 중단
-                    	    }
-                    	  }
+                         // storedReservePriceArray를 순회하면서 totalPrice1과 일치하는 값 찾기
+                         for (const value of storedReservePriceArray) {
+                           if (value === totalPrice1) {
+                             matchingTotalPrice = value;
+                             break; // 일치하는 값이 발견되면 순회 중단
+                           } else if(matchingTotalPrice === null){
+                               const reservePriceElements = document.querySelectorAll("#reservePrice");
+                               for(const rpe of reservePriceElements){
+                                  if (rpe.textContent === totalPrice1) {
+                                         matchingTotalPrice = rpe.textContent;
+                                         /* alert('matchingTotalPrice : ' + matchingTotalPrice); */
+                                         break; // 일치하는 값이 발견되면 순회 중단
+                                     }
+                               }
+                           }
+                         }
 
-                    	  // 일치하는 값을 반환
-                    	  return matchingTotalPrice;
-                    	}
+                         // 일치하는 값을 반환
+                         return matchingTotalPrice;
+                       }
                       
                       let totalPrice2 = findMatchingTotalPrice(totalPrice1);
                       
+                      /* alert(totalPrice2); */
                       
                       const totalPrice = addCommas(totalPrice2);
                       /* alert(totalPrice); */
@@ -621,16 +653,16 @@
                   }   
 
                   </script>
-				</body>
+            </body>
 
 
-				</body>
+            </body>
 
-				<!--  리뷰 끝 -->
+            <!--  리뷰 끝 -->
 
-			</div>
-		</div>
-	</div>
+         </div>
+      </div>
+   </div>
 </div>
 
 
