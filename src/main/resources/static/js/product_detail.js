@@ -37,18 +37,13 @@
     }
 
     function initializeTabs() {
-        tabs.forEach(function (tab) {
+        tabs.forEach(function (tab, index) {
+            if (index === 0) {  // 첫 번째 탭을 기본값으로 보이도록 설정
+                tab.classList.add('selected');
+            }
             tab.addEventListener('click', handleTabClick);
         });
-        var selectedTab = localStorage.getItem('selectedTab');
-        if (selectedTab) {
-            var tabLink = document.querySelector('ul.page_tabs li a[href="#' + selectedTab + '"]');
-            if (tabLink) {
-                var tabId = tabLink.getAttribute('href').substring(1);
-                showTabContent(tabId);
-                tabLink.parentNode.classList.add('selected');
-            }
-        }
+        showTabContent(tabs[0].querySelector('a').getAttribute('href').substring(1));
     }
 
     initializeTabs();
