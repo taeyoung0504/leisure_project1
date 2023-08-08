@@ -219,7 +219,7 @@
 
 
 			<!-- 필터링 페이징 -->
-			<div th:if="${kw == null && kw2==null && kw5==null && kw6==null && kw7==null && kw8==null && kw9==null}">
+			<div th:if="${kw != null && kw2==null && kw5==null && kw6==null && kw7==null && kw8==null && kw9==null}">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
 					<li class="page-item page_previous" th:classappend="${paging.number == 0} ? 'disabled'">
