@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.leisure.DataNotFoundException;
-import com.project.leisure.dogyeom.booking.BookService;
 import com.project.leisure.dogyeom.booking.BookingVO;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -33,8 +32,6 @@ public class AccommodationService {
 
 	private final AccommodationRepository accommodationRepository;
 
-	private final BookService bookService;
-
 	// 현재 로그인한 username을 가져와서 있는지 없는지 찾음
 	public Accommodation accfindUserName(String username) {
 
@@ -48,8 +45,6 @@ public class AccommodationService {
 	public void deleteAcc(long acc_id) {
 		Optional<Accommodation> optionalAccommodation = accommodationRepository.findById(acc_id);
 		if (optionalAccommodation.isPresent()) {
-			// 숙소를 가져옴 + 추가
-			Accommodation accommodation = optionalAccommodation.get();
 
 			// 서버에 있는 숙소 이미지 삭제
 			String baseDirectory = "src/main/resources/static/";
@@ -62,9 +57,6 @@ public class AccommodationService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-			// 숙소 삭제 전에 bookVO 에 외래키 연결된거 삭제 + 추가
-			bookService.updateBookingVoAccToNull(accommodation);
 
 			// 숙소 삭제
 			accommodationRepository.deleteById(acc_id);
@@ -166,8 +158,9 @@ public class AccommodationService {
 				// 이미지를 저장한 파일 경로 설정
 				acc.setAcc_img("/img/acc_img/" + fileName);
 			} catch (IOException e) {
+				// 예외 처리
 				e.printStackTrace();
-				return -1; // 실패
+				return null; // 실패
 			}
 		}
 
@@ -291,7 +284,8 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true); // Remove duplicates
 
-				Predicate keywordPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				return keywordPredicate;
 			}
@@ -325,13 +319,13 @@ public class AccommodationService {
 
 	/* 구역 + 숙소타입 + 투숙인원 + 평점 필터 */
 
-	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, int kw7) {
+	public Page<Accommodation> getList6(int page, String kw2, List<String> kw5, List<String> kw6, String kw7) {
 		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search6(kw2, kw5, kw6, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, int kw7) {
+	private Specification<Accommodation> search6(String kw2, List<String> kw5, List<String> kw6, String kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -356,8 +350,9 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
-						
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, categoryPredicate2, keywordPredicate2);
 			}
@@ -430,13 +425,13 @@ public class AccommodationService {
 	}
 
 	/* 구역 + 숙소타입+투숙인원 */
-	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, int kw7) {
+	public Page<Accommodation> getList9(int page, String kw2, List<String> kw5, String kw7) {
 		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search9(kw2, kw5, kw7);
 		return accommodationRepository.findAll(spec, pageable);
 	}
 
-	private Specification<Accommodation> search9(String kw2, List<String> kw5, int kw7) {
+	private Specification<Accommodation> search9(String kw2, List<String> kw5, String kw7) {
 		return new Specification<Accommodation>() {
 			@Override
 			public Predicate toPredicate(Root<Accommodation> root, CriteriaQuery<?> query,
@@ -454,7 +449,9 @@ public class AccommodationService {
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates1.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, keywordPredicate2);
 			}
@@ -515,7 +512,9 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate2, keywordPredicate2);
 			}
@@ -540,7 +539,9 @@ public class AccommodationService {
 				Predicate keywordPredicate = criteriaBuilder.like(root.get("acc_address"), "%" + kw2 + "%");
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(keywordPredicate, keywordPredicate2);
 			}
@@ -610,7 +611,9 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(categoryPredicate, categoryPredicate2, keywordPredicate2);
 			}
@@ -639,7 +642,9 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), Integer.parseInt(kw7));
+				Predicate keywordPredicate2 = criteriaBuilder.or(
+						criteriaBuilder.gt(root.get("acc_max_people"), Integer.parseInt(kw7)),
+						criteriaBuilder.equal(root.get("acc_max_people"), Integer.parseInt(kw7)));
 
 				return criteriaBuilder.and(categoryPredicate2, keywordPredicate2);
 			}
@@ -1399,7 +1404,8 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true); // Remove duplicates
 
-				Predicate keywordPredicate =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				Predicate keywordPredicate2 = criteriaBuilder.greaterThanOrEqualTo(root.get("acc_averPrice"), kw8Value);
@@ -1424,7 +1430,8 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true); // Remove duplicates
 
-				Predicate keywordPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_averPrice"), kw9Value);
@@ -1447,7 +1454,8 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true);
 
-				Predicate keywordPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1475,7 +1483,8 @@ public class AccommodationService {
 
 				Predicate keywordPredicate = criteriaBuilder.like(root.get("acc_address"), "%" + kw2 + "%");
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1502,7 +1511,8 @@ public class AccommodationService {
 
 				Predicate keywordPredicate = criteriaBuilder.like(root.get("acc_address"), "%" + kw2 + "%");
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -1528,7 +1538,8 @@ public class AccommodationService {
 
 				Predicate keywordPredicate = criteriaBuilder.like(root.get("acc_address"), "%" + kw2 + "%");
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1560,7 +1571,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1590,7 +1602,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -1620,7 +1633,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1652,7 +1666,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1682,7 +1697,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -1713,7 +1729,8 @@ public class AccommodationService {
 
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1751,7 +1768,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1787,7 +1805,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -1824,7 +1843,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1859,7 +1879,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1891,7 +1912,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -1923,7 +1945,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -1958,7 +1981,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1990,7 +2014,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -2022,7 +2047,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -2065,7 +2091,8 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.or(criteriaBuilder.gt(root.get("acc_max_people"), kw7),
+						criteriaBuilder.equal(root.get("acc_max_people"), kw7));
 
 				int kw8Value = Integer.parseInt(kw8);
 				int kw9Value = Integer.parseInt(kw9);
@@ -2111,8 +2138,12 @@ public class AccommodationService {
 		}
 	}
 
-	public List<Accommodation> my_acc_list() {
-		return this.accommodationRepository.findAll();
-
+	
+	
+	
+	
+	public List<Accommodation>  my_acc_list() {
+		 return this.accommodationRepository.findAll();
+		
 	}
 }
