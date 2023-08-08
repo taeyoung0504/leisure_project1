@@ -1234,6 +1234,7 @@ td {
     justify-content: center;
     list-style: none;
     padding: 0;
+    margin-top: 20px;
 }
 
 .page-item{
