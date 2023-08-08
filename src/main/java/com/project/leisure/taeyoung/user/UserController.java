@@ -525,7 +525,7 @@ public class UserController {
 	public String my_booking(Model model, Principal principal,
 			@RequestParam(value = "page", defaultValue = "0") int page) {
 	    String booker_user = principal.getName();
-	    List<BookingVO> bookList = bookService.getBookList();
+	    List<BookingVO> bookList = bookService.getBookList2();
 	    List<BookingVO> filteredBook = bookList.stream()
 	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
 	            .collect(Collectors.toList());
@@ -570,7 +570,7 @@ public class UserController {
 		
 		if(bool) {
 			String booker_user = principal.getName();
-			List<BookingVO> bookList = bookService.getBookList();
+			List<BookingVO> bookList = bookService.getbooklist();
 			List<BookingVO> filteredBook = bookList.stream()
 					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
 					.collect(Collectors.toList());
