@@ -500,7 +500,7 @@ public class UserController {
 	        accommodations.sort(Comparator.comparing(Accommodation::getId).reversed());
 
 	        // 페이징 처리
-	        int pageSize = 3; // 페이지당 숙소 개수 설정
+	        int pageSize = 10; // 페이지당 숙소 개수 설정
 	        int start = page * pageSize; // 0 * 10 = 0 으로 시작 인덱스를 나타낸다
 	        int end = Math.min((start + pageSize), accommodations.size()); // 종료 인덱스 계산 0부터 9 까지의 숙소를 표시
 	        if (start > end) {

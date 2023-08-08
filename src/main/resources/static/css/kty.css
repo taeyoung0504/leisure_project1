@@ -1214,29 +1214,44 @@ td {
     padding: 0;
 }
 
-.pagination .page-item a[class*="page-link"] {
-    pointer-events: auto;
-    cursor: pointer;
-    background-color: #ffdcdcd3;
-    color: white;
-    border-color: #e9ecef;
+.page-item{
+	display: flex;
 }
-
-.pagination .page-item a[class*="page-link"].active {
-    background-color: var(--main-color);
-    color: #fff;
-    border-color: #007bff;
-}
-
-.pagination .page-item a[class*="page-link"] {
-    color: #fff;
-}
-
 .pagination .page-item a[class*="page-link"] {
     display: block;
     padding: 8px 16px;
     text-decoration: none;
     color: white;
     background-color: #ff7b7ba3;
-    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    pointer-events: auto;
 }
+
+/* 이전 버튼 및 다음 버튼에 대한 스타일 */
+.page-item.page_previous a[class*="page-link"] {
+    border-radius: 6px 0px 0px 6px;
+}
+
+.page-item.page_next a[class*="page-link"]{
+	border-radius: 0px 6px 6px 0px;
+}
+
+/* 현재 선택된 페이지에 대한 스타일 */
+.pagination .page-item.active a[class*="page-link"] {
+    background-color: var(--main-color);
+    color: #fff;
+    display: block;
+    padding: 8px 16px;
+}
+
+.pagination .page-item.disabled a[class*="page-link"] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6; /* 이는 선택사항으로 버튼이 비활성화된 것처럼 보이게 만듭니다. */
+}
+
+
+
+
+
+
