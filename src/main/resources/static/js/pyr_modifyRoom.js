@@ -31,7 +31,7 @@ function isValidProductZeroAmount(value) {
 	return true;
 }
 
-//초기화 버튼을 눌렀을 때를 위해 기존의 값들을 저장
+//초기화 버튼을 눌렀을 때를 위해 기존의 값들을 저장 ======
 
 //기존에 있는 값을 담기 위한 객체
 var originalValues = {}; //전역
@@ -40,7 +40,7 @@ var originalValues = {}; //전역
 var originalImageUrls = []; //전역
 
 
-//전송 및 이미지 슬라이드를 위한 값들을 담는 배열
+//전송 및 이미지 슬라이드를 위한 값들을 담는 배열 ======
 
 //이미지 슬라이드 전역 변수로 설정 => 이미지 추가시 슬라이드에도 보여주가 위함
 let images = [];
@@ -308,7 +308,6 @@ $('.imageUploadInput').change(function() {
 	for (var i = 0; i < files.length; i++) {
 		createImageListItem(files[i], imageList);
 	}
-
 });
 
 
@@ -580,8 +579,6 @@ function editInputValueCheck(className, classValue) {
 				clearEditInputError(className);
 			}
 			break;
-
-
 
 		case 'edit_count':
 			if (!isValidProductAmount(classValue)) {
