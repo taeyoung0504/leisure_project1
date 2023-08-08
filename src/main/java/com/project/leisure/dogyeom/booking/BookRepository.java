@@ -24,9 +24,9 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 //	List<BookingVO> findByBookStatusIsNotNull();
 	
 	// bookStatus가 null이고 공백이면 삭제
-	@Modifying
-	@Query("DELETE FROM BookingVO b WHERE b.bookStatus IS NULL OR (b.bookStatus <> '')")
-	void deleteByBookStatusIsNullAndBookStatusIsEmpty();
+	//@Modifying
+	//@Query("DELETE FROM BookingVO b WHERE b.bookStatus IS NULL OR (b.bookStatus <> '')")
+	//void deleteByBookStatusIsNullAndBookStatusIsEmpty();
 
 	
 	List<BookingVO> findByBookStatusNotNull();
