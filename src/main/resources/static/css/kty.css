@@ -1,1148 +1,1148 @@
 :root {
-	--main-color: #e93c3c;
-	--background-color: #ffffff;
-	--hover-color: #ffa6a6;
-	--text-color: rgb(109, 109, 109);
+   --main-color: #e93c3c;
+   --background-color: #ffffff;
+   --hover-color: #ffa6a6;
+   --text-color: rgb(109, 109, 109);
 }
 
 @font-face {
-	font-family: 'TheJamsil5Bold';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2')
-		format('woff2');
-	font-weight: 700;
-	font-style: normal;
+   font-family: 'TheJamsil5Bold';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2')
+      format('woff2');
+   font-weight: 700;
+   font-style: normal;
 }
 
 @font-face {
-	font-family: 'The-Jamsil-OTF-2-Light';
-	src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
-	font-style: normal;
+   font-family: 'The-Jamsil-OTF-2-Light';
+   src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
+   font-style: normal;
 }
 
 @font-face {
-	font-family: 'The-Jamsil-OTF-3-Regular';
-	src: url('/font/The-Jamsil-OTF-3-Regular.woff') format('woff');
-	font-style: normal;
+   font-family: 'The-Jamsil-OTF-3-Regular';
+   src: url('/font/The-Jamsil-OTF-3-Regular.woff') format('woff');
+   font-style: normal;
 }
 
 input[type="button" i] {
-	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+   font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 }
 
 /* 회원가입 css */
 #username-error {
-	font-size: 12px
+   font-size: 12px
 }
 
 #password1-error {
-	font-size: 12px
+   font-size: 12px
 }
 
 #password2-error {
-	font-size: 12px
+   font-size: 12px
 }
 
 #email-error {
-	font-size: 12px
+   font-size: 12px
 }
 
 #inputCode_error {
-	font-size: 1px;
+   font-size: 1px;
 }
 
 #join_timer {
-	position: absolute;
-	display: none;
-	color: red;
-	margin-left: 450px;
-	margin-top: 530px;
+   position: absolute;
+   display: none;
+   color: red;
+   margin-left: 450px;
+   margin-top: 530px;
 }
 
 /*================================*/
 .container_my-3 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	height: 100vh;
-	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 100vh;
+   font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
 
-	/* 변경: 전체 뷰포트 높이로 설정 */
+   /* 변경: 전체 뷰포트 높이로 설정 */
 }
 
 .join_title {
-	font-family: "TheJamsil5Bold", Arial, sans-serif;
-	/* 	margin-left: 30px; */
-	/* 	margin-top: 70px; */
-	font-size: 30px;
-	color: var(--main-color);
+   font-family: "TheJamsil5Bold", Arial, sans-serif;
+   /*    margin-left: 30px; */
+   /*    margin-top: 70px; */
+   font-size: 30px;
+   color: var(--main-color);
 }
 
 .join_title:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .mb-join {
-	border-bottom: 2px solid #adadad;
-	padding: 5px 10px;
-	flex: 1;
+   border-bottom: 2px solid #adadad;
+   padding: 5px 10px;
+   flex: 1;
 }
 
 .join_username, .join_password1, .join_password2 {
-	width: 100%;
-	border: none;
-	outline: none;
-	color: #636e72;
-	font-size: 13px;
-	height: 25px;
-	background: none;
+   width: 100%;
+   border: none;
+   outline: none;
+   color: #636e72;
+   font-size: 13px;
+   height: 25px;
+   background: none;
 }
 
 .join_email, #inputCode {
-	border: none;
+   border: none;
 }
 
 .addr1, .addr3 {
-	border: none;
-	width: 180px;
-	/* text-decoration: underline; */
+   border: none;
+   width: 180px;
+   /* text-decoration: underline; */
 }
 
 .addr2 {
-	border: none;
-	width: 300px;
-	/* text-decoration: underline; */
+   border: none;
+   width: 300px;
+   /* text-decoration: underline; */
 }
 
 .checkEmailNumber {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: none;
-	display: inline-block;
-	border-radius: 15px;
-	font-weight: 600;
-	margin-left: 110px;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: none;
+   display: inline-block;
+   border-radius: 15px;
+   font-weight: 600;
+   margin-left: 110px;
 }
 
 .find_addr1 {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: none;
-	display: inline-block;
-	border-radius: 15px;
-	font-weight: 600;
-	margin-left: 100px;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: none;
+   display: inline-block;
+   border-radius: 15px;
+   font-weight: 600;
+   margin-left: 100px;
 }
 
 .find_addr1:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .checkEmailNumber:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .join_check {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: none;
-	display: inline-block;
-	border-radius: 15px;
-	font-weight: 600;
-	margin-left: 110px;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: none;
+   display: inline-block;
+   border-radius: 15px;
+   font-weight: 600;
+   margin-left: 110px;
 }
 
 .join_check:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #join_up {
-	background: rgb(255, 128, 128);
-	color: #fff;
-	border: none;
-	position: relative;
-	height: 60px;
-	font-size: 1.6em;
-	bottom: -20px;
-	width: 100%;
-	right: -5px;
-	padding: 0 2em;
-	cursor: pointer;
-	transition: 800ms ease all;
-	outline: none;
+   background: rgb(255, 128, 128);
+   color: #fff;
+   border: none;
+   position: relative;
+   height: 60px;
+   font-size: 1.6em;
+   bottom: -20px;
+   width: 100%;
+   right: -5px;
+   padding: 0 2em;
+   cursor: pointer;
+   transition: 800ms ease all;
+   outline: none;
 }
 
 #join_up:hover {
-	background: hsl(166, 81%, 84%);
-	color: hsl(166, 74%, 39%);
+   background: hsl(166, 81%, 84%);
+   color: hsl(166, 74%, 39%);
 }
 
 #join_up:before, button:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 2px;
-	width: 0;
-	transition: 400ms ease all;
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   height: 2px;
+   width: 0;
+   transition: 400ms ease all;
 }
 
 #join_up:after {
-	right: inherit;
-	top: inherit;
-	left: 0;
-	bottom: 0;
+   right: inherit;
+   top: inherit;
+   left: 0;
+   bottom: 0;
 }
 
 #join_up:hover:before, button:hover:after {
-	width: 100%;
-	transition: 800ms ease all;
+   width: 100%;
+   transition: 800ms ease all;
 }
 
 /* 로그인 css */
 .container_my-3 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	height: 100vh;
-	/* 변경: 전체 뷰포트 높이로 설정 */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 100vh;
+   /* 변경: 전체 뷰포트 높이로 설정 */
 }
 
 .login_title {
-	font-family: "TheJamsil5Bold", Arial, sans-serif;
-	margin-left: 30px;
-	margin-top: -70px;
-	font-size: 30px;
-	color: var(--main-color);
+   font-family: "TheJamsil5Bold", Arial, sans-serif;
+   margin-left: 30px;
+   margin-top: -70px;
+   font-size: 30px;
+   color: var(--main-color);
 }
 
 .login_title:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .mb-login {
-	border-bottom: 2px solid #adadad;
-	padding: 10px 10px;
-	flex: 1;
+   border-bottom: 2px solid #adadad;
+   padding: 10px 10px;
+   flex: 1;
 }
 
 #username, #password {
-	width: 100%;
-	border: none;
-	outline: none;
-	color: #636e72;
-	font-size: 16px;
-	height: 25px;
-	background: none;
+   width: 100%;
+   border: none;
+   outline: none;
+   color: #636e72;
+   font-size: 16px;
+   height: 25px;
+   background: none;
 }
 
 #login_submit {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: none;
-	display: inline-block;
-	border-radius: 15px;
-	font-weight: 600;
-	margin-left: 50px;
-	width: 200px;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: none;
+   display: inline-block;
+   border-radius: 15px;
+   font-weight: 600;
+   margin-left: 50px;
+   width: 200px;
 }
 
 #login_submit:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+   color: inherit;
+   text-decoration: none;
 }
 
 #kakao_login_btn, #google_login_btn, #naver_login_btn {
-	width: 350px;
-	border: 1px solid rgb(192, 192, 192);
-	border-radius: 8px;
+   width: 350px;
+   border: 1px solid rgb(192, 192, 192);
+   border-radius: 8px;
 }
 
 #kakao_login_btn, #google_login_btn, #naver_login_btn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #wrap {
-	left: 0;
+   left: 0;
 }
 
 .danger {
-	font-size: 13px;
-	text-align: center;
-	color: rgb(255, 128, 64);
+   font-size: 13px;
+   text-align: center;
+   color: rgb(255, 128, 64);
 }
 
 /* 마이페이지 css */
 #body-pd {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
 }
 
 /* 패널 스타일링 */
 .panel.panel-info {
-	position: absolute;
-	margin-top: 50px;
-	width: 400px;
-	border-radius: 10px;
-	height: 250px;
-	box-shadow: 0 2px 4px rgb(192, 192, 192);
-	display: block;
+   position: absolute;
+   margin-top: 50px;
+   width: 400px;
+   border-radius: 10px;
+   height: 250px;
+   box-shadow: 0 2px 4px rgb(192, 192, 192);
+   display: block;
 }
 
 .panel-heading {
-	background-color: #337ab7;
-	color: white;
-	padding: 10px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+   background-color: #337ab7;
+   color: white;
+   padding: 10px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
 }
 
 .panel-title {
-	margin: 0;
-	font-size: 20px;
+   margin: 0;
+   font-size: 20px;
 }
 
 .panel-body {
-	padding: 20px;
+   padding: 20px;
 }
 
 /* 테이블 스타일링 */
 .table-user-information {
-	width: 100%;
-	text-align: center;
-	vertical-align: middle;
-	padding-top: 20px;
+   width: 100%;
+   text-align: center;
+   vertical-align: middle;
+   padding-top: 20px;
 }
 
 .table-user-information td:first-child {
-	width: 30%;
-	font-weight: bold;
+   width: 30%;
+   font-weight: bold;
 }
 
 /* 버튼 스타일링 */
 .btn-primary {
-	margin-top: 10px;
+   margin-top: 10px;
 }
 
 /* 아이콘 스타일링 */
 .ion-icon {
-	font-size: 18px;
-	vertical-align: middle;
-	margin-right: 5px;
+   font-size: 18px;
+   vertical-align: middle;
+   margin-right: 5px;
 }
 
 /* 마이페이지  css */
 #my_infomation_modify {
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	left: 700px;
-	top: 120px;
-	margin: 0;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   left: 700px;
+   top: 120px;
+   margin: 0;
 }
 
 .userinfo_table {
-	position: relative;
-	font-size: 18px;
-	/* 	right: 90px; */
+   position: relative;
+   font-size: 18px;
+   /*    right: 90px; */
 }
 
 .userinfo_td_gap {
-	white-space: nowrap;
-	position: relative;
-	padding-bottom: 40px;
-	/* 아래쪽 간격 크기 조절 */
-	padding-left: 100px;
-	/* 좌측 간격 크기 조절 */
+   white-space: nowrap;
+   position: relative;
+   padding-bottom: 40px;
+   /* 아래쪽 간격 크기 조절 */
+   padding-left: 100px;
+   /* 좌측 간격 크기 조절 */
 }
 
 #unique_social_provider {
-	font-size: 15px;
-	color: rgb(95, 95, 95);
+   font-size: 15px;
+   color: rgb(95, 95, 95);
 }
 
 .userinfo_td_gap2 {
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h5 .nav-link {
-	color: rgb(0, 0, 0);
-	text-decoration: underline;
+   color: rgb(0, 0, 0);
+   text-decoration: underline;
 }
 
 #unique_userinfo_td_gap {
-	font-size: 15px;
-	color: rgb(95, 95, 95);
+   font-size: 15px;
+   color: rgb(95, 95, 95);
 }
 
 .btns-wrap__edit-btn {
-	position: absolute;
-	border: 1px solid grey;
-	top: -20px;
-	width: 200px;
-	height: 50px;
-	background-color: var(--main-color);
-	border-radius: 4px;
-	color: #fff;
-	border: none;
-	text-decoration: none;
-	font-size: 16px;
-	font-weight: bold;
+   position: absolute;
+   border: 1px solid grey;
+   top: -20px;
+   width: 200px;
+   height: 50px;
+   background-color: var(--main-color);
+   border-radius: 4px;
+   color: #fff;
+   border: none;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: bold;
 }
 
 #confirm_newPwd {
-	height: 2px;
-	font-size: 12px;
-	margin: 5px 0;
+   height: 2px;
+   font-size: 12px;
+   margin: 5px 0;
 }
 
 #confirm_newPwd1 {
-	font-size: 12px;
-	margin: 5px 0;
+   font-size: 12px;
+   margin: 5px 0;
 }
 
 #confirm_oldPwd {
-	font-size: 12px;
-	margin: 5px 0;
+   font-size: 12px;
+   margin: 5px 0;
 }
 
 .btns-wrap__edit-btn:hover {
-	cursor: pointer;
-	background-color: #cc0000;
+   cursor: pointer;
+   background-color: #cc0000;
 }
 
 .mypage_sidebar {
-	list-style-type: none;
-	padding-bottom: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+   list-style-type: none;
+   padding-bottom: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
 }
 
 #mypage_sidebar_nav {
-	white-space: nowrap;
-	position: fixed;
-	top: 180px;
-	font-size: 20px;
-	color: rgb(69, 69, 69);
-	left: 410px;
+   white-space: nowrap;
+   position: fixed;
+   top: 180px;
+   font-size: 20px;
+   color: rgb(69, 69, 69);
+   left: 410px;
 }
 
 #profile_lion {
-	height: 150px;
-	margin-left: 100px;
-	margin-bottom: 10px;
+   height: 150px;
+   margin-left: 100px;
+   margin-bottom: 10px;
 }
 
 li.mypage_sidebar a.active {
-	color: rgb(255, 64, 64);
-	font-weight: bold;
+   color: rgb(255, 64, 64);
+   font-weight: bold;
 }
 
 #modify_password_input {
-	display: none;
+   display: none;
 }
 
 #modify_address_input {
-	display: none;
+   display: none;
 }
 
 .modify_password {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 #modify_password_input_button {
-	position: relative;
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 100px;
-	height: 30px;
-	background-color: rgb(208, 255, 208);
-	color: rgb(64, 128, 128);
-	font-weight: bold;
+   position: relative;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 100px;
+   height: 30px;
+   background-color: rgb(208, 255, 208);
+   color: rgb(64, 128, 128);
+   font-weight: bold;
 }
 
 #modify__input_button:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .modify_password2 {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 .modify_password3 {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 #modifypassword {
-	position: relative;
-	border: none;
-	border-radius: 4px;
-	background-color: var(--main-color);
-	color: white;
-	width: 200px;
-	height: 50px;
-	font-weight: bold;
-	text-decoration: none;
-	font-size: 16px;
+   position: relative;
+   border: none;
+   border-radius: 4px;
+   background-color: var(--main-color);
+   color: white;
+   width: 200px;
+   height: 50px;
+   font-weight: bold;
+   text-decoration: none;
+   font-size: 16px;
 }
 
 #modifypassword:hover {
-	cursor: pointer;
-	background-color: #cc0000;
+   cursor: pointer;
+   background-color: #cc0000;
 }
 
 #noused_account {
-	color: rgb(113, 126, 132);
+   color: rgb(113, 126, 132);
 }
 
 .modify_addr1 {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 .modify_addr2 {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 .modify_addr3 {
-	height: 30px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 30px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 #modifyaddr {
-	position: relative;
-	border-radius: 4px;
-	background-color: var(--main-color);
-	color: white;
-	width: 200px;
-	height: 50px;
-	font-weight: bold;
-	border: none;
-	text-decoration: none;
-	font-size: 16px;
+   position: relative;
+   border-radius: 4px;
+   background-color: var(--main-color);
+   color: white;
+   width: 200px;
+   height: 50px;
+   font-weight: bold;
+   border: none;
+   text-decoration: none;
+   font-size: 16px;
 }
 
 #modify_addr_button {
-	cursor: pointer;
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 100px;
-	height: 30px;
+   cursor: pointer;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 100px;
+   height: 30px;
 }
 
 #modifyaddr:hover {
-	cursor: pointer;
-	background-color: #cc0000;
+   cursor: pointer;
+   background-color: #cc0000;
 }
 
 #user_del_input {
-	display: none;
+   display: none;
 }
 
 #userdel_confirm_button {
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 100px;
-	height: 30px;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 100px;
+   height: 30px;
 }
 
 td {
-	font-size: 17px;
-	color: rgb(83, 83, 83);
+   font-size: 17px;
+   color: rgb(83, 83, 83);
 }
 
 #userdel_confirm_button:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #user_del_button:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #user_del_button {
-	color: rgb(0, 0, 0);
-	text-decoration: underline;
+   color: rgb(0, 0, 0);
+   text-decoration: underline;
 }
 
 #userdel_check_password {
-	height: 50px;
-	width: 185px;
-	border: none;
-	border-bottom: 1px solid rgb(128, 128, 128);
+   height: 50px;
+   width: 185px;
+   border: none;
+   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 #final_password_check {
-	font-size: 13px;
-	font-weight: bold;
+   font-size: 13px;
+   font-weight: bold;
 }
 
 #final_check_pwd {
-	font-size: 15px;
+   font-size: 15px;
 }
 /* 파트너 신청 페이지 css */
 /* #mypage_partner_reg {
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
-	left: 800px;
-	top: 180px;
-	margin: 0;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 50px;
+   left: 800px;
+   top: 180px;
+   margin: 0;
 } */
 .partner_reg_hk {
-	top: 60px;
-	position: relative;
+   top: 60px;
+   position: relative;
 }
 
 #mypage_partner_reg_table {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	border-collapse: collapse;
-	bottom: -20px;
-	width: 80vh;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   border-collapse: collapse;
+   bottom: -20px;
+   width: 80vh;
 }
 
 .partner_table-th1 {
-	border-right: 1px solid white;
-	border-left: 1px solid white;
-	background-color: rgb(235, 237, 237);
-	width: 100vh;
-	height: 5vh;
+   border-right: 1px solid white;
+   border-left: 1px solid white;
+   background-color: rgb(235, 237, 237);
+   width: 100vh;
+   height: 5vh;
 }
 
 .partner_table-th2 {
-	border-right: 1px solid white;
-	width: 100vh;
+   border-right: 1px solid white;
+   width: 100vh;
 }
 
 .partner_table-th3 {
-	border-right: 1px solid white;
-	border-left: 1px solid white;
-	background-color: rgb(235, 237, 237);
-	width: 90vh;
-	text-align: center;
+   border-right: 1px solid white;
+   border-left: 1px solid white;
+   background-color: rgb(235, 237, 237);
+   width: 90vh;
+   text-align: center;
 }
 
 #company_name, #company_address {
-	width: 95%;
-	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
+   width: 95%;
+   height: 45px;
+   border: 1px solid rgb(207, 207, 207);
 }
 
 #partner_name, #partner_sectors {
-	width: 80%;
-	height: 45px;
+   width: 80%;
+   height: 45px;
 }
 
 #partner_tel, #partner_region {
-	width: 90%;
-	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
+   width: 90%;
+   height: 45px;
+   border: 1px solid rgb(207, 207, 207);
 }
 
 #mypage_partner_reg_table {
-	border-collapse: collapse;
+   border-collapse: collapse;
 }
 
 #reg_partner_final {
-	border: none;
-	border-radius: 4px;
-	background-color: var(--main-color);
-	width: 160px;
-	height: 50px;
-	font-size: 16px;
-	color: #fff;
-	text-decoration: none;
-	font-size: 16px;
-	font-weight: bold;
+   border: none;
+   border-radius: 4px;
+   background-color: var(--main-color);
+   width: 160px;
+   height: 50px;
+   font-size: 16px;
+   color: #fff;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: bold;
 }
 
 #reg_partner_final:hover {
-	cursor: pointer;
-	background-color: #cc0000;
+   cursor: pointer;
+   background-color: #cc0000;
 }
 
 #partner_input-file {
-	width: 90%;
-	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
+   width: 90%;
+   height: 45px;
+   border: 1px solid rgb(207, 207, 207);
 }
 
 #ch_file {
-	width: 95%;
-	display: inline-block;
-	/* 	margin-left: 10px; */
-	/* 오른쪽으로 10px 이동 */
-	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
+   width: 95%;
+   display: inline-block;
+   /*    margin-left: 10px; */
+   /* 오른쪽으로 10px 이동 */
+   height: 45px;
+   border: 1px solid rgb(207, 207, 207);
 }
 
 /* 비밀번호 찾기 css */
 .container_my-find {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	height: 30vh;
-	/* 변경: 전체 뷰포트 높이로 설정 */
-	margin-top: 230px;
-	/* 예시로 20px의 여백을 추가 */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 30vh;
+   /* 변경: 전체 뷰포트 높이로 설정 */
+   margin-top: 230px;
+   /* 예시로 20px의 여백을 추가 */
 }
 
 .mb-findpwd {
-	border-bottom: 2px solid #adadad;
-	margin: 13px;
-	flex: 1;
+   border-bottom: 2px solid #adadad;
+   margin: 13px;
+   flex: 1;
 }
 
 #find_username, #find_email {
-	width: 100%;
-	border: none;
-	outline: none;
-	margin-top: 10px;
-	color: #636e72;
-	font-size: 16px;
-	height: 25px;
-	background: none;
+   width: 100%;
+   border: none;
+   outline: none;
+   margin-top: 10px;
+   color: #636e72;
+   font-size: 16px;
+   height: 25px;
+   background: none;
 }
 
 .title_find_pw {
-	margin-left: 30px;
-	margin-top: -70px;
-	font-size: 25px;
-	text-align: center;
+   margin-left: 30px;
+   margin-top: -70px;
+   font-size: 25px;
+   text-align: center;
 }
 
 #send_temppwd {
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 150px;
-	height: 50px;
-	margin-top: 15px;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 150px;
+   height: 50px;
+   margin-top: 15px;
 }
 
 #send_temppwd:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 /* 아이디 찾기 css */
 #find_id_email {
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 300px;
-	height: 50px;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 300px;
+   height: 50px;
 }
 
 #check_email {
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 150px;
-	height: 40px;
-	margin-top: 15px;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 150px;
+   height: 40px;
+   margin-top: 15px;
 }
 
 #check_email:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 /* search food css  */
 .left-area {
-	margin-top: 10px;
-	margin-left: -600px;
-	width: 400px;
-	height: 90%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+   margin-top: 10px;
+   margin-left: -600px;
+   width: 400px;
+   height: 90%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
-	/*border:1px solid black;*/
+   /*border:1px solid black;*/
 }
 
 .search_food {
-	width: 320px;
-	/* height: 90%; */
-	/* margin-top: 10%; */
-	padding: 15px;
-	left: 320px;
-	position: fixed;
-	display: inline-grid;
-	top: 200px;
-	border-radius: 10px;
-	box-shadow: 0px 0px 5px #bfbfbf;
+   width: 320px;
+   /* height: 90%; */
+   /* margin-top: 10%; */
+   padding: 15px;
+   left: 320px;
+   position: fixed;
+   display: inline-grid;
+   top: 200px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 5px #bfbfbf;
 }
 
 #search_food_title {
-	font-size: 18px;
+   font-size: 18px;
 }
 
 #filter_food_title {
-	font-size: 18px;
+   font-size: 18px;
 }
 
 @media ( max-width : 768px) {
-	/* 작은 화면 크기에서의 스타일 변경 */
-	.left-area {
-		position: static;
-		width: 100%;
-		height: auto;
-		border: none;
-		display: block;
-	}
-	.search_food {
-		margin-top: 0;
-	}
+   /* 작은 화면 크기에서의 스타일 변경 */
+   .left-area {
+      position: static;
+      width: 100%;
+      height: auto;
+      border: none;
+      display: block;
+   }
+   .search_food {
+      margin-top: 0;
+   }
 }
 
 #search_food {
-	width: 78%;
-	border: none;
-	outline: none;
-	color: #636e72;
-	font-size: 13px;
-	height: 25px;
-	background: none;
-	margin-top: 15px;
-	border: 1px solid grey;
-	border-radius: 5px;
+   width: 78%;
+   border: none;
+   outline: none;
+   color: #636e72;
+   font-size: 13px;
+   height: 25px;
+   background: none;
+   margin-top: 15px;
+   border: 1px solid grey;
+   border-radius: 5px;
 }
 
 #btn_search_food {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: 1px solid white;
-	border-radius: 5px;
-	/* border: 1px solid #c7c7c7; */
-	height: 30px;
-	width: 60px;
-	margin-top: 14px;
-	/* top: 1px; */
-	position: relative;
-	float: right;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: 1px solid white;
+   border-radius: 5px;
+   /* border: 1px solid #c7c7c7; */
+   height: 30px;
+   width: 60px;
+   margin-top: 14px;
+   /* top: 1px; */
+   position: relative;
+   float: right;
 }
 
 #btn_search_food:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .filter_search_food {
-	padding-top: 20px;
-	border-top: 1px solid rgb(216, 216, 216);
-	margin-top: 30px;
-	font-size: 18px;
+   padding-top: 20px;
+   border-top: 1px solid rgb(216, 216, 216);
+   margin-top: 30px;
+   font-size: 18px;
 }
 
 #food_type {
-	font-size: 14px;
-	color: rgb(0, 0, 0);
-	display: block;
-	margin: 15px 0;
+   font-size: 14px;
+   color: rgb(0, 0, 0);
+   display: block;
+   margin: 15px 0;
 }
 
 #price_type {
-	font-size: 14px;
+   font-size: 14px;
 }
 
 .price_check_type {
-	font-size: 14px;
-	color: rgb(87, 87, 87)
+   font-size: 14px;
+   color: rgb(87, 87, 87)
 }
 
 #parking_type {
-	font-size: 14px;
+   font-size: 14px;
 }
 
 .parking_check_type {
-	color: rgb(87, 87, 87)
+   color: rgb(87, 87, 87)
 }
 
 #region_type {
-	margin-bottom: 10px;
-	font-size: 14px;
+   margin-bottom: 10px;
+   font-size: 14px;
 }
 
 #dong_type {
-	font-size: 14px;
+   font-size: 14px;
 }
 
 .right-area {
-	position: fixed;
-	width: 900px;
-	height: 80%;
-	right: 335px;
-	top: 130px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
-	/*border:1px solid black;*/
-	overflow-x: clip;
+   position: fixed;
+   width: 900px;
+   height: 80%;
+   right: 335px;
+   top: 130px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
+   /*border:1px solid black;*/
+   overflow-x: clip;
 }
 
 .food-entry {
-	display: flex;
-	border: 1px solid #e3e3e3;
-	padding: 10px;
-	margin-bottom: 10px;
-	margin: 10px 10px 10px 10px;
-	border-radius: 8px;
-	/* height: 334px; */
+   display: flex;
+   border: 1px solid #e3e3e3;
+   padding: 10px;
+   margin-bottom: 10px;
+   margin: 10px 10px 10px 10px;
+   border-radius: 8px;
+   /* height: 334px; */
 }
 
 .food_shop_photo {
-	width: 400px;
-	position: relative;
+   width: 400px;
+   position: relative;
 }
 
 .food-entry>p:first-child {
-	width: 550px;
-	background-repeat: no-repeat;
-	padding: 10px;
+   width: 550px;
+   background-repeat: no-repeat;
+   padding: 10px;
 }
 
 .food-entry>p:last-child {
-	width: 240px;
-	height: 290px;
-	background-repeat: round;
-	padding: 10px;
-	overflow-clip-margin: content-box;
-	overflow: auto;
-	border-radius: 8px;
+   width: 240px;
+   height: 290px;
+   background-repeat: round;
+   padding: 10px;
+   overflow-clip-margin: content-box;
+   overflow: auto;
+   border-radius: 8px;
 }
 
 .food_check_type>input {
-	margin: 10px 10px 10px 0;
+   margin: 10px 10px 10px 0;
 }
 
 .result_opening {
-	font-size: 14px;
-	color: #f05650;
-	font-weight: light;
+   font-size: 14px;
+   color: #f05650;
+   font-weight: light;
 }
 
 #region_dropdown {
-	height: 30px;
-	border-radius: 5px;
-	border: solid 1px #b9b9b9;
+   height: 30px;
+   border-radius: 5px;
+   border: solid 1px #b9b9b9;
 }
 
 #searchBtn {
-	background-color: rgb(255, 128, 128);
-	color: rgb(244, 245, 244);
-	height: 40px;
-	/* 버튼 디자인 */
-	border: none;
-	display: inline-block;
-	border-radius: 5px;
-	font-weight: 600;
-	/* margin-left: 35px; */
-	/* width: 200px; */
-	margin-top: 20px;
+   background-color: rgb(255, 128, 128);
+   color: rgb(244, 245, 244);
+   height: 40px;
+   /* 버튼 디자인 */
+   border: none;
+   display: inline-block;
+   border-radius: 5px;
+   font-weight: 600;
+   /* margin-left: 35px; */
+   /* width: 200px; */
+   margin-top: 20px;
 }
 
 #searchBtn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #food_menu_title {
-	font-size: 18px;
-	color: black;
+   font-size: 18px;
+   color: black;
 }
 
 .food_check_type {
-	/* margin-top: 10px; */
-	font-size: 14px;
-	color: rgb(87, 87, 87);
-	margin: 20px 0;
+   /* margin-top: 10px; */
+   font-size: 14px;
+   color: rgb(87, 87, 87);
+   margin: 20px 0;
 }
 
 #no_search_data {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	height: 60vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 60vh;
 }
 
 #my_regi_result {
-	position: absolute;
-	left: -70px;
-	top: 130px;
-	width: 1000px;
-	border-collapse: collapse;
+   position: absolute;
+   left: -70px;
+   top: 130px;
+   width: 1000px;
+   border-collapse: collapse;
 }
 
 #result_th {
-	height: 50px;
-	background-color: rgb(235, 237, 237);
+   height: 50px;
+   background-color: rgb(235, 237, 237);
 }
 
 #result_td {
-	height: 69px;
-	margin-bottom: 30px;
-	text-align: center;
+   height: 69px;
+   margin-bottom: 30px;
+   text-align: center;
 }
 
 #modify_reg_result {
-	width: 100px;
+   width: 100px;
 }
 
 #my_regi_result th:first-child, #my_regi_result td:first-child {
-	border-left: none;
+   border-left: none;
 }
 
 .center-content2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-top: -250px;
-	margin-left: 250px;
-	/* You can add more styling as needed */
-	height: 100vh;
-	/* This will center the content vertically within the viewport */
-	
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: -250px;
+   margin-left: 250px;
+   /* You can add more styling as needed */
+   height: 100vh;
+   /* This will center the content vertically within the viewport */
+   
 }
 
 /* 주석 */
 
 .btn_red {
-	display: inline-block;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 4px;
-	background-color: #ff0000; /* Red color for the button */
-	color: #fff; /* Text color for the button */
-	text-decoration: none; /* Remove underline for the link */
-	font-size: 16px;
-	font-weight: bold;
-	margin-top: 30px;
+   display: inline-block;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 4px;
+   background-color: #ff0000; /* Red color for the button */
+   color: #fff; /* Text color for the button */
+   text-decoration: none; /* Remove underline for the link */
+   font-size: 16px;
+   font-weight: bold;
+   margin-top: 30px;
 }
 
 .btn_red:hover {
-	background-color: #cc0000;
+   background-color: #cc0000;
 }
 
 #my_regi_result th:last-child, #my_regi_result td:last-child {
-	border-right: none;
+   border-right: none;
 }
 
 #my_reg_info {
-	margin-top: 70px;
-	font-size: 25px;
-	font-weight: bold;
-	margin-left: -70px;
-	color: var(--main-color);
+   margin-top: 70px;
+   font-size: 25px;
+   font-weight: bold;
+   margin-left: -70px;
+   color: var(--main-color);
 }
 
 .parking_check_type {
-	/* margin-top: 20px; */
-	font-size: 14px;
-	color: rgb(0, 0, 0);
+   /* margin-top: 20px; */
+   font-size: 14px;
+   color: rgb(0, 0, 0);
 }
 
 .chk_par {
-	margin-top: 15px;
+   margin-top: 15px;
 }
 
 .marker-link {
-	display: inline-block;
-	width: 25px; /* 마커 이미지의 가로sss 크기 */
-	height: 32px; /* 마커 이미지의 세로 크기 */
-	background-image: url('/img/marker.png');
-	background-repeat: no-repeat;
-	background-position: center;
+   display: inline-block;
+   width: 25px; /* 마커 이미지의 가로sss 크기 */
+   height: 32px; /* 마커 이미지의 세로 크기 */
+   background-image: url('/img/marker.png');
+   background-repeat: no-repeat;
+   background-position: center;
 }
 
 .my_position {
-	position: absolute;
-	/* left: -388px; */
-	/* bottom: 480px; */
-	/* border:1px solid grey; */
-	padding-left: 10px;
-	padding-top: 10px;
-	width: 300px;
-	height: 100px;
-	font-size: 25px;
-	top: 16px;
-	/* font-weight: bold; */
-	float: left;
-	display: flex;
-	right: 68px;
-	color: #292929;
+   position: absolute;
+   /* left: -388px; */
+   /* bottom: 480px; */
+   /* border:1px solid grey; */
+   padding-left: 10px;
+   padding-top: 10px;
+   width: 300px;
+   height: 100px;
+   font-size: 25px;
+   top: 16px;
+   /* font-weight: bold; */
+   float: left;
+   display: flex;
+   right: 68px;
+   color: #292929;
 }
 
 #modify_partner {
-	position: absolute;
-	top: 680px;
-	right: -100px;
-	border: 1px solid grey;
-	border-radius: 8px;
-	background-color: white;
-	color: black;
-	width: 130px;
-	height: 40px;
+   position: absolute;
+   top: 680px;
+   right: -100px;
+   border: 1px solid grey;
+   border-radius: 8px;
+   background-color: white;
+   color: black;
+   width: 130px;
+   height: 40px;
 }
 
 #modify_partner:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 /* 
 숙소검색
 .room-entry {
-	  display: flex;
+     display: flex;
     border: 1px solid grey;
     padding: 5px 20px 20px 50px;
     margin-bottom: 10px;
-	margin-left:100px;
-	margin-top:10px;
+   margin-left:100px;
+   margin-top:10px;
     border-radius: 20px;
     height: 250px;
     position: relative;
@@ -1153,59 +1153,59 @@ td {
  
 } */
 .room-entry::after {
-	content: "";
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 40%;
-	transform: translateX(-50%);
-	height: 100%;
+   content: "";
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 40%;
+   transform: translateX(-50%);
+   height: 100%;
 }
 
 .room_info_k {
-	font-size: 20px;
-	display: inline-flex;
-	color: rgba(0, 0, 0, 0.87);
+   font-size: 20px;
+   display: inline-flex;
+   color: rgba(0, 0, 0, 0.87);
 }
 
 .pagination {
-	position: relative !important;
-	bottom: 10px;
-	text-align: center;
+   position: relative !important;
+   bottom: 10px;
+   text-align: center;
 }
 
 .room-entry>div {
-	flex: 1;
+   flex: 1;
 }
 
 .centered-title {
-	text-align: center;
-	display: block;
-	margin: 0 auto;
+   text-align: center;
+   display: block;
+   margin: 0 auto;
 }
 
 .room-photo {
-	/* right: 50%; */
-	flex: 1;
-	/* 	border-radius: 5px; */
-	margin-left: px;
-	/* margin-top: 10px; */
-	background-size: cover;
-	background-position: center;
-	position: relative;
-	width: 200px;
-	height: 230px;
+   /* right: 50%; */
+   flex: 1;
+   /*    border-radius: 5px; */
+   margin-left: px;
+   /* margin-top: 10px; */
+   background-size: cover;
+   background-position: center;
+   position: relative;
+   width: 200px;
+   height: 230px;
 }
 
 .room-entry:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .room_info {
-	margin-top: 30px;
-	margin-bottom: 1px;
-	position: relative;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+   margin-top: 30px;
+   margin-bottom: 1px;
+   position: relative;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
 }
