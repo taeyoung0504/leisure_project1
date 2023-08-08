@@ -40,8 +40,6 @@ dependencies {
       implementation 'net.nurigo:sdk:4.2.7'
       
       
-      //리플릿
-      implementation 'io.github.awant:spring-boot-starter-leaflet:1.1.0'  
 }
 
 tasks.named('test') {

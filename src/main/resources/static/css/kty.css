@@ -67,7 +67,7 @@ input[type="button" i] {
 	flex-direction: column;
 	height: 100vh;
 	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
-	
+
 	/* 변경: 전체 뷰포트 높이로 설정 */
 }
 
@@ -276,11 +276,8 @@ a {
 	cursor: pointer;
 }
 
-
-#wrap{
-	
-left: 0;	
-	
+#wrap {
+	left: 0;
 }
 
 .danger {
@@ -364,11 +361,10 @@ left: 0;
 .userinfo_table {
 	position: relative;
 	font-size: 18px;
-/* 	right: 90px; */
+	/* 	right: 90px; */
 }
 
 .userinfo_td_gap {
-
 	white-space: nowrap;
 	position: relative;
 	padding-bottom: 40px;
@@ -377,21 +373,22 @@ left: 0;
 	/* 좌측 간격 크기 조절 */
 }
 
-#unique_social_provider{
-	font-size: 15px; 
+#unique_social_provider {
+	font-size: 15px;
 	color: rgb(95, 95, 95);
 }
-.userinfo_td_gap2{
+
+.userinfo_td_gap2 {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h5 .nav-link{
+h5 .nav-link {
 	color: rgb(0, 0, 0);
 	text-decoration: underline;
 }
 
-#unique_userinfo_td_gap{
-	font-size: 15px; 
+#unique_userinfo_td_gap {
+	font-size: 15px;
 	color: rgb(95, 95, 95);
 }
 
@@ -402,27 +399,30 @@ h5 .nav-link{
 	width: 200px;
 	height: 50px;
 	background-color: var(--main-color);
-    border-radius: 4px;
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
 }
-#confirm_newPwd{
-	height:2px;
+
+#confirm_newPwd {
+	height: 2px;
 	font-size: 12px;
 	margin: 5px 0;
 }
 
-#confirm_newPwd1{
+#confirm_newPwd1 {
 	font-size: 12px;
 	margin: 5px 0;
 }
-#confirm_oldPwd{
-	font-size: 12px; 
+
+#confirm_oldPwd {
+	font-size: 12px;
 	margin: 5px 0;
 }
+
 .btns-wrap__edit-btn:hover {
 	cursor: pointer;
 	background-color: #cc0000;
@@ -439,11 +439,11 @@ h5 .nav-link{
 
 #mypage_sidebar_nav {
 	white-space: nowrap;
-    position: fixed;
-    top: 180px;
-    font-size: 20px;
-    color: rgb(69, 69, 69);
-    left: 410px;
+	position: fixed;
+	top: 180px;
+	font-size: 20px;
+	color: rgb(69, 69, 69);
+	left: 410px;
 }
 
 #profile_lion {
@@ -513,13 +513,14 @@ li.mypage_sidebar a.active {
 	height: 50px;
 	font-weight: bold;
 	text-decoration: none;
-    font-size: 16px;
+	font-size: 16px;
 }
 
 #modifypassword:hover {
 	cursor: pointer;
 	background-color: #cc0000;
 }
+
 #noused_account {
 	color: rgb(113, 126, 132);
 }
@@ -554,8 +555,8 @@ li.mypage_sidebar a.active {
 	height: 50px;
 	font-weight: bold;
 	border: none;
-    text-decoration: none;
-    font-size: 16px;
+	text-decoration: none;
+	font-size: 16px;
 }
 
 #modify_addr_button {
@@ -573,7 +574,6 @@ li.mypage_sidebar a.active {
 	background-color: #cc0000;
 }
 
-
 #user_del_input {
 	display: none;
 }
@@ -587,9 +587,9 @@ li.mypage_sidebar a.active {
 	height: 30px;
 }
 
-td{
-	font-size:17px;
-	color: rgb(83 83 83);
+td {
+	font-size: 17px;
+	color: rgb(83, 83, 83);
 }
 
 #userdel_confirm_button:hover {
@@ -598,10 +598,10 @@ td{
 
 #user_del_button:hover {
 	cursor: pointer;
-	
 }
-#user_del_button{
-	color: rgb(0, 0, 0); 
+
+#user_del_button {
+	color: rgb(0, 0, 0);
 	text-decoration: underline;
 }
 
@@ -611,13 +611,14 @@ td{
 	border: none;
 	border-bottom: 1px solid rgb(128, 128, 128);
 }
-#final_password_check{
-	font-size: 13px; 
+
+#final_password_check {
+	font-size: 13px;
 	font-weight: bold;
 }
-#final_check_pwd{
+
+#final_check_pwd {
 	font-size: 15px;
-	
 }
 /* 파트너 신청 페이지 css */
 /* #mypage_partner_reg {
@@ -630,10 +631,9 @@ td{
 	top: 180px;
 	margin: 0;
 } */
-
-.partner_reg_hk{
+.partner_reg_hk {
 	top: 60px;
-    position: relative;
+	position: relative;
 }
 
 #mypage_partner_reg_table {
@@ -675,7 +675,6 @@ td{
 #partner_name, #partner_sectors {
 	width: 80%;
 	height: 45px;
-	border: 1px solid rgb(207, 207, 207);
 }
 
 #partner_tel, #partner_region {
@@ -696,12 +695,10 @@ td{
 	height: 50px;
 	font-size: 16px;
 	color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
 }
-
-
 
 #reg_partner_final:hover {
 	cursor: pointer;
@@ -717,7 +714,7 @@ td{
 #ch_file {
 	width: 95%;
 	display: inline-block;
-/* 	margin-left: 10px; */
+	/* 	margin-left: 10px; */
 	/* 오른쪽으로 10px 이동 */
 	height: 45px;
 	border: 1px solid rgb(207, 207, 207);
@@ -811,13 +808,16 @@ td{
 }
 
 .search_food {
-	width: 80%;
-	height: 90%;
-	margin-top: 10%;
-	/*display: flex;
-            justify-content: center;
-            align-items: center;*/
-	padding: 40px;
+	width: 320px;
+	/* height: 90%; */
+	/* margin-top: 10%; */
+	padding: 15px;
+	left: 320px;
+	position: fixed;
+	display: inline-grid;
+	top: 200px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #bfbfbf;
 }
 
 #search_food_title {
@@ -843,7 +843,7 @@ td{
 }
 
 #search_food {
-	width: 70%;
+	width: 78%;
 	border: none;
 	outline: none;
 	color: #636e72;
@@ -852,7 +852,7 @@ td{
 	background: none;
 	margin-top: 15px;
 	border: 1px solid grey;
-	border-radius: 7px;
+	border-radius: 5px;
 }
 
 #btn_search_food {
@@ -861,11 +861,14 @@ td{
 	height: 40px;
 	/* 버튼 디자인 */
 	border: 1px solid white;
-	border-radius: 10px;
-	border: 1px solid grey;
-	height: 25px;
-	width: 80px;
-	margin-top: 20px;
+	border-radius: 5px;
+	/* border: 1px solid #c7c7c7; */
+	height: 30px;
+	width: 60px;
+	margin-top: 14px;
+	/* top: 1px; */
+	position: relative;
+	float: right;
 }
 
 #btn_search_food:hover {
@@ -882,6 +885,8 @@ td{
 #food_type {
 	font-size: 14px;
 	color: rgb(0, 0, 0);
+	display: block;
+	margin: 15px 0;
 }
 
 #price_type {
@@ -912,37 +917,59 @@ td{
 
 .right-area {
 	position: fixed;
-	width: 55.3%;
+	width: 900px;
 	height: 80%;
-	right: 72px;
-	top: 150px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
-
+	right: 335px;
+	top: 130px; /* 기존에는 157px 였으나 100px 위로 이동시킵니다. */
 	/*border:1px solid black;*/
+	overflow-x: clip;
 }
 
 .food-entry {
 	display: flex;
-	border: 1px solid grey;
+	border: 1px solid #e3e3e3;
 	padding: 10px;
 	margin-bottom: 10px;
 	margin: 10px 10px 10px 10px;
-	border-radius: 20px;
+	border-radius: 8px;
+	/* height: 334px; */
+}
+
+.food_shop_photo {
+	width: 400px;
+	position: relative;
 }
 
 .food-entry>p:first-child {
-	width: 60%;
+	width: 550px;
+	background-repeat: no-repeat;
 	padding: 10px;
 }
 
 .food-entry>p:last-child {
-	width: 40%;
+	width: 240px;
+	height: 290px;
+	background-repeat: round;
 	padding: 10px;
+	overflow-clip-margin: content-box;
+	overflow: auto;
+	border-radius: 8px;
+}
+
+.food_check_type>input {
+	margin: 10px 10px 10px 0;
 }
 
 .result_opening {
 	font-size: 14px;
 	color: #f05650;
 	font-weight: light;
+}
+
+#region_dropdown {
+	height: 30px;
+	border-radius: 5px;
+	border: solid 1px #b9b9b9;
 }
 
 #searchBtn {
@@ -952,10 +979,10 @@ td{
 	/* 버튼 디자인 */
 	border: none;
 	display: inline-block;
-	border-radius: 15px;
+	border-radius: 5px;
 	font-weight: 600;
-	margin-left: 35px;
-	width: 200px;
+	/* margin-left: 35px; */
+	/* width: 200px; */
 	margin-top: 20px;
 }
 
@@ -969,9 +996,10 @@ td{
 }
 
 .food_check_type {
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	font-size: 14px;
-	color: rgb(87, 87, 87)
+	color: rgb(87, 87, 87);
+	margin: 20px 0;
 }
 
 #no_search_data {
@@ -1051,7 +1079,7 @@ td{
 }
 
 .parking_check_type {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	font-size: 14px;
 	color: rgb(0, 0, 0);
 }
@@ -1071,15 +1099,20 @@ td{
 
 .my_position {
 	position: absolute;
-	left: -460px;
-	bottom: 480px;
-	/*border:1px solid grey;*/
+	/* left: -388px; */
+	/* bottom: 480px; */
+	/* border:1px solid grey; */
 	padding-left: 10px;
 	padding-top: 10px;
 	width: 300px;
 	height: 100px;
-	font-size: 30px;
-	font-weight: bold;
+	font-size: 25px;
+	top: 16px;
+	/* font-weight: bold; */
+	float: left;
+	display: flex;
+	right: 68px;
+	color: #292929;
 }
 
 #modify_partner {
@@ -1129,13 +1162,13 @@ td{
 .room_info_k {
 	font-size: 20px;
 	display: inline-flex;
-	color: rgba(0,0,0,0.87);
+	color: rgba(0, 0, 0, 0.87);
 }
 
 .pagination {
 	position: relative !important;
-    bottom: 10px;
-    text-align: center;
+	bottom: 10px;
+	text-align: center;
 }
 
 .room-entry>div {
@@ -1151,7 +1184,7 @@ td{
 .room-photo {
 	/* right: 50%; */
 	flex: 1;
-/* 	border-radius: 5px; */
+	/* 	border-radius: 5px; */
 	margin-left: px;
 	/* margin-top: 10px; */
 	background-size: cover;

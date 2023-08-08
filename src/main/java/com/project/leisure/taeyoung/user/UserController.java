@@ -1,6 +1,9 @@
 package com.project.leisure.taeyoung.user;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +50,6 @@ import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
 import com.project.leisure.yuri.product.ProductService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -519,19 +522,76 @@ public class UserController {
 	
 	// 김도겸 
 	@GetMapping("/mypage/my_booking")
-	public String my_booking(Model model, Principal principal) {
+	public String my_booking(Model model, Principal principal,
+			@RequestParam(value = "page", defaultValue = "0") int page) {
 	    String booker_user = principal.getName();
 	    List<BookingVO> bookList = bookService.getBookList();
 	    List<BookingVO> filteredBook = bookList.stream()
 	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
 	            .collect(Collectors.toList());
-	    /*
-	    for (BookingVO book : bookList) {
-	        System.out.println("************** book : " + book.toString());
-	    }
-	    */
-	    model.addAttribute("bookList", filteredBook);
+	 // 페이징 처리
+        int pageSize = 5; // 페이지당 숙소 개수 설정
+//        int start = page * pageSize; // 0 * 5 = 0 으로 시작 인덱스를 나타낸다
+        int start = Math.max(page * pageSize, 0);
+        int end = Math.min((start + pageSize), filteredBook.size()); // 종료 인덱스 계산 0부터 4 까지의 숙소를 표시
+        if (start >= filteredBook.size()) {
+            start = 0;
+            end = 0;
+        }
+        // 페이징된 숙소 목록을 추출(시작, 종료 인덱스 목록 추출)
+        List<BookingVO> pagedFilteredBook = filteredBook.subList(start, end);
+
+        if (page < 0) {
+            page = 0;
+        }
+        
+        Page<BookingVO> paging = new PageImpl<>(pagedFilteredBook, PageRequest.of(page, pageSize),
+        		filteredBook.size());
+
+//        model.addAttribute("isEmpty", pagedFilteredBook.isEmpty());
+        model.addAttribute("paging", paging);
+	    
+//	    model.addAttribute("bookList", filteredBook);
 	    return "kty/my_booking";
+	}
+	
+	// PRG(Post-Redirect-Get) 패턴 이슈
+	@GetMapping("/mypage/my_booking_del/{id}")
+	public String bookingDelete(@PathVariable("id") int id,
+								Principal principal,
+								Model model,
+								HttpServletResponse response) {
+		
+		boolean bool = bookService.moveAndDelete(id);
+		
+		 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	        response.setHeader("Pragma", "no-cache");
+	        response.setHeader("Expires", "0");
+		
+		if(bool) {
+			String booker_user = principal.getName();
+			List<BookingVO> bookList = bookService.getBookList();
+			List<BookingVO> filteredBook = bookList.stream()
+					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+					.collect(Collectors.toList());
+			
+			filteredBook.stream().forEach(System.out::println);
+			
+			model.addAttribute("bookList", filteredBook);
+			
+			return "redirect:/user/mypage/my_booking";
+		} 
+//			else {
+//			String booker_user = principal.getName();
+//			List<BookingVO> bookList = bookService.getBookList();
+//			List<BookingVO> filteredBook = bookList.stream()
+//					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+//					.collect(Collectors.toList());
+//			return "kty/my_booking";
+//		}
+		
+		 return null; 
+		
 	}
 	
 	
@@ -563,7 +623,20 @@ public class UserController {
 
 	
 	@GetMapping("/event")
-	public String event_page() {
+	public String event_page(Model model) {
+		YearMonth yearMonth = YearMonth.now();
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstDayOfMonth = yearMonth.atDay(1);
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            dates.add(firstDayOfMonth.withDayOfMonth(day));
+        }
+
+        model.addAttribute("dates", dates);
+        model.addAttribute("yearMonth", yearMonth);
+		
 		return "kty/event";
 	}
 }

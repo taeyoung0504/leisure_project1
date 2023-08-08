@@ -21,10 +21,11 @@
 
 #kty_right-side_test {
 	float: right;
-	width: 65%;
+	width: 72%;
 	height: 820px;
 	/* 	margin-left: 100px; */
 	overflow: visible;
+	margin-top: 30px;
 }
 
 .search_deagu_home {
@@ -32,10 +33,13 @@
 	display: grid !important;
 	height: fit-content !important;
 	position: fixed !important;
-	border: 1px solid #c7c7c7;
+	border: 1px solid #ffffff;
 	border-radius: 10px;
 	padding: 10px;
-	/*     margin: 10px; */
+	/* margin: 10px; */
+	box-shadow: 0px 0px 5px #9b9b9b;
+	margin-top: 30px;
+	left: 400px;
 }
 
 label {
@@ -78,6 +82,7 @@ label {
 		display: grid !important;
 		height: fit-content !important;
 		position: absolute !important;
+		left: 0;
 		/* 	margin: 0 20%; */
 	}
 	.room-entry {
@@ -98,7 +103,7 @@ label {
 		background-color: rgb(240, 240, 240);
 		margin: 10px 0;
 		display: inline-table;
-		    width: -webkit-fill-available;
+		width: -webkit-fill-available;
 	}
 	#range {
 		margin-left: 3% !important;
@@ -110,7 +115,7 @@ label {
 }
 
 .search_kw {
-	margin-top: 20px;
+	/* 	margin-top: 20px; */
 	width: 100%;
 	display: table;
 }
@@ -120,13 +125,13 @@ label {
 }
 
 .region_hk {
-	margin: 10px 0 !important;
-	height: 50px;
+	margin-top: 20px !important;
+	/* height: 50px; */
 }
 
 .title_hk {
 	/* 	margin-bottom: 20px !important; */
-	/* 	margin-top: 30px !important; */
+	/* margin-top: 30px !important; */
 	
 }
 
@@ -136,10 +141,10 @@ label {
 	border: 1px solid rgb(221, 221, 221);
 	padding-left: 10px;
 	background-color: rgb(240, 240, 240);
-	font-weight: bold;
+	/* 	font-weight: bold; */
 	/* 	margin-bottom: 30px; */
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #checkin_dropdown_daegu2 {
@@ -169,14 +174,15 @@ label {
 	top: 100px;
 	width: 80%;
 	height: 30px;
-	border-radius: 10px;
+	border-radius: 5px;
 	float: left;
+	border: solid 1px #ababab;
 }
 
 #btn_search_home {
 	background-color: rgb(255, 128, 128);
 	color: rgb(244, 245, 244);
-	border-radius: 10px;
+	border-radius: 5px;
 	border: 1px solid white;
 	height: 35px;
 	width: 17%;
@@ -217,9 +223,9 @@ label {
 }
 
 .room_type_title {
-	padding-bottom: 10px;
+	/* padding-bottom: 10px; */
 	position: relative;
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 #roomtype_dropdown_daegu {
@@ -249,21 +255,22 @@ label {
 	border: 1px solid rgb(221, 221, 221);
 	padding: 10px 50px;
 	background-color: rgb(240, 240, 240);
-	margin: 10px 0;
+	margin-top: 10px;
 }
 
 .reviews_score {
 	padding: 1px;
 	position: relative;
 	/* 	right: -20px; */
-	top: -5px;
+	/* top: -5px; */
+	/* margin-top: 20px; */
 }
 
 .avable_people {
-	padding: 1px;
-	position: relative;
+	/* padding: 1px; */
+	/* position: relative; */
 	/* 	right: -20px; */
-	margin-top: 10px
+	margin-top: 20px;
 }
 
 #star_score {
@@ -271,7 +278,7 @@ label {
 	/* 	width: 392px; */
 	margin-top: 10px;
 	background-color: rgb(240, 240, 240);
-	padding-left: 10px;
+	padding: 10px;
 }
 
 #spacing2 {
@@ -287,15 +294,16 @@ label {
 	height: 50px;
 	border: 1px solid rgb(221, 221, 221);
 	background-color: rgb(240, 240, 240);
-	font-weight: bold;
+	/* 	font-weight: bold; */
 	width: 100%;
-	margin: 10px 0;
+	margin-top: 10px;
 	padding-left: 10px;
 }
 
 .room_money_title {
-	position: relative;
-	margin-top: 15px;
+	/* position: relative; */
+	/* margin-top: 20px; */
+	
 }
 
 #room_range_maxmin {
@@ -335,7 +343,7 @@ label {
 	/* ë²„íŠ¼ ë””ìžì¸ */
 	border: none;
 	display: inline-block;
-	border-radius: 15px;
+	border-radius: 5px;
 	font-weight: 600;
 	/* 	margin-left: 35px; */
 	/* 	width: 360px; */
@@ -350,14 +358,14 @@ label {
 	background-color: rgb(255, 128, 128);
 	color: rgb(244, 245, 244);
 	height: 50px;
-	/* ë²„íŠ¼ ë””ìžì¸ */
 	border: none;
 	display: inline-block;
-	border-radius: 15px;
-	font-weight: 600;
-	/* 	margin-left: 40px; */
-	/* 	width: 350px; */
+	border-radius: 5px;
+	/*     font-weight: 600; */
+	/* margin-left: 40px; */
+	/* width: 350px; */
 	margin-top: 30px;
+	font-size: 15px;
 }
 
 #btnbtn:hover {
@@ -398,6 +406,7 @@ label {
 	position: relative;
 	margin: 1px 20px;
 	color: rgba(0, 0, 0, 0.87);
+	left: 30px;
 }
 
 .room-entry2 {
@@ -412,7 +421,7 @@ label {
 
 .feefee {
 	/* 	margin-top: 20px; */
-/* 	position: absolute; */
+	/* 	position: absolute; */
 	font-size: 22px;
 }
 
@@ -432,7 +441,8 @@ label {
 }
 
 .hotel_reviews_hk {
-	color: orange;
+	/* 	color: orange; */
+	
 }
 
 .hotel_address_hk {
@@ -440,25 +450,27 @@ label {
 }
 
 .hotel_max_people_hk {
-	display: none; font-size : 18px;
+	display: none;
+	font-size: 18px;
 	margin-top: 90px;
 	font-size: 18px;
 }
 
-.cancle_hk{
+.cancle_hk {
 	font-size: 16px;
 	color: grey;
 }
+
 .hotel_averPrice_hk {
 	font-size: 20px;
 	margin-top: 90px;
 	position: relative;
 }
 
-.productAmount{
+.productAmount {
 	font-weight: bold;
-	
 }
+
 .right-align {
 	text-align: right;
 }

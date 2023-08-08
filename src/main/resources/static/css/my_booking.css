@@ -307,3 +307,54 @@ color:grey;
 .gray-button {
   filter: grayscale(100%);
 }
+
+.delParents {
+	cursor : pointer;
+	height: 10px;
+}
+
+.delParents:hover {
+	color: red;
+}
+
+#del {
+	position: relative;
+	top : 0;
+	left: 0px;
+	display : inline-block;
+	cursor : pointer;
+	height: 10px;
+}
+
+#del:hover {
+	color: red;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination .page-item {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.page-number {
+	padding: 5px;
+}
+
+.page_previous, .page_next{
+	padding: 0px 20px;
+}
+
+.active {
+	font-weight: bold;
+}
+
+.page-item.disabled a.page-link {
+    pointer-events: none;
+    cursor: default; /* 선택적으로 커서 모양 변경 */
+    opacity: 0.5; /* 선택적으로 투명도 조절 */
+}
