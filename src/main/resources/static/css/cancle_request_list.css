@@ -7,10 +7,12 @@
     filter: grayscale(100%);
   }
   
+  
 .reject-button{
 	margin-left:5px;
-	background: #50BCDF;
+	background: #ff5454;
 }
+
 
   .grayscale-button {
         /* Apply grayscale filter to the button */

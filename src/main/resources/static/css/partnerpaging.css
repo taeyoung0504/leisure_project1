@@ -1,23 +1,27 @@
 .pagination {
-  display: flex;
-  margin-top:680px;
-  margin-left:310px;
-  font-size:17px;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	margin-top: 680px;
+	margin-left: 310px;
+	font-size: 17px;
+	justify-content: center;
+	align-items: center;
 }
 
 .horizontal-pagination {
-  list-style-type: none;
-  display: flex;
-  gap: 5px;
+	list-style-type: none;
+	display: flex;
+	gap: 5px;
 }
 
 .horizontal-pagination li {
-  display: inline;
+	display: inline;
 }
 
+
 .horizontal-pagination li a {
-  padding: 3px 3px;
-  
-  }
+	padding: 3px 3px;
+	/* bottom: 600px; */
+	position: absolute;
+	top: 700px;
+	left: 345px;
+}
