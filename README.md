@@ -38,4 +38,7 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 ### PATNER
 
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/75aa0fc8-6f57-4f30-b5c4-75fb1aec0115)
+
+
 ### ADMIN
