@@ -29,8 +29,10 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
    
 # 주요 기능
 
-## USER
+주요 기능은 아래와 같음 <br>
 
-## PATNER
+### USER
 
-## ADMIN
+### PATNER
+
+### ADMIN
