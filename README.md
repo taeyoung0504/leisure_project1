@@ -52,7 +52,7 @@ deploy : git, github <br>
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
 
 
-# 프로젝트 결과 화면(요약) // 삭제할지 말지 보류중
+# 프로젝트 결과 화면(요약) // 내용 추가 중
 
 ## [숙소 메인]
 
