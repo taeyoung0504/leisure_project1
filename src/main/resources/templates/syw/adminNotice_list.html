@@ -14,13 +14,14 @@
 <body>
 	<html layout:decorate="~{khk/adminNavbar}">
 	<div layout:fragment="adminNav" class="container my-3">
-		<div class="content-container">
+		<div class="container">
 			<h1>공지사항</h1>
 
 
 
 			<button onclick="window.location.href='/admin/createNotice'" class="btn_createNotice">글쓰기</button>
 			<div class="notice_hk">
+			<div id="searchResults">
 				<div th:each="notice : ${page}" class="notice-item">
 					<h3 id="title" th:text="${notice.title}"></h3>
 					<p class="date" th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></p>
@@ -30,7 +31,7 @@
 						<div class="notice_img" th:if="${notice.imagePath}">
 							<img th:if="${notice.imagePath}"
 								th:src="@{/img/notice_img/{imageName}(imageName=${notice.imagePath})}" alt="이미지 없음"
-								width="100%" height="80%" />
+								width="700px" height="700px" />
 						</div>
 						<div class="notice_btn">
 						<button class="modi_btn"
@@ -38,6 +39,8 @@
 						<button class="del_btn" th:data-id="${notice.id}">삭제</button>
 					</div>
 					</div>
+				</div>
+				
 				</div>
 				<div class="pagination" th:if="${page.totalElements > 0}">
 					<ul>

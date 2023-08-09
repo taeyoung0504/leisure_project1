@@ -5,393 +5,71 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/css/adminNavbar.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 현재 페이지의 URL을 가져옵니다.
+  var currentUrl = window.location.pathname;
+
+  // 네비게이션 링크들을 선택합니다.
+  var navLinks = document.querySelectorAll(".admin_navbar a");
+
+  // 각 링크를 순회하며 현재 페이지와 링크의 주소를 비교하여 active 클래스를 부여합니다.
+  for (var i = 0; i < navLinks.length; i++) {
+    var link = navLinks[i];
+    if (link.getAttribute("href") === currentUrl) {
+      link.classList.add("active");
+      break; // 이미 찾았으므로 더 이상 확인할 필요 없습니다.
+    }
+  }
+});
+</script>
+
 
 <title>관리자 페이지</title>
 
-<style>
-:root {
-	--main-color: #e93c3c;
-	--background-color: #ffffff;
-	--hover-color: #ffa6a6;
-	--text-color: rgb(109, 109, 109);
-	--sub-color: rgb(255, 102, 102);
-}
-
-@font-face {
-	font-family: 'The-Jamsil-OTF-2-Light';
-	src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'The-Jamsil-OTF-3-Regular';
-	src: url('/font/The-Jamsil-OTF-3-Regular.woff') format('woff');
-	font-style: normal;
-}
-
-.admin_nav_body {
-	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-	background-color: #f9f9f9;
-}
-
-button {
-	background-color: var(--sub-color);
-	color: white;
-	border: none;
-	padding: 5px 10px;
-	cursor: pointer;
-	border-radius: 5px;
-	color: white;
-}
-
-button:hover {
-	background: var(--hover-color);
-}
-
-input[type="submit"] {
-	background-color: var(--sub-color);
-	color: white;
-	border: none;
-	padding: 5px 10px;
-	cursor: pointer;
-	border-radius: 5px;
-}
-
-input[type="submit"]:hover {
-	background-color: rgb(255, 219, 219);
-}
-
-#search_kw {
-	width: 150px;
-	height: 23px;
-	top: 0;
-}
-
-#btn_search {
-	width: 50px;
-    height: 30px;
-    top: 1px;
-    position: relative;
-}
-
-#btn_search:hover {
-	background: var(--hover-color);
-}
-
-.admin_navbar {
-	top: 0px;
-	background-color: #fff;
-/* 	width: 160px; */
-	height: 100vh;
-	color: #fff;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	position: fixed;
-	box-shadow: 2px 0px 3px 0px rgba(0, 0, 0, 0.1);
-}
-
-.admin_navbar a {
-	font-family: "The-Jamsil-OTF-3-Regular", Arial, sans-serif;
-	font-weight: 200;
-/* 	width: 160px; */
-	padding: 25px 20px;
-	text-decoration: none;
-	color: var(--main-color);
-	transition: background-color 0.3s;
-	background-color: #fff;
-	display: inline-block;
-	white-space: nowrap;
-	font-size: 20px;
-	/* text-align: center; */
-}
-
-.admin_navbar a:hover {
-	color: rgb(255, 128, 128);
-/* 	width: 100%; */
-}
-
-.admin_navbar a.active {
-	font-weight: bold;
-}
-
-.admin_navbar span {
-	color: #fff;
-	margin: 0 5px;
-}
 
 
-/* 여기서부터 nav제외 나머지 css */
-.adminbody {
-	color: #333;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	background-color: #f2f2f2;
-	font-family: "The-Jamsil-OTF-2-Light", Arial, sans-serif;
-}
-
-.hide {
-	display: none;
-}
-
-h1 {
-	text-align: center;
-	margin: 30px 0;
-	font-size: 30px;
-}
-
-h3 {
-	font-size: 1.17em;
-	margin-block-start: 1em;
-	margin-block-end: 1em;
-	margin-inline-start: 10px;
-	margin-inline-end: 0px;
-	font-weight: bold;
-}
-
-.container {
-	margin: 10px auto;
-	width: 90%;
-	height: 100%;
-	padding-left: 80px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
-}
-
-form {
-	display: inline-block;
-}
-
-.input-group {
-	right: 100px;
-	position: absolute;
-}
-
-span.role-USER {
-	color: black;
-}
-
-span.role-PARTNER {
-	color: blue;
-}
-
-span.role-ADMIN {
-	color: red;
-}
-
-
-
-select::-ms-expand {
-	display: none;
-	/*for IE10,11*/
-}
-
-select {
-	background: url('arr_pink.gif') no-repeat 97% 50%/15px auto;
-}
-
-.pagination {
-	display: flex;
-	justify-content: center;
-	list-style: none;
-	padding: 0;
-	margin-top: 20px;
-}
-
-.page-item {
-	margin: 0 5px;
-}
-
-.page-link {
-	display: inline-block;
-	padding: 5px 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	text-decoration: none;
-	color: #333;
-	background-color: #f2f2f2;
-}
-
-.page-link:hover {
-	background-color: #e0e0e0;
-}
-
-/* 모달 창 폼 css */
-.modal_hk {
-	margin-top: 20px;
-	text-align: center;
-	margin-right: 20px;
-}
-
-.modal_hk div {
-	margin-bottom: 10px;
-}
-
-.modal_hk label {
-	display: inline-block;
-	width: 120px;
-}
-
-#editNickname, #editZipcode, #editAddress1, #editAddress2,
-	#userIdDisplay, #userNameDisplay {
-	padding: 5px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	width: 200px;
-}
-
-#editForm button[type="submit"] {
-	margin: 10px 10px 10px 50px;
-	padding: 5px 10px;
-	background-color: rgb(255, 128, 128);
-	color: white;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	position: relative;
-	margin-left: 50px;
-	margin: 10px 10px 10px 40px;
-}
-
-.account-status-disabled {
-	color: red;
-}
-
-.page-item.active .page-link {
-	background-color: gray; /* 선택된 페이지 번호의 배경색 */
-	color: #fff; /* 선택된 페이지 번호의 글자색 */
-}
-
-#myModal {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 30%;
-}
-
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 50%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-	background-color: #fefefe;
-	margin: 10px auto;
-	padding: 0px;
-	border: 1px solid #888;
-	width: 95%;
-	height: 90%;
-	position: relative;
-}
-
-.close-modal {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	font-size: 20px;
-	font-weight: bold;
-	cursor: pointer;
-	color: #333;
-}
-
-.close-modal:hover, .close-modal:focus {
-	color: #000;
-}
-
-.modal-header {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.modal-body {
-	text-align: center;
-}
-
-/* 파트너 css */
-.approve_btn {
-	background-color: rgb(100, 177, 255);
-}
-
-.approve_btn:hover {
-	background: #b4dbed;
-}
-
-.reject_btn {
-	border-style: none;
-}
-
-.reject_btn:hover {
-	background-color: pink;
-	border-style: none;
-}
-
-.approveCancel_btn {
-	background-color: rgb(192, 192, 192);
-	/* border-style: none;  */
-}
-
-.select_btn_hk{
-background-color: var(--sub-color);
-    color: white;
-    border: none;
-    padding: 2px 8px;
-    cursor: pointer;
-    border-radius: 5px;
-    color: white;
-    margin-top: 0px;
-    top: 2px;
-    position: relative;
-}
-
-#home {
-	font-weight: bold;
-	padding-bottom: 70px;
-	font-size: 25px;
-	margin-top: 5px;
-}
-
-a:focus, a:active {
-    outline: none;
-    border: none;
-}
-</style>
 </head>
 <body class="admin_nav_body">
 	<div class="admin_navbar">
-		<a href="/" id="home"> DAE BAK </a> <a href="/admin/main">DashBoard</a>
-		<a href="/admin/adminNoticeList">공지사항</a> <a
-			href="/admin/authorityPage">권한 관리</a> <a
-			href="/admin/accomdationListPage">파트너 관리</a> <a
-			href="/admin/partnerListPage">파트너 신청</a> <a href="/admin/inquiryList">1:1
-			문의</a> <a href="/admin/declarationList">신고 관리</a> <a
-			href="/admin/cancle_req">예약 취소 요청</a>
+		<a href="/" id="home"> DAE BAK </a> <a href="/admin/main"><span class="material-symbols-outlined">
+grouped_bar_chart
+</span>DashBoard</a>
+		<a href="/admin/adminNoticeList"><span class="material-symbols-outlined">
+notifications
+</span>공지사항</a> <a
+			href="/admin/authorityPage"><span class="material-symbols-outlined">
+manage_accounts
+</span>권한 관리</a> <a
+			href="/admin/accomdationListPage"><span class="material-symbols-outlined">
+home
+</span>등록업체 관리</a> <a
+			href="/admin/partnerListPage">
+
+<span class="material-symbols-outlined">
+group
+</span>
+파트너 신청</a> <a href="/admin/inquiryList"><span class="material-symbols-outlined">
+help
+</span>1:1
+			문의</a> <a href="/admin/declarationList"><span class="material-symbols-outlined">
+warning
+</span>신고 관리</a> <a
+			href="/admin/cancle_req"><span class="material-symbols-outlined">
+event_busy
+</span>예약 취소 요청</a>
 	</div>
 	<th:block layout:fragment="adminNav"></th:block>
 </body>
