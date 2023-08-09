@@ -112,3 +112,5 @@ deploy : git, github <br>
 (문의내역 _ 있는경우)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/4ee58a36-31ea-4a6c-b2df-aa2253f7d4be)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a00e19c7-d4f5-4422-bfc3-6e49d8a6c019)
