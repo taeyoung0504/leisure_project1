@@ -86,7 +86,7 @@ public class ProductController {
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "redirect:error/403.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
 		}
 
 		try {
@@ -96,10 +96,9 @@ public class ProductController {
 			model.addAttribute("accommodation", accommodation); // 해당 내용 보여주기
 			return "pyr/productMainReg";
 		} catch (RuntimeException e) {
-			// Accommodation not found 예외 처리(id로 찾았으나 해당 숙소는 없음)
-			return "redirect:error/500.html";
+			// 서버 내부 오류가 발생
+			return "error/500";
 		}
-
 	}
 
 	// productMainReg 해당 유저 등록된 숙소 수정하기에서 수정된 값을 받아서 update
@@ -140,7 +139,7 @@ public class ProductController {
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "redirect:error/403.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
 		}
 
 		// id를 사용하여 해당 데이터 조회
@@ -177,7 +176,7 @@ public class ProductController {
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "redirect:error/403.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
 		}
 
 		// 해당 id로 product를 조회
@@ -412,15 +411,15 @@ public class ProductController {
 			boolean isOwner = productService.isOwnerOfAccommodationProduct(username, product);
 
 			if (!isOwner) {
-				return "redirect:error/404.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
+				return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
 			}
 
 			model.addAttribute("product", product);
 			return "pyr/modifyRoom";
 
 		} catch (Exception e) {
-			// 해당 숙소의 방의 id가 없는 경우 500 페이지 이동
-			return "redirect:error/500.html";
+			// 서버 내부 오류가 발생
+			return "error/500";
 		}
 	}
 
