@@ -1,4 +1,4 @@
-🎒 # leisure_PJT
+ # leisure_PJT
 leisure_PJT 개발 
 
 <br>
