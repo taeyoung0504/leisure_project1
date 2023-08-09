@@ -54,4 +54,4 @@ deploy : git, github <br>
 
 # 프로젝트 결과 화면(요약)
 
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/4c93612e-efbc-4bd0-bac4-bce9dc07b6d2)
+
