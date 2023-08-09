@@ -1,27 +1,49 @@
-.pagination {
-	display: flex;
-	margin-top: 680px;
-	margin-left: 310px;
-	font-size: 17px;
-	justify-content: center;
-	align-items: center;
+/* 전체적인 페이징 컨테이너 스타일 */
+.pagination1 .horizontal-pagination1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
 }
 
-.horizontal-pagination {
-	list-style-type: none;
-	display: flex;
-	gap: 5px;
+/* 일반 페이지 번호 스타일 */
+.pagination1 .horizontal-pagination1 li a {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #ff7b7ba3;
 }
 
-.horizontal-pagination li {
-	display: inline;
+/* 활성 페이지 스타일 */
+.pagination1 .horizontal-pagination1 li.active a {
+    background-color: var(--main-color); 
+    color: white;
 }
 
+/* '이전' 버튼 스타일 */
+.pagination1 .page_previous a {
+    border-radius: 6px 0px 0px 6px;
+}
 
-.horizontal-pagination li a {
-	padding: 3px 3px;
-	/* bottom: 600px; */
-	position: absolute;
-	top: 700px;
-	left: 345px;
+/* '다음' 버튼 스타일 */
+.pagination1 .page_next a {
+    padding: 8px 12px;
+    background-color: #ff7b7ba3;
+    border-radius: 0px 6px 6px 0px;
+}
+
+/* 만약 '다음' 버튼이 disabled 상태일 경우 */
+/* (이 부분은 HTML에서 직접적인 disabled 클래스나 속성이 제공되지 않기 때문에 예시로만 작성) */
+.pagination1 .page_next.disabled a {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.pagination1 .page_previous.disabled a,
+.pagination1 .page_next.disabled a {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6;
 }

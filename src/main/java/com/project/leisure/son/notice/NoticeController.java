@@ -17,7 +17,7 @@ public class NoticeController {
 		this.noticeService = noticeService;
 	}
 	
-	
+	////////
 	@GetMapping("/more/noticeList")
 	public String noticeList(Model model, @PageableDefault(size = 10, sort = "createDate", direction = Sort.Direction.DESC) Pageable pageable) {
 	    Page<Notice> page = noticeService.getAllNotices(pageable);
