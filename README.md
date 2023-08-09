@@ -21,6 +21,7 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 # Database ERD
 
 데이터베이스 ERD는 아래와 같음. <br><br>
+
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/c578332a-64fd-4d76-be1c-8084d350abf9)
 
 
