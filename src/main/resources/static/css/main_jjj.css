@@ -5,7 +5,7 @@
 	--text-color: rgb(109, 109, 109);
 }
 
-@-face {
+@font-face {
 	-family: 'TheJamsil5Bold';
 	src:
 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noons_2302_01@1.0/TheJamsil5Bold.woff2')
@@ -14,7 +14,7 @@
 	-style: normal;
 }
 
-@-face {
+@font-face {
 	-family: 'The-Jamsil-OTF-2-Light';
 	src: url('/font/The-Jamsil-OTF-2-Light.woff') format('woff');
 	font-style: normal;
@@ -381,11 +381,11 @@ nav .jj_menubar .jj_search .search_input {
 	display: inline-block;
 	justify-content: space-around;
 	height: 107px;
-	-size: 18px;
+	font-size: 20px;
 	color: var(--text-color);
 	text-align: center;
 	padding: 0;
-	margin: 0 50px 30px;
+	margin: 0px 70px 30px;
 	list-style: none;
 	text-decoration: none;
 }

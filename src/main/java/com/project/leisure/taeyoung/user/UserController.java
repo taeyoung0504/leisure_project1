@@ -525,9 +525,9 @@ public class UserController {
 	public String my_booking(Model model, Principal principal,
 			@RequestParam(value = "page", defaultValue = "0") int page) {
 	    String booker_user = principal.getName();
-	    List<BookingVO> bookList = bookService.getBookList();
+	    List<BookingVO> bookList = bookService.getBookList2();
 	    List<BookingVO> filteredBook = bookList.stream()
-	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
+	            .filter(bookingVO -> bookingVO.getBookerID().equals(booker_user) && !bookingVO.getBookStatus().trim().isEmpty())
 	            .collect(Collectors.toList());
 	 // 페이징 처리
         int pageSize = 5; // 페이지당 숙소 개수 설정
@@ -570,7 +570,7 @@ public class UserController {
 		
 		if(bool) {
 			String booker_user = principal.getName();
-			List<BookingVO> bookList = bookService.getBookList();
+			List<BookingVO> bookList = bookService.getbooklist();
 			List<BookingVO> filteredBook = bookList.stream()
 					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
 					.collect(Collectors.toList());
