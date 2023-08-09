@@ -10,24 +10,11 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 
 # 📟 개발환경
- BACK
 
-1. Java JDK 17
-2. SpringBoot 3.0.1
-3. gradle
-4. mysql 8.0 
 
-FRONT
+개발환경은 아래와 같음. <br><br>
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/8d6486eb-9021-436f-89d2-0512d0c56548)
 
-html,css,js ,jquery
-thymeleaf
-
-deploy
-1. git
-
-tools
-sts4
-VSC
 
 <br>
 
