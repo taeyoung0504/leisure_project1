@@ -48,8 +48,8 @@ public class KakaoPayService {
 
 
 //		payParams.add("approval_url", "http://localhost:8080/success"); // 결제승인시 넘어갈 url
-	//	payParams.add("fail_url", "http://localhost:8080/fail"); // 결제실패시 넘어갈 url
-	//	payParams.add("cancel_url", "http://localhost:8080/cancel"); // 결제취소시 넘어갈 url
+//		payParams.add("fail_url", "http://localhost:8080/fail"); // 결제실패시 넘어갈 url
+//		payParams.add("cancel_url", "http://localhost:8080/cancel"); // 결제취소시 넘어갈 url
 		payParams.add("approval_url", "http://192.168.10.67:8080/success"); // 결제승인시 넘어갈 url
 		payParams.add("fail_url", "http://192.168.10.67:8080/fail"); // 결제실패시 넘어갈 url
 		payParams.add("cancel_url", "http://192.168.10.67:8080/cancel"); // 결제취소시 넘어갈 url

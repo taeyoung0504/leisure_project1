@@ -308,7 +308,13 @@ $('.imageUploadInput').change(function() {
 
 	// 선택된 파일들을 순회하며 이미지를 화면에 추가
 	for (var i = 0; i < files.length; i++) {
-		createImageListItem(files[i], imageList);
+		var file = files[i];
+		// 파일의 MIME 타입을 확인하여 png 또는 jpg인지 검사
+		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다');
+			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
+		}
+		createImageListItem(file, imageList);
 	}
 });
 
