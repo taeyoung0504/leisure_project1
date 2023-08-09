@@ -229,9 +229,6 @@ public class ProductController {
 			this.productService.updateImg(product_photos, product_id);
 		}
 
-		// 등록된 상품 조회 하여 prouct 저장
-		Product product = this.productService.getProduct(product_id);
-
 		// 성공하면 해당 product_id값을 보냄 추후 비동기로 상품 추가 보여준다.
 		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
 

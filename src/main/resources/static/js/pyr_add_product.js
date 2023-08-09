@@ -395,10 +395,8 @@ $(document)
 									// 등록 후 form 초기화
 									$('#productForm')[0]
 										.reset();
-
-									setTimeout(function() {
-										window.location.reload();
-									}, 1000);
+									//페이지 reload	
+									window.location.reload();
 
 								},
 								error: function(xhr) {
