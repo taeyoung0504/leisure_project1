@@ -41,9 +41,10 @@
 	
 	
 	.cancel-button{
-background-color: #fff0;
+	background-color: #fff0;
     color: #a34a4a;
     border: solid 1px #a34a4a;
+    
 	}
 	
 	.reject-button{
