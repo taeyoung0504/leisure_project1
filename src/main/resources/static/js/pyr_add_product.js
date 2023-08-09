@@ -437,17 +437,15 @@ $(document).ready(
 						$.ajax({
 							url: '/partner/product/deleteProduct',
 							method: 'POST',
-							dataType: 'json',
+							dataType: 'text', //text로 바꿔야지 swal 적용가능
 							data: {
 								"productId": productId,
 							},
 							success: function(response) {
 								// 삭제 성공 시 동작
-
-								Swal.fire('삭제성공', '삭제되었습니다', 'success').then(() => {
-									deleteButton.closest('.box').remove(); // 저장한 변수 사용
+								Swal.fire('삭제 성공', response, 'success').then(() => {
+									deleteButton.closest('.box').remove();
 								});
-
 							},
 							error: function(xhr) {
 								Swal.fire(xhr.responseText);//실패 알림 메세지
@@ -458,7 +456,6 @@ $(document).ready(
 						//취소 버튼 클릭시 아무런 동작을 하지 않음
 					}
 				});
-
 			});
 	});
 

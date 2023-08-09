@@ -198,6 +198,7 @@ $(document).on('click', '.editOkProduct', function() {
 		enctype: 'multipart/form-data',
 		processData: false,
 		contentType: false,
+		dataType: 'text', //text로 바꿔야지 swal 적용가능
 		success: function(response) {
 
 			Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
@@ -206,8 +207,9 @@ $(document).on('click', '.editOkProduct', function() {
 		},
 		error: function(xhr) {
 			// 서버에서 반환된 에러 메시지를 가져옴
-			var errorMessage = xhr.responseText;
-			Swal.fire(errorMessage)
+			//var errorMessage = xhr.responseText;
+			//Swal.fire(xhr)
+			Swal.fire(xhr.responseText);
 		}
 	});
 
@@ -382,7 +384,6 @@ const swalWithBootstrapButtons = Swal.mixin({
 		confirmButton: 'btn btn-success',
 		cancelButton: 'btn btn-danger'
 	}
-
 });
 
 

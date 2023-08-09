@@ -29,5 +29,5 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
 	// 효경 추가
 	void save(Users users);
-
+	
 }
