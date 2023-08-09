@@ -88,7 +88,8 @@ function openModal(button) {
 	const modal = document.getElementById('myModal');
 	modal.style.display = 'block';
 
-	// Set the values in the modal form
+	document.getElementById('reasonCancle').value = '';
+	
 	document.getElementById('bookNumValue').value = bookNumValue;
 	document.getElementById('authenticatedUserName').value = authenticatedUserName;
 }
