@@ -84,3 +84,8 @@ deploy : git, github <br>
 
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/c4ffb392-371d-4b12-940a-f2a3a8fb0b42)
+
+
+(예약내역)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/82f5dfab-60f2-4e81-aa5a-911f4622164c)
