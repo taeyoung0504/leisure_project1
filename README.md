@@ -31,16 +31,16 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 주요 기능은 아래와 같음 <br>
 
-### USER
+## [USER]
 
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/56b09792-16f1-4c22-91de-8dacac5afd02)
 
 
-### PATNER
+## [PATNER]
 
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/75aa0fc8-6f57-4f30-b5c4-75fb1aec0115)
 
 
-### ADMIN
+## [ADMIN]
 
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
