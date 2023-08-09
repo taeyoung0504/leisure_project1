@@ -78,7 +78,7 @@
 			
 			
 			  <!-- 페이징처리 시작 -->
-<div class="pagination1">
+<div class="pagination1" th:if="${totalPages > 0}">
     <ul class="horizontal-pagination1">
         <li class="page_previous" th:classappend="${currentPage == 1} ? 'disabled'">
             <a th:href="@{/user/mypage/my_partner_reg(page=${currentPage - 1})}">이전</a>
