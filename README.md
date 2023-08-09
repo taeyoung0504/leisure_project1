@@ -127,16 +127,7 @@ deploy : git, github <br>
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a38ed9d3-8a82-44fc-a363-2edc3233b978)
 
 
-(파트너 권한 신청 내역)
 
-![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/f6be3668-0b93-4ca9-b970-5d8cb65ba049)
-
-(내 업소 및 숙소 관리 페이지)
-
-![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/64721cbb-5fcd-49f9-9cd6-2b1e77b423d9)
-
-
-(내 업소 예약 리스트)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/211904ba-524a-4a88-ba9a-6c692775c437)
 
