@@ -18,7 +18,7 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 <br>
 
-# Database ERD
+# 📃 Database ERD
 
 데이터베이스 ERD는 아래와 같음. <br><br>
 
