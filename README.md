@@ -50,3 +50,8 @@ deploy : git, github <br>
 ## [ADMIN]
 
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
+
+
+# 프로젝트 결과 화면(요약)
+
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/4c93612e-efbc-4bd0-bac4-bce9dc07b6d2)
