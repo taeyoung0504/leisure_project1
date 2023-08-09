@@ -1,22 +1,58 @@
-
 #bookingTable {
-     display: none;  
+	display: none;
 }
 
- .grayscale {
-    filter: grayscale(100%);
-  }
-  
-  
-.reject-button{
-	margin-left:5px;
+.grayscale {
+	filter: grayscale(100%);
+}
+
+.reject-button {
+	margin-left: 5px;
 	background: #ff5454;
 }
 
+.grayscale-button {
+	/* Apply grayscale filter to the button */
+	filter: grayscale(100%);
+}
 
-  .grayscale-button {
-        /* Apply grayscale filter to the button */
-        filter: grayscale(100%);
-    }
+.container {
+    margin: 10px auto;
+    width: 90%;
+    height: 100%;
+    padding-left: 100px;
+    padding-top: 30px !important;
+}
 
 
+#searchResults {
+	padding: 10px;
+	/* border: solid 1px; */
+	border-radius: 10px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 2px 1px #ddd;
+	margin-top: 25px;
+}
+
+.cancleBtn{
+	display: flex;
+	justify-content: center;
+	}
+	
+	
+	.cancel-button{
+background-color: #fff0;
+    color: #a34a4a;
+    border: solid 1px #a34a4a;
+	}
+	
+	.reject-button{
+	background-color: #fff0;
+	color: #717171;
+	border: solid 1px #717171;
+}
+
+th{
+	margin: 0 auto;
+	text-align: center;
+}
