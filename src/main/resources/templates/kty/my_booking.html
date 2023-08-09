@@ -106,26 +106,26 @@
 
 		<!-- 페이징처리 시작 -->
     <div th:if="${!paging.isEmpty()}">
-        <ul class="pagination">
-            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a class="page-link page_previous"
-                    th:href="@{|?page=${paging.number-1}|}">
-                    <span>◀</span>
-                </a>
-            </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-            	th:if="${page >= paging.number-2 and page <= paging.number+2}"
-                th:classappend="${page == paging.number} ? 'active'" 
-                class="page-item">
-                <a th:text="${page+1}" class="page-link page-number" th:href="@{|?page=${page}|}"></a>
-            </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link page_next" th:href="@{|?page=${paging.number+1}|}">
-                    <span>▶</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <ul class="pagination">
+        <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+            <a class="page-link prevPageBtn"
+               th:href="@{|?page=${paging.number-1}|}">
+                <span>이전</span>
+            </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            th:if="${page >= paging.number-2 and page <= paging.number+2}"
+            th:classappend="${page == paging.number} ? 'active'" 
+            class="page-item">
+            <a th:text="${page+1}" class="page-link page-number" th:href="@{|?page=${page}|}"></a>
+        </li>
+        <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+            <a class="page-link page_next" th:href="@{|?page=${paging.number+1}|}">
+                <span>다음</span>
+            </a>
+        </li>
+    </ul>
+</div>
     <!-- 페이징처리 끝 -->
 
 

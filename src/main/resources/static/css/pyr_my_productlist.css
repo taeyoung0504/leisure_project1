@@ -684,7 +684,7 @@
 }
 
 .pagination .page_item.active a {
-	background-color: #ff3434a3;
+	background-color: var(--main-color);
 	color: #fff;
 	border-color: #007bff;
 }

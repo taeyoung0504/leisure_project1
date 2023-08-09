@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.project.leisure.dogyeom.booking.BookRepository;
 import com.project.leisure.dogyeom.booking.BookingVO;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BookStatusUpdateService {
 	
@@ -42,5 +44,16 @@ public class BookStatusUpdateService {
             bookRepository.save(book);
         }
     }
+    
+//    @Scheduled(fixedDelay = 60000) // 1분(1 * 60 * 1000)마다 실행
+//    @Transactional
+//    public void deleteNullBookStatus() {
+//        bookRepository.deleteByBookStatusIsNull();
+//    }
+   // @Scheduled(fixedDelay = 90000) // 1분(1 * 60 * 1000)마다 실행
+  //  @Transactional
+  //  public void deleteNullBookStatus() {
+  //  	bookRepository.deleteByBookStatusIsNullAndBookStatusIsEmpty();
+  //  }
 	
 }

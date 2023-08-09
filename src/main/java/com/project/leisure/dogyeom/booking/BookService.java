@@ -148,6 +148,13 @@ public class BookService {
 		Collections.reverse(bookingList);
 		return bookingList;
 	}
+	
+	 // bookStatus가 null인 것들은 제외
+	public List<BookingVO> getBookList2() {
+		List<BookingVO> bookingList = this.bookRepository.findByBookStatusNotNull();;
+		Collections.reverse(bookingList);
+		return bookingList;
+	}
 
 	// 유리 추가 참조된 productID를 조회하여 null 값 처리
 	public void updateBookingVoProductToNull(Product product) {
