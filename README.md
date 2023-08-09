@@ -114,3 +114,14 @@ deploy : git, github <br>
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/4ee58a36-31ea-4a6c-b2df-aa2253f7d4be)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a00e19c7-d4f5-4422-bfc3-6e49d8a6c019)
+
+
+
+(파트너 권한 신청)
+
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/bc5493f5-9510-415f-8229-5657668c4f94)
+
+
+(파트너 권한 신청 _ 필수값 미입력 시)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a38ed9d3-8a82-44fc-a363-2edc3233b978)
