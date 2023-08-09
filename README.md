@@ -1,4 +1,4 @@
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/e124219f-1491-4dec-bd70-0b3d5931d642)  # 📕 DAEBAK
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/72873276-72d8-4ef6-96a7-7078bb8c92a6)![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/e124219f-1491-4dec-bd70-0b3d5931d642)  # 📕 DAEBAK
 SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 대구 숙박업소 예약 프로젝트 DAE BAK 입니다. <br><br>
 <b> ** 일반 회원, 파트너(사업자), 관리자 ** </b> 3개의 파트로 나누어 서비스를 구축하였습니다.
@@ -130,3 +130,13 @@ deploy : git, github <br>
 (파트너 권한 신청 내역)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/f6be3668-0b93-4ca9-b970-5d8cb65ba049)
+
+(내 업소 및 숙소 관리 페이지)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/64721cbb-5fcd-49f9-9cd6-2b1e77b423d9)
+
+
+(내 업소 예약 리스트)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/211904ba-524a-4a88-ba9a-6c692775c437)
+
