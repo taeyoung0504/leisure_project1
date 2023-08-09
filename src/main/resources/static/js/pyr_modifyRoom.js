@@ -31,7 +31,7 @@ function isValidProductZeroAmount(value) {
 	return true;
 }
 
-//초기화 버튼을 눌렀을 때를 위해 기존의 값들을 저장
+//초기화 버튼을 눌렀을 때를 위해 기존의 값들을 저장 ======
 
 //기존에 있는 값을 담기 위한 객체
 var originalValues = {}; //전역
@@ -40,7 +40,7 @@ var originalValues = {}; //전역
 var originalImageUrls = []; //전역
 
 
-//전송 및 이미지 슬라이드를 위한 값들을 담는 배열
+//전송 및 이미지 슬라이드를 위한 값들을 담는 배열 ======
 
 //이미지 슬라이드 전역 변수로 설정 => 이미지 추가시 슬라이드에도 보여주가 위함
 let images = [];
@@ -198,6 +198,7 @@ $(document).on('click', '.editOkProduct', function() {
 		enctype: 'multipart/form-data',
 		processData: false,
 		contentType: false,
+		dataType: 'text', //text로 바꿔야지 swal 적용가능
 		success: function(response) {
 
 			Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
@@ -206,8 +207,9 @@ $(document).on('click', '.editOkProduct', function() {
 		},
 		error: function(xhr) {
 			// 서버에서 반환된 에러 메시지를 가져옴
-			var errorMessage = xhr.responseText;
-			Swal.fire(errorMessage)
+			//var errorMessage = xhr.responseText;
+			//Swal.fire(xhr)
+			Swal.fire(xhr.responseText);
 		}
 	});
 
@@ -306,9 +308,14 @@ $('.imageUploadInput').change(function() {
 
 	// 선택된 파일들을 순회하며 이미지를 화면에 추가
 	for (var i = 0; i < files.length; i++) {
-		createImageListItem(files[i], imageList);
+		var file = files[i];
+		// 파일의 MIME 타입을 확인하여 png 또는 jpg인지 검사
+		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다');
+			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
+		}
+		createImageListItem(file, imageList);
 	}
-
 });
 
 
@@ -383,7 +390,6 @@ const swalWithBootstrapButtons = Swal.mixin({
 		confirmButton: 'btn btn-success',
 		cancelButton: 'btn btn-danger'
 	}
-
 });
 
 
@@ -580,8 +586,6 @@ function editInputValueCheck(className, classValue) {
 				clearEditInputError(className);
 			}
 			break;
-
-
 
 		case 'edit_count':
 			if (!isValidProductAmount(classValue)) {

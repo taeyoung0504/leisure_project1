@@ -13,84 +13,84 @@
 <body>
 <html layout:decorate="~{khk/adminNavbar}">
 <div layout:fragment="adminNav" class="container my-3">
-	<h1>예약 취소 요청</h1>
-	
-	<div class="container">
-		<div>
-			<table id="cancelTable">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>예약 번호</th>
-						<th>파트너명</th>
-						<th>숙소명</th>
-						<th>객실명</th>
-						<th>취소 사유</th>
-						<th>결제상태</th>
-						<th>결제금액</th>
-						<th>결제타입</th>
-						<th>TID</th>
-						<th>처리</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Use Thymeleaf's th:each to iterate over the list in reverse order -->
-					<tr th:each="cancelReq : ${cancleList}">
-						<td th:text="${cancelReq.id}"></td>
-						<td th:text="${cancelReq.bookNumValue}"></td>
-						<td th:text="${cancelReq.authenticatedUserName}"></td>
-						<td id="acc_acc_name"></td>
-						<td id="pro_pro_name"></td>
-						<td th:text="${cancelReq.reasonCancel}"></td>
-						<td id="status_bk"></td>
-						<td id="bbb_total"></td>
-						<td id="paymenttype"></td>
-						<td id="paymentNumber"></td>
-						  <td>
-						 <button class="cancel-button"
+   <h1>예약 취소 요청</h1>
+   
+   <div class="container">
+      <div>
+         <table id="cancelTable">
+            <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>예약 번호</th>
+                  <th>파트너명</th>
+                  <th>숙소명</th>
+                  <th>객실명</th>
+                  <th>취소 사유</th>
+                  <th>결제상태</th>
+                  <th>결제금액</th>
+                  <th>결제타입</th>
+                  <th>TID</th>
+                  <th>처리</th>
+               </tr>
+            </thead>
+            <tbody>
+               <!-- Use Thymeleaf's th:each to iterate over the list in reverse order -->
+               <tr th:each="cancelReq : ${cancleList}">
+                  <td th:text="${cancelReq.id}"></td>
+                  <td th:text="${cancelReq.bookNumValue}"></td>
+                  <td th:text="${cancelReq.authenticatedUserName}"></td>
+                  <td id="acc_acc_name"></td>
+                  <td id="pro_pro_name"></td>
+                  <td th:text="${cancelReq.reasonCancel}"></td>
+                  <td id="status_bk"></td>
+                  <td id="bbb_total"></td>
+                  <td id="paymenttype"></td>
+                  <td id="paymentNumber"></td>
+                    <td>
+                   <button class="cancel-button"
                             th:attr="class=${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result)) ? 'cancel-button grayscale-button' : 'cancel-button'}"
-                            th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소
+                            th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소</button>
                         <button class="reject-button">거절하기</button>
-						  </td>	
-					</tr>
+                    </td>   
+               </tr>
 
-				</tbody>
-			</table>
-
-
-			<br>
-			<table id="bookingTable" disabled >
-				<thead>
-					<tr>
-						<th>예약 번호</th>
-						<th>예약 상태</th>
-						<th>숙소명</th>
-						<th>객실명</th>
-						<th>결제번호</th>
-						<th>결제타입</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Use Thymeleaf's th:each to iterate over the list -->
-					<tr th:each="booking : ${book}">
-						<td th:text="${booking.bookNum}"></td>
-						<td th:text="${booking.bookStatus}"></td>
-						<td th:text="${booking.accomTitle}"></td>
-						<td th:text="${booking.roomTitle}"></td>
-						 <td th:text="${booking.tid}"></td>
-						 <td th:text="${booking.payType}"></td>
-						 <td th:text="${booking.totalPrice}"></td>
-						
-					</tr>
-				</tbody>
-			</table>
+            </tbody>
+         </table>
 
 
+         <br>
+         <table id="bookingTable" disabled >
+            <thead>
+               <tr>
+                  <th>예약 번호</th>
+                  <th>예약 상태</th>
+                  <th>숙소명</th>
+                  <th>객실명</th>
+                  <th>결제번호</th>
+                  <th>결제타입</th>
+               </tr>
+            </thead>
+            <tbody>
+               <!-- Use Thymeleaf's th:each to iterate over the list -->
+               <tr th:each="booking : ${book}">
+                  <td th:text="${booking.bookNum}"></td>
+                  <td th:text="${booking.bookStatus}"></td>
+                  <td th:text="${booking.accomTitle}"></td>
+                  <td th:text="${booking.roomTitle}"></td>
+                   <td th:text="${booking.tid}"></td>
+                   <td th:text="${booking.payType}"></td>
+                   <td th:text="${booking.totalPrice}"></td>
+                  
+               </tr>
+            </tbody>
+         </table>
 
 
 
-		</div>
-	</div>
+
+
+      </div>
+   </div>
 
 </div>
 

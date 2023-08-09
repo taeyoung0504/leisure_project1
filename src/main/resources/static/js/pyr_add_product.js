@@ -209,7 +209,7 @@ document.querySelector('#addPhoto').addEventListener('change', function(e) {
 
 		// 파일의 MIME 타입을 확인하여 png 또는 jpg인지 검사
 		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
-			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다.');
+			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다');
 			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
 		}
 	}
@@ -395,10 +395,8 @@ $(document)
 									// 등록 후 form 초기화
 									$('#productForm')[0]
 										.reset();
-
-									setTimeout(function() {
-										window.location.reload();
-									}, 1000);
+									//페이지 reload	
+									window.location.reload();
 
 								},
 								error: function(xhr) {
@@ -437,17 +435,15 @@ $(document).ready(
 						$.ajax({
 							url: '/partner/product/deleteProduct',
 							method: 'POST',
-							dataType: 'json',
+							dataType: 'text', //text로 바꿔야지 swal 적용가능
 							data: {
 								"productId": productId,
 							},
 							success: function(response) {
 								// 삭제 성공 시 동작
-
-								Swal.fire('삭제성공', '삭제되었습니다', 'success').then(() => {
-									deleteButton.closest('.box').remove(); // 저장한 변수 사용
+								Swal.fire('삭제 성공', response, 'success').then(() => {
+									deleteButton.closest('.box').remove();
 								});
-
 							},
 							error: function(xhr) {
 								Swal.fire(xhr.responseText);//실패 알림 메세지
@@ -458,7 +454,6 @@ $(document).ready(
 						//취소 버튼 클릭시 아무런 동작을 하지 않음
 					}
 				});
-
 			});
 	});
 

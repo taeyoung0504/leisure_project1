@@ -46,18 +46,18 @@ $(document).ready(
 
 		//이미지
 		const imageInput = document
-			.getElementById('addMainPhoto');
+			.getElementById('addMainPhoto'); //이미지 등록
 		const mainImgView = document
-			.getElementById('mainImgView');
+			.getElementById('mainImgView'); //이미지 보여주는 부분
 
 
 		//사장님 한마디 
-		const acc_explain = document.getElementById('acc_explain');
+		let acc_explain = document.getElementById('acc_explain');
 
 		//이미지 변경
 		imageInput.addEventListener('change', function(event) {
-			const file = event.target.files[0];
-			const reader = new FileReader();
+			let file = event.target.files[0];
+			let reader = new FileReader();
 
 			reader.addEventListener('load', function() {
 				mainImgView.src = reader.result;
@@ -70,7 +70,7 @@ $(document).ready(
 		});
 
 		acc_explain.addEventListener('input', function(event) {
-			const content = event.target.value;
+			let content = event.target.value;
 
 			if (content) {
 				//사장님 한마디 입력값 변경되면 true	

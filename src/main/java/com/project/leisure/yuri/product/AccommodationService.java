@@ -253,7 +253,7 @@ public class AccommodationService {
 
 	/* 숙소 타입 필터 */
 	public Page<Accommodation> getList3(int page, List<String> kw5) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search3(kw5);
 		return accommodationRepository.findAll(spec, pageable);
 	}
@@ -2114,5 +2114,19 @@ public class AccommodationService {
 	public List<Accommodation> my_acc_list() {
 		return this.accommodationRepository.findAll();
 
+	}
+
+	//해당 유저의 acc가 맞는지 확인
+	public boolean isAccommodationOwner(Long acc_id, String username) {
+		 // acc_id에 해당하는 숙소 정보 조회
+        Optional<Accommodation> findOwnerAccommodation = accommodationRepository.findById(acc_id);
+        
+        //만일 Acc 에서 숙소 정보가 있다면 
+        if (findOwnerAccommodation.isPresent()) {
+            Accommodation accommodation = findOwnerAccommodation.get();
+            // 조회한 숙소 정보의 소유자(username)와 현재 사용자의 이름을 비교하여 같은지 확인
+            return accommodation.getUsername().equals(username); //equals가 true 반환
+        }
+		return false;
 	}
 }

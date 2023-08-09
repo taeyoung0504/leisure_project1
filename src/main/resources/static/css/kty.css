@@ -353,7 +353,7 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	left: 700px;
+	left: 650px;
 	top: 120px;
 	margin: 0;
 }
@@ -1018,7 +1018,6 @@ td {
 }
 
 #my_regi_result {
-	position: absolute;
 	/* left: -70px; */
 	top: 80px;
 	width: 800px;
@@ -1029,8 +1028,12 @@ td {
 #result_th {
 	height: 50px;
 	/* background-color: rgb(235, 237, 237); */
-	font-size: 16px;
 	border-bottom: solid 1px #dddddd;
+}
+
+#sss2, 
+.sss3 {
+    border-bottom: 1px solid #dddddd;
 }
 
 #result_td {
@@ -1082,11 +1085,12 @@ td {
 }
 
 #my_reg_info {
-	margin-top: 30px;
+	margin-top: 50px;
 	font-size: 22px;
 	font-weight: bold;
-	/* margin-left: -70px; */
 	color: var(--main-color);
+	margin-bottom: 10px;
+	margin-left: 5px;
 }
 
 .parking_check_type {
@@ -1182,7 +1186,15 @@ td {
 }
 
 #mypage_partner_reg {
-	height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;  
+}
+
+#my_reg_info {
+    align-self: flex-start; 
 }
 
 .pagination {

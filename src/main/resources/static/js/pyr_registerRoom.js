@@ -122,18 +122,21 @@ function confirmDelete() {
 			$.ajax({
 				url: '/partner/product/deleteAcc/' + accId,
 				type: 'DELETE',
-				success: function(result) {
+				dataType: 'text', //text로 바꿔야지 swal 적용가능
+				success: function() {
 					// 요청 성공
-					window.location.href = '/user/mypage/my_productList';
+					Swal.fire('삭제 성공', '숙소가 성공적으로 삭제되었습니다.', 'success').then(() => {
+						window.location.href = '/user/mypage/my_productList';
+					});
 				},
-				error: function(xhr, status, error) {
+				error: function(xhr) {
 					// 요청 실패
-					console.log('Error: ' + status + ' ' + error);
+					Swal.fire(xhr.responseText);//실패 알림 메세지
 				}
 			});
 		} else if (result.dismiss === Swal.DismissReason.cancel) {
 			// No 버튼을 눌렀을 때의 동작
-			// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
+			// 아무런 동자 없음
 		}
 	});
 }

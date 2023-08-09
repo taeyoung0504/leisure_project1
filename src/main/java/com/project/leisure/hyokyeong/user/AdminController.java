@@ -78,7 +78,7 @@ public class AdminController {
 	@GetMapping("/adminMain")
 	public String adminMain() {
 		System.out.println("메인페이지로 이동");
-		return "khk/authorityPage";
+		return "khk/index";
 	}
 
 	// 권한 변경 페이지
@@ -249,7 +249,7 @@ public class AdminController {
 			review.setContentBlinded(false);
 			reviewRepository.save(review);
 		}
-		return "redirect:/admin/decalarationList";
+		return "redirect:/admin/declarationList";
 	}
 
 	@PostMapping("/blind-review/{reviewId}")
@@ -261,7 +261,7 @@ public class AdminController {
 			review.setContentBlinded(true);
 			reviewRepository.save(review);
 		}
-		return "redirect:/admin/decalarationList";
+		return "redirect:/admin/declarationList";
 	}
 
 ///////////////////////// 1:1 문의 컨트롤러 /////////////////////////////////////
