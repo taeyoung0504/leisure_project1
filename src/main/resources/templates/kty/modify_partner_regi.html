@@ -30,7 +30,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:if="${regList.size() > 0}" th:each="regPartner : ${regList}">
+					<tr class="sss3" th:if="${regList.size() > 0}" th:each="regPartner : ${regList}">
 						<td id="result_name"
 							th:data-company-name="${regPartner.getCompany_name()}"
 							th:text="${regPartner.getCompany_name()}"></td>
@@ -78,21 +78,22 @@
 			
 			
 			  <!-- 페이징처리 시작 -->
-<div class="pagination" >
-    <ul class="horizontal-pagination">
-        <li th:if="${currentPage > 1}">
+<div class="pagination1">
+    <ul class="horizontal-pagination1">
+        <li class="page_previous" th:classappend="${currentPage == 1} ? 'disabled'">
             <a th:href="@{/user/mypage/my_partner_reg(page=${currentPage - 1})}">이전</a>
         </li>
         <li th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
             th:class="${pageNum == currentPage ? 'active' : ''}">
             <a th:href="@{/user/mypage/my_partner_reg(page=${pageNum})}" th:text="${pageNum}"></a>
         </li>
-        <li th:if="${currentPage < totalPages}">
+        <li class="page_next" th:classappend="${currentPage == totalPages} ? 'disabled'">
             <a th:href="@{/user/mypage/my_partner_reg(page=${currentPage + 1})}">다음</a>
         </li>
     </ul>
 </div>
     <!-- 페이징처리 끝 -->
+    
 			
 			
 

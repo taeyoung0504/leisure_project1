@@ -5,6 +5,7 @@
 td, th {
 /* 	border: 1px solid rgb(205, 205, 205); */
 	padding: 5px;
+	text-align: left;
 }
 
 .addProductBtn {
@@ -42,3 +43,5 @@ td, th {
         color: red;
         font-weight: bold;
     }
+    
+    
