@@ -1,4 +1,4 @@
-  # 대구지역 숙박예약 프로젝트 DAEBAK
+  #  DAEBAK (대구지역 숙박업소 예약 프로젝트)
 leisure_PJT 개발 
 
 <br>
