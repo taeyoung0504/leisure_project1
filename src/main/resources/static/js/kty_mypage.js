@@ -279,9 +279,80 @@ $(document).ready(function() {
 
 
 
+// 회원탈퇴 검증 창 보이기
+$(document).ready(function() {
+	$("#user_del_button").click(function() {
+		$("#user_del_input").toggle();
+	});
+});
+
+$(document).ready(function() {
+	var $userdel_Pwd_input = $('#userdel_check_password');
+	var $check_del = $('#final_password_check');
+	var $userdel_confirm_button = $('#userdel_confirm_button');
+
+	$userdel_confirm_button.prop('disabled', true);
+
+	$userdel_Pwd_input.on('input focusout', function() {
+		var userdelPWD = $userdel_Pwd_input.val();
+
+		$.ajax({
+			type: 'POST',
+			url: '/user/check_oldpwd',
+			data: { modify_password: userdelPWD },
+			dataType: 'json',
+			success: function(data) {
+				if (userdelPWD === '' || data !== 1) {
+					$userdel_confirm_button.prop('disabled', true);
+				} else {
+					$userdel_confirm_button.prop('disabled', false);
+				}
+
+				if (data === 1) {
+					$check_del.text('비밀번호가 일치합니다').show();
+				} else {
+					$check_del.text('비밀번호가 일치하지 않습니다').show();
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log(error);
+			}
+		});
+	});
 
 
+	$userdel_confirm_button.on('click', function() {
+		Swal.fire({
+			position: 'center',
+			title: '탈퇴하시겠습니까?',
+			text: "확인을 누르시면 다시 로그인이 불가능합니다.",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setTimeout(function() {
+					window.location.href = '/user/del';
+				}, 2000); // 2초 후에 페이지 이동 실행
 
+				Swal.fire({
+					position: 'center',
+					title: '삭제되었습니다.',
+					text: '메인 페이지로 이동합니다 해당 계정은 이제 접속 불가능합니다.',
+					timer: 2000,
+					timerProgressBar: true,
+					showConfirmButton: false,
+					icon: 'success',
+					didOpen: () => {
+						Swal.showLoading();
+					}
+				})
+			}
+		});
+	});
+});
 
 
 $(document).ready(function() {
