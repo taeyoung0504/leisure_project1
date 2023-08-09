@@ -61,3 +61,17 @@ deploy : git, github <br>
 ## [숙소 검색 페이지]
 
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/64b0c0e1-e507-4e5a-b45c-adda6bb398c1)
+
+
+## [숙소 상세 페이지]
+
+(빈방 있는 상태)
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/ab922c01-5f2c-44dd-bddf-b7dc1bf92d6d)
+
+
+(빈방 없는 상태)
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/6889d4b7-9425-439b-8ae2-45e42f3234cc)
+
+
+## [예약 페이지]
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a7024633-3611-4fb9-bad5-a3aef426afb0)
