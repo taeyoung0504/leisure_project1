@@ -42,3 +42,5 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 
 ### ADMIN
+
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
