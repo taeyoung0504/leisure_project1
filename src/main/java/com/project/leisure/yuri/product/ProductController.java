@@ -412,7 +412,7 @@ public class ProductController {
 			boolean isOwner = productService.isOwnerOfAccommodationProduct(username, product);
 
 			if (!isOwner) {
-				return "redirect:error/404.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
+				return "redirect:error/403.html"; // 자신의 숙소가 아닌 경우 403에러 페이지
 			}
 
 			model.addAttribute("product", product);
