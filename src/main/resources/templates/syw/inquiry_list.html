@@ -2,88 +2,92 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>DAEBAK</title>
-	<link rel="stylesheet" href="/css/inquiry_list.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-	<meta charset="utf-8">
+<title>DAEBAK</title>
+<link rel="stylesheet" href="/css/inquiry_list.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<meta charset="utf-8">
 </head>
 
 <body>
-	<html layout:decorate="~{khk/adminNavbar}">
-	<div layout:fragment="adminNav" class="container my-3">
-		<div class="content-container">
-			<h1>회원 문의 내역</h1>
-			<!-- 각 문의를 테이블로 표시 -->
-			<table>
-				<thead>
-					<tr>
-						<th>유형</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>
-							<div style="display: flex; align-items: center; justify-content: space-between;">
-								<span>답변 여부</span>
-								<div>
-									<select id="filter-dropdown">
-										<option value="">전체 보기</option>
-										<option value="answered">답변 완료</option>
-										<option value="pending">답변 대기</option>
-									</select>
-									<button id="apply-filter-btn">적용</button>
-								</div>
-							</div>
-						</th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="inquiry : ${page}">
-						<td th:text="${inquiry.type}"></td>
-						<td>
-							<a th:href="@{/admin/inquiryAnswer/{id}(id=${inquiry.id})}"
-								style="text-decoration: none; font-weight: bold; cursor: pointer;">
-								<span th:text="${inquiry.title}"></span>
-							</a>
-						</td>
-						<td th:text="${inquiry.username}"></td>
-						<td th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-						<td>
-							<span th:if="${#lists.size(inquiry.inquiryAnswer) > 0}" style="color: #e40000d3;">답변
-								완료</span>
-							<span th:unless="${#lists.size(inquiry.inquiryAnswer) > 0}">답변 대기</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+<html layout:decorate="~{khk/adminNavbar}">
+<div layout:fragment="adminNav" class="container my-3">
+	<div class="container">
+		<h1>회원 문의 내역</h1>
+		<!-- 각 문의를 테이블로 표시 -->
+		<div id="input-group">
+			<select id="filter-dropdown">
+				<option value="">전체 보기</option>
+				<option value="answered">답변 완료</option>
+				<option value="pending">답변 대기</option>
+			</select>
+			<button id="apply-filter-btn">적용</button>
 		</div>
-		<div class="pagination">
-			<ul>
-				<li class="page-item" th:if="${page.number > 0}">
-					<a class="page-link" th:href="@{/admin/inquiryList(page=${page.number - 1})}">이전</a>
-				</li>
-				<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-					th:class="${i == page.number} ? 'active page-item' : 'page-item'">
-					<a class="page-link" th:href="@{/admin/inquiryList(page=${i})}" th:text="${i + 1}"></a>
-				</li>
-				<li class="page-item" th:if="${page.number < page.totalPages - 1}">
-					<a class="page-link" th:href="@{/admin/inquiryList(page=${page.number + 1})}">다음</a>
-				</li>
-			</ul>
-		</div>
-		<script>
+	
+	<div id="searchResults">
+		<table>
+			<thead>
+				<tr>
+					<th>유형</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>
+						<div
+							style="display: flex; align-items: center; justify-content: space-between;">
+							<span>답변 여부</span>
+					</th>
 
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="inquiry : ${page}">
+					<td th:text="${inquiry.type}"></td>
+					<td><a
+						th:href="@{/admin/inquiryAnswer/{id}(id=${inquiry.id})}"
+						style="text-decoration: none; font-weight: bold; cursor: pointer;">
+							<span th:text="${inquiry.title}"></span>
+					</a></td>
+					<td th:text="${inquiry.username}"></td>
+					<td
+						th:text="${#temporals.format(inquiry.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+					<td><span th:if="${#lists.size(inquiry.inquiryAnswer) > 0}"
+						style="color: rgb(0, 0, 255);">답변 완료</span> <span
+						th:unless="${#lists.size(inquiry.inquiryAnswer) > 0}"
+						style="color: red;">답변 대기</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 
-			document.addEventListener("DOMContentLoaded", function () {
-				var applyFilterBtn = document.getElementById("apply-filter-btn");
-				applyFilterBtn.addEventListener("click", function () {
-					var filterValue = document.getElementById("filter-dropdown").value;
-					var currentUrl = window.location.href.split("?")[0];
-					window.location.href = currentUrl + (filterValue ? "?filter=" + filterValue : "");
-				});
-			});
-		</script>
+<div class="pagination">
+	<ul>
+		<li class="page-item" th:if="${page.number > 0}"><a
+			class="page-link"
+			th:href="@{/admin/inquiryList(page=${page.number - 1})}">이전</a></li>
+		<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+			th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+			<a class="page-link" th:href="@{/admin/inquiryList(page=${i})}"
+			th:text="${i + 1}"></a>
+		</li>
+		<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+			<a class="page-link"
+			th:href="@{/admin/inquiryList(page=${page.number + 1})}">다음</a>
+		</li>
+	</ul>
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var applyFilterBtn = document.getElementById("apply-filter-btn");
+		applyFilterBtn.addEventListener("click", function() {
+			var filterValue = document.getElementById("filter-dropdown").value;
+			var currentUrl = window.location.href.split("?")[0];
+			window.location.href = currentUrl
+					+ (filterValue ? "?filter=" + filterValue : "");
+		});
+	});
+</script>
 </body>
 
 </html>

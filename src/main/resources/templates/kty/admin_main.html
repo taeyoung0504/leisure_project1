@@ -11,10 +11,11 @@
    <script th:src="@{/js/admin_dashboard.js}"></script>
 </head>
 
-<body>
+<body class="adminbody">
    <html layout:decorate="~{khk/adminNavbar}">
    <div layout:fragment="adminNav" class="container my-3">
       <h1 id="admin_dashboard_main">DASHBOARD</h1>
+      <div class="container-dash">
       <div class="dashboard_kkk">
 
 
@@ -132,6 +133,7 @@
 
 
       </div>
+   </div>
    </div>
    </div>
 </body>

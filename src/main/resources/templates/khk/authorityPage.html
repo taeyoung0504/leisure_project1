@@ -88,9 +88,10 @@
 										type="hidden" name="newStatus"
 										th:value="${user.islock == 0 ? 1 : 0}" /> <input
 										type="submit"
-										th:value="${user.islock == 0 ? '  활동 중  ' : '활동 정지'}"
+										th:value="${user.islock == 0 ? '  활동 중  ' : '계정 정지'}"
 										onclick="toggleAccount(event, this); return false;"
-										th:style="${user.islock == 0 ? '' : 'background-color: darkgrey;'}" />
+										th:style="${user.islock == 0 ? '' : 'background-color: #dddddd96; color: #717171;
+	border: solid 1px #717171;'}" />
 								</form>
 							</td>
 							<td
@@ -431,8 +432,8 @@ function toggleAccount(event, button) {
 
     // SweetAlert 사용하여 문구 보여주기
     var newStatus = form.newStatus.value;
-    var statusMessage = (newStatus === "0") ? "활동 중" : "활동 정지";
-    var swalMessage = `회원 계정을 ${statusMessage} 하시겠습니까? (7일)`;
+    var statusMessage = (newStatus === "0") ? "활동 중" : "계정 정지";
+    var swalMessage = `회원 계정을 ${statusMessage}으로 변경 하시겠습니까? (7일)`;
     Swal.fire({
         title: swalMessage,
         icon: "warning",
@@ -450,7 +451,7 @@ function toggleAccount(event, button) {
                 if (xhrUpdate.status === 200) {
                     // 요청이 성공한 경우 버튼 활성화 및 텍스트 변경
                     form.newStatus.value = (newStatus === "0") ? "1" : "0";
-                    button.value = (newStatus === "0") ? "  활동 중  " : "활동 정지";
+                    button.value = (newStatus === "0") ? "  활동 중  " : "계정 정지";
                     button.style.backgroundColor = (newStatus === "0") ? "" : "darkgrey";
 					}
                 // 버튼 활성화
