@@ -75,3 +75,9 @@ deploy : git, github <br>
 
 ## [예약 페이지]
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a7024633-3611-4fb9-bad5-a3aef426afb0)
+
+
+## [마이페이지]
+
+(내 정보)
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/c4ffb392-371d-4b12-940a-f2a3a8fb0b42)
