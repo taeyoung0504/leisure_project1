@@ -1,4 +1,4 @@
- # leisure_PJT
+ # 대구지역 숙박예약 프로젝트 DAEBAK
 leisure_PJT 개발 
 
 <br>
