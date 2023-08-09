@@ -80,4 +80,5 @@ deploy : git, github <br>
 ## [마이페이지]
 
 (내 정보)
+
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/c4ffb392-371d-4b12-940a-f2a3a8fb0b42)
