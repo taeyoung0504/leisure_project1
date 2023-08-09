@@ -54,4 +54,8 @@ deploy : git, github <br>
 
 # 프로젝트 결과 화면(요약)
 
+## [숙소 메인]
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/87a4e188-deb3-45f6-a61e-6b6a575d17cf)
+
+## [숙소 검색 페이지]
 
