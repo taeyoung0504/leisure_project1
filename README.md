@@ -77,6 +77,13 @@ deploy : git, github <br>
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a7024633-3611-4fb9-bad5-a3aef426afb0)
 
 
+
+
+(결제를 위한 문자 인증)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/dfc58195-c74e-4fd1-b833-998a2828e21a)
+
+
 ## [마이페이지]
 
 (내 정보)
@@ -89,3 +96,12 @@ deploy : git, github <br>
 (예약내역)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/82f5dfab-60f2-4e81-aa5a-911f4622164c)
+
+
+
+(문의내역 _ 없는경우)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/d384d21b-0475-4d64-a52a-9ccdccb53d82)
+
+
+(문의내역 _ 있는경우)
