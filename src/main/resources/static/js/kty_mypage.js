@@ -325,7 +325,7 @@ $(document).ready(function() {
 		Swal.fire({
 			position: 'center',
 			title: '탈퇴하시겠습니까?',
-			text: "확인을 누르시면 다시 로그인이 불가능합니다.",
+			text: "확인을 누르시면 다시 로그인이 불가능합니다. ",
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
