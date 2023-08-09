@@ -15,6 +15,10 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 개발환경은 아래와 같음. <br><br>
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/8d6486eb-9021-436f-89d2-0512d0c56548)
 
+etc. <br>
+tools : tst4 ,  vscode, DBeaver <br>
+deploy : git, github <br>
+
 
 <br>
 
