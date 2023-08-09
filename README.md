@@ -125,3 +125,8 @@ deploy : git, github <br>
 (파트너 권한 신청 _ 필수값 미입력 시)
 
 ![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/a38ed9d3-8a82-44fc-a363-2edc3233b978)
+
+
+(파트너 권한 신청 내역)
+
+![image](https://github.com/taeyoung0504/leisure_Project/assets/128016593/f6be3668-0b93-4ca9-b970-5d8cb65ba049)
