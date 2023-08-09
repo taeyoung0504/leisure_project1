@@ -55,7 +55,7 @@ public class ProductService {
 
 			return product;
 		} else {
-			return null; // 또는 예외 처리 등 추후 작성
+			return null;
 		}
 	}
 
@@ -146,8 +146,6 @@ public class ProductService {
 		return 0; // 실패
 	}
 
-
-
 	// 상품 전체 삭제
 	public Integer pdDelete(Long productId) {
 		Optional<Product> productOptional = productRepository.findById(productId);
@@ -183,7 +181,7 @@ public class ProductService {
 	}
 
 	// 상품 수정시 이미지 삭제
-	public Integer pdEditImgDelete(List<Long> deletedImageIds) {
+	public void pdEditImgDelete(List<Long> deletedImageIds) {
 		for (Long imageId : deletedImageIds) {
 			Optional<ProductImg> productImgOptional = productImgRepository.findById(imageId);
 			if (productImgOptional.isPresent()) {
@@ -192,7 +190,15 @@ public class ProductService {
 				productImgRepository.delete(productImg);
 			}
 		}
-		return 1; // 성공
+	}
+
+	// 자신의 숙소의 상품이 맞는지 확인
+	public boolean isOwnerOfAccommodationProduct(String username, Product product) {
+
+		if (username.equals(product.getAccommodation().getUsername())) {
+			return true;
+		}
+		return false;
 	}
 
 }

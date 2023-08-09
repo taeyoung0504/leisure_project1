@@ -493,7 +493,7 @@ public class UserController {
 	    // role이 파트너라면
 	    if (isPartner) {
 
-	        // accommodations 해당 유저이름을 조회하여 있다면 false, 없으면 true
+	        // accommodations 해당 유저이름을 조회하여 리스트로 가져온다
 	        List<Accommodation> accommodations = accommodationService.findAccommodationsByUsername(username);
 
 	        // 등록된 PK(id)를 기준으로 내림차순 정렬
