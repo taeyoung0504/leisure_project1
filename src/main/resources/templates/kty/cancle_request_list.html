@@ -17,6 +17,8 @@
    
    <div class="container">
       <div>
+       <div id="searchResults">
+      
          <table id="cancelTable">
             <thead>
                <tr>
@@ -47,16 +49,19 @@
                   <td id="paymenttype"></td>
                   <td id="paymentNumber"></td>
                     <td>
+              
+                    
                    <button class="cancel-button"
                             th:attr="class=${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result)) ? 'cancel-button grayscale-button' : 'cancel-button'}"
                             th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소</button>
                         <button class="reject-button">거절하기</button>
+                       
                     </td>   
                </tr>
 
             </tbody>
          </table>
-
+</div>
 
          <br>
          <table id="bookingTable" disabled >
