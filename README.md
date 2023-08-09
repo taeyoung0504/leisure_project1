@@ -1,7 +1,7 @@
   # 📕 DAEBAK
 SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 대구 숙박업소 예약 프로젝트 DAE BAK 입니다. <br><br>
-<span style='background-color:#fff5b1'>일반 회원, 파트너(사업자), 관리자 </span> 3개의 파트로 나누어 서비스를 구축하였습니다.
+일반 회원, 파트너(사업자), 관리자3개의 파트로 나누어 서비스를 구축하였습니다.
 
 
 
