@@ -253,7 +253,7 @@ public class AccommodationService {
 
 	/* 숙소 타입 필터 */
 	public Page<Accommodation> getList3(int page, List<String> kw5) {
-		Pageable pageable = PageRequest.of(page, 3);
+		Pageable pageable = PageRequest.of(page, 10);
 		Specification<Accommodation> spec = search3(kw5);
 		return accommodationRepository.findAll(spec, pageable);
 	}
