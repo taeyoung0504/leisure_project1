@@ -355,7 +355,7 @@ public class AdminController {
 	        notice.setContent(updatedNotice.getContent());
 	        notice.setUsername(principal.getName());
 
-	        // 이미지 업로드와 이미지 경로 저장을 처리합니다.
+	        // 이미지 업로드와 이미지 경로 저장.
 	        if (!imageFile.isEmpty()) {
 	            try {
 	                String imageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
@@ -366,14 +366,14 @@ public class AdminController {
 	                notice.setImagePath(imagePathString);
 	            } catch (IOException e) {
 	                e.printStackTrace();
-	                // 필요에 따라 예외를 처리할 수 있습니다.
+	                // 필요에 따라 예외를 처리.
 	            }
 	        }
 
-	        // 공지사항을 데이터베이스에 저장합니다.
+	        // 공지사항을 데이터베이스에 저장.
 	        noticeService.updateNotice(id, notice, imageFile);
 
-	        // 공지사항 목록 페이지로 리다이렉트합니다.
+	        // 공지사항 목록 페이지로 리다이렉트.
 	        return "redirect:/admin/adminNoticeList";
 	    }
 
