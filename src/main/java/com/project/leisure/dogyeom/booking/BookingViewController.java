@@ -24,7 +24,6 @@ public class BookingViewController {
 	    System.out.println("BookingVO: " + bookingvo);
 	    // 필요한 로직 수행
 	    model.addAttribute("bookingvo", bookingvo);
-	    //System.out.println("11111+++++++++s++++++bookingvo : " + model.toString());
 	    return "kdg/reserve";
 	}
 }

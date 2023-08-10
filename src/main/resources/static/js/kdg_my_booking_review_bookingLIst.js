@@ -97,7 +97,7 @@ cancelBtns.forEach(cancelBtn => {
 					/* window.history.back(); */
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
 					// No 버튼을 눌렀을 때의 동작
-					// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
+					// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있음.
 				}
 			});
 

@@ -31,13 +31,12 @@ public class KakaoPayService {
 		 */
 		// 카카오페이 요청 양식
 		MultiValueMap<String, Object> payParams = new LinkedMultiValueMap<>();
-		// 결제수단 추가하나?
 
 		String stringTotalPrice = params.getTotalPrice();
 		String totalPrice = stringTotalPrice.replaceAll(",", "");
 
 		payParams.add("cid", cid);
-		payParams.add("partner_order_id", "KAO20230623"); // 이런 것들은 고정값으로 박아놓는게 좋은가? or 따로 해당 정보만 담고 있는 데이터베이스를 만들어야하나?
+		payParams.add("partner_order_id", "KAO20230623"); 
 		payParams.add("partner_user_id", "kakaopayTest");
 		payParams.add("item_name", params.getRoomTitle());
 		payParams.add("quantity", 1);
@@ -64,12 +63,7 @@ public class KakaoPayService {
 //		String url = "http://kapi.kakao.com/v1/payment/ready";
 
 		// 요청결과
-//		KakaoReadyResponseVO res = template.postForObject(url, requestEntity, KakaoReadyResponseVO.class);
 		res = template.postForObject(url, requestEntity, KakaoReadyResponseVO.class);
-
-		/*
-		 * 요청결과에서 응답받은 tid 값을 데이터베이스에 저장하는 로직 추가 주문번호랑 tid랑 연결하여 결제이력테이블로 관리?
-		 */
 		return res;
 
 	}
@@ -77,14 +71,14 @@ public class KakaoPayService {
 	/**
 	 * 결제 완료 승인
 	 */
-	public KakaoApproveResponse approveResponse(String pgToken) { // 나중에 pgToken외에도 model을 받아야함(취소시 주문번호 받기)
+	public KakaoApproveResponse approveResponse(String pgToken) {
 
 		// 카카오 요청
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("cid", String.valueOf(cid));
-		parameters.add("tid", res.getTid()); // model로 받으면 res.getTid()가 아니고 model.getTid()가 될 것. -> 근데 굳이 그렇게 안줘도 될듯
-		parameters.add("partner_order_id", "KAO20230623"); // partner order id는 굳이 바꿔줄 필요 없나? 아니면 따로 제품마다 해줘야하나? ->
-															// 해줘야하면 model받아야함.
+		parameters.add("tid", res.getTid()); 
+		parameters.add("partner_order_id", "KAO20230623"); 
+															
 		parameters.add("partner_user_id", "kakaopayTest");
 		parameters.add("pg_token", pgToken);
 
@@ -97,27 +91,14 @@ public class KakaoPayService {
 		KakaoApproveResponse approveResponse = restTemplate.postForObject(
 //                "https://kapi.kakao.com/v1/payment/approve",
 				"https://kapi.kakao.com/v1/payment/approve", requestEntity, KakaoApproveResponse.class);
-		// 여기서 결제 승인 요청 성공여부 확인후에 리포지토리에 tid insert 해줘야함. -> 컨트롤러에 하는게 나을 것 같은데
+
 		return approveResponse;
 	}
 
 	/**
 	 * 결제 환불
 	 */
-	// 취소하고자하는 상품의 id를 받아서 데이터를 조회하고 조회한 데이터를 model에 담아 취소 서비스에 넘긴다.
-	// 취소 서비스에서 model에서 받은 tid와 금액을 추출하여 취소요청을 보낸다.
-	// -> 그런데 해당 결제수단을 if문으로 검사하여 해당 결제수단의 서비스로 보내줘야 할듯
 	public KakaoCancelResponse kakaoCancel(Map<String, Object> params) {
-
-		/*
-		 * System.out.println(")))))))))))))))))))))))))) amount : " +
-		 * params.get("cancel_amount")); String amount =
-		 * String.valueOf(params.get("cancel_amount"));
-		 * System.out.println(")))))))))))))))))))))))))) amount : " + amount); String
-		 * cancelAmount = amount.replaceAll(",", "");
-		 * System.out.println(")))))))))))))))))))))))))) cancelAmount : " +
-		 * cancelAmount);
-		 */
 
 		String cancelAmountStr = params.get("cancel_amount").toString();
 		cancelAmountStr = cancelAmountStr.trim();
@@ -150,9 +131,6 @@ public class KakaoPayService {
 
 		httpHeaders.set("Authorization", auth);
 		httpHeaders.set("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-		// headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
-		// headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE +
-		// ";charset=UTF-8");
 
 		return httpHeaders;
 	}
