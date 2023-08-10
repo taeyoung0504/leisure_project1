@@ -29,30 +29,28 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Model model) {
-        // Create a new Visit object and save it to the database
+    	
+        // 방문자 데이터 수집을 위한 처리(일정량 이상 데이터 수집 후 동일 ip당 1일 1회로 제한 예정)
         Visit visit = new Visit();
         visit.setVisit_count(1L);
         visitService.save(visit);
 
+        // 숙박업소 리스트 가져오기
         List<Accommodation> allAccommodations = this.accommodationService.my_acc_list();
 
-        // Sort the accommodations by acc_rating in descending order
+        // 숙박업소의 평점에 대한 역순 정렬 
         allAccommodations.sort(Comparator.comparingInt(Accommodation::getAcc_rating).reversed());
 
-        // Get the top 6 accommodations based on acc_rating
+        //평점 상위 8개의 업소 추출
         List<Accommodation> topAccommodations = allAccommodations.stream().limit(8).collect(Collectors.toList());
 
-        // Add the top 6 accommodations to the model
+       
         model.addAttribute("acc", topAccommodations);
         
         
         return "main";
     }
     
-    
-    @GetMapping("/sss")
-    public String ssds() {
-    	return "kty/ssss";
-    }
+   
    
 }

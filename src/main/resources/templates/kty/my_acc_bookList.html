@@ -16,29 +16,31 @@
 
 
 	<div class="content-container">
-<!-- 사이드 바 -->
-	<nav id="mypage_sidebar_nav">
-		<ul>
-			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내
-					정보</a></li>
-			<!-- <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}" class="active">예약
+		<!-- 사이드 바 -->
+		<nav id="mypage_sidebar_nav">
+			<ul>
+				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내
+						정보</a></li>
+				<!-- <li class="mypage_sidebar"><a th:href="@{/user/mypage/my_booking}" class="active">예약
 						내역</a></li> -->
-			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
-			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
-			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
-			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
-			</li>
-			<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_productList}"
-				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
-		<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"  class="active"> 내 업소 예약리스트</a></li>
-		</ul>
-	</nav>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_booking}">예약 내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_inquiry}"> 문의 내역</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/partner_reg}">파트너 신청</a>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_partner_reg}">파트너 신청 내역</a></li>
+				</li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_productList}"
+					sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
+				<li class="mypage_sidebar"><a
+					th:href="@{/user/mypage/my_acc_bookList}"
+					sec:authorize="hasRole('ROLE_PARTNER')" class="active"> 내 업소
+						예약리스트</a></li>
+			</ul>
+		</nav>
 		<div class="content-container">
 			<h2 class="inquiry-heading">내 숙소 예약 리스트</h2>
 			<div class="hidden_kty_hidden">
@@ -90,10 +92,14 @@
 						<td>
 							<button class="cancelButtondd" onclick="openModal(this)"
 								th:if="${book.bookStatus == '예약완료'}">취소요청</button>
-						</td>
 						<td><span th:each="cancelReq : ${cancleList}"
 							th:if="${cancelReq.bookNumValue == book.bookNum && cancelReq.result == '1'}">거절</span>
+							<span th:each="cancelReq : ${cancleList}"
+							th:if="${cancelReq.bookNumValue == book.bookNum && book.bookStatus == '예약완료' && cancelReq.result != '1'}">처리중</span>
+							<span th:each="cancelReq : ${cancleList}"
+							th:if="${cancelReq.bookNumValue == book.bookNum && cancelReq.result != '1' && book.bookStatus != '예약완료'}"></span>
 						</td>
+
 					</tr>
 
 				</tbody>
@@ -114,6 +120,31 @@
 				</div>
 			</div>
 			<!--  모달 끝 -->
+
+
+			<div>
+				<ul class="pagination">
+					<!-- 이전 페이지 -->
+					<li class="page-item page_previous"
+						th:classappend="${booking.number == 0} ? 'disabled'"><a
+						class="page-link"
+						th:href="@{/mypage/my_acc_bookList(page=${booking.number - 1})}">이전</a>
+					</li>
+					<!-- 페이지 번호들 -->
+					<li th:each="i : ${#numbers.sequence(0, booking.totalPages - 1)}"
+						th:class="${i == booking.number} ? 'active page-item' : 'page-item'">
+						<a class="page-link"
+						th:href="@{/user/mypage/my_acc_bookList(page=${i})}"
+						th:text="${i + 1}"></a>
+					</li>
+					<!-- 다음 페이지 -->
+					<li class="page-item page_next"
+						th:classappend="${booking.number+1 == booking.totalPages} ? 'disabled'">
+						<a class="page-link"
+						th:href="@{/mypage/my_acc_bookList(page=${booking.number + 1})}">다음</a>
+					</li>
+				</ul>
+			</div>
 
 
 			<div id="noMatchMessage">

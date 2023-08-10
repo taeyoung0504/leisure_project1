@@ -17,6 +17,8 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 	Accommodation findByUsername(String username);
 
 	List<Accommodation> findByusername(String username);
+	
+	List<Accommodation> findAll();
 
 	Page<Accommodation> findAll(Pageable pageable);
 

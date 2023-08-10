@@ -31,7 +31,7 @@ li {
 
 .modal_declaration {
 	display: none;
-	/* 초기에는 모달 숨김 */
+	/* ì´ˆê¸°ì—ëŠ” ëª¨ë‹¬ ìˆ¨ê¹€ */
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -42,7 +42,7 @@ li {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* 모달 콘텐츠 스타일 */
+/* ëª¨ë‹¬ ì½˜í…ì¸  ìŠ¤íƒ€ì¼ */
 .modal-content_declaration {
 	margin: 15% auto;
 	padding: 20px;
@@ -182,7 +182,8 @@ li {
 
 .pre_pre {
 	font-family: 'SDGothic', 'Noto Sans KR', sans-serif;
-	font-size: 20px;
+	font-size: 16px;
+	text-wrap: wrap;
 }
 
 .oneday_room2 {

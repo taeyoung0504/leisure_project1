@@ -50,7 +50,7 @@ public class Food {
 	    private String shopInfo; // 가게 소개
 
 	    public Food() {
-	        // Default constructor required by JPA
+	       
 	    }
 
 	    public Food(String shopId, String shopAddr, String shopCategory, String shopName, String shopTel, String shopOpening, String shopParking, String shopMenu, String shopInfo) {
