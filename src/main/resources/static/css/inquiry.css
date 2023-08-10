@@ -2,13 +2,18 @@ label {
 			display: block;
 			margin-top: 10px;
 		}
+		
+		
+		h4{
+		color: #232323;
+		}
 
 		select {
 			width: 100%;
 			padding: 10px 5px;
 			margin: 10px 0px;
 			border-radius: 5px;
-
+			border: solid 1px #ddd;
 		}
 
 		textarea {
@@ -25,6 +30,9 @@ label {
 			cursor: pointer;
 			display: block;
 			margin: 0 auto;
+			border-radius: 5px;
+			margin-top: 10px;
+			float: right;
 		}
 
 
@@ -40,6 +48,7 @@ label {
 			margin-top: 5px;
 			box-sizing: border-box;
 			border-radius: 5px;
+			border: solid 1px #ddd;
 		}
 
 		#message {
@@ -48,6 +57,7 @@ label {
 			margin-top: 5px;
 			box-sizing: border-box;
 			border-radius: 5px;
+			border: solid 1px #ddd;
 		}
 
 		#new-inquiry-form,
@@ -68,6 +78,7 @@ label {
 
 		#container {
 			margin-left: -80px;
+			width: 800px;
 		}
 
 		.mypage_sidebar a {
