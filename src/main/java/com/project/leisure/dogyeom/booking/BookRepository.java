@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,6 +29,8 @@ public interface BookRepository extends JpaRepository<BookingVO, Integer> {
 
 	// 일반 List를 받아서 UserController에서 걸러줘도 됨 이 코드는 없어도 됨
 	List<BookingVO> findByBookStatusNotNull();
+	
+	Page<BookingVO> findAll(Pageable pageable);
 	
 //	void deleteByBookStatusIsNull();
 

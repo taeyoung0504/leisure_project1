@@ -381,7 +381,7 @@ nav .jj_menubar .jj_search .search_input {
 	display: inline-block;
 	justify-content: space-around;
 	height: 107px;
-	font-size: 20px;
+	font-size: 19px;
 	color: var(--text-color);
 	text-align: center;
 	padding: 0;
@@ -467,7 +467,7 @@ nav .jj_menubar .jj_search .search_input {
 .main {
 	width: 1000px;
 	height: 24px;
-	-size: 18px;
+	font-size: 18px;
 	line-height: 1;
 	color: var(--text-color);
 	text-align: left;

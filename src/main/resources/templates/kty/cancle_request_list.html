@@ -46,7 +46,8 @@
                   <td id="bbb_total"></td>
                   <td id="paymenttype"></td>
                   <td id="paymentNumber"></td>
-                    <td>
+                    <td class="cancleBtn">
+                    
                    <button class="cancel-button"
                             th:attr="class=${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result)) ? 'cancel-button grayscale-button' : 'cancel-button'}"
                             th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소

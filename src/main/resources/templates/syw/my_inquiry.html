@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 
 <head>
-	<title>DAEBAK</title>
+	<title>대구 숙박은 DAE BAK</title>
 	<link rel="stylesheet" href="/css/my_inquiry.css">
 	<title>Inquiry List</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,7 +24,7 @@
 				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_productList}"
 						sec:authorize="hasRole('ROLE_PARTNER')">내 상품 목록</a></li>
 				<li class="mypage_sidebar"><a th:href="@{/user/mypage/my_acc_bookList}"
-						sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
+						sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 			</ul>
 		</nav>
 		<div class="my-inquiry" th:if="${inquiries.size()>0}">

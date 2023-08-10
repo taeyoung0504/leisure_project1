@@ -1,6 +1,7 @@
 .boss_sell_name {
 	margin-top: 20px;
-	width: 800px;
+	/* width: 800px; */
+	text-wrap: nowrap;
 }
 
 .hidden_kty_hidden {
@@ -13,7 +14,7 @@
 
 .content-container {
 	/* 	margin-top:-30px; */
-	
+	width: 855px;
 }
 
 #noMatchMessage {
@@ -52,7 +53,7 @@ th, td {
 
 th {
 	/* background-color: #f2f2f2; */
-	width: 800px;
+	width: 855px;
 	color: #232323;
 	border-bottom: solid 1px #dddddd;
 }
