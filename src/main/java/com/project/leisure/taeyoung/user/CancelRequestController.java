@@ -29,13 +29,13 @@ public class CancelRequestController {
   
     @PostMapping("/reject/{id}")
     public ResponseEntity<?> rejectCancelRequest(@PathVariable Long id) {
-        // Retrieve the CancelRequest entity by its ID
+        
         CancelRequest cancelRequest = cancelRequestService.getCancelRequestById(id);
         if (cancelRequest == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Update the "result" field to "1" (assuming "1" means rejected)
+        // 결제 취소 요청 결과 _ 1: 거절  
         cancelRequest.setResult("1");
 
         // Save the updated entity

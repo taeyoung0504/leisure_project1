@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 
-
+// 회원가입을 위한 이메일 인증번호 발송 
 // 이메일 발송 설정파일
 @Configuration
 @PropertySource("classpath:application.properties")

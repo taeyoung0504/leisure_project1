@@ -20,7 +20,7 @@ public class CancelRequestService {
 	}
 
 	public List<CancelRequest> getCancleReq() {
-		Sort sort = Sort.by(Sort.Direction.DESC, "id"); // Assuming "id" is the field used for sorting
+		Sort sort = Sort.by(Sort.Direction.DESC, "id"); // 취소 요청 건이 최신순으로 보이도록 정렬
 		return cancelRequestRepository.findAll(sort);
 	}
 	
