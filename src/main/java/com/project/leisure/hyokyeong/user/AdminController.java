@@ -93,7 +93,7 @@ public class AdminController {
 	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
 
 	    if (!isAdmin) {
-	        return "redirect:/user/login"; // 어드민 권한이 아닐 경우 로그인 페이지로 리다이렉트
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
 	    }
 
 	    
@@ -126,7 +126,19 @@ public class AdminController {
 		return "khk/authorityPage";
 	}
 
-	
+	// 회원 정보 가져오기
+//	@GetMapping("/getUserByUsername")
+//	public String getUserByUsername(@RequestParam("username") String username, Model model) {
+//		Optional<Users> userOptional = userListService.getUserByUsername(username);
+//		if (userOptional.isPresent()) {
+//			Users user = userOptional.get();
+//			model.addAttribute("user", user);
+//			return "khk/authorityPage"; // 사용자 정보 페이지로 이동하는 뷰 이름을 반환하세요
+//		} else {
+//			return "khk/adminMain"; // 사용자를 찾을 수 없을 경우 메인으로
+//		}
+//	}
+
 	// 회원 등급 변경 기능
 	@PostMapping("/{id}/adminRole")
 	public String updateUserRole(@PathVariable("id") Long id, @RequestParam("role") UserRole role, Model model,
@@ -209,7 +221,24 @@ public class AdminController {
 		return "khk/declaration";
 	}
 
-
+//	// 리뷰 블라인드 해제
+//	@PostMapping("/unblind-review/{reviewId}")
+//	public String unblindReview(@PathVariable("reviewId") String reviewId) {
+//		// 리뷰 ID를 사용하여 리뷰 정보를 가져옵니다.
+//		Long id = Long.parseLong(reviewId);
+//		Optional<Review> reviewOptional = reviewRepository.findById(id);
+//		if (reviewOptional.isPresent()) {
+//			Review review = reviewOptional.get();
+//
+//			// 리뷰의 블라인드 상태를 변경합니다.
+//			review.setContentBlinded(false);
+//			reviewRepository.save(review);
+//
+//			return "redirect:/admin/declaration";
+//		} else {
+//			return "redirect:/admin/authorityPage";
+//		}
+//	}
 
 	@PostMapping("/unblind-review/{reviewId}")
 	public String unblindReview(@PathVariable("reviewId") String reviewId) {
@@ -298,7 +327,16 @@ public class AdminController {
 		model.addAttribute("notice", new Notice());
 		return "syw/notice";
 	}
-
+//
+//	@PostMapping("/createNotice")
+//	public String saveNotice(@ModelAttribute("notice") Notice notice, Principal principal) {
+//		String username = principal.getName();
+//		notice.setUsername(username);
+//		notice.setCreateDate(LocalDateTime.now());
+//		noticeService.createNotice(notice);
+//		return "redirect:/admin/adminNoticeList";
+//	}
+//	
 	
 	// 이미지를 저장할 경로를 아래 변수에 지정합니다.
     private static final String UPLOAD_DIR = "src/main/resources/static/img/notice_img/";
@@ -346,6 +384,16 @@ public class AdminController {
 		return "syw/notice_modify";
 	}
 
+//	@PostMapping("/modify/{id}")
+//	public String updateNotice(@PathVariable Integer id, @ModelAttribute("notice") Notice updatedNotice,
+//			Principal principal) {
+//		Notice notice = noticeService.getNotice(id);
+//		notice.setTitle(updatedNotice.getTitle());
+//		notice.setContent(updatedNotice.getContent());
+//		notice.setUsername(principal.getName());
+//		noticeService.updateNotice(id, notice);
+//		return "redirect:/admin/adminNoticeList";
+//	}
 	
 	 @PostMapping("/modify/{id}")
 	    public String updateNotice(@PathVariable Integer id, @ModelAttribute("notice") Notice updatedNotice,
@@ -355,7 +403,7 @@ public class AdminController {
 	        notice.setContent(updatedNotice.getContent());
 	        notice.setUsername(principal.getName());
 
-	        // 이미지 업로드와 이미지 경로 저장.
+	        // 이미지 업로드와 이미지 경로 저장을 처리합니다.
 	        if (!imageFile.isEmpty()) {
 	            try {
 	                String imageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
@@ -366,14 +414,14 @@ public class AdminController {
 	                notice.setImagePath(imagePathString);
 	            } catch (IOException e) {
 	                e.printStackTrace();
-	                // 필요에 따라 예외를 처리.
+	                // 필요에 따라 예외를 처리할 수 있습니다.
 	            }
 	        }
 
-	        // 공지사항을 데이터베이스에 저장.
+	        // 공지사항을 데이터베이스에 저장합니다.
 	        noticeService.updateNotice(id, notice, imageFile);
 
-	        // 공지사항 목록 페이지로 리다이렉트.
+	        // 공지사항 목록 페이지로 리다이렉트합니다.
 	        return "redirect:/admin/adminNoticeList";
 	    }
 

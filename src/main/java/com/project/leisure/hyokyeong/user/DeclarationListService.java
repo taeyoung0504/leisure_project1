@@ -64,6 +64,16 @@ public class DeclarationListService {
 	    };
 	}
 
+//	public void findUserByAuthor(String author) {
+//        List<Users> user = userRepository.findByUsername(author);
+//        if (user != null) {
+//            // 사용자를 찾았을 때의 동작 수행
+//        	user.setEnabled(!user.isEnabled()); // 예시로 계정의 활성화 상태를 반전시킴
+//            userRepository.save(user); // 변경된 사용자 정보 저장
+//        } else {
+//            // 사용자를 찾지 못했을 때의 동작 수행
+//        }
+//    }
 	
 	
 }
