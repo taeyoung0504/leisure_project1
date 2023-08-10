@@ -108,12 +108,12 @@ function submitCancellation() {
 	const bookNumValue = document.getElementById('bookNumValue').value;
 	const authenticatedUserName = document.getElementById('authenticatedUserName').value;
 
-	// Create a data object to send in the AJAX request
+	
 	const data = {
 		reasonCancel: reasonCancelInput,
 		bookNumValue: bookNumValue,
 		authenticatedUserName: authenticatedUserName,
-		result: null // Set the initial value of the "result" field to null (optional)
+		result: null 
 	};
 	const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
 //	const backendEndpointURL = 'http://localhost:8080/cancel-requests/submit';
@@ -136,6 +136,7 @@ function submitCancellation() {
 				});
 				
 				closeModal();
+				
 			} else {
 				// If there was an error, you can handle it here (e.g., display an error message)
 				console.error('Error submitting cancellation request.');
