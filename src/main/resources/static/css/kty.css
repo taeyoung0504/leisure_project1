@@ -1117,7 +1117,7 @@ td {
 	/* left: -388px; */
 	/* bottom: 480px; */
 	/* border:1px solid grey; */
-	padding-left: 10px;
+	padding-left: 24px;
 	padding-top: 10px;
 	width: 300px;
 	height: 100px;
@@ -1126,7 +1126,7 @@ td {
 	/* font-weight: bold; */
 	float: left;
 	display: flex;
-	right: 68px;
+	right: 25px;
 	color: #292929;
 }
 

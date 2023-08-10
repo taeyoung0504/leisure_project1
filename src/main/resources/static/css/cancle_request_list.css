@@ -35,8 +35,9 @@
 }
 
 .cancleBtn{
-	display: flex;
-	justify-content: center;
+    justify-content: center;
+    width: 170px;
+    height: auto;
 	}
 	
 	

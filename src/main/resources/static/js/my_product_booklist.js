@@ -116,6 +116,7 @@ function submitCancellation() {
 		result: null // Set the initial value of the "result" field to null (optional)
 	};
 	const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
+//	const backendEndpointURL = 'http://localhost:8080/cancel-requests/submit';
 
 	fetch(backendEndpointURL, {
 		method: 'POST',
