@@ -10,6 +10,9 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+
+// 리뷰신고 엔티티 
+
 @Entity
 @Getter
 @Setter
