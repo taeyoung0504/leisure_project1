@@ -597,7 +597,7 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage/my_acc_bookList")
-	public String my_acc_bookList(Principal principal, Model model) {
+	public String my_acc_bookList(Principal principal, Model model, Pageable pageable) {
 	    String username = principal.getName();
 
 	    // 해당 유저의 role이 partner인지 확인
@@ -609,7 +609,7 @@ public class UserController {
 	    }
 
 	    List<Accommodation> acc = this.accommodationService.my_acc_list();
-	    List<BookingVO> book = this.bookService.getbooklist();
+	    Page<BookingVO> bookPage = this.bookService.getbooklist(pageable);
 	    List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
 
 	    List<Accommodation> filteredBook = acc.stream()
@@ -617,7 +617,7 @@ public class UserController {
 	            .collect(Collectors.toList());
 
 	    model.addAttribute("acc", filteredBook); 
-	    model.addAttribute("booking", book);
+	    model.addAttribute("booking", bookPage);
 	    model.addAttribute("cancleList", canclereqList);
 	    return "kty/my_acc_bookList";
 	}

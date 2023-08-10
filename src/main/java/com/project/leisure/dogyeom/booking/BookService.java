@@ -152,6 +152,10 @@ public class BookService {
 		return bookingList;
 	}
 	
+	public Page<BookingVO> getbooklist(Pageable pageable) {
+	    return bookRepository.findAll(pageable);
+	}
+	
 	
 	 // bookStatus가 null인 것들은 제외
 	public List<BookingVO> getBookList2() {
