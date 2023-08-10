@@ -64,10 +64,10 @@ public class EmailService2 {
 		// 예약자 이름 중간에 * 문자 삽입
 		String maskedName = real_name.charAt(0) + "*" + real_name.substring(2);
 
-		message.addRecipients(MimeMessage.RecipientType.TO, to); // to 보내는 대상
-		message.setSubject("[DAEBAK] 예약완료"); // 메일 제목
+		message.addRecipients(MimeMessage.RecipientType.TO, to);  // to
+		message.setSubject("[DAEBAK] 예약완료");  // from
 
-		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용 가능
+		// 예약 완료 메일 템플릿
 		String msg = "";
 
 		msg += " <table text-align=\"center\" margin=\"0\" cellpadding=\"0\" cellspacing=\"0\"\r\n"
@@ -303,7 +303,7 @@ public class EmailService2 {
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // to, from
 
 		return message;
 
@@ -331,7 +331,7 @@ public class EmailService2 {
 		// 예약자 이름 중간에 * 문자 삽입
 		String maskedName = real_name.charAt(0) + "*" + real_name.substring(2);
 
-		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용 가능
+		
 		String msg = "";
 
 		msg += " <table text-align=\"center\" margin=\"0\" cellpadding=\"0\" cellspacing=\"0\"\r\n"
@@ -577,7 +577,7 @@ public class EmailService2 {
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // to , from
 
 		return message;
 	}
@@ -600,7 +600,7 @@ public class EmailService2 {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formattedDateTime = paymentDateTime.format(formatter);
 
-		// 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용
+	
 		String msg = "";
 
 		msg += " <table text-align=\"center\" margin=\"0\" cellpadding=\"0\" cellspacing=\"0\"\r\n"
@@ -834,7 +834,7 @@ public class EmailService2 {
 				+ "    </td>\r\n" + "    </tr>\r\n" + "    </tbody>\r\n" + "    </table>";
 
 		message.setText(msg, "utf-8", "html"); // 내용, charset타입, subtype
-		message.setFrom(new InternetAddress(id, "DAEBAK")); // 보내는 사람의 메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress(id, "DAEBAK")); // to,from
 
 		return message;
 
@@ -860,7 +860,7 @@ public class EmailService2 {
 	// 예약취소 메세지 전송
 	public void sendCancelEmailMessage(String to, String realName, String accName, String productType,
 			LocalDate checkIn, LocalDate checkOut, String payDate, String totalPrict, String canDate) throws Exception {
-		// 위에 지정한 형식으로 메세지를 보낸다
+		// 위에 지정한 형식으로 메세지 발송
 		MimeMessage message = cancelEmailMessage(to, realName, accName, productType, checkIn, checkOut, payDate,
 				totalPrict, canDate);
 

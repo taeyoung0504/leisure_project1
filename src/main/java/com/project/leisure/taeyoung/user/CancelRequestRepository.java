@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CancelRequestRepository extends JpaRepository<CancelRequest, Long> {
-    // Add custom query methods if needed
+  
 }

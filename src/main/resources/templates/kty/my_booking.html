@@ -35,17 +35,14 @@
 				th:href="@{/user/mypage/my_productList}"
 				sec:authorize="hasRole('ROLE_PARTNER')"> 내 상품 목록</a></li>
 		<li class="mypage_sidebar"><a
-				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 업소 예약리스트</a></li>
+				th:href="@{/user/mypage/my_acc_bookList}" sec:authorize="hasRole('ROLE_PARTNER')"> 내 숙소 예약리스트</a></li>
 		</ul>
 	</nav>
 	<div id="wrap">
 		<div id="container" th:each="book : ${paging.content} ">
 				
 			   <div id="left">
-				<!-- <img th:src="${book.productImg}" 
-								alt="Product Image" width="100%"
-								height="100%" class="">    -->
-				<!-- 이미지 태그에 회색 필터 클래스를 적용 -->
+				
 				<img th:src="${book.productImg}"
 					th:class="${book.bookStatus == '예약만료' or book.bookStatus == 'CANCEL_PAYMENT' 
             or book.bookStatus == '이용완료' ? 'gray-filter' : ''}"
@@ -67,25 +64,11 @@
 					<span id="payType" th:text="${book.payType}"></span><br>
 					<span th:text="${book.tempAccomId}" id="book_accID" ></span>
 					<span th:text="${book.tempRoomId}" id="book_roomID"></span>
-				<!-- <button id="cancelBtn">예약취소</button> -->
-				<!-- <button id="cancelBtn" class="cancelBtn"
-					th:class="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? 'gray-button' : 'cancelBtn'}"
-					th:text="${book.bookStatus == '이용중' or book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' ? '만료' : '예약취소'}">예약취소</button> -->
 					<button id="cancelBtn" class="cancelBtn"
     th:class="${book.bookStatus == '이용중' ? 'cancelBtn3' : (book.bookStatus == 'CANCEL_PAYMENT' or book.bookStatus == '이용완료' or book.bookStatus == 'CANCELED'? 'gray-button' : 'cancelBtn')}"
     th:text="${book.bookStatus == '이용중' ? '이용중' : book.bookStatus == '이용완료' ? '이용완료' : '예약취소'}">예약취소</button>
 					
-					<!--  수정 중
-					<div class="ssss21131231" th:each="acc : ${book.accommodation}">
-					<div th:text="${#authentication.name}"></div>
-			 			<div th:text="${acc.acc_name}">
-			 			</div>
-			 			<div th:each="review : ${acc.reviews}">
-			 					<div th:text="${review.author}"></div>
-			 				</div>
-			 		</div> -->
-			 		
-			 
+					
 			<button id="cancelBtn2" class="reviewBtn"
     th:if="${book.bookStatus == '이용완료'}"
     th:text="'리뷰작성'"
@@ -101,7 +84,7 @@
 			  <span id="del" th:if="${book.bookStatus == '이용중'}" th:onclick=warnning2()>&#215;</span>
 			  <span th:if="${book.bookStatus != '이용중' and book.bookStatus != '예약완료'}" th:onclick="|location.href='/user/mypage/my_booking_del/${book.bookNum}'|">&#215;</span>
 			</span>
-		</div> <!--  영역끝 -->
+		</div> 
 
 
 		<!-- 페이징처리 시작 -->
@@ -126,7 +109,7 @@
         </li>
     </ul>
 </div>
-    <!-- 페이징처리 끝 -->
+
 
 
 		
@@ -139,8 +122,6 @@
 	</div>
 
 
-
-	<!-- 이게 아니라 버튼에서 바로 매핑된 컨트롤러로 이동해야함. fetch를 거치는게 아니라 button에 매핑된 url로 s바로 이동해야함. -->
 	<script src="/js/kdg_my_booking_review_bookingList.js"></script>
 	</body>
 

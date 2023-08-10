@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -276,8 +277,7 @@ public class UserController {
 				System.out.println("ns_Credential :" + ns_Credential);
 				model.addAttribute("ns_Credential", ns_Credential);
 
-				// 'id' 필드의 값을 추출
-				// String id = output.replaceAll(".*id=(\\d+).*", "$1");
+				
 
 				// 'nickname' 필드의 값을 추출
 				// String nickname = output.replaceAll(".*nickname=([^,}]+).*", "$1");
@@ -548,10 +548,10 @@ public class UserController {
         Page<BookingVO> paging = new PageImpl<>(pagedFilteredBook, PageRequest.of(page, pageSize),
         		filteredBook.size());
 
-//        model.addAttribute("isEmpty", pagedFilteredBook.isEmpty());
+
         model.addAttribute("paging", paging);
 	    
-//	    model.addAttribute("bookList", filteredBook);
+
 	    return "kty/my_booking";
 	}
 	
@@ -581,14 +581,7 @@ public class UserController {
 			
 			return "redirect:/user/mypage/my_booking";
 		} 
-//			else {
-//			String booker_user = principal.getName();
-//			List<BookingVO> bookList = bookService.getBookList();
-//			List<BookingVO> filteredBook = bookList.stream()
-//					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
-//					.collect(Collectors.toList());
-//			return "kty/my_booking";
-//		}
+		
 		
 		 return null; 
 		
@@ -596,7 +589,7 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage/my_acc_bookList")
-	public String my_acc_bookList(Principal principal, Model model) {
+	public String my_acc_bookList(Principal principal, Model model, Pageable pageable) {
 	    String username = principal.getName();
 
 	    // 해당 유저의 role이 partner인지 확인
@@ -608,7 +601,7 @@ public class UserController {
 	    }
 
 	    List<Accommodation> acc = this.accommodationService.my_acc_list();
-	    List<BookingVO> book = this.bookService.getbooklist();
+	    Page<BookingVO> bookPage = this.bookService.getbooklist(pageable);
 	    List<CancelRequest> canclereqList = this.cancelRequestService.getCancleReq();
 
 	    List<Accommodation> filteredBook = acc.stream()
@@ -616,7 +609,7 @@ public class UserController {
 	            .collect(Collectors.toList());
 
 	    model.addAttribute("acc", filteredBook); 
-	    model.addAttribute("booking", book);
+	    model.addAttribute("booking", bookPage);
 	    model.addAttribute("cancleList", canclereqList);
 	    return "kty/my_acc_bookList";
 	}

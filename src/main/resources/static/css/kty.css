@@ -1103,10 +1103,7 @@ td {
 	justify-content: center;
 	align-items: center;
 	margin-top: -250px;
-	margin-left: 250px;
-	/* You can add more styling as needed */
 	height: 100vh;
-	/* This will center the content vertically within the viewport */
 }
 
 /* 주석 */
