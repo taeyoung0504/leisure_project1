@@ -88,7 +88,8 @@ function openModal(button) {
 	const modal = document.getElementById('myModal');
 	modal.style.display = 'block';
 
-	// Set the values in the modal form
+	document.getElementById('reasonCancle').value = '';
+	
 	document.getElementById('bookNumValue').value = bookNumValue;
 	document.getElementById('authenticatedUserName').value = authenticatedUserName;
 }
@@ -100,67 +101,67 @@ function closeModal() {
 
 
 
-function submitCancellation() {
-	// Get the input value from the textarea
-	const reasonCancelInput = document.getElementById('reasonCancle').value;
+ function submitCancellation() {
+            // Get the input value from the textarea
+            const reasonCancelInput = document.getElementById('reasonCancle').value;
 
-	// Get the bookNumValue and authenticatedUserName from the modal
-	const bookNumValue = document.getElementById('bookNumValue').value;
-	const authenticatedUserName = document.getElementById('authenticatedUserName').value;
+            // Get the bookNumValue and authenticatedUserName from the modal
+            const bookNumValue = document.getElementById('bookNumValue').value;
+            const authenticatedUserName = document.getElementById('authenticatedUserName').value;
 
-	// Create a data object to send in the AJAX request
-	const data = {
-		reasonCancel: reasonCancelInput,
-		bookNumValue: bookNumValue,
-		authenticatedUserName: authenticatedUserName,
-		result: null // Set the initial value of the "result" field to null (optional)
-	};
-	const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
+            // Create a data object to send in the AJAX request
+            const data = {
+                reasonCancel: reasonCancelInput,
+                bookNumValue: bookNumValue,
+                authenticatedUserName: authenticatedUserName,
+                result: null // Set the initial value of the "result" field to null (optional)
+            };
 
-	fetch(backendEndpointURL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-	})
-		.then(response => {
-			if (response.ok) {
-				Swal.fire({
-					position: 'center',
-					icon: 'success',
-					title: '취소요청이 완료되었습니다.',
-					showConfirmButton: false,
-					timer: 2000
-				});
-				closeModal();
-			} else {
-				// If there was an error, you can handle it here (e.g., display an error message)
-				console.error('Error submitting cancellation request.');
-			}
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});
-}
+            const backendEndpointURL = 'http://192.168.10.67:8080/cancel-requests/submit';
+
+            fetch(backendEndpointURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '취소요청이 완료되었습니다.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        closeModal();
+                    } else {
+                        // If there was an error, you can handle it here (e.g., display an error message)
+                        console.error('Error submitting cancellation request.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
 
 
 
 
 
 function hideCancelButton() {
-  // Get all the span elements within the table body
+
   const spanElements = document.querySelectorAll("tbody span");
 
-  // Loop through each span element
+ 
   spanElements.forEach((spanElement) => {
-    // Get the text value of the span element
+
     const spanText = spanElement.textContent.trim();
     console.log("Span Text:", spanText);
 
-    // Check if the span text value is "거절"
     if (spanText === "거절") {
-      // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+ 
       const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
       if (cancelButton) {
         cancelButton.style.display = "none";
