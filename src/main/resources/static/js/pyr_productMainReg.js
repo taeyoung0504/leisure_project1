@@ -43,9 +43,9 @@ $(document).ready(
 
 
 		//이미지
-		const imageInput = document
+		const imageInput = document //input 감지
 			.getElementById('addMainPhoto');
-		const mainImgView = document
+		const mainImgView = document //해당 이미지 보여주는 부분
 			.getElementById('mainImgView');
 
 
@@ -59,8 +59,8 @@ $(document).ready(
 
 		//이미지 변경 여부를 표시(변경 후 => true)
 		imageInput.addEventListener('change', function(event) {
-			const file = event.target.files[0];
-			const reader = new FileReader();
+			let file = event.target.files[0];
+			let reader = new FileReader();
 
 			reader.addEventListener('load', function() {
 				mainImgView.src = reader.result;
@@ -135,61 +135,31 @@ $(document).ready(
 				return;
 			}
 
-			if (isImageChanged) {
-				// 이미지가 변경되었다면
-				var form = $('#productForm')[0];
-				var formData = new FormData(form);
+			var form = $('#productForm')[0];
+			var formData = new FormData(form);
 
-				if (!isImageChanged) {
-					// 이미지 파일이 변경되지 않은 경우 formData에서 이미지 파일 필드를 삭제
-					formData.delete('partnerMainImg');
-				}
-
-				$.ajax({
-					url: '/partner/product/productMainInfo',
-					type: 'POST',
-					data: formData,
-					enctype: 'multipart/form-data',
-					processData: false,
-					contentType: false,
-					success: function(response) {
-
-						Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
-							window.location.href = '/partner/product/registerRoom/' + response;
-						});
-
-					},
-					error: function(xhr) {
-						Swal.fire(xhr.responseText) // 수정 실패 알림 메세지
-						window.location.href = '/partner/product/registerRoom/' + response;
-					}
-				});
-			} else {
-
-				// 이미지가 변경되었다면
-				var form = $('#productForm')[0];
-				var formData = new FormData(form);
-
-				$.ajax({
-					url: '/partner/product/productMainInfo',
-					type: 'POST',
-					data: formData,
-					enctype: 'multipart/form-data',
-					processData: false,
-					contentType: false,
-					success: function(response) {
-
-						Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
-							window.location.href = '/partner/product/registerRoom/' + response;
-						});
-
-					},
-					error: function(xhr) {
-						Swal.fire(xhr.responseText) // 수정 실패 알림 메세지
-						window.location.href = '/partner/product/registerRoom/' + response;
-					}
-				});
-
+			if (!isImageChanged) {
+				formData.delete('partnerMainImg');
 			}
+
+			$.ajax({
+				url: '/partner/product/productMainInfo',
+				type: 'POST',
+				data: formData,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function(response) {
+					Swal.fire('수정성공', '수정 완료되었습니다', 'success').then(() => {
+						window.location.href = '/partner/product/registerRoom/' + response;
+					});
+				},
+				error: function(xhr) {
+					Swal.fire(xhr.responseText); // 수정 실패 알림 메세지
+					window.location.href = '/partner/product/registerRoom/' + response;
+				}
+			});
+
+					
 		});
 	});

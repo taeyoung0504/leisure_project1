@@ -356,8 +356,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
-						
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, categoryPredicate2, keywordPredicate2);
 			}
@@ -639,7 +638,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(categoryPredicate2, keywordPredicate2);
 			}
@@ -1399,7 +1398,7 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true); // Remove duplicates
 
-				Predicate keywordPredicate =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw8Value = Integer.parseInt(kw8);
 				Predicate keywordPredicate2 = criteriaBuilder.greaterThanOrEqualTo(root.get("acc_averPrice"), kw8Value);
@@ -1560,7 +1559,7 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1682,7 +1681,7 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -2116,17 +2115,17 @@ public class AccommodationService {
 
 	}
 
-	//해당 유저의 acc가 맞는지 확인
+	// 해당 유저의 acc가 맞는지 확인
 	public boolean isAccommodationOwner(Long acc_id, String username) {
-		 // acc_id에 해당하는 숙소 정보 조회
-        Optional<Accommodation> findOwnerAccommodation = accommodationRepository.findById(acc_id);
-        
-        //만일 Acc 에서 숙소 정보가 있다면 
-        if (findOwnerAccommodation.isPresent()) {
-            Accommodation accommodation = findOwnerAccommodation.get();
-            // 조회한 숙소 정보의 소유자(username)와 현재 사용자의 이름을 비교하여 같은지 확인
-            return accommodation.getUsername().equals(username); //equals가 true 반환
-        }
+		// acc_id에 해당하는 숙소 정보 조회
+		Optional<Accommodation> findOwnerAccommodation = accommodationRepository.findById(acc_id);
+
+		// 만일 Acc 에서 숙소 정보가 있다면
+		if (findOwnerAccommodation.isPresent()) {
+			Accommodation accommodation = findOwnerAccommodation.get();
+			// 조회한 숙소 정보의 소유자(username)와 현재 사용자의 이름을 비교하여 같은지 확인
+			return accommodation.getUsername().equals(username); // equals가 true 반환
+		}
 		return false;
 	}
 }
