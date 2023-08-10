@@ -421,6 +421,11 @@ select {
 	border: solid 1px #717171;
 }
 
+.accdeleteBtn{
+	background-color: #fff0;
+    color: #a34a4a;
+    border: solid 1px #a34a4a;
+    }
 
 #home {
 	/* font-weight: bold; */
