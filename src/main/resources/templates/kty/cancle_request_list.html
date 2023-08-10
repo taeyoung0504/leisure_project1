@@ -16,9 +16,7 @@
    <h1>예약 취소 요청</h1>
    
    <div class="container">
-      <div>
-       <div id="searchResults">
-      
+      <div id="searchResults">
          <table id="cancelTable">
             <thead>
                <tr>
@@ -48,20 +46,18 @@
                   <td id="bbb_total"></td>
                   <td id="paymenttype"></td>
                   <td id="paymentNumber"></td>
-                    <td>
-              
+                    <td class="cancleBtn">
                     
                    <button class="cancel-button"
                             th:attr="class=${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result)) ? 'cancel-button grayscale-button' : 'cancel-button'}"
-                            th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소</button>
+                            th:disabled="${(cancelReq.result != null and !#strings.isEmpty(cancelReq.result))}">결제취소
                         <button class="reject-button">거절하기</button>
-                       
                     </td>   
                </tr>
 
             </tbody>
          </table>
-</div>
+
 
          <br>
          <table id="bookingTable" disabled >
