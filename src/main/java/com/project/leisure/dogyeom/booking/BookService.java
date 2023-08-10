@@ -152,6 +152,7 @@ public class BookService {
 		return bookingList;
 	}
 	
+	
 	 // bookStatus가 null인 것들은 제외
 	public List<BookingVO> getBookList2() {
 		List<BookingVO> bookingList = this.bookRepository.findByBookStatusNotNull();;
