@@ -13,28 +13,27 @@
 	<html layout:decorate="~{khk/adminNavbar}">
 	<div layout:fragment="adminNav" class="container my-3">
 
+			<h1>1:1 문의 답변</h1>
 		<div class="content-container">
-			<h2>1:1 문의 답변</h2>
 			<div class="inquiry_list" th:if="${inquiry.isPresent()}" style="margin-top: 70px;">
-				<p th:text="${inquiry.get().type}" style="font-weight: bold; font-size: 20px;"></p>
+				<div class="inquiryType" th:text="${inquiry.get().type}"></div>
+					<span th:text="${inquiry.get().title}" class="inquiry_title" ></span>
+				<div class="inquiry_username">
+					<span>작성자 : </span><span
+						th:text="${inquiry.get().username}" ></span>
+				</div>
 
-				<p>
-					<span th:text="${inquiry.get().title}" style="font-size: 20px;"></span>
-					<span style="margin-left: 50px;font-size: 15px;">작성자 : </span><span
-						th:text="${inquiry.get().username}" style="font-size: 15px;"></span>
-				</p>
-
-				<div class="inquiry-container" style="padding: 20px;">
+				<div class="inquiry-container">
 					<p th:text="${inquiry.get().message}" style="white-space: pre-line;"></p>
 					<p th:text="${#temporals.format(inquiry.get().createDate, 'yyyy-MM-dd HH:mm')}"></p>
 				</div>
 			</div>
 
 			<div class="previous_answers">
-				<h3>문의 답변</h3>
+				<h5 class="inquiry_title">문의 답변</h5>
 				<table>
 					<tr>
-						<th>답변</th>
+						<th  class="inquiry_answer">답변 내용</th>
 					</tr>
 					<tr th:each="answer : ${inquiry.get().inquiryAnswer}">
 						<div class="answer-container" style="padding: 20px;">

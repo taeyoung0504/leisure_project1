@@ -191,9 +191,10 @@ table {
 }
 
 th, td {
-	padding: 8px;
+	padding: 7px;
 	text-align: center;
 	border-bottom: 1px solid #ddd;
+	min-width: 62px;
 }
 
 form {
