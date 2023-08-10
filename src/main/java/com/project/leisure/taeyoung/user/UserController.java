@@ -277,8 +277,7 @@ public class UserController {
 				System.out.println("ns_Credential :" + ns_Credential);
 				model.addAttribute("ns_Credential", ns_Credential);
 
-				// 'id' 필드의 값을 추출
-				// String id = output.replaceAll(".*id=(\\d+).*", "$1");
+				
 
 				// 'nickname' 필드의 값을 추출
 				// String nickname = output.replaceAll(".*nickname=([^,}]+).*", "$1");
@@ -549,10 +548,10 @@ public class UserController {
         Page<BookingVO> paging = new PageImpl<>(pagedFilteredBook, PageRequest.of(page, pageSize),
         		filteredBook.size());
 
-//        model.addAttribute("isEmpty", pagedFilteredBook.isEmpty());
+
         model.addAttribute("paging", paging);
 	    
-//	    model.addAttribute("bookList", filteredBook);
+
 	    return "kty/my_booking";
 	}
 	
@@ -582,14 +581,7 @@ public class UserController {
 			
 			return "redirect:/user/mypage/my_booking";
 		} 
-//			else {
-//			String booker_user = principal.getName();
-//			List<BookingVO> bookList = bookService.getBookList();
-//			List<BookingVO> filteredBook = bookList.stream()
-//					.filter(bookingVO -> bookingVO.getBookerID().equals(booker_user))
-//					.collect(Collectors.toList());
-//			return "kty/my_booking";
-//		}
+		
 		
 		 return null; 
 		
