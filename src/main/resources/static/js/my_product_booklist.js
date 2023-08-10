@@ -134,6 +134,7 @@ function submitCancellation() {
 					showConfirmButton: false,
 					timer: 2000
 				});
+				
 				closeModal();
 			} else {
 				// If there was an error, you can handle it here (e.g., display an error message)
