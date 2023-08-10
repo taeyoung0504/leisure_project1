@@ -180,13 +180,7 @@
 								<span> 원</span>&nbsp&nbsp
 							</span>
 						</div>
-						<!-- 					<div class="hotel_minPrice_hk"> -->
-						<!-- 						<span class="minfee"> <span>최소금액: </span>&nbsp&nbsp <span -->
-						<!-- 							class="productAmount" -->
-						<!-- 							th:text="${accommodation.product.product_amount}"></span> &nbsp <span> -->
-						<!-- 								원</span>&nbsp&nbsp -->
-						<!-- 						</span> -->
-						<!-- 					</div> -->
+						
 				</div>
 				<div class="room-photo" th:style="'background-image: url(' + ${accommodations.acc_img} + ');'"></div>
 				</a>
@@ -200,23 +194,6 @@
 				</p>
 			</div>
 
-
-
-
-
-
-
-
-
-			<!--  
-<div th:each="accommodations : ${accommodations}" class="room-entry" th:style="'background-image: url(' + ${product.productImgs[0].img_url} + ')'">
-  <p class="room_info" style="color: white;">
-    <span th:text="${product.product_type}" style="font-size: 30px;"></span><br><br>
-    <span id="fee" style="font-size: 20px;">요금: </span><span class="productAmount" th:text="${product.product_amount}" style="font-size: 20px;"></span>  <span style="font-size:20px;">원<span style="font-size:15px;"> (1박 기준)</span><br><br>
-    <span style="font-size: 20px;">이용시간 : </span><span class="roomtime" th:text="${product.checkin}" style="font-size: 20px;"></span>&nbsp&nbsp<span style="font-size:20px;"> ~</span>&nbsp&nbsp<span class="roomtime" th:text="${product.checkout}" style="font-size: 20px;"></span><br><br>
-    <span th:text="${product.product_detail}" style="font-size: 20px;"></span>  
-  </p>
-</div> -->
 
 
 			<!-- 필터링 페이징 -->
@@ -455,63 +432,12 @@
 				</ul>
 			</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<form th:action="@{/tour/daegu_room}" method="get" id="searchForm">
 				<input type="hidden" id="kw" name="kw" th:value="${kw}"> <input type="hidden" id="page" name="page"
 					th:value="${paging.number}">
 			</form>
 
-			<!--  
-             <form th:action="@{/tour/daegu_room2}" method="get" id="searchForm2">
-            <input type="hidden" id="kw2" th:value="${kw2}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-           <form th:action="@{/tour/daegu_room3}" method="get" id="searchForm3">
-            <input type="hidden" id="kw5" th:value="${kw5}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-          <form th:action="@{/tour/daegu_room4}" method="get" id="searchForm4">
-            <input type="hidden" id="kw6" th:value="${kw6}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-          <form th:action="@{/tour/daegu_room5}" method="get" id="searchForm5">
-            <input type="hidden" id="kw7" th:value="${kw7}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-         <form th:action="@{/tour/daegu_room6}" method="get" id="searchForm6">
-            <input type="hidden" id="kw2" th:value="${kw2}">
-            <input type="hidden" id="kw5" th:value="${kw5}">
-            <input type="hidden" id="kw6" th:value="${kw6}">
-            <input type="hidden" id="kw7" th:value="${kw7}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-            <form th:action="@{/tour/daegu_room7}" method="get" id="searchForm6">
-            <input type="hidden" id="kw2" th:value="${kw2}">
-            <input type="hidden" id="kw5" th:value="${kw5}"> <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-         </form>
-            <form th:action="@{/tour/daegu_room8}" method="get" id="searchForm8">
-            <input type="hidden" id="kw2" th:value="${kw2}">
-            <input type="hidden" id="kw5" th:value="${kw5}">
-            <input type="hidden" id="kw6" th:value="${kw6}">
-             <input
-               type="hidden" id="page" name="page" th:value="${paging.number}">
-         </form>
-         -->
+		
 		</div>
 </body>
 
