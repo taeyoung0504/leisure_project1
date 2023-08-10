@@ -8,7 +8,7 @@ label {
 			padding: 10px 5px;
 			margin: 10px 0px;
 			border-radius: 5px;
-
+			border: solid 1px #ddd;
 		}
 
 		textarea {
@@ -45,6 +45,7 @@ label {
 			margin-top: 5px;
 			box-sizing: border-box;
 			border-radius: 5px;
+			border: solid 1px #ddd;
 		}
 
 		#message {
@@ -53,12 +54,13 @@ label {
 			margin-top: 5px;
 			box-sizing: border-box;
 			border-radius: 5px;
+			border: solid 1px #ddd;
 		}
 
 		#new-inquiry-form,
 		#my-inquiry-container {
 			margin-left: 200px;
-			max-width: 700px;
+			max-width: 1000px;
 		}
 
 
@@ -69,6 +71,7 @@ label {
 		#new-inquiry-form {
 			margin-left: -40px;
 			margin-top: 40px;
+			width: 800px;
 		}
 
 		input[type="submit"] {
@@ -78,7 +81,11 @@ label {
 			padding: 10px 20px;
 			cursor: pointer;
 			display: block;
-			margin: 0 auto;
+			/* margin: 0 auto; */
+			border-radius: 5px;
+			margin-top: 20px;
+			/* margin-left: 651px; */
+			float: right;
 		}
 
 		.mypage_sidebar a {
@@ -91,4 +98,9 @@ label {
 
 		#message {
 			box-sizing: border-box;
+		}
+
+		h4{
+			color:#232323;
+			
 		}

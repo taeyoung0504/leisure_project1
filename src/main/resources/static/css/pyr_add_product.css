@@ -17,12 +17,12 @@ a {
     color: inherit;
 }
 
-/* 유효성 검사 조건 불충족 시 에러 메세지  */
+/* ìœ íš¨ì„± ê²€ì‚¬ ì¡°ê±´ ë¶ˆì¶©ì¡± ì‹œ ì—ëŸ¬ ë©”ì„¸ì§€  */
 .error-message {
     font-size: 12px;
 }
 
-/* 상품 수정 유효성 검사 에러 메세지  */
+/* ìƒí’ˆ ìˆ˜ì • ìœ íš¨ì„± ê²€ì‚¬ ì—ëŸ¬ ë©”ì„¸ì§€  */
 .error {
     font-size: 11px;
     padding: 0 0 0 80px;
@@ -41,7 +41,7 @@ a {
     margin-top: 3px;
 }
 
-/* ========== 상품 등록 ========== */
+/* ========== ìƒí’ˆ ë“±ë¡ ========== */
 #Product-registration {
     width: 880px;
     height: auto;
@@ -67,7 +67,7 @@ a {
     margin-top: 8px;
 }
 
-/* 입력 필드 스타일 */
+/* ìž…ë ¥ í•„ë“œ ìŠ¤íƒ€ì¼ */
 #Product-registration input[type="text"],
 #Product-registration input[type="number"],
 #Product-registration input[type="time"],
@@ -81,7 +81,7 @@ a {
     box-sizing: border-box;
 }
 
-/* 방 등록, 금액 */
+/* ë°© ë“±ë¡, ê¸ˆì•¡ */
 #roomAndAmount {
     display: flex;
     justify-content: space-around;
@@ -91,13 +91,13 @@ a {
     width: 45%;
 }
 
-/* 상세 설명 */
+/* ìƒì„¸ ì„¤ëª… */
 #pr-detail {
     width: 95%;
     margin: 0 auto;
 }
 
-/* 방 갯수, 최대 수용인원 */
+/* ë°© ê°¯ìˆ˜, ìµœëŒ€ ìˆ˜ìš©ì¸ì› */
 #countArea {
     display: flex;
     justify-content: space-around;
@@ -107,7 +107,7 @@ a {
     width: 45%;
 }
 
-/* 업소등록 시간  */
+/* ì—…ì†Œë“±ë¡ ì‹œê°„  */
 #timeArea {
     display: flex;
     justify-content: space-around;
@@ -118,7 +118,7 @@ a {
     width: 45%;
 }
 
-/* 파일 선택  */
+/* íŒŒì¼ ì„ íƒ  */
 
 
 #fileAreaText {
@@ -161,7 +161,7 @@ a {
     border: 1px solid rgb(199, 198, 198);
     border-radius: 2px;
     margin-bottom: 15px;
-    /* 내용이 요소의 크기를 초과할 때만 스크롤바 표시 */
+    /* ë‚´ìš©ì´ ìš”ì†Œì˜ í¬ê¸°ë¥¼ ì´ˆê³¼í•  ë•Œë§Œ ìŠ¤í¬ë¡¤ë°” í‘œì‹œ */
     /* overflow: auto; */
 }
 
@@ -208,7 +208,7 @@ a {
 
 
 
-/* li 관련 수정 */
+/* li ê´€ë ¨ ìˆ˜ì • */
 
 .file_info_li {
     display: flex;
@@ -262,11 +262,11 @@ a {
 }
 
 
-/* 파일 선택 수정중 */
+/* íŒŒì¼ ì„ íƒ ìˆ˜ì •ì¤‘ */
 
 
 
-/* 버튼 스타일 */
+/* ë²„íŠ¼ ìŠ¤íƒ€ì¼ */
 #Product-registration button {
     /* padding: 10px 20px; */
     background-color: var(--main-color);
@@ -302,7 +302,7 @@ a {
     width: 45%;
 }
 
-/* ============= 상품 리스트 ============= */
+/* ============= ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ ============= */
 .box {
     width: 800px;
     height: 400px;
@@ -338,7 +338,7 @@ a {
     background-color: #cc0000;
 }
 
-/* 상품리스트 h2 */
+/* ìƒí’ˆë¦¬ìŠ¤íŠ¸ h2 */
 #prListEdit .list_title {
     font-size: 30px;
     font-weight: bold;
@@ -347,7 +347,7 @@ a {
     margin-bottom: 20px;
 }
 
-/* ==== 글자 왼쪽 여백 조정 및 해당 영역의 글자 크기 조정==== */
+/* ==== ê¸€ìž ì™¼ìª½ ì—¬ë°± ì¡°ì • ë° í•´ë‹¹ ì˜ì—­ì˜ ê¸€ìž í¬ê¸° ì¡°ì •==== */
 .Product_contents .prName .product_type,
 .Product_contents .prName .edit_type,
 .Product_contents .pdDetail .product_detail,
@@ -366,7 +366,7 @@ a {
     font-size: 13px;
 }
 
-/* ============== 이미지 부분 시작 ================== */
+/* ============== ì´ë¯¸ì§€ ë¶€ë¶„ ì‹œìž‘ ================== */
 .boxCintainer {
     flex-direction: column;
     width: 50%;
@@ -397,7 +397,7 @@ a {
     border-top-left-radius: 8px;
 }
 
-/* 배열에 저장된 이미지 슬라이드 위해서 바로 보여지는 이미지 숨김 */
+/* ë°°ì—´ì— ì €ìž¥ëœ ì´ë¯¸ì§€ ìŠ¬ë¼ì´ë“œ ìœ„í•´ì„œ ë°”ë¡œ ë³´ì—¬ì§€ëŠ” ì´ë¯¸ì§€ ìˆ¨ê¹€ */
 .showImgs img {
     display: none;
 }
@@ -441,7 +441,7 @@ a {
     right: 10px;
 }
 
-/* display: flex하기 위한 영역 */
+/* display: flexí•˜ê¸° ìœ„í•œ ì˜ì—­ */
 .imgLists .image-list {
     box-sizing: border-box;
     display: flex;
@@ -461,7 +461,7 @@ a {
     position: relative;
 }
 
-/* 해당 이미지 리스트에 있는 이미지 영역 */
+/* í•´ë‹¹ ì´ë¯¸ì§€ ë¦¬ìŠ¤íŠ¸ì— ìžˆëŠ” ì´ë¯¸ì§€ ì˜ì—­ */
 .imgLists .image-list li {
     list-style-type: none;
     position: relative;
@@ -479,7 +479,7 @@ a {
     border-radius: 4px;
 }
 
-/* 이미지가 담겨져 있는 크기를 조정 */
+/* ì´ë¯¸ì§€ê°€ ë‹´ê²¨ì ¸ ìžˆëŠ” í¬ê¸°ë¥¼ ì¡°ì • */
 .img_list_position {
     width: 100px;
     height: 90px;
@@ -487,7 +487,7 @@ a {
     border-radius: 4px;
 }
 
-/* 상품리스트 이미지 추가 관련  */
+/* ìƒí’ˆë¦¬ìŠ¤íŠ¸ ì´ë¯¸ì§€ ì¶”ê°€ ê´€ë ¨  */
 .imageUploadContainer {
     position: absolute;
     transition: background-color 0.3s ease;
@@ -508,19 +508,19 @@ a {
     margin: 20px 27px 15px 15px;
 }
 
-/* 이미지 추가에서 파일 선택 숨김 */
+/* ì´ë¯¸ì§€ ì¶”ê°€ì—ì„œ íŒŒì¼ ì„ íƒ ìˆ¨ê¹€ */
 .imageUploadInput {
     display: none;
 }
 
-/* =========== 이미지 옆 내용 ============ */
+/* =========== ì´ë¯¸ì§€ ì˜† ë‚´ìš© ============ */
 
-/* 내용들이 담겨야 하는부분 */
+/* ë‚´ìš©ë“¤ì´ ë‹´ê²¨ì•¼ í•˜ëŠ”ë¶€ë¶„ */
 .Product_contents {
     /* border: 1px rgb(163, 165, 168) solid; */
     width: 50%;
     padding: 10px;
-    /* 안에 내용 정렬 */
+    /* ì•ˆì— ë‚´ìš© ì •ë ¬ */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -542,6 +542,7 @@ a {
     display: inline-block;
     width: 120px;
     margin-left: 8px;
+    overflow-y: scroll;
 }
 
 .Product_contents p input {
@@ -554,7 +555,7 @@ a {
     margin-left: 8px;
 }
 
-/* 객실 이름 */
+/* ê°ì‹¤ ì´ë¦„ */
 .prName {
     display: flex;
 }
@@ -574,7 +575,7 @@ a {
     margin-left: 10px;
 }
 
-/* 상세 설명 */
+/* ìƒì„¸ ì„¤ëª… */
 .pdDetail {
     display: flex;
     margin-top: 20px;
@@ -599,7 +600,7 @@ a {
     margin-left: 10px;
 }
 
-/* 금액 */
+/* ê¸ˆì•¡ */
 .pdAmount {
     display: flex;
     /* margin-bottom: 8px */
@@ -627,7 +628,7 @@ a {
     display: inline-block;
 }
 
-/* 객실 수 , 최대 인원 수  */
+/* ê°ì‹¤ ìˆ˜ , ìµœëŒ€ ì¸ì› ìˆ˜  */
 .pdCountArea {
     display: flex;
     justify-content: space-around;
@@ -635,7 +636,7 @@ a {
     margin-right: 10px;
 }
 
-/* 상품리트스 시간 */
+/* ìƒí’ˆë¦¬íŠ¸ìŠ¤ ì‹œê°„ */
 .pdTimeArea {
     display: flex;
     justify-content: space-around;
@@ -643,7 +644,7 @@ a {
     margin-right: 10px;
 }
 
-/* 버튼 div */
+/* ë²„íŠ¼ div */
 .btnArea {
     display: flex;
     justify-content: space-around;
