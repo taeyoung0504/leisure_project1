@@ -70,13 +70,25 @@
       }
 
       .edit-button {
-         padding: 1px 5px;
+         padding: 2px 5px;
          cursor: pointer;
+         background-color: white;
+         border: 1px solid #ddd;
+         /* padding: 3px; */
+         margin-bottom: 17px;
+         /* margin-right: 20px; */
+         border-radius: 5px;
       }
 
       .delete-button {
-         padding: 1px 5px;
+         padding: 2px 5px;
          cursor: pointer;
+         background-color: white;
+         border: 1px solid #ddd;
+         /* padding: 3px; */
+         margin-bottom: 17px;
+         /* margin-right: 20px; */
+         border-radius: 5px;
       }
 
       .answer-content h4 {
@@ -141,10 +153,12 @@
       .button-container {
       display: none;
       background-color: white;
-      border: 1px solid #ccc;
+      /* border: 1px solid #ddd; */
       padding: 3px;
       margin-bottom: 17px;
       margin-right: 20px;
+      border-radius: 5px;
+      color: #232323;
    }
    
    .swal2-styled.swal2-confirm {
