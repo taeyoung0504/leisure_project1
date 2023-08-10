@@ -122,6 +122,26 @@
 			<!--  모달 끝 -->
 
 
+			<div>
+					<ul class="pagination">
+						<!-- 이전 페이지 -->
+						<li class="page-item page_previous" th:classappend="${booking.number == 0} ? 'disabled'">
+							<a class="page-link" th:href="@{/mypage/my_acc_bookList(page=${booking.number - 1})}">이전</a>
+						</li>
+						<!-- 페이지 번호들 -->
+						<li th:each="i : ${#numbers.sequence(0, booking.totalPages - 1)}"
+							th:class="${i == booking.number} ? 'active page-item' : 'page-item'">
+							<a class="page-link" th:href="@{/user/mypage/my_acc_bookList(page=${i})}" th:text="${i + 1}"></a>
+						</li>
+						<!-- 다음 페이지 -->
+						<li class="page-item page_next"
+							th:classappend="${booking.number+1 == booking.totalPages} ? 'disabled'">
+							<a class="page-link" th:href="@{/mypage/my_acc_bookList(page=${booking.number + 1})}">다음</a>
+						</li>
+					</ul>
+				</div>
+
+
 			<div id="noMatchMessage">
 				<strong>예약내역이 없습니다.</strong>
 			</div>

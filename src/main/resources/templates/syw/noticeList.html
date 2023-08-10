@@ -3,7 +3,7 @@
 
 <head>
 	<link rel="stylesheet" href="/css/noticeList.css">
-	<title>DAEBAK</title>
+	<title>대구 숙박은 DAE BAK</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function () {
@@ -56,16 +56,28 @@
 
 			</div>
 
-			<div class="pagination">
-				<ul>
-					<li class="page-item" th:if="${page.number > 0}"><a class="page-link" href="#"
-							th:href="@{/more/noticeList(page=${page.number - 1})}">이전</a></li>
+			<div>
+				<ul class="pagination" style="margin-top: 30px;">
+
+					<!-- 이전 버튼 -->
+					<li class="page-item page_previous" th:classappend="${page.number == 0} ? 'disabled' : ''">
+						<a class="page-link" th:href="@{/more/noticeList(page=${page.number - 1})}">
+							이전
+						</a>
+					</li>
+
+					<!-- 숫자 페이징 -->
 					<li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-	th:class="${i == page.number} ? 'active page-item' : 'page-item'">
-	<a class="page-link" href="#" th:href="@{/more/noticeList(page=${i})}" th:text="${i + 1}"></a>
-</li>
-					<li class="page-item" th:if="${page.number < page.totalPages - 1}">
-						<a class="page-link" href="#" th:href="@{/more/noticeList(page=${page.number + 1})}">다음</a>
+						th:class="${i == page.number} ? 'active page-item' : 'page-item'">
+						<a class="page-link" th:href="@{/more/noticeList(page=${i})}" th:text="${i + 1}">
+						</a>
+					</li>
+
+					<!-- 다음 버튼 -->
+					<li class="page-item page_next" th:classappend="${page.number+1 == page.totalPages} ? 'disabled' : ''">
+						<a class="page-link" th:href="@{/more/noticeList(page=${page.number + 1})}">
+							다음
+						</a>
 					</li>
 				</ul>
 			</div>
