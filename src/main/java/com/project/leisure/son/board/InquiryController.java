@@ -57,12 +57,12 @@ public class InquiryController {
 
     @PostMapping("/inquiry")
     public String submitInquiryForm(Inquiry inquiry, Principal principal) {
-        String username = principal.getName(); // 현재 로그인한 사용자의 이름(username) 가져오기
-        inquiry.setUsername(username); // Inquiry 객체에 사용자 이름(username) 설정
+        String username = principal.getName(); 
+        inquiry.setUsername(username); 
 
-        inquiry.setCreateDate(LocalDateTime.now()); // 현재 시간으로 작성 시간 설정
+        inquiry.setCreateDate(LocalDateTime.now()); 
 
-        inquiryRepository.save(inquiry); // 데이터베이스에 Inquiry 객체 저장
+        inquiryRepository.save(inquiry); 
 
         return "redirect:/user/mypage/my_inquiry";
     }
