@@ -24,12 +24,12 @@ public class ProductService {
 	private final ProductImgRepository productImgRepository;
 	private final AccommodationRepository accommodationRepository;
 
-	// Product에 대한 모든 것을 출력
+	
 	public List<Product> getList() {
 		return this.productRepository.findAll();
 	}
 
-	// ProductImg에 대한 모든 것을 출력
+	
 	public List<ProductImg> getImgList() {
 		return this.productImgRepository.findAll();
 	}
@@ -88,20 +88,20 @@ public class ProductService {
 				// 이미지 경로 DB 저장
 				productImg.setImg_url("/img/product_img/" + fileName);
 
-				// 이미지를 저장한다
+				// 이미지를 저장
 				this.productImgRepository.save(productImg);
 
 				// 상품 정보 저장
 				this.productRepository.save(product);
 
 			} catch (IOException e) {
-				// 예외 처리
+				
 				e.printStackTrace();
-				return 0; // 예외 발생 시 0을 반환하도록 수정
+				return 0; 
 			}
 		}
 
-		return 1; // 이미지 저장 성공 시 1을 반환하도록 수정
+		return 1; 
 	}
 
 	// 상품 등록 기능 구현
@@ -141,9 +141,9 @@ public class ProductService {
 
 			productRepository.save(product);
 
-			return 1; // 성공
+			return 1; 
 		}
-		return 0; // 실패
+		return 0; 
 	}
 
 	// 상품 전체 삭제
@@ -160,10 +160,10 @@ public class ProductService {
 
 			productRepository.delete(product);
 
-			return 1; // 성공
+			return 1; 
 		}
 
-		return 0; // 실패
+		return 0; 
 	}
 
 	// 해당 이미지 삭제기능

@@ -8,7 +8,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 
-//취소 버튼을 이전 페이지 이동
+//취소 버튼
 document
 	.getElementById("CancelButton")
 	.addEventListener(
@@ -25,11 +25,9 @@ document
 
 			}).then((result) => {
 				if (result.isConfirmed) {
-					// Yes 버튼을 눌렀을 때의 동작
 					window.history.back();
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
-					// No 버튼을 눌렀을 때의 동작
-					// 추가적인 작업을 수행하거나 아무 동작도 하지 않을 수 있습니다.
+					
 				}
 			});
 
@@ -39,22 +37,20 @@ document
 
 $(document).ready(
 	function() {
-		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
-
+		var isImageChanged = false; // 이미지 변경 여부
 
 		//이미지
-		const imageInput = document //input 감지
+		const imageInput = document 
 			.getElementById('addMainPhoto');
-		const mainImgView = document //해당 이미지 보여주는 부분
+		const mainImgView = document 
 			.getElementById('mainImgView');
 
 
 
-		//값 변경됨을 감지하기 위함(기존의 값들을 저장)
-		var originaAccName = $("#acc_name").val(); //숙소 이름
-		var originaAccAddress = $("#acc_address").val(); //숙소 주소
-		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
-
+		//기존의 값들을 저장
+		var originaAccName = $("#acc_name").val(); 
+		var originaAccAddress = $("#acc_address").val(); 
+		var originaAccSectors = $("#partner_sectors").val(); 
 
 
 		//이미지 변경 여부를 표시(변경 후 => true)
@@ -68,26 +64,24 @@ $(document).ready(
 
 			if (file) {
 				reader.readAsDataURL(file);
-				isImageChanged = true; // 이미지가 변경되었음을 표시
+				isImageChanged = true; 
 			}
 		});
 
 
-
 		//등록하기 버튼을 누름
 		$('#addButton').click(function(event) {
-			event.preventDefault(); // 폼의 기본 동작인 서버로의 전송 방지
+			event.preventDefault(); 
 
 			//유효성 검사
-			var accMaxPeople = $('#acc_max_people').val(); //최대인원
-			var acc_explain = $('#acc_explain').val(); //사장님 한마디
-			var acc_info = $('#acc_info').val(); //숙소 정보
+			var accMaxPeople = $('#acc_max_people').val(); 
+			var acc_explain = $('#acc_explain').val(); 
+			var acc_info = $('#acc_info').val(); 
 
-			//현재 값들을 불러온다
+			//현재 값을 불러옴
 			var accName = $('#acc_name').val();
 			var accAddress = $('#acc_address').val();
 			var accPartnerSec = $('#partner_sectors').val();
-
 
 			//기존 이름 변경 검사
 			if (accName !== originaAccName) {
@@ -111,26 +105,22 @@ $(document).ready(
 
 
 			if (accMaxPeople.trim() === '') {
-				//최대인원이 공백인 경우
 				Swal.fire('최대인원을 입력해 주세요')
 				return;
 			}
 
 			if (accMaxPeople <= 0) {
-				//alert('최대 인원은 0 보다 커야 합니다.');
 				Swal.fire('최대 인원은 0 보다 커야 합니다')
 				return;
 			}
 
 
 			if (acc_explain.length < 10) {
-				//최소 글자수
 				Swal.fire('글자 수는 최소 10자입니다')
 				return;
 			}
 
 			if (acc_info.trim() === '') {
-				//숙소 정보가 공백인 경우
 				Swal.fire('숙소 정보를 입력해 주세요')
 				return;
 			}
@@ -155,7 +145,7 @@ $(document).ready(
 					});
 				},
 				error: function(xhr) {
-					Swal.fire(xhr.responseText); // 수정 실패 알림 메세지
+					Swal.fire(xhr.responseText); 
 					window.location.href = '/partner/product/registerRoom/' + response;
 				}
 			});

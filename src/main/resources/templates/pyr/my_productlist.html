@@ -14,7 +14,7 @@
 
 	<body id="userinfo_modify">
 
-		<!-- 사이드 바 -->
+		
 		<nav id="mypage_sidebar_nav">
 			<ul>
 				<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">내
@@ -34,7 +34,7 @@
 		</nav>
 
 
-		<!-- role이 파트너가 아닌 경우  -->
+		
 		<div th:if="${noPartner}">
 			<script th:inline="javascript">
 				alert('파트너가 아닙니다. 파트너 신청을 해주세요.');
@@ -43,7 +43,7 @@
 		</div>
 
 
-		<!-- 파트너이고 acc에 등록한 숙소 정보가 있는 경우  -->
+		
 		<div th:unless="${isEmpty}">
 
 			<div id="Container">
@@ -84,7 +84,7 @@
 			</div>
 
 
-			<!-- 페이징 처리 -->
+			
 			<div id="accPaging">
 				<div th:if="${!paging.isEmpty()}">
 					<ul class="pagination">
@@ -103,7 +103,7 @@
 			</div>
 		</div>
 
-		<!-- 만약 해당 데이터가 비어있으면 바로 등록하기로 이동  -->
+		
 		<div th:if="${isEmpty}">
 
 			<div id=noAccfild>

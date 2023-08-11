@@ -484,30 +484,28 @@ public class UserController {
 	@PreAuthorize("isAuthenticated()")
 	public String myProducts(Principal principal, Model model,
 	        @RequestParam(value = "page", defaultValue = "0") int page) {
-	    // 유저 이름을 가져옴
+	   
 	    String username = principal.getName();
 
 	    // 해당 유저의 role이 partner인지 확인
 	    List<Users> userList = this.userService.check(username);
 	    boolean isPartner = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
-	    // role이 파트너라면
 	    if (isPartner) {
 
-	        // accommodations 해당 유저이름을 조회하여 리스트로 가져온다
 	        List<Accommodation> accommodations = accommodationService.findAccommodationsByUsername(username);
 
-	        // 등록된 PK(id)를 기준으로 내림차순 정렬
+	        //내림차순 정렬
 	        accommodations.sort(Comparator.comparing(Accommodation::getId).reversed());
 
 	        // 페이징 처리
-	        int pageSize = 10; // 페이지당 숙소 개수 설정
-	        int start = page * pageSize; // 0 * 10 = 0 으로 시작 인덱스를 나타낸다
-	        int end = Math.min((start + pageSize), accommodations.size()); // 종료 인덱스 계산 0부터 9 까지의 숙소를 표시
+	        int pageSize = 10; 
+	        int start = page * pageSize; 
+	        int end = Math.min((start + pageSize), accommodations.size()); 
 	        if (start > end) {
-	            start = 0; // 시작 인덱스가 범위를 벗어나면 0으로 설정
+	            start = 0; 
 	        }
-	        // 페이징된 숙소 목록을 추출(시작, 종료 인덱스 목록 추출)
+	       
 	        List<Accommodation> pagedAccommodations = accommodations.subList(start, end);
 
 	        Page<Accommodation> paging = new PageImpl<>(pagedAccommodations, PageRequest.of(page, pageSize),
@@ -516,7 +514,7 @@ public class UserController {
 	        model.addAttribute("isEmpty", pagedAccommodations.isEmpty());
 	        model.addAttribute("paging", paging);
 	    } else {
-	        return "redirect:/user/login"; // partner가 아니라면 /user/logout으로 이동
+	        return "redirect:/user/login"; 
 	    }
 	    return "pyr/my_productlist";
 	}

@@ -6,7 +6,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 	}
 });
 
-//취소 버튼을 이전 페이지 이동
+//취소 버튼
 document
 	.getElementById("CancelButton")
 	.addEventListener(
@@ -23,10 +23,9 @@ document
 
 			}).then((result) => {
 				if (result.isConfirmed) {
-					// 확인 누를 시 이전 페이지로 이동
 					window.history.back();
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
-					// 취소 버튼 동작 => 아무런 동작 없음
+					
 				}
 			});
 
@@ -36,20 +35,19 @@ document
 $(document).ready(
 	function() {
 
-		var originaAccName = $("#acc_name").val(); //숙소 이름
-		var originaAccAddress = $("#acc_address").val(); //숙소 주소
-		var originaAccSectors = $("#partner_sectors").val(); //숙박 업종
+		var originaAccName = $("#acc_name").val(); 
+		var originaAccAddress = $("#acc_address").val(); 
+		var originaAccSectors = $("#partner_sectors").val(); 
 
-		//값 변경됨을 감지하기 위함(입력값이 있으면 등록 가능)
-		var isImageChanged = false; // 이미지 변경 여부를 저장하는 변수
-		var isAccExplainChanged = false; //사장님 한마디 변경 여부를 저장
+		//값 변경됨을 감지
+		var isImageChanged = false; // 이미지 변경 여부
+		var isAccExplainChanged = false; //사장님 한마디 변경 여부
 
 		//이미지
 		const imageInput = document
-			.getElementById('addMainPhoto'); //이미지 등록
+			.getElementById('addMainPhoto'); 
 		const mainImgView = document
-			.getElementById('mainImgView'); //이미지 보여주는 부분
-
+			.getElementById('mainImgView'); 
 
 		//사장님 한마디 
 		let acc_explain = document.getElementById('acc_explain');
@@ -65,7 +63,7 @@ $(document).ready(
 
 			if (file) {
 				reader.readAsDataURL(file);
-				isImageChanged = true; // 이미지가 변경되었음을 표시
+				isImageChanged = true; 
 			}
 		});
 
@@ -73,10 +71,8 @@ $(document).ready(
 			let content = event.target.value;
 
 			if (content) {
-				//사장님 한마디 입력값 변경되면 true	
 				isAccExplainChanged = true;
 			} else {
-				//사장님 한마디 입력값 변경 안되면 false
 				isAccExplainChanged = false;
 			}
 		});
@@ -85,11 +81,10 @@ $(document).ready(
 
 		$('#addButton').click(function(event) {
 
-			event.preventDefault(); // 폼의 기본 동작인 서버로의 전송 방지
+			event.preventDefault(); 
 
-			var form = $('#productForm')[0]; //첫 번째 form요소
+			var form = $('#productForm')[0]; 
 			var formData = new FormData(form);
-
 
 			//유효성 검사
 			var accName = $('#acc_name').val();
@@ -132,13 +127,11 @@ $(document).ready(
 			}
 
 			if (accMaxPeople.trim() === '') {
-				//alert('최대인원을 입력해 주세요');
 				Swal.fire('최대인원을 입력해 주세요')
 				return;
 			}
 
 			if (accMaxPeople <= 0) {
-				//alert('최대 인원은 0 보다 커야 합니다.');
 				Swal.fire('최대 인원은 0 보다 커야 합니다')
 				return;
 			}
@@ -148,16 +141,12 @@ $(document).ready(
 				return;
 			}
 
-
 			if (!isImageChanged) {
-				// 이미지 파일이 변경되지 않은 경우 formData에서 이미지 파일 필드를 삭제
-				//alert('이미지를 선택해 주세요.');
 				Swal.fire('이미지를 선택해 주세요')
 				return;
 			}
 
 			if (!isAccExplainChanged) {
-				//사장님 한마디에 아무런 입력값이 없는 경우
 				Swal.fire('업소에 대한 설명을 작성해 주세요')
 				return;
 			}
@@ -185,7 +174,7 @@ $(document).ready(
 					});
 				},
 				error: function(xhr) {
-					Swal.fire(xhr.responseText) // 등록 실패 알림 메세지
+					Swal.fire(xhr.responseText) 
 					window.location.href = '/user/mypage/my_productList';
 				}
 			});
