@@ -29,7 +29,7 @@ public class InquiryController {
     private final InquiryService inquiryService;
     private final InquiryAnswerService inquiryAnswerService;
 
-
+    //
     @GetMapping("/more/inquiry")
     public String showInquiryForm(Model model, Principal principal) {
         if (principal == null) {
