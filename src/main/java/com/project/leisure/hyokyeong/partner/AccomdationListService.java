@@ -79,34 +79,6 @@ public class AccomdationListService {
 	}
 
 	
-	
-//	public String getFileUrlFromDatabase(String filename) {
-//		RegPartner partner = regRepository.findByFilename(filename);
-//		if (partner != null) {
-//			String encodedFilename = URLEncoder.encode(partner.getFilename(), StandardCharsets.UTF_8);
-//			return "/img/partner_regi_img/" + encodedFilename;
-//		}
-//		return null;
-//	}
-//
-//	public String getBaseUrl(HttpServletRequest request) {
-//		String scheme = request.getScheme();
-//		String serverName = request.getServerName();
-//		int serverPort = request.getServerPort();
-//		String contextPath = request.getContextPath();
-//		return scheme + "://" + serverName + ":" + serverPort + contextPath;
-//	}
-//
-//	// 파일리스트 가져오기
-//	public List<String> getFileList() {
-//		List<Accommodation> partners = regRepository.findAll();
-//		List<String> fileList = new ArrayList<>();
-//		for (RegPartner partner : partners) {
-//			String fileName = partner.getFilename();
-//			fileList.add(fileName);
-//		}
-//		return fileList;
-//	}
 
 
 }

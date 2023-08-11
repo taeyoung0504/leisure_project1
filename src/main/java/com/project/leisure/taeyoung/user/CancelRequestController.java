@@ -38,7 +38,6 @@ public class CancelRequestController {
         // 결제 취소 요청 결과 _ 1: 거절  
         cancelRequest.setResult("1");
 
-        // Save the updated entity
         CancelRequest updatedCancelRequest = cancelRequestService.saveCancelRequest(cancelRequest);
         return ResponseEntity.ok(updatedCancelRequest);
     }

@@ -46,7 +46,7 @@ public class RegService {
 				reg.setFilename(fileName);
 				reg.setFilePath(filePath.toString());
 			} catch (IOException e) {
-				// Handle file upload exception
+			
 				e.printStackTrace();
 			}
 		}

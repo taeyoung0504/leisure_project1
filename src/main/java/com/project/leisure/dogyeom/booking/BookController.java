@@ -27,6 +27,7 @@ import com.project.leisure.dogyeom.toss.domain.CancelPaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentResDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentSuccessDto;
+import com.project.leisure.dogyeom.totalPrice.TotalPrice;
 import com.project.leisure.dogyeom.totalPrice.TotalPriceRepository;
 import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
@@ -89,18 +90,17 @@ private final PaymentService paymentService;
 		product = productService.getProduct(convertedId2);
 
 		String totalPrice1 = null;
+		
+		List<TotalPrice> totalArrays = totalPriceRepository.findByTotalPrice(totalPrice);
+		for(TotalPrice totals: totalArrays) {
+			if(totalPrice.equals(totals.getTotalPrice())) {
+				totalPrice1 = totalPrice;
+				break;
+			} else {
+				totalPrice1 = null;
+			}
+		}
 
-//		List<TotalPrice> totalArrays = totalPriceRepository.findByTotalPrice(totalPrice);
-//		for (TotalPrice totals : totalArrays) {
-//			if (totalPrice.equals(totals.getTotalPrice())) {
-//				totalPrice1 = totalPrice;
-//				break;
-//			} else {
-//				totalPrice1 = null;
-//			}
-//		}
-
-		// request로 받은 값들 예약객체에 넣기 // -> build 써야하나? -> 몇몇 정보만 넣고 싶다.
 		bookingvo.setBookerID("username"); // principal 넣어야함.
 		bookingvo.setBookerName(params.getParameter("username"));
 		bookingvo.setAccomTitle(product.getAccommodation().getAcc_name());
@@ -108,8 +108,8 @@ private final PaymentService paymentService;
 		bookingvo.setCheckin(date1);
 		bookingvo.setCheckOut(date2);
 		bookingvo.setBookHeadCount(4);
-//		bookingvo.setTotalPrice(totalPrice1);
-		bookingvo.setTotalPrice(totalPrice);
+		bookingvo.setTotalPrice(totalPrice1);
+//		bookingvo.setTotalPrice(totalPrice);
 		bookingvo.setTempRoomId(product.getProduct_id());
 		bookingvo.setTempAccomId(product.getAccommodation().getId());
 
@@ -224,11 +224,9 @@ private final PaymentService paymentService;
 			)
 					throws IOException {
 //		log.info("INFO {}", params);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@" + id);
 //		@AuthenticationPrincipal Users principal
 		// 세션에서 현재 로그인한 사람의 로그인 아이디도 가져와야함.
 		String username = principal.getName();
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@" + username);
 		
 //		Users user = 
 		
@@ -311,10 +309,6 @@ private final PaymentService paymentService;
             @RequestParam Long amount
     ) {
 		
-		System.out.println("########################## paymentKey" + paymentKey);
-		System.out.println("########################## orderId" + orderId);
-		System.out.println("########################## amount" + amount);
-		
 		PaymentSuccessDto result = paymentService.tossPaymentSuccess(paymentKey, orderId, amount);
 		
 		String payDate = result.getApprovedAt();
@@ -334,15 +328,11 @@ private final PaymentService paymentService;
 	  	String paymentKey = requestParams.get("paymentKey");
 	      String cancelReason = requestParams.get("cancelReason");
 	  	
-	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! paymentKey : " + paymentKey);
-	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! cancelReason : " + cancelReason);
-	  	
 	  	CancelPaymentDto cres = paymentService.tossPaymentCancel(paymentKey, cancelReason);
 	  	
 	  	String tid = paymentKey;
 	  	String status = cres.getStatus();
 	  	String canceled_at = cres.getApprovedAt();
-	  	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!! canceled_at : " + canceled_at);
 	  	bookService.updateCancel(tid, status, canceled_at);
 	  	
 	//  	model.addAttribute("info", cres);

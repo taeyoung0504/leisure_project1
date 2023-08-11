@@ -142,7 +142,7 @@ public class PartnerListService {
 						user.setPartner_code(3333);
 						userRepository.saveAndFlush(user); // 변경된 값을 즉시 저장
 					}
-					// 파트너 신청을 했던 안했던 그냥 승인이 없어. 그럼 USER
+					// 파트너 신청을 했던 안했던 그냥 승인이 없는 경우. 그럼 USER
 					if (partnerRegList.size() == 0) {
 						user.setRole(UserRole.USER);
 						user.setAdmin_code(0);
@@ -151,7 +151,7 @@ public class PartnerListService {
 					}
 
 				}
-				// 등록된 숙소는 있어.
+				// 등록된 숙소는 있는 경우
 				else {
 					// 파트너신청을 해서 승인이 있는경우
 					if (partnerRegList.size() > 0) {
@@ -194,13 +194,7 @@ public class PartnerListService {
 							}
 						}
 
-						System.out.println("@@@@@@@@@@@@@@@@@@@@");
-						System.out.println("@@@@@@@@@@@@@@@@@@@@");
-						System.out.println(addr + "addr");
-						System.out.println(foundAccId + "foundAccId");
-						System.out.println("@@@@@@@@@@@@@@@@@@@@");
-						System.out.println("@@@@@@@@@@@@@@@@@@@@");
-
+					
 						return foundAccId;
 
 					}

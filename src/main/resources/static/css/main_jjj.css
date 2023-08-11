@@ -126,7 +126,7 @@
 .jj_navbar_logo {
 	font-size: 30px;
 	/* 	color: var(--main-color); */
-	padding-left: 17%;
+	padding-left: 20%;
 }
 
 .jj_navbar_logo i {
@@ -153,7 +153,7 @@ body:not(.jj_navbar) {
 }
 
 nav .jj_menubar {
-	padding-right: 17%;
+	padding-right: 20%;
 }
 
 nav .jj_menubar ul {
@@ -314,7 +314,7 @@ nav .jj_menubar .jj_search .search_input {
 }
 
 .jj_slide_container {
-	width: 1200px;
+	width: 1100px;
 	height: 600px;
 	display: flex;
 	margin: auto;
@@ -324,7 +324,7 @@ nav .jj_menubar .jj_search .search_input {
 
 .jj_slide-box {
 	overflow: hidden;
-	flex: 0 0 1200px;
+	flex: 0 0 1100px;
 	transition: all 1s ease-in-out;
 	/* display: flex; */
 	/* justify-content: center; */
@@ -385,7 +385,7 @@ nav .jj_menubar .jj_search .search_input {
 	color: var(--text-color);
 	text-align: center;
 	padding: 0;
-	margin: 0px 70px 30px;
+	margin: 0px 72px 30px;
 	list-style: none;
 	text-decoration: none;
 }
@@ -404,7 +404,7 @@ nav .jj_menubar .jj_search .search_input {
 
 .jj_wrapper {
 	display: flex;
-	padding: 0px 35px;
+/* 	padding: 0px 35px; */
 	align-items: center;
 	justify-content: center;
 	margin: 0 auto;
@@ -426,17 +426,18 @@ nav .jj_menubar .jj_search .search_input {
 	-size: 1.2rem;
 	text-align: center;
 	line-height: 40px;
-	background-color: #f5f3f3;
+	background-color: #f5f3f3db;
 	transform: translateY(-50%);
 	border-radius: 3px;
+	z-index: 2;
 }
 
 .jj_wrapper i:first-child {
-	left: 0px;
+	left: 50px;
 }
 
 .jj_wrapper i:last-child {
-	right: 0px;
+	right: 50px;
 }
 
 .jj_wrapper .jj_carousel {
@@ -465,7 +466,7 @@ nav .jj_menubar .jj_search .search_input {
 }
 
 .main {
-	width: 1000px;
+	width: 1100px;
 	height: 24px;
 	font-size: 18px;
 	line-height: 1;
@@ -473,6 +474,18 @@ nav .jj_menubar .jj_search .search_input {
 	text-align: left;
 	display: block;
 	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+h2.main {
+	width: 1100px;
+	height: 24px;
+	font-size: 20px;
+	line-height: 1;
+	color: var(--text-color);
+	text-align: left;
+	display: block;
+	margin-left: 400px;
 	margin-top: 50px;
 	margin-bottom: 20px;
 }
@@ -1163,4 +1176,8 @@ div .jj_list {
 	.jj_carousel img {
 		width: calc(100%/ 2);
 	}
+	
+	
+	
+	
 }

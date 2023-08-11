@@ -93,7 +93,7 @@ public class AdminController {
 	    boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.ADMIN));
 
 	    if (!isAdmin) {
-	        return "redirect:/user/login"; // 어드민 권한이 아닐 경우 로그인 페이지로 리다이렉트
+	        return "redirect:/user/login"; // If not an admin, redirect to /user/login
 	    }
 
 	    
@@ -209,7 +209,24 @@ public class AdminController {
 		return "khk/declaration";
 	}
 
-
+//	// 리뷰 블라인드 해제
+//	@PostMapping("/unblind-review/{reviewId}")
+//	public String unblindReview(@PathVariable("reviewId") String reviewId) {
+//		// 리뷰 ID를 사용하여 리뷰 정보를 가져옵니다.
+//		Long id = Long.parseLong(reviewId);
+//		Optional<Review> reviewOptional = reviewRepository.findById(id);
+//		if (reviewOptional.isPresent()) {
+//			Review review = reviewOptional.get();
+//
+//			// 리뷰의 블라인드 상태를 변경합니다.
+//			review.setContentBlinded(false);
+//			reviewRepository.save(review);
+//
+//			return "redirect:/admin/declaration";
+//		} else {
+//			return "redirect:/admin/authorityPage";
+//		}
+//	}
 
 	@PostMapping("/unblind-review/{reviewId}")
 	public String unblindReview(@PathVariable("reviewId") String reviewId) {
@@ -299,7 +316,6 @@ public class AdminController {
 		return "syw/notice";
 	}
 
-	
 	// 이미지를 저장할 경로를 아래 변수에 지정합니다.
     private static final String UPLOAD_DIR = "src/main/resources/static/img/notice_img/";
 
