@@ -149,25 +149,7 @@ public class PartnerController {
 		return "redirect:" + referer;
 	}
 
-//	// 해당 숙소를 삭제
-//		@DeleteMapping(value = "deleteAcc/{id}")
-//		public ResponseEntity<?> deleteAcc(@PathVariable("id") Long acc_id) {
-//
-//			// 해당 숙소에 연결된 상품들 조회
-//			List<Product> products = productService.findProductsByAccommodationId(acc_id);
-//
-//			// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
-//
-//			// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
-//			for (Product product : products) {
-//				productService.pdDelete(product.getProduct_id());
-//			}
-//
-//			// 숙소 삭제
-//			accommodationService.deleteAcc(acc_id);
-//
-//			return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
-//		}
+
 
 	// 해당 숙소를 삭제
 	@DeleteMapping(value = "deleteAcc/{accId}")

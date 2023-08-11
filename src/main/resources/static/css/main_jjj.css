@@ -324,7 +324,7 @@ nav .jj_menubar .jj_search .search_input {
 
 .jj_slide-box {
 	overflow: hidden;
-	flex: 0 0 1200px;
+	flex: 0 0 1100px;
 	transition: all 1s ease-in-out;
 	/* display: flex; */
 	/* justify-content: center; */
@@ -1176,4 +1176,8 @@ div .jj_list {
 	.jj_carousel img {
 		width: calc(100%/ 2);
 	}
+	
+	
+	
+	
 }
