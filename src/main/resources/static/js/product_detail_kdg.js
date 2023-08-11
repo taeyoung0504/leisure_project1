@@ -351,7 +351,7 @@ $(document).ready(function() {
 
                   if (hasNullValue) {
                     // 데이터에 null 값이 있는 경우 '유효하지 않은 요청입니다.'라는 alert 창을 띄우고 이전 페이지로 이동
-                    alert('경찰서 가고싶어?');
+                    Swal.fire('경찰서 가고싶어?');
                     /* history.back(); */
                     window.location.reload();
                   } else {
