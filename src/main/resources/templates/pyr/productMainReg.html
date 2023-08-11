@@ -80,7 +80,6 @@
 				<div id="accInfoArea">
 					<h3><span style="font-weight: bold; color: orangered;">*</span>숙소 정보</h3>
 					<div style="width: 600px; resize: none;">
-						<!-- Add an ID to the textarea for the Markdown editor -->
 						<textarea rows="" cols="" type="text" required name="acc_info"
 							id="acc_info" th:text="${accommodation?.acc_info ?: ''}"
 							placeholder="숙소에 대한 상세설명을 등록해 주세요. ex)공지사항, 기본정보, 취소 및 환불규정..."></textarea>
@@ -96,11 +95,7 @@
 
 
 		</div>
-		<!-- <script>
-			var simplemde = new SimpleMDE({
-				element : document.getElementById("acc_info"),
-			});
-		</script> -->
+	
 		<script src="/js/pyr_productMainReg.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>

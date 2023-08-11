@@ -24,12 +24,8 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
 	Page<Accommodation> findAll(Specification<Accommodation> spec, Pageable pageable);
 
-//	// 도겸이가 추가한 코드
-//	// 모든 숙소(업소) 조회
-////	Optional<List<Accommodation>> findAll();
 	Optional<Accommodation> findById(Long id);
 
-	// 효경 추가
 	void save(Users users);
 	
 }

@@ -1,4 +1,3 @@
-//===== 이미지 슬라이드 ==========
 
 $(document).ready(
 	function() {
@@ -35,16 +34,9 @@ function startSlideshow(slideshowContainer, images) {
 	const prevButton = slideshowContainer.find('.prev');
 	const nextButton = slideshowContainer.find('.next');
 
-	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
-	function updateSlide() {
-		const imgUrl = images[currentSlideIndex].imgUrl;
-		slide.css('background-image', `url(${imgUrl})`);
-	}
-
-	// 첫 번째 이미지로 초기화
 	updateSlide();
 
-	// 이전 이미지로 이동하는 함수
+	// 이전 이미지
 	function goToPrevSlide() {
 		currentSlideIndex--;
 		if (currentSlideIndex < 0) {
@@ -53,7 +45,7 @@ function startSlideshow(slideshowContainer, images) {
 		updateSlide();
 	}
 
-	// 다음 이미지로 이동하는 함수
+	// 다음 이미지
 	function goToNextSlide() {
 		currentSlideIndex++;
 		if (currentSlideIndex >= images.length) {
@@ -62,7 +54,7 @@ function startSlideshow(slideshowContainer, images) {
 		updateSlide();
 	}
 
-	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
+	// 슬라이드 업데이트 함수
 	function updateSlide() {
 		const imgUrl = images[currentSlideIndex].imgUrl;
 		slide.find('img').attr('src', imgUrl);
@@ -84,28 +76,7 @@ $('.product_amount').each(function() {
 });
 
 
-/*//해당 숙소를 삭제한다. 
-function confirmDelete() {
-	if (confirm("숙소를 삭제하시겠습니까?")) {
-		var accId = $(".acc_id").text();
-		console.log(accId);
-
-		$.ajax({
-			url: '/product/deleteAcc/' + accId,
-			type: 'DELETE',
-			success: function(result) {
-				// 요청 성공
-				window.location.href = '/user/mypage/my_productList';
-			},
-			error: function(xhr, status, error) {
-				// 요청 실패
-				console.log('Error: ' + status + ' ' + error);
-			}
-		});
-	}
-}*/
-
-//해당 숙소를 삭제한다. 
+//해당 숙소를 삭제
 function confirmDelete() {
 	var accId = $(".acc_id").text();
 	swalWithBootstrapButtons.fire({
@@ -122,25 +93,21 @@ function confirmDelete() {
 			$.ajax({
 				url: '/partner/product/deleteAcc/' + accId,
 				type: 'DELETE',
-				dataType: 'text', //text로 바꿔야지 swal 적용가능
+				dataType: 'text', 
 				success: function() {
-					// 요청 성공
 					Swal.fire('삭제 성공', '숙소가 성공적으로 삭제되었습니다.', 'success').then(() => {
 						window.location.href = '/user/mypage/my_productList';
 					});
 				},
 				error: function(xhr) {
-					// 요청 실패
-					Swal.fire(xhr.responseText);//실패 알림 메세지
+					Swal.fire(xhr.responseText);
 				}
 			});
 		} else if (result.dismiss === Swal.DismissReason.cancel) {
-			// No 버튼을 눌렀을 때의 동작
-			// 아무런 동자 없음
+		
 		}
 	});
 }
-
 
 /*swal*/
 const swalWithBootstrapButtons = Swal.mixin({
@@ -148,7 +115,6 @@ const swalWithBootstrapButtons = Swal.mixin({
 		confirmButton: 'btn btn-success',
 		cancelButton: 'btn btn-danger'
 	}
-
 });
 
 

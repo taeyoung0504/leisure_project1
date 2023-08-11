@@ -47,7 +47,6 @@ public class Product {
 	@JoinColumn(name = "accommodation_id", referencedColumnName = "id")
 	private Accommodation accommodation;
 	
-	// 김도겸이 추가한 totalPrice
 	private String totalPrice;
 
 }

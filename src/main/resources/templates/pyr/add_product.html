@@ -22,7 +22,7 @@
 			<h1>상품 등록</h1>
 
 			<form id="productForm">
-				<!-- 해당 acc의 pk같이 전송용 -->
+				
 				<input type="number" name="acc_id" th:value="${id}"
 					style="display: none;">
 
@@ -56,7 +56,7 @@
 					</label>
 				</div>
 
-<!-- name="product_photo" -->
+
 				<div id="fileArea">
 					<div id="fileAreaText">
 						<p class="product_img_text">상품 이미지</p>
@@ -114,11 +114,11 @@
 
 							<div th:if="${not #lists.isEmpty(product.productImgs)}"
 								class="slideshow-container">
-								<!-- 해당 배열의 이미지를 보여줌 -->
+								
 								<div th:each="img : ${product.productImgs}" class="imgContainer">
 									<div class="slide">
 
-										<!-- 해당 이미지의 경로를 가져온다.   -->
+										
 										<img th:src="${img.img_url}" alt="Product Image" width="100%"
 											height="100%" class="showImgs"><span
 											th:text="${img.img_id}" style="display: none;" class="img_id"></span>

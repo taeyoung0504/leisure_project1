@@ -56,7 +56,7 @@ public class ProductController {
 			@RequestParam("acc_address") String acc_address, @RequestParam("acc_sectors") String acc_sectors,
 			@RequestParam("acc_explain") String acc_explain, @RequestParam("acc_img") MultipartFile acc_img,
 			@RequestParam("acc_max_people") int acc_max_people, @RequestParam("acc_info") String acc_info) {
-		String username = principal.getName(); // 현재 로그인 한 유저 이름
+		String username = principal.getName();
 
 		int result;
 
@@ -64,9 +64,9 @@ public class ProductController {
 				acc_address, acc_max_people, acc_info);
 
 		if (result == 1) {
-			return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
+			return ResponseEntity.ok().build();
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("등록에 실패하였습니다"); // 에러 메시지와 함께 HTTP 400
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("등록에 실패하였습니다");
 	}
 
 	// 숙박업소 수정
@@ -77,39 +77,39 @@ public class ProductController {
 
 		List<Users> userList = this.userService.check(username);
 		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
-		// 만약 admin이 아닌 경우 로그인 페이지로 이동
+
 		if (!isAdmin) {
 			return "redirect:/user/login";
 		}
 
-		// 해당 숙소의 소유자인지 확인 하는 코드 생성해야함
+		// 해당 숙소의 소유자인지 확인
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403";
 		}
 
 		try {
-			// id를 사용하여 해당 데이터 조회
+
 			Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
-			model.addAttribute("accommodation", accommodation); // 해당 내용 보여주기
+			model.addAttribute("accommodation", accommodation);
 			return "pyr/productMainReg";
 		} catch (RuntimeException e) {
-			// 서버 내부 오류가 발생
+
 			return "error/500";
 		}
 	}
 
 	// productMainReg 해당 유저 등록된 숙소 수정하기에서 수정된 값을 받아서 update
-	@PostMapping("/productMainInfo") // required = false => 해당 파라미터가 필수가 아님
+	@PostMapping("/productMainInfo")
 	public ResponseEntity<String> productMainInfo(Principal principal, @RequestParam("acc_name") String acc_name,
 			@RequestParam("acc_address") String acc_address, @RequestParam("acc_sectors") String acc_sectors,
 			@RequestParam("acc_explain") String acc_explain,
 			@RequestParam(value = "acc_img", required = false) MultipartFile acc_img,
 			@RequestParam("acc_max_people") int acc_max_people, @RequestParam("acc_id") Long acc_id,
 			@RequestParam("acc_info") String acc_info) {
-		String username = principal.getName(); // 현재 로그인 한 유저 이름
+		String username = principal.getName();
 
 		int result;
 
@@ -117,12 +117,12 @@ public class ProductController {
 				acc_address, acc_max_people, acc_id, acc_info);
 
 		if (result == 1) {
-			return ResponseEntity.ok().body(acc_id.toString()); // Long을 String으로 변환
+			return ResponseEntity.ok().body(acc_id.toString());
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정에 실패하였습니다");
 	}
 
-	// 등록한 객실을 조회 => 해당 pk(id)를 가져와서 해당 객실을 조회
+	// 등록한 객실을 조회
 	@GetMapping(value = "registerRoom/{id}")
 	public String showRegisterRoom(Model model, @PathVariable("id") Long acc_id, Principal principal) {
 
@@ -132,22 +132,21 @@ public class ProductController {
 		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
 		if (!isAdmin) {
-			return "redirect:/user/login"; // If not an admin, redirect to /user/login
+			return "redirect:/user/login";
 		}
 
-		// 해당 숙소의 소유자인지 확인 하는 코드 생성해야함
+		// 해당 숙소의 소유자인지 확인
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403";
 		}
 
 		// id를 사용하여 해당 데이터 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
-		model.addAttribute("accommodation", accommodation); // 해당 내용 보여주기
+		model.addAttribute("accommodation", accommodation);
 
-		// 해당 id로 product를 조회
 		List<Product> product = productService.findProductsByAccommodationId(acc_id);
 
 		if (!product.isEmpty()) {
@@ -159,7 +158,7 @@ public class ProductController {
 		return "pyr/registerRoom";
 	}
 
-	// 객실 등록 페이지 이동 및 해당 pk조회하여 product 가져오기
+	// 객실 등록 페이지 이동
 	@GetMapping(value = "addproduct/{id}")
 	public String setAddProduct(Model model, @PathVariable("id") Long acc_id, Principal principal) {
 
@@ -169,17 +168,16 @@ public class ProductController {
 		boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
 		if (!isAdmin) {
-			return "redirect:/user/login"; // 다시 로그인 페이지로 리다이렉트
+			return "redirect:/user/login";
 		}
 
-		// 해당 숙소의 소유자인지 확인 하는 코드 생성
+		// 해당 숙소의 소유자인지 확인
 		boolean isOwner = accommodationService.isAccommodationOwner(acc_id, username);
 
 		if (!isOwner) {
-			return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
+			return "error/403";
 		}
 
-		// 해당 id로 product를 조회
 		List<Product> product = productService.findProductsByAccommodationId(acc_id);
 
 		if (!product.isEmpty()) {
@@ -193,7 +191,7 @@ public class ProductController {
 
 	}
 
-	// 숙소를 등록한다. 객실 등록 시 해당 숙소의 pk도 가져온다
+	// 객실을 등록한다
 	@PostMapping("/addproduct")
 	public ResponseEntity<String> addProduct(@RequestParam("product_photo") MultipartFile[] product_photo,
 			@RequestParam("product_type") String product_type, @RequestParam("product_detail") String product_detail,
@@ -205,15 +203,13 @@ public class ProductController {
 
 	{
 
-		// id를 사용하여 해당 acc를 조회
 		Accommodation accommodation = accommodationService.findByAccId(acc_id);
 
-		// 방 등록시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
+		// 객실 등록시 인원수가 만약 숙소 최대 인원수 보다 많을 경우
 		if (accommodation.getAcc_max_people() < product_pernum) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
 		}
 
-		// 상품 등록 처리
 		long product_id = this.productService.pdCreate(product_type, product_detail, product_count, product_amount,
 				product_pernum, product_checkin, product_checkout, accommodation);
 
@@ -228,8 +224,7 @@ public class ProductController {
 			this.productService.updateImg(product_photos, product_id);
 		}
 
-		// 성공하면 해당 product_id값을 보냄 추후 비동기로 상품 추가 보여준다.
-		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
+		return ResponseEntity.ok().build();
 
 	}
 
@@ -237,7 +232,7 @@ public class ProductController {
 	@DeleteMapping(value = "deleteAcc/{id}")
 	public ResponseEntity<String> deleteAcc(@PathVariable("id") Long acc_id, Principal principal) {
 		try {
-			// 현재 로그인한 사용자의 이름
+
 			String username = principal.getName();
 
 			// 해당 숙소를 소유한 사용자인지 확인
@@ -252,7 +247,6 @@ public class ProductController {
 			// 해당 숙소에 연결된 상품들 조회
 			List<Product> products = productService.findProductsByAccommodationId(acc_id);
 
-			// 숙소 연결된 이미지 삭제 해당 숙소둘의 Pk를 가져온다
 			// 각 상품에 연결된 이미지들 삭제 및 상품 삭제
 			for (Product product : products) {
 				this.bookService.updateAllBookingVoProductToNull(product);
@@ -262,40 +256,36 @@ public class ProductController {
 			accommodationService.deleteAcc(acc_id);
 		} catch (Exception e) {
 
-			// 예외가 발생한 경우, 에러 메시지와 함께 HTTP 500 상태 코드를 반환
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패하였습니다");
 		}
-		return ResponseEntity.ok().build(); // HTTP 200 상태 코드를 반환
+		return ResponseEntity.ok().build();
 	}
 
-	// 버튼을 누르면 숙소의 상품을 삭제한다
+	// 숙소의 객실을 삭제
 	@PostMapping("/deleteProduct")
 	public ResponseEntity<?> deleateProduct(@RequestParam("productId") Long product_id, Principal principal) {
 		try {
-			// id를 사용하여 해당 상품을 조회
+
 			Product product = productService.getProduct(product_id);
 
-			// product가 null인 경우
 			if (product == null) {
 				return new ResponseEntity<>("상품을 찾을 수 없습니다", HttpStatus.NOT_FOUND);
 			}
 
 			// 상품의 소유자 검증
-
 			String username = principal.getName();
 			Accommodation accommodation = product.getAccommodation();
 			boolean isOwner = accommodationService.isAccommodationOwner(accommodation.getId(), username);
 
-			// 만일 자신의 숙소의 상품이 아닌 경우
 			if (!isOwner) {
 				return new ResponseEntity<>("삭제 불가능 합니다", HttpStatus.FORBIDDEN);
 			}
 
-			// 해당하는 product를 book 에 전송 => book 에서는 그 정보를 토대로 null로 변경
+			// 삭제된 상품을 BookingVo에서 null로 처리
 			this.bookService.updateBookingVoProductToNull(product);
 
 			int deleteStatus = this.productService.pdDelete(product_id);
-			if (deleteStatus == 0) { // 상품 삭제에 실패한 경우 0을 반환
+			if (deleteStatus == 0) {
 				return new ResponseEntity<>("상품 삭제에 실패했습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
@@ -306,7 +296,7 @@ public class ProductController {
 			this.accommodationService.saveAverPrice(accommodation, averagePrice);
 
 			return ResponseEntity.ok("삭제되었습니다");
-		} catch (Exception e) { // 서버 내부 오류가 발생했을 때
+		} catch (Exception e) {
 			return new ResponseEntity<>("예상치 못한 오류가 발생하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -322,12 +312,10 @@ public class ProductController {
 			@RequestParam("checkin") LocalTime checkin, @RequestParam("checkout") LocalTime checkout,
 			Principal principal) {
 
-		// 현재 로그인한 사용자의 이름
 		String username = principal.getName();
-		// 상품 조회 해당하는 상픔의 pk를 가져와서 조회한다.
+
 		Product product = this.productService.getProduct(product_id);
 
-		// product가 null 인 경우
 		if (product == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("접근 불가능합니다");
 		}
@@ -335,21 +323,20 @@ public class ProductController {
 		boolean isOwner = productService.isOwnerOfAccommodationProduct(username, product);
 
 		if (!isOwner) {
-			// 자신의 숙소가 아닌 경우 403에러 페이지
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("수정 불가능합니다");
 		}
 
-		// 방 수정시 인원수가 만약 숙소 최대 인원수 보다 많을 경우에 대한 조건 검사
+		// 객실 수정시 인원수가 만약 숙소 최대 인원수 보다 많을 경우
 		if (product.getAccommodation().getAcc_max_people() < pernum) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("숙소 최대 인원수보다 많습니다");
 		}
 
-		// 개별 이미지 삭제 (해당 이미지의 pk를 가져와서 삭제한다)
+		// 개별 이미지 삭제
 		if (deletedImageIds != null && !deletedImageIds.isEmpty()) {
 			this.productService.pdEditImgDelete(deletedImageIds);
 		}
 
-		// 들어온 이미지 추가 for 문으로 여러 개의 이미지를 상품 PK와 연결해서 저장
+		// 이미지 저장
 		if (editedImages != null && editedImages.length > 0) {
 			for (MultipartFile productPhoto : editedImages) {
 				if (!productPhoto.isEmpty()) {
@@ -358,11 +345,9 @@ public class ProductController {
 			}
 		}
 
-		// 수정된 것을 기준으로 다시 업데이트
 		this.productService.updateProduct(product_id, type, detail, count, amount, pernum, checkin, checkout);
 
-		// 금액 평균 구함
-		// 해당하는 상품의 accommodation
+		// 금액 평균
 		Accommodation accommodation = product.getAccommodation();
 
 		// 평균 가격 계산
@@ -371,7 +356,7 @@ public class ProductController {
 		// 금액을 서비스에 저장
 		this.accommodationService.saveAverPrice(accommodation, averagePrice);
 
-		return ResponseEntity.ok(accommodation.getId()); // HTTP 200 상태 코드를 반환하고 accommodation.getId()를 본문으로 포함
+		return ResponseEntity.ok(accommodation.getId());
 	}
 
 	// 평균 계산 함수
@@ -390,8 +375,7 @@ public class ProductController {
 		}
 	}
 
-//방 수정하기위해 해당 방 ID를 가져오고 또한 해당 방을 조회해서 찾음
-	// @PostMapping(value = "modifyRoom")
+//객실 수정
 	@GetMapping(value = "modifyRoom/{productId}")
 	public String modifyRoom(Model model, @PathVariable("productId") Long productId, Principal principal) {
 
@@ -402,7 +386,7 @@ public class ProductController {
 			boolean isAdmin = userList.stream().anyMatch(user -> user.getRole().equals(UserRole.PARTNER));
 
 			if (!isAdmin) {
-				return "redirect:/user/login"; // If not an admin, redirect to /user/login
+				return "redirect:/user/login";
 			}
 
 			Product product = this.productService.getProduct(productId);
@@ -411,14 +395,14 @@ public class ProductController {
 			boolean isOwner = productService.isOwnerOfAccommodationProduct(username, product);
 
 			if (!isOwner) {
-				return "error/403"; // 자신의 숙소가 아닌 경우 403에러 페이지
+				return "error/403";
 			}
 
 			model.addAttribute("product", product);
 			return "pyr/modifyRoom";
 
 		} catch (Exception e) {
-			// 서버 내부 오류가 발생
+
 			return "error/500";
 		}
 	}

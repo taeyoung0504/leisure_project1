@@ -35,7 +35,7 @@ public class AccommodationService {
 
 	private final BookService bookService;
 
-	// 현재 로그인한 username을 가져와서 있는지 없는지 찾음
+	//현재 로그인한 user가 숙소를 가지고 있는지 확인
 	public Accommodation accfindUserName(String username) {
 
 		Accommodation accommodation = accommodationRepository.findByUsername(username);
@@ -73,12 +73,11 @@ public class AccommodationService {
 		}
 	}
 
-	// 평균 금액 저장(해당하는 숙소에 평균 금액 저장)
+	// 해당하는 숙소에 평균 금액 저장
 	public void saveAverPrice(Accommodation accommodation, int averagePrice) {
-		// 숙소 객체에 평균 가격 설정
+		
 		accommodation.setAcc_averPrice(averagePrice);
 
-		// 숙소 저장
 		accommodationRepository.save(accommodation);
 
 	}
@@ -94,7 +93,6 @@ public class AccommodationService {
 	}
 
 	// 숙소 이미지 및 숙소 업데이트
-	// 해당 숙소 이름, 이미지, 설명, 업종, 주소 , 사용자명 등록
 	public Integer addAccommodation(String username, String acc_name, String acc_explain, MultipartFile acc_img,
 			String acc_sectors, String acc_address, int acc_max_people, Long acc_id, String acc_info) {
 
@@ -109,13 +107,13 @@ public class AccommodationService {
 		acc.setAcc_max_people(acc_max_people);
 		acc.setAcc_info(acc_info);
 
-		// 이미지 필드가 비어있지 않은 경우에만 이미지 처리를 수행합니다.
+		// 이미지 필드가 비어있지 않은 경우에만 이미지 처리를 수행
 		if (acc_img != null && !acc_img.isEmpty()) {
 			try {
 				UUID uuid = UUID.randomUUID();
 
 				// 파일을 저장할 경로와 파일명 설정
-				String fileName = uuid.toString() + "_" + acc_img.getOriginalFilename(); // 원본 파일 이름을 반환
+				String fileName = uuid.toString() + "_" + acc_img.getOriginalFilename(); 
 				String filePath = "src/main/resources/static/img/acc_img/" + fileName;
 
 				// 파일 저장
@@ -125,15 +123,15 @@ public class AccommodationService {
 				// 이미지를 저장한 파일 경로 설정
 				acc.setAcc_img("/img/acc_img/" + fileName);
 			} catch (IOException e) {
-				// 예외 처리
+			
 				e.printStackTrace();
-				return null; // 실패
+				return null; 
 			}
 		}
 
 		this.accommodationRepository.save(acc);
 
-		return 1; // 성공
+		return 1; 
 	}
 
 	// 새로운 객실 추가 등록
@@ -150,7 +148,7 @@ public class AccommodationService {
 		acc.setAcc_max_people(acc_max_people);
 		acc.setAcc_info(acc_info);
 
-		// 이미지 필드가 비어있지 않은 경우에만 이미지 처리를 수행합니다.
+		// 이미지 필드가 비어있지 않은 경우에만 이미지 처리를 수행
 		if (acc_img != null && !acc_img.isEmpty()) {
 			try {
 				UUID uuid = UUID.randomUUID();
@@ -167,13 +165,13 @@ public class AccommodationService {
 				acc.setAcc_img("/img/acc_img/" + fileName);
 			} catch (IOException e) {
 				e.printStackTrace();
-				return -1; // 실패
+				return -1; 
 			}
 		}
 
 		this.accommodationRepository.save(acc);
 
-		return 1; // 성공
+		return 1; 
 	}
 
 	public List<Accommodation> findAccommodationsByUsername(String username) {
@@ -212,8 +210,8 @@ public class AccommodationService {
 
 				List<Predicate> predicates = new ArrayList<>();
 				for (String keyword : keywords) {
-					Predicate keywordPredicate = cb.and(cb.or(cb.like(q.get("acc_address"), "%" + keyword + "%"), // 주소로
-							// 찾기
+					Predicate keywordPredicate = cb.and(cb.or(cb.like(q.get("acc_address"), "%" + keyword + "%"), // 주소로 찾기
+							 
 							cb.like(q.get("acc_name"), "%" + keyword + "%"), // 가게명으로 찾기
 							cb.like(q.get("acc_sectors"), "%" + keyword + "%"), // 업종으로 찾기
 							cb.like(q.get("acc_explain"), "%" + keyword + "%") // 메뉴로 찾기
@@ -356,8 +354,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
-						
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(keywordPredicate, categoryPredicate, categoryPredicate2, keywordPredicate2);
 			}
@@ -639,7 +636,7 @@ public class AccommodationService {
 				Predicate categoryPredicate2 = criteriaBuilder.or(categoryPredicates2.toArray(new Predicate[0]));
 
 				/* 투숙 인원 */
-				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"),kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				return criteriaBuilder.and(categoryPredicate2, keywordPredicate2);
 			}
@@ -1399,7 +1396,7 @@ public class AccommodationService {
 					CriteriaBuilder criteriaBuilder) {
 				query.distinct(true); // Remove duplicates
 
-				Predicate keywordPredicate =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw8Value = Integer.parseInt(kw8);
 				Predicate keywordPredicate2 = criteriaBuilder.greaterThanOrEqualTo(root.get("acc_averPrice"), kw8Value);
@@ -1560,7 +1557,7 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw8Value = Integer.parseInt(kw8);
 
@@ -1682,7 +1679,7 @@ public class AccommodationService {
 				}
 				Predicate categoryPredicate = criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0]));
 
-				Predicate keywordPredicate2 =criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
+				Predicate keywordPredicate2 = criteriaBuilder.lessThanOrEqualTo(root.get("acc_max_people"), kw7);
 
 				int kw9Value = Integer.parseInt(kw9);
 
@@ -2079,33 +2076,26 @@ public class AccommodationService {
 		};
 	}
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//도겸이가 추가한 메서드
+
+//해당 숙소의 예약 가능한 객실의 리스트
 	public Accommodation getAccomList(Long tempAccomId, List<BookingVO> filteredRooms) {
 		Accommodation acc = new Accommodation();
 		Product pro = new Product();
-		// int count = 0;
 		Long id = tempAccomId;
-		Optional<Accommodation> accom = this.accommodationRepository.findById(id); // optional은 findById()만 가능한듯.
+		Optional<Accommodation> accom = this.accommodationRepository.findById(id); 
 		if (accom.isPresent()) {
-			// for(Accommodation accom: accomList) { // 숙소리스트에서 숙소 뽑아옴
-			for (Product product : accom.get().getProducts()) { // 숙소에 있는 객실리스트에서 객실 뽑아옴
-				int productCount = product.getProduct_count(); // 객실의 종류는 여러개고 각 객실마다 객실 수가 다르다. A객실의 카운트를 가져온다.
-				// 만일 객실아이디가 여러개면 이 자리에 product.getProduct_id로 foreach문 돌린다. -> 여러개다.
+			
+			for (Product product : accom.get().getProducts()) {
+				int productCount = product.getProduct_count(); 
+				
 				for (BookingVO reservedRoom : filteredRooms) { //
 					if (product.getProduct_id() == reservedRoom.getTempRoomId()) {
-						productCount -= 1; // int형이면 0이 담기겠지 null이 아니라?
+						productCount -= 1; 
 					}
 				}
 				product.setProduct_count(productCount);
 			}
-			// }ㄴ
-
 			return accom.get();
-//  	return Optional.of(accommodationRepository.findAll());
 		} else {
 			throw new DataNotFoundException("accomList not found");
 		}
@@ -2116,17 +2106,17 @@ public class AccommodationService {
 
 	}
 
-	//해당 유저의 acc가 맞는지 확인
+	// 해당 유저의 숙소가 맞는지 확인
 	public boolean isAccommodationOwner(Long acc_id, String username) {
-		 // acc_id에 해당하는 숙소 정보 조회
-        Optional<Accommodation> findOwnerAccommodation = accommodationRepository.findById(acc_id);
-        
-        //만일 Acc 에서 숙소 정보가 있다면 
-        if (findOwnerAccommodation.isPresent()) {
-            Accommodation accommodation = findOwnerAccommodation.get();
-            // 조회한 숙소 정보의 소유자(username)와 현재 사용자의 이름을 비교하여 같은지 확인
-            return accommodation.getUsername().equals(username); //equals가 true 반환
-        }
+		
+		Optional<Accommodation> findOwnerAccommodation = accommodationRepository.findById(acc_id);
+
+		
+		if (findOwnerAccommodation.isPresent()) {
+			Accommodation accommodation = findOwnerAccommodation.get();
+			
+			return accommodation.getUsername().equals(username); //true 반환
+		}
 		return false;
 	}
 }

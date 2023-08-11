@@ -10,7 +10,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 
 
-//방 수정하기 버튼 클릭시 해당 하는 곳으로 이동한다. 
+//방 수정하기 이동
 function modifyRoom(button) {
 	var editButton = $(button);
 	var productId = parseInt(editButton.parents('.Product_contents').find('.product_id').text());
@@ -18,11 +18,11 @@ function modifyRoom(button) {
 	window.location.href = url;
 }
 
-//유효성 검사
+//productForm에 input 이벤트 발생시 검사
 $(document).ready(function() {
-	// 입력 필드 값 변경 이벤트 처리
+
 	$('#productForm input').on('input', function() {
-		// 값이 변경된 입력 필드의 처리 로직을 작성합니다.
+
 		var fieldName = $(this).attr('name');
 		var fieldValue = $(this).val();
 
@@ -32,9 +32,9 @@ $(document).ready(function() {
 });
 
 
-// 유효성 검사 함수 메세지(메세지를 출력)
+// 유효성 검사 함수 
 function validateField(fieldName, fieldValue) {
-	// 필드 타입에 따라 유효성 검사를 수행
+
 	switch (fieldName) {
 		case 'product_type':
 			if (!isValidProductLetter(fieldValue)) {
@@ -84,7 +84,7 @@ function validateField(fieldName, fieldValue) {
 }
 
 
-// 방 등록 값 유효성 검사 (빈 공백)
+// 빈 공백 검사
 function isValidProductLetter(value) {
 	if (value.trim() === '') {
 		// 값이 공백인 경우
@@ -112,7 +112,6 @@ function isValidProductZeroAmount(value) {
 	}
 	return true;
 }
-
 
 
 // 오류 메시지 표시 함수
@@ -158,10 +157,11 @@ $(document).ready(function() {
 				clearError('product_count');
 				clearError('product_pernum');
 				$('#productForm').trigger('reset');
+
 				deleteAllFiles();//이미지 전체 삭제 함수 호출
 
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
-				//아무런 작업을 하지 않는다
+
 			}
 		});
 
@@ -171,13 +171,12 @@ $(document).ready(function() {
 
 
 
-//이미지 추가
+//이미지 파일 저장 배열(전역 변수)
+var tempFiles = [];
 
-var tempFiles = [];  // 전역 변수로 생성
-
-// 파일이 등록되었을 때 이벤트 리스너를 추가합니다.
+// 파일이 등록되었을 때 이벤트 리스너를 추가
 document.querySelector('#addPhoto').addEventListener('change', function(e) {
-	var files = e.target.files; // 선택된 파일들을 가져옵니다.
+	var files = e.target.files;
 
 
 	var files = $(this).get(0).files; // 새로 추가하려는 이미지
@@ -186,104 +185,94 @@ document.querySelector('#addPhoto').addEventListener('change', function(e) {
 
 
 
-	//만약에 이미지를 5개 이상 한번에 등록하려 한다면 
+	//이미지 5개 이상 한번에 등록
 	if (files.length > maxAllowedFiles) {
 		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
-		// 선택한 파일 초기화
 		$(this).val('');
-		return;  // 즉시 함수를 종료
+		return;
 	}
 
-	//만약 기존에 등록된 이미지가 있는데 새로 추가한거와 수를 비교했을 시 5개가 넘을때
+	//기존 이미지 수 + 새로 추가한 이미지 수 5이하인지 확인
 	if (existingImages + files.length > maxAllowedFiles) {
 		Swal.fire('사진은 최대 5장까지 등록할 수 있습니다')
-		// 선택한 파일 초기화
 		$(this).get(0).value = '';
-		return;  // 즉시 함수를 종료
-
+		return;
 	}
 
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-		tempFiles.push(file);  // 파일 정보를 임시 배열에 저장
+		tempFiles.push(file);
 
-		// 파일의 MIME 타입을 확인하여 png 또는 jpg인지 검사
+		//png 또는 jpg인지 검사
 		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
 			Swal.fire('png 또는 jpg 이미지만 등록할 수 있습니다');
-			return;  // 이미지가 png 또는 jpg가 아니라면 더 이상 처리하지 않고 함수를 종료
+			return;
 		}
 	}
 
-
-	for (var i = 0; i < files.length; i++) { // 선택된 파일들에 대하여 반복
+	//새로 추가된 img 파일 보여준다
+	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-		var reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체를 생성
+		var reader = new FileReader();
 
-		reader.onload = (function(file) { // 파일 읽기가 완료되면 실행되는 콜백 함수
+		reader.onload = (function(file) {
 			return function(e) {
-				var li = document.createElement('li'); // 새로운 <li> 엘리먼트를 생성
-				li.className = 'file_info_li'; // 클래스 이름을 설정
+				var li = document.createElement('li');
+				li.className = 'file_info_li';
 				li.innerHTML = `
                     <div class="file_img_and_link">
                         <img class="show_file_img" src="${e.target.result}" alt="${file.name}">
                         <div class="file_link_name">${file.name}</div>
                     </div>
                     <button class="file_img_deleate"  onclick="deleteFileItem(event)">x</button>
-                `; // li 내부의 HTML을 설정
+                `;
 
-				document.querySelector('.file_infos').appendChild(li); // <ul> 안에 새로운 <li> 엘리먼트를 추가
+				document.querySelector('.file_infos').appendChild(li);
 			};
 		})(file);
 
-		reader.readAsDataURL(file); // 파일을 읽움. 비동기로 실행
-
+		reader.readAsDataURL(file);
 	}
 
-	// 이벤트 처리 후 파일 선택 필드 초기화 => 삭제 후에도 동일한 이름 이미지 올릴 수 있도록
+	// 이벤트 처리 후 파일 선택 필드 초기화
 	e.target.value = '';
 
-	//전체 삭제 버튼 클릭시 전체 이미지 삭제
+	//전체 삭제 버튼
 	document.querySelector('.file_list_header_del').addEventListener('click', deleteAllFiles);
 
 });
 
-//전체 삭제 버튼 클릭시 전체 이미지 삭제
+//전체 삭제 버튼 함수
 function deleteAllFiles() {
-	// 모든 <li> 엘리먼트를 선택
+
 	var listItems = document.querySelectorAll('.file_info_li');
 
-	// 모든 <li> 요소를 삭제
 	listItems.forEach(function(listItem) {
 		listItem.remove();
 	});
 
-	// tempFiles 배열 비우기
+	//이미지 저장 배열 비우기
 	tempFiles = [];
 }
 
 
-// 삭제 버튼 클릭 시 해당 파일 항목을 리스트에서 제거 (개당 제거)
+// 개당 이미지 제거
 function deleteFileItem(event) {
 	var listItem = event.target.parentElement;
 
-
-	// <li> 요소들이 포함된 부모 요소인 리스트(listItems)를 찾아야 함
 	var listItems = listItem.parentElement.children;
 
-	// <li> 요소들 중에서 삭제 버튼이 위치한 <li> 요소의 인덱스를 찾음
+	//몇 번째 이미지인지 찾음	
 	var index = Array.prototype.indexOf.call(listItems, listItem);
 
-
-	// tempFiles 배열에서 해당 인덱스의 파일을 삭제합니다.
 	tempFiles.splice(index, 1);
 
-	// <li> 요소를 삭제하여 UI에서 제거
 	listItem.remove();
 
 }
 
 
-//등록하기 버튼 클릭 이벤트 처리
+//등록하기 버튼 클릭
 $(document)
 	.ready(
 		function() {
@@ -291,95 +280,46 @@ $(document)
 				.click(
 					function() {
 
-						var form = $('#productForm')[0]; //첫 번째 form요소
+						var form = $('#productForm')[0];
 						var formData = new FormData(form);
-
 
 						// 'change' 이벤트에서 처리했던 파일들을 다시 가져옴
 						var files = document.querySelector('#addPhoto').files;
 
-						// 각각의 파일을 FormData에 추가
-						for (var i = 0; i < files.length; i++) {
-							var file = files[i];
-							formData.append('product_photo', file, file.name);
-						}
 
-
-
-						for (var i = 0; i < tempFiles.length; i++) {  // 임시 배열에 저장된 파일 정보 사용
+						//tempFiles 에 있는 이미지 
+						for (var i = 0; i < tempFiles.length; i++) {
 							var file = tempFiles[i];
 							formData.append('product_photo', file, file.name);
 						}
 
+						//유효성 검사
+						var validations = [
+							{ field: 'product_type', validator: isValidProductLetter, errorMessage: '방 이름을 입력해 주세요' },
+							{ field: 'product_amount', validator: isValidProductAmount, errorMessage: '금액을 적어주세요' },
+							{ field: 'product_amount', validator: isValidProductZeroAmount, errorMessage: '0보다 큰 숫자를 입력해 주세요' },
+							{ field: 'product_detail', validator: isValidProductLetter, errorMessage: '상세설명을 입력해 주세요' },
+							{ field: 'product_count', validator: isValidProductAmount, errorMessage: '방 갯수를 입력해 주세요' },
+							{ field: 'product_count', validator: isValidProductZeroAmount, errorMessage: '0보다 큰 숫자를 입력해 주세요' },
+							{ field: 'product_pernum', validator: isValidProductAmount, errorMessage: '최대 수용인원을 입력해 주세요' },
+							{ field: 'product_pernum', validator: isValidProductZeroAmount, errorMessage: '0보다 큰 숫자를 입력해 주세요' }
+						];
 
-						//방 등록 시 유효성 검사 (해당 사항 불 충족 시 값 전송 안됌)
-
-						//방 등록 유효성 검사 
-						if (!isValidProductLetter($('input[name="product_type"]').val())) {
-							showError('product_type', '방 이름을 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
+						for (var i = 0; i < validations.length; i++) {
+							var validation = validations[i];
+							var value = $('input[name="' + validation.field + '"]').val();
+							if (!validation.validator(value)) {
+								showError(validation.field, validation.errorMessage);
+								return;
+							}
 						}
-
-
-						//공백인 경우 유효성 검사
-						if (!isValidProductAmount($('input[name="product_amount"]').val())) {
-							showError('product_amount', '금액을 적어주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-						//금액이 0인 경우 유효성 검사
-						if (!isValidProductZeroAmount($('input[name="product_amount"]').val())) {
-							showError('product_amount', '0보다 큰 숫자를 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-						//상세설명 유효성 검사 
-						if (!isValidProductLetter($('input[name="product_detail"]').val())) {
-							showError('product_detail', '상세설명을 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-
-						//방 갯수 유효성 검사 
-						if (!isValidProductAmount($('input[name="product_count"]').val())) {
-							showError('product_count', '방 갯수를 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-						//방 갯수 유효성 검사 
-						if (!isValidProductZeroAmount($('input[name="product_count"]').val())) {
-							showError('product_count', '0보다 큰 숫자를 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-						//최대 수용인원 유효성 검사 
-						if (!isValidProductAmount($('input[name="product_pernum"]').val())) {
-							showError('product_pernum', '최대 수용인원을 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
-
-						//최대 수용인원 유효성 검사 
-						if (!isValidProductZeroAmount($('input[name="product_pernum"]').val())) {
-							showError('product_pernum', '0보다 큰 숫자를 입력해 주세요');
-							return; // 유효성 검사에 실패하면 함수 종료
-						}
-
 
 						// 이미지 파일이 선택되었는지 확인
-						//var files = $('#addPhoto').get(0).files;
 						var files = $('.file_info_li').length;
 						if (files === 0) {
-							//	alert('이미지가 최소 1개가 필요합니다.');
 							Swal.fire('이미지는 최소 1개가 필요합니다')
-							return; // 이미지가 선택되지 않았으므로 함수 종료
+							return;
 						}
-
 
 						$
 							.ajax({
@@ -395,12 +335,11 @@ $(document)
 									// 등록 후 form 초기화
 									$('#productForm')[0]
 										.reset();
-									//페이지 reload	
+
 									window.location.reload();
 
 								},
 								error: function(xhr) {
-									// 서버에서 반환된 에러 메시지를 가져옴
 									var errorMessage = xhr.responseText;
 									Swal.fire(errorMessage)
 
@@ -418,7 +357,6 @@ $(document).ready(
 			function() {
 				var deleteButton = $(this);
 
-				//해당 상품의 id 를 찾음
 				var productId = parseInt(deleteButton.parents('.Product_contents').find('.product_id').text());
 
 				swalWithBootstrapButtons.fire({
@@ -435,23 +373,22 @@ $(document).ready(
 						$.ajax({
 							url: '/partner/product/deleteProduct',
 							method: 'POST',
-							dataType: 'text', //text로 바꿔야지 swal 적용가능
+							dataType: 'text',
 							data: {
 								"productId": productId,
 							},
 							success: function(response) {
-								// 삭제 성공 시 동작
 								Swal.fire('삭제 성공', response, 'success').then(() => {
 									deleteButton.closest('.box').remove();
 								});
 							},
 							error: function(xhr) {
-								Swal.fire(xhr.responseText);//실패 알림 메세지
+								Swal.fire(xhr.responseText);
 							}
 						})
 
 					} else if (result.dismiss === Swal.DismissReason.cancel) {
-						//취소 버튼 클릭시 아무런 동작을 하지 않음
+
 					}
 				});
 			});
@@ -487,7 +424,7 @@ $(document).ready(
 		});
 	});
 
-
+//이미지 슬라이드 함수
 function startSlideshow(slideshowContainer, images) {
 	let currentSlideIndex = 0;
 	const slide = slideshowContainer.find('.slide');
@@ -495,17 +432,11 @@ function startSlideshow(slideshowContainer, images) {
 	const nextButton = slideshowContainer.find('.next');
 
 
-	// 슬라이드 업데이트 함수 (에니메이션 효과와 함께 슬라이드를 업데이트)
-	function updateSlide() {
-		const imgUrl = images[currentSlideIndex].imgUrl;
-		slide.css('background-image', `url(${imgUrl})`);
-	}
-
 	// 첫 번째 이미지로 초기화
 	updateSlide();
 
 
-	// 이전 이미지로 이동하는 함수
+	// 이전 이미지
 	function goToPrevSlide() {
 		currentSlideIndex--;
 		if (currentSlideIndex < 0) {
@@ -514,7 +445,7 @@ function startSlideshow(slideshowContainer, images) {
 		updateSlide();
 	}
 
-	// 다음 이미지로 이동하는 함수
+	// 다음 이미지
 	function goToNextSlide() {
 		currentSlideIndex++;
 		if (currentSlideIndex >= images.length) {
@@ -531,7 +462,6 @@ function startSlideshow(slideshowContainer, images) {
 
 	prevButton.on('click', goToPrevSlide);
 	nextButton.on('click', goToNextSlide);
-
 }
 
 
@@ -541,7 +471,7 @@ $('.product_amount').each(
 	function() {
 		var amountText = $(this).text();
 		var amountNumber = parseFloat(amountText.replace(
-			/[^0-9.]/g, '')); //숫자로 변환
-		var formattedNumber = amountNumber.toLocaleString(); //통화 기호
-		$(this).text(formattedNumber); //변경
+			/[^0-9.]/g, '')); 
+		var formattedNumber = amountNumber.toLocaleString(); 
+		$(this).text(formattedNumber); 
 	});

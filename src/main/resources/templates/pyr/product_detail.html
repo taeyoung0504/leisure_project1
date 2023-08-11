@@ -19,13 +19,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link rel="stylesheet" href="/css/product_detail.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<!-- 다음 주소 검색 api-->
 <script th:src="@{/js/product_detail.js}"></script>
 <link rel="stylesheet" href="/css/dec_kty.css">
-<!-- 김도겸 css -->
 <link rel="stylesheet" href="/css/product_detail_kdg.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-<!-- 김도겸 css 끝 -->
 
 </head>
 <body>
@@ -37,13 +34,10 @@
             <img class="fixed_image" th:src="${acc.acc_img}" alt="숙소">
          </div>
       </div>
-      <!--  page container 끝 -->
 
 
       <div class="page_right">
-         <!--  숙소명 -->
          <p class="hotelname" th:text="${acc.acc_name}"></p>
-         <!--  평점 -->
          <span class="score_start"
             th:text="${acc.acc_rating eq 1 ? '★ ✩ ✩ ✩ ✩' : 
                                  acc.acc_rating eq 2 ? '★ ★ ✩ ✩ ✩' :
@@ -77,7 +71,6 @@
          <li><a href="#view3" onclick="changeTabColor(2)">리뷰</a></li>
       </ul>
       <div class="tabcontents">
-         <!--  객실 부분 --->
 			<div id="view1">
 				<section id="datepicker-container">
 					<input type="text" id="datepicker1" name="checkin" required>
@@ -105,9 +98,7 @@
 					  </div>
 					</div>
 					
-					<!-- Swiper JS -->
 					<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-					<!-- Initialize Swiper -->
 					<script src="/js/product_detail_slide.js"></script>
 					
                <div class="room_info"
@@ -125,9 +116,6 @@
                      <strong>최대 수용 인원 -  <span th:text="${product.product_pernum}"></span>명</strong>
                      
                      </div>
-                     <!-- <button type="button" onclick="pop_room_detail()">" 객실
-                        이용 안내"</button> -->
-                     <!-- <button type="button"> 판매완료 </button> -->
                      <span id="hidden" hidden th:text="${product.product_id}"
                         th:value="${product.product_id}"></span>
                      <button type="button" id="button"
@@ -135,22 +123,20 @@
                         th:id="${product.product_id}" onclick="handleClick(this)">
                         <strong>총</strong> <span name=""
                            th:value="${product.product_id}" id="reservePrice"
-                           th:text="${product.totalPrice}"> <!-- onclick="handleClick(event)" -->
+                           th:text="${product.totalPrice}"> 
                            <p></p></span>원 예약하기
                      </button>
                   </div>
                </div>
             </div>
          </div>
-         <!--  객실 끝  -->
 
          <div id="view2">
-            <!-- 불러오기 성공 이제 수정들어가야 함 -->
+            
             <pre class="pre_pre">
               <p th:utext="${@commonUtil.markdown(acc?.acc_info) ?: ''}"></p>
             </pre>
 
-            <!--  map -->
             <div class="map" id="kakao_maps">
 
                <body>
@@ -160,7 +146,7 @@
                   <script th:src="@{/js/kty_map.js}"></script>
                </body>
 
-               <!--  지도 -->
+               
 
 
             </div>
@@ -202,7 +188,7 @@
                               ★ ★ ★ ✩</span> <span th:if="${review.rating == 5}"
                               class="start_repeat"> ★ ★ ★ ★ ★</span> <span
                               class="score_number" th:text="${review.rating}"> </span>
-                        </p> <!-- 신고 누락적시 블라인드 처리된 내용 표시 -->
+                        </p> 
                         <p class="blind1">
                            <span th:text="${review.contentForDisplay}"></span>
                         </p>
@@ -213,7 +199,7 @@
                      </li>
                   </ul>
                </div>
-               <!--  모달 (신고) -->
+              
                <div id="myModa" class="modal_declaration">
                   <div class="modal-content_declaration">
                      <span class="close">&times;</span>
@@ -239,7 +225,6 @@
                </div>
 
 
-               <!-- datepicker 적용 -->
                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
                <script
                   src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -249,7 +234,6 @@
 
             </body>
 
-            <!--  리뷰 끝 -->
 
          </div>
       </div>

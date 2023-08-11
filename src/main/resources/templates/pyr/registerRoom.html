@@ -19,7 +19,6 @@
 
 
 
-	<!-- 사이드 바 -->
 	<nav id="mypage_sidebar_nav">
 		<ul>
 			<li class="mypage_sidebar"><a th:href="@{/user/mypage/me}">나의
@@ -114,12 +113,9 @@
 
 								<div th:if="${not #lists.isEmpty(product.productImgs)}"
 									class="slideshow-container">
-									<!-- 해당 배열의 이미지를 보여줌 -->
 									<div th:each="img : ${product.productImgs}"
 										class="imgContainer">
 										<div class="slide">
-											<!-- 해당 이미지의 경로를 가져온다.   -->
-
 
 											<img th:src="${img.img_url}" alt="Product Image" width="100%"
 												height="100%" class="showImgs"><span
@@ -198,7 +194,6 @@
 								</p>
 
 							</div>
-							<!-- 	<button class="addEditImg">이미지 추가</button> -->
 
 
 						</div>
@@ -213,7 +208,6 @@
 			</div>
 		</div>
 
-		<!-- 모달 -->
 		<div id="myModal" class="modal">
 			<span class="close" onclick="closeModal()">&times;</span> <img
 				id="modalImg" class="modal-content">
@@ -222,7 +216,6 @@
 	</div>
 
 
-	<!-- 만약 해당 데이터가 비어있으면 바로 등록하기로 이동  -->
 	<div th:if="${isEmpty}">
 
 		<script>
@@ -241,13 +234,10 @@
 			var modal = document.getElementById("myModal");
 			var modalImg = document.getElementById("modalImg");
 
-			// 모달 창에 이미지를 표시할 때 사용할 이미지 소스를 가져옴
 			var imgSrc = event.target.src;
 
-			// 모달 창 이미지 엘리먼트의 src 속성에 이미지 소스를 설정
 			modalImg.src = imgSrc;
 
-			// 모달 창을 표시
 			modal.style.display = "block";
 		}
 
