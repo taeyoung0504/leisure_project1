@@ -130,7 +130,6 @@ public class BookService {
     }
 	
 	
-	// 이거 안쓰는 코드 인듯
 	public Room getRoom(int id) {
 
 		Optional<Room> room = this.roomRepository.findById(id);
@@ -141,7 +140,7 @@ public class BookService {
 		}
 	}
 
-	// 유리 추가 Tid 로 해당 bookVo를 조회하여 넘겨준다
+	// Tid 로 해당 bookVo를 조회하여 넘겨준다
 	public Optional<BookingVO> findBookTid(String tid) {
 		return bookRepository.findByTid(tid);
 	}
@@ -164,7 +163,7 @@ public class BookService {
 		return bookingList;
 	}
 
-	// 유리 추가 참조된 productID를 조회하여 null 값 처리
+	// 참조된 productID를 조회하여 null 값 처리
 	public void updateBookingVoProductToNull(Product product) {
 		// BookingVO 조회
 		Optional<BookingVO> bookingVoOptional = bookRepository.findByProduct(product);
@@ -176,7 +175,7 @@ public class BookService {
 		});
 	}
 
-	// 유리 추가 참조된 Acc 를 조회하여 null 값 처리
+	// 참조된 Acc 를 조회하여 null 값 처리
 	public void updateBookingVoAccToNull(Accommodation accommodation) {
 	    // 해당 Accommodation에 연결된 모든 BookingVO를 조회
 	    List<BookingVO> bookingVoList = bookRepository.findByAccommodation(accommodation);
@@ -192,7 +191,7 @@ public class BookService {
 	}
 	
 	
-	// 유리 추가 참조된 여러개의 productID를 조회하여 null 값 처리
+	// 참조된 여러개의 productID를 조회하여 null 값 처리
 	public void updateAllBookingVoProductToNull(Product product) {
 	    // 해당 Product에 연결된 모든 BookingVO를 조회
 	    List<BookingVO> bookingVoList = bookRepository.findAllByProduct(product);

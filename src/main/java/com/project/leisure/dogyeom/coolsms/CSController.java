@@ -36,8 +36,6 @@ public class CSController {
 
 	
 	@GetMapping("/check/sendSMS")
-	//@ResponseBody
-//	SingleMessageSentResponse sendSMS(@RequestParam("phoneNumber") String phoneNumber, HttpSession session) {
 		public ResponseEntity<?> sendSMS(@RequestParam("phoneNumber") String phoneNumber, HttpSession session) {
 	    // phoneNumber2 매개변수명으로 수정하고 @RequestParam 어노테이션을 추가하여 클라이언트 측에서 전달한 값을 받아옴
 	    
@@ -114,17 +112,8 @@ public class CSController {
 	@GetMapping("/check/timeout")
 	public int timeout(HttpSession session) {
 		
-//		String rand = (String)session.getAttribute("rand");
-		
-//		if (rand.equals(code)) {
-//			phoneService.updateEnableOne(phoneNumber);
-//	        session.removeAttribute("rand");
-//	        return false;
-//	    } 
-		
 		if(session != null) {
 			if (session.getAttribute("rand") != null) {
-	            // Remove the session attribute with the key 'rand'
 	            session.removeAttribute("rand");
 	            return 0;
 	        }

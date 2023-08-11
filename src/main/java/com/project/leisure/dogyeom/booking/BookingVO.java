@@ -71,25 +71,6 @@ public class BookingVO extends BaseEntity implements Serializable{
 	@JoinColumn(name = "accomID", referencedColumnName = "id")
 	private Accommodation accommodation;
 	
-//	@JsonIgnore
-//	@OneToOne(mappedBy = "booking")
-//	@JoinColumn(name = "roomID", referencedColumnName = "product_id")
-//	private Product product;
-//	
-//	private Long tempAccomId; // 숙소아이디(외래키 적용 예정)
-//	
-//	@OneToOne(mappedBy = "booking")
-//	@JoinColumn(name = "accomID", referencedColumnName = "id")
-//	private Accommodation accommodation;
-	
-//	@OneToOne
-//    @JoinColumn(name = "roomID", referencedColumnName = "product_id")
-//    private Product product;
-//	
-//	 @OneToOne
-//	 @JoinColumn(name = "accomID", referencedColumnName = "id")
-//	 private Accommodation accommodation;
-	
 	private String tid; // 결제번호(카카오에서 받음)
 
 	
@@ -103,12 +84,6 @@ public class BookingVO extends BaseEntity implements Serializable{
         super();
         this.tempRoomId = tempRoomId;
     }
-
-
-	/*
-	 * public BookingVO(LocalDateTime paymentDate, String tid) { super();
-	 * this.paymentDate = paymentDate; this.tid = tid; }
-	 */
 
 	 public BookingVO(String roomTitle, String totalPrice, Product product) {
 	        super();
