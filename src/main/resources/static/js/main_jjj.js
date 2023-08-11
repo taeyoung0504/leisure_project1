@@ -208,6 +208,25 @@ document.addEventListener("DOMContentLoaded", function() {
 const jj_carousel = document.querySelector(".card-container"),
 	firstImg = jj_carousel.querySelectorAll(".card")[0];
 arrowIcons = document.querySelectorAll(".jj_wrapper i");
+// 아이콘 숨김
+arrowIcons.forEach(icon => {
+  icon.style.display = "none";
+});
+
+// 마우스가 올라갈 때 아이콘 보이기
+jj_carousel.addEventListener("mouseenter", () => {
+  arrowIcons.forEach(icon => {
+    icon.style.display = "block";
+  });
+});
+
+// 마우스가 영역을 벗어날 때 아이콘 숨기기
+jj_carousel.addEventListener("mouseleave", () => {
+  arrowIcons.forEach(icon => {
+    icon.style.display = "none";
+  });
+});
+
 
 let isDragStrart = false, prevPageX, prevScrollLeft;
 let firstImgWidth = firstImg.clientWidth + 270;

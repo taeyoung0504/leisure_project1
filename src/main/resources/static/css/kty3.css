@@ -420,9 +420,11 @@ label {
 }
 
 .feefee {
-	/* 	margin-top: 20px; */
-	/* 	position: absolute; */
+	/* margin-top: 16px; */
+	position: relative;
 	font-size: 22px;
+	bottom: -15px;
+	text-wrap: nowrap;
 }
 
 .hotel_name_hk {

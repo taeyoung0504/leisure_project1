@@ -87,7 +87,7 @@
 					th:href="@{/user/login}">로그인</a></li>
 				<li sec:authorize="isAuthenticated()"><a class="nav-link"
 					th:href="@{/user/logout}">로그아웃</a></li>
-				<li sec:authorize="hasAnyRole('PARTNER', 'SNS_USER','USER')"><a class="nav-link" th:href="@{/user/mypage/me}">마이페이지</a></li>
+				<li><a class="nav-link" th:href="@{/user/mypage/me}">마이페이지</a></li>
 				<li sec:authorize="isAnonymous()"><a class="nav-link"
 					th:href="@{/user/signup}">회원가입</a></li>
 				<!--예약내역 th:href@{} 연결부분 페이지 완성 s되면 수정해주세요(수정필요2)-->
