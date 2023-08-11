@@ -27,6 +27,7 @@ import com.project.leisure.dogyeom.toss.domain.CancelPaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentResDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentSuccessDto;
+import com.project.leisure.dogyeom.totalPrice.TotalPrice;
 import com.project.leisure.dogyeom.totalPrice.TotalPriceRepository;
 import com.project.leisure.yuri.product.Accommodation;
 import com.project.leisure.yuri.product.AccommodationService;
@@ -89,6 +90,16 @@ private final PaymentService paymentService;
 		product = productService.getProduct(convertedId2);
 
 		String totalPrice1 = null;
+		
+		List<TotalPrice> totalArrays = totalPriceRepository.findByTotalPrice(totalPrice);
+		for(TotalPrice totals: totalArrays) {
+			if(totalPrice.equals(totals.getTotalPrice())) {
+				totalPrice1 = totalPrice;
+				break;
+			} else {
+				totalPrice1 = null;
+			}
+		}
 
 		bookingvo.setBookerID("username"); // principal 넣어야함.
 		bookingvo.setBookerName(params.getParameter("username"));
@@ -97,8 +108,8 @@ private final PaymentService paymentService;
 		bookingvo.setCheckin(date1);
 		bookingvo.setCheckOut(date2);
 		bookingvo.setBookHeadCount(4);
-//		bookingvo.setTotalPrice(totalPrice1);
-		bookingvo.setTotalPrice(totalPrice);
+		bookingvo.setTotalPrice(totalPrice1);
+//		bookingvo.setTotalPrice(totalPrice);
 		bookingvo.setTempRoomId(product.getProduct_id());
 		bookingvo.setTempAccomId(product.getAccommodation().getId());
 
