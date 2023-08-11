@@ -37,42 +37,35 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
+
 		/* 페이지별 접근 권한 설정 */
-		http.authorizeHttpRequests()
-        .requestMatchers(new AntPathRequestMatcher("/admin/*")).hasRole("ADMIN") // admin route => only Admin role
-        .requestMatchers(new AntPathRequestMatcher("/user/mypage/my_productList")).hasRole("PARTNER") // 숙소등록 및 확인 => only Partner role
-        .requestMatchers("/partner/*").hasRole("PARTNER") // /partner/* => only Partner role
-        .requestMatchers(new AntPathRequestMatcher("/user/mypage/*")).hasAnyRole("USER", "PARTNER", "SNS", "ADMIN") // etc...
-        .requestMatchers("/**").permitAll() // allow all other requests (you can customize this as needed)
-        .and()
-        .csrf().disable()
-        /* 로그인 성공, 실패 결과 관한 처리 코드 */
-        .formLogin()
-            .loginPage("/user/login") // 로그인 페이지 경로
-            .failureHandler(userLoginFailHandler) // 로그인 실패 시 메시지 출력을 위한 핸들러 
-            .defaultSuccessUrl("/") // 로그인 성공 시 메인페이지로 이동
-        .and()
-        .logout() // 로그아웃 처리 
-            .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-            .logoutSuccessUrl("/") // 로그아웃 성공 시 메인페이지로 이동
-            .invalidateHttpSession(true) // 로그아웃 성공 시 세션종료
-        .and()
-        .oauth2Login() // 소셜로그인을 위한 처리 
-            .defaultSuccessUrl("/")
-            .userInfoEndpoint()
-            .userService(customOAuth2UserService);
+		http.authorizeHttpRequests().requestMatchers(new AntPathRequestMatcher("/admin/*")).hasRole("ADMIN")
+				.requestMatchers(new AntPathRequestMatcher("/user/mypage/my_productList")).hasRole("PARTNER") // 접근권한 설정 																				// role
+				.requestMatchers("/partner/*").hasRole("PARTNER") // /partner/* => only Partner role
+				.requestMatchers(new AntPathRequestMatcher("/user/mypage/*"))
+				.hasAnyRole("USER", "PARTNER", "SNS", "ADMIN") // etc...
+				.requestMatchers("/**").permitAll().and().csrf().disable()
+				/* 로그인 성공, 실패 결과 관한 처리 코드 */
+				.formLogin().loginPage("/user/login") // 로그인 페이지 경로
+				.failureHandler(userLoginFailHandler) // 로그인 실패 시 메시지 출력을 위한 핸들러
+				.defaultSuccessUrl("/") // 로그인 성공 시 메인페이지로 이동
+				.and().logout() // 로그아웃 처리
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")).logoutSuccessUrl("/") // 로그아웃 성공 시
+																										// 메인페이지로 이동
+				.invalidateHttpSession(true) // 로그아웃 성공 시 세션종료
+				.and().oauth2Login() // 소셜로그인을 위한 처리
+				.defaultSuccessUrl("/").userInfoEndpoint().userService(customOAuth2UserService);
 
 		http.rememberMe() // 사용자 계정 저장
 				.rememberMeParameter("remember") // default 파라미터는 remember-me
 				.tokenValiditySeconds(604800) // 7일(default 14일)
-				.alwaysRemember(false) // remember-me 기능 항상 실행
+				.alwaysRemember(false) // remember-me 기능 실행여부 (true=항상실행, false=실행안함)
 				.userDetailsService(userDetailsService); // 사용자 계정 조회
 
 		return http.build();
 	}
 
-	@Bean //패스워드 평문 저장을 방지하기 위한, 암호화를 위한 처리 
+	@Bean // 패스워드 평문 저장을 방지하기 위한, 암호화를 위한 처리
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
