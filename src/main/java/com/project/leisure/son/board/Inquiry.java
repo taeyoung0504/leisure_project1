@@ -33,12 +33,6 @@ public class Inquiry {
 
     private String username;
 
-	// column 속성
-	// name: 필드와 매칭할 테이블의 컬럼 이름 지정 - 기본 값을 객체의 필드 이름
-	// nullable(DDL) : null 값의 허용 여부를 설정(false = not null)
-	// unique(DDL) : 한 컬럼에 간단히 유니크 제약조건을 걸 때 사용
-		// 두 컬럼 이상 유니크 제약 조건을 사용하는 경우 @Table(uniqueConstraints=)속성 사용 권장
-	// collumneDefinition(DDL) : 데이터베이스 컬럼 정보를 직접 지정 가능
 	
     private String title; // 제목
 

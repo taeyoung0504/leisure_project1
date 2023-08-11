@@ -13,14 +13,13 @@
 	<html layout:decorate="~{khk/adminNavbar}">
 	<div layout:fragment="adminNav" class="container my-3">
 
-			<h1>1:1 문의 답변</h1>
+		<h1>1:1 문의 답변</h1>
 		<div class="content-container">
 			<div class="inquiry_list" th:if="${inquiry.isPresent()}" style="margin-top: 70px;">
 				<div class="inquiryType" th:text="${inquiry.get().type}"></div>
-					<span th:text="${inquiry.get().title}" class="inquiry_title" ></span>
+				<span th:text="${inquiry.get().title}" class="inquiry_title"></span>
 				<div class="inquiry_username">
-					<span>작성자 : </span><span
-						th:text="${inquiry.get().username}" ></span>
+					<span>작성자 : </span><span th:text="${inquiry.get().username}"></span>
 				</div>
 
 				<div class="inquiry-container">
@@ -33,7 +32,7 @@
 				<h5 class="inquiry_title">문의 답변</h5>
 				<table>
 					<tr>
-						<th  class="inquiry_answer">답변 내용</th>
+						<th class="inquiry_answer">답변 내용</th>
 					</tr>
 					<tr th:each="answer : ${inquiry.get().inquiryAnswer}">
 						<div class="answer-container" style="padding: 20px;">

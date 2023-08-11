@@ -34,14 +34,7 @@ public class NoticeService {
 		return noticeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid notice Id:" + id));
 	}
 
-//	public void updateNotice(Integer id, Notice updatedNotice) {
-//		Notice notice = getNotice(id);
-//		notice.setTitle(updatedNotice.getTitle());
-//		notice.setContent(updatedNotice.getContent());
-//		noticeRepository.save(notice);
-//	}
-	
-	// 이미지를 저장할 경로를 아래 변수에 지정합니다.
+	// 이미지 저장
     private static final String UPLOAD_DIR = "src/main/resources/static/img/notice_img/";
 	
     public void updateNotice(Integer id, Notice updatedNotice, @RequestParam("image") MultipartFile imageFile) {
@@ -60,7 +53,7 @@ public class NoticeService {
                 notice.setImagePath(imagePathString);
             } catch (IOException e) {
                 e.printStackTrace();
-                // 필요에 따라 예외를 처리할 수 있습니다.
+                
             }
         }
 
