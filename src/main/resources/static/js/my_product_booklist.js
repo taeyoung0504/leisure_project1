@@ -1,76 +1,4 @@
 
-/*
-document.addEventListener("DOMContentLoaded", function() {
-	// Get the select element
-	const selectElement = document.getElementById("accSelect");
-
-	// Add an event listener to the select element
-	selectElement.addEventListener("change", function() {
-		// Get the selected value
-		const selectedValue = selectElement.value;
-
-		// Get all the table rows
-		const tableRows = document.querySelectorAll("#booking-table tbody tr");
-
-		// Loop through each row and check if the accommodation title matches the selected value
-		tableRows.forEach(function(row) {
-			const accomTitleCell = row.querySelector("td:nth-child(2)"); // Assuming the accommodation title is in the second column
-
-			if (selectedValue === "모두" || accomTitleCell.textContent === selectedValue) {
-				// If the selected value is "모두" or the accommodation title matches the selected value, show the row
-				row.style.display = "table-row";
-			} else {
-				// Otherwise, hide the row
-				row.style.display = "none";
-			}
-		});
-	});
-});
-*/
-/*
-document.addEventListener("DOMContentLoaded", function() {
-	// Get the select element
-	const selectElement = document.getElementById("accSelect");
-
-	// Get the no match message element
-	const noMatchMessage = document.getElementById("noMatchMessage");
-
-	// Add an event listener to the select element
-	selectElement.addEventListener("change", function() {
-		// Get the selected value
-		const selectedValue = selectElement.value;
-
-		// Get all the table rows
-		const tableRows = document.querySelectorAll("#booking-table tbody tr");
-
-		// Initialize a variable to keep track of whether there are matching rows or not
-		let hasMatchingRows = false;
-
-		// Loop through each row and check if the accommodation title matches the selected value
-		tableRows.forEach(function(row) {
-			const accomTitleCell = row.querySelector("td:nth-child(2)"); // Assuming the accommodation title is in the second column
-
-			if (selectedValue === "모두" || accomTitleCell.textContent === selectedValue) {
-				// If the selected value is "모두" or the accommodation title matches the selected value, show the row
-				row.style.display = "table-row";
-				hasMatchingRows = true;
-			} else {
-				// Otherwise, hide the row
-				row.style.display = "none";
-			}
-		});
-
-		// Show/hide the no match message based on whether there are matching rows
-		if (hasMatchingRows) {
-			noMatchMessage.style.display = "none";
-		} else {
-			noMatchMessage.style.display = "block";
-		}
-	});
-});
-*/
-
-
 
 
 
@@ -152,18 +80,17 @@ function submitCancellation() {
 
 
 function hideCancelButton() {
-  // Get all the span elements within the table body
+  
   const spanElements = document.querySelectorAll("tbody span");
 
-  // Loop through each span element
   spanElements.forEach((spanElement) => {
-    // Get the text value of the span element
+   
     const spanText = spanElement.textContent.trim();
     console.log("Span Text:", spanText);
 
-    // Check if the span text value is "거절"
+  
     if (spanText === "거절") {
-      // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
+
       const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
       if (cancelButton) {
         cancelButton.style.display = "none";
@@ -175,7 +102,7 @@ function hideCancelButton() {
   });
 }
 
-// Call the hideCancelButton function when the page loads
+
 document.addEventListener("DOMContentLoaded", hideCancelButton);
 
 
@@ -239,78 +166,3 @@ function setDefaultDate() {
     
     
 
-
-/* 거절 시 숨기기 
-
-
-
-
-
- function hideCancelButton() {
-    // Get all the span elements within the table body
-    const spanElements = document.querySelectorAll("tbody span");
-
-    // Loop through each span element
-    spanElements.forEach((spanElement) => {
-      // Get the text value of the span element
-      const spanText = spanElement.textContent.trim();
-
-      // Check if the span text value is "거절"
-      if (spanText === "거절") {
-        // If the text is "거절", find the closest button with the class "cancelButtondd" and hide it
-        const cancelButton = spanElement.closest("tr").querySelector(".cancelButtondd");
-        cancelButton.style.display = "none";
-      }
-    });
-  }
-
-  // Call the hideCancelButton function when the page loads
-  document.addEventListener("DOMContentLoaded", hideCancelButton);
-*/
-
-
-
-/*
-function openModal() {
-	var modal = document.getElementById('myModal');
-	modal.style.display = 'block';
-}
-
-function closeModal() {
-	var modal = document.getElementById('myModal');
-	modal.style.display = 'none';
-}
-
-
-
-
-	// 버튼 클릭 이벤트에 함수 연결
-	var button = document.getElementById("cancelButtonSubmit");
-	button.addEventListener("click", showAlert);
-    
-	*/
-
-
-/*
- document.addEventListener("DOMContentLoaded", function() {
-	const phoneNumberElements = document.getElementsByClassName("tel-number");
-	for (const element of phoneNumberElements) {
-	  const phoneNumber = element.textContent.trim();
-	  element.textContent = formatPhoneNumber(phoneNumber);
-	}
-  });
-
-  function formatPhoneNumber(phoneNumber) {
-	const cleaned = phoneNumber.replace(/\D/g, ""); // Remove non-digit characters
-	const match = cleaned.match(/^(\d{3})(\d)(\d{3})(\d{4})$/); // Match groups of 3, 1, 3, and 4 digits
-	if (match) {
-	  const maskedMiddleThree = "*".repeat(3); // Create a string of 3 asterisks for the middle digits
-	  const maskedLastFour = "*".repeat(4); // Create a string of 4 asterisks for the last digits
-	  return `${match[1]}-${match[2]}${maskedMiddleThree}-${maskedLastFour}`;
-	}
-	// If the format doesn't match, return the original number
-	return phoneNumber;
-  }
-  
-  
-  */

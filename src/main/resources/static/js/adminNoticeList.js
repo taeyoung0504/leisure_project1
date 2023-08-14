@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	$(".notice-content, .notice_btn").hide(); // 페이지 로드 시 모든 notice-content와 notice_btn을 숨깁니다.
+	$(".notice-content, .notice_btn").hide(); 
 
 	$(".notice-item").click(function() {
-		// 현재 클릭된 notice-item 내의 notice-content와 notice_btn을 토글합니다.
+		// 현재 클릭된 notice-item 내의 notice-content와 notice_btn을 토글.
 		$(this).find(".notice-content, .notice_btn").toggle();
 	});
 
