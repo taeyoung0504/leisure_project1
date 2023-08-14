@@ -26,7 +26,7 @@ import com.project.leisure.taeyoung.email.EmailService2;
 import com.project.leisure.taeyoung.user.UserService;
 import com.project.leisure.taeyoung.user.Users;
 
-import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 //@RequestMapping("/")
@@ -65,73 +65,86 @@ public class KakaoPayController {
 
 	// 결제 승인
 	@GetMapping("/success") // session에 예약VO이름으로 저장된 객체 가져와서 그안에 주문번호 가져와서 해당 서비스에 파라미터로 넣어주기
-	public String kakaoPaySuccess(@RequestParam("pg_token") String pgToken, Model model, Principal principal) { // @ModelAttribute("bookNum")
-																												// String
+	public String kakaoPaySuccess(@RequestParam("pg_token") String pgToken, Model model, Principal principal,
+			HttpSession session) { // @ModelAttribute("bookNum")
+		
+		
+		
 																												// bookNum,
 		log.info("kakaoPaySuccess get............................................");
 		log.info("kakaoPaySuccess pg_token : " + pgToken);
 		// 여기서 session객체 불러서 service에 파라미터로 넘겨줘야한다. -> 안해도됨
-
-		KakaoApproveResponse kcr = new KakaoApproveResponse();
-
-		kcr = kakaoPayService.approveResponse(pgToken);
-
-//		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
-
-		String payDate = kcr.getApproved_at();
-		String tid = kcr.getTid();
-		String status = "예약완료";
-
-		bookService.updatePaymentDate(tid, payDate, status);
-		
-		BookingVO book = bookService.getBook(tid);
-		
-		model.addAttribute("book", book);	
-
-		// 유리 추가 카카오 승인이 되면 이메일 보내도록 처리
-		// 현재 로그인한 유저의 정보를 가져온다.
-		String username = principal.getName();
-		List<Users> findUserEmail = userService.check(username); // 유저가 있는지 없는지 확인
-
-		if (findUserEmail.isEmpty()) {
-			model.addAttribute("error", "User does not exist.");
-			return "kdg/error";
-		}
-
-		Users user = findUserEmail.get(0); // 유저의 정보를 가져온다
-		String userEmail = user.getEmail(); // 가져온 정보에서 이메일을 가져옴
-
-		// tid 불러와서 조회
-		Optional<BookingVO> bookingVO = bookService.findBookTid(tid);
-		if (bookingVO.isPresent()) {
-			String accName = bookingVO.get().getAccomTitle(); // 숙박업소 이름
-			String productType = bookingVO.get().getRoomTitle(); // 객실명
-			LocalDate checkIn = bookingVO.get().getCheckin(); // 체크인 시간
-			LocalDate checkOut = bookingVO.get().getCheckOut(); // 체크아웃 시간
-
-			// 결제 날짜 년-월-일 식으로 보여주기 위함
-			String paymentDateTimeStr = bookingVO.get().getPaymentDate();
-			DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-			LocalDateTime paymentDateTime = LocalDateTime.parse(paymentDateTimeStr, parser);
-
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			String pay_Date = paymentDateTime.format(formatter);
-
-			String totalPrict = bookingVO.get().getTotalPrice();
-			String realName = bookingVO.get().getBookerName();
-
-			try {
-				emailService2.sendConfirmationEmail(userEmail, realName, accName, productType, checkIn,
-						checkOut, pay_Date, totalPrict);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if(pgToken.equals(session.getAttribute("pgToken"))) {
+			session.removeAttribute("pgToken");
+			return "redirect:/user/mypage/my_booking";
 		} else {
-			model.addAttribute("error", "Booking not found.");
-			return "kdg/error"; // 메세지 전달 실패 에러 페이지 추후에 만들기
-		} // 유리 추가 끝
-
-		return "kdg/success";
+			
+			// String
+			
+			KakaoApproveResponse kcr = new KakaoApproveResponse();
+			
+			
+			
+			kcr = kakaoPayService.approveResponse(pgToken);
+			
+//		model.addAttribute("info", kcr); // model도 받아서 주문번호 넣어줘야함.
+			
+			String payDate = kcr.getApproved_at();
+			String tid = kcr.getTid();
+			String status = "예약완료";
+			
+			bookService.updatePaymentDate(tid, payDate, status);
+			
+			BookingVO book = bookService.getBook(tid);
+			
+			model.addAttribute("book", book);	
+			
+			// 유리 추가 카카오 승인이 되면 이메일 보내도록 처리
+			// 현재 로그인한 유저의 정보를 가져온다.
+			String username = principal.getName();
+			List<Users> findUserEmail = userService.check(username); // 유저가 있는지 없는지 확인
+			
+			if (findUserEmail.isEmpty()) {
+				model.addAttribute("error", "User does not exist.");
+				return "kdg/error";
+			}
+			
+			Users user = findUserEmail.get(0); // 유저의 정보를 가져온다
+			String userEmail = user.getEmail(); // 가져온 정보에서 이메일을 가져옴
+			
+			// tid 불러와서 조회
+			Optional<BookingVO> bookingVO = bookService.findBookTid(tid);
+			if (bookingVO.isPresent()) {
+				String accName = bookingVO.get().getAccomTitle(); // 숙박업소 이름
+				String productType = bookingVO.get().getRoomTitle(); // 객실명
+				LocalDate checkIn = bookingVO.get().getCheckin(); // 체크인 시간
+				LocalDate checkOut = bookingVO.get().getCheckOut(); // 체크아웃 시간
+				
+				// 결제 날짜 년-월-일 식으로 보여주기 위함
+				String paymentDateTimeStr = bookingVO.get().getPaymentDate();
+				DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+				LocalDateTime paymentDateTime = LocalDateTime.parse(paymentDateTimeStr, parser);
+				
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String pay_Date = paymentDateTime.format(formatter);
+				
+				String totalPrict = bookingVO.get().getTotalPrice();
+				String realName = bookingVO.get().getBookerName();
+				
+				try {
+					emailService2.sendConfirmationEmail(userEmail, realName, accName, productType, checkIn,
+							checkOut, pay_Date, totalPrict);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				model.addAttribute("error", "Booking not found.");
+				return "kdg/error"; // 메세지 전달 실패 에러 페이지 추후에 만들기
+			} // 유리 추가 끝
+			session.setAttribute("pgToken", pgToken);
+			return "kdg/success";
+		}
+		
 	}
 
 	@PostMapping("/refundd")
