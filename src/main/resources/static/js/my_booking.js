@@ -5,7 +5,7 @@ cancelBtns.forEach(cancelBtn => {
     cancelBtn.addEventListener("click", () => {
         const buttonText = cancelBtn.textContent;
 
-        // Check if the button text is "이용중", and if so, return without doing anything
+
         if (buttonText === "이용중") {
             return;
         }
@@ -37,20 +37,7 @@ cancelBtns.forEach(cancelBtn => {
         });
     });
 });
-    /* 리뷰 id 출력
-    $(document).ready(function() {
-        // Add click event listener to the "리뷰작성" button
-        $('.reviewBtn').click(function() {
-            // Get the value of accomID from the data-accomid attribute
-            var accomID = $(this).attr('data-accomid');
-            // Log the value to the console
-            console.log(accomID);
-            // You can now use the accomID variable for further processing or display
-        });
-    });
-	
-    */
-    
+   
     
     // 리뷰 새창
   $(document).ready(function() {
@@ -58,10 +45,10 @@ cancelBtns.forEach(cancelBtn => {
 	  function disableButton(button) {
 		    if (!button.disabled) {
 		      button.disabled = true;
-		      $(button).removeClass('reviewBtn'); // Remove 'reviewBtn' class
-		      $(button).addClass('gray-button'); // Add the 'gray-button' class to change appearance
+		      $(button).removeClass('reviewBtn'); 
+		      $(button).addClass('gray-button'); 
 		      var accomID = $(button).attr('data-accomid');
-		      localStorage.setItem('disabled_review_button_' + accomID, 'true'); // Store the disabled state in local storage
+		      localStorage.setItem('disabled_review_button_' + accomID, 'true'); 
 
 		      // Update the button text to "작성 완료"
 		      $(button).text('작성 완료');
@@ -75,13 +62,13 @@ cancelBtns.forEach(cancelBtn => {
 		      var isDisabled = localStorage.getItem('disabled_review_button_' + accomID);
 		      if (isDisabled === 'true') {
 		        $(this).prop('disabled', true);
-		        $(this).addClass('gray-button'); // Add the 'graysssss-button' class to change appearance
-		        $(this).text('작성 완료'); // Update the button text to "작성 완료"
+		        $(this).addClass('gray-button');
+		        $(this).text('작성 완료'); 
 		      }
 		    });
 		  }
 
-		  // Check and update the button state when the page loads
+		  
 		  checkAndUpdateButtonState();
 	  
   $('.reviewBtn').click(function() {

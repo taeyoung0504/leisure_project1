@@ -70,6 +70,8 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+	
+	// 스프링 시큐리티의 인증을 담당 => 사용자 인증 시 UserSecurityService와 PasswordEncoder를 사용
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
 			throws Exception {
