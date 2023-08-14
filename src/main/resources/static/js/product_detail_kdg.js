@@ -9,12 +9,85 @@ $(document).ready(function() {
             minDate: 0
           });
           
-       // 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
+          // 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
           const checkin = sessionStorage.getItem("checkin");
           const checkOut = sessionStorage.getItem("checkOut");
+          
+          // 체크인과 체크아웃 사이의 일수 차이 계산
+     function getDateDiff(date1, date2) {
+       const oneDay = 24 * 60 * 60 * 1000; // 하루를 밀리초로 나타냄
+       const diffDays = Math.round(Math.abs((date1 - date2) / oneDay));
+       return diffDays;
+     }
+     
+     // 다수의 날짜를 입력받았을 경우, 가장 빠른 날과 늦은 날 사이의 일수 차이를 구한뒤 금액에 곱하는 함수
+     // 동일한 일수 x 각 객실의 금액(1박 기준)
+     function setReservationSpanValue2(num) {
+       const reservePriceElements = document.querySelectorAll("#reservePrice");
+       const totalAmountElements = document.querySelectorAll("#totalAmount");
+       
+       const reservePriceArray = []; // 값을 저장할 배열을 생성
+     
+       let index = 0;
+       for (const totalAmountElement of totalAmountElements) {
+         const totalAmount = parseInt(totalAmountElement.textContent);
+         const reservePriceElement = reservePriceElements[index];
+         const newValue = totalAmount * num;
+         const totalPrice = addCommas(newValue);
+         console.log('totalPrice',totalPrice);
+         reservePriceElement.textContent = totalPrice.toString();
+         
+         reservePriceArray.push(totalPrice.toString()); // 값을 배열에 저장
+         console.log(reservePriceArray);
+         
+         // 금액만 변질되지 않게 하기 위함이라 객실아이디는 필요가 없나? -> 어차피 같은 금액이라도 상관 없는 것 아닌가
+         // 배열에 계속 저장하기 루프를 다 돌고 나서 배열을 fetch로 컨트롤러로 넘겨주기
+         // -> 컨트롤러에서 해당 배열 받아서 쿼리문 날려서 -> 임시테이블에 저장
+         // -> 성공의 결과로 해당 레코드의 pk 받아오거나 성공 여부만 숫자 0이나 1로 받음
+         // 이후 fetch는 아무 것도 리다이렉션 하지 않고 끝?
+         index++;
+         if (index >= reservePriceElements.length) {
+           break;
+         }
+       }
+     // reservePriceArray를 fetch를 통해 컨트롤러로 전송.
+       const url = `/price/savePrice`;
+      // const data = { reservePrices: reservePriceArray }; // 전송할 데이터를 객체 형태로 만든다.
+
+       fetch(url, {
+         method: "POST", 
+         headers: {
+           "Content-Type": "application/json", // 전송하는 데이터 타입을 JSON으로 지정
+         },
+         /* body: JSON.stringify(data), */ // 데이터를 JSON 형태로 변환하여 전송
+         body: JSON.stringify(reservePriceArray),
+       })
+       .then((response) => response.json())
+       .then((data) => {
+         // 컨트롤러로부터 받은 응답을 처리하는 로직
+         console.log("Response from controller:", data);
+         const checkin = sessionStorage.getItem("checkin");
+          const checkOut = sessionStorage.getItem("checkOut");
+         $("#datepicker1").val(checkin + " ~ " + checkOut);
+       })
+       .catch((error) => {
+         // 오류 처리
+         console.error("Error:", error);
+       });
+     }
+          
+       /*// 페이지가 로드 되었을 때 세션에 checkin과 checkout이라는 키가 있는지 확인
+          const checkin = sessionStorage.getItem("checkin");
+          const checkOut = sessionStorage.getItem("checkOut");*/
 
           if (checkin && checkOut) {
             // 있다면 datepicker가 적용된 input의 기본값으로 출력
+            const checkin1 = new Date(sessionStorage.getItem("checkin")); // 값 추출 후 Date 객체로 변환
+  			const checkOut2 = new Date(sessionStorage.getItem("checkOut")); // 값 추출 후 Date 객체로 변환
+            const num = getDateDiff(checkin1, checkOut2);
+         
+          // 각 객실의 금액과 숙박 일수를 곱함
+            setReservationSpanValue2(num);
             $("#datepicker1").val(checkin + " ~ " + checkOut);
             
           } else {
@@ -31,6 +104,11 @@ $(document).ready(function() {
             
             sessionStorage.setItem("checkin", checkin);
            sessionStorage.setItem("checkOut", checkOut);
+            
+            const num = getDateDiff(today, nextDay);
+         
+          // 각 객실의 금액과 숙박 일수를 곱함
+            setReservationSpanValue2(num);
             
             $("#datepicker1").val(checkin + " ~ " + checkOut);
           }
@@ -137,7 +215,7 @@ $(document).ready(function() {
              location.assign(url); 
        
        } 
-         $("#datepicker1").val("");  // 입력값이 공백이라면 datepicker 초기화
+        /* $("#datepicker1").val("");*/  // 입력값이 공백이라면 datepicker 초기화
        }
      }
      
@@ -262,6 +340,7 @@ $(document).ready(function() {
        }
       
       let totalPrice2 = findMatchingTotalPrice(totalPrice1);
+      
       
       /* alert(totalPrice2); */
       
