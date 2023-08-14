@@ -24,6 +24,7 @@ import com.project.leisure.dogyeom.toss.domain.PaymentResDto;
 import com.project.leisure.dogyeom.toss.domain.PaymentSuccessDto;
 import com.project.leisure.taeyoung.user.Users;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -60,23 +61,31 @@ public class PaymentController {
             @RequestParam String paymentKey,
             @RequestParam String orderId,
             @RequestParam Long amount,
+            HttpSession session,
             Model model
     ) {
 		
-		PaymentSuccessDto result = paymentService.tossPaymentSuccess(paymentKey, orderId, amount);
-		
-		String payDate = result.getApprovedAt();
-		String tid = result.getOrderId(); // 취소 요청을 보낼 때 orderId 쓰는줄 알았는데 paymentKey 쓴다고함.
-		String newTid = result.getPaymentKey();
-		String status = "예약완료";
-		
-		bookService.updatePaymentDate2(tid, payDate, status, newTid);
-		
-		BookingVO book = bookService.getBook(newTid);
-		
-		model.addAttribute("book", book);
-		
-		return "kdg/success";
+    	if(paymentKey.equals(session.getAttribute("paymentKey"))) {
+			session.removeAttribute("paymentKey");
+			return "redirect:/user/mypage/my_booking";
+    	}else {
+    		
+    		PaymentSuccessDto result = paymentService.tossPaymentSuccess(paymentKey, orderId, amount);
+    		
+    		String payDate = result.getApprovedAt();
+    		String tid = result.getOrderId(); // 취소 요청을 보낼 때 orderId 쓰는줄 알았는데 paymentKey 쓴다고함.
+    		String newTid = result.getPaymentKey();
+    		String status = "예약완료";
+    		
+    		bookService.updatePaymentDate2(tid, payDate, status, newTid);
+    		
+    		BookingVO book = bookService.getBook(newTid);
+    		
+    		model.addAttribute("book", book);
+    		session.setAttribute("paymentKey", paymentKey);
+    		return "kdg/success";
+    	}
+    	
     }
     
     
