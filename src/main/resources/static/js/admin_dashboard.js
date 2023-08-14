@@ -1,18 +1,22 @@
+// chart.js 이용
+
+
+// 비동기 방식으로 api 호출
 async function fetchData() {
    try {
-      // Replace '/api/roles' with your actual API endpoint to fetch data
+     
       const response = await fetch('/api/roles');
-      if (!response.ok) {
-         throw new Error('Network response was not ok');
+      if (!response.ok) { // 정상적으로 통신 X
+         throw new Error('네트워크 에러');
       }
       const responseData = await response.json();
       return responseData;
-   } catch (error) {
+   } catch (error) { //에러 발생 시 콘솔창에 에러 원인 출력
       console.error('Error fetching data:', error);
    }
 }
 
-// Function to update the chart with new data
+// api 데이터 차트 생성
 async function updateChart() {
    const responseData = await fetchData();
 
@@ -54,8 +58,7 @@ async function updateChart() {
    });
 }
 
-// Call the updateChart function initially to load the chart
-updateChart();
+updateChart(); //차트 생성
 
 
 
@@ -82,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function createBarChart(sectors, counts) {
    const ctx = document.getElementById('sectorChart').getContext('2d');
 
-   // Define an array of colors to be used for different sectors
+   
    const colors = [
       'rgba(75, 192, 192, 0.6)', 
       'rgba(255, 99, 132, 0.6)', 
@@ -148,7 +151,7 @@ function createBarChart(sectors, counts) {
                 .catch(error => console.error('Error:', error));
         }
 
-        // Call the function to update the booking count on page load
+      
         updateBookingCount();
 
 /*예약 총 매출 */
@@ -163,7 +166,7 @@ function updateBookingCount2() {
         .catch(error => console.error('Error:', error));
 }
 
-// Call the function to update the booking count on page load
+
 updateBookingCount2();
         
         
@@ -197,7 +200,7 @@ function updateCancleCount33() {
         .catch(error => console.error('Error:', error));
 }
 
-// Call the function to update the cancel count on page load
+
 updateCancleCount33();
 
 
@@ -260,7 +263,7 @@ async function updateLineChart() {
             },
             y: {
                beginAtZero: true,
-               stepSize: 10, // You can adjust the step size based on your data
+               stepSize: 10, 
                title: {
                   display: true,
                   text: '방문자 수',
@@ -271,5 +274,4 @@ async function updateLineChart() {
    });
 }
 
-// Call the updateLineChart function initially to load the chart
 updateLineChart();
