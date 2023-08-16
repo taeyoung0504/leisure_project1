@@ -210,11 +210,5 @@ public class EmailService {
 		}
 		return tempPw; // 메일로 보냈던 인증 코드를 서버로 리턴
 	}
-	/*
-	 * public String verifyEmail(String key) throws
-	 * ChangeSetPersister.NotFoundException { String memberEmail =
-	 * redisUtill.getData(key); if (memberEmail == null) { throw new
-	 * ChangeSetPersister.NotFoundException(); } //redisUtill.deleteData(key);
-	 * return ePw; }
-	 */
+	
 }
