@@ -1,6 +1,6 @@
 package com.project.leisure.taeyoung.email;
 
-// OAuth 로그인 사용자 반환정보 처리
+// OAuth 로그인 시 사용자 반환정보 처리(파싱 담당)
 import java.util.Map;
 
 import com.project.leisure.taeyoung.user.UserRole;

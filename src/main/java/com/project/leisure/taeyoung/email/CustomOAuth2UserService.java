@@ -24,22 +24,22 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 	private final UserRepository userRepository;
 	private final HttpSession httpSession;
 
-	@Override
+	@Override 
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
-		OAuth2User oAuth2User = delegate.loadUser(userRequest);
+		OAuth2User oAuth2User = delegate.loadUser(userRequest);  // OAuth2 공급자에서 사용자 정보를 가져옴 (loadUser메서드)
 
-		// OAuth2 서비스 id (구글, 카카오, 네이버)
+		// OAuth2 서비스 id (구글, 카카오, 네이버) 
 		String registrationId = userRequest.getClientRegistration().getRegistrationId();
-		// OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
+		// OAuth2 로그인 진행 시 키가 되는 필드 값(PK) -> 고유 식별 값 (id  or email)
 		String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
 				.getUserNameAttributeName();
 
 		// OAuth2UserService
 		OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName,
-				oAuth2User.getAttributes());
-		Users user = saveOrUpdate(attributes);
-		httpSession.setAttribute("user", new SessionUser(user)); // SessionMember 
+				oAuth2User.getAttributes()); // registrationId, userNameAttributeName 정보를 캡슐화 (OAuthAttributes 메서드)
+		Users user = saveOrUpdate(attributes); 
+		httpSession.setAttribute("user", new SessionUser(user));  //http session으로 설정
 
 
 		return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
@@ -55,3 +55,4 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 		return userRepository.save(user);
 	}
 }
+

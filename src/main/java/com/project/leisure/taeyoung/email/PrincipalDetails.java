@@ -11,6 +11,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.project.leisure.taeyoung.user.UserRole;
 import com.project.leisure.taeyoung.user.Users;
 
+/* 계정의 권한을 통합관리하기 위한 클래스 */
+
+
 public class PrincipalDetails implements UserDetails, OAuth2User {
 	private Users users;
 	private Map<String, Object> attributes;
