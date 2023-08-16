@@ -6,7 +6,7 @@ import com.project.leisure.taeyoung.user.Users;
 
 import lombok.Getter;
 
-//OAuth2 사용자 세션 정보
+//OAuth2 사용자 세션 정보처리
 @Getter
 public class SessionUser implements Serializable {
 	private String social_nickname;
