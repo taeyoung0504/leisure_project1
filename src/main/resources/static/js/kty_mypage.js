@@ -201,16 +201,16 @@ $(document).ready(function() {
 			$NewPwdError1.text('기존 비밀번호와 같습니다').show();
 			$NewPwdError.hide();
 			$inputNewPwd2.prop('disabled', true);
-			$modifyEmailBtn.prop('disabled', true); // Disable the button when passwords are the same
+			$modifyEmailBtn.prop('disabled', true);
 		} else if (passwordRegex.test(newPassword)) {
 			$NewPwdError1.text('사용 가능한 비밀번호입니다').show();
 			$inputNewPwd2.prop('disabled', false);
-			$modifyEmailBtn.prop('disabled', false); // Enable the button when the new password is valid
+			$modifyEmailBtn.prop('disabled', false); 
 		} else {
 			$NewPwdError1.text('문자,숫자,특수기호 포함 6-12자리 X').show();
 			$NewPwdError.hide();
 			$inputNewPwd2.prop('disabled', true);
-			$modifyEmailBtn.prop('disabled', true); // Disable the button when the new password is invalid
+			$modifyEmailBtn.prop('disabled', true); 
 		}
 
 		validateBothPwdInputs();
@@ -248,7 +248,7 @@ $(document).ready(function() {
 	});
 
 	$modifyEmailBtn.click(function() {
-		// Check if any of the input fields is empty
+		
 		if ($inputOldPwd.val() === '' || $inputNewPwd1.val() === '' || $inputNewPwd2.val() === '') {
 			return; // Return early, don't execute the rest of the code
 		}

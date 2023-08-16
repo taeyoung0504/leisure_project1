@@ -1,5 +1,5 @@
 
-
+/* 페이징 처리 를 위한 js */
 document.addEventListener("DOMContentLoaded", function() {
 	const pageElements = document.getElementsByClassName("page-link");
 	Array.from(pageElements).forEach(function(element) {
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-	// Extract opening hours and compare with current time
+	// 현재날짜를 기준으로 공공데이터로 불러온 가게가 영업중인지 영업 종료인지 판별하는 js 코드 */
 	const foodEntries = document.getElementsByClassName("food-entry");
 	Array.from(foodEntries).forEach(function(entry) {
 		const openingHours = entry.getElementsByClassName("shop-opening-text")[0].textContent.trim().split(" ~ ");
@@ -175,142 +175,19 @@ document.addEventListener("DOMContentLoaded", function() {
 	const foodShopPhotos = document.getElementsByClassName("food_shop_photo");
 
 	Array.from(foodShopPhotos).forEach(function(element) {
-		// Get the total number of images in the folder
-		const numImages = 100; // Replace with the actual number of images in the folder
+		
+		const numImages = 100; 
 
-		// Generate a random number between 1 and numImages
 		const randomNumber = Math.floor(Math.random() * numImages) + 1;
 
-		// Set the background image URL
+	
 		const imageURL = `/img/tour/food/shop/${randomNumber}.jpg`;
 
-		// Set the background image for the current element
 		element.style.backgroundImage = `url('${imageURL}')`;
 	});
 
 
 
-
-/*  아래 수정 필요*/
-
-function getAddressFromLatLng(lat, lng, callback) {
-  var geocoder = new kakao.maps.services.Geocoder();
-
-  geocoder.coord2Address(lng, lat, function(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      var address = result[0].address.address_name;
-      callback(address);
-    } else {
-      console.log("주소 변환 중 오류가 발생했습니다.");
-    }
-  });
-}
-
-
-function compareDistance(address1, address2, callback) {
-  // Implement your distance comparison logic here
-  // This function should calculate the distance between two addresses and invoke the callback with the result
-  // For simplicity, let's assume the distance is a random number
-  var distance = Math.random() * 10; // Replace this with your actual distance calculation
-
-  callback(distance);
-}
-
-
-function showPosition(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  getAddressFromLatLng(latitude, longitude, function(currentAddress) {
-    var foodEntries = document.getElementsByClassName("food-entry");
-
-    // Iterate over each food entry
-    for (var i = 0; i < foodEntries.length; i++) {
-      var foodEntry = foodEntries[i];
-      var foodAddressElement = foodEntry.querySelector(".shop-address");
-      var foodAddress = foodAddressElement.innerText;
-
-      // Compare the distance between the current address and the food address
-      compareDistance(currentAddress, foodAddress, function(distance) {
-        // Update the distance result in the corresponding element
-        var sddElement = foodEntry.querySelector("#sdd");
-        var formattedDistance = formatDistance(distance);
-        sddElement.innerText = formattedDistance;
-      });
-    }
-  });
-}
-
-
-
-function formatDistance(distance) {
-  if (distance >= 1) {
-    // Convert to kilometers and format with two decimal places
-    var formattedDistance = distance.toFixed(2) + " km";
-    return formattedDistance;
-  } else {
-    // Convert to meters and format without decimal places
-    var formattedDistance = (distance * 1000).toFixed(0) + " m";
-    return formattedDistance;
-  }
-}
-
-function showError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      console.log("사용자가 위치 공유 권한을 거부했습니다.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      console.log("위치 정보를 사용할 수 없습니다.");
-      break;
-    case error.TIMEOUT:
-      console.log("위치 정보 요청이 시간 초과되었습니다.");
-      break;
-    case error.UNKNOWN_ERROR:
-      console.log("알 수 없는 오류가 발생했습니다.");
-      break;
-  }
-}
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    console.log("Geolocation이 지원되지 않는 브라우저입니다.");
-  }
-}
-
-window.onload = getLocation;
-		
-		
-		
-		function showPosition(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  getAddressFromLatLng(latitude, longitude, function(currentAddress) {
-    var currentMyDongnae = document.getElementById("current_my_dongnae");
-    currentMyDongnae.innerHTML = currentAddress;
-
-    var foodEntries = document.getElementsByClassName("food-entry");
-
-    // Iterate over each food entry
-    for (var i = 0; i < foodEntries.length; i++) {
-      var foodEntry = foodEntries[i];
-      var foodAddressElement = foodEntry.querySelector(".shop-address");
-      var foodAddress = foodAddressElement.innerText;
-
-      // Compare the distance between the current address and the food address
-      compareDistance(currentAddress, foodAddress, function(distance) {
-        // Update the distance result in the corresponding element
-        var sddElement = foodEntry.querySelector("#sdd");
-        var formattedDistance = formatDistance(distance);
-        sddElement.innerText = formattedDistance;
-      });
-    }
-  });
-}
-		
 	
 	
 	

@@ -12,3 +12,6 @@ public class DataNotFoundException extends RuntimeException {
 
 	}
 }
+
+/* 예외처리를 위해 생성 */
+/* 에러방지를 위해 DataNotFoundException 클래스 사용 */

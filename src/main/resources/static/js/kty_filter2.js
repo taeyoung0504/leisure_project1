@@ -1,3 +1,5 @@
+
+
 function getSevenDaysLater(date) {
 	var currentDate = new Date(date);
 	var sevenDaysLater = new Date(currentDate.setDate(currentDate.getDate() + 7));
@@ -7,20 +9,6 @@ function getSevenDaysLater(date) {
 	return year + "-" + month + "-" + day;
 }
 
-// 입력란 값 변경 시 기준 날짜를 설정하는 함수
-/*
-function setDefaultDate() {
-	var input = document.getElementById("checkin_dropdown_daegu2");
-	var selectedDate = input.value;
-	var defaultDate = getSevenDaysLater(selectedDate);
-
-	var checkoutInput = document.getElementById("checkout_dropdown_daegu3");
-	checkoutInput.value = defaultDate;
-}
-
-// Add event listener to call setDefaultDate() when the check-in date changes
-document.getElementById("checkin_dropdown_daegu2").addEventListener("change", setDefaultDate);
-*/
 // 가격범위
 $(function() {
 	$("#price-range").slider({
@@ -317,24 +305,7 @@ function formatTime(time) {
   return formattedTime;
 }
 
-/*
 
-const page_elements = document.getElementsByClassName("page-link");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
-        document.getElementById('searchForm').submit();
-    });
-});
-
-const page_elements2 = document.getElementsByClassName("page-link2");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
-        document.getElementById('searchForm2').submit();
-    });
-});
-*/
 const btn_search = document.getElementById("btn_search_home");
 btn_search.addEventListener('click', function() {
     document.getElementById('kw').value = document.getElementById('search_kw').value;

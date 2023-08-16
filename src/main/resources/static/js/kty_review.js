@@ -54,11 +54,10 @@ $(document).ready(function() {
 			timeLabel = years + timeLabels[5];
 		}
 
-		// Update the text of the element with the calculated time difference
+		
 		$(this).text(timeLabel);
 	});
 
-	/*222sss11ss2s*/
 
 
 	document.querySelectorAll(".declaration").forEach(function(button) {
@@ -179,7 +178,7 @@ function validateForm() {
 		return false; // Prevent form submission
 	}
 
-	// If all inputs are valid, allow form submission
+	
 	return true;
 }
 
