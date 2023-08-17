@@ -64,4 +64,5 @@ deploy : git, github <br>
 
 
 
+![파트너 신청](https://github.com/taeyoung0504/leisure_project1/assets/118175453/54adfaab-eba6-4972-bb3e-9b1cb139c7d2)
 
