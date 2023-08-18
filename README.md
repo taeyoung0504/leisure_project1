@@ -111,23 +111,6 @@ deploy : git, github <br>
 
 
 
-# 유저 기능
-
-
-
-### ✔숙소 검색
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
-
-#### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
-#### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
-
-<br clear="both"/>
-<br>
-
-
-
-
 ## [ADMIN]
 
 ### ✔대시보드 / 공지사항등록
@@ -169,3 +152,37 @@ deploy : git, github <br>
 #### &nbsp;&nbsp;부적절한 리뷰를 블라인드하여 관리 할 수 있습니다.
 
 
+
+## [USER]
+
+
+
+### ✔대구 여행 추천 코스
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/cec83771-c732-4a17-baed-117ff1c13fd1" alt="관광지 검색 gif" width="65%" align="left"/>
+
+
+#### 관광지 리스트에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
+#### 원하는 장소를 클릭하면 그 관광지에 대한 정보들과 길찾기, 홈페이지로 이동할 수 있는 기능을 제공합니다.
+
+<br clear="both"/>
+<br>
+
+### ✔맛집 검색
+
+<img src="" alt="맛집 검색 gif" width="65%" align="left"/>
+
+#### 키워드를 검색하거나 필터 기능을 사용해서 내가 원하는 맛집의 정보를 얻을 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔숙소 검색
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
+#### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
+
+<br clear="both"/>
+<br>
