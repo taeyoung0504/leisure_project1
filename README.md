@@ -64,3 +64,7 @@ deploy : git, github <br>
 
 
 
+# 관리자페이지
+
+
+![대시보드-공지사항](https://github.com/taeyoung0504/leisure_project1/assets/132328765/fe151985-105e-4b00-beb9-97ec5ada90f5)
