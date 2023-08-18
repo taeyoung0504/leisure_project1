@@ -134,7 +134,7 @@ deploy : git, github <br>
 
 ### ✔숙소 검색
 
-<img src="https://https://github.com/taeyoung0504/leisure_project1/assets/131851352/f1aa659d-7aa3-48de-9188-99612a93373b" alt="숙소 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
 
 #### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
 #### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
