@@ -111,7 +111,7 @@ deploy : git, github <br>
 
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/5b16b64b-cb1e-4d63-936a-81e17d580540" alt="파트너-신청 gif" width="65%" align="left"/>
 
-#### 수정 시 현재 선택한 이미지를 기준으로 슬라이드가 동작합니다.
+#### 수정 시 현재 선택한 이미지를 기준으로 슬라이드가 작동합니다.
 #### 초기화를 누르면 새로 입력했던 값들은 사라집니다.
 
 <br clear="both"/>
