@@ -70,6 +70,11 @@ deploy : git, github <br>
 ![대시보드-공지사항](https://github.com/taeyoung0504/leisure_project1/assets/132328765/fe151985-105e-4b00-beb9-97ec5ada90f5)
 
 
+
 # 기능소개
 
+
+
 ## 파트너 신청
+
+| 왼쪽 열 | 오른쪽 열 |
