@@ -125,3 +125,20 @@ deploy : git, github <br>
 #### 취소를 누르면 이벤트가 취소되며 확인을 누를 시 숙박업소, 상품(객실)이 삭제 됩니다.
 
 <br clear="both"/>
+
+
+
+# 유저 기능
+
+
+
+### ✔숙소 검색
+
+<img src="https://https://github.com/taeyoung0504/leisure_project1/assets/131851352/f1aa659d-7aa3-48de-9188-99612a93373b" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
+#### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
+
+<br clear="both"/>
+<br>
+
