@@ -75,6 +75,53 @@ deploy : git, github <br>
 
 
 
-## 파트너 신청
+### ✔파트너 신청
 
-| 왼쪽 열 | 오른쪽 열 |
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/5b86d5b2-fd1b-49a6-bb92-4fa965c618f0" alt="파트너-신청 gif" width="65%" align="left"/>
+
+#### 신청 시 업체명, 업체 주소, 인감증명서(pdf), 담당자명, 담당자 연락처, 업총, 지역 을 입력 및 선택하여 신청가능 합니다.
+#### 파트너 신청하기를 누르면 신청이 완료 되며 파트너 신청 내역 페이지로 이동됩니다.
+#### 신청 대기, 승인, 반려는 파트너 신청 내역에 가서 확인 가능합니다.
+
+<br clear="both"/>
+<br>
+
+### ✔숙박업소 등록
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/fefc4b28-cad2-4bb2-b17d-7db3b82de50a" alt="파트너-신청 gif" width="65%" align="left"/>
+
+#### 신청상태가 승인되면 숙박업소를 등록할 수 있습니다.
+#### *(별표기호) 가 표시되어 있는 항목만이 작성 가능합니다.
+
+<br clear="both"/>
+<br>
+
+### ✔상품(객실) 등록
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/a4a65d46-8a63-4c1b-82b6-03015c045aea" alt="파트너-신청 gif" width="65%" align="left"/>
+
+#### 숙박업소를 등록하면 상품(객실)을 등록할 수 있습니다.
+#### 등록시 이미지는 최대 5개 등록이 가능합니다.
+#### 확인 버튼을 누르면 아래에서 등록한 상품(객실)을 확인할 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔상품(객실) 수정
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/5b16b64b-cb1e-4d63-936a-81e17d580540" alt="파트너-신청 gif" width="65%" align="left"/>
+
+#### 수정 시 현재 선택한 이미지를 기준으로 슬라이드가 동작합니다.
+#### 초기화를 누르면 새로 입력했던 값들은 사라집니다.
+
+<br clear="both"/>
+<br>
+
+### ✔숙박업소, 상품(객실) 삭제
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/118175453/27e0807a-3a65-4ac8-b7b4-5e8ee644fd9e" alt="파트너-신청 gif" width="65%" align="left"/>
+
+#### 삭제 버튼을 누르면 알림창이 나오며 확인 여부를 묻습니다.
+#### 취소를 누르면 이벤트가 취소되며 확인을 누를 시 숙박업소, 상품(객실)이 삭제 됩니다.
+
+<br clear="both"/>
