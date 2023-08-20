@@ -161,7 +161,7 @@ deploy : git, github <br>
 
 ### ✔대구 여행 추천 코스
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/1c6a77f7-6f90-4d9e-8eb7-58a776ceff61" alt="관광지 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f82a48f2-8e68-4142-81c5-61c5b56b9e24" alt="관광지 검색 gif" width="65%" align="left"/>
 
 
 #### 관광지 리스트에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
