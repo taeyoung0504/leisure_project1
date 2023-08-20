@@ -198,3 +198,12 @@ deploy : git, github <br>
 
 <br clear="both"/>
 <br>
+
+### ✔결제
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/eacdf3bc-f38d-4092-8aba-7fce26ca89ac" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙소를 선택해 결제를 통해 예약을 진행할 수 있습니다.
+
+<br clear="both"/>
+<br>
