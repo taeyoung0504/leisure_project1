@@ -172,7 +172,7 @@ deploy : git, github <br>
 
 ### ✔맛집 검색
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/cd8ab4d8-a89c-4cb6-a45d-ece5ff99e7bc" alt="맛집 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/dcce3624-d3e7-4113-925f-8d778ca751b6" alt="맛집 검색 gif" width="65%" align="left"/>
 
 #### 키워드를 검색하거나 필터 기능을 사용해서 내가 원하는 맛집의 정보를 얻을 수 있습니다.
 
