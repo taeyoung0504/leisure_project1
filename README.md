@@ -164,7 +164,7 @@ deploy : git, github <br>
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/830ab52d-940b-4bb8-bbd7-131c9f286b55" alt="관광지 검색 gif" width="65%" align="left"/>
 
 
-#### 관광지 리스트에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
+#### 대구 여행 추천 코스에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
 #### 원하는 장소를 클릭하면 그 관광지에 대한 정보들과 길찾기, 홈페이지로 이동할 수 있는 기능을 제공합니다.
 
 <br clear="both"/>
