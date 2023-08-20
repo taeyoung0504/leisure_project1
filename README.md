@@ -188,3 +188,13 @@ deploy : git, github <br>
 
 <br clear="both"/>
 <br>
+
+### ✔숙소 상세 페이지
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/bc8e6cab-4a93-46f9-bc1e-6e575b4f7b6a" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙소를 선택해서 숙소 예약를 할 수 있습니다.
+#### 선택한 숙소에 대한 숙소 정보와 리뷰들을 볼 수 있습니다.
+
+<br clear="both"/>
+<br>
