@@ -115,7 +115,6 @@ deploy : git, github <br>
 
 ### ✔대시보드 / 공지사항등록
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/d59fd5d1-c8ce-45ff-9f31-d4cdc1aedc53" width="65%" align="left">
-<br/><br/>
 
 #### &nbsp;&nbsp;대시보드를 이용해 이용현황을 한눈에 알아볼 수 있습니다.
 #### &nbsp;&nbsp;에디터를 이용한 공지사항 작성이 가능합니다.
@@ -125,7 +124,6 @@ deploy : git, github <br>
 
 ### ✔권한 변경 / 숙소삭제 
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/0f4813c8-655d-479d-90f6-b18bc0c7a0a3"  width="65%" align="left" >
-<br/><br/>
 
 #### &nbsp;&nbsp;현재 회원 등급을 변경, 정보를 수정하고 계정을 정지 및 해제 할 수 있습니다. 
 #### &nbsp;&nbsp;간편하게 등록된 숙소이름을 검색하고 삭제 관리가 가능합니다.
@@ -135,7 +133,7 @@ deploy : git, github <br>
 
 ### ✔파트너 승인 / 예약 취소 승인 
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/0eb8fa07-fa14-440e-a192-9fcbb9d7da3a"  width="65%" align="left" >
-<br/><br/>
+
 
 
 #### &nbsp;&nbsp;파트너승인과 동시에 등급 변경이 가능합니다.
@@ -146,7 +144,6 @@ deploy : git, github <br>
 
 ### ✔1:1 문의 / 리뷰 신고 관리 
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/ec86e391-31a2-4c66-b599-ccdf0a9e39af"  width="65%" align="left" >
-<br/><br/>
 
 #### &nbsp;&nbsp;답변 대기중인 1:1문의를 따로 볼수 있고 답변을 달 수 있습니다.
 #### &nbsp;&nbsp;부적절한 리뷰를 블라인드하여 관리 할 수 있습니다.
