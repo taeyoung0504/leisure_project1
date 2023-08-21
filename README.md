@@ -52,6 +52,68 @@ deploy : git, github <br>
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
 
 
+## [USER]
+
+
+
+### ✔대구 여행 추천 코스
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/830ab52d-940b-4bb8-bbd7-131c9f286b55" alt="관광지 검색 gif" width="65%" align="left"/>
+
+
+#### 대구 여행 추천 코스에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
+#### 원하는 장소를 클릭하면 그 관광지에 대한 정보들과 길찾기, 홈페이지로 이동할 수 있는 기능을 제공합니다.
+
+<br clear="both"/>
+<br>
+
+### ✔맛집 검색
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/dcce3624-d3e7-4113-925f-8d778ca751b6" alt="맛집 검색 gif" width="65%" align="left"/>
+
+#### 키워드를 검색하거나 필터 기능을 사용해서 내가 원하는 맛집의 정보를 얻을 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔숙소 검색
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
+#### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔숙소 상세 페이지
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/bc8e6cab-4a93-46f9-bc1e-6e575b4f7b6a" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙소를 선택해서 숙소 예약을 진행 할 수 있습니다.
+#### 선택한 숙소에 대한 숙소 정보와 리뷰들을 볼 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔결제
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/eacdf3bc-f38d-4092-8aba-7fce26ca89ac" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 원하는 숙소를 선택해 원하시는 결제 유형을 선택해 예약을 진행할 수 있습니다.
+
+<br clear="both"/>
+<br>
+
+### ✔리뷰
+
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/3856e42d-1fe5-4f63-8380-db19b5c01bef" alt="숙소 검색 gif" width="65%" align="left"/>
+
+#### 숙소를 이용한 후 숙소에 대한 리뷰를 작성할 수 있습니다.
+
+<br clear="both"/>
+<br>
+
 
 
 # 기능소개
@@ -149,67 +211,3 @@ deploy : git, github <br>
 #### &nbsp;&nbsp;부적절한 리뷰를 블라인드하여 관리 할 수 있습니다.
 
 <br clear="both"/>
-
-
-
-## [USER]
-
-
-
-### ✔대구 여행 추천 코스
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/830ab52d-940b-4bb8-bbd7-131c9f286b55" alt="관광지 검색 gif" width="65%" align="left"/>
-
-
-#### 대구 여행 추천 코스에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
-#### 원하는 장소를 클릭하면 그 관광지에 대한 정보들과 길찾기, 홈페이지로 이동할 수 있는 기능을 제공합니다.
-
-<br clear="both"/>
-<br>
-
-### ✔맛집 검색
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/dcce3624-d3e7-4113-925f-8d778ca751b6" alt="맛집 검색 gif" width="65%" align="left"/>
-
-#### 키워드를 검색하거나 필터 기능을 사용해서 내가 원하는 맛집의 정보를 얻을 수 있습니다.
-
-<br clear="both"/>
-<br>
-
-### ✔숙소 검색
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
-
-#### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
-#### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
-
-<br clear="both"/>
-<br>
-
-### ✔숙소 상세 페이지
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/bc8e6cab-4a93-46f9-bc1e-6e575b4f7b6a" alt="숙소 검색 gif" width="65%" align="left"/>
-
-#### 원하는 숙소를 선택해서 숙소 예약을 진행 할 수 있습니다.
-#### 선택한 숙소에 대한 숙소 정보와 리뷰들을 볼 수 있습니다.
-
-<br clear="both"/>
-<br>
-
-### ✔결제
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/eacdf3bc-f38d-4092-8aba-7fce26ca89ac" alt="숙소 검색 gif" width="65%" align="left"/>
-
-#### 원하는 숙소를 선택해 원하시는 결제 유형을 선택해 예약을 진행할 수 있습니다.
-
-<br clear="both"/>
-<br>
-
-### ✔리뷰
-
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/3856e42d-1fe5-4f63-8380-db19b5c01bef" alt="숙소 검색 gif" width="65%" align="left"/>
-
-#### 숙소를 이용한 후 숙소에 대한 리뷰를 작성할 수 있습니다.
-
-<br clear="both"/>
-<br>
