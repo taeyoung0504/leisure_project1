@@ -60,8 +60,7 @@ deploy : git, github <br>
 
 ### ✔대구 여행 추천 코스
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/830ab52d-940b-4bb8-bbd7-131c9f286b55" alt="관광지 검색 gif" width="65%" align="left"/>
-
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/760d902e-67a5-4247-9628-59eb555389df" alt="관광지 검색 gif" width="65%" align="left"/>
 
 #### 대구 여행 추천 코스에서 원하는 장소를 선택하면 지도에 위치가 표시됩니다.
 #### 원하는 장소를 클릭하면 그 관광지에 대한 정보들과 길찾기, 홈페이지로 이동할 수 있는 기능을 제공합니다.
@@ -71,7 +70,7 @@ deploy : git, github <br>
 
 ### ✔맛집 검색
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/dcce3624-d3e7-4113-925f-8d778ca751b6" alt="맛집 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f4cf481b-9455-4d3e-99ef-8f794b0b8f77" alt="맛집 검색 gif" width="65%" align="left"/>
 
 #### 키워드를 검색하거나 필터 기능을 사용해서 내가 원하는 맛집의 정보를 얻을 수 있습니다.
 
