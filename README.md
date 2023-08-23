@@ -80,7 +80,7 @@ deploy : git, github <br>
 
 ### ✔숙소 검색
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/f6820015-8b0a-4683-8526-0f7916f1e348" alt="숙소 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/38aafcae-bff2-4cd7-a3a6-079ec4ac07ed" alt="숙소 검색 gif" width="65%" align="left"/>
 
 #### 원하는 숙박 유형을 선택하고 들어가면 선택한 숙소들의 리스트를 볼 수 있습니다.
 #### 필터 기능을 사용하여 본인이 원하는 조건을 선택해서 숙소를 선택할 수 있습니다.
@@ -90,7 +90,7 @@ deploy : git, github <br>
 
 ### ✔숙소 상세 페이지
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/bc8e6cab-4a93-46f9-bc1e-6e575b4f7b6a" alt="숙소 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/09510c04-3440-481f-aeeb-e4d05301103d" alt="숙소 검색 gif" width="65%" align="left"/>
 
 #### 원하는 숙소를 선택해서 숙소 예약을 진행 할 수 있습니다.
 #### 선택한 숙소에 대한 숙소 정보와 리뷰들을 볼 수 있습니다.
@@ -100,7 +100,7 @@ deploy : git, github <br>
 
 ### ✔결제
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/eacdf3bc-f38d-4092-8aba-7fce26ca89ac" alt="숙소 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/71b5de9d-2c61-4390-8b1a-8450a1753254" alt="숙소 검색 gif" width="65%" align="left"/>
 
 #### 원하는 숙소를 선택해 원하시는 결제 유형을 선택해 예약을 진행할 수 있습니다.
 
@@ -109,7 +109,7 @@ deploy : git, github <br>
 
 ### ✔리뷰
 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/3856e42d-1fe5-4f63-8380-db19b5c01bef" alt="숙소 검색 gif" width="65%" align="left"/>
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/131851352/436b7744-d068-4cb8-aca6-c1e6725d30be" alt="숙소 검색 gif" width="65%" align="left"/>
 
 #### 숙소를 이용한 후 숙소에 대한 리뷰를 작성할 수 있습니다.
 
