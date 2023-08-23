@@ -29,7 +29,8 @@ deploy : git, github <br>
 
 데이터베이스 ERD는 아래와 같음. <br><br>
 
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/c578332a-64fd-4d76-be1c-8084d350abf9)
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/d938e30b-100b-4105-8b0e-7fad37ea2e79)
+
 
 
    
@@ -40,17 +41,20 @@ deploy : git, github <br>
 
 ## [USER]
 
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/56b09792-16f1-4c22-91de-8dacac5afd02)
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/9328655f-3da5-478a-a198-d956a0cccf0b)
+
 
 
 ## [PATNER]
 
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/75aa0fc8-6f57-4f30-b5c4-75fb1aec0115)
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/7cba06d6-1655-4d84-8faf-2b6d4b87142a)
+
 
 
 ## [ADMIN]
 
-![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/10e1ade4-b17f-4fcf-a083-7c3a9175d7e8)
+![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/8aaa41b7-9d51-45a0-9e83-1d83022048e4)
+
 
 # 기능소개
 
