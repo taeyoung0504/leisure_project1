@@ -176,7 +176,7 @@ deploy : git, github <br>
 ## [ADMIN]
 
 ### ✔대시보드 / 공지사항등록
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/d59fd5d1-c8ce-45ff-9f31-d4cdc1aedc53" width="65%" align="left">
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/c4115d67-a6a7-4d22-8a7e-df12e30e1491" width="65%" align="left">
 
 #### &nbsp;&nbsp;대시보드를 이용해 이용현황을 한눈에 알아볼 수 있습니다.
 #### &nbsp;&nbsp;에디터를 이용한 공지사항 작성이 가능합니다.
@@ -203,6 +203,8 @@ deploy : git, github <br>
 
 <br clear="both"/>
 <br>
+
+https://github.com/taeyoung0504/leisure_project1/assets/132328765/c4115d67-a6a7-4d22-8a7e-df12e30e1491
 
 ### ✔1:1 문의 / 리뷰 신고 관리 
 <img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/ec86e391-31a2-4c66-b599-ccdf0a9e39af"  width="65%" align="left" >
