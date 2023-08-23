@@ -176,8 +176,7 @@ deploy : git, github <br>
 ## [ADMIN]
 
 ### ✔대시보드 / 공지사항등록
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/8efeedc6-c11c-4640-ae02-e808a133f118
-" width="65%" align="left">
+<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/8efeedc6-c11c-4640-ae02-e808a133f118" width="65%" align="left">
 
 #### &nbsp;&nbsp;대시보드를 이용해 이용현황을 한눈에 알아볼 수 있습니다.
 #### &nbsp;&nbsp;에디터를 이용한 공지사항 작성이 가능합니다.
