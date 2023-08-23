@@ -1,7 +1,7 @@
 fetchData();
 
 			function fetchData() {
-				var myurl = 'https://api.odcloud.kr/api/15087234/v1/uddi:927f8b4b-0241-4461-9924-f8dfffbe5394?page=1&perPage=36&serviceKey=OzZTUnMJGM1btfj8YuaBUFh5ZYDn85xrzW1n3S82xZEHM5pZI7D%2FVYzTXPfmQtxC5iY8pE9vmfFPf5qzo%2FKQnQ%3D%3D';
+				var myurl = 'https://api.odcloud.kr/api/15087234/v1/uddi:927f8b4b-0241-4461-9924-f8dfffbe5394?page=1&perPage=36&serviceKey=';
 				$.ajax({
 					url : myurl,
 						}).done(

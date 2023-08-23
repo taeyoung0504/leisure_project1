@@ -34,8 +34,8 @@ spring:
                         - account_email
                        clientName: Kakao
                   naver:
-                      clientId: poPGeI1fQBJ4nnHBVco0
-                      clientSecret: BlQByxvepv
+                      clientId: GcOMphOwM6H31Jl1dATu
+                      clientSecret: I3tZQ8wGLk
                       
                       redirectUri: http://192.168.10.67:8080/login/oauth2/code/naver
                       authorizationGrantType: authorization_code

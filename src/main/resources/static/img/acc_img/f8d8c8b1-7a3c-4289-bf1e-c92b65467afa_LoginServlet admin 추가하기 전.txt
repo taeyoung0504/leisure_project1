@@ -1,0 +1,88 @@
+package join_exam.join;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/login/*")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    MemberDAO memberDAO;
+
+    @Override
+    public void init() throws ServletException {
+        // MemberDAO 생성 - Model 제어하기 위한 객체 생성
+        memberDAO = new MemberDAO(); // 해당 서블릿이 생성되면 생성됨과 동시에 DAO 생성됨.
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String nextPage = null;
+        String action = request.getPathInfo(); // URL 요청명을 String 문자열로 반환 or null로 반환
+        System.out.println("action : " + action);
+
+        // doGet(request, response);
+
+        if (action == null || action.equals("/loginAction.do")) {
+            request.setCharacterEncoding("UTF-8");
+
+            // 로그인 여부 확인
+            String userID = null;
+            HttpSession session = request.getSession();
+            if (session.getAttribute("userID") != null) {
+                userID = (String) session.getAttribute("userID");
+            }
+
+            // 이미 로그인된 경우
+            if (userID != null) {
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("alert('이미 로그인이 되어있습니다.')");
+                out.println("location.href = 'main.jsp'");
+                out.println("</script>");
+                nextPage = "/main.jsp";
+                // return;
+            }
+
+            // 로그인 처리
+            String id = request.getParameter("id");
+            String pwd = request.getParameter("pwd");
+
+            int result = memberDAO.login(id, pwd);
+
+            if (result == 1) {
+                // 로그인 성공
+                session.setAttribute("userID", id);
+                nextPage = "/main.jsp";
+            } else if (result == 0) {
+                // 비밀번호 오류
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("alert('비밀번호가 틀립니다.')");
+                out.println("history.back()");
+                out.println("</script>");
+            } else if (result == -2) {
+                // 데이터베이스 오류
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("alert('데이터베이스 오류가 발생했습니다.')");
+                out.println("history.back()");
+                out.println("</script>");
+            }
+        } else if () {
+        	
+        }
+        
+        if (nextPage != null) {
+            response.sendRedirect(request.getContextPath() + nextPage);
+        }
+    }
+}

@@ -68,7 +68,7 @@ public class CSController {
 			    		session.setAttribute("rand", numStr);
 			    		
 			    		Message message = new Message();
-			    		message.setFrom("01093365038");
+			    		message.setFrom("01011112222"); //발신자 번호
 			    		message.setTo(phoneNumber); // phoneNumber 매개변수 사용
 			    		message.setText("[DAE BAK]입력하셔야할 인증번호는[" + numStr + "]입니다.");
 			    		
