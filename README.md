@@ -198,7 +198,7 @@ deploy : git, github <br>
 <br>
 
 ### ✔파트너 승인 / 예약 취소 승인 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/df1cae42-35fe-4f0d-b2c6-b0f500567af2"  width="65%" align="left" >
+<img src="https://github.com/HyoKyeong-Kang/leisure_project1/assets/132328765/3b470f44-baea-49b8-9e56-34019a35dcbe"  width="65%" align="left" >
 
 
 
