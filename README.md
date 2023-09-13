@@ -4,6 +4,8 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 대구 숙박업소 예약 프로젝트 DAE BAK 입니다. <br><br>
 <b> ** 일반 회원, 파트너(사업자), 관리자 ** </b> 3개의 파트로 나누어 서비스를 구축하였습니다.
 
+Docker url: http://docs.yi.or.kr:8087/
+
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/875c6a4e-898d-4935-9e4d-0cfb6b1dbf3f)
 
 <br>
@@ -12,6 +14,33 @@ SpringBoot와 Spring MVC 패턴을 기반으로 제작한 <br><br>
 
 # 📟 개발환경
 
+<div align=center><h1>📚 STACKS</h1></div>
+
+<div align=center> 
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+  <br>
+  
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+  <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+  <br>
+  
+ 
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+  <br>
+  
+  <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <br>
+  
+  <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
+  <br>
+  
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <br>
+</div>
 
 개발환경은 아래와 같음. <br><br>
 ![image](https://github.com/taeyoung0504/leisure_project1/assets/128016593/d65c15ec-ea5e-45c8-9f2d-05b7939549a1)
@@ -199,7 +228,7 @@ deploy : git, github <br>
 <br>
 
 ### ✔파트너 승인 / 예약 취소 승인 
-<img src="https://github.com/taeyoung0504/leisure_project1/assets/132328765/df1cae42-35fe-4f0d-b2c6-b0f500567af2"  width="65%" align="left" >
+<img src="https://github.com/HyoKyeong-Kang/leisure_project1/assets/132328765/3b470f44-baea-49b8-9e56-34019a35dcbe"  width="65%" align="left" >
 
 
 
